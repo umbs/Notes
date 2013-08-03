@@ -1,0 +1,18 @@
+patch --dry-run --ignore-whitespace -p0 -i patch.txt 
+
+patch --ignore-whitespace -p0 -i patch.txt
+
+On Git
+--------
+
+Generating patch: 
+git format-patch <branch> --stdout > patch.txt 
+
+Check the patch: 
+git apply --stat patch.txt 
+
+Dry run 
+git apply --check patch.txt 
+
+Applying the patch. There are two ways 
+git am --signoff < patch.txt 

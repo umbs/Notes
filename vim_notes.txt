@@ -1,0 +1,95 @@
+Window Splitting 
+----------------
+:vsp // Vertical split 
+:sp  // Horizontal split 
+:vsp <file> // Opens <file> in new window 
+:10sp // Specify split height 
+:set splitright // Opens window in right [for vertical splits] and becomes
+                  active
+:set splitbelow // same for horizontal window 
+ctrl + w, <number>, < // reduce width of window by <number> 
+ctrl + w, <number>, > // increase width of window by <number> 
+ctrl + w, | // max out window width 
+ctrl + w, _ // max out window height 
+ctrl + w, = // normalize all window sizes 
+ctrl + w, R // swap both windows [including buffers] 
+
+vim -O file1 file2 // open two files side by side 
+
+Substituting Tips 
+-----------------
+Save typing by using \zs and \ze to set the start and end of a pattern.
+For example, instead of: 
+
+:s/Copyright 2007 All Rights Reserved/Copyright 2008 All Rights Reserved/
+
+Use: 
+
+:s/Copyright \zs2007\ze All Rights Reserved/2008/
+
+Tab Views 
+----------
+:tabnew <file> // opens <file> in a new tab 
+:tabp // previous tab 
+:tabn // next tab 
+
+In Normal mode 
+gt // go to next tab 
+gT // go to previous tab 
+ngt // got to tab no. n 
+
+vim -p file1 file 2 // open multiple files in tab mode 
+
+
+Diff
+----
+vimdiff file1 file2 // diff two files side by side 
+
+
+
+Code Folding
+------------
+Reference - :help folding 
+            :help za 
+            :help zo
+            :help zc
+
+Synopsis - Using commands here, code in a file can be temporarily folded
+[hidden]. Folding helps in navigating a file quickly as parts of the file
+is hidden. 
+
+zc - close a fold 
+zo - open a fold 
+za - toggle a fold [open if its closed and vice versa] 
+
+zC, zO, zA are similar but inner folding levels are also affected by them,
+not just the level at which cursor is present.
+
+
+Page Scroll
+-----------
+^d ^u   Scroll half a page down or up 
+^f ^b   Scroll full page up or down
+
+Reformatting
+------------
+In the .vimrc file, `set textwidth=80` (or whatever column width). 
+- `gg` go to top of file
+- `gqG` globally set the entire file to 80 width column. It joins lines. If you
+  dont want lines to be joined, have a blank one in between. 
+- `gq}` change only current paragraph 
+
+Key Mappings
+-------------
+{cmd} {attr} {lhs} {rhs}
+
+where
+{cmd}  is one of ':map', ':map!', ':nmap', ':vmap', ':imap',
+       <buffer>, <silent>, <expr> <script>, <unique> and
+       <special>. More than one attribute can be specified to a map.
+{lhs}  left hand side, is a sequence of one or more keys that are being
+       mapped.
+{rhs}  right hand side, is the sequence of keys that the {lhs} keys are
+       mapped to.
+
+
