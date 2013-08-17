@@ -1,5 +1,5 @@
-Git Commands
-------------
+Some (not Frequently) Q&A's 
+---------------------------
 How to backout all changes committed to local repo but not yet pushed to
 remote? 
   git fetch 
@@ -14,6 +14,9 @@ Revert single uncommitted file
                          # filename is same as branch, this doesn't work
   git checkout -- filename # is preferred 
 
+Revert single committed file to earlier commit 
+  git checkout HEAD~1 path/to/file 
+
 Revert changes made to working copy. 
   git checkout -- .
 
@@ -23,6 +26,47 @@ Revert changes made to index (added files)
 Revert changes that are committed. 
   git revert .. 
 
+How to fix log of last committed message. 
+  git commit --ammend    # will open an editor to change commit message. 
+  git commit --ammend -m "New message, which will overwrite old one" 
+  git commit --ammend -author "New Author Name <email@address.com>" 
+ 
+How to fix logs of last few committed messages. Multple ways to do this: 
+  (a) Using git rebase: 
+     - `git rebase -i $parent_of_flawed_commit`
+     - i) Editor will pop up. Change `pick` to `edit` or appropriate
+          option. 
+       ii) Save and git will replay listed commits. 
+     - Git will drop you in to an editor for every commit you want to
+       change. 
+       i) Change commit as you like. 
+       ii) git commit --ammend 
+       iii) git rebase --continue
+  (b) Using git filter-branch. Read following references:
+ 
+http://stackoverflow.com/questions/750172/how-do-i-change-the-author-of-a-commit-in-git
+http://schacon.github.io/git/git-filter-branch.html   
+https://help.github.com/articles/changing-author-info
+ 
+Patching: 
+--------
+- Create a patch 
+     git format-patch <branch> --stdout > file.patch 
+
+- Create patch of last commit 
+     git format-patch -1 --stdout > file.patch 
+
+- Before applying look for stats 
+     git apply --stat file.patch 
+
+- Check for errors 
+     git apply --check file.patch 
+
+- Apply patch 
+     git am --signoff < file.patch 
+
+Reference: 
+    ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/ 
  
 Staging: 
 --------
@@ -159,10 +203,8 @@ Git is slow
 -----------
 # git gc 
    ! Run git garbage collection
+# git config preloadindex 
+   ! Pre-loads index in parallel 
+# git update-index --asume-unchanged <file> 
+   ! Does not index file and hence saves time 
 
-Questions: 
------------
-+ git has become slow. `git branch` etc are taking long time to respond. 
-    Run git garbage collection. 
-        git gc
-  

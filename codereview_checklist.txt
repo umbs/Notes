@@ -1,0 +1,9 @@
+                       Checklist for C Codereview 
+                       --------------------------
+
+Function Return Type:
+--------------------- 
+- Examine what values are being returned. And if those values are handled
+  properly by calling function.
+
+-  
