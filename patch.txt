@@ -1,3 +1,8 @@
+Generate Diff 
+-------------
+
+Apply Patch 
+-----------
 patch --dry-run --ignore-whitespace -p0 -i patch.txt 
 
 patch --ignore-whitespace -p0 -i patch.txt
@@ -6,7 +11,19 @@ On Git
 --------
 
 Generating patch: 
-git format-patch <branch> --stdout > patch.txt 
+git format-patch [<commit criteria>] --stdout > patch.txt 
+
+Example:
+// get the last committed changes
+git format-patch -1 --stdout > patch.txt 
+
+// get the last two committed changes
+git format-patch -2 --stdout > patch.txt 
+
+// Changes between origin & HEAD 
+git format-patch origin HEAD --stdout > patch.txt 
+
+
 
 Check the patch: 
 git apply --stat patch.txt 
@@ -14,5 +31,5 @@ git apply --stat patch.txt
 Dry run 
 git apply --check patch.txt 
 
-Applying the patch. There are two ways 
+Applying the patch. 
 git am --signoff < patch.txt 
