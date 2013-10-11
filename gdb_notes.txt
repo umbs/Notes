@@ -1,0 +1,25 @@
+# Create work directory 
+mkdir /tmp/jheitz/175280
+cd /tmp/jheitz/175280
+
+# Give image tar ball; extract lib64, usr lib42 and binary of interest (here aaad) 
+tar xzf /home/sysbuild/images/swfeature_int/SEOS-swfeature_int-ASG-pkg-SSR-11.1.3.100.51.tar.gz lib64 usr/lib64 usr/lib/siara/lib64 usr/lib/siara/bin/aaad
+
+# This step is not required 
+# tar xjf /home/dhiren/tmp/for_jakob/rpsw-glibc-debug.tar.gz
+
+# Run gdb 
+/project/builds/rbnlinux/build_env/x86_64_devboard-3.0.0.9/export/sysroot/common_pc_64-glibc_std/x86-linux2/i586-wrs-linux-gnu-x86_64-glibc_std-gdb
+
+# set system root 
+set sysroot .
+
+# Core file 
+target core /home/klung/redundancy/20111011_041021_aaad.6092.1318331420.pf31-ssr1.core_pf31-ssr1
+
+# Attach it to the binary extracted from tar ball 
+file usr/lib/siara/bin/aaad
+
+# Set environment variables. 
+set sysroot-on-target .
+set disassembly-flavor intel

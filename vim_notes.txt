@@ -126,6 +126,8 @@ In the .vimrc file, `set textwidth=80` (or whatever column width).
   dont want lines to be joined, have a blank one in between. 
 - `gq}` change only current paragraph 
 
+- `ga` Gives ASCII value of character under cursor 
+
 Key Mappings
 -------------
 {cmd} {attr} {lhs} {rhs}
