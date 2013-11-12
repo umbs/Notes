@@ -7,7 +7,7 @@ Most Basic
 - Cscope_maps.vim (Vim plugin) 
 - Copy of .vimrc file (available on GitHub) 
 - Xmarks extension for bookmark sync
-- Git (or any version control software) 
+- Git (or any version control software) & copy .gitconfig from dotfiles on GitHub
 - VNC (if applicable) 
 
 Vim Plugins
