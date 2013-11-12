@@ -2,8 +2,7 @@
 http://cscope.sourceforge.net/cscope_maps.vim
 
 1. Building database 
-cd /my/project 
-find . -name "*.[chxsS]" -o -name "*.ddl" > cscope.files 
+find $PWD -name "*.[chxsS]" -o -name "*.ddl" > cscope.files 
 cscope -b -q # builds a database using cscope.files
 
 2. Set environment variable for Vim to locate cscope database 
