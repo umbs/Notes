@@ -21,7 +21,9 @@ CSCOPE_DB=$HOME/my/project/cscope.out; export CSCOPE_DB
 “:cs f f <string>” will show you a list of files in cscope.files matching <pattern>. Actually I just noticed it while composing this article, and should use it more myself.
 “:cs help” will show you some of the other options. 
 
+4. :help cscope-howtouse 
+This has very helpful resource on connecting cscope database with Vim. 
+
 Resources: 
 [1] http://cscope.sourceforge.net/cscope_vim_tutorial.html
 [2] http://hekafs.org/index.php/2013/03/glusterfs-cscope-and-vim-oh-my/
-
