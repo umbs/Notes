@@ -1,0 +1,22 @@
+Basic applications needed in development environment (C programming)
+
+Most Basic
+----------
+- Vim for coding
+- Cscope 
+- Cscope_maps.vim (Vim plugin) 
+- Copy of .vimrc file (available on GitHub) 
+- Xmarks extension for bookmark sync
+- Git (or any version control software) 
+- VNC (if applicable) 
+
+Vim Plugins
+-----------
+- Cscope_maps.vim
+- NERDTree 
+- Tagbar 
+
+Good to have
+-------------
+- MacVim on Mac OS, for note taking
+- Dropbox for access to notes and technical material 
