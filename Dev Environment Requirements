@@ -23,6 +23,7 @@ Most Basic
   
 Vim Plugins
 -----------
+- Pathogen (plugin manager)
 - Cscope_maps.vim
 - NERDTree 
 - Tagbar 
