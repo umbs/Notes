@@ -9,6 +9,8 @@ Most Basic
 - Xmarks extension for bookmark sync
 - Homebrew (for Mac) 
 - Git (or any version control software) & copy .gitconfig from dotfiles on GitHub
+  // brew install git 
+  
 - On Mac, Command Line Tools (CLT) is required to install Gcc tool chain. It can be 
   on Apple Developer Download page: 
   https://developer.apple.com/downloads
@@ -17,7 +19,8 @@ Most Basic
   https://gist.github.com/trinitronx/6217746
   
 - Install Gcc (on Mac, its not available by default) 
-
+  // brew install gcc49 (or latest version. Check using 'brew tap homebrew/versions') 
+  
 Vim Plugins
 -----------
 - Cscope_maps.vim
