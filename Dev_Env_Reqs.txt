@@ -21,6 +21,9 @@ Most Basic
 - Install Gcc (on Mac, its not available by default) 
   // brew install gcc49 (or latest version. Check using 'brew tap homebrew/versions') 
   
+- Install tmux (on Mac, its not available by default) 
+  // brew install tmux 
+  
 Vim Plugins
 -----------
 - Pathogen (plugin manager)
