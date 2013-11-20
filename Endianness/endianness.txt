@@ -1,0 +1,24 @@
+Consider two byte number: 0xabcd; left being smallest memory address and right
+being highest. 
+
+Big-Endian (aka Network Byte Order) is represented as: 0xabcd; 
+Ex: Motorola 68k, Data transfer on networks use NBO,  
+
+Little-Endian is represented as: 0xcdab 
+Ex: Intel x86 
+
+Host-Byte Order: Ordering on the host machine. If processor is x86, its
+little-endian, if its Motorola's 68k, its big-endian. 
+ 
+Mixed-Endian (or Middle-Endian): Ordering of bytes within 16-bit word may differ
+from ordering of 16-bit words within 32-bit word. 
+Ex: 
+
+Bi-Endian: Architectures allowing switchable endianness in data segment, code
+segment or both. 'Bi-Endian' refers how processor accesses data. Instruction
+access (fetching instruction words) is usually fixed endian. Intel's Itanium CPU
+allows bi-endian data and instruction access.   
+Ex: ARM version 3 and above, PowerPC,  
+
+Reference: 
+[1] http://en.wikipedia.org/wiki/Endianness 
