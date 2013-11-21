@@ -61,4 +61,11 @@ git add --all
 git commit
 
 Longer way: 
-git rebase -i  
+git rebase -i 
+
+
+****
+Advanced Git: Graphs, Hashes and Compressions
+https://www.youtube.com/watch?v=ig5E8CcdM9g
+
+ 

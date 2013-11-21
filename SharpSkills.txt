@@ -1,0 +1,63 @@
+ABC - Always Be Coding
+
+1. FOCUSED PRACTICE: 
+ABC - Always be coding, on different projects. Have goals and very FOCUSED
+practice. 
+  - Work on new & short projects. At least one project every 6 months.  
+  - Publish on GitHub CONTINUOUSLY. 
+
+Suggestions: 
+  - Build a database of ideas and start working. 
+  - Start contributing to open source: Linux Kernel, Mininet, Linux
+    Containers, Some OS related repo. 
+  - TopCoder; CodeChef; CodeEval; USACO; Project-Euler
+
+2. Re-Build The Wheel:  
+Code all basic data structures in various languages: 
+(a) Basic Array (b) Dynamic Array (c) Singly-Linked List (d) Doubly-Linked
+List (e) Skip List (f) Hash Table (g) Binary Search Tree (h) Cartesian
+Tree (i) B-Tree (j) Red-Black Tree (k) Splay Tree (l) AVL Tree (m) Stack
+(n) Queue (o) Circula Queues (p) Hash Map (r) Hash Tree (s) Set (t)
+Priority Queue  
+
+Heaps 
+(a) Linked-List (sorted) (b) Linked-List (unsorted) (c) Binary Heap (d)
+Binomial Heap (e) Fibonacci Heap 
+
+Graphs 
+(a) Adjacency List (b) Incidence List (c) Adjacency Matrix (d) Incidence
+Matrix 
+
+
+3. Solve word problems. Spend time coding solutions to different types of
+problems. One of the best resources is TopCoder. Read this, then try
+solving problems. Pick those that test your ability to implement
+recursive, pattern-matching, greedy, dynamic programming, and graph
+problems. Just go through a bunch of archived problems.
+
+This is probably the number one reason I was hired at Google. I spent
+literally two weeks obsessed with TopCoder. After that, I could code
+Dijkstra’s algorithm with my eyes closed and one arm tied behind my back.
+I could solve almost any kind of graph-problem under the sun. It was all
+problem-solving repetition. And as Eric Schmidt says, “Repetition doesn’t
+spoil the prayer.”
+
+4. Build small products. Look at the startups around you, can you rebuild
+some portion of their product? Chances are you can do it in a weekend. You
+can build the initial essence of Google in a weekend (PageRank over a
+structured document corpus) if you really want.
+
+Again, just keep coding. Keep a growing list of projects and ideas for
+what you can build in minutes, days and weeks.
+
+
+
+[1]
+http://www.quora.com/Computer-Programming/How-do-you-keep-your-programming-skills-sharp
+
+[2]
+https://medium.com/tech-talk/d5f8051afce2 
+
+[3]
+http://bigocheatsheet.com/
+
