@@ -60,5 +60,29 @@ struct in6_addr {
     unsigned char   s6_addr[16];   // IPv6 address
 };
 
+
+
+
+SYSTEM CALLS
+-------
+
+/* hints = structure that we fill out
+ * node = host name or IP 
+ * service = Port number or any service such as http, ftp, telnet etc 
+ * res = pointer to linked list of results 
+ */ 
+int getaddrinfo(const char *node,     // e.g. "www.example.com" or IP
+                const char *service,  // e.g. "http" or port number
+                const struct addrinfo *hints,
+                struct addrinfo **res);
+
+
+ 
+
+UTILITY FUNCTIONS
+-------
+inet_ntop() 
+inet_pton() 
+
 Reference: 
 [1] http://www.beej.us/guide/bgnet/

@@ -121,12 +121,23 @@ Page Scroll
 Reformatting
 ------------
 In the .vimrc file, `set textwidth=80` (or whatever column width). 
-- `gg` go to top of file
+- `gg`  go to top of file
 - `gqG` globally set the entire file to 80 width column. It joins lines. If you
-  dont want lines to be joined, have a blank one in between. 
+        dont want lines to be joined, have a blank one in between. 
 - `gq}` change only current paragraph 
+- `G`   go to beginning of last line 
+- `ga`  Gives ASCII value of character under cursor 
 
-- `ga` Gives ASCII value of character under cursor 
+Wikia Tips
+----------
+1. Insert line numbers in file (not just display) or a portion of file?
+
+    http://vim.wikia.com/wiki/Insert_line_numbers
+
+    :%s/^/\=printf("%d", line("."))   // prints current line number. Read
+                                      // above link for more granularity.   
+
+
 
 Key Mappings
 -------------
@@ -140,5 +151,3 @@ where
        mapped.
 {rhs}  right hand side, is the sequence of keys that the {lhs} keys are
        mapped to.
-
-
