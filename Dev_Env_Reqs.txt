@@ -30,7 +30,10 @@ Vim Plugins
 - Cscope_maps.vim
 - NERDTree 
 - Tagbar 
-- Syntastic 
+- Syntastic
+- ctrl-p
+- IndexedSearch
+- vim-fugitive
 
 Good to have
 -------------

@@ -1,8 +1,20 @@
 Generate Diff 
 -------------
+diff -purN original.c changed.c > patch.txt
+
+/* p = print relevant C function 
+ * u = Output in unified context 
+ * r = recursive compare subdirectories 
+ * N = treat absent files as empty 
+ * -x PAT = exclude files that match PAT
+ * b = ignore space change 
+ * w = ignore all white spaces in comparison 
+ * B = ignore all blank line changes/diffs 
+ */ 
 
 Apply Patch 
 -----------
+// applying patch to original.c (or original directory) 
 patch --dry-run --ignore-whitespace -p0 -i patch.txt 
 
 patch --ignore-whitespace -p0 -i patch.txt

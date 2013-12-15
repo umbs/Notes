@@ -13,8 +13,9 @@ Patching:
      git apply --check file.patch 
 
 - Apply patch 
-     git am --signoff < file.patch 
-
+     git am --signoff < file.patch   // --signoff and '<' are optional  
+     git am -3 file.patch // do a 3 way merge. If there is conflict, it
+                          // can be resolved with help of <<<, ===, >>>>  
 Reference: 
     ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/ 
  
