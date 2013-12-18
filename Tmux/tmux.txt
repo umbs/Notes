@@ -27,6 +27,12 @@ Panes (splits):
 %  horizontal split  
 "  vertical split
 
+"arrow"  switch between panes: 
+Up switch to pane above 
+Down switch to pane below 
+Right
+Left 
+
 o  swap panes 
 q  show pane numbers 
 x  kill pane 
