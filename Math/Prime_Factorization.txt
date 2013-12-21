@@ -1,0 +1,48 @@
+                     PRIME       FACTORIZATION         TECHNIQUES
+                     ============================================
+
+Trial Division [1]:
+---
+To see if a small integer is prime, divide all the primes less than (or
+equal to) its square root. For example, to show 211 is prime, just divide
+by 2, 3, 5, 7, 11 and 13. Since there is no divisor among those primes,
+211 is a prime number.
+
+Theorem: Let a and n be integers such that a < n < a^2. n is prime iff
+gcd(n, a!) = 1 
+
+Trial Division works efficiently on small numbers. For large primes, trial
+division is used for pre-screening and then further primality tests are
+applied.  
+
+
+
+Sieve of Erathosthene [2]
+---
+To find all primes less than N, list out the numbers 2 to N. Starting at
+2, strike out all multiples of prime numbers up to sqrt(N). What is left
+are prime numbers.  
+
+This method is very fast and large list of primes need not stored on
+computer and instead can be calculated on the fly. Calculating these
+numbers is faster than storing and retrieving primes, apparently. 
+
+Space is an issue: O(n)
+Running time is: O(n(log n)log logn) bit operations.  
+
+For very large N, segmented sieve can be used. Theoretically, time and
+space can be improved. 
+
+
+
+Wheel Factorization [3]
+---
+Need to read up again to understand better. 
+
+
+
+
+Reference: 
+[1] http://primes.utm.edu/glossary/xpage/TrialDivision.html
+[2] http://primes.utm.edu/glossary/xpage/SieveOfEratosthenes.html
+[3] http://primes.utm.edu/glossary/xpage/WheelFactorization.html

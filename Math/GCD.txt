@@ -1,0 +1,36 @@
+                            GCD      ALGORITHM 
+                            ==================
+Euclidean Algorithm [1, 3]:
+
+    Input: Two positive integers, a and b.
+    Output: The greatest common divisor, g, of a and b.
+    Algo: 1 If a<b, exchange a and b.
+          2 Divide a by b and get the remainder, r. 
+          3 If r=0, report b as the GCD of a and b. 
+          4 Replace a by b and replace b by r.
+          5 Return to step 2 
+
+     int gcd(int a, int b) {
+         if (b==0) return a; 
+         return gcd(b, a%b); 
+     }
+
+Binary GCD (or Stein's Algorithm) [2]: 
+
+    Input: Two non-negative numbers u, v
+    Output: GCD g of u, v
+    Algo: 
+    1   gcd(0, v) = v; gcd(u, 0) = u; gcd(0, 0) = 0
+    2   If u & v are both even, gcd(u, v) = 2.gcd(u/2, v/2) 
+    3.1 If u is even and v is odd, then gcd(u, v) = gcd(u/2, v) because 2 is
+        not a common divisor. 
+    3.2 Similarly if u is odd and v is even, then gcd(u, v) = gcd(u, v/2)
+    4   If u and v are both odd and u >= v then gcd(u, v) = gcd((u-v)/2, v); 
+        If u < v then, gcd(u, v) = gcd((v-u)/2, v) 
+
+Prime Factorization: 
+
+Reference: 
+[1] http://www.math.rutgers.edu/~greenfie/gs2004/euclid.html
+[2] http://en.wikipedia.org/wiki/Binary_GCD_algorithm
+[3] http://en.wikipedia.org/wiki/Euclidean_algorithm
