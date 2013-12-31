@@ -40,8 +40,8 @@ x  kill pane
 -  restore pane from window 
    space - toggle between layouts 
 PREFIX q (show pane numbers, when the numbers show up, type the key to go to that pane) 
-PREFIX { (move the current pane left) 
-PREFIX } (move current pane right) 
+PREFIX { (move the current pane left/top) 
+PREFIX } (move current pane right/bottom) 
 
 
 d  detach 

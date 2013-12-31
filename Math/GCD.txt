@@ -12,7 +12,7 @@ Euclidean Algorithm [1, 3]:
 
      int gcd(int a, int b) {
          if (b==0) return a; 
-         return gcd(b, a%b); 
+         return gcd(b, a%b);  
      }
 
 Binary GCD (or Stein's Algorithm) [2]: 

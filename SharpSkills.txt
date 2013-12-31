@@ -50,6 +50,70 @@ structured document corpus) if you really want.
 Again, just keep coding. Keep a growing list of projects and ideas for
 what you can build in minutes, days and weeks.
 
+================
+NETWORKING 
+CCNA Notes: 
+Other Protocols: 
+  Bridging, OSPF, BGP, MPLS, PW, IPv6, SNMP
+
+================
+ALGORITHMS
+================
+Data Structures: 
+  Basic: Linked Lists, Stack, Dynamic Arrays (Vectors), Queues
+  
+  Indexing: Binary Search Trees [BST], AVL (Balanced BST), Red-Black
+  Trees, Splay Trees, Open Hash Tables (Closed Addressing), Closed Hash
+  Table (Open Addressing), Closed Hash Tables (using buckets), B Trees, B+
+  Trees
+
+  Heap-like DS: Heaps, Min-Heap, Binomial Queues, Fibonacci Heaps, Leftist
+  Heaps, Skew Heaps 
+
+Sorting Algos: 
+  Comparison Sorting: Bubble, Selection, Insertion, Shell, Merge, Quick.  
+  Non-Comparison: Bucket, Counting, Radix, Heap
+
+Graph Algos: BFS, DFS, Connected Components, Dijkstra's Shortest Path,
+Prim's Minimum Cost Spanning Tree, Topological Sort, Floyd-Warshall (all
+pairs shortest path), Kruska's Minimum Cost Spanning Tree
+
+Dynamic Programming: Calculating nth Fibonacci Number, Longest Common
+Subsequence
+
+Recursion: Factorial, Reversing a String, N-Queens Probl
+
+Geometric Algos: 2D rotation and scale matrices, 2D rotation and
+translation matrices, 2D changing and coordinate systems, 3D rotation and
+scale matrices, 3D changing coordinate system.  
+
+String Matching: 
+
+Compression/Regex: 
+
+================
+SYSTEMS/OS
+================
+Linux/OS: 
+  Understanding system calls 
+  Multithreading/Concurrency: Synchronization, Signaling, Message Passing,
+  Shared Mem, Piping. 
+  Device Drivers: 
+  Memory Management: 
+  File Systems:
+  Process creation and scheduling:
+  Performance Tuning: 
+
+===============
+C BIT TWIDLING 
+================
+MORE READING
+- mmap(), mprotect(), 
+- execX() series of syscalls 
+- brk()/sbrk() syscalls 
+- madvise()  
+================
+
 
 
 [1]
