@@ -1,0 +1,12 @@
+                  ALGORITHMS          COLLECTION
+                  ===============================
+
+SUM in an Array Algos:
+-------
+2SUM/3SUM
+
+String Problems:
+-------
+Longest palindrome in a string.
+  - Manacher's algorithm is fastest: O(N) running and O(N) space. 
+

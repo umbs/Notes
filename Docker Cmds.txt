@@ -1,0 +1,46 @@
+Docker Commands
+---------------
+$ docker version     
+// shows client/server & Go versions 
+
+
+$ docker search <string> 
+// 'string' need not be in double/single quotes 
+
+
+$ docker pull <username>/<repo>
+// pulls repo from central index
+
+
+$ docker run <username>/<repo> [command] [command-params]
+// runs [command] [command-params] in image <username>/<repo>
+// E.g., docker run learn/tutorial echo "hello world"
+
+
+$ docker run <username>/<repo> apt-get install -y ping 
+// installing a program (ping) in container 
+
+
+$ docker commit <container ID or name> <repo name>
+// Saving changes in container  
+
+$ docker ps 
+// Check your images 
+
+$ docker inspect IMAGE 
+// Gives all sorts of info 
+
+$ docker images
+// Lists all images on host 
+
+$ docker push 
+// Pushes images to remote 
+
+
+
+DockerFile Syntax 
+-----------------
+INSTRUCTION arguments     
+
+FROM 
+RUN 

@@ -1,0 +1,37 @@
+                      THREAD 
+                      ======
+
+
+DESIGN PATTERNS:
+----------------
+THREAD POOL (MANAGER/wORKER): Threads are dispatched to perform jobs from
+a precreated pool. A manager thread does this job. 
+
+PEER (Workcrew): One thread spawns children and that becomes part of the
+children. 
+
+Pipeline: Each thread does a part of processing and hands off to next
+thread in a pipeline. Careful with workload distribution and ensure
+non-blocking behavior or else pipeline stalls can happen.  
+
+SYNCHRONIZATION PRIMITIVES: 
+---------------------------
+JOIN: "Collect" all threads at a logical synchronization point in the
+program. 
+          pthread_join(...) 
+
+CONDITION VARIABLES: Threas synchronize to a value of a shared resource.
+Typically, its used as a notification system between threads. 
+
+Warning: Conditional wait should be inside a loop to avoid spurious
+wakeup.
+
+BARRIERS: Sync at a point in time. All threads are blocked until slowest
+thread reaches that point.
+
+SPINLOCKS: Spins on mutexes. Should be avoided on uniprocessors.  
+
+SEMAPHORES: Binary or Counting. Binary is similar to mutexes but not same.
+Counting, multiple threads can access critical section. 
+
+

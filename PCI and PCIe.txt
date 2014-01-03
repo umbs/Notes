@@ -1,0 +1,13 @@
+                  PCI        AND         PCIe 
+                  ===========================
+
+DEFINITION:
+-----------
+Peripheral Component Interconnect [PCI] is a protocol to connect
+peripheral devices such as sound, video and NICs to motherboard. It is
+32-bits in size and can handle up to 5 devices. This is a drawback.
+
+PCIe eliminates these shortcomings. It provides 64-bit width and is much
+faster than PCI.
+
+
