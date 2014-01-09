@@ -2,13 +2,15 @@ Basic applications needed in development environment (C programming)
 
 Most Basic
 ----------
-- Vim for coding
-- Cscope 
-- Cscope_maps.vim (Vim plugin) 
-- Copy of .vimrc file (available on GitHub) 
-- Xmarks extension for bookmark sync
-- Homebrew (for Mac) 
-- Git (or any version control software) & copy .gitconfig from dotfiles on GitHub
+- Vim for coding.
+- Cscope. 
+- Cscope_maps.vim (Vim plugin).
+- Copy of .vimrc file (available on GitHub). 
+- Xmarks extension for bookmark sync.
+- Install Pocket extension for "Read Later" docs/pages.  
+- Homebrew (for Mac). 
+- Git (or any version control software) & copy .gitconfig from dotfiles on
+  GitHub.
   // brew install git 
   
 - On Mac, Command Line Tools (CLT) is required to install Gcc tool chain. It can be 
