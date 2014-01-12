@@ -1,0 +1,105 @@
+              INTER    PROCESS    COMMUNICATION
+              =================================
+
+
+MESSAGE QUEUES:
+---------------
+
+#include <sys/msg.h> 
+#include <stddefs.h>
+#include <sys/ipc.h> 
+
+
+Create a message queue: 
+       int msgget(key_t key, int msgflg); 
+
+       key     - its a system wide unique identifier obtained using ftok()
+                 system call (see below).  
+       msgflg  - intention of the queue (create, read etc). 
+       returns - queue ID on success and -1 on failure (errno is set). 
+
+       msgflg should indicate the operation (IPC_CREATE) and set
+       permission on the queue, just like unix file permission
+
+How to get the 'key': 
+       key_t ftok(const char *path, int id); 
+
+       path - some file that this process can read (seems strange). 
+       id   - Any integer or just a char. 
+
+       Example: 
+           key = ftok("/home/esarupa/example.txt", 'a'); 
+
+
+What type of messages can be sent to Queue?
+        Message MUST have two fields in it: Type and Data.
+
+        struct msgbuf {
+                /* msg type */
+                long mtype; 
+            
+                /* data, any data can go here; single structure (as below)
+                 * or multiple primitive data types */
+                struct moreInfo {
+                        /* various fields */
+                }; 
+        };
+
+        msgtype field can drastically modify behavior of how messages are
+        received from the Queue. 
+
+        msgtype      Effect on way its received
+        -------      --------------------------
+        Zero         Retrieve next message on the queue, regardless of
+                     type.
+
+        Positive     Get next message with mtype equal to specified mtype. 
+        
+        Negative     Retrieve the first message on the queue whose mtype
+                     field is less than or equal to the absolute value of
+                     the msgtyp argument.
+
+        For most projects, zero can be used. 
+
+
+Send msg to Queue: 
+        int msgsnd(int msqid, const void *msgp, size_t msgsz, int msgflg);
+
+        msqid  - message id obtained when queue is created. 
+        msgp   - pointer to message data. 
+        msgsz  - size of 'data' part of the structure added to the queue. 
+        msgflg - Optional flag params. 
+
+        msgsz = sizeof(entire structure) - sizeof(long)
+
+
+
+Receive msg from Queue: 
+        int msgrcv(int msqid, void *msgp, size_t msgsz, long msgtyp, int
+                   msgflg);
+
+         msqid   - message id of queue.  
+         msgp    - pointer to the record.
+         msgsz   - size, discounting sizeof(long). 
+         msgtyp  - type of message, zero for most applications. 
+         msgflg  - optional flags. 
+
+
+Destroying a Queue: 
+Message Queues can stay in system forever. List of Queues can be seen
+using 'ipcs' command and can be deleted using 'ipcrm'. A better way to ddo
+is using msgctl() routine. 
+
+         int msgctl(int msqid, int cmd, struct msqid_ds *buf); 
+
+         msqid  - queue id. 
+         cmd    - indicates msgctl what to do with queue. For deleting the
+                  queue, IPC_RMID should be used. 
+         buf    - Can be set to NULL to delete the queue. 
+
+
+
+
+
+Reference:
+[1] http://beej.us/guide/bgipc/output/html/multipage/mq.html
