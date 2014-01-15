@@ -1,0 +1,91 @@
+                     DEVICE   DRIVER   PROG (COMMANDS)
+                     =================================
+
+Basic Driver Structure:
+
+nothing.c
+---------
+    #include <linux/module.h> 
+
+    MODULE_LICENSE("Dual BSD/GPL"); 
+
+Makefile:
+---------
+obj-m: nothing.o 
+
+Compiling: 
+----------
+$ make -C /usr/src/kernel-source-2.6.8 M=pwd modules 
+
+Inserting module: 
+-----------------
+$ insmod nothing.ko
+
+List:
+-----
+$ lsmod 
+
+
+Remove module: 
+--------------
+$ rmmod nothing
+
+
+module_init() - Performs initialization tasks when a device driver module
+is loaded (insmod). 
+
+module_exit() - Cleans up on removing module from kernel (rmmod).  
+
+
+============================
+memory.c: A full device driver  
+--------
+    #include <linux/init.h>
+    ...
+
+    int memory_open(struct inode *inode, struct file *filp); 
+    int memory_release(struct inode *inode, struct file *filp); 
+    ssize_t memory_read(struct file *filp, char *buf, size_t count, loff_t
+    *f)
+    ssize_t memory_write(struct file *filp, char *buf, size_t count,
+    loff_t *f)
+    void memory_exit(void); 
+    int memory_init(void); 
+
+    struct file_operations memory_fops = {
+        read: memory_read, 
+        write: memory_write, 
+        open: memory_open, 
+        release: memory_release
+    };
+
+    module_init(memory_init); 
+    module_exit(memory_exit); 
+
+    int memory_major = 60; 
+    char *memory_buffer; 
+
+
+============================
+
+- Device driver files are located at /dev 
+- A file to access the device should be created follows:
+
+   $ mknod /dev/memory C 60 0 
+
+c = Char device; 
+60 = major number 
+0 = minor number 
+
+- Link between device driver and the file just created above is done using
+  register_chrdev() call inside memory_init() method. 
+
+  register_chrdev(memory_major, "memory", &memory_fops)
+
+- When removing the driver: 
+  unregister_chrdev(memory_major, "memory"); 
+
+
+Reference: 
+[1] http://www.freesoftwaremagazine.com/articles/drivers_linux 
+

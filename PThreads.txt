@@ -20,7 +20,7 @@ JOIN: "Collect" all threads at a logical synchronization point in the
 program. 
           pthread_join(...) 
 
-CONDITION VARIABLES: Threas synchronize to a value of a shared resource.
+CONDITION VARIABLES: Threads synchronize to a value of a shared resource.
 Typically, its used as a notification system between threads. 
 
 Warning: Conditional wait should be inside a loop to avoid spurious

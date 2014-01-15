@@ -1,9 +1,50 @@
               INTER    PROCESS    COMMUNICATION
               =================================
 
+FORK: 
+-----
+There is tonnes of information abour fork() one needs to know. 
 
-MESSAGE QUEUES:
----------------
+SIGNALS: 
+--------
+        int sigaction(int sig, const struct sigaction *act, 
+                                struct sigaction *old_act); 
+
+        sig     - signal above call is catching. 
+        act     - structure defining how to handle 'sig' signal. Pointer
+                  signal handler function is also present. 
+        old_act - old definition/behavior of signal. 
+
+        RETURN VALUES: 
+
+PIPES:
+------
+
+FIFO (named PIPES):
+------
+
+File Locks: 
+-------
+
+SEMAPHORES: 
+-------
+
+SHARED MEMORY: 
+-------
+
+MEMORY MAPPED FILES: 
+-------
+
+
+UNIX SOCKETS: 
+-------
+
+
+MESSAGE QUEUES (SYSTEM V):
+-------------------------
+
+This is System V message queues. Notes on POSIX message queues at the
+bottom. 
 
 #include <sys/msg.h> 
 #include <stddefs.h>
@@ -72,7 +113,9 @@ Send msg to Queue:
 
         msgsz = sizeof(entire structure) - sizeof(long)
 
-
+        RETURN VALUES: 
+        0 on successful add to queue and -1 on error. Global variable
+        errno is set. 
 
 Receive msg from Queue: 
         int msgrcv(int msqid, void *msgp, size_t msgsz, long msgtyp, int
@@ -84,6 +127,9 @@ Receive msg from Queue:
          msgtyp  - type of message, zero for most applications. 
          msgflg  - optional flags. 
 
+        RETURN VALUES: 
+        Size of data added in msgp structure (does not include the size of
+        long). On error, returns -1. Global variable errno is set. 
 
 Destroying a Queue: 
 Message Queues can stay in system forever. List of Queues can be seen
@@ -103,3 +149,4 @@ is using msgctl() routine.
 
 Reference:
 [1] http://beej.us/guide/bgipc/output/html/multipage/mq.html
+[2] http://www.cs.cf.ac.uk/Dave/C/node25.html#fig:message
