@@ -86,6 +86,16 @@ c = Char device;
   unregister_chrdev(memory_major, "memory"); 
 
 
+Commands Summary
+================
+lsmod - list of loaded modules 
+insmod <module_file> - inserts/loads specified module file (with .ko
+extension) 
+modprobe <module> - inserts/loads module along with dependencies. 
+rmmod <module> - remote/unloads the module
+
+
 Reference: 
 [1] http://www.freesoftwaremagazine.com/articles/drivers_linux 
+[2] http://www.linuxforu.com/tag/linux-device-drivers-series/page/2/ 
 
