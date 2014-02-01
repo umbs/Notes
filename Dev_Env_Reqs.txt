@@ -13,7 +13,8 @@ Most Basic
   GitHub.
   // brew install git 
   
-- On Mac, Command Line Tools (CLT) is required to install Gcc tool chain. It can be 
+- On Mac, Command Line Tools (CLT) is required to install Gcc tool chain.
+  It can be found at: 
   on Apple Developer Download page: 
   https://developer.apple.com/downloads
   

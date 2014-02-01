@@ -138,6 +138,10 @@ Wikia Tips
                                       // above link for more granularity.   
 
 
+Code Indentation
+----------------
+1. Shift+V and then up/down 
+2. hit =
 
 Key Mappings
 -------------

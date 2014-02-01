@@ -10,3 +10,490 @@ String Problems:
 Longest palindrome in a string.
   - Manacher's algorithm is fastest: O(N) running and O(N) space. 
 
+
+Undirected Graphs
+--------
+Graph: Set of "vertices" connected pairwise by "edges" 
+
+Terminology: 
+    Path: Sequence of vertices connected by edges. 
+    Cycle: Path whose first and last vertices are the same. 
+    Connected Components: Subset of graph
+
+Graph Probs: 
+---------
+PATH: Is there a path between `s` and `t`
+SHORTEST PATH: 
+
+CYCLE: Is there a cycle in graph? 
+EULER TOUR: Is there a cycle that uses each edge exactly once? 
+HAMILTON TOUR: Is there a cycle that uses each vertex exactly once? 
+
+CONNECTIVITY: Is there a way to connect all of the vertices? 
+MST: Best way to connect all vertices? 
+BICONNECTIVITY: Vertex whose removal disconnects the graph? 
+
+PLANARITY: Draw a graph in a plane with no crossing edges? 
+GRAPH ISOMORPHISM: Do two adjacency lists represent the same graph?
+
+Graph Representation: 
+-----------
+- Adjacency-Matrix with 0 indicating no connection, 1 indicating its
+  connected. Not scalable (V^2 size). 
+- Adjacency-List: Each vertex has a list of adjacency nodes/vertices. Most
+  commonly used representation. 
+        +---+      +---+      +---+      +---+
+        |   | ---> |   | ---> |   | ---> |   |  
+        +---+      +---+      +---+      +---+
+        +---+      +---+ 
+        |   | ---> |   | 
+        +---+      +---+ 
+        +---+      +---+      +---+
+        |   | ---> |   | ---> |   | 
+        +---+      +---+      +---+
+        +---+      +---+      +---+      +---+
+        |   | ---> |   | ---> |   | ---> |   |  
+        +---+      +---+      +---+      +---+
+        |   |
+        +---+
+
+- In real world, graphs have lots of vertices but small degree (fewer
+  edges). 
+
+
+DEPTH FIRST SEARCH [DFS]
+-------------
+- Tremaux Maze exploration algo: 
+     - Unroll a ball of string behind you.
+     - Mark each visited intersection and each visited passage. 
+     - Retrace steps when no visited options. 
+
+  DFS (vertex v)   // algo  
+     mark v as visited
+     recursively visit all unmarked vertices adjacent to v 
+
+BREADTH FIRST SEARCH [BFS]
+--------------
+   BFS (vertex v)  // rough algo 
+      - add v to FIFO Q & mark as visited
+       repeat until Q is empty 
+          - remove least recently added vertex v 
+          - add each unvisited adjacent vertex of v to Q and mark them as
+            visited. 
+
+- BFS computes Shortest Path
+
+Connected Components
+--------------
+Def: Vertices v & w are connected if there is a path between them. 
+Goal: Preprocess graph to answer queries: is v connected to w?
+Def: A connected component is a maximal set of vertices in a graph. 
+
+- Similar to Union-Find problem. 
+- DFS can be used. 
+
+Practical Use: 
+- STD like health issues. 
+- Flood Fill in paint softwares.
+
+
+Graph Challenges
+-------------
+1) Is a graph bipartite? Can graph be divided in to 2 set of
+vertices each vertex in one set connecting to another in other set? 
+  - DFS can solve this prob. 
+
+2) Does a graph have cycle? 
+  - DFS can solve this prob. 
+
+3) Euler Tour: Given a graph, is there a cycle that uses each edge exactly
+once? 
+  - Yes, iff connected and all vertices have even degree. 
+
+4) TSP/Hamilton Tour: Find a cycle that visits each vertex only once.
+  - NP-complete problem. 
+
+5) Are two graphs identical (except vertex names)? Graph Isomorphism
+Problem: 
+  - No one knows how to classify this problem. 
+
+6) Layout a graph in a plane without crossing edges. 
+  - There is a linear-time DFS-based planarity algo discovered by Tarjan
+    in 1970s (too complicated for most practitioners). 
+
+
+
+Directed Graphs (Digraphs)
+-----------
+- Set of vertices connected pairwise by directed edges. 
+- in-degree: number of edges pointing to a vertex. 
+- out-degree: number of edges pointing away from a vertex. 
+
+Typical Problems
+-----------
+- Is there a directed path from s to t
+- What is shortest directed path from s to t 
+- Can you draw a graph so that all edges point upwards? 
+
+
+Digraph Search - DFS can be used  
+----------
+- Reachability Application - Program control flow analysis (static
+  analysis tools)
+- Garbage Collection - Mark & Sweep algos use Digraphs. 
+  - Mark all reachable objects. 
+  - Sweep objects (garbage collect) if it is unmarked. 
+
+BFS - can be used to get Shortest Path from s to t in a Digraph.  
+- A variation can be done to get multiple-source shortest path.
+
+Applications: Web crawler is an example of BFS on Digraphs. 
+
+
+TOPOLOGICAL SORT/PRECEDENCE SCHEDULING
+--------
+- Use DFS
+- Sample applications: 
+    - Scheduling of courses in university.
+    - Scheduling of manufacturing tasks. 
+
+    // Algo
+    - Run DFS
+    - Return vertices in reverse postorder 
+
+Directed Cycle Detection
+---------
+- If directed cyclec, topological order is impossible. 
+- DFS can be used. 
+
+
+Strongly-Connected Components
+---------
+Def: Vertices v and w are strongly connected if there is a directed graph
+from v to w and w to v. 
+
+Applications
+---------
+Food Web Graph:
+    Vertex = species 
+    Edge = From producer to consumer 
+
+Algo to solve Strongly Connected Components
+----------
+Kosaraju-Sharir Algo
+- Strong comp in graph G is same as reverse G
+- Kernel DAG - Contract each strong component in to a single vertex. 
+
+  // Algo 
+  Phase 1: run DFS on reverse G to compute reverse postorder. 
+  Phase 2: run DFS on G, considering order given in phase 1. 
+
+Minimum Spanning Trees [MST]
+----------
+Given: Undirected graph G with positive edge weights (connected) 
+Def: A spanning tree of G is a subgraph T that is connected and acyclic. 
+Goal: Find a min weight spanning tree. 
+
+
+Simple Greedy Algo
+----------
+Assumptions: 
+  - Edge weights are distinct. 
+  - Graph is connected. 
+
+Definition:
+  - Cut: partition in graph in to two sets of vertices. 
+  - Crossing Edge: connects vertex in one set to vertex in other set. 
+  - Cut property: Given any cut, the crossing edge of min weight is in
+    MST. 
+
+Kruskal's Algo
+-------
+- Sort all edges by weight. 
+- Keep adding edges to MST in order unless they create a cycle. 
+- MST is computed in Elog E (in worst case)
+
+Prim's Algo 
+--------
+- Start with vertex 0 and greedily grow tree T. 
+- Add to T the min weight edge with exactly one endpoint in T. 
+- Repeat until V-1 edges. 
+- E log E running time and extra storage space proportional to E. 
+
+Shortest Path
+-------
+- Given an edge-weighted digraph, find the shortest path from s to t. 
+- Variants: 
+    - Source-sink: from one vertex to another. 
+    - Single source: from one vertex to every other. 
+    - All pairs: between all pairs of vertices. 
+
+Dijkstra's Algo (Shortest path) 
+-------
+- Consider vertices in increasing order of distance from s (lowest
+  distTo[] value). 
+- Add vertex to tree and update distTo[] of all vertices pointing from
+  that vertex.
+
+- Prim's and Dijkstra's algos are same. Prim's is for undirected graph. It
+  looks for closest vertex to the spanning tree. Dijkstra's is for
+  directed graph. It looks for closest vertex along a shortest path
+  starting at source. 
+
+Longest Path Edge-Weighted DAGs
+---------
+(applications)
+Parallel Job Scheduling:
+    Create a graph G such that, vertices are start times of job and edges
+    are job duration. 
+
+    Use longest path from the source to schedule each job ??
+
+
+MINCUT PROBLEM
+-------
+Input: An edge-weight digraph, source vertex s and target vertex t. All
+edges are positive. 
+
+Definition: A st-cut(cut) is a partition of vertices in to two disjoint
+sets with s in set A and t in set B.
+Definition: Capacity is sum of capacities of edges from A to B. 
+
+Goal: Find a cut of minimum capacity.
+
+
+MAXFLOW PROBLEM
+-------
+Input: An edge-weighted digraph, source vertex s and target vertex t. 
+Capacity Constraints: 0<= edge's flow <= edge capacity
+Local Equilibrium: inflow = outflow at every vertex (except s & t). 
+
+Def: Value of a flow is the inflow at t. 
+Goal: Find a flow of max value. 
+
+
+Ford-Fulkerson Algo
+-------
+
+
+Strings in Java
+------
+- Strings are immutable. 
+- StringBuilder is mutable. 
+
+String Sorting Algos
+------
+Key-Indexed Counting   // basic algo 
+Goal: Sort an array a[] of N integers between 0 and R-1. 
+
+// Algo 
+- Count frequency of each letter using key as index. 
+- Compute frequency cumulates which specify destination. 
+- Access cumulates using key as index to move items. 
+- Copy back in to original array. 
+
+  int N = a.length 
+  int[] count = new int[R+1]; 
+
+  // compute frequency of each letter
+  for(int i=0; i<N; i++) 
+      count[a[i]+1]++; 
+
+  // compute cumulates 
+  for(int r=0; r<R; r++) 
+      count[r+1] += count[r]; 
+  
+  // move items to aux array 
+  for(int i=0; i<N; i++) 
+      aux[count[a[i]]++] = a[i]; 
+
+  // get them to original array
+  for(int i=0; i<N; i++)
+      a[i] = aux[i]; 
+
+
+
+LSD String (Radix) Sort
+--------
+- Consider chars from right to left. 
+- Stably sort using dth char as key (using key-indexed counting) 
+
+MSD Radix Sort
+--------
+
+Suffix Sort
+--------
+- Create an array of suffixes of a given string. 
+- Sort the suffix strings. 
+
+Longest repeated substring
+-------
+(Used in Genomics, Cryptanalysis)
+- Get suffix arrays and sort. 
+- Compare length of longest common prefix. 
+
+
+Substring Matching
+-------
+- Brute Force: MN char compares in worst case (M= pattern length, N = text
+  size). 
+- 
+
+
+Knuth-Morris-Pratt Algo
+-------
+- Construct a DFA to match/mismatch input chars and state changes. 
+- A state indicates number of matching chars in pattern. 
+- Building the DFA is trickiest. Read/understand more. 
+- 
+
+Boyer-Moore 
+--------
+
+Rabin-Karp 
+--------
+- There are variation of vanilla Rabin-Karp version called: Monte Carlo,
+  Las Vegas versions. 
+
+
+Floyd-Warshall Algo (All Pairs Shortest Path) 
+
+
+
+
+Geometric Applications of Binary Search Trees (BST)
+---------
+
+1-d Range Search 
+---------
+- Geometric objects intersections. 
+- Finding points in a 2d range 
+- Intersections of orthogonal rectangles. 
+- Many applications. 
+
+Range Search: Find all keys between k1 and k2.
+Range Count: # of keys between k1 and k2. 
+
+Geometric Interpretation: 
+- Keys are points on a line 
+- Find/count points in a given interval in 1-dimension (1d).
+
+       DS           insert       range count         range search 
+Unordered Array        1              N                    N 
+Ordered Array          N            log N               R + log N
+Goal                 log N          log N               R + log N 
+
+N = number of keys 
+R = number of keys that match 
+
+- Keep a rank(node) function that counts # of keys less than that node in
+  a BST. 
+- Range(low, high) = rank(high) - rank(low) [+1 depending on high/low are
+  part of the query]
+
+
+// Algo: Find all keys between lo and hi 
+- Recursively find all keys in left subtree
+- Check key in current node 
+- Recursively find all keys in right subtree 
+
+
+
+Line Segment Intersection Search 
+-------
+// Algo 
+- Sweep vertical line from left to right 
+- x-coordinates define events. 
+- h-line (left endpoint): insert y-coord in to BST 
+- h-line (right endpoint): remove y-coord from BST
+- v-line: do a 1d-range search in BST for y-range
+
+
+Line Sweep Algos 
+-------
+Applications: 
+- Closest Pair of points. 
+- Line segment intersections.
+- Area of union of rectangles. 
+- Convex hull. 
+
+Kd-Trees 
+--------
+Extension of 1d-range 
+- Operations: Insert a 2d key; Delete a 2d key; Search for a 2d key
+- Range search: find all keys that lie in a 2d range. 
+- Range count: # of keys that lie in a 2d range.
+
+Geometric Interpretation: 
+- Keys are point in a plane. 
+- Find/count points in a given h-v rectangle. 
+
+Applications: 
+- Networking, Circuit Design, Databases. 
+
+Grid Implementation
+--------
+- Divide space in to MxN squares/grids. 
+- Create a list of points contained in each square. 
+- Use 2d array to directly index relevant square. 
+- Insert: add(x,y) to list for corresponding square. 
+- Range Search: Examine only squares that intersect 2d range query. 
+
+Space-Time Tradeoff: 
+---------
+- Space: M^2 + N
+- Time: 1 + N/(M^2) per square examined, on average
+
+Choose grid square size to tune performance
+---------
+- Too small: wastes space.
+- Too large: too many points per square.
+- Rule of thumb: sqrt(N) by sqrt(N) grid. 
+
+Running Time
+---------
+- Initialize DS: N
+- Insert point: 1 
+- Range search: 1 per point in range. 
+
+Clustering
+--------
+- Grid implementation is poor. 
+- Other options: 
+  2d Tree
+  Quadtree 
+  BSP Tree
+
+
+2d Tree
+-------
+// Algo 
+- Recursively partition plane in to two half planes (alternating between
+  horizontal & vertival partitions).
+- All points to left of a vertical will be in left sub-tree and vice
+  versa. 
+- Similarly for horizontal partition. 
+- Build a BST in above fashion. 
+
+
+Application
+-------
+- Given a set of points in a plane and a rectangle, find all the points
+  within that rectangle. 
+- Nearest neighbor search. 
+
+
+
+Drawback
+
+
+2-3 Tree (2-3 are # of nodes in the tree and not the keys. Keys are 1-2) 
+---------
+Allow 1 or 2 keys per node 
+- 2 node: one key, 2 children 
+- 3 node: two keys, 3 children 
+
+Perfect Balance: Every path from root to null link has same length. 
+Symmetric Order: Inorder traversal yields keys in ascending order. 
+
+Red-Black Trees (RB-Trees)
