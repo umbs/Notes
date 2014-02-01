@@ -1,0 +1,73 @@
+                   LDD NOTES
+                   ==========
+
+Questions: 
+- When giving params to a module at command line, there should be no
+  space. In an example where "Hello World" was passed, instructor
+  mentioned something about shell interpreting double quotes and failing.
+  Elaborate please. 
+
+- After writing to a char driver using $echo "Hello World" > /dev/CDD and
+  reading from it: $cat < /dev/CDD, is the module erasing contents of
+  /dev/CDD? Why is it failing to read again? 
+
+- 
+
+===========
+- Dowload full sourse from www.kernel.org 
+- Make a softlink in /usr/src/ called linux, pointing to extracted full
+  source.
+
+        $cd /usr/src 
+        $rm -f linux 
+        $tar jvxf linux-3.12.9.tar.xz  // right untar command.
+        $ln -sf linux-3.12.9 linux 
+
+- Get a quick help on make prior to building the kernel, to understand
+  various make options.
+  
+        $make help 2>1 | less
+
+- Change EXTRAVERSION field to something (i added LDD). 
+- We can do "make config" and explicitly provide Y/N options.
+
+- Alternatively, copy a default boot config file from /boot/ directory in
+  to current directory (as .config).  
+- Then, run "make xconfig" to use GUI to configure and make. 
+- Or, use 'make oldconfig', which uses .config file and if any options are
+  changed, only those are prompted. In the end, two files are created: 
+          .config  
+          .config.old 
+
+- Then type 'make' which uses new .config
+- `make modules_install` installs the modules 
+- `make install` 
+- Once done, cd /grub and look at ...
+- cd /boot and we should see 3 files in there: 
+      vmlinuz-3.12.9-ldd (whatever we wrote in EXTENSION variable in
+      Makefile) 
+      initramfs-3.12.9-ldd.img 
+      System.map-3.12.9-ldd 
+
+
+Sequence of steps: 
+    1. copy a config file from /boot/ to /usr/src/linux/ directory 
+    2. make oldconfig - /* unclear, but I think its to setup proper config
+                           options */
+    3. make  
+    4. make modules_install /* we skip `make install` because its included
+                               `make` */ 
+    5. make install     /* it installs boot loader */ 
+
+
+               +-------------------------+
+               |       Ch 2 Vid 2        |
+               +-------------------------+
+
+- Module is dynamically loaded binary to extend kernel functionality. 
+- `static` keyword is used for init and exit modules because to avoid
+  namespace pollution. The symbols have to be unique across kernel. 
+- printk writes to circular buffer in /proc/kmsgs. klogd reads from this
+  and routes it to syslogd which looks at loglevel and routes it to
+  /var/log/messages or remote. 
+ - 
