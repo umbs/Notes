@@ -1,9 +1,331 @@
                   ALGORITHMS          COLLECTION
                   ===============================
 
+Dynamic Programming Problems: 
+1 Sequence Alignment
+2 Tower of Hannoi Puzzle 
+3 Egg dropping puzzle 
+4 Matrix chain multiplication 
+5 
+
+References: 
+[1] http://en.wikipedia.org/wiki/Dynamic_programming
+[2] http://www.quora.com/Programming-Interviews/What-are-the-top-10-most-popular-dynamic-programming-problems-among-interviewers
+
+
+
+
+- Dynamic Connectivity Problem (How many connected components exist) 
+- Quick Find
+          // algo 
+          id[component] = component
+          union(p, q): 
+                id[p] = id[q]
+                each element that has id[p] has to be changed to id[q]
+                (this is O(N) step) 
+          connected(p, q): 
+                return (id[p] == id[q])
+
+        Algo          Initialize         Union       Find 
+        -------------------------------------------------
+     Quick-Find            N               N           1 
+
+- Problem: Union is expensive. N^2 time for N union's
+- Too slow algo.
+
+- Quick Union: Lazy approach to above problem. 
+   Data Structure
+   - Integer array id[] of size N 
+   - Interpretation: id[i] is parent of i 
+   - Root of i is id[id[...id[i] ...]]] - keep going until there is no
+     change. Algo ensures no cycles. 
+
+   Find(): 
+        - Check if p and q have same root? 
+   Union(): 
+        - Merge components containing p and q, set the id of p's root to
+          id of q's root. Only one value changes. 
+
+   // Algo 
+   private int root(int i) 
+   {
+        while(i != id[i])
+                i = id[i]; 
+        return i; 
+   }
+
+   public bool connected(int p, int q) 
+   {
+        return root(p) == root(q); 
+   }
+
+   public void union(int p, int q)
+   {
+        int pr = root(p); 
+        int qr = root(q); 
+
+        id[pr] = qr; 
+   }
+
+        Algo          Initialize         Union       Find 
+        -------------------------------------------------
+     Quick-Find            N               N           1 
+     Quick-Union           N               N*          1 
+
+     * - includes cost of finding roots 
+
+- Quick Union with Weighting (Improvement #1) 
+  - Modify QU to avoid tall trees 
+  - Keep track of size of each tree (# of objects) 
+  - Balance by linking root of smaller tree to root of larger tree. 
+
+  // Algo 
+  - Maintain sz[i] = size of tree rooted at i
+  Find()/Connected(p, q): 
+        return root(p) == root(q); 
+
+  QUwithWeight(p, q) 
+  {
+        int pr = root(p); 
+        int qr = root(q); 
+
+        if(pr == qr) return; // same tree 
+
+        if(sz[pr] < sz[qr]) 
+                id[pr] = qr; 
+                sz[qr] += sz[pr];
+        else 
+                id[qr] = pr; 
+                sz[pr] += sz[qr]; 
+  }
+  
+  - Depth of each node is atmost lg N (base 2 log) 
+
+        Algo          Initialize         Union       Find/Connected 
+        -------------------------------------------------
+     Quick-Find            N               N           1 
+     Quick-Union           N               N*          1 
+     Weighted QU           N              lg N        lg N
+
+
+
+- Weighted QU (Improvement #2): Path compression. Flatten the tree. 
+  - After computing root of p, set id of each examined node to point to
+    that root. 
+  - Starting from empty data structure, any sequence of M union-find ops
+    on N objects makes <= c (N + M lg* N) array accesses. 
+    lg* N = 5 for 2^65536, which is pretty much constant. 
+  - Therefore, almost linear time algo. 
+  
+              Algo              worst-cast time  
+        -------------------------------------------------
+          Quick-Find            MN  
+          Quick-Union           MN  
+          Weighted QU           N + Mlog N
+     QU + Path Compression      N + Mlog N 
+     Weighted QU + Path Comp    N + Mlg *N 
+
+        M union-find ops on set of N objects 
+
+Example: 10^9 union-finds with 10^9 objects 
+  - WQUPC reduces time from 30 years to 6 seconds. 
+
+
+Applications: 
+  - Percolation
+  - Games (Go, Hex)
+
+Percolation Problem Modeling 
+- How to check whether an NxN system percolates? 
+  1 Create an object for each site and name them 0 to N^2-1
+  2 Sites are in same component if connected by open sites. 
+  3 Percolates iff any site on bottom row is connected to site on top row.
+  This can be brute force and N^2 calls to connected() routine.
+  4. Instead, create a virtual site at top & bottom that is connected to
+  all nodes at top row and bottom row respectively. 
+
+
+
+
+
+
+
 SUM in an Array Algos:
 -------
-2SUM/3SUM
+2SUM/3SUM - Given N distinct integers, how many triples (or doubles) sum
+to zero (or a particular number). 
+
+// Algos
+- Brute Force - N^3
+
+BinarySearch of an Array
+--------
+// Code - from lecture (non-recursive)  
+
+   public static int binarySearch(int[] a, int key) 
+   {
+        int lo = 0, hi = a.length-1; 
+
+        while(lo <= hi)
+        {
+                int mid = lo + (hi-lo)/2; 
+                if      (key < a[mid]) hi = mid-1; 
+                else if (key > a[mid]) lo = mid+1; 
+                else return mid; 
+        }
+
+        return -1; 
+   }
+
+- An (N^2)log N algo for 3-SUM
+  - Sort N distinct number (Nlog N)
+  - For each pair of numbers in a[i] and a[j], binary search for
+    negative (a[i]+a[j]) - this is (N^2)log N step. 
+  - Total: (N^2)log N + (Nlog N)
+
+
+Memory Usage for Primitive Data Types in Java
+---------
+          
+          Type           Bytes
+          --------------------
+        boolean            1
+          byte             1
+          char             2 
+          int              4
+          float            4 
+          long             8 
+         double            8 
+         char[]           2N + 24 
+         int[]            4N + 24 
+       double[]           8N + 24 
+
+- Object overhead in Java = 16 bytes 
+- Reference overhead = 8 bytes 
+- Memory alignment = Each object uses multiples of 8 (on 64 bit machine)
+
+
+
+
+SORTING
+========
+Selection Sort:
+-------
+- In iteration i, find index of smallest remaining entry (call it `min`) 
+- Swap a[i] and a[min]. 
+
+Invariants: 
+-------
+- No entry to right of i is smaller than elements less than i. 
+
+  // Code 
+  public static void selectionSort(Comparable[] a) 
+  {
+        int N = a.length; 
+        for (int i=0; i<N; i++) 
+        {
+                int min = i; 
+                for (int j=i+1; j<N; j++) 
+                {
+                        if(less(a[j], a[min])
+                                min = j; 
+                }
+                exch(a, i, min); 
+         }
+   }
+
+- ~(N^2)/2 compares and N exchanges. 
+- Quadratic time input, even if input is sorted. 
+
+
+Insertion Sort:
+-------
+- In iteration i, swap a[i] with each larger entry to its left. 
+- All entries to left of i is sorted. 
+
+  // Code 
+  public static void insertionSort(Comparable[] a) 
+  {
+        int N = a.length; 
+        for (int i=0; i<N; i++) 
+                for (int j=i; j>0; j--) 
+                        if (less(a[j], a[j-1])) 
+                                exch(a, j, j-1) 
+                        else 
+                                break; 
+  }
+
+- On average, ~1/4(N^2) compares and ~1/4(N^2) exchanges. 
+- Best case: If array is in sorted (say, ascending order), only N-1
+  compares and 0 exchanges. 
+- Worst case: If array is in descending order, ~1/2(N^2) compares and
+  ~1/2(N^2) exchanges. 
+
+Insertion Sort: Partially-Sorted Array
+-------
+Def: An inversion is a pair of keys that are out of order. 
+         A E E L M O T R X P S
+
+         There are 6 inversions in above array. 
+         T-R T-P T-S R-P X-P X-S 
+
+Def: An array is partially sorted if the number of inversions is <= cN 
+(some constant times N). 
+
+- For partially sorted arrays, insertion sort runs in linear time because
+  number of exchanges = number of inversions. 
+  number of compares = number of exchanges + (N-1)
+
+
+
+Shell Sort: 
+--------
+Idea: Move entries more than one position at a time by h-sorting array. 
+
+an h-sorted array is h interleaved sorted subsequence. 
+
+- How to h-sort an array? Insertion sort, with stride length of h
+- Why insertion sort? 
+  - Big increments = small subarrays.
+  - Small increments = nearly in order (or partially sorted). 
+
+- Worst case: number of compares is O(N^(3/2)) for 3x+1 increments. 
+- Why are we interested in shellsort? 
+  - Useful in practice.
+  - Fast unless array size is huge. 
+  - Tiny, fixed footprint of code (used in embedded sys).
+  - Hardware sort prototype. 
+
+
+Shuffling: How do you shuffle a deck of cards? 
+-------
+- Generate a random number for each card and sort them. But there is a
+  cost of sorting the deck. 
+- Can we do better? Yes! Knuth Shuffle. 
+
+Knuth Shuffle: 
+-------
+- In iteration i, pick integer r between 0 and i uniformly at random. 
+- Swap a[i] and a[r]. 
+- This is linear time shuffling algo, making use of random number. 
+
+  // Code 
+  public void knuthShuffle(Object[] a) 
+  {
+        int N = a.length; 
+        for(int i=0; i<N; i++) 
+        {
+                int r = StdRandom.uniform(i+1); 
+                exch(a, i, r); 
+        }
+  }
+- Bug: Choosing to swap a random number between 0 and N-1. It is not
+  uniformly random. However, choosing between i and N-1 will work. 
+  
+
+
+
+
 
 String Problems:
 -------
