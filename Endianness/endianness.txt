@@ -1,11 +1,49 @@
-Consider two byte number: 0xabcd; left being smallest memory address and right
-being highest. 
+Consider four byte number: 0x0a0b0c0d; left being smallest memory address
+and right being highest. 
 
-Big-Endian (aka Network Byte Order) is represented as: 0xabcd; 
+  Number: 0x0a0b0c0d. Here LSB is 0x0d and MSB is 0x0a 
+
+  Memory Address: 0x100    0x101    0x102    0x103     
+                  +--------+--------+--------+--------+
+                  |        |        |        |        | 
+                  +--------+--------+--------+--------+
+
+Little-Endian: In LE, LSB is in lowest memory and MSB in highest memory
+address. So, the number is stored as: 0x0d0c0b0a in memory.  
+Ex: Intel x86
+
+  Number: 0x0a0b0c0d. Here LSB is 0x0d and MSB is 0x0a 
+
+  Memory Address: 0x100    0x101    0x102    0x103     
+                  +--------+--------+--------+--------+
+                  |  0x0d  |  0x0c  |  0x0b  |  0x0a  | 
+                  +--------+--------+--------+--------+
+
+  code: 
+        int i = 0x0a0b0c0d; 
+        char *c = (char *) &i; 
+        printf ("0x%x\n", *c); 
+
+        // Output is 0xd = little-endian. 
+
+Big-Endian (aka Network Byte Order): In BE, MSB is in lowestmemory address
+and LSB in highest. It looks the way numbers are written down on paper.
+So, the number is stored as: 0x0a0b0c0d in memory.  
 Ex: Motorola 68k, Data transfer on networks use NBO,  
 
-Little-Endian is represented as: 0xcdab 
-Ex: Intel x86 
+  Number: 0x0a0b0c0d. 
+
+  Memory Address: 0x100    0x101    0x102    0x103     
+                  +--------+--------+--------+--------+
+                  |  0x0a  |  0x0b  |  0x0c  |  0x0d  | 
+                  +--------+--------+--------+--------+
+
+  code: 
+        int i = 0x0a0b0c0d; 
+        char *c = (char *) &i; 
+        printf ("0x%x\n", *c); 
+
+        // Output is 0xa = big-endian. 
 
 Host-Byte Order: Ordering on the host machine. If processor is x86, its
 little-endian, if its Motorola's 68k, its big-endian. 
