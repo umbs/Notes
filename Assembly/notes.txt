@@ -1,0 +1,158 @@
+              DATA    SIZES
+              =============
+
+Bit: 0 or 1
+Byte: 8 bits 
+Word: 16 bits 
+Dword (Intel)/Long (ATT): 32 bits 
+Qword (Intel)/Quad (ATT): 64 bits
+
+
+          GENERAL    SYNTAX 
+          =================
+
+  INTEL                ATT 
+mov al, 23           movb $23, %al 
+mov bl, 6            movb $6, %bl 
+add al, bl           addb %bl, %al 
+
+- Suffix: b = byte; w = word; l = long; q = quad
+
+ATT is more "intuitive" syntax and here is why. 
+
+In Intel syntax, destination is usually first operand. In ATT, destination
+is 2nd operand. Hence, reading the syntax becomes intuitive. 
+
+Ex: 
+  INTEL                ATT 
+mov eax, 100          movl $100, %eax 
+
+ATT can be read as "Move 100 to eax" 
+Intel can be read as "Move in to eax value 100" 
+
+- In ATT syntax if no suffix is present to a mnemonic then the size is
+  inferred from destination operand. 
+
+
+           x86 Register Set 
+           ================
+
+AL = 8 bit register. Can hold signed & unsigned ints or single byte chars. 
+AH = Same as AL
+AX = AH + AL. Changing values in AH and AL will affect AX, but AL and AH
+are independent. H & L represent High and Low. 
+
+                     AX (ASCII register ??)
+              +------+------+
+              |  AH  |  AL  | 
+              +------+------+
+
+
+EAX = 32 bit register. Lower 16 bits is AX. There is no way to directly
+access top 16 bits of EAX. 
+
+                    EAX (Extra AX)
+              +------+------+------+------+
+              |      |      |     AX      |  
+              |      |      |  AH  |  AL  |  
+              +------+------+------+------+
+
+
+RAX = 64 bit register. 
+
+                                     RAX (64 bit) 
+              +------+------+------+------+------+------+------+------+
+              |      |      |      |      |            EAX            | 
+              |      |      |      |      |      |      |     AX      | 
+              |      |      |      |      |      |      |  AH  |  AL  |
+              +------+------+------+------+------+------+------+------+
+
+
+- In x64 CPU, there are 16 such registers as RAX. Its called General
+  Purpose Registers (GPR).
+  
+  64     low 32     low 16      low 8             Notes
+  bits     bits       bits       bits   
+  ------------------------------------------------------------
+  RAX    EAX        AX          AH/AL             Accumulator
+  RBX    EBX        BX          BH/BL             Base 
+  RCX    ECX        CX          CH/CL             Counter 
+  RDX    EDX        DX          DH/DL             Data 
+  RSP    ESP        SP          SPL               Stack Pointer
+  RBP    EBP        BP          BPL               Base Pointer 
+  RSI    ESI        SI          SIL               Source Index 
+  RDI    EDI        DI          DIL               Destination Index 
+
+  R7     R7D        R7W         R7B               Only on 64 bit 
+  R8     R8D        R8W         R8B               Only on 64 bit 
+  R9     R9D        R9W         R9B               Only on 64 bit 
+  R10    R10D       R10W        R10B              Only on 64 bit 
+  R11    R11D       R11W        R11B              Only on 64 bit 
+  R12    R12D       R12W        R12B              Only on 64 bit 
+  R13    R13D       R13W        R13B              Only on 64 bit 
+  R14    R14D       R14W        R14B              Only on 64 bit 
+  R15    R15D       R15W        R15B              Only on 64 bit 
+  ------------------------------------------------------------
+
+
+- There are Special Registers: 
+        RIP = Instruction Pointer. Location in RAM where next instruction
+              is present. 
+        RFLAGS = Helps to check condition/results of previous instruction. 
+        S[] = Set of registers used by floating point unit (called x87
+        floating unit). They are 80 bits wide and work like a stack.  
+        SIMD = Many SIMD registers, depending on CPU. 
+        - Many registers specific to CPU such as: counting clock ticks,
+          measuring performance of branching, segment regs, etc.  
+
+- CS - Code Segment Register 
+  DS - Data Segment
+  SS - Stack Segment
+  ES - Extra 
+
+  The above 4 registers are no longer in x64, but were there earlier. 
+
+            BASIC   INSTRUCTIONS
+            ====================
+- mov, add, sub, inc, dec, neg, imul, ret  
+
+
+- C and C++, each have their own calling conventions. 
+- In x64, the first 6 integer variables (function parameters) is passed
+  via registers. Pretty much anything that can be represented as integer
+  variable is passed via registers. 
+
+         Param        Register 
+         -----        --------
+             1        RDI 
+             2        RSI 
+             3        RCX 
+             4        RDX 
+             5        R8 
+             6        R9 
+            >6        passed on Stack 
+   
+   Ex:      void Func(int a, char b, unsigned long c) 
+            int a: passed in EDI portion of RDI register 
+            char b: passed in SIL portion of RSI register 
+            unsigned long c: passed in RDX 
+
+- Integer values are returned in C++ in RAX registers. 
+         Type         Register
+         ----         --------
+        char/bool     AL 
+        short         AX 
+        int           EAX 
+        long          RAX 
+
+
+
+
+
+
+Reference: 
+[1]
+http://www.youtube.com/watch?v=zRqLU_AxNdU&feature=share&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOvME&index=3
+
+[2]
+http://www.youtube.com/watch?v=nDj35pMLBQE&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOvME&index=3
