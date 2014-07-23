@@ -1,0 +1,18 @@
++ How to check linux flavor/version
+Method 1: 
+$ cat /etc/*-release 
+
+Method 2: 
+$ lsb_release -a            # displays LSB (Linux Standard Base) and
+                            # distribution specific info.  
+Method 3: 
+$ cat /proc/version 
+
+---------------------------
++ How to find out kernel version 
+$ uname -a 
+$ uname -mrs 
+
+---------------------------
+Ref:
+[1] http://www.cyberciti.biz/faq/find-linux-distribution-name-version-number/ 
