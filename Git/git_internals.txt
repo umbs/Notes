@@ -1,0 +1,58 @@
+       GIT  INTERNALS 
+       ==============
+$ git init      // creates .git/ directory
+
+$ ls .git/
+    HEAD
+    branches/
+    config -- local git config 
+    description 
+    hooks/ -- contains client/server hook scripts 
+    index
+    info/  -- contains .gitignore file 
+    objects/
+    refs/
+
+Core parts of Git: HEAD, index, objects, refs
+
+objects/ -- Stores all content for your database. 
+refs/ -- Stores pointers in to commit objects in that branches. 
+HEAD -- Points to branch you currently checkedout. 
+index -- Files containing staging area info. 
+
+
+Tree Objects
+---
+$ git update-index --add --cacheinfo SHA-1 <filename>
+    updates staging area/index with <filename> from version SHA-1. --add
+    flag adds files to staging area. --cacheinfo pulls content from
+    database and not the file itself. 
+
+$ git write-tree 
+    Writes contents of staging area to a tree object. 
+
+$ git read-tree --prefix=<name> SHA-1
+$ git write-tree 
+    Read trees in to your staging area. 
+
+$ git commit-tree SHA-1
+    Builds a commit tree object. 
+
+$ git update-ref <ref-file> SHA-1
+
+
+
+
+Plumbing Commands
+---
+git hash-object
+        $ echo 'test contents' | git hash-object -w --stdin 
+        d670460b4b4aece5915caf5c68d12f560a9fe3e4
+        $
+        // -w indicates store the content; --stdin indicates the content
+        // comes from stdin instead of a file. 
+
+git cat-file -p SHA 
+git cat-file -t SHA 
+
+
