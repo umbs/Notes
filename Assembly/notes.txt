@@ -146,13 +146,311 @@ RAX = 64 bit register.
         long          RAX 
 
 
+MEMORY ADDRESSING MODES
+(a) Indirect        (R)         Mem[Reg(R)]
+        Ex: movl  (%ecx), %eax
+(b) Displacement    D(R)        Mem[Reg(R)+D]
+        Ex: movl  8(%ebp), %edx
+(c) Complete Memory Addressing Mode. The most general form:
+        D(Rb, Ri, S) = Mem[Reg(Rb) + S*Reg(Ri) + D]
+        Ex: leal instructions use this
+            leal (%eax, %ebx, 4), %ecx 
+(d) PC Relative Addressing. 
+        0x100   cmp r2, r3
+        0x102   je  0x70        # PC relative addressing  
+        0x104   ...
+        ...     ...
+        0x172   add r3, r4
+
+        PC relative addressing are relocatable. Absolute branches are not. 
+
+
+- Some Arithmetic Ops
+
+      Instr     S, D    Result
+      addl      S, D    D = D+S
+      subl      S, D    D = D-S 
+      imull     S, D    D = D*S 
+      sall      S, D    D = D<<S
+      sarl      S, D    D = D>>S  # Arithmetic shift 
+      shrl      S, D    D = D>>S  # Logical shift 
+      xorl      S, D    D = D^S
+      andl      S, D    D = D&S
+      orl       S, D    D = D|S 
+   
+   + There is no distiction between signed and unsigned numbers in
+   Assembly. 
+
+- Jump instructions 
+
+      jX         Condition              Description 
+      ---------------------------------------------
+      jmp        1                      Unconditional 
+      je         ZF                     Equal/Zero 
+      jne        ~ZF                    Not Equal/Not Zero 
+      js         SF                     Negative 
+      jns        ~SF                    Nonnegative 
+      jg         ~(SF^OF) & ~ZF         Greater (Signed)
+      jge        ~(SF^OF)               Greater or Equal (Signed)
+      jl         (SF^OF)                Less (Signed) 
+      jle        (SF^OF) | ZF           Less or Equal (Signed) 
+      ja         ~CF & ~ZF              Above (Unsigned) 
+      jb         CF                     Below (Unsigned) 
+
+- Status registers (implicitly set, most of instructions): 
+        CF = Carry Flag, only for unsigned 
+        ZF = Zero Flag 
+        SF = Sign Flag, only for signed
+        OF = Overflow Flag 
+
+Conditionals: x86-64 (Performance Improvement using `cmovle` instruction) 
+    int absdiff(int x, int y)      |  # function prologue  
+    {                              |  movl %edi, %eax    # eax = x
+            int res;               |  movl %esi, %edx    # edx = y
+            if (x > y)             |  subl %esi, %eax    # eax = x-y
+                    res = x-y;     |  subl %edi, %eax    # edx = y-x 
+            else                   |  cmpl %esi, %edi    # x:y
+                    res = y-x;     |  cmovle %edx, %eax  # eax = edx, if <= 
+            return res;            |  ret  
+    }  
+
+
++ Jump Tables: 
+        - Represents switch statements in C. Indirect addressing is used. 
+        - Doesn't show up in disassembled code. 
+        - Can inspect using GDB 
+                db asm-cntl 
+        - Preferred if the range of cases are small. 
+
+
++ Program Stack [from 6] 
+
+R = Readable; O = Read-Only; W = Writeable; X = Executable 
+
+        +-----------------------------------+
+   RW   |             STACK                 | 
+        +-----------------------------------+   
+        |                                   |
+        |                                   |
+        |                                   |
+        |                                   |
+        +-----------------------------------+   
+   RW   |     HEAP (Dynamic Data)           | malloc()
+        +-----------------------------------+   
+   RW   |   Static Data & Global Vars       |
+        +-----------------------------------+   
+   O    |        String Literals            |
+        +-----------------------------------+   
+   OX   |     Program Instructions          |
+        +-----------------------------------+  
+
+
++ Stack Overview 
+
+        +-----------+ <--+
+        |           |    |
+        |           |    |
+        |           |   Caller
+        +-----------+   Frame
+        |  Args     |    |
+        +-----------+    |
+        | Ret Addr  |    |
+        +-----------+ <--+
+        | old %ebp  |
+        +-----------+
+        |           |
+        | saved regs|
+        |    +      |
+        |  local    |
+        | variables |
+        +-----------+
+        |   Args    |
+        |  build    | Stack Pointer
+        +-----------+ <---%esp
+
+
++ Register saving conventions (IA32/Linux): 
+        - Caller saves following registers if its being used after call to
+          another routine: %eax, %edx, %ecx
+        - Callee saves following registers if it wants to use them: %ebx,
+          %esi, %edi 
+        - %eax is used to return integer value.
+        - %esp, %ebp: special form of callee save-restored to original
+          values upon exit from procedure. 
+
++ X64-64 Procedure Call Highlights 
+ - Arguments (up to first 6) are in registers. 
+ - Local vars also in registers if there is room. 
+ - callq instruction stores 64-bit return address on stack. 
+ - No frame pointer (%ebp): 
+        - All references to stack frame made relative to %rsp. Eliminates
+          need to update %ebp/%rbp, which is now available for general
+          purpose use.
+ - Functions can access memory up to 128 bytes beyond %rsp: the "red zone" 
+   - Can store some temps on stack without altering %rsp 
+ - Registers still designated "caller saved" or "callee saved" 
+ - Ideally, x86-64 functions need no stack frame at all !!!!!!!
+        - Just a return address is pushed on to the stack.
+ - A func does need a stack frame when it: 
+        - Has too many local vars
+        - Has local vars that are arrays or structs 
+        - Uses & operator to compute address of local var 
+        - Calls another function that takes more than 6 args 
+        - Needs to save the state of callee-save regs b4 modifying them. 
 
 
 
+        Cache Performance Metrics 
+        =========================
+Miss Rate: 
+        - Fraction of memory references NOT found in cache
+          (misses/accesses) = (1 - hit rate) 
+        - Typical numbers = 3% to 10% for L1 cache 
 
+Hit Time: 
+        - Time to deliver a line in the cache to the processor. Includes
+          time to determine if line is in the cache. 
+        - Typical hit times: 1-2 clock cycles for L1 cache. 
+
+Miss Penalty: 
+        - Additional time required because of a miss. 
+        - Typically 50 - 200 cycles. 
+
+
+                Memory Hierarcy 
+                ===============
+
+                registers 
+                    |
+                on-chip L1
+                cache (SRAM)
+                    |
+                off/on-chip L2
+                cache (SRAM) 
+                    |
+                main memory 
+                 (DRAM) 
+                    |
+                local secondary 
+                 storage 
+                    |
+                remote disks 
+
+
+Example: Intels Core i7 Cache Hierarchy 
+
+        Core 0                          Core 1
+        ------                          ------
+        registers                       registers 
+           |                                |
+     +-----+-----+                    +-----+-----+
+     |           |                    |           |
+     v           v                    v           v
+    L1           L1                  L1           L1
+  d-cache      i-cache             d-cache       i-cache
+     |           |                    |            |
+     L2 unified cache                 L2 unified cache 
+           |                                 |
+           |                                 |
+           L3 unified cache, shared by all cores 
+                             |
+                             |
+                        Main Memory 
+
++ L1 i-cache and d-cache: 
+        32KB, 8-way set-associative, Access: 4 cycles 
++ L2 unified cache: 
+        256KB, 8-way set-associative, Access: 11 cycles 
++ L3 unified cache: 
+        8MB, 16-way, Access: 30-40 cycles
++ Block Size: 64 Bytes for all caches. 
+
+
+        Cache Organization
+        ==================
++ Where will data go in cache? 
+        (a) Direct Mapped Caching: Data in memory is directly mapped to
+        location in cache.
+        (b) Fully Associative Caching: Data in memory can go anywhere in
+        cache. 
+        (c) Set-Associative Caching: Cache is divided in to fixed number
+        of sets. Data can go anywhere in those sets.
+
++ Layout of Set-Associative Caching:
+        +-------------+------------+----+
+        |             |            |    |
+        +-------------+------------+----+
+            (Tag)        (Index)    (Offset) 
+
+        Offset - Location of data inside a set. 
+        Index  - Indicates which set. 
+        Tag -    Type of data in Cache. 
+
++ K-way associativity means, in EACH set in the cache, there are K
+  entries to fill. So, number of sets in a Cache = (M/K) where M is size
+  of Cache. 
+
++ General Cache Organization: 
+        - There are S sets in a cache (2^s, where small 's' indicates
+          # of bits representing sets).  
+        - Each set has E blocks (or cache lines) = 2^e where small 'e'
+          indicates # of bits representing blocks or cache lines.  
+        - Each block or cache line has: V (a valid bit), Tag (certain # of
+          bits indicating data type), B bytes of data (2^b, where b = # of
+          bits).
+        - Size of Cache = S * E * B bytes
+
++ When processor gets an address, it does following: 
+        - Locate Set.
+        - Check if any line in the Set has matching tag. 
+                - Yes + Valid bit set = Hit
+                - Else miss. 
+        - Locate data starting at offset.
+
+
++ How are writes handled in Cache? 
+        - Write-Through: write immediately to main memory. 
+        - Write-Back: Defer write to main memory until line is evicted.
+                Need a dirty bit to indicate if line is different than
+                main memory. 
+        - Write-Allocate: Load data in to Cache and update line in cache.
+                Good if more writes to the location follow. 
+        - No-Write-Allocate: Just write immediately to memory. 
+
+
++ Types of Cache Misses: CCC
+        - Compulsory
+        - Conflict 
+        - Capacity 
+
+
++ Exceptions: Synchronous and Asynchronous.
+        - Asynchronous: Occurs due to events outside processor control.
+                        Interrupts are an example.  
+        - Synchronous: 
+                - Traps: Intentional transfer control of OS to perform
+                  some function. Ex: Sys calls, breakpoints. 
+                - Faults: Unintentional but possibly recoverable. Ex: Page
+                  Faults (recoverable), Segment Faults (unrecov),
+                  Divide/Zero (unrecov).
+                - Aborts: Unintentional and unrecoverable.
+
+
+                
 Reference: 
 [1]
 http://www.youtube.com/watch?v=zRqLU_AxNdU&feature=share&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOvME&index=3
 
 [2]
 http://www.youtube.com/watch?v=nDj35pMLBQE&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOvME&index=3
+
+[3] Complete code set for IA32
+http://www.jegerlehner.ch/intel/IntelCodeTable.pdf
+
+[4] Very good description of instructions 
+http://web.itu.edu.tr/kesgin/mul06/intel/index.html
+
+[5] Notes from Hardware Software Interface course on Coursera. 
+
+[6] Coursera: Hardware Software Interface 
+
