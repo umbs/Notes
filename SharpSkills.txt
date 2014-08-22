@@ -14,19 +14,37 @@ Suggestions:
 
 2. Re-Build The Wheel:  
 Code all basic data structures in various languages: 
-(a) Basic Array (b) Dynamic Array (c) Singly-Linked List (d) Doubly-Linked
-List (e) Skip List (f) Hash Table (g) Binary Search Tree (h) Cartesian
-Tree (i) B-Tree (j) Red-Black Tree (k) Splay Tree (l) AVL Tree (m) Stack
-(n) Queue (o) Circula Queues (p) Hash Map (r) Hash Tree (s) Set (t)
-Priority Queue  
+        Dynamic Array 
+        Singly-Linked List (sorted/unsorted) 
+        Doubly-Linked List 
+        Skip List 
+        Binary Search Tree 
+        Cartesian Tree 
+        B-Tree 
+        Red-Black Tree
+        B+ Tree
+        Splay Tree 
+        AVL Tree
+        Trie/Patricia Tree
+        Stack 
+        Queue 
+        Circular Queues 
+        Hash Table 
+        Hash Map 
+        Hash Tree 
+        Set 
+        Heaps/Priority Queue  
 
 Heaps 
-(a) Linked-List (sorted) (b) Linked-List (unsorted) (c) Binary Heap (d)
-Binomial Heap (e) Fibonacci Heap 
+        Binary Heap 
+        Binomial Heap 
+        Fibonacci Heap 
 
 Graphs 
-(a) Adjacency List (b) Incidence List (c) Adjacency Matrix (d) Incidence
-Matrix 
+        Adjacency List 
+        Incidence List 
+        Adjacency Matrix 
+        Incidence Matrix 
 
 
 3. Solve word problems. Spend time coding solutions to different types of
@@ -54,7 +72,7 @@ what you can build in minutes, days and weeks.
 NETWORKING 
 CCNA Notes: 
 Other Protocols: 
-  Bridging, OSPF, BGP, MPLS, PW, IPv6, SNMP
+  Bridging, STP, RSTP, OSPF, BGP, MPLS, PW, IPv6, SNMP
 
 ================
 ALGORITHMS

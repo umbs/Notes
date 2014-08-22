@@ -1,0 +1,176 @@
+Vid 1: What it means to buy a company's stock
+-----
++ Equity = (Assets - Liabilities) 
++ Theoretically, value of one share = Equity/Number of shares. 
++ If share price is greater than above theoretical value then people
+expect the company to do well. If its lower, people expect it to do
+badly?? 
+
++ Current Assets = Value that can be 'converted' to cash/money in next one
+year. 
++ Current Liabilities = Money owed/debt to be payed in next one year. 
+
+Vid 2: Primer on unemployment rate
+-----
++ Total US population ~300M 
++ Total US population > 16 or more years of age (employable age) ~237M 
++ Actual Labor Force = Working population 
+                             + 
+                       Actively looking for work population
+                     ~155M 
++ Unemployed People = Unemployed + Actively looking for work ~5M 
++ Unemployment Rate = (Unemployed People)/(Actual Labor Force) * 100 
+                    = (5M)/(155M)*100 
+                    = ~9.7%
+
++ Does not account people entering and exiting labor force which can
+drastically affect the unemployment rate. 
+
+
+Vid 3: Traditional IRA (Individual Retirement Account)  
+-------
++ Each individual can invest up to certain limit each year based on age.
+This limit is set by IRA and is usually high for people older than 50 yrs. 
+
++ The money contributed to IRA is pre-taxed and will be taxed only when
+taking it out. 
+
++ There is a penalty of 10% for early withdrawl of IRA money. Cut off date
+is 59.5yrs. 
+
+
+Case Study: 
+----- 
+An individual with income in 32% tax bracket contributs $5000 to IRA. How
+does he fare contributing (& investing) through IRA versus investing by
+himself (without IRA). 
+
+                                IRA                     No IRA 
+                             ---------               ------------
+Starting Amount                $5000                $5000 * 32% = $3400
+
+Invest in stock A
+for 10yrs and amount 
+doubles                       $10,000                 $6800
+
+After tax, amount left        $10,000               $6800 - ($3400*15%)
+                           (won't pay tax           = $6290
+                           because money is        (15% tax on $3400
+                           still with IRA)           capital gains)  
+
+Invest in stock B 
+for 10yrs and amount 
+doubles                       $20,000                  $12,580 
+
+
+After tax, amount left        $20,000             $12,580 - ($6290*15%) 
+                                                  = $11,636.50 
+
+If you are over 59.5yrs 
+now and eligible to 
+withdraw. Say you earn 
+much less now and fall 
+in 25% tax bracket
+
+------------------------------------------------------------------------
+After tax, amount left        $15,000                 $11,636.50 
+------------------------------------------------------------------------
+
+This is made up scenario and most likely/probable one. 
+
+
+Vid 4: The rule of 72 for compound interest 
+---------
++ A simple rule to describe how long does it take for a principal amount
+to double, given an interest rate R%: 72/R 
+        Ex: R = 10% per annum. 
+            It takes 7.2yrs to double the principal amount. 
+
+            R = 10% per month. 
+            It takes 7.2months to double. 
+
++ Actual formula: 
+        Let P0 = principal amount right now. 
+        Let P1 = Total amount after 1 year. 
+        Let Pn = Total amount after n years. 
+        Let R  = Interest rate per year. 
+
+        Pn = P0 + P1 + P2 + ... 
+           = P0(1+R/100)^n 
+
+
+Vid 5: Term and Whole Life Insurance Policies
+--------- 
++ Term Insurace: Policy on life for a certain term (say 10yrs). 
+        - Pay yearly premium of, say, $500 for 10yrs for a payoff to
+          beneficiary upon death within 10yrs. 
+        - If no death then you loose whole money. 
+        - If the term length is longer, premiums are higher due to higher
+          probability of death. 
+        - Premiums go up with age. 
+        - This plan is not available after a certain age (like 70yrs or
+          so). 
+
++ Life Insurace: Policy taken out for the whole life. 
+        - Premiums are much higher than Term Insurance. 
+        - Payout is after death to beneficiary. 
+        - Optional savings plan associated with Life Insurance where a
+          certain % interest is given on your premium. 
+        - If you opt out of LI policy before death, you can take out the
+          savings at a certain fee. 
+        - However, upon death, only the Insurance payout will be provided
+          to beneficiary. The cash savings is lost and will not be paid to
+          beneficiary. 
+
+
+Vid 6: Roth IRA
+----------
++ Named after William Roth, Delaware Senator who proposed this bill. 
++ Roth IRA is post tax investment. 
++ Principal can be withdrawn anytime without penalty. 
++ If more than principal is withdrawn (if principal increases) then 10%
+penalty and income tax is applied. 
++ After 59.5yrs, only income tax is applied on amount (except principal).  
+
+
+
+
+                        Traditional IRA         Roth IRA 
+                        --------------------------------
+Initial: $5000             $5000               $3400 (at 32% tax)         
+deposit                (tax deferred) 
+
+Investment doubles         $10000              $6800 
+but stays in IRA 
+
+Investment doubles         $20000              $13600 
+again but stays in IRA
+
+Ex 1: 
+Withdraw $3400 before   $3400-($340 penalty)    $3400-(1088 at 32% tax)
+59.5yrs                 - ($1088 at 32% tax)    = $2312
+                        = $1972
+
+Ex 2: 
+Withdraw $4000 before   $4000-($400 penalty)    No tax on $3400. 
+59.5yrs                 -($1280 at 32% tax)     On $600, 10% penalty +  
+                        = $2320                 32% income tax = $348 
+                                                Total = $3748. 
+
+Ex 3: 
+Withdraw after 59.5yrs  $15000                  No tax on $3400 + 
+at 25% tax rate         (after tax)             25% on $10200 
+                                                = $11050
+
+
+
+
+References:
+[1] Notes from Khan Academy 'Personal Finance' playlist
+https://www.youtube.com/watch?v=98qfFzqDKR8&list=PL83DF21B47327EDFE
+
+[2] Where to find a company's balance sheet.
+http://www.nasdaq.com/quotes/company-financials.aspx
+
+[3] 
+

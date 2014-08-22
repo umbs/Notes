@@ -48,10 +48,10 @@ Regular Expression Examples
 /^[a-zA-Z]/	Matches if the line starts with any letter
 /^[a-z].*/	Matches if the first character of the line is a-z and there is at least one more of any character following it
 /2134$/	Matches if line ends with 2134
-/\(21|35\)/	Matches is the line contains 21 or 35
+/\(21|35\)/	Matches if the line contains 21 or 35
 Note the use of ( ) with the pipe symbol to specify the 'or' condition
 /[0-9]*/	Matches if there are zero or more numbers in the line
-/^[^#]/	Matches if the first character is not a # in the line
+/^[^#]/	        Matches if the first character is not a # in the line
 
 Notes:
 1. Regular expressions are case sensitive

@@ -435,8 +435,62 @@ Example: Intels Core i7 Cache Hierarchy
                   Divide/Zero (unrecov).
                 - Aborts: Unintentional and unrecoverable.
 
++ MMU (Memory Management Unit) uses PTBR (Page Table Base Register) to
+locate the start of Page Table. MMU uses Page Table to look up and convert
+Virtual Addresses to Physical Addresses.
 
-                
++ Page Tables can be stored in Cache/Memory. But that can slow down Page
+Table lookup's. Hence, TLB (Translation Lookaside Buffer) to speed Page
+Table Lookup's. On Intel Core2 Duo, there can be 128 or 256 entries in
+TLB. 
+
+
+        Dynamic Memory Allocation
+        =========================
++ sbrk() syscall is used by malloc/calloc family of routines to increase,
+decrease or allocated memory from heap. 
+
++ What info is needed by memory allocator to keep track of blocks in heap? 
+
++ When calling free(void *p), how does free know the size to free? 
+        - Keep size info in previous word. Standard practice. 
+
++ How to keep track of free blocks? 
+        Method 1: Implicit Lists: Linked list of blocks (first word being
+        length) - links ALL blocks, even the used blocks. 
+        Method 2: Explicit Lists: Linked list of free blocks.
+        Method 3: Segregated free lists: Different free lists for
+        different size classes. 
+        Method 4: Blocks sorted by size: Can use a balanced tree (R-B
+        Tree) with pointers within each free block, and the length used as
+        key. 
+
++ How to keep track if block is allocated or not? 
+        - Standard trick to save memory. If blocks are aligned, the first
+          word is size (typically, multiples of 8 bytes). 
+        - The last bit of these sizes are always 0. Use it to determine
+          allocated/free flag.
+        - When reading size, must remember to mask out this bit. 
+
++ How to find a free block (using Implicit Lists)? 
+        - First fit: Search the list from beginning and return first
+          match. 
+        - Drawbacks: Linear time, 'Splinters' at the beginning. 
+
+        - Next fit: Start from where you stopped last time. Faster than
+          'First Fit' as it avoids scanning unhelpful blocks.  
+        - Drawback: Some research suggests that fragmentation is worse. 
+
+        - Best fit: Choose best (closest match in size) free block. This
+          keeps fragementation small. 
+        - Drawback: Slower. 
+
+
+
+
+
+
+
 Reference: 
 [1]
 http://www.youtube.com/watch?v=zRqLU_AxNdU&feature=share&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOvME&index=3
