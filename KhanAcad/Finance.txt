@@ -1,42 +1,44 @@
+                PERSONAL FINANCE PLAYLIST 
+                =========================
+
 Vid 1: What it means to buy a company's stock
 -----
-+ Equity = (Assets - Liabilities) 
-+ Theoretically, value of one share = Equity/Number of shares. 
-+ If share price is greater than above theoretical value then people
-expect the company to do well. If its lower, people expect it to do
-badly?? 
+- Equity = (Assets - Liabilities) 
+- Theoretically, value of one share = Equity/Number of shares. 
+- If share price is greater than above theoretical value then people
+  expect the company to do well. If its lower, people expect it to do
+  badly?? 
 
-+ Current Assets = Value that can be 'converted' to cash/money in next one
-year. 
-+ Current Liabilities = Money owed/debt to be payed in next one year. 
+- Current Assets = Value that can be 'converted' to cash/money in next one
+  year. 
+- Current Liabilities = Money owed/debt to be payed in next one year. 
 
 Vid 2: Primer on unemployment rate
 -----
-+ Total US population ~300M 
-+ Total US population > 16 or more years of age (employable age) ~237M 
-+ Actual Labor Force = Working population 
+- Total US population ~300M 
+- Total US population > 16 or more years of age (employable age) ~237M 
+- Actual Labor Force = Working population 
                              + 
                        Actively looking for work population
                      ~155M 
-+ Unemployed People = Unemployed + Actively looking for work ~5M 
-+ Unemployment Rate = (Unemployed People)/(Actual Labor Force) * 100 
+- Unemployed People = Unemployed + Actively looking for work ~5M 
+- Unemployment Rate = (Unemployed People)/(Actual Labor Force) * 100 
                     = (5M)/(155M)*100 
                     = ~9.7%
 
-+ Does not account people entering and exiting labor force which can
-drastically affect the unemployment rate. 
+- Does not account people entering and exiting labor force which can
+  drastically affect the unemployment rate. 
 
 
 Vid 3: Traditional IRA (Individual Retirement Account)  
 -------
-+ Each individual can invest up to certain limit each year based on age.
-This limit is set by IRA and is usually high for people older than 50 yrs. 
-
-+ The money contributed to IRA is pre-taxed and will be taxed only when
-taking it out. 
-
-+ There is a penalty of 10% for early withdrawl of IRA money. Cut off date
-is 59.5yrs. 
+- Each individual can invest up to certain limit each year based on age.
+  This limit is set by IRA and is usually high for people older than 50
+  yrs. 
+- The money contributed to IRA is pre-taxed and will be taxed only when
+  taking it out. 
+- There is a penalty of 10% for early withdrawl of IRA money. Cut off date
+  is 59.5yrs. 
 
 
 Case Study: 
@@ -81,7 +83,7 @@ This is made up scenario and most likely/probable one.
 
 Vid 4: The rule of 72 for compound interest 
 ---------
-+ A simple rule to describe how long does it take for a principal amount
+- A simple rule to describe how long does it take for a principal amount
 to double, given an interest rate R%: 72/R 
         Ex: R = 10% per annum. 
             It takes 7.2yrs to double the principal amount. 
@@ -89,7 +91,7 @@ to double, given an interest rate R%: 72/R
             R = 10% per month. 
             It takes 7.2months to double. 
 
-+ Actual formula: 
+- Actual formula: 
         Let P0 = principal amount right now. 
         Let P1 = Total amount after 1 year. 
         Let Pn = Total amount after n years. 
@@ -101,7 +103,7 @@ to double, given an interest rate R%: 72/R
 
 Vid 5: Term and Whole Life Insurance Policies
 --------- 
-+ Term Insurace: Policy on life for a certain term (say 10yrs). 
+- Term Insurace: Policy on life for a certain term (say 10yrs). 
         - Pay yearly premium of, say, $500 for 10yrs for a payoff to
           beneficiary upon death within 10yrs. 
         - If no death then you loose whole money. 
@@ -111,7 +113,7 @@ Vid 5: Term and Whole Life Insurance Policies
         - This plan is not available after a certain age (like 70yrs or
           so). 
 
-+ Life Insurace: Policy taken out for the whole life. 
+- Life Insurace: Policy taken out for the whole life. 
         - Premiums are much higher than Term Insurance. 
         - Payout is after death to beneficiary. 
         - Optional savings plan associated with Life Insurance where a
@@ -125,12 +127,12 @@ Vid 5: Term and Whole Life Insurance Policies
 
 Vid 6: Roth IRA
 ----------
-+ Named after William Roth, Delaware Senator who proposed this bill. 
-+ Roth IRA is post tax investment. 
-+ Principal can be withdrawn anytime without penalty. 
-+ If more than principal is withdrawn (if principal increases) then 10%
+- Named after William Roth, Delaware Senator who proposed this bill. 
+- Roth IRA is post tax investment. 
+- Principal can be withdrawn anytime without penalty. 
+- If more than principal is withdrawn (if principal increases) then 10%
 penalty and income tax is applied. 
-+ After 59.5yrs, only income tax is applied on amount (except principal).  
+- After 59.5yrs, only income tax is applied on amount (except principal).  
 
 
 
@@ -162,6 +164,158 @@ Withdraw after 59.5yrs  $15000                  No tax on $3400 +
 at 25% tax rate         (after tax)             25% on $10200 
                                                 = $11050
 
+
+
+Vid 8: Personal Bankruptcy - Chapters 7 and 13 
+------
+- Defaulting on debt and a legal process to handle that is defined in
+  Bankruptcy laws. Chapt 7 & 13 are the most common and applies to
+  individuals.
+
+- Mideval times, if one fails to repay the debt, there was a concept of
+  'debt labor' - repaying in form of labor. 
+- In early 18th century, there were debt prisons. Charles Dicken's dad was
+  in debt prison. Family has to repay the loan/debt and free the debtor.  
+
+Chapt 7: 
+-------
+- Chap 7 is a stronger, straight forward declaration of Bankruptcy. 
+- You go to bankruptcy court and declare it. They appoint an assessor, who
+  takes all your assets, within reasonable limits, sell it off and pay the
+  creditors. 
+- This stays on credit report for 10 yrs.  
+
+
+Chapt 13: 
+-----
+- Much lenient than Chap 7, this is asking court to reduce the interest
+  rates, or debt amount or some thing similar. It is still promising to
+  return the debt, but negotiating the terms & conditions. 
+- This also stays on credit report for 10 yrs. 
+
+
+- Other chapters of Bankruptcy law deals with other types of situations:
+  Chapter 12 is related to food producers (farmers, fisher men etc);
+  Chapter 11 is related to insitutions, but some individuals with vast
+  assets can also fall in this category.  
+
+- Certain loans/debts cannot be waived under Bankruptcy laws. Student loan
+  is one.
+
+
+Vid 9: Open Ended Mutual Funds
+-------
+- Imagine someone wants to start an investment fund, they go to SEC,
+  incorporate themselves and start soliciting funds from public. They have
+  to pass all regulatory hurdles first. 
+- Hedge Funds cannot solicit funds from general public. 
+
+- Suppose, we start a fund with $400 investment and 4 shares. So, Total
+  Assets Under Management (AUM) is $400. 
+- If someone wants to invest, fund can issue new shares at $100 each. Let
+  say, new AUM is $500 (total 5 shares).
+- The Net Asset Value (NAV) is $100/share. 
+- If fund performs well and grows to $1000, the new NAV is $200. 
+- If someone wants 10 new shares, the fund manager can create new ones and
+  issue them, making AUM to $2000. 
+- If a particular year, fund looses 10%, AUM is now $1800. 
+- If one investor wants his money back, the fund AUM reduces to $1620.
+  Note that NAV still remains same, $180. 
+- Drawback of Open Ended MF is that manager has to have some cash reserve
+  to return investors (typically 3-5%) 
+- OEMF can grow or shrink frequently (without affective NAV in above
+  example).
+
+
+Vid 10: Intro to Mortgage Loans
+---------
+
+Vid 11: Intro to Compound Interest  
+---------
+
+
+
+
+Vid 12: Intro to Bonds
+---------
+- Companies or Govt or any institutions can raise funds in two ways: 
+  (a) Borrow from a bank (b) Issue bonds
+
+- In the case of bonds (from what I understand), there are a lot many
+  investors and hence distributing the risk. Compare this to a bank
+  lending the entire sum. If the institution defaults, the bank bears a
+  heavy loss. 
+
+- Similar to a loan, in Bonds, there is a Maturity Date, Interest Rate and
+  Coupons (dates when the interest on principal is disbursed). 
+- Typically, interests are payed semi-annually. 
+
+- Ex: If a Company wants to raise $5M capital, they can issue 5000 bonds
+  at $1000 face value (par value), at an interest rate of 10% and 2yr
+  maturity. This is how the bond pays out. 
+
+  -------------+--------------+---------------+------------------+
+  0           6m             12m             18m                24m
+  -$1000     +$50            +50            +$50              +$50
+                                                              +$1000 
+
+- From Company's perpective: 
+
+        Initial Asset 
+        +---------+
+        | $10M    |
+        +---------+
+
+        After issuing bonds
+           Asset    Debt/Liabilities 
+        +---------+---------+
+        | $10M    |  $5M    |
+        +---------+---------+
+
+        If Company's assets grow to, say, $20M, bond holders DO NOT
+        benefit. They only get what's promised to them. 
+
+
+
+Vid 13: Institutional roles in issuing and processing credit cards  
+---------
+
+Vid 14: Basics of Estate Tax 
+---------
++ Also called inheritence tax. 
++ No tax up to $5M. But taxed 10% on anything above. 
++ This tax is when estate is inherited from an individual. But when
+inherited from joint (couple), its a different rate. 
+
+Vid 15: Basics of US income tax rate
+------
+
+Vid 16: APR and Effective APR 
+-------
++ Credit Cards announce an APR value (say, 22%) and in fine print mention
+a daily interest rate of 0.06027% (=22/365)
++ However, if we compound this interest, the effective APR =
+(1.0006027)^365 ~ 24.59%
++ Note that due to compounding, the effective interest is a bit higher. 
+
+
+Vid 17: 401K 
+--------
++ Similar to Traditional IRA. 
++ Differences: 
+        - Larger limit to invest in 401K.  
+        - In 401K Company matches and theoretically, a generous employer
+          can match a lot of money. There is a limit of combined
+          contribution of $50K. 
+        - Traditional IRA give flexibility to invest anywhere. 401K is
+          tied to options given by employer.
+        - Not so important, in 401K, the money is automatically deducted
+          from paycheck while in Traditional IRA, we have to invest after
+          receiving the paycheck. Tax deductions happens at end of the
+          year. 
+
+Vid 18, 19, 20: 
+-----
 
 
 
