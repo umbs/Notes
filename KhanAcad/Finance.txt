@@ -1,4 +1,4 @@
-                PERSONAL FINANCE PLAYLIST 
+                PERSONAL FINANCE PLAYLIST (20 vids) 
                 =========================
 
 Vid 1: What it means to buy a company's stock
@@ -318,6 +318,106 @@ Vid 18, 19, 20:
 -----
 
 
+                FINANCE (196 vids)
+                ==================
+Vid 1,2: Interest
+-----
+P = Principal, R = Rate of Interest (in %), N = Number of years 
+F = Future Amount 
+
+Simple Interest: 
+F = P + P*N*(R/100) 
+
+Compound Interest: 
+F = P(1+R/100)^N
+
+
+Vid 3,4,5: Present Value 
+------
+PV = Present Value; FV = Future Value; R = Interest (in %); N = Number of
+years. 
+
+FV = PV (1+R/100)^N
+
++ Sometimes R is called discount.
+
+
+Vid 6: Discounted Cash Flow
+-----
++ Varying interest rates, such as deposits for long term vs deposits for
+short term. 
++ Best way to compare various choices, caculate PV for all choices and
+evaluate. 
+
+
+Vid 7, 8, 9: Intro to Balance Sheets
+-------
+- Assets = All that you own and can be converted to cash (car, house,
+  cash). House is an example of Asset. However, there could be mortgage on
+  the house and hence we don't have 100% ownership. 
+- Liabilities = Anything that you owe others (debt, loan, mortgage etc). 
+- Equity = Something that you are 100% owner of, mostly calculated in
+  cash. 
+
+- Assets = Liabilities + Equity. 
+
+           House (1M Asset)  
+        +------------+
+        | 750K load  | <--- Liability
+        |            |
+        +------------+
+        | 250K yours | <-- Equity 
+        +------------+
+
+- As you pay off the loan, the principal portion goes towards Equity. 
+- If the house value drops to, say, $800K. Then, since Liability remians
+  same, the loss is in owners Equity. 
+- If the house value increases, to say, $1.5M, then owners Equity
+  increases to $750K. 
+- Home Equity Loan: Getting a loan if Equity on home increases as above.
+  Usually, banks only give loan up to 75% of home value if Equity
+  increases. In above case, 75% of $1.5M is $1.125M. Since bank already
+  gave $750K loan, it can give additional $375K loan.
+
+
+Vid 10, 11, 12: Renting vs Buying 
+-------
+- Renting or Buying, this is how to do analysis. 
+
+- Params for buying: $1M house with $250K downpayment, i.e., $750K loan @
+  5% interest, say $5K/mo in mortgage = $60K/yr in mortgage 
+- If initially, the interest component is 2/3 of that amount (=$40K), that is tax
+  deductible. By rough calculation (at 33% tax rate), about 1/3 is
+  recovered (=$13K). Hence, we pay abour $47K towards a home mortgage,
+  EFFECTIVELY.  
+
+- Params for renting (similar house as above): $3K/mo = $36K/yr and assume
+  there is a 4% interest on $250K (=$10K/yr). With this income, effect
+  "loss" per year is $26K/yr
+- There is almost $20K difference, which we'll never see if we buy a home.  
+
+
+
+Vid 13, 14, 15, 16: Housing Price Conundrum
+------
+- What is reason for Housing Price Connundrum from 2000 to 2006 in USA? 
+- Money has become easy to get. Banks were lending money, for literally
+  zero downpayment. 
+- Banks or Financial Institutions, such as Country Wide Financials, were
+  bundling Billions of loands and selling them off to bigger banks (such
+  as Bear Sterns) and getting commissions on the loans made. 
+- Bear Sterns were selling them to Hedge Funds or other such Financial
+  Institutions, where a pool of investors put their money. 
+- Investors of Hedge Fund depended on Standard & Poors (S&P), Moody's
+  Investor Services and Fitch Ratings to rate the quality of loans. They
+  are the big 3 credit-rating agencies. 
+- These agencies gave AAA (or such highest quality) rating because these
+  mortgage owners never defaulted in the past.
+- Hedge Fund and such investors invested because its an easy 7-8% returns
+  on their investment.
+
+
+
 
 References:
 [1] Notes from Khan Academy 'Personal Finance' playlist
@@ -327,4 +427,4 @@ https://www.youtube.com/watch?v=98qfFzqDKR8&list=PL83DF21B47327EDFE
 http://www.nasdaq.com/quotes/company-financials.aspx
 
 [3] 
-
+https://www.youtube.com/watch?v=GtaoP0skPWc&list=PL9ECA8AEB409B3E4F
