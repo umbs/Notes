@@ -1,0 +1,44 @@
+
+
+top - Process Activity
+vmstat - System Activity, H/W info 
+w - Who logged on
+ps - Displays processes 
+pgrep 
+free - Memory Usage 
+iostat - Average CPU Load, Disk Activity 
+sar - System Activity Reporter 
+mpstat - Multiprocessor Usage 
+pmap - Process Memory Usage 
+netstat - Networks stats 
+ss - Network stats 
+iptraf - Realtime network traffic 
+tcpdump - 
+strace - System Calls
+/proc - Various Kernel Stats
+nagios - Server and Network Monitoring 
+FAN - Fully Automated Nagios
+
+nmap - Port Scanning
+lsof - list open files, network connections and more. 
+ntop
+
+
++ How to check linux flavor/version
+Method 1: 
+$ cat /etc/*-release 
+
+Method 2: 
+$ lsb_release -a            # displays LSB (Linux Standard Base) and
+                            # distribution specific info.  
+Method 3: 
+$ cat /proc/version 
+
+---------------------------
++ How to find out kernel version 
+$ uname -a 
+$ uname -mrs 
+
+---------------------------
+Ref:
+[1] http://www.cyberciti.biz/faq/find-linux-distribution-name-version-number/ 

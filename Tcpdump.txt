@@ -1,0 +1,52 @@
+SYNTAX:   Protocol Direction  Host(s)   Value Operation   Other Expression 
+EXAMPLE:     tcp     dst      10.1.1.1    80     and      tcp dst 10.2.2.2
+
+Protocol: ether, fddi, ip, arp, rarp, etc 
+
+Direction: src, dst, "src and dst", "src or dst". If nothing is specified,
+"src or dst" is applied. For example, "host 2.2.2.2" indicates "src or dst
+host 2.2.2.2".
+
+
+---------------------------------------
+#tcpdump 
+  - To display standard tcpdump output 
+
+#tcpdump -v 
+  - Verbose output 
+
+#tcpdump -D 
+  - Available interfaces for capture 
+
+#tcpdump -n 
+  - Display numerical addresses instead of DNS addresses 
+
+#tcpdump -q 
+  - Quick output 
+
+#tcpdump -i eth0 
+  - Traffic on eth0 interface 
+
+#tcpdump udp 
+  - Capture only UDP traffic 
+
+#tcpdump port http 
+  - Capture port 80 http traffic 
+
+#tcpdump -F file_name 
+  - Capture traffic from filter stored in file_name 
+
+#tcpdump -c 20 
+  - stop the capture after 20 packets 
+
+#tcpdump -w capture.log 
+  - Send the capture in to the file
+
+#tcpdump -r capture.log 
+  - Read the log file 
+
+#tcpdump host www.openmaniak.com
+  - Display packets having "www.openmaniak.com" as src or dst addr. 
+
+#tcpdump src 192.168.1.100 and dst 192.168.1.2 and port ftp 
+  - Display FTP packets with given src and dst addr 

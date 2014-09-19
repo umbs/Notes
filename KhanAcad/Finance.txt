@@ -417,6 +417,22 @@ Vid 13, 14, 15, 16: Housing Price Conundrum
   on their investment.
 
 
+Vid 19, 20, 21: Short Selling
+------
+Mechanics of Shorting: 
+- Borrow stocks/shares from owners via broker. Sell it in market and wait,
+  in the hopes that share price will fall. Buy back the stock at lower
+  price and return the shares to the owner via broker. Difference in stock
+  price is profit. 
+
+- Making money when market (or shares) is going in downward direction. 
+
+- Is it bad? Almost all players in market benefit from share price going
+  up (Company execs, Financial media, Financial service providers, Govt,
+  etc). Short sellers are on other side. They benefit when shares go down
+  and can check 'misbehavior' of people who can influence share price
+  going up. 
+
 
 
 References:
