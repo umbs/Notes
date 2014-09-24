@@ -218,6 +218,20 @@ Shows
 # git show HEAD:file 
     ! show contents of a file 
 
+Stash commands
+-----
+# git stash 
+    ! Push contents of working directory on to stash 
+# git stash list 
+    ! List contents of stash stack 
+# git stash pop 
+    ! Pop topmost entry of stack 
+# git stash apply 
+    ! Apply topmost entry of stach without popping 
+# git stash show [stash@{WIP}]
+    ! List file names of topmost
+# git stash show -p 
+    ! Show contents of topmost entry on stack 
 
 Searching [git grep is 10% faster than grep]
 ---------

@@ -1,0 +1,3551 @@
+---------------------------------------------------
+ECA-IP Questions 
+
+- IGMPv1 and multicast 
+- Questions on IPv6 prefix notation and basic questions 
+- NTP runs on which transport protocol 
+- DHCP role 
+- ARP functionality 
+- MPLS, LIB building:- many questions 
+- Command to verify LSP for a destination IP 
+- LDP 
+- "show ldp bindings"
+- Size of MPLS label 
+- EXP bigs, FIB/RIB, LIB/LFIB
+- RD, RT, BGP, L3VPN 
+- VPN, many questions 
+- VRF?
+- DiffServ priority
+- QoS [DSCP, Rate limiting]
+- iBGP, eBGP configs on SE
+- How is BGP session established 
+- IS-IS and OSPF details
+- NSAP details 
+- DIS server 
+- Backup Designated Router [BDR] 
+
+---------------------------------------------------
+
+/*************************************************************/
+ *           CCNA Syllabus                                    *
+ * Refer to 200-120_composite2.pdf file 
+/*************************************************************/
+
+
+/*************************************************************/
+ *           Table of Contents                               *
+/*************************************************************/
+1 Ethernet Fundamentals 
+2 Spanning Tree Protocol (STP)
+3 Rapid Spanning Tree Protocol (RSTP) 
+4 VLAN 
+5 LAG/LACP
+
+Cisco CCNA Notes (Perhaps from DeAnza College Course) 
+6 IP 
+7 Chapter 2: Static Routing Overview
+    7.1 Cisco Discovery Protocol (CDP) 
+8 Chapter 3: Dynamic Routing Protocols 
+9 Chapter 4: Distance Vector Routing Protocols
+    9.1 RIP
+    9.2 EIGRP 
+10 Chapter 5: RIP v1
+11 Chapter 6: VLSM and CIDR 
+12 Chapter 7: RIP v2
+13 Chapter 8: Routing Table: A Closer Look 
+14 Chapter 9: EIGRP 
+<<<<< End of Cisco Course notes 
+
+15 IS-IS Primer 
+16 OSPF Primer 
+17 OSPF 101 
+18 RIB 
+19 BGP Primer 
+20 MPLS Overview 
+21 MPLS Fundamentals 
+22 MPLS L3VPN Primer v2 
+23 VPLS Overview 
+24 IP QoS Intro (PWFQ Intro) 
+25 QoS Primer 
+
+
+26 ARP
+27 ICMP 
+28 UDP 
+
+29 VPN Technologies
+
+Todo: TCP, UDP, IP, IGMP, ICMP, DCHP, DNS, ARP, RARP, SNMP, IGMP 
+
+/*************************************************************/
+      ERICSSON CERTIFIED ASSOCIATE - IP NETWORKING             
+            from Ericsson's internal website
+/*************************************************************/
+/************************************************************/
+         CCNA Cisco Net Academy Notes                       
+           from Cisco Class Notes at 
+                  DeAnza College 
+/************************************************************/
+
+/*-----------------------------------------------------------*/ 
+ *               CARRIER ETHERNET - OVERVIEW  
+/*-----------------------------------------------------------*/
+- Carrier Ethernet is different than LAN ethernet & Metro Ethernet.
+- CE is part of next-gen Telecom Solutions. 
+- Operators are providing Voice, Video and Data over transport ethernet
+  (yeah!, another adjective before ethernet). 
+- Providing different services on different infrastructure is a costly
+  model for Telcos (like Voice has separate infra, same with Video and
+  Data). 
+- Voice and Video are shifting to IP networks 
+
+
+      |       |       |        |              |                  |                
+      |       |       |        |              |     data         |      End user services 
+      |       |       |        |              |                  |
+      | Voice |       |  Video |              |                  |
+      |       |       |        |            +----------------------+    Statistical multiplexing 
+      |       |       |        |            |         IP           |    Service flexibility 
+      |       |       |        |            +----------------------+
+      |       |       |        |                       |
+      |       |       |        |                       v
+    +---------------------------------------------------------------+   QoS
+    |                         ATM                                   |   Connection oriented
+    +---------------------------------------------------------------+   Statistical multiplexing 
+            |                                                 |
+            |                                                 |
+            v                                                 v 
+    +---------------------------------------------------------------+   High availability
+    |                     Sonet/SDH                                 |   SLA monitoring
+    +---------------------------------------------------------------+   Provisioning 
+            |                                                 |
+            |                                                 |
+            v                                                 v
+    +---------------------------------------------------------------+
+    |                     Fibre/WDM                                 |   High bandwidtch 
+    +---------------------------------------------------------------+
+
+
+- Smart devices are accelerating growth in data networks. 
+- Ethernet is lowcost technology compared to ATM and provides high
+  bandwidth. 
+- Converged networks increases operational complexity. 
+
+
+- Carrier Ethernet scales standard ethernet for Carrier class/scale
+  operations.
+- CE provides Standardized Services, Scalability, Reliability, Service
+  Management, QoS. 
+- Two components to CE: (a) Network Elements/Infra (b) Network Services. 
+
+
+- Metro Ethernet: Infra to connect subscribers and businesses to larger
+  internet. 
+- ME is typically managed by one operator. 
+
+- CE, on other hand, can span ME + National + International Connectivity.
+  Ex: ATT, Verizon, BT, BSNL etc. 
+
+- Ethernet OAM helps manage CE. 
+
+
+802.2 = Logical Link Control Layer. 
++ IEEE 802.3 = MAC + Physical Layer. 
+
+PHYSICAL MEDIA 
+-----
++ Many physical media. Data Link Layer is same. 
+
++ Universal Twisted Pair (UTP)
+    - 10Mbps speed
+    - Half Duplex or Full Duplex.
+
++ RJ45
+    - 100MBPS speed. 
+    - Half/Full duplex. 
+
++ UTP (4 pairs) or Fiber/Optical Cables 
+    - 1Gbps 
+    - For fiber: (a) Short Wavelength (Sx) (b) Long Wavelength (Lx) 
+    - 200 meters UTF can operate. 
+    - Fiber can operate on 5KM. 
+
+ETHERNET NAMING CONVENTIONS
+-------
+
+    Speed : Transmission Type : Phy Medium 
+
+ + Speed = Bit Rate 
+ + Trans Type = Baseband (sigle signal) or Broadband (multiple signals
+                over phy medium). 
+ + Phy Medium = T - Unshielded Twisted Pair 
+                Lx - Long Wavelength Fiber 
+                Sx - Short Wavelength Fiber. 
+ 
+Ex: 100Base200 = 100Mbps baseband over Coaxial Cable with 200meters
+distance limit. 
+Ex: 1000BaseLx = 1Gbps over Long Wavelength Fiber.  
+
+
+ETHERNET ADDRESS (MAC)
+---------
++ Hardware Address: Burned in (48 bits). 
++ Globally unique.
++ HEX format. 
++ No correlation with device location. 
++ 3 types of addresses: 
+    Unicast, Broadcast and Multicast. 
+
++ First 24 bits = Company ID (Manufacturer ID)
++ Some Company ID's are reserved to identify Unicast, Broadcast and
+Multicast frames. 
++ Second 24 bits = Extension ID, to uniquely identify cards made by a
+manufacturer. 
+
+   +--------------------------------------------------------+
+   |   8   |  6    |   6   |  2    |                  |  4  |
+   | bytes | bytes | bytes | bytes |         DATA     |bytes|
+   |  SFD  |  DA   |  SA   | Type  |                  | FCS |
+   +-------+-------+-------+-------+------------------+-----+
+
+
+TRANSPORTING MECHANISM/ALGORITHM
+--------
++ CSMA/CD (Carrier Sense Multiple Access/Collision Detection)
++ Modern ETH networks use switches and avoid Collision Domain. Hence
+CSMA/CD is no longer used. 
++ Collision Domain: Group of nodes sharing transmission medium hence
+resulting in collision if they transmit at same time.
+
+BRIDGING
+-------
++ To avoid collision, bridging domain was introduced. 
++ Bridging divides network in to multiple, separate collision domains. 
++ Bridge learning creates MAC table. This is used to lookup for
+forwarding. 
++ Nowadays bridges are used to connect networks at a higher level and not
+to separate collision domains. 
+
+
+SWITCHES
+-------
++ Switches are extension of bridges. 
++ They too separate collision domains. 
++ MAC table is at hardware level and hence much faster than bridge.
++ If a host connects to a switch, then it is in its own Collision Domain.
+Hence, CSMA/CD is not required anymore and host can transmit & receive
+data simultaneously (Full Duplex mode).
++ Broadcasts on Switches: DST MAC = FF:FF:FF:FF:FF:FF. Switch forwards
+broadcast on all 'other' ports. 
+
+
+ETHERNET LOOPS
+-------
++ Broadcast storms can happen.
++ MAC Table is constantly toggled/updated. 
++ Applications may crash due to packet resend overloads. 
+
+
+LOOP AVOIDANCE
+------
++ STP is used to avoid loops. 
++ It detects Link Failure or Switch Failure. 
+
+// Read STP chapter for more details. 
+
+
+
+/*************************************************************/
+ *           ETHERNET FUNDAMENTALS                           *
+/*************************************************************/
+
+   +--------------------------------------------------------+
+   |   8   |  6    |   6   |  2    |                  |  4  |
+   | bytes | bytes | bytes | bytes |         DATA     |bytes|
+   |  SFD  |  DA   |  SA   | Type  |                  | FCS |
+   +-------+-------+-------+-------+------------------+-----+
+
+SFD - Start Frame Delimiter 
+DA  - Destination Addr 
+SA  - Source Addr 
+Type- Ethertype 
+Data 
+FCS - Frame Check Sequence 
+
+- Baseband - Single signal over the cable; 
+  Broadband - Multiple signals over the cable. 
+
+- Collision Domain: A packet sent by a host is received by ALL the host in 
+  that domain. 
+- BRIDGE separates Collision Domains. 
+- BRIDGE maintains a Bridge Table [or MAC Addr Table] that maintains the MAC 
+  addr versus interfaces on which it belongs. 
+- If packet comes on an interface and destination MAC addr is on the SAME 
+  intf, it is dropped, thus separating the collision domains. 
+- If destination packet is on ANOTHER interface then it is forwarded. 
+- "Bridge Learning" is the process used in building the MAC addr table. 
+
+- Now a days, the term "Bridging" is used to refer to joining multiple 
+  networks together. Switches replace Bridges in today's networks. 
+
+- Switches have a hardware backplane mesh, hence its much faster to 
+  transfer packets. 
+
+- Ethernet Loops: Lots of disadvantages and network failure if there is a loop. 
+
+- STP avoids loops.
+
+/*************************************************************/
+              SPANNING TREE PROTOCOL 
+/*************************************************************/
+
+- Begins with selection of one switch as Root Bridge. Its done through election 
+  process.  
+- Root Bridge ports are always in "Forwarding" state. 
+- After selection of RB, all other switches must select their port which is 
+  closest to the root. These are ports that offers the easiest or lowest cost 
+  path to the root bridge. These are called Root Ports. Note that RP are only 
+  on non-root bridges. 
+- Finally, switch must select one dedicated port for each "segment" - connection 
+  between two switches or between switch & host. This is called Designated
+  Port. 
+- All ports on RB are designated ports
+- All OTHER ports on non-RB switches are put in "blocking state" and no traffic 
+  can be forwarded on them. 
+
+STP Process
+
+- Election of Root Bridge and selection of port roles are done by BPDU. 
+  Bridging Protocol Data Units 
+- Switches send to each other BPDU with info used to create tree. 
+
+BPDU 
+           +---------+---------+---------+-------+
+           |  root   | sender  | cost to | STP   |
+           | bridge  | bridge  | reach   |timers |
+           |   ID    |   ID    | root    |       |
+           +---------+---------+---------+-------+
+
+
+- Each switch has a bridge identifier BID which is used to select root. 
+
+BID 
+           +----------------+
+           | priority | MAC |
+           +----------+-----+
+
+- priority is set by admin & MAC addr assigned to switch [Q: Which MAC addr?]
+- MAC is used to maintain uniqueness of BID. 
+- Lower the BID, higher the likelihood of being a root. 
+- In designing the network it is important to configure the priority part of 
+  BID carefully because that switch will carry the most traffic within the n/w. 
+
+Switch Failure
+
+- When a switch fails, blocked ports are moved to designated or root ports 
+  to maintain connectivity. 
+
+
+STP PORT STATES 
+- (a) BLOCKING: All other ports 
+  (b) LISTENING: 
+  (c) LEARNING: 
+  (d) FORWARDING: Designated Ports & Root Ports 
+
+- Ports cannot move from BLOCKING to FORWARDING when network changes. Doing
+  so can cause loops due to incorrect MAC tables. 
+- LISTENING state: similar to blocking as no forwarding is done. Old, 
+  incorrect MAC addresses are timed out. 
+- LEARNING state: frames are still not fowarded but switch starts learning 
+  MAC addresses of frames received on interface. 
+- Finally, port enters FORWARDING state. 
+
+BLOCKING ---> LISTENING ---> LEARNING ---> FORWARDING 
+
+
+
+
+/*************************************************************/
+            RAPID SPANNING TREE PROTOCOL 
+/*************************************************************/
+
+- STP works well but is developed with old networks in mind. 
+- Timers used and support for hubs means that recovery time when link or switch 
+  fails is up to 50secs. 
+- RSTP aims to improve recovery time. It introduces new states for ports to do 
+  this. Recovery times < 5s. 
+
+
+RSTP Connection Types
+
+(a) Link Type Point to Point: Connection between switches 
+(b) Link Type Shared: Between switches and hubs 
+(c) Edge Type: Between switch and end users 
+
+- RSTP improves recovery time for (a) & (c) connections. This is good because 
+  mordern networks doesn't use hubs anymore. 
+
+
+RSTP Port Roles 
+(a) Designated Port 
+(b) Root Port 
+(c) Backup Port - Back up to DP 
+(d) Alternative Port - Back up to RP 
+(e) Disabled Port - Similar to Blocking port 
+
+
+RSTP Port States 
+(a) Discarding - similar to blocking 
+(b) Learning state - Don't forward frames. But learn MAC addr.  
+(c) Forwarding - RP and DP operate in this state. 
+
+Discarding ---> Learning ---> Forwarding: State transition. 
+
+
+/*************************************************************/
+                      VLAN
+/*************************************************************/
+
+- Segments physical broadcast domains in to virtual broadcast domains. 
+- Admin can configure different ports on a switch to different VLAN's. 
+- VLAN's reduces size of broadcast domain and hence traffic/overhead. 
+
+VLAN TRUNKS [or just TRUNKS]
+
+- Trunks is a special link used to connect switches. 
+- It can carry traffic for ANY vlan. Conversely, an interface configured 
+  as trunk mode is assumed to be in multiple VLANs.
+- If a broadcast packet is received on a trunk interface, how should it be
+  transmitted on appropriate VLAN? Answer: Use of VLAN ID. 
+
+
+Switch Ports can be configured as 
+
+(a) Access Ports: 
+   - Connect to end users.
+   - Carries traffic for one VLAN.
+   - Frames transmitted on access ports don't have VLAN tags.
+
+(b) Trunk Ports: 
+   - These ports carry traffic for multiple VLANs and usually have 
+     VLAN tags. 
+   - These ports are those connecting switches. 
+
+
+802.1Q/VLAN Header 
+
+    +----------+-----+----+----+--------------+------+----------+-----+
+    | preamble | SFD | DA | SA |  802.1Q tag  | TYPE |   DATA   | FCS |
+    +----------+-----+----+----+--------------+------+----------+-----+
+
+
+802.1Q tag 
+
+    +----------+-----+-----+-----+
+    |   TPID   | VID | PCP | CFI |
+    +----------+-----+-----+-----+
+
+TPID = Tag Protocol ID: 8100, 88a8, 9100 etc 
+VID = 12 bits 
+PCP = Priority Code Point, used to prioritize certain VLANs over others. 
+      Example: Voice over data 
+CFI - Canonical Format Identifier [one bit]. Indicates the format of MAC 
+      address representation in the frame. 
+
+
+ETHERNET RESILIENCY 
+- Link Aggregation:  
+    - provides redundancy. 
+    - Extra bandwidth.
+
+- Note that there will be loops between switches with multi interface. 
+- LAG prevents loops with additional benefits mentioned above. 
+
+
+/*************************************************************/
+      LINK AGGREGATION CONTROL PROTOCOL [LACP]
+/*************************************************************/
+- LACP is used to negotiate the aggregation of links between devices 
+- LACP is used to group links between 2 switches with multiple connections. 
+- LACP priority is set on devices using LACP. One with lowest priority value 
+  decides which ports should be aggregated.  
+
+- Ports themselves have priorities set on them so certain links are more 
+  likely to be used than others. This is negotiated between the devices. 
+
+- Max of 16 ports can be in one LACP group and only 8 can be use at one time. 
+- The other 8 are backup. 
+
+
+On SmartEdge 
+
+[local]spiders(config-link-group)#lacp ?
+  active            Configure LACP in Active Mode
+  admin-key         Configure LACP Administrative Key
+  hold-timeout      Configure LACP Hold Timeout
+  ignore-system-id  Configure LACP Ignore System Id
+  passive           Configure LACP in Passive Mode
+  periodic-timeout  Configure LACP Periodic Timeout
+  revertible        Configure LACP revertible operation
+
+[local]spiders(config-link-group)#por eth 1/6
+[local]spiders(config-port)#lacp ?
+  priority  Configure LACP port priority
+[local]spiders(config-port)#lacp priority ?
+  0..65535  Specify the priority
+
+
+
+Link Aggregation Requirements [using LACP]
+
+All the links between switches should be 
+- Full Duplex 
+- Point to Point 
+- Same Speed
+
+- Traffic is balanced across different physical links. 
+- Load balancing is done by calculating hash value of Source Addr and Dest Addr. 
+  This means that for an LACP connection carrying multiple flows, each 
+  physical ethernet link should get an equal share of traffic. 
+
+
+
+TELECOM GRADE ETHERNET RING PROTOCOL 
+------------------------------------
++ Challenges in scaling Ethernet from LAN to Carrier Network.
+    - Longer distances and more end points.
+    - Higher bandwidth and more aggregation. 
+    - QoS and intolerance to failure.
+
++ Fiber optics is common medium of transport in Carrier Ethernet.
+
+
+LIMITATION OF ETHERNET
+----------------------
++ Long recovery time on link/node failure. 
++ RSTP can recover in 5s, but this is too long on Carrier Ethernet. 
++ SDH/SONET offers convergence times less than 50ms.
++ Ethernet Ring Protection is solution.
+
+ETHERNET RING PROTECTION
+------------------------
++ Use Fiber Ring Networks for Ethernet.
++ One switch is configured as designated MASTER. This switch has Primary
+port and Secondary port specified. 
++ A Control VLAN is setup that spans full Ethernet Ring. 
++ On Master, all ports are operational in Control VLAN. 
++ Other VLANs are called Data VLANs. Only Primary port of Master switch is
+in Data VLAN. Secondary port is blocked. This is where loops are
+prevented.
++ When data is sent out primary port and received on secondary port, it is
+discarded. 
++ Only health messages are sent out on Control VLANs. Its sent out on
+Primary port and received on Secondary port, thus ensuring ring is
+operational. 
+
+
+ERP LINK DOWN
+-------------
++ When a switch detects link down, it generates link down message and
+sends out on Control VLAN.
++ When Master receives this, it unblocks Secondary Port so all switches
+will maintain connectivity. 
++ It informs all switches about topology change, which means update to
+respective MAC tables. 
++ A 'Flush Forwading Database' is sent out on Control VLAN on both ports. 
+
+
+ERP SWITCH DOWN
+---------------
++ When a health message fails to receive on Secondary Port, Master
+concludes that a switch has failed. 
++ Master ublocks Secondary Port, thus maintaining connectivity between all
+non-failing switches. 
+
+
+
+QinQ - QinQ Provider Bridging
+-----------------------------
++ Carrier can provide 'Bridging' services to customer using VLAN's. One
+customer can get many VLANs from an ISP for various tasks. Carrier Network
+should have the ability to route this traffic and provide 'bridging'
+functionality. 
++ Due to limit on VLAN ID's (12bits, 4096 VLANs), this is not Scalable. 
++ QinQ bridging was invented. 
+
+S-Tag = Service Tag 
+C-Tag = Customer Tag [within a customer's own network]
+
+TPID for S-Tag = 9100
+TPID for C-Tag = 8100 
+
++ Provider only looks at S-Tag to route its traffic.
+
+DRAWBACK
+--------
++ QinQ networks can bloat up MAC tables in Switches. 
++ To solve that, MAC in MAC is devised. 
+
+
+
+
+802.1AH Provider Backbone Bridging [MAC in MAC] 
+-----------------------------------------------
+- To address the problem associated with large MAC address table in QinQ n/w.
+
+ +-------+-------+-------+-------+-------+-------+--------+------+---+
+ | B-DST | B-SRC | B-TAG |  DST  |  SRC  | C-TAG |  TYPE  | Data | F |
+ +-------+-------+-------+-------+-------+-------+--------+------+---+
+
+B-DST: Backbone Destination MAC 
+B-SRC: Backbone Source MAC 
+B-TAG: Backbone VLAN TAG 
+
+- This increases frame size. 
+
+
+802.1QAY: Connection Oriented Ethernet Traffic Engineering
+----------------------------------------------------------
+- Static MAC Paths are configured to simulate 'Connection Oriented
+  Ethernet' and take its advantages. 
+- There is no learning as MACs are statically configured. 
+- No loops exists. 
+- 802.1Qay is used to centrally manage these paths. 
+
+
+
+/*************************************************************/
+            NETWORK PROTOCOL STACK - OVERVIEW    
+/*************************************************************/
+// Boring, too basic
+
+MPLS (Multi Protocol Label Switching) 
+------
++ MPLS is underlying protocol to most backbone networks today. 
++ Enables Operator to setup dedicated tunnels between different sites
+accross the globe for corporate VPN. 
++ It can carry many different n/w protocols. 
+
++ It does NOT fit in to L2 or L3, but has characteristics of both layers. 
++ It can encapsulate L3 protocols (say, IPv4) and can itself get
+encapsulated in L2 protocol.  
+
+
+SS7 (Signaling System Number 7) Protocol Suite
+-------
++ SS7 is the protocol suite used in traditional telecom networks. 
++ Its purpose is to setup/teardown PSTN calls. 
++ SS7 is still widely used though Operators are moving more towards IP
+infrastructure. 
+
++ SS7 was designed to run over TDM (Time Division Multiplexing) n/w. 
++ Many protocols that were running on SS7 are being migrated to IP. 
++ This merging of traditional TDM n/w and IP n/w is handled by protocol
+suite known as SIGTRAN (Signaling Transmission). 
+
+    SS7 Protocol Stack 
+
+    +-------------------+
+    | Application Level |
+    +-------------------+
+    |       MTP 3       |
+    +-------------------+
+    |       MTP 2       |
+    +-------------------+
+    |       MTP 1       |
+    +-------------------+
+
++ Application Level: 
+    - Most crucial level in the stack. Data for communication is in this
+      layer.  
+    - If ISUP (ISDN User Part) protocol is used, this layer stores A
+      number and B number (caller and callee, respectively). This is when
+      a call is made on landline (PSTN phone).
+    - Operator looks at both numbers and routes the call by first
+      reserving necessary resources. 
+
++ MTP (Message Transfer Part) Level 3: 
+    - Handles routing of application data between exchanges (similar to IP
+      in TCP/IP suite). 
+    - Source address is called OPC (Originating Point Code) and Dest
+      address is called DPC (Destination Point Code). Addressing format is
+      called SPC (Signaling Point Code). 
+
++ MTP Level 2: 
+    - Ensure reliability by having error checks, flow control and sequence
+      checking. 
+
++ MTP Level 1: 
+    - Physical/Electrical part. In Europe, this was 64kbps per caller on
+      2Mbps E1 channels.
+
+
+ATM (Asynchronous Transfer Mode) Reference Model
+-------
+
+    +-------------------+
+    |      Data         |
+    +-------------------+
+    |      AAL          |
+    +-------------------+
+    |      ATM          |
+    +-------------------+
+    |    Physical       |
+    +-------------------+
+
++ Still widely used for voice and data. 
++ ATM is connection oriented (end-to-end virtual path is setup). 
+
++ Data Layer: 
+    - Most important part. Voice or Data. 
++ AAL (ATM Adaptation Layer): 
+    - Encodes type of data, since each type has its own requirements. 
+    - For instance, AAL1 (voice traffic) has CBR (Constant Bit Rate)
+      requirement.
++ ATM 
+    - Sets up and identifies the virtual path the cells (aka IP Packets)
+      travel.
+    - Virtual Paths are identified by VPI/VCI. VPI splits Physical Paths
+      in to Virtual Paths and VCI further divides virtual paths in to
+      channels. 
+   
+
+IETF Operation 
+------
++ Life cycle of an idea/draft/rfc/standard
+    Motivation --> Scop --> Working Group --> Internet Draft (RFC) -->
+    Internet Standard.
+
+
+
+/************************************************************/
+                    IP Overview                             
+                 E/// class notes
+/************************************************************/
+
++ Traditional Telco Network Stack 
+
+    Voice           Data                TV&Video
+    -----           ----                --------
+    PSTN            Common IP           Satellite (DVB-S)
+    Frame Relay     infra for           Cable N/W (DVB-T)
+    ATM             many services.
+    SONET/SDH 
+    Mobile N/W
+
++ Infra is very expensive for Telcos for each service. 
++ In meantime, IP is evolving like crazy and supporting all services.
+Economies of scale is driving the IP infra cost down. 
++ From vertical n/w to layered architecture.
+
+Circuit Switch Concept
+-----
++ A dedicated line/circuit was established to carry voice traffic. 
++ It was not shared. 
+
+Packet Switch 
+------
++ Data transmission chops data in to packets and transmitted on n/w. 
++ n/w are idle most of the time with bursts of traffic. 
++ Packet switch was developed with this idea. 
+
+
+Packet vs Circuit
+------
++ IP n/w offer better bandwidth utilization. 
++ n/w resources are allocated only when users need to send data. 
++ IP offers better traffic prioritization options. 
++ IP n/w can take dynamic routing decision, providing quick restoration of
+n/w failures and flexibility. 
+
+
+
+/************************************************************/
+                    IP Fundamentals                         
+                    E/// class notes
+/************************************************************/
+/*************************************************************/
+        INTERNET    PROTOCOL  (IP)
+                DeAnza Notes 
+/*************************************************************/
+
+- OSI Model 
+
+    layer 7 - Application: Interacts with applications. 
+    layer 6 - Presentation: Converts code and reformats data 
+    layer 5 - Session: coordinates interaction between end-to-end
+                        application processes. 
+    layer 4 - Transport: Provides end-to-end data integrity and QoS 
+    layer 3 - Network: Switches and routes data to the appropriate n/w
+                        device. 
+    layer 2 - Data Link: Transfers units of data to other end of physical
+                         link. 
+    layer 1 - Physical: Transmits and recv on n/w medium. 
+
+
+- Layer 1: Physical: 
+- Layer 2: Ethernet, Frame Relay, PPP
+- Layer 3: Logical addressing (end-to-end addressing), Routing, Path
+  determination. IPv4, IPv6 and IPx
+- Layer 4: TCP, UDP, SCTP 
+- Layer 5: SAP, NetBIOS 
+- Layer 6: Encryption, Compression, MIME, TLS, SSL,
+- Layer 7: Authentication, FTP, HTTP, Telnet.
+
+
+    OSI Model                   TCP/IP Model 
+    +-------------+--------------+--------------+
+    | Application |              |              |
+    +-------------+              | Application  |
+    |Presentation |              |    Layer     |
+    +-------------+              |              |
+    |  Session    |              |              |
+    +-------------+--------------+--------------+ <-- port number
+    | Transport   |              |  Transport   |
+    +-------------+--------------+--------------+ <-- protocol number
+    |  Network    |              |Internet Layer|
+    +-------------+--------------+--------------+ <-- type code 
+    | Data Link   |              |              |
+    +-------------+              | Link Layer   |
+    |  Physical   |              |              |
+    +-------------+              +--------------+
+
+
+
+
+
+- IP Packet Header 
+
+  0                             15 16                            31
+  +---------------+---------------+---------------+---------------+
+  | Vers |  IHL   |  Service Type |      Packet  Length           |
+  +---------------+---------------+---------------+---------------+
+  |         Identification        | Flag |    Frag. Offset        | 
+  +---------------+---------------+---------------+---------------+
+  |    TTL        |    Protocol   |      Header Checksum          | 
+  +---------------+---------------+---------------+---------------+
+  |                  Source IP Address                            | 
+  +---------------+---------------+---------------+---------------+
+  |                  Destination IP Address                       | 
+  +---------------+---------------+---------------+---------------+
+  
+- IP Header in a packet travels unchanged throughout the network. 
+- Only MAC header changes with every hop. 
+- Unreliable, connectionless datagram delivery service. 
+- Unreliable: Best effort service. If IP receives error packet, its
+  discarded and an ICMP message is send to sender. 
+- Connectionless: No state information of packets/datagram is saved. 
+
+Vers (4-bit): IPv4 
+Header Length (4-bit): HL in 32-bit size. Hence, max of 60 byte header is
+possible. 
+Service Type (8-bits):
+    3-bits: unused 
+    1-bit: minimize delay 
+    1-bit: maximize throughput 
+    1-bit: maximize reliability 
+    1-bit: minimize monetary costs
+        Only one of the above 4 can be on. 
+    Last-bit: always set to zero 
+
+
+Packet Length (16 bits): Packets up to 65536 bytes can be sent/recvd by
+IP. However, lower layers cannot handle it and fragmentation happens. 
+Identification (16-bits): 
+Flag ():
+Frag. Offset ():
+TTL (8-bits):
+Protocol (8-bits): 
+Header Checksum (16-bit):
+Source IP (32-bit):
+Dest IP (32-bit):
+
+
+
+/*************************************************************/
+            IP Routing Fundamentals   
+               E/// Class Notes 
+/*************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Table of Contents 
+
+/**************************************************************/
+ *                                                            *
+ *             Routing Protocols & Concepts                   *
+ *                                                            *
+/**************************************************************/
+
+Chapter 1: Introduction to Routing and Packet Forwarding 
+
+- ROM in a router stores the following 
+  (a) Bootstrap instructions 
+  (b) Basic diagnostic software 
+  (c) Scaled-down version of IOS 
+
+- Router Boot-up Process 
+  (a) Perform POST 
+  (b) Load bootstrap program 
+  (c) Locate and load Cisco IOS software 
+  (d) Load startup config file 
+
+- Main job of bootstrap program is to locate Cisco IOS and load it in to RAM 
+- Cisco IOS can be either on Flash or other places like a TFTP server
+- Management Ports: 
+    - Not used for packet forwarding
+    - Used for router configuration 
+    - Two types
+          (a) Console Port
+          (b) Auxiliary Port 
+
+- Router interfaces can be divided in to two types 
+  (a) LAN Interfaces - such as Ethernet and FastEthernet 
+  (b) WAN Interfaces - such as serial, ISDN and Frame Relay 
+
+
+
+
+
+
+
+
+>>>>> Endianness <<<<<
+
+- 0th bit is MSB and 7th bit is LSB. When sending out, data is sent in 0
+  to 7, 8 to 15 bits and so on. This is Big Endian or Network Byte Order.  
+
+
+
+
+
+Chapter 2: Static Routing 
+
+- For WAN connections, Cisco routers supports the following cable types 
+  (a) EIA/TIA-232
+  (b) EIA/TIA-449
+  (c) V.35 
+  (d) X.21 
+  (e) EIA/TIA-530 
+   - Don't have to remember them. On Cisco side, DB-60 port is used. Other 
+     end is the type above cables provide. 
+
+- Like devices are those whose ports have similar pins and unlike devices are those 
+  whose ports have different pins. 
+
+- Routers and PCs are like devices. Switches and Hubs are like devices. Naturally, 
+  switches and routers are unlike devices. 
+
+- Within Ethernet LANS, two types of cables are used: 
+  (a) Straight-through: to connect unlike devices 
+      - switches to routers 
+      - switches to PC 
+      - Hubs to routers 
+      - Hubs to PC 
+
+  (b) Crossover Cable: to connect like devices 
+      - switch to switch 
+      - PC-to-PC 
+      - switch to hub 
+      - hub-to-hub 
+      - Router-to-Router 
+      - Router-to-Server 
+
+- On serial links, one end is DTE and one is DCE. 
+
+- "Administratively Down" means that interface is "shutdown". 
+- "Line Protocol Down" means interface is not receiving carrier signal from peer. 
+
+- Ethernet interfaces on a router participates in ARP. 
+
+>>>> Configuring Interfaces 
+
+>> Serial Interface 
+    interface serial 0/0/0 
+      ip address 172.10.2.1 255.255.255.0 
+      no shut
+
+>> Configuring Serial Links in Lab 
+- Cisco serial interfaces are DTE by default but can be configured as DCE . 
+- To configure an interface as DCE, connect the DCE end of the cable to intf 
+  and configure "clock rate" command. 
+- DCE = female connector, DTE = male connector 
+
+
+/*************************************************************/
+>>>> Cisco Discovery Protocol [CDP] <<<<
+/*************************************************************/
+
+- CDP is a powerful info gathering tool used to get info about directly 
+  connected Cisco devices.
+- Its an L2 protocol, meaning only physically connected devices are considered 
+  neighbors. 
+- Allows to access summary of protocol and address info about connected 
+  Cisco devices. 
+- Its a proprietary tool. 
+
+- CDP Advertisements contain: router interfaces, model numbers, intf used 
+  to make connections etc 
+
+- "show cdp neighbor" and "show cdp neighbor detail" gives info about neighbor 
+
+- To disable CDP on the entire box: (config)#no cdp run 
+- To disable CDP on an interface: (config-if)#no cdp enable 
+
+- show cdp neighbor 
+- show cdp neighbor detail 
+
+>>>> Static Routes <<<<
+
+- Static routes [ip route ...] are configured when routing from a network to 
+  a stub network. 
+
+- When an exit intf goes down [shutdown], the static route cannot be resolved 
+  to an exit intf. Then it is removed from the routing table. 
+
+- The entries are still in the running-config. So, if the intf comes back up 
+  again [no shutdown] then they are installed in the routing table. 
+
+- There are certain protocols used on point-to-point serial link such as HDLC 
+  and PPP where next-hop IP address is not used. The IP packet, in HDLC case, 
+  is encapsulated with L2 broadcast destination address. 
+
+- Static Route Summarization. 
+  - Helps reduce routing table size 
+  - Lookups are faster 
+
+- When instead of exit interface, if an exit IP is configured, then there will 
+  be two lookups to resolve exit interface. This is called Recursive Route Lookup. 
+  [RRL]
+
+- To avoid RRL, we can configure exit interface instead of exit IP. This is 
+  only possible for serial interfaces as there is only one device [router] at 
+  other end in serial intf. 
+
+- Ethernet intf is a multi-access intf and there could be multiple devices 
+  sharing that end point. By having Ethernet intf, router doesn't know the 
+  end point. 
+
+- For Ethernet intf, configure both exit intf and next-hop IP. 
+
+- Route Summarization reduces routing table size. Multiple static routes can be summarized into a single static route if:
+	a) The destination networks can be summarized into a single network address, and 
+	b) The multiple static routes all use the same exit-interface or next-hop IP address 
+
+
+>> Default Static Route
+
+- ip route 0.0.0.0 0.0.0.0 [exit interface] 
+- Default route need not be static route, but it usually is. 
+
+
+
+
+Chapter 3: Dynamic Routing Protocols 
+
+
+
+           |<-- Dist. Vect. --->|<---- Link State   ---->|<--Path Vect-->
+-----------+---------+----------+-----------+------------+--------------+
+Classful   |   RIP   |   IGRP   |           |            |     EGP      |
+-----------+---------+----------+-----------+------------+--------------+
+Classless  | RIPv2   |  EIGRP   |  OSPFv2   |   IS-IS    |    BGPv4     |
+-----------+---------+----------+-----------+------------+--------------+
+IPv6       | RIPng   | EIGRPv6  |  OSPFv3   |  IS-ISv6   |    BPGv6     |
+-----------+---------+----------+-----------+------------+--------------+
+
+- Interior Gateway Protocols [IGP] are used for routing within an Autonomous 
+  Systems (routing domain). Examples: RIP, IGRP, EIGRP, OSPG and IS-IS
+
+- Exterios Gateway Protocols [EGP] are used for routing between Autonomous Systems.
+  Examples: BGP, its the only practical solution. 
+
+- IGP comprises of Distance Vector and Link State protocols 
+
+
+>>>> Distance Vector Protocols <<<< 
+
+- Distance Vector := Distance + Direction
+  Distance := hop count or similar metric 
+  Direction := exit interface or IP of next hop router 
+
+- DV uses Bellman-Ford algo to determine best path
+
+- DV works best when 
+   - simple and flat network like hub/spoke n/w 
+   - worst-case convergence times are not a concern 
+
+
+>>>> Link State Protocols <<<< 
+
+- A router configured with Link State protocol can get a "complete view" 
+  of the network. 
+
+- LS works best when 
+   - Network design is hierarchical 
+   - Fast convergence is crucial 
+
+- Classful routing: Subnet mask not included. Network is either Class A, B, C or D
+  - Example: RIPv1, IGRP
+
+- Classless routing: Subnet mask is included. 
+  - Example: RIPv2, EIGRP, OSPF, IS-IS, BGP
+
+- Metrics generally used in routing protocols 
+  Hop Count 
+  Bandwidth 
+  Load - Considers traffic utilization of a certain link 
+  Delay
+  Reliability - probability of error 
+  Cost - can represent a metric or combo of metrics/policy 
+
+- RIP uses Hop Count 
+- IGRP & EIGRP use Bandwidth, Delay, Reliability and Load. 
+- IS-IS & OSPF use Cost. IOS or network admin determines this cost. 
+
+- All protocols in CCNA course are capable of load balancing upto 4 equal cost 
+  routes. 
+- EIGRP can load balance between unequal cost routes. 
+
+
+>>>> Administrative Distance <<<< 
+
+- AD defines the preference of one routing source to the other. Lower AD, higher 
+  preference. 0 <= AD <= 255
+- Directly connected routes have 0 AD and it cannot be changed. 
+- AD of 255 means that router does not trust the source and route is NOT 
+  installed in the routing table. 
+
+
+Source         AD 
+-------------------
+Connected          0
+Static             1
+EIGRP Summary      5 
+External BGP       20 
+Internal EIGRP     90 
+IGRP               100 
+OSPF               110 
+IS-IS              115
+RIP                120 
+External EIGRP     170 
+Internal BGP       200 
+
+
+>>>> Static Route <<<< 
+
+- Static route has an AD of 1 
+- "Floating Static Route": When a route to a network exists in routing table 
+  due to a dynamic protocol, but admin configures a static route with AD greater 
+  than that of routing protocol, then such a static route is called "Floating 
+  Static Route". 
+
+
+
+
+Chapter 4: Distance Vector Routing Protocol 
+
+
+DVRP include RIP, IGRP and EIGRP
+
+RIP 
+  -- Hop count is used as metric. 
+  -- If hop count > 15, RIP cannot supply route to that network. 
+  -- Updates are broadcast or multicast every 30 seconds, by default.  
+
+IGRP 
+  -- Cisco's proprietary protocol 
+  -- A combination of bandwidth, delay, load and reliability is used 
+     as metric. 
+  -- Updates are broadcast every 90 seconds, by default. 
+  -- Its obsolete now. EIGRP is used now. 
+
+EIGRP 
+  -- Can perform unequal cost load balancing. 
+  -- Uses Diffusing Update Algorithm [DUAL] to calculate shortest path. 
+  -- Updates are sent only when there is a change. 
+
+
+       |      Distance Vector                        |  Link State 
+--------------------------------------------------------------------------
+       | RIPv1    | RIP v2    | IGRP    | EIGRP      | OSPF     | IS-IS 
+--------------------------------------------------------------------------
+ A     | Slow     | Slow      | Slow    | Fast       | Fast     | Fast 
+--------------------------------------------------------------------------
+ B     | Small    | Small     | Small   | Large      | Large    | Large 
+--------------------------------------------------------------------------
+ C     | No       | Yes       | No      | Yes        | Yes      | Yes 
+--------------------------------------------------------------------------
+ D     | Low      | Low       | Low     | Medium     | High     | High 
+--------------------------------------------------------------------------
+ E     | Simple   | Simple    | Simple  | Complex    | Complex  | Complex 
+
+
+A = Speed of convergence 
+B = Scalability - Size of network 
+C = Use of VLSM 
+D = Resource usage 
+E = Implementation & Maintenance 
+
+
+>>>> Routing Information Protocol [RIPv1] <<<<<<
+
+- The following timers exists for RIPv1
+  (a) Update  [30s default]
+      Time when routing updates are sent to neighbors. 
+
+  (b) Invalid  [180s default]
+      Time to keep a route in the table of an update to refresh if not received. 
+      Route is marked invalid by setting the hop count to 16 and kept in table 
+      until flush timer expires. 
+
+  (c) Flush [240s default]
+      When this timer expires, route is removed from the table. 
+ 
+  (d) Holddown [180s default]
+      This timer is used to stabilize the routing info when topology is yet to 
+      converge. Once a route is marked unreachable, the route has to wait for 
+      holddown seconds to learn about it again. 
+
+- "show ip protocols" and "show ip route" will give info about the timers. 
+
+- Triggered updates are sent [without having to wait for update timer] when 
+  the following happens 
+   (a) An interface state changes.
+   (b) A route has entered [or exited] the "unreachable" state. 
+   (c) A route is installed in routing table.
+
+- When all routers send updates simultaneously, collisions can occur. So, Cisco 
+  introduced RIP_JITTER variable that subtracts [0-15%] from update timer. Now, 
+  the update timer becomes, somewhere between 25-30s
+
+
+>> Routing Loop Avoidance 
+- There are numerous mechanisms to eliminate routing loops 
+  (a) Defining max limit on certain metrics [such as TTL] to avoid count 
+      to infinity. 
+  (b) Holddown timers 
+  (c) Split horizon 
+  (d) Route poisoning or poison reverse 
+  (e) Triggered updates 
+
+- Holddown Timer: Used to prevent regular updates due to inappropriately 
+  installing a route in routing table [may be due to interface flapping etc] 
+
+- Workings of Holddown Timer
+  (a) Router receives an update that a certain network is down
+  (b) Router marks this route as "Down" and starts the Holddown Timer
+  (c) If an update for that route with a better metric is received, timer 
+      is invalidated and the better route is installed. 
+  (d) If an update with same or worse metric is received, its ignored. 
+  (e) Router still forwards packets to "Down" route, to cover for 
+      intermittent connectivity issues. 
+
+- Split Horizon: A router should not advertise a network through the interface 
+  from which the udpate came. 
+
+- Route Poisoning [or Poison Reverse]: is used to mark the route as unreachable 
+  in a routing update sent to other routers. 
+  
+- Split Horizon with Poison Reverse: When sending updates out a specific 
+  interface, designate any networks that were learned on that interface as 
+  unreachable. 
+
+
+>>>>> RIP <<<<<
+
+- Standardized routing protocol that works in mixed vendor router environment. 
+- Easiest protocols to configure; good choice for small networks. 
+
+RIPv1 Features: 
+- Supports split horizon with poison reverse to prevent loops
+- Capable of load balancing up to six equal cost paths. Default is four equal 
+  cost paths. 
+
+RIPv2 Features: 
+- Includes subnet mask in routing updates, making it classless routing [RIPv2]
+- Has authentication mechanism to secure routing table updates. 
+- Supports variable length subnet mask [VLSM]
+- Uses multicast addresses instead of broadcast. 
+- Supports manual route summarization. 
+
+
+>>>>> EIGRP <<<<< 
+
+- Enhanced IGRP is a classless, DV proprietary routing protocol from Cisco. 
+
+EIGRP Features: 
+- Triggered updates [there is no periodic updates]
+- Use of a topology table to maintain ALL the routes received from neighbor 
+  [not just the best route]
+- Establishment of adjacencies with neighbors using "Hello Protocol". 
+- Support for VLSM and manual route summarization. 
+
+Advantages of EIGRP: 
+- Metric is based on bandwidth and cumulative delay of the path. 
+- Fast convergence due to Diffusing Update Algorithm [DUAL] route calculation. 
+- Bounded updates, resulting in less bandwidth consumption in large networks. 
+- EIGRP supports multiple network layer protocols through protocol dependent 
+  modules. 
+
+
+
+
+
+Chapter 5: Routing Information Protocol v1
+
+           |<-- Dist. Vect. --->|<---- Link State   ---->|<--Path Vect-->
+-----------+---------+----------+-----------+------------+--------------+
+Classful   |   RIP   |   IGRP   |           |            |     EGP      |
+-----------+---------+----------+-----------+------------+--------------+
+Classless  | RIPv2   |  EIGRP   |  OSPFv2   |   IS-IS    |    BGPv4     |
+-----------+---------+----------+-----------+------------+--------------+
+IPv6       | RIPng   | EIGRPv6  |  OSPFv3   |  IS-ISv6   |    BPGv6     |
+-----------+---------+----------+-----------+------------+--------------+
+
+
+Characteristics: 
+
+- RIP is a distance vector protocol. 
+- Hop count is the only metric for selecting a route. 
+- Hop count > 15 means unreachable network.
+- Messages are broadcast every 30 seconds. 
+
+
++--------------------+------------+--------------+------------------+
+|Data Link Frame Hdr | IP Pkt Hdr | UDP Sgmt Hdr |   RIP Message    |
+|                    |            |              | 504 bytes, up to | 
+|                    |            |              | 25 routes        | 
++--------------------+------------+--------------+------------------+
+
+Data Link Frame Hdr: 
+    MAC Dest Addr: FF FF FF FF FF FF
+    MAC Src  Addr: Senders MAC Addr 
+
+IP Pkt Hdr: 
+    IP Dest Addr: 255.255.255.255 
+    IP Src  Addr: IP of sender 
+    Protocol field: 17 meaning UDP 
+
+UDP Sgmt: 
+    Src Port: 520 
+    Dest Port: 520 
+
+
+0             7 8                15 16                                31        
++--------------+-------------------+-----------------------------------+
+|Command=1 or 2|  Version = 1      |          zero                     |
++--------------+-------------------+-----------------------------------+
+| Address Family [IP = 2]          |          zero                     |
++----------------------------------+-----------------------------------+
+|                        IP Address (Network Address)                  |
++----------------------------------------------------------------------+
+|                                 zero                                 |
++----------------------------------------------------------------------+
+|                                 zero                                 |
++----------------------------------------------------------------------+
+|                            Metric (Hops)                             |
++----------------------------------------------------------------------+
+|              Multiple route entries, up to max of 25                 |
++----------------------------------------------------------------------+
+
+
+
+5.1.2 
+
+Command: 1 for Request, 2 for Reply 
+Version: 1 for v1 and 2 for v2 
+Address Family: 2 for IP unless a request for complete routing table 
+         in which case its 0 
+IP Address: Destination IP 
+Metric: Hop count
+
+
+>>> RIP Operation
+
+>> Basics 
+- Upon bring up, RIP interfaces sends out request message. 
+- RIP-enabled neighbors respond with their routing table. 
+- Evaluate each route entry received and table updated. 
+- Send triggered updates to neighbors. 
+
+>> Classful Routing
+- RIP is classful and hence does not send subnet mask. 
+- Router either uses subnet mask configured on interface or use default 
+  value for that class. 
+- Due to this, RIPv1 networks cannot be discontigous. 
+
+>> AD 
+- RIP has 120 AD. Of all interior gateway protocols, RIP has highest.   
+
+
+>> Configuration
+
+R1# config t 
+R1(config)# router rip 
+
+
+
+`passive-interface intf-type intf-number` prevents sending updates 
+along that interface. 
+
+
+>> Processing RIP Updates 
+- If update & intf on which its received belong to same network, subnet 
+mask of intf is applied. 
+- If update & intf on which its received belong to different network, 
+subnet mask of the class is applied. 
+- Update sent on same major network will have exact network address entry 
+and associated metric. 
+- Update sent on different major network will have summarized to classful 
+network address. 
+
+>> Advantages of Automatic Route Summarization
+- Smaller routing table 
+- Fewer routing updates 
+
+>> Disadvantages 
+- When discontiguous networks are configured, summarization doesn't work. 
+
+
+
+Chapter 6: VLSM and CIDR 
+
+
+    Class        Higher Order         Start          End 
+------------------------------------------------------------------
+  Class A              0             0.0.0.0       127.255.255.255 
+------------------------------------------------------------------
+  Class B              10           128.0.0.0      191.255.255.255 
+------------------------------------------------------------------
+  Class C              110          192.0.0.0      223.255.255.255 
+------------------------------------------------------------------
+  Multicast            1110         224.0.0.0      239.255.255.255 
+------------------------------------------------------------------
+  Experimental         1111         240.0.0.0      255.255.255.255 
+------------------------------------------------------------------
+
+
+
+
+
+    Class    1st Octect     2nd         3rd         4th        Subnet 
+-----------+------------+-----------+-----------+------------+--------+
+  Class A  |  Network   |   Host    |  Host     |   Host     |  /8    |
+-----------+------------+-----------+-----------+------------+--------+
+  Class B  |  Network   |  Network  |  Host     |   Host     |  /16   |
+-----------+------------+-----------+-----------+------------+--------+
+  Class C  |  Network   |  Network  | Network   |   Host     |  /24   |
+-----------+------------+-----------+-----------+------------+--------+
+
+
+Private IP Address Space
+-----------
++ Not to be used publicly. Only for private use. 
+
++ In Class A:   10.0.0.0 to 10.255.255.255; One network addr. 
++ In Class B:   172.16.0.0 to 172.31.255.255; 16 network addresses.
++ In Class C:   192.168.0.0 to 192.168.255.255; 256 network addr. 
+
++ Private IP addr is not routed to public routers. 
+
+Special Use IP Addresses
+-----------
+0.0.0.0/8       "This" network 
+14.0.0.0/8      Public-Data Network 
+24.0.0.0/8      Cable Television Network 
+39.0.0.0/8      Reserved but subject to allocation. 
+127.0.0.0/8     Loopback 
+128.0.0.0/16    Reserved but subject to allocation. 
+169.254.0.0/16  Link Local 
+192.0.0.0/24    Reserved but subject to allocation. 
+192.0.2.0/24    Test-Net 
+192.88.99.0/24  Relay anycast 
+223.255.255.0/24    Reserved but subject to allocation. 
+
+
+
+
+CIDR (RFC 1519)
+- More flexible use of IPv4 address space. 
+- Prefix aggregation, which reduced routing table size. 
+- To CIDR routers, network class is meaningless. 
+- Network address is determined by routing prefix. 
+
+VLSM
+- CIDR uses VLSM to allocated IP addresses to subnets. 
+- Classless routing protocols propagate CIDR/VLSM addresses. These 
+include: RIPv2, EIGRP, OSPF, IS-IS & BGP. 
+- Route summarization and 'super netting' means the same thing. 
+
+
+
+
+
+Chapter 7: RIPv2 
+
+- 'Route Redistribution' means, taking routes from one source and sending 
+it to another router. 'redistribute static' command should be applied. 
+
+- RIPv1 & RIPv2 packets are encapsulated in UDP segments using port 520 
+and carries up to 25 routes. 
+
+
+
+0             7 8                15 16                                31        
++--------------+-------------------+-----------------------------------+
+|Command=1 or 2|  Version = 2      |          zero                     |
++--------------+-------------------+-----------------------------------+
+| Address Family [IP = 2]          |      Route Tag                    |
++----------------------------------+-----------------------------------+
+|                        IP Address (Network Address)                  |
++----------------------------------------------------------------------+
+|                               Subnet Mask                            |
++----------------------------------------------------------------------+
+|                               Next Hop                               |
++----------------------------------------------------------------------+
+|                            Metric (Hops)                             |
++----------------------------------------------------------------------+
+|              Multiple route entries, up to max of 25                 |
++----------------------------------------------------------------------+
+
+
+
+- Two improvements of RIPv2 over v1
+   a. Subnet mask field
+   b. Next Hop address: Used to identify better next-hop address, if one 
+      exists, than the address of the sending router. If set to 0.0.0.0, 
+      the address of sender is best next-hop. 
+
+- Configuration 
+
+(config)# router rip 
+(config-router)# version 2 
+
+- Network with 192.168.0.0/16 CANNOT be distributed with v1 because subnet 
+mask is less than classful mask. Because mask is not included in v1 updates, 
+there is no way for RIPv1 router to determine what that mask should be. 
+Therefore, update was never sent. 
+- 'no auto-summary' disables summarization. It can be confirmed in 
+'show ip protocols'
+
+
+Chapter 8: The Routing Table: A Closer Look 
+
+- Level 1 route is a route with subnet mask equal to or less than classful 
+mask of network address. 192.168.1.0/24 is level 1 route because the 
+subnet mask is equal to the networks classful mask. 
+
+- Level 1 route can function as: 
+  - Default route (static route with address 0.0.0.0/0) 
+  - Supernet route (mask less than classful mask) 
+  - Network route (subnet mask == classful mask) 
+
+- Ultimate Route: One that includes next hop IP and/or exit interface. 
+- Parent Route: Level 1 parent route is one that does not have next-hop 
+  IP address or exit interface for any network. 
+- Child Route: Level 2, has next-hop and/or exit interface info. 
+
+- Level 2 route is a subnet of classful network address. 
+
+>> Steps in route lookup process 
+1. Examine level 1 route for best match with the packets destination address. 
+1a. If best match is level 1 ultimate route, use it to forward packet. 
+1b. If best match is level 1 parent route, proceed to Step 2 
+2. Child routes are examined for best match. 
+2a. Match! Use this subnet to forward packets. 
+2b. No Match. Proceed to Step 3. 
+3. Classful or Classless routing behavior? 
+3a. Classful routing. Drop the packet. 
+3b. Classless routing. Search level 1 routes. 
+4. Match with Supernet first and then default to forward packets. 
+5. No match, no default. Drop the packet. 
+
+- Longest match: Route with most number of equivalent left-most bits 
+is preferred. 
+
+- Classful & classless behavior can be configured by '[no] ip classless'. 
+  
+
+
+
+Chapter 9: EIGRP 
+
+- Features include: 
+  - RTP 
+  - Bounded Updates 
+  - Diffusing Update Algorithm [DUAL]
+  - Establishing Adjacencies 
+  - Neighbor & Topology Tables 
+
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISIS Primer 
+OSPF Primer 
+
+
+Dynamic Trunking Protocol [DTP] switchport mode relationships 
+
+------------------+-----------+------------+----------+---------+
+                  | Dynamic   | Dynamic    |          |         |
+                  |  Auto     | Desirable  | Trunk    | Access  |
+------------------+-----------+------------+----------+---------+
+Dynamic Auto      | Access    |  Trunk     | Trunk    | Access  |
+------------------+-----------+------------+----------+---------+
+Dynamic Desirable | Trunk     |  Trunk     | Trunk    | Access  |
+------------------+-----------+------------+----------+---------+
+Trunk             | Trunk     |  Trunk     | Trunk    | NR      |
+------------------+-----------+------------+----------+---------+
+Access            | Access    |  Access    | NR       | Access  |
+------------------+-----------+------------+----------+---------+
+
+NR = Not Recommended 
+
+> "show dtp interface" displays current settings 
+
+
+Creating VLAN 
+-------------
+#config t 
+(config)# vlan <id>
+(config-vlan)# name "vlan name"
+(config-vlan)#end 
+
+
+Assign a switch port
+--------------------
+#config t 
+(config)# interface <id> 
+(config-if)# switchport mode access 
+(config-if)# switchport access vlan <id>
+(config-if)# end 
+
+Removing a VLAN
+----------------
+(config)# no switchport access vlan ==> removes the port from VLAN and assigns 
+                                        default VLAN [VLAN 1, may be]
+
+
+Assign a trunk
+---------------
+#config t 
+(config)# interface <id> 
+(config-if)# switchport mode trunk 
+(config-if)# switchport trunk native vlan <id> 
+(config-if)# end 
+
+
+Removing a trunk
+-----------------
+(config-if)# no switchport mode trunk allowed vlan  ==> reset all the VLANs configured 
+                                                        on this trunk port 
+
+(config-if)# no switchport mode native vlan ==> reset native VLAN to VLAN 1 
+
+
+Show VLAN commands
+-------------------
+show vlan [brief | id <id> | name "name" | summary]
+
+
+Show interface commands
+------------------------
+show interfaces [<interface id> | vlan <id>] | switchport 
+
+
+
+/********************************************************************/
+ *                                                                  *
+ *                         IS-IS PRIMER                             *
+ *                                                                  *
+/********************************************************************/
+
+IS-IS = Intermediate System to Intermediate System 
+
+- Originally designed as a dynamic routing protocol to route packets in 
+  ISO Connectionless Network Services [CLNS] environment. 
+
+- Link State routing protocol used as Interior Gateway Protocol [IGP]. 
+
+- OSPF evolved from IS-IS
+
+- Integrated IS-IS is an extension of IS-IS supporting both IP and OSI 
+  protocols. Remember that original IS-IS was developed for OSI and not 
+  for TCP/IP suite. 
+
+- IS routers use addresses called Network Service Access Point [NSAP] 
+  as a way to identify itself on the network. 
+
+- The same NSAP address is used for the entire node [unlike IP which 
+  assigns an IP address to each interface] 
+
+- When using integrated IS-IS, both NSAP and IP addresses are used. 
+
+
+- NSAP Address format is pretty complex. Here is a generic one. 
+
+    |<--- IDP --->|<--------  DSP  ------------>|
+    +-----+-------+----------+----------+-------+
+    | AFI |  IDI  |  HO-DSP  |    ID    |  SEL  |
+    +-----+-------+----------+----------+-------+
+
+    IDP = Initial Domain Part --> Standardized by ISO 
+    DSP = Domain Specific Part --> Assigned by authority specified in IDP 
+    AFI = Authority and Format Identifier 
+    IDI = Initial Domain 
+    HO-DSP = High Order Domain Specific Part 
+
+    NOTE: The combination of IDP and HO-DSP forms the routing domain 
+          and area id. 
+
+    ID  = System Identifier for this router. 
+    SEL = NSAP Selector 
+
+
+- Simplified NSAP Address
+
+    +-----+-------+----------+----------+-------+
+    | AFI |  IDI  |  HO-DSP  |    ID    |  SEL  |
+    +-----+-------+----------+----------+-------+
+    |<-----    Area    ----->|< sys id >| NSEL  |
+      var len: 1-13 bytes       6 bytes   1 byte
+
+- NSAP Addresses are variable in length and can be up to 20 bytes long. 
+
+  NSEL (1 byte):- NSAP Selector refers to target network service user, 
+                  such as network device or routing layer. Similar to 
+                  TCP port no. 
+
+  ID (6 bytes):- Unique ID assigned to this router. Can use loopback IP. 
+                 Example: 1921.6810.1001 [192.168.101.1 is re-written]
+
+  Area ID (1-13 bytes):- Identifies the area IS router belongs to. 
+  Consists of 2 parts. Example: 49.0001
+        (a) First byte is AFI.
+        (b) Following bytes represent area number. 
+
+> Full NSAP: 49.0001.1921.6810.1001.00
+
+
+TERMINOLOGY 
+-----------
+  IS - Intermediate System [Router etc]
+  ES - End System [like a PC]
+  CLNS - Connectionless Network Service 
+  CLNP - Connectionless Network Protocol 
+  NSAP - Network Service Access Point 
+  NET  - NSAP where NSEL=00
+  PDU  - Protocol Data Unit 
+  LSP  - Link State PDU 
+
+
+ADJACENCIES 
+------------
+- Routers can establish adjacencies only on same level. 
+- Adjacencies are formed using special PDU called Hello. 
+- Adjacency formation is different on point-to-point and broadcast n/w. 
+- Adjacent router exchange routing info using Link State PDUs. 
+
+
+- On a broadcast domain, redundant info may be sent out. 
+- To avoid, Designated IS [DIS] is choosen. 
+
+
+Multiple Area Networks
+----------------------
+- Routing tables and link-state databases can grow enormously. High
+  convergence time. 
+- Concept of "AREA" was introduced to limit the size of the database. 
+- Level 1 routing happens between routers in same area ID. 
+- Level 2 routing is between routers in DIFFERENT area ID. They 
+  form the backbone of the network. 
+
+- 3 routing levels exists: Level 1 only, Level 2 only, Level 1-2
+
+
+IS Router Configuration on SEOS 
+--------------------------------
+context IS-Router 
+router isis 1 
+net 49.0001.0000.bbbb.3333.00
+is type level-1
+dynamic-hostname router-name IS-Router 
+interface intf 
+  metric 10 
+interface link-3 
+  metric 15 
+
+SEOS Route Show Commands 
+-------------------------
+> show ip route
+> show ip route all
+> show ip route isis
+> show isis route
+
+
+LSP Entries in IS-IS Database
+-----------------------------
+- For every broadcast link on Level 1, there is a pseudo node created
+  for that link. 
+- In output of 'show isis database': 
+     ++ LSP IDs ending with 00-00 describe a router. 
+     ++ LSP IDs ending with xx-00 describe a pseudo node. 
+
+LSP ID
+------
+SysID.XX-YY 
+   SysID - System ID part of originating router NSAP
+   XX    - Describes the router. 00 means regular. Non-zero means 
+           pseudonode. 
+   YY    - LSP fragment no. LSP can be very big. If its bigger than 
+           1492 bytes, ISIS fragments them. 
+
+Example: IS-Router.01-00
+         router.00-00
+
+
+IS-IS Show Commands
+--------------------
+> show isis topology 
+> show isis adjacency 
+> show isis adj-log [interface | is]
+> show isis interface 
+
+
+IS-IS Summary Commands
+-----------------------
+> show isis <id> protocol-summary 
+
+
+
+
+
+/********************************************************************/
+ *                                                                  *
+ *                         OSPF  PRIMER                             *
+ *                                                                  *
+/********************************************************************/
+
+- Concept of Areas exists in OSPF too. Area 0 = backbone routers. Other 
+  areas = internal routers. 
+- Area Border Router [ABR] = connects two areas, one of which is Area 0. 
+- Autonomous System Border Router [ASBR] = Connects OSPF Area to external 
+       routing domain such as ISIS, BGP or static/connected routes. 
+
+OSPF Topology Construction
+---------------------------
+- It automatically discovers all OSPF routers. 
+- It automatically discovers all prefixes in network. 
+
+- Just configure OSPF for IP connectivity and assign an area. Rest is taken 
+  care of. 
+- OSPF routers use Link State Advertisements [LSA] to share information 
+  between routers. 
+
+
+Types of LSAs
+-------------
+
+LSA 1 [Router LSA]: 
+    Generated by all routers in an area to describe their directly attached 
+    links. Limited to an area.
+
+LSA 2 [Network LSA]: 
+    Generated by Designated Router of a broadcast or non-broadcast segment 
+    to describe neighbors connected to the segment. Limited to an area. 
+
+LSA 3 [Summary LSA]: 
+    Generated by ABR to describe a route to neighbors outside of the area. 
+    [Inter-Area Routes]
+
+LSA 4 [Summary LSA]: 
+    Generated by the ABR to describe a route to an ASBR to neighbors outside 
+    the area. 
+
+LSA 5 [External LSA]: 
+    Generated by ASBR to describe routes redistributed into the area. 
+
+
+Show Commands 
+--------------
+
+> show ospf database  --> LSA 1 
+> show ospf database network  --> LSA 2
+> show ospf database summary-network detail  --> LSA 3
+> show ospf database summary-asbr detail  --> LSA 4 
+> show ospf database external detail  --> LSA 5
+
+
+/********************************************************************/
+ *                                                                  *
+ *                         OSPF  101                                *
+ *                                                                  *
+/********************************************************************/
+
+- OSPF router maintains a full network topology database called link-state 
+  database. 
+- Routers use Link State Advertisements [LSA] to exchange info required 
+  to build link-state database. 
+- Using link-state database and Shortest Path First algo, OSPF calculates 
+  routes to all destinations. 
+
+Neighbor Discovery
+------------------
+State: INIT 
+   1) OSPF uses hello packets to locate neighbors 
+   2) Hello packets sent on multicast address 224.0.0.5 
+   3) Routers must agree on certain settings before becoming neighbors 
+       (a) Both routers should be in same area
+       (b) Link must be based on valid network address 
+       (c) Authentication params must be valid [if enabled]
+       (d) Hello & Dead intervals must be same 
+       (e) Routers must also have unique router IDs
+State: 2-WAY
+   4) If above conditions are met, routers become neighbors and 
+      progress to "2-WAY" state. 
+
+
+Link State Database Synchronization
+-----------------------------------
+- All routers in an area have same link state database 
+- A new router coming online will need to 
+   (a) Update its neighbors about its own links
+   (b) Receive a complete database from its neighbors 
+- A master-slave relationship is established to exchange database info. 
+   (a) Routers select master [highest router ID]
+   (b) Routers exchange database descriptor packets [DBDs] that 
+       briefly describes the content of the database. 
+- OSPF is connection-oriented
+   (a) Messages will be acknowledged by the receiver
+   (b) un-ack'ed messages will be re-transmitted. 
+   (c) If ack is not received after retry, receiver will be declared 
+       dead and hence a topology change. 
+- OSPF does not use TCP or UDP. It runs directly over IP. Hence the 
+  retransmission mechanism is directly implemented in OSPF. 
+
+State: EXSTART
+   1) Routers identify the master. One with highest Router ID is 
+      the master. 
+
+State: EXCHANGE
+   2) Routers exchange DBD packets. 
+
+State: LOADING 
+   3) If there are new links in DBD, router sends Link State 
+      Request [LSR] to request more info on the new link. 
+   4) Receiving router will respond with details using Link State 
+      Update [LSU]
+   5) Sender sends Link State Ack [LSAck]. 
+
+State: FULL
+   6) Routers will calculate optimal paths to destination using 
+      SPF algorithm
+
+- Neighbor routers exchange "Hello" packets. 
+
+- For broadcast domains [Ethernet], special rules apply. 
+   (a) A Designated Router [DR] is established within a LAN. 
+   (b) Each router establishes adjacency with DR only [Hub-Spoke model].
+
+- Routing updates are greatly reduced. 
+- Neighbors still exchange "Hello" packets. But routing updates 
+  go through DR only. 
+- Backup DR is also elected to greatly reduce convergence time when 
+  DR goes down.
+
+OSPF Convergence - Flooding
+----------------------------
+- On topology change, OSPF router flood LSA on all interfaces. 
+- In broadcast environments [Ethernet], DR will flood LSA on LAN. 
+   (a) Member router send LSA to DR/BDR using special multicast 
+       address - 224.0.0.6 
+   (b) DR sends LSA to all OSPF routers using 224.0.0.5 multicast 
+       address 
+
+OSPF Areas
+----------
+- To scale large networks and reduce link state database.
+- Several types of areas: Backbone, Normal, Stubby, Totally Stubby, 
+  Not So Stubby Area [NSSA]
+- Backbone area number is 0 [or 0.0.0.0]
+- To prevent loops, all areas must be connected via backbone area. 
+
+Area Border Router:- Sits between edges of two areas, one of them 
+  being Area 0 [or backbone area]
+
+Autonomous System Border Router:- Sits on edge of OSPF network and 
+  talks to other networks [BGP etc] 
+
+
+*** NOTE: When configuring OSPF, if we do not configure router ID, 
+    OSPF picks lowest loopback interface address. If there is no 
+    loopback interfaces, OSPF chooses the lowest interface address. 
+
+
+Administrative Distances
+-------------------------
+
+Static  1 
+OSPF    110 
+ISIS    115 
+
+
+/********************************************************************/
+            Routing Information Base [RIB]
+/********************************************************************/
+
+- Each routing protocol builds its own routing table. 
+- RIB selects the best route from all these databases and puts it 
+  in its own database. 	
+
+
+Router LSA [or LSA 1]
+----------------------
+- Talks to adjacent router in same area. 
+- Asks for network connected to this router. 
+
+> show ospf database 
+
+Network LSA [or LSA 2]
+----------------------
+- Used in broadcast domains such as Ethernet. 
+- DR informs about all the attached neighbors using LSA 2.
+- Link ID = DR's IP address of interface connecting to LAN. 
+- Advertising Router = DR's router ID. 
+- LSA 2 are flooded within originating area. 
+- There is a limit of 300 neighbors in SmartEdge
+
+> show ospf database - Gives list of Router LSA [lSA 1], Network 
+                       LSA [LSA 2] and Summary LSA [LSA 3]
+> show ospf database network
+> show ospf database network detail 
+
+Show commands
+--------------
+> show ospf <instance>  - gives most info about a routing instance 
+> show ospf area - info abour routing area 
+> show ospf context - instances running in given context 
+> show ospf statistics - operational stats 
+
+> show ospf neighbors - provides neighbor info
+> show ospf interface - gives local interfaces info. You'll notice that 
+                        this info matches with intf info of neighbors too. 
+> show ospf global - global ospf info 
+> show ospf spf - 
+
+
+- In OSPF ABR, one interface can be in one area and one interface in 
+  another area. Its unlike ISIS where the whole router is in one area. 
+
+Summary LSA [LSA 3]
+-------------------
+- Originated by ABR. 
+- Summarizes networks present in one area for other areas. 
+- LSA 3 routes are labeled as Inter-Area routes in the table. 
+- Summary LSA are flooded throughout a single area only. 
+   (a) LSA 3 is never forwarded by ABR 
+   (b) When ABR receives LSA 3, it modifies LSA 3 and puts itself as 
+       next hop in it and then forwards the new LSA 3. 
+
+
+Summary Area Service Border Router LSA [LSA 4]
+----------------------------------------------
+- Originated by ABR
+- Describes reachability to ASBRs
+- Flooded throughout backbone area to other ABRs 
+- NOT flooded to stub and totally stubby areas
+
+
+External LSA [LSA 5]
+--------------------
+- Originated by ASBR 
+- LSA 5 is flooded throughout OSPF domain except stubby and totally 
+  stubby areas. 
+- LSA 5 routes are labeled E1 and E2 
+  E1 = Cost of external and internal 
+  E2 = Cost is not included 
+
+
+Redistribution in to OSPF
+-------------------------
+- Network devices not capable of running OSPF when connected to an 
+  OSPF box, we need to inform those networks to OSPF domain. 
+- "redistribute" command under OSPF domain can be used. 
+   (a) We can redistribute routes learnt from following protocols
+       bgp, connected, isis, nat, ospf, rip, static and subscriber 
+
+
+> debug ospf resdistribution - gives redistribution debug messages 
+
+
+Stubby Area
+-----------
+- Fully aware of OSPF domain but unaware of external networks
+- Uses default route to ABR for external destinations 
+- Use Case: When large external domains exists, stubby routers 
+  reduce link state database
+- All routers in stubby area must be configured as stubby to 
+  become stubby. 
+- ABR will block all LSA 4 and LSA 5 
+- ABR creates an LSA 3 creating a default route 
+
+Totally Stubby Area
+-------------------
+- Routers in this area aware of only its own topology. 
+- Extension of stubby area. 
+- Routers in this area are NOT aware of outside networks. 
+- Uses ABR as default router for outside network. 
+
+Route Summarization
+-------------------
+- Reduces routing table size
+- Usually towards the direction of backbone router 
+
+Originate Default
+-----------------
+- Induces a default route in to OSPF domain so that external networks 
+  routing table need not be circulated in OSPF domain. 
+
+
+
+/********************************************************************/
+ *                                                                  *
+ *                         BGP Primer                               *
+ *                                                                  *
+/********************************************************************/
+
+- Its an inter Autonomous System protocol
+- Within an AS, IGP is used. But outside, BGP
+
+- BGP exchanges network info with BGP neighbors only if configured to 
+  do so 
+- BGP neighbors are not auto discovered. One has to configure manually. 
+- BGP routing update carries list of AS it traversed ==> AS Path 
+- BGP routing updates are incremental. 
+
+- BGP uses TCP to exchange info on port 179
+  - TCP chosen for reliability. 
+  - BGP peers required to be directly connected. 
+
+- BGP Messages 
+  (a) OPEN:- Used in initialization and establishing BGP connection. 
+             Parameter negotiation etc happens. 
+  (b) UPDATE:- Transfer routing info between BGP neighbors. 
+  (c) NOTIFICATION:- Sent when an error happens. BGP connection is 
+                     closed immediately. 
+  (d) KEEPALIVE:- To determine if peer is alive. 
+
+
+BGP Finite State Machine [FSM]
+-------------------------------
+- BGP maintains a FSM for each of its neighbor. Its very complex. 
+  RFC 4271 - complete details.
+- A neighbor can be in 6 different states 
+  (a) Idle 
+  (b) Connect 
+  (c) Active 
+  (d) OpenSent 
+  (e) OpenConfirmed 
+  (f) Established 
+
+
+Idle 
+-----
+- 1st state after configuring BGP peer. BGP FSM refuses all incoming 
+  BGP connections for this peer. 
+- Resources are being allocated. 
+
+Connect
+-------
+- TCP connections are being established between peers 
+
+Active
+------
+- If TCP connection fails then the FSM will move to Active state where 
+  peer will listen for connections and MAY establish a BGP connection 
+  in future. 
+
+OpenSent
+--------
+- Open msg is sent and wait for peer to respond 
+
+OpenConfirmed
+-------------
+- Received Open msg from peer. Waiting for KeepAlive msg. 
+
+Established
+-----------
+- FSM for peer is moved to this state and ready to exchange Update 
+  msg with peer. 
+
+
+- Once BGP connection is established, routing info is exchanged using 
+  Update msgs. 
+- Update msgs can contain either prefixes to be added or removed 
+  or both 
+- 
+
+
+Autonomous System Types
+-----------------------
+
+Stub AS
+-------
+- Is connected to only one other AS
+
+Transit AS 
+----------
+- Provides connections through itself to other AS, example: ISP
+
+Multihomed AS 
+-------------
+- Doesn't let traffic from one AS to another through it. 
+- Is connected to many AS 
+- Provides redundancy
+
+
+Challenges with BGP next-hop 
+-----------------------------
+
+t3 ----------+
+             |
+             |
+t1 --------- t2 -------------- b1 (bgp | ospf) ---------
+                 160.1.1.0/30
+            I-BGP --->|<---  OSPF with AS 100
+              |<--- E-BGP  --->|
+
+1) Router b1 announces 50.1.0.0 to be available via next-hop 160.1.1.1
+2) Router t2 will respect the next-hop from E-BGP and forward this to t1 
+3) Router t1 will learn 50.1.0.0 is reachable via next-hop 160.1.1.1 
+4) What happens if 160.1.1.0/30 is not in routing tables of AS 300 routers? 
+   >>> Destination unreachable ....
+
+Solution:- t2 replaces the next hop info in the update with itself. 
+
+5) So, for t1, 50.1.0.0 network is reachable via t2. 
+
+
+I-BGP & Full Mesh
+------------------
+(a) I-BGP breaks routing loops by removing its own AS number from I-BGP 
+    update 
+
+
+
+                 +------ T3 ------+     T2 to T3 IBGP update 
+    AS 20        |                |     T3 to T1 IBGP update
+EBGP 1.0.0.0/8   |                |     T1 to T4 IBGP update 
+       --------> T2   IBGP        T1    T4 to T2 IBGP update 
+                 |                |
+                 |                |     Now, T2 thinks that it has 2 routes 
+                 +------ T4 ------+     to 1.0.0.0/8 network. One using EBGP
+                                        and one using IBGP. A loop.
+
+
+(b) I-BGP update will must not be forwarded further over I-BGP. Its has 
+    only one hop life. 
+
+                 +------ T3 ------+     T2 to T3 IBGP update 
+    AS 20        |                |     T2 to T4 IBGP update 
+EBGP 1.0.0.0/8   |                |     
+       --------> T2    IBGP       T1    T3 does NOT send to T1
+                 |                |     T4 does NOT send to T1 
+                 |                |     
+                 +------ T4 ------+     
+
+For T1 to reach 1.0.0.0/8 network, it HAS to be connected to T2. Hence a 
+requirement for fully meshed network. 
+
+- All the routers in transit AS need to run BGP or tunneling protocol 
+  [MPLS or GRE]
+
+
+
+Route Redistribution
+---------------------
+! Create a prefix-list named customers 
+ip prefix-list customers
+  seq 10 permit 30.1.0.0/22 ge 24  ! all prefixes greater than equals 24
+
+! In this route-map, we match ip addresses to an ip prefix-list
+route-map cust-prefixes-only permit 10 
+  match ip address prefix-list customers 
+router bgp 20 
+  address-family ipv4 unicast 
+! we redistribute but run a route-map called cust-prefixes-only 
+  redistribute ospf 1 route-map cust-prefixes-only  
+
+
+Prefix Aggregation
+------------------
+
+router bgp 20 
+  aggregate-address A.B.C.D/M summary-only 
+
+
+>>Read Again: BGP Attributes<<
+BGP Attributes
+---------------
+#show bgp route 
+
+(a) Next Hop:- defines the IP addr of next hop
+(b) Metric, which is MED - Multi Exit Discriminator 
+(c) Local Preference 
+(d) Weight 
+(e) AS Path:- Identifies the AS that the UPDATE has passed  
+(f) Origin:- 3 values 
+    i - prefix configured via n/w statement 
+    e - originated via EGP
+    ? - incomplete, most likely redistributed into BGP 
+
+
+/********************************************************************/
+ *                                                                  *
+ *                         MPLS Overview [basic level]              *
+ *                                                                  *
+/********************************************************************/
+- MPLS is important because voice, video and data networks can be
+  converged in to single MPLS based network. 
+- What is the need for convergence? 
+- First service provided by providers was voice [telephone]. They used
+  landlines. 
+- Next, in the evolution, TV & Video and then data [internet] came along. 
+- All 3 used 3 different infrastructure. 
+- Each of these 3 services needed special/extra technologies. 
+- During the course of telco evolution, multiple technologies were
+  introduced. 
+- Often, the same technologies were used to build different networks for
+  video, voice and data. 
+
+
+      |       |       |        |              |                  |                
+      |       |       |        |              |     data         |      End user services 
+      |       |       |        |              |                  |
+      | Voice |       |  Video |              |                  |
+      |       |       |        |            +----------------------+    Statistical multiplexing 
+      |       |       |        |            |         IP           |    Service flexibility 
+      |       |       |        |            +----------------------+
+      |       |       |        |                       |
+      |       |       |        |                       v
+    +---------------------------------------------------------------+   QoS
+    |                         ATM                                   |   Connection oriented
+    +---------------------------------------------------------------+   Statistical multiplexing 
+            |                                                 |
+            |                                                 |
+            v                                                 v 
+    +---------------------------------------------------------------+   High availability
+    |                     Sonet/SDH                                 |   SLA monitoring
+    +---------------------------------------------------------------+   Provisioning 
+            |                                                 |
+            |                                                 |
+            v                                                 v
+    +---------------------------------------------------------------+
+    |                     Fibre/WDM                                 |   High bandwidtch 
+    +---------------------------------------------------------------+
+
+
+- This model was expensive to build. But each verticle model generates its
+  own revenue, the cost was recovered. 
+
+- Services offered traditionally over legacy telecom infra started moving
+  towards IP. 
+- This put demand on IP to provide support for real time applications such
+  as voice. 
+- For voice applications, packets must arrive in the same sequence as it
+  was sent. IP networks does not guarantee that. 
+
+- In order for the packets to arrive in same order, they have to be sent
+  along same path ***
+- This is against IP network design. 
+
+*** I don't think so. Receiver can reorder packets. 
+
+- MPLS came in to picture. It's an extension of IP. It introduced fixed
+  path for IP packets.
+- It added QoS capabilities to IP networks. 
+
+
+>>>> Impact of MPLS in Telecom Networks <<<< 
+
+
+
+      |       |       |        |              |                  |                
+      |       |       |        |              |     data         |      End user services 
+      |       |       |        |              |                  |
+      | Voice |       |  Video |              |                  |      Statistical multiplexing 
+      |       |       |        |            +----------------------+    Service flexibility
+      |       |       |        |            |      MPLS/IP         |    QoS 
+      |       |       |        |            +----------------------+    Connection oriented
+      |       |       |        |                       |
+      |       |       |        |                       v
+    +---------------------------------------------------------------+   QoS
+    |                         ATM                                   |   Connection oriented
+    +---------------------------------------------------------------+   Statistical multiplexing 
+            |                                                 |
+            |                                                 |
+            v                                                 v 
+    +---------------------------------------------------------------+   High availability
+    |                     Sonet/SDH                                 |   SLA monitoring
+    +---------------------------------------------------------------+   Provisioning 
+            |                                                 |
+            |                                                 |
+            v                                                 v
+    +---------------------------------------------------------------+
+    |                     Fibre/WDM                                 |   High bandwidtch 
+    +---------------------------------------------------------------+
+
+
+
+
+
+
+
+
+- If we see, role of ATM and MPLS/IP are the same. So, ATM was no longer
+  necessary in data networks. 
+
+      |       |       |        |              |                  |                
+      |       |       |        |              |                  |      End user services 
+      |       |       |        |              |                  |
+      | Voice |       |  Video |              |   data           |       
+      |       |       |        |              |                  |      
+      |       |       |        |              |                  |
+      |       |       |        |              |                  |  
+      |       |       |        |              |                  |         
+      |       |       |        |              |                  |         
+    +------------------------------+        +----------------------+
+    |         ATM                  |        |     MPLS/IP          |
+    +------------------------------+        +----------------------+
+            |                                                 |
+            |                                                 |
+            v                                                 v 
+    +---------------------------------------------------------------+   High availability
+    |                     Sonet/SDH                                 |   SLA monitoring
+    +---------------------------------------------------------------+   Provisioning 
+            |                                                 |
+            |                                                 |
+            v                                                 v
+    +---------------------------------------------------------------+
+    |                     Fibre/WDM                                 |   High bandwidtch 
+    +---------------------------------------------------------------+
+
+
+
+
+- MPLS/IP proved to be stable and given the growth of IP, it seemed reasonable 
+to invest in IP. So, ATM slowly got pushed out. 
+
+- Eventually, some voice networks are still using legacy ATM networks and MPLS/IP 
+started supporting this ATM. The new network model was like this
+
+
+
+
+
+      |       |       |        |              |                  |                
+      |       |       |        |              |                  |      
+      |       |       |        |              |                  |
+      | Voice |       |  Video |              |      data        |      
+      +-------+       |        |              |                  |
+      | ATM   |       |        |              |                  |
+      +-------+       |        |              |                  |
+          |           |        |              |                  |
+          v           |        |              |                  |
+    +---------------------------------------------------------------+   
+    |                         MPLS/IP                               |   
+    +---------------------------------------------------------------+   
+            |                                                 |
+            |                                                 |
+            v                                                 v 
+    +---------------------------------------------------------------+   
+    |                     Sonet/SDH                                 |  
+    +---------------------------------------------------------------+   
+            |                                                 |
+            |                                                 |
+            v                                                 v
+    +---------------------------------------------------------------+
+    |                     Fibre/WDM                                 |   
+    +---------------------------------------------------------------+
+
+
+
+- ATM became one of the transport layer protocols supported by MPLS
+
+- To reduce the cost, Operators removed the vertical separation in the
+  network. They combined, Voice, Video & Data in to a single network.
+
+- To further reduce costs, Operators considered reducing layers. WDM
+  cannot be removed as it provides bandwidth. MPLS provides flexibility.
+
+- So, if the functionality of Sonet/SDH can be moved to MPLS, that layer
+  can be removed.
+
+- MPLS-TP is an extension of MPLS that provides this additional
+  functionality of High Availability, SLA Monitoring and Provisioning. 
+
+
+Eventually,
+
+
+
+
+
+        Voice            Video       Data     
+          |                |          |
+          |                |          |
+          |                |          |       +------------+
+          |                |          |       | Legacy     |
+          |                |          |       | Sonet/SDH  |
+          |                |          |       +------------+
+          |                |          |             |
+          |                |          |             |
+          v                v          v             v
+    +---------------------------------------------------------------+   
+    |                         MPLS/IP                               |   
+    +---------------------------------------------------------------+   
+            |                                                 |
+            |                                                 |
+            v                                                 v 
+    +---------------------------------------------------------------+
+    |                     Fibre/WDM                                 |   
+    +---------------------------------------------------------------+
+
+
+
+
+
+>>>> Benefits <<<<<
+
+- Allows true convergence of all networks [voice, video & data]
+- MPLS networks provide ability to offer wide range of news services. 
+  Some of them are: 
+    - Business VPN for secure communication
+
+
+>>>> What exactly is MPLS? <<<<
+
+- It is a protocol to define label switching technology. 
+- It can be seen as an extension to IP. 
+- By itself, MPLS doesn't provide various services and QoS functionality. 
+  MPLS works with rest of the protocols [OSPF, BGP, IP, ISIS etc] to give 
+  the above functionality. 
+
+
+>>>> How does MPLS work? <<<<
+
+- Primary activity in MPLS network is establishing of Label Switched Path 
+  [LSP] in the network. 
+
+>>>> Acronyms <<<< 
+MPLS/IP --> It is the first extension [or standard] defined for IP traffic. 
+            It provides IP services and IP forwarding. 
+
+MPLS-TE --> MPLS Traffic Engineering. To provide QoS. 
+
+GMPLS --> Generalized MPLS, for optical networks. 
+
+MPLS-TP --> MPLS Transport Profile. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*******************************************************************/
+ *                                                                  *
+ *              MPLS Fundamentals [Intermediate]                    *
+ *                                                                  *
+/********************************************************************/
+
+Why MPLS? 
+
+- MPLS was designed to bring more 'packet-switching' behavior such as ATM 
+  and Frame Relay in to IP 
+
+- On packet-switched networks, packets are routed through various routes 
+  and could reach destination out of order causing poor QoS due to 
+  re-sequencing. 
+
+Why MPLS: IP vs ATM 
+
+- ATM is based on cell-switching. It is similar to IP packets
+  fragmentation but the packet size is fixed, 48 bytes and 5 bytes of
+  header = 53 bytes. 
+
+- ATM headers have Permanent Virtual Paths [PVCs] that are taken by cells
+  between same source and destination. This is unlike IP. Hence cells are
+  not reordered in transit. 
+
+- ATM header contains Virtual Path Identifier [VPI] and Virtual
+  Channel/Circuit  Identifier [VCI] that define the PVC. 
+
+- ATM offers precise traffic flow control over the network. 
+
+- Frame Relay also uses labels called DLCI - Data Link Connection
+  Identifier. 
+
+- DLCI has channel number that is similar to labels and is used in routing
+  traffic. 
+
+- TDM is another technology using timeslots. 
+
+- So, why use a new label based technology when ATM/FR etc already exists?
+
+- MPLS is based on IP. ATM/FR is not. It is evident that future
+  applications will be based on IP. MPLS is stable and popular technology
+  which can combine label-switching over IP core and control plane. 
+
+
+What is MPLS? [Multi-Protocol Label Switching]
+
+- A well defined label switching technology. It combines switching
+  principles of ATM with flexibility of IP. 
+
+- "Multi-Protocol" is used in the name because it is protocol agnostic.
+  Labels can be attached to IPv4, IPv6 and L2 frames. MPLS carries these
+  packets over L2. 
+
+- MPLS removes any dependencies over L2 technology. MPLS packets can be
+  carried over ATM, Sonet/SDH, PPP, HDLC or Ethernet. 
+
+- "Label Switching" in the name means that MPLS is a switching protocol. 
+
+- A label is a fixed length, locally significant idetifier used for packet
+  flow. 
+
+- There can be multiple levels of labels. The MPLS packets are "switched"
+  and not "routed" through the network. 
+
+- MPLS was originally designed to make routing faster because the
+  assumption was that the fixed label size lookup is quicker than longest
+  prefix match used by IP routing. This is no longer true. 
+
+- The value in MPLS now is in traffic engineering. 
+
+
+MPLS challenges IP Networks
+
+- MPLS addresses 2 major challenges within IP networks 
+
+(a) QoS - Quality of Service 
+- MPLS provides predictable paths for IP traffic. It is very similar to
+  ATM PVCs. 
+- Predictable path allows for traffic engineering and allows for triple
+  play. 
+- Traffic Engineering means we have control over the paths that packet
+  takes and can design our network accordingly. 
+- Example 
+     - Voice traffic is small and doesn't use up much bandwidth. But
+       requires speed, precision/reliability and predictable paths. 
+     - File transfers need lot of bandwidth but does not have similar
+       requirements for speed and reliability. 
+
+- So we can design our network that suits each traffic requirements. 
+
+(b) VPN - Virtual Private Networks 
+- ISP's provide IP VPN. Providers can separate networks by just adding
+  another label in front of an IP packet. Different customers can even use
+  overlapping IP addresses. 
+
+
+
+
+MPLS and OSI Model 
+
+L7  Application 
+L6  Presentation 
+L5  Session 
+L4  Transport 
+L3  Network 
+L2  Data Link 
+L1  Physical
+
+- MPLS is neither L2 nor L3. In MPLS, there is still L2 encapsulation
+  [src/dest mac addrs etc]
+- There is also L3 functionality of label switching between routers. 
+- Hence is a Layer 2.5 protocol 
+
+
+MPLS Functions & Roles
+
+LSP - Label Switch Path 
+- Its a unidirectional flow of traffic. 
+- Packets cannot be injected in this path in the middle. They enter at the
+  beginning and exit at the end of the path. 
+
+MPLS Header 
+- MPLS uses a 32 bit header to identify the label. 
+
+
+    +---------+-----------+----------------------------------------------+
+    |  L2 HRD |  MPLS     |         IP packet                            |
+    |         |  HDR      |                                              |
+    |         |           |                                              |
+    +---------+-----------+----------------------------------------------+
+              |           |           
+              |           |
+    +---------+           +----------+
+    |                                |
+    v                                v
+    +-------------+----+---+---------+
+    |             | E  |   |         |      
+    |   label     | X  | S |   TTL   |
+    |             | P  |   |         |
+    +-------------+----+---+---------+
+
+- Label = 20 bit field carrying value of MPLS label 
+- EXP = 3 bit experimental field. 
+        * Defines class of service the packet belongs to.  Can identify
+        * priority of the packet used in queuing during its transport 
+          through different network elements. 
+- S = 1 bit "Stack" field. MPLS packet can have multiple labels. If this
+  bit is set, this label is at the bottom of the stack of labels. If bit
+  is set to 0, then there are no more labels in the stack. 
+- TTL
+
+
+
+
+
+
+
+
+/*******************************************************************/
+ *                                                                  *
+ *                         MPLS L3VPN Pimer V2                      *
+ *                                                                  *
+/********************************************************************/
+
+- VPN services over IP by ISPs
+- Customers communicate over providers backbone just like a private 
+  router/network. 
+- L3VPN is quite complex in implementation on providers side. Involves 
+  IP, IGP, BGP, MPLS
+
+
+MPLS 101
+----------
+- Addresses 2 major challenges within IP networks 
+  (a) QoS
+        - MPLS provides predictable paths for IP traffic, similar 
+          to ATM pvc
+        - This allows for traffic engineering and enables network 
+          for triple play services
+  (b) VPN 
+        - providers can separate customer networks by just adding 
+          MPLS label in front of IP packet 
+        - Customers can even use overlapping IP spaces as IP is not 
+          exposed to provider backbone
+
+- Multiprotocol Label Switching is a layer 2 protocol. Doesn't exactly fit
+  OSI model, but its closer to L2. 
+- Adds a fixed size header to packets entering MPLS network. 
+     - Label is the most important part of header 
+     - Its short, fixed length and locally significant identifier used to
+       identify a packet flow. 
+     - Rest of the fields in header contains TTL, EXP bits etc. 
+- Forwarding decisions are based on contents of the label 
+- Packets are classified at the edge of MPLS network
+     - 2 packets with same label travel over exactly the same MPLS network
+     - Its similar to circuit swtiched network
+- MPLS labels can be attached to pure IP packets or L2 packets like
+  Ethernet.  So, applications like VPLS can use MPLS too.
+
+
+Example
+-------
+
+CE ------+                                                +------- CE 
+         |                                                |
+         |                                                |
+         +------ PE ------- P ------- P ------- PE  ------+
+         |                                                |
+         |                                                |
+CE ------+                                                +------- CE 
+
+CE = Customer Edge 
+PE = Provider Edge 
+P  = Provider Backbone Routers
+
+(1) CE sends packets to PE router 
+(2) PE adds label to packets and sends to P router [push action]
+(3) P router switches packets based on labels to destination [swap action]. 
+    At each P router, labels are swapped. 
+(4) PE router removes label and forwards packet to egress CE [pop action]
+
+NOTE: 
+- Egress PE routers just removes label and forwards it on CE.  
+- So, label has no significance on PE
+- PE routers are very busy [shaping, ip lookup] and not as powerful 
+  as P routers. So, its not very useful to lookup labels for this 
+  router. 
+- So, PE can delegate this label lookup to P router. 
+- PE does this by sending a special label [label 3] to P and P will 
+  remove the label and send plain IP packet to PE. 
+
+PHP - Penultimate Hop Popping
+------------------------------
+- This process of delegating label removal to last P router by PE 
+  router is called Penultimate Hop Popping. 
+
+
+Label Switch Path [LSP]
+-----------------------
+- Creates a unique path between two PE routers
+- Can be seen as a tunnel identified by labels
+- MPLS labels have local significance and are changed at every hop
+
+
+
+  CE ------+                                                +------- CE 
+           |                                                |
+           |                                                |
+           +------ PE ------- P1 ------- P2 ------- PE  ------+
+           |                                                |
+           |                                                |
+  CE ------+                                                +------- CE 
+10.1.1.1                                                         10.1.2.1
+
+
+CE --> PE = IP Packet 
+PE --> P1 = 300 + IP Packet [push]
+P1 --> P2 = 400 + IP Packet [swap]
+P2 --> PE = IP Packet [PHP]
+PE --> CE = IP Packet 
+
+
+- Each MPLS router maintains switch table containing ingress and egress
+  label mapping [LFIB - Label Forwarding Information Base]
+
+
+Building LFIB
+--------------
+- Labels are locally significant
+- Router picks labels arbitrarily and expects neighbors to use it
+- 2 protocols are used to automate label learning [apart from manually
+  configuring them]
+- Label Distribution Protocol [LDP]:- Easy to configure but less control
+  over LSP
+- RSVP:- More complex but greater control. Used where QoS is needed. 
+
+
+MPLS Label Stacking
+--------------------
+- Multiple labels are attached to an IP packet
+- Only 1st label is read. After its popped, next label is examined
+- Stacked labels are used in VPN applications
+- For example: Outer labels are used for MPLS routing and inner for VPN
+  application
+
+
+VPN A                                                            VPN A
+                                                                 10.1.2.1
+  CE ------+                                                +------- CE 
+           |                                                |
+           |                                                |
+           +------ PE ------- P1 ------- P2 ------- PE  ------+
+           |                                                |
+           |                                                |
+  CE ------+                                                +------- CE 
+10.1.1.1                                                         10.1.2.1
+VPN B                                                              VPN B 
+
+
+- Ingress PE needs to add 2 pieces of info to packet
+  (a) Which VPN does this packet belong to --> inner label
+  (b) Which LSP should be used to reach egress PE --> outer label 
+
+VPN B CE --> PE = IP Packet [D: 10.1.2.1, S: 10.1.1.1]
+PE --> P1 = MPLS: 300 + MPLS: 888 + IP Packet [2 pushes]
+P1 --> P2 = MPLS: 400 + MPLS: 888 + IP Packet [1 swap]
+P2 --> PE = MPLS: 888 + IP Packet [php]
+PE --> CE = IP Packet [pop]
+
+- Egress PE removes the inner label 
+
+
+MPLS Terminology
+----------------
+P Router = Provider Router 
+LSR = Label Switch Router, same as P Router 
+PE Router = Provider Edge Router 
+Edge-LSR = Same as PE Router 
+LSP = Label Switch Path 
+LFIB = Label FIB
+Outer Label = Distributed via LDP or RSVP
+Inner Label = Distributed via iBGP
+
+
+Routing in L3VPN network
+------------------------
+- Provider backbone represents itself as a single router to CE
+- Ingress and Egress PE have to sync customer's routing info in 
+  some way
+- iBGP is used to do that due to its flexibility and scalability
+
+
+L3VPN Routing Challenges
+------------------------
+- Overlapping IP prefixes. For example 40.1.1.0/24 and 50.1.1.0/24. 
+  How will iBGP will resolve this at ingress and egress PE?
+
+- They are solved in 2 ways?
+  (a) Route Distinguisher
+  (b) Route Target
+
+Route Distinguisher [RD]
+-------------------------
+- Add a 96 bit header
+- Combination of RD & IP called as VPN-IPv4 address family 
+- BGP will support this VPN-IPv4 address family
+- RD has to be globally unique to allow cross domain routing
+
+- 2 ways to build RD
+   (a) AS:number
+   (b) IP:number 
+
+- RD is not very flexible
+
+
+Route Target [RT]
+-----------------
+- used to differentiate prefixes among VPNs
+- Its an extended BGP community attribute 
+- Ingress PE adds given RT to VPN-IPv4 address based on config. 
+  Its called export. 
+- Egress PE checks RT and decides in which VPN prefix should be 
+  installed. Its called import. 
+- Both sides of a VPN should be configured for the same RT 
+
+
+
+
+
+
+/********************************************************************/
+ *                                                                  *
+ *                         VPLS Overview                            *
+ *                                                                  *
+/********************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************************/
+ *                                                                  *
+ *           IP QoS Intro [PWFQ Intro]                              *
+ *                                                                  *
+/********************************************************************/
+
+On SmartEdge 
+
+- PWFQ is multi-level hierarchical scheduling that combines PQ and WFQ. 
+- Subscriber sessions is associated with a cct within a port. 
+- Each cct can have up to 8 queues providing differentiated traffic flows 
+  towards a subscriber. 
+
+- For an incoming packet, SmartEdge can do: 
+    Classification
+    Marking 
+    Congestion Management 
+    Queuing 
+
+- Queuing and scheduling is done on egress PPA only 
+- 
+
+
+
+/********************************************************************/
+ *                                                                  *
+ *                          QoS Primer                              *
+ *                                                                  *
+/********************************************************************/
+
+Terminology
+------------
+
+Classification
+--------------
+- Based on configured params, looking at the packet and concluding what
+  QoS to apply to it
+
+
+Marking
+-------
+- A mechanism to label packets to inform system on how to treat them
+
+
+Queuing & Scheduling:- Congestion Management/Avoidance algos
+-------------------------------------------------------------
+- Performed on egress PPA
+- Based on priority values in PD label, packets at egress PPA will be
+  sorted in to different labels 
+- Scheduling is a way to empty queues
+
+
+Rate of Transmission
+---------------------
+
+Token Bucket Formula
+---------------------
+- Its not a queuing mechanism 
+
+- rate(bits/sec) = Burst Size (bytes)/Time Committed (sec) 
+- Rule of thumb for Time Comitted is 1.5 seconds. 
+- Burst Size (bytes) = rate (bits/sec) * 1.5 
+
+- Tokeb Bucket provides "credits" to traffic during Time Committed
+  interval 
+- If credites are available during TC, packets are considered conforming
+  traffic
+- If not, packets are considered exceeding traffic 
+
+
+QoS Metering/Policing
+---------------------
+- A tool to classify and rate limit traffic without using queues 
+- Policing:- will apply on packets entering the traffic card
+- Metering:- will apply on packets leaving the traffic card 
+- So, both policies can do classification and rate limiting but direction
+  is different. 
+- M/P can be applied per-port, per-circuit, per-session, per-class
+
+
+Example of a Metering 
+----------------------
+
+                     qos policy <name> metering
+                                 |
+                                 |
+             Mark ---------------+--------------------- Rate 
+               |                                         |
+               |                                         |
+       DSCP ---+                             Exceed -----+-------- Conform
+               |                                |                    |
+               |                       Drop ----+                    +--- Mark
+ Precedence ---+                                |                    |
+               |                        Mark ---+                    +--- no-action
+               |                                |
+  Priority ----+                   no-action ---+
+
+
+- Apply the policy to port/cct etc
+   port ethernet 2/2
+        qos policy metering <name>
+
+
+
+Example of Policing 
+-------------------
+
+                     qos policy <name> policing
+                                 |
+                                 |
+             Mark ---------------+--------------------- Rate 
+               |                                         |
+               |                                         |
+       DSCP ---+                             Exceed -----+-------- Conform
+               |                                |                    |
+               |                       Drop ----+                    +--- Mark
+ Precedence ---+                                |                    |
+               |                        Mark ---+                    +--- no-action
+               |                                |
+  Priority ----+                   no-action ---+
+
+
+- Apply the policy to port/cct etc
+   port ethernet 2/2
+        qos policy policing <name>
+
+
+Queuing
+--------
+- Traffic classified for queuing is labeled with an internal priority 
+  number inside the Packet Descriptor 
+- PD is used to map packets to output queues 
+- 
+
+
+
+
+
++------+ +------+ +---+ +----+ +-----+ +---+ +----+ +-----+ +----+
+| Ping | |Telnet| |FTP| |SMTP| |Trace| |DNS| |TFTP| |BOOTP| |SNMP|
++------+ +------+ +---+ +----+ |Route| +---+ +----+ +-----+ +----+
+                               +-----+ 
+
+
+       +-----+                                  +-----+
+       | TCP |                                  | UDP |
+       +-----+                                  +-----+
+
+                               +----+
+                               | IP |
+                               +----+
+
+
+        +----------+    +-----------+
+        | Ethernet |    | Token Ring| ....
+        +----------+    +-----------+
+
+
+
+
+/****************************************************/
+               Address Resolution Protocol (ARP) 
+/****************************************************/
+
+
+- ARP: IP to MAC address conversion 
+- Applies only on a LAN 
+- Ethertype for ARP is 0x0806 
+
+
+   0                                          31
+   +----------+----------+----------+----------+
+   |      HW   TYPE      |  Protocol   Type    |
+   +----------+----------+----------+----------+
+   | HW Len   | Prot Len |        Operation    |
+   +----------+----------+----------+----------+
+   |       Sender MAC (HW) address             |
+   +----------+----------+----------+----------+
+   | Src HW addr (cont)  |  Src Protocol Addr  |  
+   +----------+----------+----------+----------+
+   |Src Prot addr(cont)  | Dest HW addr        |
+   +----------+----------+----------+----------+
+   |             Dest HW addr (cont)           | 
+   +----------+----------+----------+----------+
+   |             Dest Protocol Addrs           |
+   +----------+----------+----------+----------+
+
+
+- HW Type (16-bit): 1 for Ethernet. Some other value for token ring, fiber
+  etc. 
+- Protocol Type (16-bit): 0x0800 for IP, purposefully same as the type
+  value in Ethernet frame. 
+- HW Len: Len of HW address in bytes. For MAC address, its 6 bytes.
+- Prot Len: For IP, its 4 bytes 
+- Operation: ARP Request/Reply etc 
+- Next 4 fields are senders HW/IP and destination HW/IP address. Note that
+  there is duplication of this info in Ethernet Frame as well. 
+
+
+>>>>> Proxy ARP <<<<<
+- This lets router answer ARP requests on one of its network for a host on
+  another of its network. 
+- This lets hosts think that destination is the router, while its on
+  another network. 
+
+>>>>> Gratuitous ARP <<<<<
+- When a host sends ARP request looking for its own IP address. 
+
+
+
+/****************************************************/
+               UDP (User Datagram Protocol) 
+/****************************************************/
+
+- Unreliable, datagram-oriented
+
+
+    0                            15 16                          31
+    +------------------------------+------------------------------+
+    |  Src port number             |  Dest port number            |
+    +------------------------------+------------------------------+
+    |  UDP length                  |  UDP Checksum                | 
+    +------------------------------+------------------------------+
+    |                       data (if any)                         |
+    +------------------------------+------------------------------+
+
+- Length is minimum 8 bytes (header alone). 
+- Checksum is to verify header (and not data). Actually, checksum verifies
+  Src/Dst IP and Protocol numbers, in addition to UDP header. 
+
+- DNS and DHCP uses UDP due to speed of protocol. 
+
+
+/****************************************************/
+               TCP (Transport Control Protocol)
+/****************************************************/
+
+
+    0                            15 16                          31
+    +------------------------------+------------------------------+
+    |  Src port number             |  Dest port number            |
+    +------------------------------+------------------------------+
+    |                    Sequence Number                          | 
+    +------------------------------+------------------------------+
+    |               Acknowledgement Number                        | 
+    +----+-------------------------+------------------------------+
+    |OFF |                         |            Window            | 
+    +----+-------------------------+------------------------------+
+    |         Checksum             |     Urgent Pointer           | 
+    +------------------------------+--------------+---------------+
+    |                Options                      |    Padding    | 
+    +------------------------------+--------------+---------------+
+    |                       data (if any)                         |
+    +------------------------------+------------------------------+
+
+
+
+
+/****************************************************/
+            Chapter 29 VPN Technologies 
+/****************************************************/
+
+- Main classes of VPNs: (a) Site-to-Site (b) Point-to-Point (c) Remote Access. 
+- Most VPNs need some form of tunneling to isolate traffic. 
+- VPN protocols: 
+        (a) Point to Point Tunneling Protocol (PPTP)
+        (b) Layer 2 Tunneling Protocol (L2TP)
+        (c) IPSec
+        (d) SSL 
+
+Point-to-Point Tunneling Protocol (PPTP)
+-------
+- An extension of PPP. Mostly widely used. Default on Windows and promoted
+  big by Microsoft. Other vendors (Juniper, Cisco) have support too.
+- MS implementation encapsulates data in PPP and encrypts using Microsofts
+  Point-to-Point Encryption (MPPE). Authentication is provided by in-built
+  dialup authentication protocols. 
+- Encrypted data is sent within a Generic Routing Encapsulation (GRE)
+  packet.
+- GRE packet is then encapsulated within IP within L2 headers and so on.
+  GRE is an L3 protocol.
+- PPTP uses a separate, unencrypted channel to open, close and maintain a
+  connection. 
+- PPTP clients use dynamic port and servers use 1723 port to establish
+  connection. 
+- PPTP establishes connection but does not provide encryption. MPPE is
+  used for encryption in Windows platform. 
+- PPTP can be used with many authentication and encryption options.
+  Extensible Authentication Protocol (EAP) can be used to enhance security
+  of PPTP. 
+
+- PPTP is popular but may one day bereplaced by L2TP and IPSec. 
+
+
+Layer 2 Tunneling Protocol (L2TP)
+--------
+- Cisco is primary driver of L2TP. 
+- L2TP combines features of PPTP and Cisco'sLayer 2 Forwarding (L2F)
+  protocols
+- IPSec's Encapsulating Security Payload (ESP) provides encryption for
+  L2TP protocols. 
+- L2TP, by itself, does not have encryption and not worth using w/o
+  encryption.
+- L2TP does not use a separate channel for control data as PPTP does.
+  Control data is part of L2TP communication. 
+
+Advantages of L2TP over PPTP
+--------
+- Can be used over non-IP networks. 
+- Provides 'replay protection', an extra level of security. 
+
+
+IPSec
+----
+- Collection of multiple related protocols that can be used as a complete
+  VPN solution. 
+- Can be used by itself as tunneling proto or used as encryption scheme
+  along with L2TP or PPTP. 
+- Has two encryption modes: (a) Tunnel (b) Transport. 
+
+- Tunnel: Encrypts header and payload. 
+- Transport: Encrypts only payload. 
+
+- Often considered a standard solution for site-to-site VPNs connecting
+  two LANs. 
+- IPSec exists at Layer 3 and obviously needs IP to run. 
+
+SSL/TLS
+------
+- Browsers are VPN clients for this proto. Hence, there is restrictions on
+  which protocols can be used by SSL/TLS. 
+- With Java and ActiveX plugins, access to applications can be provided.
+  This could be security risk.
+- Its a Layer 5 proto (in OSI model).
+
+
+OpenVPN & SSTP
+-------
+- Read further in [4] below. 
+
+
+References: 
+[1] http://www.windowsecurity.com/articles-tutorials/firewalls_and_VPN/VPN-Options.html
+[2] http://www.mcpressonline.com/networking/general/vpns-a-head-to-head-comparison.html
+[3] http://en.wikipedia.org/wiki/Virtual_private_network
+[4] https://www.bestvpn.com/blog/4147/pptp-vs-l2tp-vs-openvpn-vs-sstp/
+ 
+
+
+
+
+
+
+IOS Hints, Tips & Tricks 
+-------------------------
+- When booting, if router does NOT find IOS, it asks 
+
+  Would you like to enter the initial configuration dialog? [yes/no]: no 
+
+  If we enter config mode, we can get out by pressing Ctrl-C. 
+
+- show version - Displays info about many things. Some are listed here 
+                 (a) IOS version and location 
+                 (b) bootstrap program 
+                 (c) Hardware info such as RAM, NVRAM, Flash 
+                 (d) Configuration Register
+
+- hostname <name> - Changes the router to <name>. Done in config mode.
+- enable secret <word> - Creates <word> as a password for entering privilege EXEC mode.
+                         So, when we type "enable", router prompts us to enter a password. 
+                         We have to enter <word> 
+
+- Creating password for console 
+
+(config)# line console 0 
+(config-line)# password <word> 
+(config-line)# login 
+
+- Creating password for telnet connections 
+
+(config)# line vty 0 4 
+(config-line)# password <word> 
+(config-line)# login 
+
+
+- Configuring a banner 
+
+(config) banner motd # 
+Enter TEXT message. End with the character '#' 
+
+
+- Configuring 'clock rate'
+
+(config-if)#clock rate 6400 - on the DCE end of PPP connection/cable
+
+- show running-config
+- show ip route - Displays routing table used by IOS 
+- show ip protocols 
+- show ip interface brief - Brief info about intf 
+- show interfaces - Detailed info about interfaces 
+
+- Unsolicited Messages from IOS. Use "logging synchronous" 
+
+- "undebug all" will stop all the debug commands 
+
+- To disable CDP on the entire box: (config)#no cdp run 
+- To disable CDP on an interface: (config-if)#no cdp enable 
+
+- show cdp neighbor 
+- show cdp neighbor detail 
+
+- passive-interface intf-type intf-number
+It indicates which intf is passive and RIP updates should not be sent out 
+on that intf. However, subnets along that intf are advertised. 
+
+- default-information originate
+Advertise default route info. 
+
+
+
+
+
+
+Terms & Definitions
+--------------------
+
+DSL: Digital Subscriber Line. Public network technology that delivers high
+bandwidth over conventional copper wiring at limited distances. There are
+4 types of DSL: ADSL, HDSL, SDSL and VDSL. All are provisioned via modem
+pairs, with one modem located at central office and the other at the
+customer site. Because most DSL technologies do not use the whole
+bandwidth of the twisted pair, there is room remaining for voice channel. 
+
+
+ISDN: Integrated Services Digital Network Communication protocol, offered
+by telephone companies that permits telephone networks to carry data,
+voice and other source traffic. 
+
+
+Knowledge Assessment: 
+---
+* = Answer
+- = Not an answer 
+? = Unsure 
+WARNING: Not all my answers are correct. 
+
+Ethernet Transport Fundamentals
+---
++ A host connected directly to Hub operates in which mode? 
+    * Half Duplex 
+    - MIMO 
+    - Backoff Priority Mode 
+    - Full Duplex 
+
++ Which of the following Port states apply to Spanning Tree Protocol but
+not to Rapid Spanning Tree Protocol? 
+    * Listening 
+    - Forward 
+    - Blocking 
+    - Learning 
+
++ When the Ethernet Ring Protection topology changes, what message is sent
+out to all switches by the Master? 
+    * Flush FDB Message 
+    - Link Fail Message
+    - Root Election BPDU
+    - ARP 
+
++ Why are loops more of a problem for Ethernet than for IP? 
+    - ETH has no TTL field. 
+    ? ETH doesn't use logical addressing. 
+    - ETH n/w are larger and contain more redundancy. 
+    - ETH does not use a STP. 
+
++ Which of the following does not exist in a modern network using switches
+rather than hubs? 
+    - Broadcasts 
+    - VLANs 
+    - Bridging Table 
+    * Collisions 
+
++ A 1000BaseLX ETH connection operates at which speed? 
+    - 10 Gbps 
+    - 100 Mbps 
+    * 1 Gbps 
+    - 100 bits per sec 
+
++ Where can the 802.1q tag be found in an ETH frame? 
+    - Before the DST address. 
+    - After the carried data. 
+    * After the Type field and before the carried data.
+    - Between the SRC and Type field. 
+
++ Fill in the two blans with correct terms
+    Typically, switches process frames: 
+            - in software 
+            * in hardware 
+    Whereas bridges process frames: 
+            * in software 
+            - in hardware
+
++ What protocol is used for connection oriented ETH Traffic Engineering? 
+    - 802.1d
+    - 802.2
+    - 802.11
+    * 802.1Qay
+
++ Bridges and Switches increases the number of collision domains in a n/w
+    - True
+    * False 
+
++ Which of the following conditions are NOT required, for links to
+successfully be aggregated? 
+    * Spanning Tree Disabled
+    - Same Speed
+    - Full Duplex 
+    - Point to Point
+
++ Which of the following OSI Layers does ETH operate on? 
+    - Session
+    - Presentation
+    - Applicatino
+    - Network
+    * Data Link
+
++ Which of the following are STP states in which MAC addresses are NOT
+learned? 
+    - Loading
+    - Forward 
+    * Listening
+    - Learning
+
++ What is the name of the messages ETH switches running STP send to each
+other? 
+    - Root Messages 
+    - ISL 
+    - BID (Bridge ID)
+    * BPDU (Bridging Protocol Data Units)
+
++ RSTP includes two port roles not defined in STP. Which of the following
+is one of them? 
+    - Dedicated
+    - Root 
+    - Designated
+    * Alternative
+
+
