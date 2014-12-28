@@ -434,6 +434,28 @@ Mechanics of Shorting:
   going up. 
 
 
+Vid 22
+-----
+- There are two types of Bankruptcy: (a) Liquidation (b) Reorganization. 
+
+Liquidation: 
+----
+- Usually done when companies don't do well at all. Banks sell off the
+  assets and pay off debtors. 
+- There will be negotiations between all debt holders and equity holders
+  and all that stuff. 
+- Who gets this money? First Debtors. But there are levels/seniority among
+  them. 
+- 'Senior Secure Debt' holders will be first to get money. Next are
+  'Senior Unsecure Debt' holders. Then 'Subordinate' then 'Junior' etc.
+  There is a hierarcy. Lower in the hierarcy, lower are the returns (if
+  company does NOT go in to bankruptcy) because they take more risk. 
+- 'Senior Secure' debt holders get least interest on their money because
+  their money is 'gauranteed' to be returned. 
+- If any money is left after paying off debtors, its shared among equity
+  holders.
+
+
 
 References:
 [1] Notes from Khan Academy 'Personal Finance' playlist

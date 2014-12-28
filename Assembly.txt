@@ -582,4 +582,3 @@ http://web.itu.edu.tr/kesgin/mul06/intel/index.html
 [5] Notes from Hardware Software Interface course on Coursera. 
 
 [6] Coursera: Hardware Software Interface 
-

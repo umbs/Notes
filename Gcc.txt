@@ -1,0 +1,23 @@
+What are .LXXX labels in assembly?      
+        .L prefix indicates label is local to this file and so it will not
+        conflict with same name labels in other files. 
+        .LFB0 = Function Begin 0 (1st function)
+        .LFE0 = End of 1st Function
+        .LFB1 = 2nd Function Begin
+        etc 
+
+GCC Flags: 
+-fno-asynchronous-unwind-tables
+        Call Frame Information [1] tags are used by GCC Assembler to
+        reconstruct a stack backtrace. Some of .cfi labels look like: 
+        .cfi_start_proc 
+        .cfi_def_cfa_offset 
+        .cfi_end_proc 
+        .cfi_offset_cfa_register 
+
+
+Reference: 
+[1] http://en.wikipedia.org/wiki/Call_stack#Structure
+Call Frame Information
+
+[2] 

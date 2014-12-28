@@ -74,6 +74,7 @@ Cisco CCNA Notes (Perhaps from DeAnza College Course)
 28 UDP 
 
 29 VPN Technologies
+    29.1 EVPN 
 
 Todo: TCP, UDP, IP, IGMP, ICMP, DCHP, DNS, ARP, RARP, SNMP, IGMP 
 
@@ -814,7 +815,7 @@ n/w failures and flexibility.
 
 
 
-- IP Packet Header 
+- IPv4 Packet Header 
 
   0                             15 16                            31
   +---------------+---------------+---------------+---------------+
@@ -861,15 +862,36 @@ Source IP (32-bit):
 Dest IP (32-bit):
 
 
+/************************************************************/
+                    IP Routing Overview 
+                    E/// class notes
+/************************************************************/
+- Basics of IP Routing.  
+- Static vs Dynamic Routing: 
+        - Manual configuration; Static Routing. Not scalable.  
+        - Dynamic Routing - Routers exchange their routing tables. 
+        
+- IGP: Interior Gateway Protocol
+        - RIP, OSPF, IS-IS, iBGP. Routers exchange info within an
+          Autonomous System.  
+
+- EGP: Exterior Gateway Protocol
+        - Hide LAN details, but share routing info.  
+
 
 /*************************************************************/
             IP Routing Fundamentals   
                E/// Class Notes 
 /*************************************************************/
 
+Basics Principles
+- Dynamically learn and fill routing table. 
+- Place best routes in table. 
+- Remove invalid routes and replace them, wherever possible. 
+- Add new routes quickly (called convergence). 
+- Prevent routing loops. 
 
-
-
+- Distance Vector & Link State Protocols 
 
 
 
@@ -3211,6 +3233,29 @@ Queuing
 - When a host sends ARP request looking for its own IP address. 
 
 
+/****************************************************/
+               Neighbor Discovery (ND) [9] 
+/****************************************************/
+- IPv6 Neighbor Discovery is set of messages to discover relationships
+  between neighboring nodes.
+- ND replaces ARP, ICMP Router Discovery, ICMP Redirect and provides
+  additional functionality. 
+- ND is described in RFC 2461. 
+
+Hosts:
+---
+- ND is used by hosts to discover neighbors, address prefixes and config
+  params. 
+
+Routers:
+---
+- ND is used by routers to advertise their presence, advertise host config
+  params and address prefixes. 
+- Informs hosts of better next-hop address to forward packets for specific
+  destination. 
+
+TODO: yet to complete 
+
 
 /****************************************************/
                UDP (User Datagram Protocol) 
@@ -3343,15 +3388,230 @@ OpenVPN & SSTP
 - Read further in [4] below. 
 
 
+        ********************
+      EVPN (Ethernet VPN) [5-8] 
+        ********************
+
+- EVPN introduces the concept of routing MAC addresses using BGP over MPLS
+  core. MAC routing is done by BGP and actual transport of packets is done
+  by MPLS network. 
+- Conceptually, the technology is very similar to Layer 3 MPLS VPN. 
+- This can solve the problem of stretching Layer 2 networks without VPLS. 
+- Juniper is already using this technology in their QFabric product. 
+- Cisco is developing a version called PBB-EVPN.  
+
+Benefits: 
+----
+- Ability to have all active multi-link connection between edge devices
+  (avoiding loops).  
+- Load-balance on all active links. 
+- Support MAC address mobility. 
+
+Terminology:
+-----
+Broadcast Domain: VLAN (single or stacked). 
+Bridge Domain: An instance of broadcast domain. ??  
+
+EVI: An EVPN Instance spanning across the PEs participating in that EVPN. 
+
+Ethernet Segment Identifier: Set of Ethernet links attaching a CE to PE's
+is called Ethernet Segment. A unique (provider-wide) identifier is used to
+identify this, called Ethernet Segment Identifier (ESI). 
+
+Ethernet Tag: Identifier of a broadcast domain. VLAN is one example of
+Ethernet Tag. An EVPN instance can have multiple broadcast domains. PEs
+map CEs to Ethernet Tag/VLANs. 
+
+DMAC: Destination MAC 
+
+MAC-VRF: MAC Virtual Route Forwarding. 
+
+- MAC learning happens in Control Plane. I think it happens in Data Plane
+  but learnt MAC info is immediately sent to Control Plane where an entry
+  in MAC-VRF table is built in which each entry contains (my guess): 
+
+        MAC-VRF Table 
+        -------------
+        EVI/Ethernet Tag   
+        ESI     
+        MAC Addr      
+        IP Addr of Remote PE    
+        Outgoing Intf
+
+DF: Designated Forwarder. In a multihomed Ethernet Segment, one of the PEs
+becomes DF and rest non-DF. 
+
+
+
+Split Horizon:
+-----
+- If CEs send Broadcast, Unknown Unicast or Multicast [BUM] traffic, PEs
+  should not send it back to CE. This is called Split Horizon.  
+- To do this, there should be a table mapping ESI to MPLS label. Peer
+  PEs connected to same CE should drop MPLS traffic with above label. In
+  below example, PE2 should drop MPLS BUM traffic from PE1 corresponding
+  to ESI 10. 
+
+        +----- PE1 <-----------------> PE3 ---+ 
+      /         ^                       ^       \
+     /          |                       |        \
+    /           |                       |         \
+  CE1 (ESI 10)  |                       | (ESI 20) CE2 
+    \           |                       |         /
+     \          |                       |        /
+      \         v                       v       /
+        +----- PE2 <-----------------> PE4 ---+
+                
+                        Fig 29.1 
+
+- MPLS labels are advertised by PEs using Ethernet A-D route extended
+  community. 
+- Egress PEs rely on this label to decide to forward BUM packet or drop
+  it. 
+- Difference between Split Horizon and "Multi Destination Traffic" is SH
+  is based on ESI and Multi Destination Traffic is based on BVI. 
+
+
+BGP EVPN NLRI:
+-----
+- BGP Network Layer Route Information is regular updates sent by BGP
+  routers to share route info. 
+- An extension to BGP [RFC4271] called Multiprotocol Extensions BGP [RFC4760]
+  is used to send EVPN NLRI info.  
+- Following is its format: 
+
+                +-----------------------------------+
+                |    Route Type (1 octet)           |
+                +-----------------------------------+
+                |     Length (1 octet)              |
+                +-----------------------------------+
+                |      Route Type (EVPN NLRI)       |
+                |       its variable length         |
+                +-----------------------------------+
+
+                        Fig 29.2
+ 
+        Route Type = Defines encoding of rest of EVPN NLRI 
+                     (type = 0x02) 
+        Length = in Bytes
+
+
+Types of BGP EVPN NLRI
+----------------------------------------------------------------------
+Ethernet Auto-Discovery | Used for 'Fast Convergence' and 'Aliasing'. 
+----------------------------------------------------------------------
+MAC/IP Advertisement | To advertise new MAC, load balancing activities.
+----------------------------------------------------------------------
+Inclusive Multicast Ethernet Tag | PEs send this NLRI so that remote PEs
+can reach this PEs to send BUM traffic. Used in 'Handling of
+Multi-Destination Traffic'.
+----------------------------------------------------------------------
+Ethernet Segment | Used in 'DF Election'. 
+----------------------------------------------------------------------
+ESI Label Extended Community (EC) | May be advertised with Ethernet A-D to
+prevent split-horizon. 
+----------------------------------------------------------------------
+ES-Import Route Target EC | 
+----------------------------------------------------------------------
+MAC Mobility EC | 
+----------------------------------------------------------------------
+Default Gateway EC | 
+----------------------------------------------------------------------
+RD Assignment per EVI | 
+----------------------------------------------------------------------
+RT (Route Targets) | 
+----------------------------------------------------------------------
+
+
+MAC/IP Advertisement Route:  
+-----
+- For each PE, locally learned MACs are advertised in following format. 
+
+               +---------------------------------------+
+               |     Route Type (1 byte, type=3)       |
+               +---------------------------------------+
+               |          Length (1 byte)              |
+               +---------------------------------------+
+               |          RD   (8 bytes)               |
+               |       RD Type 1 - x.x.x.x:0           |
+               +---------------------------------------+
+               |Ethernet Segment Identifier (10 bytes) |
+               +---------------------------------------+
+               |      Ethernet Tag ID (4 bytes)        |
+               +---------------------------------------+
+               |    Source MAC Addr Length (1 byte)    |
+               +---------------------------------------+
+               |      Source MAC Addr (6 bytes)        |
+               +---------------------------------------+
+               |   Source IP Addr Length (1 byte)      |
+               +---------------------------------------+
+               |  Source IP Addr (0 or 4 or 16 bytes)  |
+               +---------------------------------------+
+               |        MPLS Label1 (3 bytes)          |
+               +---------------------------------------+
+               |      MPLS Label2 (0 or 3 bytes)       |
+               +---------------------------------------+
+
+                             Fig 29.3 
+
+- MACs can be aggregated and MAC prefix can be advertised instead of each MAC. 
+- In that case, IP addr length = 0 and no IP addr is advertised. 
+- If there is an ARP Request from a CE and if PE has MAC:IP mapping record, it
+  will act as ARP Proxy and respond to the request. 
+
+
+Multi-Destination Traffic: 
+----
+- PEs advertise new "Inclusive Multicast Ethernet Tag" route type to allow
+  remote PEs to forward BUM packets.
+- Format looks like this (from draft, Section 7.2): 
+        
+               +---------------------------------------+
+               |     Route Type (1 byte, type=3)       |
+               +---------------------------------------+
+               |          Length (1 byte)              |
+               +---------------------------------------+
+               |            RD (8 bytes)               |
+               +---------------------------------------+
+               |        Ethernet Tag ID (4 bytes)      |
+               +---------------------------------------+
+               |       IP Addr Length (1 byte)         |
+               +---------------------------------------+
+               |       Originating Router's IP Addr    |
+               |            (4 or 16 bytes)            |
+               +---------------------------------------+
+
+
+Section 13: Forwarding Unicast Packets 
+
+13.1: Forwarding packets received from CE
+
+    a. Packet received by PE 
+        a.a. DMAC is known (somehow).
+            - Forward packet to remote PEs or locally attached CE. 
+            - Uses remote PEs' EVPN MPLS label as advertised by remote PE. 
+
+        a.b. DMAC is unknown.
+            - PE must flood the packet to other PEs. 
+            - Encapsulate the packet with ESI MPLS label 
+
+
+
+13.2: Forwarding packets received from PE
+13.2.1: Unknown Unicast
+13.2.2: Known Unicast 
+
+- 
 References: 
 [1] http://www.windowsecurity.com/articles-tutorials/firewalls_and_VPN/VPN-Options.html
 [2] http://www.mcpressonline.com/networking/general/vpns-a-head-to-head-comparison.html
 [3] http://en.wikipedia.org/wiki/Virtual_private_network
 [4] https://www.bestvpn.com/blog/4147/pptp-vs-l2tp-vs-openvpn-vs-sstp/
- 
-
-
-
+[5] https://tools.ietf.org/html/draft-ietf-l2vpn-evpn-08 
+[6] http://www2.alcatel-lucent.com/techzine/ethernet-vpn-evpn-integrated-layer-2-3-services/
+[7] https://conference.apnic.net/data/37/2014-02-24-apricot-evpn-presentation_1393283550.pdf
+[8] https://sites.google.com/site/amitsciscozone/home/important-tips/mpls-wiki/bgp-mpls-based-ethernet-vpn
+[9] http://technet.microsoft.com/en-us/library/cc778019(v=ws.10).aspx 
 
 
 

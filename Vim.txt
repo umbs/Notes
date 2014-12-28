@@ -136,7 +136,8 @@ Wikia Tips
 
     :%s/^/\=printf("%d", line("."))   // prints current line number. Read
                                       // above link for more granularity.   
-
+2. VIM as a logfile viewer.
+    
 
 Code Indentation
 ----------------
