@@ -1,7 +1,5 @@
-Notes from [1]
-
-Socket descriptor type: int 
-
+DATA STRUCTURES & FUNCTIONS 
+-----
 struct addrinfo {
     int              ai_flags;     // AI_PASSIVE, AI_CANONNAME, etc.
     int              ai_family;    // AF_INET, AF_INET6, AF_UNSPEC
@@ -10,20 +8,13 @@ struct addrinfo {
     size_t           ai_addrlen;   // size of ai_addr in bytes
     struct sockaddr *ai_addr;      // struct sockaddr_in or _in6
     char            *ai_canonname; // full canonical hostname
-
     struct addrinfo *ai_next;      // linked list, next node
 };
-- Above struct is filled and then getaddrinfo() is called. OS will return
-  a pointer to linked list of above structs filled with all required data. 
 
 struct sockaddr {
     unsigned short    sa_family;    // address family, AF_xxx
     char              sa_data[14];  // 14 bytes of protocol address
 }; 
-
-- sa_data contains destination IP and port number and is not easy to use. So,
-  sockaddr_in is created to use interchangeably with sockaddr (typecast
-  between the two).  
 
 // (IPv4 only--see struct sockaddr_in6 for IPv6)
 struct sockaddr_in {
@@ -33,24 +24,12 @@ struct sockaddr_in {
     unsigned char      sin_zero[8]; // Same size as struct sockaddr
 };
 
-- sin_zero is zero'd out. Its only used as padding to match sockaddr size. 
-- sin_family in sockaddr_in corresponds to sa_family in sockaddr 
-
-
-// (IPv4 only--see struct in6_addr for IPv6)
-
 // Internet address (a structure for historical reasons)
 struct in_addr {
     uint32_t s_addr; // that's a 32-bit int (4 bytes)
 };
 
-- Now for below variable, accessing IP address is: 
-  struct sockaddr_in ina; 
-  ina.sin_addr.s_addr; 
-
-
 // (IPv6 only--see struct sockaddr_in and struct in_addr for IPv4)
-
 struct sockaddr_in6 {
     u_int16_t       sin6_family;   // address family, AF_INET6
     u_int16_t       sin6_port;     // port number, Network Byte Order
@@ -63,7 +42,6 @@ struct in6_addr {
     unsigned char   s6_addr[16];   // IPv6 address
 };
 
-
 // In some cases, we don't know if v4 or v6 structure is returned. So,
 // using below struct, pass both v4 and v6 structs in parallel and
 // depending on family type (ss_family), cast to sockaddr_in or _in6.   
@@ -75,6 +53,58 @@ struct sockaddr_storage {
     int64_t   __ss_align;
     char      __ss_pad2[_SS_PAD2SIZE];
 };
+
+int getaddrinfo(const char *node, const char *service, const struct addrinfo *hints, struct addrinfo **res);
+int socket(int domain, int type, int protocol); 
+int bind(int sockfd, struct sockaddr *my_addr, int addrlen);
+int connect(int sockfd, struct sockaddr *serv_addr, int addrlen);
+int listen(int sockfd, int backlog); 
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
+int send(int sockfd, const void *msg, int len, int flags); 
+int recv(int sockfd, void *buf, int len, int flags);
+sendto() and recvfrom() - DGRAM sockets 
+close(sockfd); 
+int getpeername(int sockfd, struct sockaddr *addr, int *addrlen); 
+int gethostname(char *hostname, size_t size); 
+int select(int numfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout); 
+
+inet_pton() 
+inet_ntop() 
+FD_SET(int fd, fd_set *set)
+FD_CLR(int fd, fd_set *set)
+FD_ISSET(int fd, fd_set *set)
+FD_ZERO(fd_set *set)
+
+
+
+NOTES [1]
+-----
+
+Socket descriptor type: int 
+
+struct addrinfo
+- Above struct is filled and then getaddrinfo() is called. OS will return
+  a pointer to linked list of above structs filled with all required data. 
+
+struct sockaddr
+- sa_data within this struct contains destination IP and port number and
+  is not easy to use. So, sockaddr_in is created to use interchangeably
+  with sockaddr (typecast between the two).  
+
+// (IPv4 only--see struct sockaddr_in6 for IPv6)
+struct sockaddr_in 
+- sin_zero is zero'd out. Its only used as padding to match sockaddr size. 
+- sin_family in sockaddr_in corresponds to sa_family in sockaddr 
+
+// Internet address (a structure for historical reasons)
+struct in_addr 
+- Now for below variable, accessing IP address is: 
+  struct sockaddr_in ina; 
+  ina.sin_addr.s_addr; 
+
+// (IPv6 only--see struct sockaddr_in and struct in_addr for IPv4)
+struct sockaddr_in6 
+struct in6_addr 
 
 
 SYSTEM CALLS
@@ -263,6 +293,38 @@ int getpeername(int sockfd, struct sockaddr *addr, int *addrlen);
 int gethostname(char *hostname, size_t size); 
 
 
+ADVANCE TOPICS 
+------
+- socket() returns descriptor that blocks on read/accept calls. It can be
+  set to NON-BLOCKING using fcntl() function as follows:
+
+  sockfd = socket(PF_INET, SOCK_STREAM, 0); 
+  fcntl(sockfd, F_SETFL, O_NONBLOCK); 
+
+- We can then 'poll' the socket for data. But it's inefficient. 
+
+[12]
+
+/* 
+ * numfds = largest sockfd+1 
+ * readfds = set of fd's to be read 
+ * writefds = set of fd's to be written to 
+ * exceptfds = set of fd's to be monitored for exception 
+ * timeout = 
+ */
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int select(int numfds, fd_set *readfds, fd_set *writefds,
+           fd_set *exceptfds, struct timeval *timeout); 
+
+- select() allows to monitor several sockets at once. It indicates which
+  sockets are ready to read, write and threw exceptions. However, its
+  slow. 'libevent' is a popular alternative. 
+
+- Use FD_SET/CLR/ISSET/ZERO() macros to manipulate fd sets. 
+
 
 
 UTILITY FUNCTIONS
@@ -298,6 +360,12 @@ char ip6[INET6_ADDRSTRLEN]; // space to hold the IPv6 string
 struct sockaddr_in6 sa6;    // pretend this is loaded with something
 inet_ntop(AF_INET6, &(sa6.sin6_addr), ip6, INET6_ADDRSTRLEN);
 printf("The address is: %s\n", ip6);
+
+
+FD_SET(int fd, fd_set *set)     Add fd to 'set' 
+FD_CLR(int fd, fd_set *set)     Remove fd from 'set'
+FD_ISSET(int fd, fd_set *set)   Return true if fd is in 'set'
+FD_ZERO(fd_set *set)            Clear all entries from 'set' 
 
 
 Reference: 

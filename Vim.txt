@@ -7,14 +7,30 @@ Window Splitting
 :set splitright // Opens window in right [for vertical splits] and becomes
                   active
 :set splitbelow // same for horizontal window 
-ctrl + w, <number>, < // reduce width of window by <number> 
-ctrl + w, <number>, > // increase width of window by <number> 
-ctrl + w, | // max out window width 
-ctrl + w, _ // max out window height 
-ctrl + w, = // normalize all window sizes 
-ctrl + w, R // swap both windows [including buffers] 
+ctrl+w <number> < // reduce width of window by <number> 
+ctrl+w <number> > // increase width of window by <number> 
+ctrl+w | // max out window width 
+ctrl+w _ // max out window height 
+ctrl+w = // normalize all window sizes (equal sizes) 
+ctrl+w R // swap both windows [including buffers] 
+
+<number> ctrl+w w // switch to window <number>
+ctrl+w T // make current split window in to a tab (capital T)  
 
 vim -O file1 file2 // open two files side by side 
+
+Tab Views 
+----------
+:tabnew <file> // opens <file> in a new tab 
+:tabp // previous tab 
+:tabn // next tab 
+
+In Normal mode 
+gt // go to next tab 
+gT // go to previous tab 
+ngt // got to tab no. n 
+
+vim -p file1 file 2 // open multiple files in tab mode 
 
 
 Regular Expressions
@@ -74,19 +90,6 @@ Use:
 
 :s/Copyright \zs2007\ze All Rights Reserved/2008/
 
-Tab Views 
-----------
-:tabnew <file> // opens <file> in a new tab 
-:tabp // previous tab 
-:tabn // next tab 
-
-In Normal mode 
-gt // go to next tab 
-gT // go to previous tab 
-ngt // got to tab no. n 
-
-vim -p file1 file 2 // open multiple files in tab mode 
-
 
 Diff
 ----
@@ -128,6 +131,34 @@ In the .vimrc file, `set textwidth=80` (or whatever column width).
 - `G`   go to beginning of last line 
 - `ga`  Gives ASCII value of character under cursor 
 
+Power of g command 
+------------------
+:[range]g/pattern/command 
+- Above command acts on [range] (default - whole file), by executing 'cmd'
+  command, for each line matching 'pattern'. 
+
+Examples: 
+:g/pattern/d
+- Delete all lines matching 'pattern' 
+
+:g/pattern/z#.5 
+- Display context (5 lines) for all occurrences of a pattern. 
+
+:g/pattern/z#.5 | echo "==========="
+- Same as above but with some beautification.
+
+:g!/pattern/d
+:v/pattern/d 
+- Do NOT delete lines matching 'pattern'
+
+:g/^\s*$/d
+- Delete all blank lines. '^' start of line, '\s*' is zero or more white
+  spaces, '$' end of line. 
+
+
+
+http://vim.wikia.com/wiki/Power_of_g
+
 Wikia Tips
 ----------
 1. Insert line numbers in file (not just display) or a portion of file?
@@ -155,4 +186,3 @@ where
 {lhs}  left hand side, is a sequence of one or more keys that are being
        mapped.
 {rhs}  right hand side, is the sequence of keys that the {lhs} keys are
-       mapped to.

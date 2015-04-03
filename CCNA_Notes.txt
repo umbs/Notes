@@ -78,16 +78,900 @@ Cisco CCNA Notes (Perhaps from DeAnza College Course)
 
 Todo: TCP, UDP, IP, IGMP, ICMP, DCHP, DNS, ARP, RARP, SNMP, IGMP 
 
-/*************************************************************/
-      ERICSSON CERTIFIED ASSOCIATE - IP NETWORKING             
-            from Ericsson's internal website
-/*************************************************************/
 /************************************************************/
          CCNA Cisco Net Academy Notes                       
            from Cisco Class Notes at 
                   DeAnza College 
 /************************************************************/
 
+/*************************************************************/
+                INTERNET    PROTOCOL  (IP)
+                Foothill College Notes
+                    Cisco Academy    
+/*************************************************************/
+
+- OSI Model 
+
+    layer 7 - Application: Interacts with applications. 
+    layer 6 - Presentation: Converts code and reformats data 
+    layer 5 - Session: coordinates interaction between end-to-end
+                        application processes. 
+    layer 4 - Transport: Provides end-to-end data integrity and QoS 
+    layer 3 - Network: Switches and routes data to the appropriate n/w
+                        device. 
+    layer 2 - Data Link: Transfers units of data to other end of physical
+                         link. 
+    layer 1 - Physical: Transmits and recv on n/w medium. 
+
+
+- Layer 1: Physical: 
+- Layer 2: Ethernet, Frame Relay, PPP
+- Layer 3: Logical addressing (end-to-end addressing), Routing, Path
+  determination. IPv4, IPv6 and IPx
+- Layer 4: TCP, UDP, SCTP 
+- Layer 5: SAP, NetBIOS 
+- Layer 6: Encryption, Compression, MIME, TLS, SSL,
+- Layer 7: Authentication, FTP, HTTP, Telnet.
+
+
+    OSI Model                   TCP/IP Model 
+    +-------------+--------------+--------------+
+    | Application |              |              |
+    +-------------+              | Application  |
+    |Presentation |              |    Layer     |
+    +-------------+              |              |
+    |  Session    |              |              |
+    +-------------+--------------+--------------+ <-- port number
+    | Transport   |              |  Transport   |
+    +-------------+--------------+--------------+ <-- protocol number
+    |  Network    |              |Internet Layer|
+    +-------------+--------------+--------------+ <-- type code 
+    | Data Link   |              |              |
+    +-------------+              | Link Layer   |
+    |  Physical   |              |              |
+    +-------------+              +--------------+
+
+
+
+
+
+- IPv4 Packet Header 
+
+  0                             15 16                            31
+  +---------------+---------------+---------------+---------------+
+  | Vers |  IHL   |  Service Type |      Packet  Length           |
+  +---------------+---------------+---------------+---------------+
+  |         Identification        | Flag |    Frag. Offset        | 
+  +---------------+---------------+---------------+---------------+
+  |    TTL        |    Protocol   |      Header Checksum          | 
+  +---------------+---------------+---------------+---------------+
+  |                  Source IP Address                            | 
+  +---------------+---------------+---------------+---------------+
+  |                  Destination IP Address                       | 
+  +---------------+---------------+---------------+---------------+
+  
+- IP Header in a packet travels unchanged throughout the network. 
+- Only MAC header changes with every hop. 
+- Unreliable, connectionless datagram delivery service. 
+- Unreliable: Best effort service. If IP receives error packet, its
+  discarded and an ICMP message is send to sender. 
+- Connectionless: No state information of packets/datagram is saved. 
+
+Vers (4-bit): IPv4 
+Header Length (4-bit): HL in 32-bit size. Hence, max of 60 byte header is
+possible. 
+Service Type (8-bits):
+    3-bits: unused 
+    1-bit: minimize delay 
+    1-bit: maximize throughput 
+    1-bit: maximize reliability 
+    1-bit: minimize monetary costs
+        Only one of the above 4 can be on. 
+    Last-bit: always set to zero 
+
+
+Packet Length (16 bits): Packets up to 65536 bytes can be sent/recvd by
+IP. However, lower layers cannot handle it and fragmentation happens. 
+Identification (16-bits): 
+Flag ():
+Frag. Offset ():
+TTL (8-bits):
+Protocol (8-bits): 
+Header Checksum (16-bit):
+Source IP (32-bit):
+Dest IP (32-bit):
+
+Table of Contents 
+
+/**************************************************************/
+ *                                                            *
+ *             Routing Protocols & Concepts                   *
+ *                                                            *
+/**************************************************************/
+
+Chapter 1: Introduction to Routing and Packet Forwarding 
+
+- ROM in a router stores the following 
+  (a) Bootstrap instructions 
+  (b) Basic diagnostic software 
+  (c) Scaled-down version of IOS 
+
+- Router Boot-up Process 
+  (a) Perform POST 
+  (b) Load bootstrap program 
+  (c) Locate and load Cisco IOS software 
+  (d) Load startup config file 
+
+- Main job of bootstrap program is to locate Cisco IOS and load it in to RAM 
+- Cisco IOS can be either on Flash or other places like a TFTP server
+- Management Ports: 
+    - Not used for packet forwarding
+    - Used for router configuration 
+    - Two types
+          (a) Console Port
+          (b) Auxiliary Port 
+
+- Router interfaces can be divided in to two types 
+  (a) LAN Interfaces - such as Ethernet and FastEthernet 
+  (b) WAN Interfaces - such as serial, ISDN and Frame Relay 
+
+
+
+
+
+
+
+
+>>>>> Endianness <<<<<
+
+- 0th bit is MSB and 7th bit is LSB. When sending out, data is sent in 0
+  to 7, 8 to 15 bits and so on. This is Big Endian or Network Byte Order.  
+
+
+
+
+
+Chapter 2: Static Routing 
+
+- For WAN connections, Cisco routers supports the following cable types 
+  (a) EIA/TIA-232
+  (b) EIA/TIA-449
+  (c) V.35 
+  (d) X.21 
+  (e) EIA/TIA-530 
+   - Don't have to remember them. On Cisco side, DB-60 port is used. Other 
+     end is the type above cables provide. 
+
+- Like devices are those whose ports have similar pins and unlike devices are those 
+  whose ports have different pins. 
+
+- Routers and PCs are like devices. Switches and Hubs are like devices. Naturally, 
+  switches and routers are unlike devices. 
+
+- Within Ethernet LANS, two types of cables are used: 
+  (a) Straight-through: to connect unlike devices 
+      - switches to routers 
+      - switches to PC 
+      - Hubs to routers 
+      - Hubs to PC 
+
+  (b) Crossover Cable: to connect like devices 
+      - switch to switch 
+      - PC-to-PC 
+      - switch to hub 
+      - hub-to-hub 
+      - Router-to-Router 
+      - Router-to-Server 
+
+- On serial links, one end is DTE and one is DCE. 
+
+- "Administratively Down" means that interface is "shutdown". 
+- "Line Protocol Down" means interface is not receiving carrier signal from peer. 
+
+- Ethernet interfaces on a router participates in ARP. 
+
+>>>> Configuring Interfaces 
+
+>> Serial Interface 
+    interface serial 0/0/0 
+      ip address 172.10.2.1 255.255.255.0 
+      no shut
+
+>> Configuring Serial Links in Lab 
+- Cisco serial interfaces are DTE by default but can be configured as DCE . 
+- To configure an interface as DCE, connect the DCE end of the cable to intf 
+  and configure "clock rate" command. 
+- DCE = female connector, DTE = male connector 
+
+
+/*************************************************************/
+>>>> Cisco Discovery Protocol [CDP] <<<<
+/*************************************************************/
+
+- CDP is a powerful info gathering tool used to get info about directly 
+  connected Cisco devices.
+- Its an L2 protocol, meaning only physically connected devices are considered 
+  neighbors. 
+- Allows to access summary of protocol and address info about connected 
+  Cisco devices. 
+- Its a proprietary tool. 
+
+- CDP Advertisements contain: router interfaces, model numbers, intf used 
+  to make connections etc 
+
+- "show cdp neighbor" and "show cdp neighbor detail" gives info about neighbor 
+
+- To disable CDP on the entire box: (config)#no cdp run 
+- To disable CDP on an interface: (config-if)#no cdp enable 
+
+- show cdp neighbor 
+- show cdp neighbor detail 
+
+>>>> Static Routes <<<<
+
+- Static routes [ip route ...] are configured when routing from a network to 
+  a stub network. 
+
+- When an exit intf goes down [shutdown], the static route cannot be resolved 
+  to an exit intf. Then it is removed from the routing table. 
+
+- The entries are still in the running-config. So, if the intf comes back up 
+  again [no shutdown] then they are installed in the routing table. 
+
+- There are certain protocols used on point-to-point serial link such as HDLC 
+  and PPP where next-hop IP address is not used. The IP packet, in HDLC case, 
+  is encapsulated with L2 broadcast destination address. 
+
+- Static Route Summarization. 
+  - Helps reduce routing table size 
+  - Lookups are faster 
+
+- When instead of exit interface, if an exit IP is configured, then there will 
+  be two lookups to resolve exit interface. This is called Recursive Route Lookup. 
+  [RRL]
+
+- To avoid RRL, we can configure exit interface instead of exit IP. This is 
+  only possible for serial interfaces as there is only one device [router] at 
+  other end in serial intf. 
+
+- Ethernet intf is a multi-access intf and there could be multiple devices 
+  sharing that end point. By having Ethernet intf, router doesn't know the 
+  end point. 
+
+- For Ethernet intf, configure both exit intf and next-hop IP. 
+
+- Route Summarization reduces routing table size. Multiple static routes can be summarized into a single static route if:
+	a) The destination networks can be summarized into a single network address, and 
+	b) The multiple static routes all use the same exit-interface or next-hop IP address 
+
+
+>> Default Static Route
+
+- ip route 0.0.0.0 0.0.0.0 [exit interface] 
+- Default route need not be static route, but it usually is. 
+
+
+
+
+Chapter 3: Dynamic Routing Protocols 
+
+
+
+           |<-- Dist. Vect. --->|<---- Link State   ---->|<--Path Vect-->
+-----------+---------+----------+-----------+------------+--------------+
+Classful   |   RIP   |   IGRP   |           |            |     EGP      |
+-----------+---------+----------+-----------+------------+--------------+
+Classless  | RIPv2   |  EIGRP   |  OSPFv2   |   IS-IS    |    BGPv4     |
+-----------+---------+----------+-----------+------------+--------------+
+IPv6       | RIPng   | EIGRPv6  |  OSPFv3   |  IS-ISv6   |    BPGv6     |
+-----------+---------+----------+-----------+------------+--------------+
+
+- Interior Gateway Protocols [IGP] are used for routing within an Autonomous 
+  Systems (routing domain). Examples: RIP, IGRP, EIGRP, OSPG and IS-IS
+
+- Exterios Gateway Protocols [EGP] are used for routing between Autonomous Systems.
+  Examples: BGP, its the only practical solution. 
+
+- IGP comprises of Distance Vector and Link State protocols 
+
+
+>>>> Distance Vector Protocols <<<< 
+
+- Distance Vector := Distance + Direction
+  Distance := hop count or similar metric 
+  Direction := exit interface or IP of next hop router 
+
+- DV uses Bellman-Ford algo to determine best path
+
+- DV works best when 
+   - simple and flat network like hub/spoke n/w 
+   - worst-case convergence times are not a concern 
+
+
+>>>> Link State Protocols <<<< 
+
+- A router configured with Link State protocol can get a "complete view" 
+  of the network. 
+
+- LS works best when 
+   - Network design is hierarchical 
+   - Fast convergence is crucial 
+
+- Classful routing: Subnet mask not included. Network is either Class A, B, C or D
+  - Example: RIPv1, IGRP
+
+- Classless routing: Subnet mask is included. 
+  - Example: RIPv2, EIGRP, OSPF, IS-IS, BGP
+
+- Metrics generally used in routing protocols 
+  Hop Count 
+  Bandwidth 
+  Load - Considers traffic utilization of a certain link 
+  Delay
+  Reliability - probability of error 
+  Cost - can represent a metric or combo of metrics/policy 
+
+- RIP uses Hop Count 
+- IGRP & EIGRP use Bandwidth, Delay, Reliability and Load. 
+- IS-IS & OSPF use Cost. IOS or network admin determines this cost. 
+
+- All protocols in CCNA course are capable of load balancing upto 4 equal cost 
+  routes. 
+- EIGRP can load balance between unequal cost routes. 
+
+
+>>>> Administrative Distance <<<< 
+
+- AD defines the preference of one routing source to the other. Lower AD, higher 
+  preference. 0 <= AD <= 255
+- Directly connected routes have 0 AD and it cannot be changed. 
+- AD of 255 means that router does not trust the source and route is NOT 
+  installed in the routing table. 
+
+
+Source         AD 
+-------------------
+Connected          0
+Static             1
+EIGRP Summary      5 
+External BGP       20 
+Internal EIGRP     90 
+IGRP               100 
+OSPF               110 
+IS-IS              115
+RIP                120 
+External EIGRP     170 
+Internal BGP       200 
+
+
+>>>> Static Route <<<< 
+
+- Static route has an AD of 1 
+- "Floating Static Route": When a route to a network exists in routing table 
+  due to a dynamic protocol, but admin configures a static route with AD greater 
+  than that of routing protocol, then such a static route is called "Floating 
+  Static Route". 
+
+
+
+
+Chapter 4: Distance Vector Routing Protocol 
+
+
+DVRP include RIP, IGRP and EIGRP
+
+RIP 
+  -- Hop count is used as metric. 
+  -- If hop count > 15, RIP cannot supply route to that network. 
+  -- Updates are broadcast or multicast every 30 seconds, by default.  
+
+IGRP 
+  -- Cisco's proprietary protocol 
+  -- A combination of bandwidth, delay, load and reliability is used 
+     as metric. 
+  -- Updates are broadcast every 90 seconds, by default. 
+  -- Its obsolete now. EIGRP is used now. 
+
+EIGRP 
+  -- Can perform unequal cost load balancing. 
+  -- Uses Diffusing Update Algorithm [DUAL] to calculate shortest path. 
+  -- Updates are sent only when there is a change. 
+
+
+       |      Distance Vector                        |  Link State 
+--------------------------------------------------------------------------
+       | RIPv1    | RIP v2    | IGRP    | EIGRP      | OSPF     | IS-IS 
+--------------------------------------------------------------------------
+ A     | Slow     | Slow      | Slow    | Fast       | Fast     | Fast 
+--------------------------------------------------------------------------
+ B     | Small    | Small     | Small   | Large      | Large    | Large 
+--------------------------------------------------------------------------
+ C     | No       | Yes       | No      | Yes        | Yes      | Yes 
+--------------------------------------------------------------------------
+ D     | Low      | Low       | Low     | Medium     | High     | High 
+--------------------------------------------------------------------------
+ E     | Simple   | Simple    | Simple  | Complex    | Complex  | Complex 
+
+
+A = Speed of convergence 
+B = Scalability - Size of network 
+C = Use of VLSM 
+D = Resource usage 
+E = Implementation & Maintenance 
+
+
+>>>> Routing Information Protocol [RIPv1] <<<<<<
+
+- The following timers exists for RIPv1
+  (a) Update  [30s default]
+      Time when routing updates are sent to neighbors. 
+
+  (b) Invalid  [180s default]
+      Time to keep a route in the table of an update to refresh if not received. 
+      Route is marked invalid by setting the hop count to 16 and kept in table 
+      until flush timer expires. 
+
+  (c) Flush [240s default]
+      When this timer expires, route is removed from the table. 
+ 
+  (d) Holddown [180s default]
+      This timer is used to stabilize the routing info when topology is yet to 
+      converge. Once a route is marked unreachable, the route has to wait for 
+      holddown seconds to learn about it again. 
+
+- "show ip protocols" and "show ip route" will give info about the timers. 
+
+- Triggered updates are sent [without having to wait for update timer] when 
+  the following happens 
+   (a) An interface state changes.
+   (b) A route has entered [or exited] the "unreachable" state. 
+   (c) A route is installed in routing table.
+
+- When all routers send updates simultaneously, collisions can occur. So, Cisco 
+  introduced RIP_JITTER variable that subtracts [0-15%] from update timer. Now, 
+  the update timer becomes, somewhere between 25-30s
+
+
+>> Routing Loop Avoidance 
+- There are numerous mechanisms to eliminate routing loops 
+  (a) Defining max limit on certain metrics [such as TTL] to avoid count 
+      to infinity. 
+  (b) Holddown timers 
+  (c) Split horizon 
+  (d) Route poisoning or poison reverse 
+  (e) Triggered updates 
+
+- Holddown Timer: Used to prevent regular updates due to inappropriately 
+  installing a route in routing table [may be due to interface flapping etc] 
+
+- Workings of Holddown Timer
+  (a) Router receives an update that a certain network is down
+  (b) Router marks this route as "Down" and starts the Holddown Timer
+  (c) If an update for that route with a better metric is received, timer 
+      is invalidated and the better route is installed. 
+  (d) If an update with same or worse metric is received, its ignored. 
+  (e) Router still forwards packets to "Down" route, to cover for 
+      intermittent connectivity issues. 
+
+- Split Horizon: A router should not advertise a network through the interface 
+  from which the udpate came. 
+
+- Route Poisoning [or Poison Reverse]: is used to mark the route as unreachable 
+  in a routing update sent to other routers. 
+  
+- Split Horizon with Poison Reverse: When sending updates out a specific 
+  interface, designate any networks that were learned on that interface as 
+  unreachable. 
+
+
+>>>>> RIP <<<<<
+
+- Standardized routing protocol that works in mixed vendor router environment. 
+- Easiest protocols to configure; good choice for small networks. 
+
+RIPv1 Features: 
+- Supports split horizon with poison reverse to prevent loops
+- Capable of load balancing up to six equal cost paths. Default is four equal 
+  cost paths. 
+
+RIPv2 Features: 
+- Includes subnet mask in routing updates, making it classless routing [RIPv2]
+- Has authentication mechanism to secure routing table updates. 
+- Supports variable length subnet mask [VLSM]
+- Uses multicast addresses instead of broadcast. 
+- Supports manual route summarization. 
+
+
+>>>>> EIGRP <<<<< 
+
+- Enhanced IGRP is a classless, DV proprietary routing protocol from Cisco. 
+
+EIGRP Features: 
+- Triggered updates [there is no periodic updates]
+- Use of a topology table to maintain ALL the routes received from neighbor 
+  [not just the best route]
+- Establishment of adjacencies with neighbors using "Hello Protocol". 
+- Support for VLSM and manual route summarization. 
+
+Advantages of EIGRP: 
+- Metric is based on bandwidth and cumulative delay of the path. 
+- Fast convergence due to Diffusing Update Algorithm [DUAL] route calculation. 
+- Bounded updates, resulting in less bandwidth consumption in large networks. 
+- EIGRP supports multiple network layer protocols through protocol dependent 
+  modules. 
+
+
+
+Chapter 5: Routing Information Protocol v1
+
+           |<-- Dist. Vect. --->|<---- Link State   ---->|<--Path Vect-->
+-----------+---------+----------+-----------+------------+--------------+
+Classful   |   RIP   |   IGRP   |           |            |     EGP      |
+-----------+---------+----------+-----------+------------+--------------+
+Classless  | RIPv2   |  EIGRP   |  OSPFv2   |   IS-IS    |    BGPv4     |
+-----------+---------+----------+-----------+------------+--------------+
+IPv6       | RIPng   | EIGRPv6  |  OSPFv3   |  IS-ISv6   |    BPGv6     |
+-----------+---------+----------+-----------+------------+--------------+
+
+
+Characteristics: 
+
+- RIP is a distance vector protocol. 
+- Hop count is the only metric for selecting a route. 
+- Hop count > 15 means unreachable network.
+- Messages are broadcast every 30 seconds. 
+
+
++--------------------+------------+--------------+------------------+
+|Data Link Frame Hdr | IP Pkt Hdr | UDP Sgmt Hdr |   RIP Message    |
+|                    |            |              | 504 bytes, up to | 
+|                    |            |              | 25 routes        | 
++--------------------+------------+--------------+------------------+
+
+Data Link Frame Hdr: 
+    MAC Dest Addr: FF FF FF FF FF FF
+    MAC Src  Addr: Senders MAC Addr 
+
+IP Pkt Hdr: 
+    IP Dest Addr: 255.255.255.255 
+    IP Src  Addr: IP of sender 
+    Protocol field: 17 meaning UDP 
+
+UDP Sgmt: 
+    Src Port: 520 
+    Dest Port: 520 
+
+
+0             7 8                15 16                                31        
++--------------+-------------------+-----------------------------------+
+|Command=1 or 2|  Version = 1      |          zero                     |
++--------------+-------------------+-----------------------------------+
+| Address Family [IP = 2]          |          zero                     |
++----------------------------------+-----------------------------------+
+|                        IP Address (Network Address)                  |
++----------------------------------------------------------------------+
+|                                 zero                                 |
++----------------------------------------------------------------------+
+|                                 zero                                 |
++----------------------------------------------------------------------+
+|                            Metric (Hops)                             |
++----------------------------------------------------------------------+
+|              Multiple route entries, up to max of 25                 |
++----------------------------------------------------------------------+
+
+
+
+5.1.2 
+
+Command: 1 for Request, 2 for Reply 
+Version: 1 for v1 and 2 for v2 
+Address Family: 2 for IP unless a request for complete routing table 
+         in which case its 0 
+IP Address: Destination IP 
+Metric: Hop count
+
+
+>>> RIP Operation
+
+>> Basics 
+- Upon bring up, RIP interfaces sends out request message. 
+- RIP-enabled neighbors respond with their routing table. 
+- Evaluate each route entry received and table updated. 
+- Send triggered updates to neighbors. 
+
+>> Classful Routing
+- RIP is classful and hence does not send subnet mask. 
+- Router either uses subnet mask configured on interface or use default 
+  value for that class. 
+- Due to this, RIPv1 networks cannot be discontigous. 
+
+>> AD 
+- RIP has 120 AD. Of all interior gateway protocols, RIP has highest.   
+
+
+>> Configuration
+
+R1# config t 
+R1(config)# router rip 
+
+
+
+`passive-interface intf-type intf-number` prevents sending updates 
+along that interface. 
+
+
+>> Processing RIP Updates 
+- If update & intf on which its received belong to same network, subnet 
+mask of intf is applied. 
+- If update & intf on which its received belong to different network, 
+subnet mask of the class is applied. 
+- Update sent on same major network will have exact network address entry 
+and associated metric. 
+- Update sent on different major network will have summarized to classful 
+network address. 
+
+>> Advantages of Automatic Route Summarization
+- Smaller routing table 
+- Fewer routing updates 
+
+>> Disadvantages 
+- When discontiguous networks are configured, summarization doesn't work. 
+
+
+
+Chapter 6: VLSM and CIDR 
+
+
+    Class        Higher Order         Start          End 
+------------------------------------------------------------------
+  Class A              0             0.0.0.0       127.255.255.255 
+------------------------------------------------------------------
+  Class B              10           128.0.0.0      191.255.255.255 
+------------------------------------------------------------------
+  Class C              110          192.0.0.0      223.255.255.255 
+------------------------------------------------------------------
+  Multicast            1110         224.0.0.0      239.255.255.255 
+------------------------------------------------------------------
+  Experimental         1111         240.0.0.0      255.255.255.255 
+------------------------------------------------------------------
+
+
+
+
+
+    Class    1st Octect     2nd         3rd         4th        Subnet 
+-----------+------------+-----------+-----------+------------+--------+
+  Class A  |  Network   |   Host    |  Host     |   Host     |  /8    |
+-----------+------------+-----------+-----------+------------+--------+
+  Class B  |  Network   |  Network  |  Host     |   Host     |  /16   |
+-----------+------------+-----------+-----------+------------+--------+
+  Class C  |  Network   |  Network  | Network   |   Host     |  /24   |
+-----------+------------+-----------+-----------+------------+--------+
+
+
+Private IP Address Space
+-----------
++ Not to be used publicly. Only for private use. 
+
++ In Class A:   10.0.0.0 to 10.255.255.255; One network addr. 
++ In Class B:   172.16.0.0 to 172.31.255.255; 16 network addresses.
++ In Class C:   192.168.0.0 to 192.168.255.255; 256 network addr. 
+
++ Private IP addr is not routed to public routers. 
+
+Special Use IP Addresses
+-----------
+0.0.0.0/8       "This" network 
+14.0.0.0/8      Public-Data Network 
+24.0.0.0/8      Cable Television Network 
+39.0.0.0/8      Reserved but subject to allocation. 
+127.0.0.0/8     Loopback 
+128.0.0.0/16    Reserved but subject to allocation. 
+169.254.0.0/16  Link Local 
+192.0.0.0/24    Reserved but subject to allocation. 
+192.0.2.0/24    Test-Net 
+192.88.99.0/24  Relay anycast 
+223.255.255.0/24    Reserved but subject to allocation. 
+
+
+
+
+CIDR (RFC 1519)
+- More flexible use of IPv4 address space. 
+- Prefix aggregation, which reduced routing table size. 
+- To CIDR routers, network class is meaningless. 
+- Network address is determined by routing prefix. 
+
+VLSM
+- CIDR uses VLSM to allocated IP addresses to subnets. 
+- Classless routing protocols propagate CIDR/VLSM addresses. These 
+include: RIPv2, EIGRP, OSPF, IS-IS & BGP. 
+- Route summarization and 'super netting' means the same thing. 
+
+
+
+
+
+Chapter 7: RIPv2 
+
+- 'Route Redistribution' means, taking routes from one source and sending 
+it to another router. 'redistribute static' command should be applied. 
+
+- RIPv1 & RIPv2 packets are encapsulated in UDP segments using port 520 
+and carries up to 25 routes. 
+
+
+
+0             7 8                15 16                                31        
++--------------+-------------------+-----------------------------------+
+|Command=1 or 2|  Version = 2      |          zero                     |
++--------------+-------------------+-----------------------------------+
+| Address Family [IP = 2]          |      Route Tag                    |
++----------------------------------+-----------------------------------+
+|                        IP Address (Network Address)                  |
++----------------------------------------------------------------------+
+|                               Subnet Mask                            |
++----------------------------------------------------------------------+
+|                               Next Hop                               |
++----------------------------------------------------------------------+
+|                            Metric (Hops)                             |
++----------------------------------------------------------------------+
+|              Multiple route entries, up to max of 25                 |
++----------------------------------------------------------------------+
+
+
+
+- Two improvements of RIPv2 over v1
+   a. Subnet mask field
+   b. Next Hop address: Used to identify better next-hop address, if one 
+      exists, than the address of the sending router. If set to 0.0.0.0, 
+      the address of sender is best next-hop. 
+
+- Configuration 
+
+(config)# router rip 
+(config-router)# version 2 
+
+- Network with 192.168.0.0/16 CANNOT be distributed with v1 because subnet 
+mask is less than classful mask. Because mask is not included in v1 updates, 
+there is no way for RIPv1 router to determine what that mask should be. 
+Therefore, update was never sent. 
+- 'no auto-summary' disables summarization. It can be confirmed in 
+'show ip protocols'
+
+
+Chapter 8: The Routing Table: A Closer Look 
+
+- Level 1 route is a route with subnet mask equal to or less than classful 
+mask of network address. 192.168.1.0/24 is level 1 route because the 
+subnet mask is equal to the networks classful mask. 
+
+- Level 1 route can function as: 
+  - Default route (static route with address 0.0.0.0/0) 
+  - Supernet route (mask less than classful mask) 
+  - Network route (subnet mask == classful mask) 
+
+- Ultimate Route: One that includes next hop IP and/or exit interface. 
+- Parent Route: Level 1 parent route is one that does not have next-hop 
+  IP address or exit interface for any network. 
+- Child Route: Level 2, has next-hop and/or exit interface info. 
+
+- Level 2 route is a subnet of classful network address. 
+
+>> Steps in route lookup process 
+1. Examine level 1 route for best match with the packets destination address. 
+1a. If best match is level 1 ultimate route, use it to forward packet. 
+1b. If best match is level 1 parent route, proceed to Step 2 
+2. Child routes are examined for best match. 
+2a. Match! Use this subnet to forward packets. 
+2b. No Match. Proceed to Step 3. 
+3. Classful or Classless routing behavior? 
+3a. Classful routing. Drop the packet. 
+3b. Classless routing. Search level 1 routes. 
+4. Match with Supernet first and then default to forward packets. 
+5. No match, no default. Drop the packet. 
+
+- Longest match: Route with most number of equivalent left-most bits 
+is preferred. 
+
+- Classful & classless behavior can be configured by '[no] ip classless'. 
+  
+
+
+
+Chapter 9: EIGRP 
+
+- Features include: 
+  - RTP 
+  - Bounded Updates 
+  - Diffusing Update Algorithm [DUAL]
+  - Establishing Adjacencies 
+  - Neighbor & Topology Tables 
+
+- 
+
+Dynamic Trunking Protocol [DTP] switchport mode relationships 
+
+------------------+-----------+------------+----------+---------+
+                  | Dynamic   | Dynamic    |          |         |
+                  |  Auto     | Desirable  | Trunk    | Access  |
+------------------+-----------+------------+----------+---------+
+Dynamic Auto      | Access    |  Trunk     | Trunk    | Access  |
+------------------+-----------+------------+----------+---------+
+Dynamic Desirable | Trunk     |  Trunk     | Trunk    | Access  |
+------------------+-----------+------------+----------+---------+
+Trunk             | Trunk     |  Trunk     | Trunk    | NR      |
+------------------+-----------+------------+----------+---------+
+Access            | Access    |  Access    | NR       | Access  |
+------------------+-----------+------------+----------+---------+
+
+NR = Not Recommended 
+
+> "show dtp interface" displays current settings 
+
+
+Creating VLAN 
+-------------
+#config t 
+(config)# vlan <id>
+(config-vlan)# name "vlan name"
+(config-vlan)#end 
+
+
+Assign a switch port
+--------------------
+#config t 
+(config)# interface <id> 
+(config-if)# switchport mode access 
+(config-if)# switchport access vlan <id>
+(config-if)# end 
+
+Removing a VLAN
+----------------
+(config)# no switchport access vlan ==> removes the port from VLAN and assigns 
+                                        default VLAN [VLAN 1, may be]
+
+
+Assign a trunk
+---------------
+#config t 
+(config)# interface <id> 
+(config-if)# switchport mode trunk 
+(config-if)# switchport trunk native vlan <id> 
+(config-if)# end 
+
+
+Removing a trunk
+-----------------
+(config-if)# no switchport mode trunk allowed vlan  ==> reset all the VLANs configured 
+                                                        on this trunk port 
+
+(config-if)# no switchport mode native vlan ==> reset native VLAN to VLAN 1 
+
+
+Show VLAN commands
+-------------------
+show vlan [brief | id <id> | name "name" | summary]
+
+
+Show interface commands
+------------------------
+show interfaces [<interface id> | vlan <id>] | switchport 
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************************/
+      ERICSSON CERTIFIED ASSOCIATE - IP NETWORKING             
+            from Ericsson's internal website
+/*************************************************************/
 /*-----------------------------------------------------------*/ 
  *               CARRIER ETHERNET - OVERVIEW  
 /*-----------------------------------------------------------*/
@@ -765,103 +1649,6 @@ n/w failures and flexibility.
                     IP Fundamentals                         
                     E/// class notes
 /************************************************************/
-/*************************************************************/
-        INTERNET    PROTOCOL  (IP)
-                DeAnza Notes 
-/*************************************************************/
-
-- OSI Model 
-
-    layer 7 - Application: Interacts with applications. 
-    layer 6 - Presentation: Converts code and reformats data 
-    layer 5 - Session: coordinates interaction between end-to-end
-                        application processes. 
-    layer 4 - Transport: Provides end-to-end data integrity and QoS 
-    layer 3 - Network: Switches and routes data to the appropriate n/w
-                        device. 
-    layer 2 - Data Link: Transfers units of data to other end of physical
-                         link. 
-    layer 1 - Physical: Transmits and recv on n/w medium. 
-
-
-- Layer 1: Physical: 
-- Layer 2: Ethernet, Frame Relay, PPP
-- Layer 3: Logical addressing (end-to-end addressing), Routing, Path
-  determination. IPv4, IPv6 and IPx
-- Layer 4: TCP, UDP, SCTP 
-- Layer 5: SAP, NetBIOS 
-- Layer 6: Encryption, Compression, MIME, TLS, SSL,
-- Layer 7: Authentication, FTP, HTTP, Telnet.
-
-
-    OSI Model                   TCP/IP Model 
-    +-------------+--------------+--------------+
-    | Application |              |              |
-    +-------------+              | Application  |
-    |Presentation |              |    Layer     |
-    +-------------+              |              |
-    |  Session    |              |              |
-    +-------------+--------------+--------------+ <-- port number
-    | Transport   |              |  Transport   |
-    +-------------+--------------+--------------+ <-- protocol number
-    |  Network    |              |Internet Layer|
-    +-------------+--------------+--------------+ <-- type code 
-    | Data Link   |              |              |
-    +-------------+              | Link Layer   |
-    |  Physical   |              |              |
-    +-------------+              +--------------+
-
-
-
-
-
-- IPv4 Packet Header 
-
-  0                             15 16                            31
-  +---------------+---------------+---------------+---------------+
-  | Vers |  IHL   |  Service Type |      Packet  Length           |
-  +---------------+---------------+---------------+---------------+
-  |         Identification        | Flag |    Frag. Offset        | 
-  +---------------+---------------+---------------+---------------+
-  |    TTL        |    Protocol   |      Header Checksum          | 
-  +---------------+---------------+---------------+---------------+
-  |                  Source IP Address                            | 
-  +---------------+---------------+---------------+---------------+
-  |                  Destination IP Address                       | 
-  +---------------+---------------+---------------+---------------+
-  
-- IP Header in a packet travels unchanged throughout the network. 
-- Only MAC header changes with every hop. 
-- Unreliable, connectionless datagram delivery service. 
-- Unreliable: Best effort service. If IP receives error packet, its
-  discarded and an ICMP message is send to sender. 
-- Connectionless: No state information of packets/datagram is saved. 
-
-Vers (4-bit): IPv4 
-Header Length (4-bit): HL in 32-bit size. Hence, max of 60 byte header is
-possible. 
-Service Type (8-bits):
-    3-bits: unused 
-    1-bit: minimize delay 
-    1-bit: maximize throughput 
-    1-bit: maximize reliability 
-    1-bit: minimize monetary costs
-        Only one of the above 4 can be on. 
-    Last-bit: always set to zero 
-
-
-Packet Length (16 bits): Packets up to 65536 bytes can be sent/recvd by
-IP. However, lower layers cannot handle it and fragmentation happens. 
-Identification (16-bits): 
-Flag ():
-Frag. Offset ():
-TTL (8-bits):
-Protocol (8-bits): 
-Header Checksum (16-bit):
-Source IP (32-bit):
-Dest IP (32-bit):
-
-
 /************************************************************/
                     IP Routing Overview 
                     E/// class notes
@@ -895,837 +1682,6 @@ Basics Principles
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Table of Contents 
-
-/**************************************************************/
- *                                                            *
- *             Routing Protocols & Concepts                   *
- *                                                            *
-/**************************************************************/
-
-Chapter 1: Introduction to Routing and Packet Forwarding 
-
-- ROM in a router stores the following 
-  (a) Bootstrap instructions 
-  (b) Basic diagnostic software 
-  (c) Scaled-down version of IOS 
-
-- Router Boot-up Process 
-  (a) Perform POST 
-  (b) Load bootstrap program 
-  (c) Locate and load Cisco IOS software 
-  (d) Load startup config file 
-
-- Main job of bootstrap program is to locate Cisco IOS and load it in to RAM 
-- Cisco IOS can be either on Flash or other places like a TFTP server
-- Management Ports: 
-    - Not used for packet forwarding
-    - Used for router configuration 
-    - Two types
-          (a) Console Port
-          (b) Auxiliary Port 
-
-- Router interfaces can be divided in to two types 
-  (a) LAN Interfaces - such as Ethernet and FastEthernet 
-  (b) WAN Interfaces - such as serial, ISDN and Frame Relay 
-
-
-
-
-
-
-
-
->>>>> Endianness <<<<<
-
-- 0th bit is MSB and 7th bit is LSB. When sending out, data is sent in 0
-  to 7, 8 to 15 bits and so on. This is Big Endian or Network Byte Order.  
-
-
-
-
-
-Chapter 2: Static Routing 
-
-- For WAN connections, Cisco routers supports the following cable types 
-  (a) EIA/TIA-232
-  (b) EIA/TIA-449
-  (c) V.35 
-  (d) X.21 
-  (e) EIA/TIA-530 
-   - Don't have to remember them. On Cisco side, DB-60 port is used. Other 
-     end is the type above cables provide. 
-
-- Like devices are those whose ports have similar pins and unlike devices are those 
-  whose ports have different pins. 
-
-- Routers and PCs are like devices. Switches and Hubs are like devices. Naturally, 
-  switches and routers are unlike devices. 
-
-- Within Ethernet LANS, two types of cables are used: 
-  (a) Straight-through: to connect unlike devices 
-      - switches to routers 
-      - switches to PC 
-      - Hubs to routers 
-      - Hubs to PC 
-
-  (b) Crossover Cable: to connect like devices 
-      - switch to switch 
-      - PC-to-PC 
-      - switch to hub 
-      - hub-to-hub 
-      - Router-to-Router 
-      - Router-to-Server 
-
-- On serial links, one end is DTE and one is DCE. 
-
-- "Administratively Down" means that interface is "shutdown". 
-- "Line Protocol Down" means interface is not receiving carrier signal from peer. 
-
-- Ethernet interfaces on a router participates in ARP. 
-
->>>> Configuring Interfaces 
-
->> Serial Interface 
-    interface serial 0/0/0 
-      ip address 172.10.2.1 255.255.255.0 
-      no shut
-
->> Configuring Serial Links in Lab 
-- Cisco serial interfaces are DTE by default but can be configured as DCE . 
-- To configure an interface as DCE, connect the DCE end of the cable to intf 
-  and configure "clock rate" command. 
-- DCE = female connector, DTE = male connector 
-
-
-/*************************************************************/
->>>> Cisco Discovery Protocol [CDP] <<<<
-/*************************************************************/
-
-- CDP is a powerful info gathering tool used to get info about directly 
-  connected Cisco devices.
-- Its an L2 protocol, meaning only physically connected devices are considered 
-  neighbors. 
-- Allows to access summary of protocol and address info about connected 
-  Cisco devices. 
-- Its a proprietary tool. 
-
-- CDP Advertisements contain: router interfaces, model numbers, intf used 
-  to make connections etc 
-
-- "show cdp neighbor" and "show cdp neighbor detail" gives info about neighbor 
-
-- To disable CDP on the entire box: (config)#no cdp run 
-- To disable CDP on an interface: (config-if)#no cdp enable 
-
-- show cdp neighbor 
-- show cdp neighbor detail 
-
->>>> Static Routes <<<<
-
-- Static routes [ip route ...] are configured when routing from a network to 
-  a stub network. 
-
-- When an exit intf goes down [shutdown], the static route cannot be resolved 
-  to an exit intf. Then it is removed from the routing table. 
-
-- The entries are still in the running-config. So, if the intf comes back up 
-  again [no shutdown] then they are installed in the routing table. 
-
-- There are certain protocols used on point-to-point serial link such as HDLC 
-  and PPP where next-hop IP address is not used. The IP packet, in HDLC case, 
-  is encapsulated with L2 broadcast destination address. 
-
-- Static Route Summarization. 
-  - Helps reduce routing table size 
-  - Lookups are faster 
-
-- When instead of exit interface, if an exit IP is configured, then there will 
-  be two lookups to resolve exit interface. This is called Recursive Route Lookup. 
-  [RRL]
-
-- To avoid RRL, we can configure exit interface instead of exit IP. This is 
-  only possible for serial interfaces as there is only one device [router] at 
-  other end in serial intf. 
-
-- Ethernet intf is a multi-access intf and there could be multiple devices 
-  sharing that end point. By having Ethernet intf, router doesn't know the 
-  end point. 
-
-- For Ethernet intf, configure both exit intf and next-hop IP. 
-
-- Route Summarization reduces routing table size. Multiple static routes can be summarized into a single static route if:
-	a) The destination networks can be summarized into a single network address, and 
-	b) The multiple static routes all use the same exit-interface or next-hop IP address 
-
-
->> Default Static Route
-
-- ip route 0.0.0.0 0.0.0.0 [exit interface] 
-- Default route need not be static route, but it usually is. 
-
-
-
-
-Chapter 3: Dynamic Routing Protocols 
-
-
-
-           |<-- Dist. Vect. --->|<---- Link State   ---->|<--Path Vect-->
------------+---------+----------+-----------+------------+--------------+
-Classful   |   RIP   |   IGRP   |           |            |     EGP      |
------------+---------+----------+-----------+------------+--------------+
-Classless  | RIPv2   |  EIGRP   |  OSPFv2   |   IS-IS    |    BGPv4     |
------------+---------+----------+-----------+------------+--------------+
-IPv6       | RIPng   | EIGRPv6  |  OSPFv3   |  IS-ISv6   |    BPGv6     |
------------+---------+----------+-----------+------------+--------------+
-
-- Interior Gateway Protocols [IGP] are used for routing within an Autonomous 
-  Systems (routing domain). Examples: RIP, IGRP, EIGRP, OSPG and IS-IS
-
-- Exterios Gateway Protocols [EGP] are used for routing between Autonomous Systems.
-  Examples: BGP, its the only practical solution. 
-
-- IGP comprises of Distance Vector and Link State protocols 
-
-
->>>> Distance Vector Protocols <<<< 
-
-- Distance Vector := Distance + Direction
-  Distance := hop count or similar metric 
-  Direction := exit interface or IP of next hop router 
-
-- DV uses Bellman-Ford algo to determine best path
-
-- DV works best when 
-   - simple and flat network like hub/spoke n/w 
-   - worst-case convergence times are not a concern 
-
-
->>>> Link State Protocols <<<< 
-
-- A router configured with Link State protocol can get a "complete view" 
-  of the network. 
-
-- LS works best when 
-   - Network design is hierarchical 
-   - Fast convergence is crucial 
-
-- Classful routing: Subnet mask not included. Network is either Class A, B, C or D
-  - Example: RIPv1, IGRP
-
-- Classless routing: Subnet mask is included. 
-  - Example: RIPv2, EIGRP, OSPF, IS-IS, BGP
-
-- Metrics generally used in routing protocols 
-  Hop Count 
-  Bandwidth 
-  Load - Considers traffic utilization of a certain link 
-  Delay
-  Reliability - probability of error 
-  Cost - can represent a metric or combo of metrics/policy 
-
-- RIP uses Hop Count 
-- IGRP & EIGRP use Bandwidth, Delay, Reliability and Load. 
-- IS-IS & OSPF use Cost. IOS or network admin determines this cost. 
-
-- All protocols in CCNA course are capable of load balancing upto 4 equal cost 
-  routes. 
-- EIGRP can load balance between unequal cost routes. 
-
-
->>>> Administrative Distance <<<< 
-
-- AD defines the preference of one routing source to the other. Lower AD, higher 
-  preference. 0 <= AD <= 255
-- Directly connected routes have 0 AD and it cannot be changed. 
-- AD of 255 means that router does not trust the source and route is NOT 
-  installed in the routing table. 
-
-
-Source         AD 
--------------------
-Connected          0
-Static             1
-EIGRP Summary      5 
-External BGP       20 
-Internal EIGRP     90 
-IGRP               100 
-OSPF               110 
-IS-IS              115
-RIP                120 
-External EIGRP     170 
-Internal BGP       200 
-
-
->>>> Static Route <<<< 
-
-- Static route has an AD of 1 
-- "Floating Static Route": When a route to a network exists in routing table 
-  due to a dynamic protocol, but admin configures a static route with AD greater 
-  than that of routing protocol, then such a static route is called "Floating 
-  Static Route". 
-
-
-
-
-Chapter 4: Distance Vector Routing Protocol 
-
-
-DVRP include RIP, IGRP and EIGRP
-
-RIP 
-  -- Hop count is used as metric. 
-  -- If hop count > 15, RIP cannot supply route to that network. 
-  -- Updates are broadcast or multicast every 30 seconds, by default.  
-
-IGRP 
-  -- Cisco's proprietary protocol 
-  -- A combination of bandwidth, delay, load and reliability is used 
-     as metric. 
-  -- Updates are broadcast every 90 seconds, by default. 
-  -- Its obsolete now. EIGRP is used now. 
-
-EIGRP 
-  -- Can perform unequal cost load balancing. 
-  -- Uses Diffusing Update Algorithm [DUAL] to calculate shortest path. 
-  -- Updates are sent only when there is a change. 
-
-
-       |      Distance Vector                        |  Link State 
---------------------------------------------------------------------------
-       | RIPv1    | RIP v2    | IGRP    | EIGRP      | OSPF     | IS-IS 
---------------------------------------------------------------------------
- A     | Slow     | Slow      | Slow    | Fast       | Fast     | Fast 
---------------------------------------------------------------------------
- B     | Small    | Small     | Small   | Large      | Large    | Large 
---------------------------------------------------------------------------
- C     | No       | Yes       | No      | Yes        | Yes      | Yes 
---------------------------------------------------------------------------
- D     | Low      | Low       | Low     | Medium     | High     | High 
---------------------------------------------------------------------------
- E     | Simple   | Simple    | Simple  | Complex    | Complex  | Complex 
-
-
-A = Speed of convergence 
-B = Scalability - Size of network 
-C = Use of VLSM 
-D = Resource usage 
-E = Implementation & Maintenance 
-
-
->>>> Routing Information Protocol [RIPv1] <<<<<<
-
-- The following timers exists for RIPv1
-  (a) Update  [30s default]
-      Time when routing updates are sent to neighbors. 
-
-  (b) Invalid  [180s default]
-      Time to keep a route in the table of an update to refresh if not received. 
-      Route is marked invalid by setting the hop count to 16 and kept in table 
-      until flush timer expires. 
-
-  (c) Flush [240s default]
-      When this timer expires, route is removed from the table. 
- 
-  (d) Holddown [180s default]
-      This timer is used to stabilize the routing info when topology is yet to 
-      converge. Once a route is marked unreachable, the route has to wait for 
-      holddown seconds to learn about it again. 
-
-- "show ip protocols" and "show ip route" will give info about the timers. 
-
-- Triggered updates are sent [without having to wait for update timer] when 
-  the following happens 
-   (a) An interface state changes.
-   (b) A route has entered [or exited] the "unreachable" state. 
-   (c) A route is installed in routing table.
-
-- When all routers send updates simultaneously, collisions can occur. So, Cisco 
-  introduced RIP_JITTER variable that subtracts [0-15%] from update timer. Now, 
-  the update timer becomes, somewhere between 25-30s
-
-
->> Routing Loop Avoidance 
-- There are numerous mechanisms to eliminate routing loops 
-  (a) Defining max limit on certain metrics [such as TTL] to avoid count 
-      to infinity. 
-  (b) Holddown timers 
-  (c) Split horizon 
-  (d) Route poisoning or poison reverse 
-  (e) Triggered updates 
-
-- Holddown Timer: Used to prevent regular updates due to inappropriately 
-  installing a route in routing table [may be due to interface flapping etc] 
-
-- Workings of Holddown Timer
-  (a) Router receives an update that a certain network is down
-  (b) Router marks this route as "Down" and starts the Holddown Timer
-  (c) If an update for that route with a better metric is received, timer 
-      is invalidated and the better route is installed. 
-  (d) If an update with same or worse metric is received, its ignored. 
-  (e) Router still forwards packets to "Down" route, to cover for 
-      intermittent connectivity issues. 
-
-- Split Horizon: A router should not advertise a network through the interface 
-  from which the udpate came. 
-
-- Route Poisoning [or Poison Reverse]: is used to mark the route as unreachable 
-  in a routing update sent to other routers. 
-  
-- Split Horizon with Poison Reverse: When sending updates out a specific 
-  interface, designate any networks that were learned on that interface as 
-  unreachable. 
-
-
->>>>> RIP <<<<<
-
-- Standardized routing protocol that works in mixed vendor router environment. 
-- Easiest protocols to configure; good choice for small networks. 
-
-RIPv1 Features: 
-- Supports split horizon with poison reverse to prevent loops
-- Capable of load balancing up to six equal cost paths. Default is four equal 
-  cost paths. 
-
-RIPv2 Features: 
-- Includes subnet mask in routing updates, making it classless routing [RIPv2]
-- Has authentication mechanism to secure routing table updates. 
-- Supports variable length subnet mask [VLSM]
-- Uses multicast addresses instead of broadcast. 
-- Supports manual route summarization. 
-
-
->>>>> EIGRP <<<<< 
-
-- Enhanced IGRP is a classless, DV proprietary routing protocol from Cisco. 
-
-EIGRP Features: 
-- Triggered updates [there is no periodic updates]
-- Use of a topology table to maintain ALL the routes received from neighbor 
-  [not just the best route]
-- Establishment of adjacencies with neighbors using "Hello Protocol". 
-- Support for VLSM and manual route summarization. 
-
-Advantages of EIGRP: 
-- Metric is based on bandwidth and cumulative delay of the path. 
-- Fast convergence due to Diffusing Update Algorithm [DUAL] route calculation. 
-- Bounded updates, resulting in less bandwidth consumption in large networks. 
-- EIGRP supports multiple network layer protocols through protocol dependent 
-  modules. 
-
-
-
-
-
-Chapter 5: Routing Information Protocol v1
-
-           |<-- Dist. Vect. --->|<---- Link State   ---->|<--Path Vect-->
------------+---------+----------+-----------+------------+--------------+
-Classful   |   RIP   |   IGRP   |           |            |     EGP      |
------------+---------+----------+-----------+------------+--------------+
-Classless  | RIPv2   |  EIGRP   |  OSPFv2   |   IS-IS    |    BGPv4     |
------------+---------+----------+-----------+------------+--------------+
-IPv6       | RIPng   | EIGRPv6  |  OSPFv3   |  IS-ISv6   |    BPGv6     |
------------+---------+----------+-----------+------------+--------------+
-
-
-Characteristics: 
-
-- RIP is a distance vector protocol. 
-- Hop count is the only metric for selecting a route. 
-- Hop count > 15 means unreachable network.
-- Messages are broadcast every 30 seconds. 
-
-
-+--------------------+------------+--------------+------------------+
-|Data Link Frame Hdr | IP Pkt Hdr | UDP Sgmt Hdr |   RIP Message    |
-|                    |            |              | 504 bytes, up to | 
-|                    |            |              | 25 routes        | 
-+--------------------+------------+--------------+------------------+
-
-Data Link Frame Hdr: 
-    MAC Dest Addr: FF FF FF FF FF FF
-    MAC Src  Addr: Senders MAC Addr 
-
-IP Pkt Hdr: 
-    IP Dest Addr: 255.255.255.255 
-    IP Src  Addr: IP of sender 
-    Protocol field: 17 meaning UDP 
-
-UDP Sgmt: 
-    Src Port: 520 
-    Dest Port: 520 
-
-
-0             7 8                15 16                                31        
-+--------------+-------------------+-----------------------------------+
-|Command=1 or 2|  Version = 1      |          zero                     |
-+--------------+-------------------+-----------------------------------+
-| Address Family [IP = 2]          |          zero                     |
-+----------------------------------+-----------------------------------+
-|                        IP Address (Network Address)                  |
-+----------------------------------------------------------------------+
-|                                 zero                                 |
-+----------------------------------------------------------------------+
-|                                 zero                                 |
-+----------------------------------------------------------------------+
-|                            Metric (Hops)                             |
-+----------------------------------------------------------------------+
-|              Multiple route entries, up to max of 25                 |
-+----------------------------------------------------------------------+
-
-
-
-5.1.2 
-
-Command: 1 for Request, 2 for Reply 
-Version: 1 for v1 and 2 for v2 
-Address Family: 2 for IP unless a request for complete routing table 
-         in which case its 0 
-IP Address: Destination IP 
-Metric: Hop count
-
-
->>> RIP Operation
-
->> Basics 
-- Upon bring up, RIP interfaces sends out request message. 
-- RIP-enabled neighbors respond with their routing table. 
-- Evaluate each route entry received and table updated. 
-- Send triggered updates to neighbors. 
-
->> Classful Routing
-- RIP is classful and hence does not send subnet mask. 
-- Router either uses subnet mask configured on interface or use default 
-  value for that class. 
-- Due to this, RIPv1 networks cannot be discontigous. 
-
->> AD 
-- RIP has 120 AD. Of all interior gateway protocols, RIP has highest.   
-
-
->> Configuration
-
-R1# config t 
-R1(config)# router rip 
-
-
-
-`passive-interface intf-type intf-number` prevents sending updates 
-along that interface. 
-
-
->> Processing RIP Updates 
-- If update & intf on which its received belong to same network, subnet 
-mask of intf is applied. 
-- If update & intf on which its received belong to different network, 
-subnet mask of the class is applied. 
-- Update sent on same major network will have exact network address entry 
-and associated metric. 
-- Update sent on different major network will have summarized to classful 
-network address. 
-
->> Advantages of Automatic Route Summarization
-- Smaller routing table 
-- Fewer routing updates 
-
->> Disadvantages 
-- When discontiguous networks are configured, summarization doesn't work. 
-
-
-
-Chapter 6: VLSM and CIDR 
-
-
-    Class        Higher Order         Start          End 
-------------------------------------------------------------------
-  Class A              0             0.0.0.0       127.255.255.255 
-------------------------------------------------------------------
-  Class B              10           128.0.0.0      191.255.255.255 
-------------------------------------------------------------------
-  Class C              110          192.0.0.0      223.255.255.255 
-------------------------------------------------------------------
-  Multicast            1110         224.0.0.0      239.255.255.255 
-------------------------------------------------------------------
-  Experimental         1111         240.0.0.0      255.255.255.255 
-------------------------------------------------------------------
-
-
-
-
-
-    Class    1st Octect     2nd         3rd         4th        Subnet 
------------+------------+-----------+-----------+------------+--------+
-  Class A  |  Network   |   Host    |  Host     |   Host     |  /8    |
------------+------------+-----------+-----------+------------+--------+
-  Class B  |  Network   |  Network  |  Host     |   Host     |  /16   |
------------+------------+-----------+-----------+------------+--------+
-  Class C  |  Network   |  Network  | Network   |   Host     |  /24   |
------------+------------+-----------+-----------+------------+--------+
-
-
-Private IP Address Space
------------
-+ Not to be used publicly. Only for private use. 
-
-+ In Class A:   10.0.0.0 to 10.255.255.255; One network addr. 
-+ In Class B:   172.16.0.0 to 172.31.255.255; 16 network addresses.
-+ In Class C:   192.168.0.0 to 192.168.255.255; 256 network addr. 
-
-+ Private IP addr is not routed to public routers. 
-
-Special Use IP Addresses
------------
-0.0.0.0/8       "This" network 
-14.0.0.0/8      Public-Data Network 
-24.0.0.0/8      Cable Television Network 
-39.0.0.0/8      Reserved but subject to allocation. 
-127.0.0.0/8     Loopback 
-128.0.0.0/16    Reserved but subject to allocation. 
-169.254.0.0/16  Link Local 
-192.0.0.0/24    Reserved but subject to allocation. 
-192.0.2.0/24    Test-Net 
-192.88.99.0/24  Relay anycast 
-223.255.255.0/24    Reserved but subject to allocation. 
-
-
-
-
-CIDR (RFC 1519)
-- More flexible use of IPv4 address space. 
-- Prefix aggregation, which reduced routing table size. 
-- To CIDR routers, network class is meaningless. 
-- Network address is determined by routing prefix. 
-
-VLSM
-- CIDR uses VLSM to allocated IP addresses to subnets. 
-- Classless routing protocols propagate CIDR/VLSM addresses. These 
-include: RIPv2, EIGRP, OSPF, IS-IS & BGP. 
-- Route summarization and 'super netting' means the same thing. 
-
-
-
-
-
-Chapter 7: RIPv2 
-
-- 'Route Redistribution' means, taking routes from one source and sending 
-it to another router. 'redistribute static' command should be applied. 
-
-- RIPv1 & RIPv2 packets are encapsulated in UDP segments using port 520 
-and carries up to 25 routes. 
-
-
-
-0             7 8                15 16                                31        
-+--------------+-------------------+-----------------------------------+
-|Command=1 or 2|  Version = 2      |          zero                     |
-+--------------+-------------------+-----------------------------------+
-| Address Family [IP = 2]          |      Route Tag                    |
-+----------------------------------+-----------------------------------+
-|                        IP Address (Network Address)                  |
-+----------------------------------------------------------------------+
-|                               Subnet Mask                            |
-+----------------------------------------------------------------------+
-|                               Next Hop                               |
-+----------------------------------------------------------------------+
-|                            Metric (Hops)                             |
-+----------------------------------------------------------------------+
-|              Multiple route entries, up to max of 25                 |
-+----------------------------------------------------------------------+
-
-
-
-- Two improvements of RIPv2 over v1
-   a. Subnet mask field
-   b. Next Hop address: Used to identify better next-hop address, if one 
-      exists, than the address of the sending router. If set to 0.0.0.0, 
-      the address of sender is best next-hop. 
-
-- Configuration 
-
-(config)# router rip 
-(config-router)# version 2 
-
-- Network with 192.168.0.0/16 CANNOT be distributed with v1 because subnet 
-mask is less than classful mask. Because mask is not included in v1 updates, 
-there is no way for RIPv1 router to determine what that mask should be. 
-Therefore, update was never sent. 
-- 'no auto-summary' disables summarization. It can be confirmed in 
-'show ip protocols'
-
-
-Chapter 8: The Routing Table: A Closer Look 
-
-- Level 1 route is a route with subnet mask equal to or less than classful 
-mask of network address. 192.168.1.0/24 is level 1 route because the 
-subnet mask is equal to the networks classful mask. 
-
-- Level 1 route can function as: 
-  - Default route (static route with address 0.0.0.0/0) 
-  - Supernet route (mask less than classful mask) 
-  - Network route (subnet mask == classful mask) 
-
-- Ultimate Route: One that includes next hop IP and/or exit interface. 
-- Parent Route: Level 1 parent route is one that does not have next-hop 
-  IP address or exit interface for any network. 
-- Child Route: Level 2, has next-hop and/or exit interface info. 
-
-- Level 2 route is a subnet of classful network address. 
-
->> Steps in route lookup process 
-1. Examine level 1 route for best match with the packets destination address. 
-1a. If best match is level 1 ultimate route, use it to forward packet. 
-1b. If best match is level 1 parent route, proceed to Step 2 
-2. Child routes are examined for best match. 
-2a. Match! Use this subnet to forward packets. 
-2b. No Match. Proceed to Step 3. 
-3. Classful or Classless routing behavior? 
-3a. Classful routing. Drop the packet. 
-3b. Classless routing. Search level 1 routes. 
-4. Match with Supernet first and then default to forward packets. 
-5. No match, no default. Drop the packet. 
-
-- Longest match: Route with most number of equivalent left-most bits 
-is preferred. 
-
-- Classful & classless behavior can be configured by '[no] ip classless'. 
-  
-
-
-
-Chapter 9: EIGRP 
-
-- Features include: 
-  - RTP 
-  - Bounded Updates 
-  - Diffusing Update Algorithm [DUAL]
-  - Establishing Adjacencies 
-  - Neighbor & Topology Tables 
-
-- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ISIS Primer 
-OSPF Primer 
-
-
-Dynamic Trunking Protocol [DTP] switchport mode relationships 
-
-------------------+-----------+------------+----------+---------+
-                  | Dynamic   | Dynamic    |          |         |
-                  |  Auto     | Desirable  | Trunk    | Access  |
-------------------+-----------+------------+----------+---------+
-Dynamic Auto      | Access    |  Trunk     | Trunk    | Access  |
-------------------+-----------+------------+----------+---------+
-Dynamic Desirable | Trunk     |  Trunk     | Trunk    | Access  |
-------------------+-----------+------------+----------+---------+
-Trunk             | Trunk     |  Trunk     | Trunk    | NR      |
-------------------+-----------+------------+----------+---------+
-Access            | Access    |  Access    | NR       | Access  |
-------------------+-----------+------------+----------+---------+
-
-NR = Not Recommended 
-
-> "show dtp interface" displays current settings 
-
-
-Creating VLAN 
--------------
-#config t 
-(config)# vlan <id>
-(config-vlan)# name "vlan name"
-(config-vlan)#end 
-
-
-Assign a switch port
---------------------
-#config t 
-(config)# interface <id> 
-(config-if)# switchport mode access 
-(config-if)# switchport access vlan <id>
-(config-if)# end 
-
-Removing a VLAN
-----------------
-(config)# no switchport access vlan ==> removes the port from VLAN and assigns 
-                                        default VLAN [VLAN 1, may be]
-
-
-Assign a trunk
----------------
-#config t 
-(config)# interface <id> 
-(config-if)# switchport mode trunk 
-(config-if)# switchport trunk native vlan <id> 
-(config-if)# end 
-
-
-Removing a trunk
------------------
-(config-if)# no switchport mode trunk allowed vlan  ==> reset all the VLANs configured 
-                                                        on this trunk port 
-
-(config-if)# no switchport mode native vlan ==> reset native VLAN to VLAN 1 
-
-
-Show VLAN commands
--------------------
-show vlan [brief | id <id> | name "name" | summary]
-
-
-Show interface commands
-------------------------
-show interfaces [<interface id> | vlan <id>] | switchport 
 
 
 
@@ -2182,6 +2138,155 @@ Originate Default
   routing table need not be circulated in OSPF domain. 
 
 
+/********************************************************************/
+ *                                                                  *
+ *                         BGP Overview                             *
+ *                                                                  *
+/********************************************************************/
+
+- What is an Autonomous System (AS)? 
+    - Routers run by an operator under a single administration. 
+    - Owned by ISP or large orgs. 
+    - Usually, AS runs IGP internally (OSPF and IS-IS). 
+    - Each AS has a number that is unique identifier and can be purchased from
+      some authorities.  
+    - BGP connects AS. 
+
+- Adv/Disadv of IGP
+    - Chatty protocol. 
+    - Fast convergence.
+    - Don't scale well.
+    - Hence BGP is needed. 
+
+- BGP can be deployed internally too (within same AS), called as iBGP. 
+- BGP routers connected to different AS uses eBGP protocol. 
+
+- Multi Homed AS
+    - AS connected to more than on other AS, for redundancy.  
+
+
+- BGP is also used in L3VPN (more on this in L3VPN courses).  
+
+/********************************************************************/
+ *                                                                  *
+ *                         BGP Fundamentals                         *
+ *                                                                  *
+/********************************************************************/
+
+- Uses TCP for transport (reliable) on port 179. Its connection oriented. 
+- BGP establishes peers (aka neighbors). Peers are configured manually (??). 
+- iBGP (used to create Transit AS). Used by wholesale operators and allow
+  traffic from one AS to another to flow through it. 
+- eBGP is used to connect to other AS.
+
+Why BGP? 
+--------
+- Its a 'selective' protocol. Only shared prefixes that it is asked to share. 
+- Typical network has one or two routers on edge of AS, running BGP. Rest of the
+  routers run an IGP. 
+
+Peering:
+--------
+- BGP uses a Finite State Machine (FSM) for peering. 
+- IDLE State:
+    - BGP initiates all resources with its configured peer. 
+    - All inbound connections are refused as TCP connection to peer is
+      initiated. 
+- CONNECT State: 
+    - Next state if initiation goes well. 
+    - Router waits for TCP connection to complete. BGP transitions from this
+      state quickly to next one. 
+- OPENSENT State:  
+    - BGP sends OPEN packet out its interface and moves to this state if
+      negotiation was successful. If not, it moves to ACTIVE state. 
+- ACTIVE State: 
+    - BGP restarts another TCP session with peer. 
+    - If success, BGP sends OPEN message and moves to OPENSENT state. And if
+      BGP receives OPEN message back with correct settings, state changes to
+      OPENCONFIRM.  
+    - If fails, BGP moves to IDLE state.  
+
+- OPENCONFIRM State: 
+    - If all goes well, BGP remains in OPENCONFIRM state and keeps sending
+      KEEPALIVE messages. If KEEPALIVE is received within correct window, BGP
+      moves to ESTABLISHED state. 
+
+
+BGP Messages: 
+------------
+- OPEN: Connection params are established. 
+- KEEPALIVE: Is peer alive? 
+- UPDATE: Routing info is exchanged. 
+- NOTIFICATION: Sent when error condition is detected.
+
+Sharing Prefixes:
+----------------
+- There are couple of ways to share prefixes in BGP. 
+    (a) Using 'network' statements. These are permit statements. 
+    (b) redistributing IGP routes (such as OSPF/IS-IS) in to BGP
+
+- Network statements are semi-dynamic. It involves manual config, but BGP only
+  advertises if its available in its routing table. 
+- Network statements can be used to advertise static routes also. In fact, this
+  is most stable option if there is only one link from AS towards internet. 
+
+- 'redistribute ospf' distributes ALL IGP routes to BGP. Be careful!!! 
+- Usually a prefix is added at the end to indicate which prefix to redistribute.  
+
+
+# show bgp route    // has bunch of attributes that determines preferred path. 
+
+Next Hop:   Tells router of next hop IP. 
+Metric:     MED - Multi Exit Discriminator. Used when there are multiple
+            entry/exit points in to a single AS.
+LocPrf:     Local Preference. Higher is better. Its included in UPDATE msgs for
+            iBGP within same AS. LocPrf is calculated for each external route
+            and shared with peers. BGP, when choosing between two paths, chooses
+            LocPrf with higher value. 
+ 
+Weight:     Local attribute. Not shared with peer. If multiple path's exists for
+            SAME PREFIX, one with higher weight is chosen. Diff between Weight
+            and LocPrf is that LocPrf is shared with peers  
+
+AS Path:    All AS traveresed by UPDATE message before it reached our BGP router.
+
+Origin:     Value sent by sending BGP peer. i = iBGP, e=eBGP (deprecated),
+            ?=unknown (mostly because this prefix is redistributed in to BGP) 
+
+- All these attributes are taken in to account for selecting best path. 
+
+
+BGP Path Selection:
+-------------------
+- There is a strict oder of path selection. How to select a path? 
+
+1. Is next hop accessible?
+2. If all next hop's are accessible, prefer a path with largest weight (local
+value). 
+3. If weights are equal, pick largest LocPrf path. 
+4. If LocPrf is same, pick route originated by this router. 
+    - Route configured by network command is prefered over aggregate command.
+
+If all else are same then:  
+5. Prefer shorter AS PATH if none of the path is local. 
+6. Favor lower origin.
+    - IGP is lower than EGP, EGP lower than incomplete. 
+7. Path with lowest MED (Metric) is picked.
+8. Pick external over internal paths.  
+9. Prefer path via closest IGP neighbor. 
+10. Select path with lowest router ID. 
+
+
+BGP Route Summarization:
+---------
+- Summarization/Aggregation saves multiple entries in routing table. 
+- It hides link failures, thus saving on update messages between AS. 
+
+
+
+
+ 
+
 
 /********************************************************************/
  *                                                                  *
@@ -2258,7 +2363,6 @@ Established
   Update msgs. 
 - Update msgs can contain either prefixes to be added or removed 
   or both 
-- 
 
 
 Autonomous System Types

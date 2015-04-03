@@ -63,6 +63,18 @@ git commit
 Longer way: 
 git rebase -i 
 
+**** 
+How to add remote repo (say a friends code base) 
+git remote add <nickname> <full url> // this full url can be ssh also
+
+Ex: 
+git remote add friend ssh://sarma@<hostname or IP>/path/to/repo/
+git remote -v   // should show 'fetch' and 'merge' links to friend's repo.
+
+Fetch & Merge using: 
+git fetch friend    // all branches are fetch'ed 
+git merge friend/branch 
+
 
 ****
 Advanced Git: Graphs, Hashes and Compressions

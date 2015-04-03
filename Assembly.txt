@@ -223,7 +223,7 @@ Conditionals: x86-64 (Performance Improvement using `cmovle` instruction)
         - Preferred if the range of cases are small. 
 
 
-+ Program Stack [from 6] 
++ Program Stack [from 5] 
 
 R = Readable; O = Read-Only; W = Writeable; X = Executable 
 
@@ -580,5 +580,3 @@ http://www.jegerlehner.ch/intel/IntelCodeTable.pdf
 http://web.itu.edu.tr/kesgin/mul06/intel/index.html
 
 [5] Notes from Hardware Software Interface course on Coursera. 
-
-[6] Coursera: Hardware Software Interface 
