@@ -1498,6 +1498,11 @@ B-TAG: Backbone VLAN TAG
 - 802.1Qay is used to centrally manage these paths. 
 
 
+/************************************************************/
+            SECTION: IP FUNDAMENTALS                            
+                 E/// class notes
+/************************************************************/
+
 
 /*************************************************************/
             NETWORK PROTOCOL STACK - OVERVIEW    
@@ -1671,7 +1676,7 @@ n/w failures and flexibility.
                E/// Class Notes 
 /*************************************************************/
 
-Basics Principles
+Basic Principles
 - Dynamically learn and fill routing table. 
 - Place best routes in table. 
 - Remove invalid routes and replace them, wherever possible. 
@@ -1681,6 +1686,45 @@ Basics Principles
 - Distance Vector & Link State Protocols 
 
 
+
+/********************************************************************/
+ *                                                                  *
+ * TODO:                                                            * 
+ *    IPv6 Overview                                                 *
+ *    IPv6 Fundamentals                                             *
+ *    IPv6 Fundamentals CLI Demo                                    *
+ *    IPv6 Transition Mechanisms Fundamentals                       *
+ *    IP Multicast - Overview                                       *
+ *    IP Multicast - Fundamentals                                   *
+ *                                                                  *
+ * ---------- IGP TOPICS ----------                                 *
+ *    Dist Vect Prot Operations                                     *
+ *    Dist Vect Prot Convergence                                    *
+ *    Link State Prot Operations                                    *
+ *    LS Convergence & Scalability                                  *
+ *    OSPF Overview                                                 *
+ *    OSPF Network Components                                       *
+ *    OSPFv3 Fundamentals                                           *
+ *    IS-IS Overview                                                *
+ *    IS-IS Fundamentals                                            *
+ *    IS-IS Fundamentals Addendum                                   *
+ *                                                                  *
+ *    (THERE ARE OTHER IS-IS & OSPF NOTES)                          *
+ *                                                                  *
+ *                                                                  *
+ * ---------- BGP TOPICS ----------                                 *
+ *    ALL TOPICS COVERED                                            *
+ *                                                                  *
+ * ---------- MPLS TOPICS ----------                                *
+ *    ALL TOPICS COVERED                                            *
+ *                                                                  *
+ * ---------- L3VPN TOPICS ----------                               *
+ *    ALL TOPICS COVERED                                            *
+ *                                                                  *
+ * ---------- QOS   TOPICS ----------                               *
+ *    ALL TOPICS COVERED                                            *
+ *                                                                  *
+/********************************************************************/
 
 
 
@@ -3397,7 +3441,7 @@ TODO: yet to complete
     +------------------------------+------------------------------+
     |               Acknowledgement Number                        | 
     +----+-------------------------+------------------------------+
-    |OFF |                         |            Window            | 
+    |Data offset |  Reserved  |U|A|P|R|S|F|      Window           | 
     +----+-------------------------+------------------------------+
     |         Checksum             |     Urgent Pointer           | 
     +------------------------------+--------------+---------------+

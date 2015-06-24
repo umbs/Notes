@@ -26,7 +26,7 @@ Ex: Intel x86
 
         // Output is 0xd = little-endian. 
 
-Big-Endian (aka Network Byte Order): In BE, MSB is in lowestmemory address
+Big-Endian (aka Network Byte Order): In BE, MSB is in lowest memory address
 and LSB in highest. It looks the way numbers are written down on paper.
 So, the number is stored as: 0x0a0b0c0d in memory.  
 Ex: Motorola 68k, Data transfer on networks use NBO,  

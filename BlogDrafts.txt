@@ -1,0 +1,89 @@
+Notes on sizeof/sizeof()/char *var/char var[]/memcpy/strncpy 
+---------------
+- Its a unary operator to determine size of ANY datatype. 
+        sizeof unary-expression
+        sizeof (type-name)
+
+- Parameter passed to sizeof can be: 
+  (a) An expression. When used with an expression, use of paranthesis is
+  optional. Expression is NOT evaluated.  
+  (b) type-name. MUST use paranthesis when type-name is used. This can be
+  primitive type (int, char, float etc) or composite type/user-defined
+  (structs, class etc). 
+
+- sizeof operator, when applied to static array, yields the TOTAL number
+  of bytes in that array. It does NOT indicate size of size of pointer
+  represented by array identifier. 
+
+  Ex1: 
+        char arHello[] = "Hello, World!"; 
+        char *ptHello  = "Hello, World!"; 
+
+        // gives 14 because arHello is an array of chars. As mentioned
+        // above, sizeof 'array-identifier-name' indicates length of the
+        // array, including the null terminator.  
+        printf("Length: %lu\n", sizeof arHello); 
+
+        // gives 8 on 64-bit system because ptHello is a pointer to a
+        // char. 
+        printf("Length: %lu\n", sizeof ptHello); 
+
+- When sizeof is applied to composite type, the result can include padding
+  added to align members on word boundaries.
+
+- sizeof never yeilds 0. 
+- sizeof cannot be used on: 
+        - Functions (can be used on function pointers)
+        - Bit fields. 
+        - void types. 
+        - Dynamically allocated arrays. 
+
+- C99 adds support for flexible array members to structs, which are last
+  element of the struct. The struct MUST contain ATLEAST one other element
+  (not a flexible array). The size of this struct is same as not having
+  the flexible array + padding bytes. 
+
+  Ex2: 
+        struct flex 
+        {
+                char count; 
+                int list[]; /* flexible array */
+        }; 
+
+        sizeof(struct flex) = 4 /* 1 byte for char and 3 for padding */
+
+
+- In Ex1, there are two variables: arHelle and ptHello. In most
+  situations, one can choose either forms of declarations. But please
+  refer to [3,4,5] for detailed explanation of differences. When length of
+  string needs to be evaluated, sizeof is not the correct operator
+  because: 
+  (a) sizeof arHello includes '\0' in calculating the length and evaluates
+  to 14. 
+  (b) sizeof ptHello returns width of a pointer and not that of string and
+  evaluates to 8 (on 64 bit machine). 
+
+  strlen() on other hand evaluates to 13 (ignoring null terminator).  
+
+
+
+References: 
+[1] http://en.wikipedia.org/wiki/Sizeof
+[2] http://msdn.microsoft.com/en-us/library/4s7x1k91.aspx
+[3] http://stackoverflow.com/questions/1704407/what-is-the-difference-between-char-s-and-char-s-in-c
+[4] http://c-faq.com/aryptr/index.html
+[5] http://c-faq.com/charstring/index.html
+
+
+====================================
+
+VIM Topics: 
+- Quickview Window.
+- Split window navigation.
+- Key mappings tutorial. 
+- Multiple search highlighting. 
+- Understanding registers.
+- Vimscripting.
+
+====================================
+
