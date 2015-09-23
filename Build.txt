@@ -1,3 +1,4 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@     MAKE NOTES     @@@@@@@@@@@@@@@@@@@@@@@
 $@      The name of the target.
 $%      The target member name, when the target is an archive member.
 $<      The name of the first (or only) prerequisite.
@@ -26,3 +27,22 @@ Reference:
 [2] https://www.gnu.org/software/make/manual/html_node/Quick-Reference.html
 [3] http://martinvseticka.eu/temp/make/normal.html
 [4] http://www2.inf.fh-brs.de/~rberre2m/sonstiges/make_short.pdf
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@    Yocto Project     @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    Poky = BitBake + Metadata 
+
+Poky    = Build system used by Yocto Project.  
+BitBake = Task executor and scheduler. 
+Metadata = Task definitions 
+    * Configuration (.config) = global defs of variables, such as compiler
+                flags, location of image paths, machine archs etc.  
+    * Classes (.bbclass) = encaps and inheritance of build logic, packaging etc.
+                This does most heavy lifting in system. There are .bbclass for
+                'how to build linux kernel', 'how to generate rpm package', 'how
+                create root file system image' and so on. 
+    * Recipes (.bb) = Logical units of software/images to build, ex. recipe for
+                GNU tar command, GTK library, and so on. Recipes are also used
+                define what packages get included in your final image.  
+ 

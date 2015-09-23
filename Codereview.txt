@@ -1,4 +1,4 @@
-                       Checklist for C Codereview 
+@@@@@@@@@@@@@@@@@@@    Checklist for C Codereview    @@@@@@@@@@@@@@@@@@ 
                        --------------------------
 NOTE: This list is prepared mostly from personal experience. 
 

@@ -1,3 +1,4 @@
+@@@@@@@@@@@@@@@@@@@@@ ALL THINGS SYSADMIN/DEVOPS RELATED @@@@@@@@@@@@@@@@@@@@@@@
 
 top - Process Activity
 vmstat - System Activity, H/W info 
@@ -39,6 +40,7 @@ $ uname -a
 $ uname -mrs 
 
 ---------------------------
+@@@@@@@@@@@@@@@@@@@@@ TAR commands @@@@@@@@@@@@@@@@@@@@@@@
 + 'tar' command examples [2]
 // Note that '-' is a mess and may or may not be used. 
 
@@ -105,6 +107,7 @@ $ tar -rvf example.tar php   //php is a directory here
 // compressed files. 
 
 ---------------------------
+@@@@@@@@@@@@@@@@@@@@@ FIND commands @@@@@@@@@@@@@@@@@@@@@@@
 Find Command Usage [3] 
 
 Part I – Basic Find Commands for Finding Files with Names
@@ -531,3 +534,108 @@ Ref:
 [4] http://www.theunixschool.com/2012/07/find-command-15-examples-to-exclude.html
 [5] http://baturin.org/docs/iproute2/ 
 
+@@@@@@@@@@@@@@@@@@@@@@ WORKING WITH "patch" COMMAND  @@@@@@@@@@@@@@@@@@@@@@@@@@
+Generate Diff 
+-------------
+diff -purN original.c changed.c > patch.txt
+
+/* p = print relevant C function 
+ * u = Output in unified context 
+ * r = recursive compare subdirectories 
+ * N = treat absent files as empty 
+ * -x PAT = exclude files that match PAT
+ * b = ignore space change 
+ * w = ignore all white spaces in comparison 
+ * B = ignore all blank line changes/diffs 
+ */ 
+
+Apply Patch 
+-----------
+// applying patch to original.c (or original directory) 
+patch --dry-run --ignore-whitespace -p0 -i patch.txt 
+
+patch --ignore-whitespace -p0 -i patch.txt
+
+On Git
+--------
+
+Generating patch: 
+git format-patch [<commit criteria>] --stdout > patch.txt 
+
+Example:
+// get the last committed changes
+git format-patch -1 --stdout > patch.txt 
+
+// get the last two committed changes
+git format-patch -2 --stdout > patch.txt 
+
+// Changes between origin & HEAD 
+git format-patch origin HEAD --stdout > patch.txt 
+
+
+
+Check the patch: 
+git apply --stat patch.txt 
+
+Dry run 
+git apply --check patch.txt 
+
+Applying the patch. 
+git am --signoff < patch.txt 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   TCPDUMP NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+SYNTAX:   Protocol Direction  Host(s)   Value Operation   Other Expression 
+EXAMPLE:     tcp     dst      10.1.1.1    80     and      tcp dst 10.2.2.2
+
+Protocol: ether, fddi, ip, arp, rarp, etc 
+
+Direction: src, dst, "src and dst", "src or dst". If nothing is specified,
+"src or dst" is applied. For example, "host 2.2.2.2" indicates "src or dst
+host 2.2.2.2".
+
+
+---------------------------------------
+#tcpdump 
+  - To display standard tcpdump output 
+
+#tcpdump -v 
+  - Verbose output 
+
+#tcpdump -D 
+  - Available interfaces for capture 
+
+#tcpdump -n 
+  - Display numerical addresses instead of DNS addresses 
+
+#tcpdump -q 
+  - Quick output 
+
+#tcpdump -i eth0 
+  - Traffic on eth0 interface 
+
+#tcpdump udp 
+  - Capture only UDP traffic 
+
+#tcpdump port http 
+  - Capture port 80 http traffic 
+
+#tcpdump -F file_name 
+  - Capture traffic from filter stored in file_name 
+
+#tcpdump -c 20 
+  - stop the capture after 20 packets 
+
+#tcpdump -w capture.log 
+  - Send the capture in to the file
+
+#tcpdump -r capture.log 
+  - Read the log file 
+
+#tcpdump host www.openmaniak.com
+  - Display packets having "www.openmaniak.com" as src or dst addr. 
+
+#tcpdump src 192.168.1.100 and dst 192.168.1.2 and port ftp 
+  - Display FTP packets with given src and dst addr
+
+ 
