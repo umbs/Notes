@@ -1,5 +1,4 @@
 
-
 top - Process Activity
 vmstat - System Activity, H/W info 
 w - Who logged on
@@ -273,9 +272,262 @@ Find all .mp3 files with more than 10MB and delete them using one single
 command.
 # find / -type f -name *.mp3 -size +10M -exec rm {} \;
 
+Part VI - Exclude directories during search [4]  
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    LINUX NETWORKING COMMANDS 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+ipcalc 
+------
+$ ipcalc 192.168.0.1/255.255.128.0
+Address:   192.168.0.1          11000000.10101000.0 0000000.00000001
+Netmask:   255.255.128.0 = 17   11111111.11111111.1 0000000.00000000
+Wildcard:  0.0.127.255          00000000.00000000.0 1111111.11111111
+=>
+Network:   192.168.0.0/17       11000000.10101000.0 0000000.00000000
+HostMin:   192.168.0.1          11000000.10101000.0 0000000.00000001
+HostMax:   192.168.127.254      11000000.10101000.0 1111111.11111110
+Broadcast: 192.168.127.255      11000000.10101000.0 1111111.11111111
+Hosts/Net: 32766                 Class C, Private Internet
+
+
+iproute2 commands [5]
+--------
+show all addresses 
+    $ ip address show
+ 
+show address for a single intf 
+    $ ip address show ${interface name}     
+
+show running intf 
+    $ ip address show up    
+
+show statically configured address  
+    $ ip address show [dev ${interface}] permanent  
+
+show dynamically configured address  
+    $ ip address show [dev ${interface}] dynamic 
+
+Add an address to an interface 
+    $ ip address add ${address}/${mask} dev ${intf name}
+
+Ex: 
+    ip address add 192.0.2.10/27 dev eth0
+    ip address add 2001:db8:1::/48 dev tun10
+
+Add an address with human-readable description
+    $ ip address add ${address}/${mask} dev ${interface name} label ${interface name}:${description} 
+
+Ex:
+    $ ip address add 192.0.2.1/24 dev eth0 label eth0:my_wan_address
+
+Delete an address 
+    $ ip address delete ${address}/${prefix} dev ${interface name} 
+
+Remove all addresses from an interface
+    $ ip address flush dev ${interface name} 
+
+View all routes 
+    $ ip route 
+    $ ip route show  
+
+View routes to a network and all its subnets 
+    $ ip route show to root ${address}/${mask}
+    $ ip route show to root 192.168.0.0/24 
+
+View routes to a network and all its supernets 
+    $ ip route show to match ${address}/${mask}
+    $ ip route show to match 192.168.0.0/24 
+
+View routes to exact subnet 
+    $ ip route show to exact ${address}/${mask}
+
+View route actually used by kernel 
+    $ ip route get ${address}/${mask}
+
+View route cache
+    $ ip route show cached 
+
+Add a route via gateway 
+    $ ip route add ${address}/${mask} via ${next hop}
+    $ ip route add 192.0.2.128/25 via 192.0.2.1
+
+Add a route via interface 
+    $ ip route add ${address}/${mask} dev ${interface name} 
+
+Change/Replace/Delete a route 
+    $ ip route change ${rest of route statement}
+    $ ip route replace ${rest of route statement}
+    $ ip route delete ${rest of route statement}
+
+Default route 
+    $ ip route add default via ${address}/${mask}
+    $ ip route add default dev ${interface name}
+
+Blackhole routes 
+    $ ip route add blackhole ${address}/${mask}
+
+Special routes 
+    $ ip route add unreachable ${address}/${mask}
+    $ ip route add prohibit ${address}/${mask}
+    $ ip route add throw ${address}/${mask}
+
+Routes with different metric
+    $ ip route add ${address}/${mask} via ${gateway} metric ${number}
+    $ ip route add 192.168.2.0/24 via 10.0.1.1 metric 5
+    $ ip route add 192.168.2.0 dev ppp0 metric 10
+
+Multipath routing
+    $ ip route add ${addresss}/${mask} nexthop via ${gateway 1} weight ${number}
+nexthop via ${gateway 2} weight ${number}
+
+    $ ip route add default nexthop via 192.168.1.1 weight 1 nexthop dev ppp0 weight 10
+
+
+Show info about all links
+    $ ip link show 
+    $ ip link list 
+
+Show info about specific link 
+    $ ip link show dev ${intf name}
+
+Bring up/down a link 
+    $ ip link set dev ${intf name} up 
+    $ ip link set dev ${intf name} down
+
+Set human-readable link description 
+    $ ip link set dev ${intf name} alias "${description}" 
+    $ ip link set dev eth0 alias "LAN interface" 
+
+Rename an interface 
+    $ ip link set dev ${old name} name ${new name}
+
+Change link layer address (usually MAC) 
+    $ ip link set dev ${intf name} address ${address} 
+
+Change link MTU 
+    $ ip link set dev ${intf name} mtu ${MTU value}
+
+Delete link 
+    $ ip link delete dev ${intf name}
+
+
+Enable or disable multicast on an interface
+    $ ip link set ${interface name} multicast on
+    $ ip link set ${interface name} multicast off
+
+
+Enable or disable ARP on an interface
+    $ ip link set ${interface name} arp on
+    $ ip link set ${interface name} arp off
+
+
+Create a VLAN intf 
+    $ ip link add name ${VLAN interface name} link ${parent interface name} type vlan id ${tag} 
+    
+    $ ip link add name eth0.110 link eth0 type vlan id 110
+
+QinQ 
+    $ ip link add name ${service interface} link ${physical interface} type vlan proto 802.1ad id ${service tag}
+    
+    $ ip link add name ${client interface} link ${service interface} type vlan proto 802.1q id ${client tag}
+
+Ex:  
+    $ ip link add name eth0.100 link eth0 type vlan proto 802.1ad id 100 # Create service tag interface
+    $ ip link add name eth0.100.200 link eth0.100 type vlan proto 802.1q id 200 # Create client tag interface
+
+
+Create pseudo-ethernet (aka macvlan) interface 
+    $ ip link add name ${macvlan interface name} link ${parent interface} type macvlan 
+    $ ip link add name peth0 link eth0 type macvlan 
+
+Create dummy intf 
+    $ ip link add name ${dummy intf name} type dummy
+
+Create a bridge intf 
+    $ ip link add name ${bridge name} type bridge 
+
+Add an intf to bridge 
+    $ ip link set dev ${intf name} master ${bridge name}
+
+Remove intf from bridge 
+    $ ip link set dev ${intf name} nomaster 
+
+Create a bonding intf 
+    $ ip link add name ${name} type bond 
+    // read documentation as bonding is extensive topic 
+
+Create an Intermediate Functional Block interface (IFB) 
+    $ ip link add ${intf name} type ifb 
+    // RTFM for more. It's extensive topic. 
+
+
+Network Namespace Management 
+---------
+
+Create a namespace 
+    $ ip netns add ${namespace name} 
+
+List existing namespaces
+    $ ip netns list 
+
+Delete namespace 
+    $ ip netns delete ${namespace name}
+
+Run a process inside a namespace 
+    $ ip netns exec ${namespace name} ${command}
+    $ ip netns exec foo /bin/sh 
+
+List all processes assigned to a namespace 
+    $ ip netns pids ${namespace name}
+
+Identify process' primary namespace 
+    $ ip netns identify ${pid}
+
+Assign network intf to a namespace 
+    $ ip link set dev ${intf name} netns ${namespace name}
+
+Connect one namespace to another
+    # look up the reference link 
+
+Monitor network namespace subsystem events 
+    $ ip netns monitor 
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    strace Examples/Notes     
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// Trace certain syscalls
+$ strace -e trace=socket, sendmsg ./a.out 
+
+// Trace a running process 
+$ strace -p [PID]
+
+// Trace child processes 
+$ strace -f ./a.out 
+
+// Longer output strings with -s [num]. Default is 32 chars 
+$ strace -s 2000 ./.a.out 
+
+// Count syscalls 
+$ strace -c ./a.out 
+
+// Time spent on each call 
+$ strace -T ./a.out 
+
+// Log output to a file 
+$ strace -o out.txt ./a.out 
+
+
+
 ---------------------------
 Ref:
 [1] http://www.cyberciti.biz/faq/find-linux-distribution-name-version-number/
 [2] http://www.tecmint.com/18-tar-command-examples-in-linux/
 [3] http://www.tecmint.com/35-practical-examples-of-linux-find-command/
+[4] http://www.theunixschool.com/2012/07/find-command-15-examples-to-exclude.html
+[5] http://baturin.org/docs/iproute2/ 
 

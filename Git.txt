@@ -141,24 +141,47 @@ git cat-file -t SHA
 
 Patching: 
 --------
-- Create a patch 
-     git format-patch <branch> --stdout > file.patch 
+- Create a patch to a file.  
+    git format-patch <branch> --stdout > file.patch
+    // <branch> is optional and defaults to current branch. 
+    
+- Create patch file for each local commit. Let's say, you have two commits.  
+    git format-patch HEAD~~
+
+    //This creates two patches 
+    0001-make-stuff-more-awesome.patch
+    0002-allow-users-to-be-locked.patch
 
 - Create patch of last commit 
-     git format-patch -1 --stdout > file.patch 
+    git format-patch -1 --stdout > file.patch 
 
 - Before applying look for stats 
-     git apply --stat file.patch 
+    git apply --stat file.patch 
 
 - Check for errors 
-     git apply --check file.patch 
+    git apply --check file.patch 
 
-- Apply patch 
-     git am --signoff < file.patch   // --signoff and '<' are optional  
-     git am -3 file.patch // do a 3 way merge. If there is conflict, it
-                          // can be resolved with help of <<<, ===, >>>>  
+// You can use 'git apply <some>.patch' to have the changes applied to CWD.
+// They'll be unstaged and needs to be committed. 
+
+- To apply a patch as a commit (with its commit message), use 
+        'git am <some>.patch'
+    git am --signoff < file.patch   // --signoff and '<' are optional  
+    git am -3 file.patch // do a 3 way merge. If there is conflict, it
+                          // can be resolved with help of <<<, ===, >>>> 
+    git am *.patch // all patches are applied, in the order. You cannot apply
+                   // out of sequence patches, individually.
+
+Patching (TLDR;)
+---------------
+$ git format-patch HEAD--  // generate patches 
+$ git am *.patch    // apply patches, sequentially, including commit msgs. 
+
+
+
 Reference: 
-    ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/ 
+    http://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
+    http://makandracards.com/makandra/2521-git-how-to-create-and-apply-patches 
  
 Staging: 
 --------

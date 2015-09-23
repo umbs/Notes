@@ -9,6 +9,8 @@ Window Splitting
 :set splitbelow // same for horizontal window 
 ctrl+w <number> < // reduce width of window by <number> 
 ctrl+w <number> > // increase width of window by <number> 
+<number> ctrl+w +   // increase length of window by <number> 
+<number> ctrl+w -   // decrease length of window by <number> 
 ctrl+w | // max out window width 
 ctrl+w _ // max out window height 
 ctrl+w = // normalize all window sizes (equal sizes) 

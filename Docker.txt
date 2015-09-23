@@ -1,0 +1,97 @@
+Commands: 
+---------
+sudo usermod -aG docker <username> 
+
+docker ps
+docker ps -aq 
+
+docker run [options] [image] [command] [args]   // runs the container 
+docker run -ti [image] bash 
+docker run -d [image] 
+docker logs [container-id]
+
+docker stop [image-id]
+docker rm [image-id]
+ 
+ 
+
+                    INTRO TO DOCKER 
+                    ===============
+Glossary: 
+
++ Docker Engine (aka Docker Daemon): 
+    * Program that enables containers to be built, shipped and run.
+    * Uses Linux Kernel namespaces and control groups. 
+    * Docker uses following namespaces from Kernel: 
+        - PID for process isolation 
+        - NET for managing network stack  
+        - IPC 
+        - MNT for mounting and managing mount points.  
+        - UTS
+
+
+// To add a user to docker group do this. After this, user need not enter 'sudo'
+// before running docker commands 
+$ sudo usermod -aG docker <username> 
+
++ Docker has a Client/Server architecture, with Server being the Daemon mentioned
+above. Example: 
+    'docker run <>' 
+Above, CLI is being used as a Client. Kitematic is a GUI Client for Docker. 
+
++ Docker Images: 
+    * Read only template to build containers. 
+    * Built by you or other Docker users. 
+    * Stored in Docker Hub or your local Registry. 
+
++ Docker Containers: 
+    * Isolated application platform. 
+    * Contains everything needed to run your application. 
+    * Bsed on one or more images. 
+
++ Docker Registry and Repositories: 
+    * Place to store all images. 
+    * Can run local registry or use public registry such as Docker Hub. 
+    * Each Registry can have multiple Repo, such as: Ubuntu, RedHat, NGINX. 
+    * Each Repo can have multiple images for that Repo. 
+
++ Docker Hub: 
+    * Public registry of images. Similar to App store. 
+
++ Docker Orchestration Tools: 
+    * There are 3 tools for Orchestration: Machine, Swarm and Compose. 
+
+$ docker run [options] [image] [command] [args]   // runs the container 
+// image is specified with repository:tag 
+Examples: 
+    $ docker run ubuntu:14.04 echo "Hello World!" 
+    $ docker run ubuntu ps ax 
+
+
+
+Accessing Terminal Inside Docker 
+----
+Use following flags: 
+    -i = Tells Docker to connect to STDIN on container 
+    -t = Tells Docker to get pseudo terminal 
+
+$ docker run -i -t ubuntu:latest bash 
+
++ Inside the container, PID = 1 for the bash process in above example. The PID
+of 'bash' on host machine is different. PPID of bash = PID of Docker.
+
++ Containers have: Short ID, Long ID and Name
+
+
+Running Containers in Detached Mode (use -d flag)  
+-------- 
+$ docker run -d ...
+// To observe output: $ docker logs [container id] 
+// -P flag maps container ports to host ports 
+
+
+                        DOCKER FUNDAMENTALS
+                        ===================
+
++ Docker images are comprised of multiple layers (layers are other images)  
+ 
