@@ -1,99 +1,105 @@
 @@@@@@@@@@@@@@@@@@@@@@@       GCC       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-What are .LXXX labels in assembly?      
+What are .LXXX labels in assembly?
         .L prefix indicates label is local to this file and so it will not
-        conflict with same name labels in other files. 
+        conflict with same name labels in other files.
         .LFB0 = Function Begin 0 (1st function)
         .LFE0 = End of 1st Function
         .LFB1 = 2nd Function Begin
-        etc 
+        etc
 
-GCC Flags: 
+GCC Flags:
 -fno-asynchronous-unwind-tables
         Call Frame Information [1] tags are used by GCC Assembler to
-        reconstruct a stack backtrace. Some of .cfi labels look like: 
-        .cfi_start_proc 
-        .cfi_def_cfa_offset 
-        .cfi_end_proc 
-        .cfi_offset_cfa_register 
+        reconstruct a stack backtrace. Some of .cfi labels look like:
+        .cfi_start_proc
+        .cfi_def_cfa_offset
+        .cfi_end_proc
+        .cfi_offset_cfa_register
+
+-c  Compile or assemble the source, but don't link.
+-S  Stop after compilation. Don't assemble.
+-E  Stop after preprocessing. Don't compile.
+-o <file>   Place output in <file.
+-v  Print the commands executed to run stages of compilation.
 
 
-Reference: 
-[1] http://en.wikipedia.org/wiki/Call_stack#Structure
-Call Frame Information
+Reference:
+[1] http://en.wikipedia.org/wiki/Call_stack#Structure Call Frame Information
 
-[2] 
+[2] https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@        GDB Macros        @@@@@@@@@@@@@@@@@@@@@@@@@@@
 GDB macro-coding language basic structure:
 
-  define <command> 
-  <code> 
-  end 
-  document <command> 
-  <help text> 
-  end 
+  define <command>
+  <code>
+  end
+  document <command>
+  <help text>
+  end
 
 When <command> is run, <code> is executed.
-When help <command> is run, the <help text> is displayed. 
+When help <command> is run, the <help text> is displayed.
 
-Enter this code in .gdbinit file and run GDB. 
+Enter this code in .gdbinit file and run GDB.
 
-Simple example: clear screen 
-  define cls 
-  shell clear 
-  end 
-  document cls 
-  Clears the screen with a simple command 
-  end 
+Simple example: clear screen
+  define cls
+  shell clear
+  end
+  document cls
+  Clears the screen with a simple command
+  end
 
-User defined variables: 
-  set $<var name>=<expression> 
+User defined variables:
+  set $<var name>=<expression>
 
   set $c=*(unsigned char *)($arg0)
- 
-Conditional Loops: 
-  if - else - end 
-  Same as other if() conditionals 
+
+Conditional Loops:
+  if - else - end
+  Same as other if() conditionals
 
   while - end
-  Same as other while() loop 
-  
-Calling user defined macros inside another macro: 
-   <macro name> <arguments> 
+  Same as other while() loop
+
+Calling user defined macros inside another macro:
+   <macro name> <arguments>
 
 
 Read up more at [1]
- 
-References: 
-[1] http://www.ibm.com/developerworks/aix/library/au-gdb.html  
+
+References:
+[1] http://www.ibm.com/developerworks/aix/library/au-gdb.html
 @@@@@@@@@@@@@@@@@@       OTOOL      NOTES      @@@@@@@@@@@@@@@@@@@@@@@@@
-                                          
+
 'otool' comes as part of Xcode Tools that can act as replacement for
 'objdump'. Objdump can be installed as part of binutils[1] but it is not
-installed by default on Mac. Homebrew has it.  
+installed by default on Mac. Homebrew has it.
 
-Here are few flags of otool that I found useful: 
+Here are few flags of otool that I found useful:
 
-Sample Usage: 
+Sample Usage:
       otool [ options ] <file> [ <file2> ... ]
 
-Options: 
--l   Load commands are displayed. 
+Options:
+-l   Load commands are displayed.
 -t   Contents of __TEXT__ is displayed. Combined with -v flag to
      disassemble the text. Use -V to symbolically disassemble the
-     operands. 
-     
-     Useful: otool -tVX test.o 
+     operands.
 
--d   Display __DATA__ section.  
--r   relocation entries. 
--X   avoid printing leading addresses. 
+     Useful: otool -tVX test.o
+
+-d   Display __DATA__ section.
+-r   relocation entries.
+-X   avoid printing leading addresses.
 
 
 
 
 'dwarftool' (or dwarfdump) is another option that's available on Mac. It
 is used only to dump/disassemble DWARF information from object file. More
-to come ... 
+to come ...
 
 References:
 [1] http://binutils.darwinports.com

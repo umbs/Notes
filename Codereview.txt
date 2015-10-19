@@ -1,33 +1,33 @@
-@@@@@@@@@@@@@@@@@@@    Checklist for C Codereview    @@@@@@@@@@@@@@@@@@ 
+@@@@@@@@@@@@@@@@@@@    Checklist for C Codereview    @@@@@@@@@@@@@@@@@@
                        --------------------------
-NOTE: This list is prepared mostly from personal experience. 
+NOTE: This list is prepared mostly from personal experience.
 
-Function Arguments: 
+Function Arguments:
 ----------------
 - Check if right values are passed as func args, especially, if these args
   are pointers and are dereferrenced inside the routine. (Static code
-  analysis tools can do this check too). 
+  analysis tools can do this check too).
 
- 
+
 Function Return Type:
---------------------- 
+---------------------
 - Examine what values are being returned. And if those values are handled
   properly by calling function.
 
-Copying Objects: 
+Copying Objects:
 ---------------
 -  When an object (or a data structure) is copied to another object using
-   memcpy, What is the intent? 
-     (a) Copy all attributes of the object? 
+   memcpy, What is the intent?
+     (a) Copy all attributes of the object?
      (b) Copy only some?
    If its (a), what happens if only some attributes are changed (Eg.,
    update of a profile) and rest remain same? Will the old attributes get
-   copied? 
+   copied?
 
-Deleting configs: 
+Deleting configs:
 -----------------
 - In case of profiles on a ccts, what SHOULD happen when they are deleted?
-  Should attributes take default value? Should they take some other value? 
+  Should attributes take default value? Should they take some other value?
 
 Read/Write to Event Queues:
 ---------------------------
@@ -35,6 +35,22 @@ Read/Write to Event Queues:
   not be setting flags (or values in shared data) indicating that 'event has
   been consumed'. Only the consumer of the event should do that job. Of
   course, producers can set flags to the effect 'event has been produced',
-  but not 'event has been consumed'. 
+  but not 'event has been consumed'.
 
-  
+
+@@@@@@@@@@@@@@@@@@@@@@@    STATIC CODE ANALYZERS     @@@@@@@@@@@@@@@@@@@@@@
+Free Tools [1]:
+---
+Splint (Secure Programming Lint)
+cppcheck
+PScan
+Flawfinder
+RATS (Rough Auditing Tool for Security)
+MOPS (MOdelchecking Programs for Security Properties)
+
+
+
+Reference:
+[1]
+https://www.sans.org/reading-room/whitepapers/securecode/secure-software-development-code-analysis-tools-389
+

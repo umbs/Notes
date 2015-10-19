@@ -1,114 +1,114 @@
 @@@@@@@@@@@@@@@@@@@@@ ALL THINGS SYSADMIN/DEVOPS RELATED @@@@@@@@@@@@@@@@@@@@@@@
 
 top - Process Activity
-vmstat - System Activity, H/W info 
+vmstat - System Activity, H/W info
 w - Who logged on
-ps - Displays processes 
-pgrep 
-free - Memory Usage 
-iostat - Average CPU Load, Disk Activity 
-sar - System Activity Reporter 
-mpstat - Multiprocessor Usage 
-pmap - Process Memory Usage 
-netstat - Networks stats 
-ss - Network stats 
-iptraf - Realtime network traffic 
-tcpdump - 
+ps - Displays processes
+pgrep
+free - Memory Usage
+iostat - Average CPU Load, Disk Activity
+sar - System Activity Reporter
+mpstat - Multiprocessor Usage
+pmap - Process Memory Usage
+netstat - Networks stats
+ss - Network stats
+iptraf - Realtime network traffic
+tcpdump -
 strace - System Calls
 /proc - Various Kernel Stats
-nagios - Server and Network Monitoring 
+nagios - Server and Network Monitoring
 FAN - Fully Automated Nagios
 
 nmap - Port Scanning
-lsof - list open files, network connections and more. 
+lsof - list open files, network connections and more.
 ntop
 
 
 + How to check linux flavor/version
-Method 1: 
-$ cat /etc/*-release 
+Method 1:
+$ cat /etc/*-release
 
-Method 2: 
+Method 2:
 $ lsb_release -a            # displays LSB (Linux Standard Base) and
-                            # distribution specific info.  
-Method 3: 
-$ cat /proc/version 
+                            # distribution specific info.
+Method 3:
+$ cat /proc/version
 
 ---------------------------
-+ How to find out kernel version 
-$ uname -a 
-$ uname -mrs 
++ How to find out kernel version
+$ uname -a
+$ uname -mrs
 
 ---------------------------
 @@@@@@@@@@@@@@@@@@@@@ TAR commands @@@@@@@@@@@@@@@@@@@@@@@
 + 'tar' command examples [2]
-// Note that '-' is a mess and may or may not be used. 
+// Note that '-' is a mess and may or may not be used.
 
-1) Create tar Archive File 
-$ tar -cvf example.tar /home/example/ 
+1) Create tar Archive File
+$ tar -cvf example.tar /home/example/
 
-c - Create a new .tar archive file. 
+c - Create a new .tar archive file.
 v - Verbose
-f - File name is provided (example.tar) 
+f - File name is provided (example.tar)
 
-2) Create tar.gz Archive File 
-$ tar -cvzf example.tar.gz /home/example/ 
-OR 
+2) Create tar.gz Archive File
+$ tar -cvzf example.tar.gz /home/example/
+OR
 $ tar -cvzf example.tgz /home/example/
 
-3) Create a tar.bz2 Archive File 
+3) Create a tar.bz2 Archive File
 $ tar -cvfj example.tar.bz2 /home/example/
-OR 
+OR
 $ tar -cvfj example.tar.tbz /home/example/
 OR
 $ tar -cvfj example.tar.tb2 /home/example/
 
-4) Untar tar (or tar.gz or tar.bz2) Archive File 
-// NOTE: Untar in current directory 
-$ tar -xvf example.tar 
+4) Untar tar (or tar.gz or tar.bz2) Archive File
+// NOTE: Untar in current directory
+$ tar -xvf example.tar
 OR
-$ tar -xvf example.tar -C /destination/directory/ 
+$ tar -xvf example.tar -C /destination/directory/
 
-$ tar -xvf example.tar.gz 
+$ tar -xvf example.tar.gz
 
-$ tar -xvf example.tar.bz2 
+$ tar -xvf example.tar.bz2
 
-5) List Content of tar (or tar.gz or tar.bz2) Archive File 
-$ tar -tvf example.tar 
-$ tar -tvf example.tar.gz 
-$ tar -tvf example.tar.bz2 
+5) List Content of tar (or tar.gz or tar.bz2) Archive File
+$ tar -tvf example.tar
+$ tar -tvf example.tar.gz
+$ tar -tvf example.tar.bz2
 
-6) Untar one or more files from tar Archive File 
+6) Untar one or more files from tar Archive File
 $ tar -xvf example.tar 1.txt [2.txt ...]  //1.txt is part of the archive.
-OR 
-$ tar --extract --file=example.tar 1.txt 
+OR
+$ tar --extract --file=example.tar 1.txt
 
-7) Untar one or more files from tar.gz 
-$ tar -zxvf example.tar.gz 1.txt 
-OR 
-$ tar --extract --file=example.tar.gz 1.txt 
+7) Untar one or more files from tar.gz
+$ tar -zxvf example.tar.gz 1.txt
+OR
+$ tar --extract --file=example.tar.gz 1.txt
 
-8) Untar one or more files from tar.bz2 
-$ tar -jcvf example.tar.bz2 1.txt 
-OR 
-$ tar --extract --file=example.tar.bz2 1.txt 
+8) Untar one or more files from tar.bz2
+$ tar -jcvf example.tar.bz2 1.txt
+OR
+$ tar --extract --file=example.tar.bz2 1.txt
 
-9) Extract group of files using Wildcard 
+9) Extract group of files using Wildcard
 $ tar -xvf example.tar --wildcards '*.c'
 $ tar -zxvf example.tar.gz --wildcards '*.c'
 $ tar -jxvf example.tar.bz2 --wildcards '*.c'
 
 10) Add files or directories to tar Archive
-$ tar -rvf example.tar 1.txt 
-OR 
-$ tar -rvf example.tar php   //php is a directory here 
+$ tar -rvf example.tar 1.txt
+OR
+$ tar -rvf example.tar php   //php is a directory here
 
 // tar command CANNOT add files/directories to .tar.gz and tar.bz2
-// compressed files. 
+// compressed files.
 
 ---------------------------
 @@@@@@@@@@@@@@@@@@@@@ FIND commands @@@@@@@@@@@@@@@@@@@@@@@
-Find Command Usage [3] 
+Find Command Usage [3]
 
 Part I – Basic Find Commands for Finding Files with Names
 
@@ -275,14 +275,14 @@ Find all .mp3 files with more than 10MB and delete them using one single
 command.
 # find / -type f -name *.mp3 -size +10M -exec rm {} \;
 
-Part VI - Exclude directories during search [4]  
+Part VI - Exclude directories during search [4]
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                    LINUX NETWORKING COMMANDS 
+                    LINUX NETWORKING COMMANDS
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-ipcalc 
+ipcalc
 ------
 $ ipcalc 192.168.0.1/255.255.128.0
 Address:   192.168.0.1          11000000.10101000.0 0000000.00000001
@@ -298,81 +298,81 @@ Hosts/Net: 32766                 Class C, Private Internet
 
 iproute2 commands [5]
 --------
-show all addresses 
+show all addresses
     $ ip address show
- 
-show address for a single intf 
-    $ ip address show ${interface name}     
 
-show running intf 
-    $ ip address show up    
+show address for a single intf
+    $ ip address show ${interface name}
 
-show statically configured address  
-    $ ip address show [dev ${interface}] permanent  
+show running intf
+    $ ip address show up
 
-show dynamically configured address  
-    $ ip address show [dev ${interface}] dynamic 
+show statically configured address
+    $ ip address show [dev ${interface}] permanent
 
-Add an address to an interface 
+show dynamically configured address
+    $ ip address show [dev ${interface}] dynamic
+
+Add an address to an interface
     $ ip address add ${address}/${mask} dev ${intf name}
 
-Ex: 
+Ex:
     ip address add 192.0.2.10/27 dev eth0
     ip address add 2001:db8:1::/48 dev tun10
 
 Add an address with human-readable description
-    $ ip address add ${address}/${mask} dev ${interface name} label ${interface name}:${description} 
+    $ ip address add ${address}/${mask} dev ${interface name} label ${interface name}:${description}
 
 Ex:
     $ ip address add 192.0.2.1/24 dev eth0 label eth0:my_wan_address
 
-Delete an address 
-    $ ip address delete ${address}/${prefix} dev ${interface name} 
+Delete an address
+    $ ip address delete ${address}/${prefix} dev ${interface name}
 
 Remove all addresses from an interface
-    $ ip address flush dev ${interface name} 
+    $ ip address flush dev ${interface name}
 
-View all routes 
-    $ ip route 
-    $ ip route show  
+View all routes
+    $ ip route
+    $ ip route show
 
-View routes to a network and all its subnets 
+View routes to a network and all its subnets
     $ ip route show to root ${address}/${mask}
-    $ ip route show to root 192.168.0.0/24 
+    $ ip route show to root 192.168.0.0/24
 
-View routes to a network and all its supernets 
+View routes to a network and all its supernets
     $ ip route show to match ${address}/${mask}
-    $ ip route show to match 192.168.0.0/24 
+    $ ip route show to match 192.168.0.0/24
 
-View routes to exact subnet 
+View routes to exact subnet
     $ ip route show to exact ${address}/${mask}
 
-View route actually used by kernel 
+View route actually used by kernel
     $ ip route get ${address}/${mask}
 
 View route cache
-    $ ip route show cached 
+    $ ip route show cached
 
-Add a route via gateway 
+Add a route via gateway
     $ ip route add ${address}/${mask} via ${next hop}
     $ ip route add 192.0.2.128/25 via 192.0.2.1
 
-Add a route via interface 
-    $ ip route add ${address}/${mask} dev ${interface name} 
+Add a route via interface
+    $ ip route add ${address}/${mask} dev ${interface name}
 
-Change/Replace/Delete a route 
+Change/Replace/Delete a route
     $ ip route change ${rest of route statement}
     $ ip route replace ${rest of route statement}
     $ ip route delete ${rest of route statement}
 
-Default route 
+Default route
     $ ip route add default via ${address}/${mask}
     $ ip route add default dev ${interface name}
 
-Blackhole routes 
+Blackhole routes
     $ ip route add blackhole ${address}/${mask}
 
-Special routes 
+Special routes
     $ ip route add unreachable ${address}/${mask}
     $ ip route add prohibit ${address}/${mask}
     $ ip route add throw ${address}/${mask}
@@ -390,30 +390,30 @@ nexthop via ${gateway 2} weight ${number}
 
 
 Show info about all links
-    $ ip link show 
-    $ ip link list 
+    $ ip link show
+    $ ip link list
 
-Show info about specific link 
+Show info about specific link
     $ ip link show dev ${intf name}
 
-Bring up/down a link 
-    $ ip link set dev ${intf name} up 
+Bring up/down a link
+    $ ip link set dev ${intf name} up
     $ ip link set dev ${intf name} down
 
-Set human-readable link description 
-    $ ip link set dev ${intf name} alias "${description}" 
-    $ ip link set dev eth0 alias "LAN interface" 
+Set human-readable link description
+    $ ip link set dev ${intf name} alias "${description}"
+    $ ip link set dev eth0 alias "LAN interface"
 
-Rename an interface 
+Rename an interface
     $ ip link set dev ${old name} name ${new name}
 
-Change link layer address (usually MAC) 
-    $ ip link set dev ${intf name} address ${address} 
+Change link layer address (usually MAC)
+    $ ip link set dev ${intf name} address ${address}
 
-Change link MTU 
+Change link MTU
     $ ip link set dev ${intf name} mtu ${MTU value}
 
-Delete link 
+Delete link
     $ ip link delete dev ${intf name}
 
 
@@ -427,102 +427,108 @@ Enable or disable ARP on an interface
     $ ip link set ${interface name} arp off
 
 
-Create a VLAN intf 
-    $ ip link add name ${VLAN interface name} link ${parent interface name} type vlan id ${tag} 
-    
+Create a VLAN intf
+    $ ip link add name ${VLAN interface name} link ${parent interface name} type vlan id ${tag}
+
     $ ip link add name eth0.110 link eth0 type vlan id 110
 
-QinQ 
+QinQ
     $ ip link add name ${service interface} link ${physical interface} type vlan proto 802.1ad id ${service tag}
-    
+
     $ ip link add name ${client interface} link ${service interface} type vlan proto 802.1q id ${client tag}
 
-Ex:  
+Ex:
     $ ip link add name eth0.100 link eth0 type vlan proto 802.1ad id 100 # Create service tag interface
     $ ip link add name eth0.100.200 link eth0.100 type vlan proto 802.1q id 200 # Create client tag interface
 
 
-Create pseudo-ethernet (aka macvlan) interface 
-    $ ip link add name ${macvlan interface name} link ${parent interface} type macvlan 
-    $ ip link add name peth0 link eth0 type macvlan 
+Create pseudo-ethernet (aka macvlan) interface
+    $ ip link add name ${macvlan interface name} link ${parent interface} type macvlan
+    $ ip link add name peth0 link eth0 type macvlan
 
-Create dummy intf 
+Create dummy intf
     $ ip link add name ${dummy intf name} type dummy
 
-Create a bridge intf 
-    $ ip link add name ${bridge name} type bridge 
+Create a bridge intf
+    $ ip link add name ${bridge name} type bridge
 
-Add an intf to bridge 
+Add an intf to bridge
     $ ip link set dev ${intf name} master ${bridge name}
 
-Remove intf from bridge 
-    $ ip link set dev ${intf name} nomaster 
+Remove intf from bridge
+    $ ip link set dev ${intf name} nomaster
 
-Create a bonding intf 
-    $ ip link add name ${name} type bond 
-    // read documentation as bonding is extensive topic 
+Create a bonding intf
+    $ ip link add name ${name} type bond
+    // read documentation as bonding is extensive topic
 
-Create an Intermediate Functional Block interface (IFB) 
-    $ ip link add ${intf name} type ifb 
-    // RTFM for more. It's extensive topic. 
+Create an Intermediate Functional Block interface (IFB)
+    $ ip link add ${intf name} type ifb
+    // RTFM for more. It's extensive topic.
 
 
-Network Namespace Management 
+Network Namespace Management
 ---------
 
-Create a namespace 
-    $ ip netns add ${namespace name} 
+Create a namespace
+    $ ip netns add ${namespace name}
 
 List existing namespaces
-    $ ip netns list 
+    $ ip netns list
 
-Delete namespace 
+Delete namespace
     $ ip netns delete ${namespace name}
 
-Run a process inside a namespace 
+Run a process inside a namespace
     $ ip netns exec ${namespace name} ${command}
-    $ ip netns exec foo /bin/sh 
+    $ ip netns exec foo /bin/sh
 
-List all processes assigned to a namespace 
+List all processes assigned to a namespace
     $ ip netns pids ${namespace name}
 
-Identify process' primary namespace 
+Identify process' primary namespace
     $ ip netns identify ${pid}
 
-Assign network intf to a namespace 
+Assign network intf to a namespace
     $ ip link set dev ${intf name} netns ${namespace name}
 
 Connect one namespace to another
-    # look up the reference link 
+    # look up the reference link
 
-Monitor network namespace subsystem events 
-    $ ip netns monitor 
-
+Monitor network namespace subsystem events
+    $ ip netns monitor
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                    strace Examples/Notes     
+                        PING/PING6
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+/* pinging a loopback addr. The -I is essential to ping loop-back intf */
+$ ping -c 5 -I eth0 <ipv6-loop-back-addr>
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    strace Examples/Notes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // Trace certain syscalls
-$ strace -e trace=socket, sendmsg ./a.out 
+$ strace -e trace=socket, sendmsg ./a.out
 
-// Trace a running process 
+// Trace a running process
 $ strace -p [PID]
 
-// Trace child processes 
-$ strace -f ./a.out 
+// Trace child processes
+$ strace -f ./a.out
 
-// Longer output strings with -s [num]. Default is 32 chars 
-$ strace -s 2000 ./.a.out 
+// Longer output strings with -s [num]. Default is 32 chars
+$ strace -s 2000 ./.a.out
 
-// Count syscalls 
-$ strace -c ./a.out 
+// Count syscalls
+$ strace -c ./a.out
 
-// Time spent on each call 
-$ strace -T ./a.out 
+// Time spent on each call
+$ strace -T ./a.out
 
-// Log output to a file 
-$ strace -o out.txt ./a.out 
+// Log output to a file
+$ strace -o out.txt ./a.out
 
 
 
@@ -532,63 +538,63 @@ Ref:
 [2] http://www.tecmint.com/18-tar-command-examples-in-linux/
 [3] http://www.tecmint.com/35-practical-examples-of-linux-find-command/
 [4] http://www.theunixschool.com/2012/07/find-command-15-examples-to-exclude.html
-[5] http://baturin.org/docs/iproute2/ 
+[5] http://baturin.org/docs/iproute2/
 
 @@@@@@@@@@@@@@@@@@@@@@ WORKING WITH "patch" COMMAND  @@@@@@@@@@@@@@@@@@@@@@@@@@
-Generate Diff 
+Generate Diff
 -------------
 diff -purN original.c changed.c > patch.txt
 
-/* p = print relevant C function 
- * u = Output in unified context 
- * r = recursive compare subdirectories 
- * N = treat absent files as empty 
+/* p = print relevant C function
+ * u = Output in unified context
+ * r = recursive compare subdirectories
+ * N = treat absent files as empty
  * -x PAT = exclude files that match PAT
- * b = ignore space change 
- * w = ignore all white spaces in comparison 
- * B = ignore all blank line changes/diffs 
- */ 
+ * b = ignore space change
+ * w = ignore all white spaces in comparison
+ * B = ignore all blank line changes/diffs
+ */
 
-Apply Patch 
+Apply Patch
 -----------
-// applying patch to original.c (or original directory) 
-patch --dry-run --ignore-whitespace -p0 -i patch.txt 
+// applying patch to original.c (or original directory)
+patch --dry-run --ignore-whitespace -p0 -i patch.txt
 
 patch --ignore-whitespace -p0 -i patch.txt
 
 On Git
 --------
 
-Generating patch: 
-git format-patch [<commit criteria>] --stdout > patch.txt 
+Generating patch:
+git format-patch [<commit criteria>] --stdout > patch.txt
 
 Example:
 // get the last committed changes
-git format-patch -1 --stdout > patch.txt 
+git format-patch -1 --stdout > patch.txt
 
 // get the last two committed changes
-git format-patch -2 --stdout > patch.txt 
+git format-patch -2 --stdout > patch.txt
 
-// Changes between origin & HEAD 
-git format-patch origin HEAD --stdout > patch.txt 
+// Changes between origin & HEAD
+git format-patch origin HEAD --stdout > patch.txt
 
 
 
-Check the patch: 
-git apply --stat patch.txt 
+Check the patch:
+git apply --stat patch.txt
 
-Dry run 
-git apply --check patch.txt 
+Dry run
+git apply --check patch.txt
 
-Applying the patch. 
-git am --signoff < patch.txt 
+Applying the patch.
+git am --signoff < patch.txt
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@   TCPDUMP NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-SYNTAX:   Protocol Direction  Host(s)   Value Operation   Other Expression 
+SYNTAX:   Protocol Direction  Host(s)   Value Operation   Other Expression
 EXAMPLE:     tcp     dst      10.1.1.1    80     and      tcp dst 10.2.2.2
 
-Protocol: ether, fddi, ip, arp, rarp, etc 
+Protocol: ether, fddi, ip, arp, rarp, etc
 
 Direction: src, dst, "src and dst", "src or dst". If nothing is specified,
 "src or dst" is applied. For example, "host 2.2.2.2" indicates "src or dst
@@ -596,46 +602,46 @@ host 2.2.2.2".
 
 
 ---------------------------------------
-#tcpdump 
-  - To display standard tcpdump output 
+#tcpdump
+  - To display standard tcpdump output
 
-#tcpdump -v 
-  - Verbose output 
+#tcpdump -v
+  - Verbose output
 
-#tcpdump -D 
-  - Available interfaces for capture 
+#tcpdump -D
+  - Available interfaces for capture
 
-#tcpdump -n 
-  - Display numerical addresses instead of DNS addresses 
+#tcpdump -n
+  - Display numerical addresses instead of DNS addresses
 
-#tcpdump -q 
-  - Quick output 
+#tcpdump -q
+  - Quick output
 
-#tcpdump -i eth0 
-  - Traffic on eth0 interface 
+#tcpdump -i eth0
+  - Traffic on eth0 interface
 
-#tcpdump udp 
-  - Capture only UDP traffic 
+#tcpdump udp
+  - Capture only UDP traffic
 
-#tcpdump port http 
-  - Capture port 80 http traffic 
+#tcpdump port http
+  - Capture port 80 http traffic
 
-#tcpdump -F file_name 
-  - Capture traffic from filter stored in file_name 
+#tcpdump -F file_name
+  - Capture traffic from filter stored in file_name
 
-#tcpdump -c 20 
-  - stop the capture after 20 packets 
+#tcpdump -c 20
+  - stop the capture after 20 packets
 
-#tcpdump -w capture.log 
+#tcpdump -w capture.log
   - Send the capture in to the file
 
-#tcpdump -r capture.log 
-  - Read the log file 
+#tcpdump -r capture.log
+  - Read the log file
 
 #tcpdump host www.openmaniak.com
-  - Display packets having "www.openmaniak.com" as src or dst addr. 
+  - Display packets having "www.openmaniak.com" as src or dst addr.
 
-#tcpdump src 192.168.1.100 and dst 192.168.1.2 and port ftp 
+#tcpdump src 192.168.1.100 and dst 192.168.1.2 and port ftp
   - Display FTP packets with given src and dst addr
 
- 
+

@@ -27,72 +27,169 @@ ECA-IP Questions
 ---------------------------------------------------
 
 /*************************************************************/
- *           CCNA: From IT University Online Classes         * 
+ *           CCNA: From IT University Online Classes         *
 /*************************************************************/
 ICND-1
 
 - MAC Adrress: 24 bits OUI --> Organization Unique ID
-               24 bits vendor assigned. Org can use anything. 
-- Cisco's OUI: 00:03:68 
+               24 bits vendor assigned. Org can use anything.
+- Cisco's OUI: 00:03:68
 
-HUBs:  
+HUBs:
     * Use 802.3 communication mode: CSMA/CD
-    * Uniform port speeds. 
-    * Loops can be created. 
+    * Uniform port speeds.
+    * Loops can be created.
     * Half Duplex communication.
 
-SWITCHEs: 
+SWITCHEs:
     * Can support ports of different speeds.
     * Can prevent forwarding loops.
     * Full Duplex communication.
 
-LAN Media: 
-    * Coaxial - Copper cable. Not used anymore.  
-    * CAT5 UTP - Unshielded Twisted Pair. Copper cable. Variant of Coaxial. 
+LAN Media:
+    * Coaxial - Copper cable. Not used anymore.
+    * CAT5 UTP - Unshielded Twisted Pair. Copper cable. Variant of Coaxial.
     * Fiber
 
-UTP Cabling: 
-- Cat3: Used for telephones. 
-- Cat5: 10mb-100mb 
-- Cat5e: 1000mb 
+UTP Cabling:
+- Cat3: Used for telephones.
+- Cat5: 10mb-100mb
+- Cat5e: 1000mb
 - Cat6: 3gb-10gb
 - Cat6a: 10g
 
 Cabling Types: Straight through & Crossover.
 
-Crossover Cable - Connects SIMILAR devices. 
+Crossover Cable - Connects SIMILAR devices.
 Straight through - Connects DISIMILAR devices.
 
 - If crossover cable is working when connected to similar devices or vice-versa
   then there must be a feature called: Auto MPX.
 
 
-Fiber Optic Cables: 
-- Multi Mode fiber: Used for short range distances: 1g at 600 meters. 
-- Single Mode fiber: Used for long range: 10g at 10km (32000 feet). 
+Fiber Optic Cables:
+- Multi Mode fiber: Used for short range distances: 1g at 600 meters.
+- Single Mode fiber: Used for long range: 10g at 10km (32000 feet).
 
 - Ethernet has a distance limitation of 330 ft (about 100meters).
 
 
-IOS Basics: 
+IOS Basics:
 ---
 - To establish console connection, rollover cable needs to have following
   settings: 9600 baud, 8 data bits, 1 stop bit, no parity, no flow.
-- Rollover cable is also called Serial cable.  
- 
-IOS Modes: 
+- Rollover cable is also called Serial cable.
+
+IOS Modes:
 ---
 - User (Read-Only Mode)
-- Privileged/Exec
-- Global Config 
-- Interface 
-- Sub-Intf 
-- ROM 
+- Privileged/Exec/Enable
+- Global Config
+- Interface
+- Sub-Intf
+- ROM
+
+
+Commands:
+cisco(config)# hostname <name>
+cisco(config)# banner MOTD # <message goes here. Hastag is needed>
+
+/* user to exec mode password. This is stored in clear text in config file. */
+cisco(config)# enable password <pass>
+
+/* user to exec mode password. This is stored as a hash in config file. */
+cisco(config)# enable secret <pass>
+
+cisco(config)# username <> password <>
+
+Remote Access:
+---
+cisco(config)# enable password <>
+cisco(config)# line vty 0 4
+cisco(config-line)# password <>
+cisco(config-line)# login
+
+IOS from Cisco Routers of following series can be used in GNS3
+2600 3600 7200
+
+POST - Power On Selft Test
+- Verifies hardware and components are operational.
+- Find and Load IOS software.
+- Find and Load config (NVRAM).
+
+Cisco Switches have a default vlan 1.
+
+cisco(config)# interface vlan 1
+cisco(config-if)# ip addr 10.10.10.2/24
+cisco(config-if)# no shut
+cisco(config-if)# exit
+cisco(config)# ip default-gateway 10.10.10.1 <<< needed to connect to switch
+
+
+cisco(config)# show ip interface br
+
+- When "status" is UP. Physical interface is UP (L1 and L2 are working).
+- When "Protocol" is UP.
+
+Status/Protocol Combination:
+-----
+down/down (not connected) - Nothing is connected.
+down/down
+up/down - Intf is Up. Something wrong with L1/L2.
+Administratively down/down - Intf was "shut"down by admin.
+Up/Up - All is good.
+
+cisco# show mac address-table /* contents of CAM table */
+cisco# clear mac address-table
+
+- PVST+ - Per vLAN Spanning Tree, defines one instance of STP per VLAN. It's
+  Cisco proprietary but interoperable with non-Cisco devices. Re-converges in
+  1s, instead of 50s for STP.
+
+VLAN configuration:
+cisco(config)# vlan 3
+cisco(config-vlan)# name Accounting /* Inside VLAN mode */
+cisco(config-vlan)# vlan 4
+cisco(config-vlan)# name Sales
+
+cisco(config-if)# switchport mode access
+cisco(config-if)# switchport access vlan 4
+
+Voice VLAN
+- Cisco switches have a special vlan called Voice VLAN.
+- If there is an IP Phone on access port, place that in Voice VLAN. Otherwise,
+  use whichever data VLAN is assigned.
+
+cisco(config)# interface fast ethernet0/1
+cisco(config-if)# switchport mode access
+cisco(config-if)# switchport access vlan 3
+cisco(config-if)# switchport voice-vlan 100
+
+VLAN Trunking
+----
+- Trunk interface passes all (or selected) VLANs.
+- Both ends of trunk interface must have same native VLAN or else trunk will not
+  work.
+- Obviously, the interface must be in "trunk" mode and not "acess" mode.
+
+/* MUST BE DONE FIRST */
+cisco(config)# switchport trunk encap dot1q
+
+/* makes interface as trunk */
+cisco(config)# switchport mode trunk
+
+/* OPTIONAL: only if you want to change native vlan. It MUST match on both
+ * sides. */
+cisco(config)# switchport trunk native vlan 20
+
+/* OPTIONAL: only allow following VLANs */
+cisco(config)# switchport trunk allowed vlans 1, 10, 20, 30, 41, 45, 300
 
 
 
-  
- 
+
+
+
 
 /*************************************************************/
  *           CCNA Syllabus                                    *
@@ -659,8 +756,8 @@ EIGRP Features:
   [not just the best route]
 - Establishment of adjacencies with neighbors using "Hello Protocol".
 - Support for VLSM and manual route summarization.
-- Also, supports CIDR. 
-- Metric is complex. 
+- Also, supports CIDR.
+- Metric is complex.
 
 Advantages of EIGRP:
 - Metric is based on bandwidth and cumulative delay of the path.
@@ -673,43 +770,43 @@ Advantages of EIGRP:
   Protocol) to deliver pkts to neighbors.
 - Supports Equal and Unequal Cost Load Balancing.
 
-EIGRP Messages: 
+EIGRP Messages:
 ---
-HELLO, ACK, UPDATE, QUERY, REPLY 
+HELLO, ACK, UPDATE, QUERY, REPLY
 
 EIGRP HELLO Pkts
-- Used to discover EIGRP neighbors and form adjacencies. 
+- Used to discover EIGRP neighbors and form adjacencies.
 - EIGRP HELLO pkts are sent to multicast group address. IPv4 on 224.0.0.10 and
-  IPv6 on FF02::A 
+  IPv6 on FF02::A
 - There is no ACKs for HELLO packets.
-- Sent every 5s (every 60s on low speed NBMA networks). 
+- Sent every 5s (every 60s on low speed NBMA networks).
 - Hold timer = 3 * Hello timer (5s). If HELLO pkts are not received within hold
-  timer, neighbor is unreachable.  
+  timer, neighbor is unreachable.
 
 - In IP header (v4 or v6), EIGRP is identified as by Protocol Number 88. EIGRP
-  doesn't run on TCP or UDP.  
+  doesn't run on TCP or UDP.
 
 
-    R1  <--------------------------------------------->  R2 
-    HELLO, I am R1 -> 
+    R1  <--------------------------------------------->  R2
+    HELLO, I am R1 ->
                                      <- HELLO, I am R2
 
-    NEIGHBOR table              <- UPDATE, here is my routing table. 
+    NEIGHBOR table              <- UPDATE, here is my routing table.
       is filled
- 
-    ACK, thanks for info  ->
-    UPDATE, here is my routing info -> 
 
-    TOPOLOGY table                                   TOPOLOGY table  
+    ACK, thanks for info  ->
+    UPDATE, here is my routing info ->
+
+    TOPOLOGY table                                   TOPOLOGY table
       is filled                                         is filled
 
-                                        <- ACK, thanks for info. 
-             
+                                        <- ACK, thanks for info.
+
             ======= R1 and R2 are fully converged =======
 
 - Neighbors are either in DOWN state or FULL state.
 - In above message exchanges, full routing table is sent first time. Subsequent
-  updates are only incremental changes.  
+  updates are only incremental changes.
 
 
 
@@ -3948,11 +4045,11 @@ Advertise default route info.
 
 EIGRP Commands
 ----
-# show ip eigrp neighbor 
-# show ip eigrp topology 
+# show ip eigrp neighbor
+# show ip eigrp topology
 
 AS = Autonomous System Number
-RID = Router ID 
+RID = Router ID
 FD = Feasible Distance
 RD = Route Distance
 

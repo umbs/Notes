@@ -2,148 +2,148 @@
               =============
 
 Bit: 0 or 1
-Byte: 8 bits 
-Word: 16 bits 
-Dword (Intel)/Long (ATT): 32 bits 
+Byte: 8 bits
+Word: 16 bits
+Dword (Intel)/Long (ATT): 32 bits
 Qword (Intel)/Quad (ATT): 64 bits
 
 
-          GENERAL    SYNTAX 
+          GENERAL    SYNTAX
           =================
 
-  INTEL                ATT 
-mov al, 23           movb $23, %al 
-mov bl, 6            movb $6, %bl 
-add al, bl           addb %bl, %al 
+  INTEL                ATT
+mov al, 23           movb $23, %al
+mov bl, 6            movb $6, %bl
+add al, bl           addb %bl, %al
 
 - Suffix: b = byte; w = word; l = long; q = quad
 
-ATT is more "intuitive" syntax and here is why. 
+ATT is more "intuitive" syntax and here is why.
 
 In Intel syntax, destination is usually first operand. In ATT, destination
-is 2nd operand. Hence, reading the syntax becomes intuitive. 
+is 2nd operand. Hence, reading the syntax becomes intuitive.
 
-Ex: 
-  INTEL                ATT 
-mov eax, 100          movl $100, %eax 
+Ex:
+  INTEL                ATT
+mov eax, 100          movl $100, %eax
 
-ATT can be read as "Move 100 to eax" 
-Intel can be read as "Move in to eax value 100" 
+ATT can be read as "Move 100 to eax"
+Intel can be read as "Move in to eax value 100"
 
 - In ATT syntax if no suffix is present to a mnemonic then the size is
-  inferred from destination operand. 
+  inferred from destination operand.
 
 
-           x86 Register Set 
+           x86 Register Set
            ================
 
-AL = 8 bit register. Can hold signed & unsigned ints or single byte chars. 
+AL = 8 bit register. Can hold signed & unsigned ints or single byte chars.
 AH = Same as AL
 AX = AH + AL. Changing values in AH and AL will affect AX, but AL and AH
-are independent. H & L represent High and Low. 
+are independent. H & L represent High and Low.
 
                      AX (ASCII register ??)
               +------+------+
-              |  AH  |  AL  | 
+              |  AH  |  AL  |
               +------+------+
 
 
 EAX = 32 bit register. Lower 16 bits is AX. There is no way to directly
-access top 16 bits of EAX. 
+access top 16 bits of EAX.
 
                     EAX (Extra AX)
               +------+------+------+------+
-              |      |      |     AX      |  
-              |      |      |  AH  |  AL  |  
+              |      |      |     AX      |
+              |      |      |  AH  |  AL  |
               +------+------+------+------+
 
 
-RAX = 64 bit register. 
+RAX = 64 bit register.
 
-                                     RAX (64 bit) 
+                                     RAX (64 bit)
               +------+------+------+------+------+------+------+------+
-              |      |      |      |      |            EAX            | 
-              |      |      |      |      |      |      |     AX      | 
+              |      |      |      |      |            EAX            |
+              |      |      |      |      |      |      |     AX      |
               |      |      |      |      |      |      |  AH  |  AL  |
               +------+------+------+------+------+------+------+------+
 
 
 - In x64 CPU, there are 16 such registers as RAX. Its called General
   Purpose Registers (GPR).
-  
+
   64     low 32     low 16      low 8             Notes
-  bits     bits       bits       bits   
+  bits     bits       bits       bits
   ------------------------------------------------------------
   RAX    EAX        AX          AH/AL             Accumulator
-  RBX    EBX        BX          BH/BL             Base 
-  RCX    ECX        CX          CH/CL             Counter 
-  RDX    EDX        DX          DH/DL             Data 
+  RBX    EBX        BX          BH/BL             Base
+  RCX    ECX        CX          CH/CL             Counter
+  RDX    EDX        DX          DH/DL             Data
   RSP    ESP        SP          SPL               Stack Pointer
-  RBP    EBP        BP          BPL               Base Pointer 
-  RSI    ESI        SI          SIL               Source Index 
-  RDI    EDI        DI          DIL               Destination Index 
+  RBP    EBP        BP          BPL               Base Pointer
+  RSI    ESI        SI          SIL               Source Index
+  RDI    EDI        DI          DIL               Destination Index
 
-  R7     R7D        R7W         R7B               Only on 64 bit 
-  R8     R8D        R8W         R8B               Only on 64 bit 
-  R9     R9D        R9W         R9B               Only on 64 bit 
-  R10    R10D       R10W        R10B              Only on 64 bit 
-  R11    R11D       R11W        R11B              Only on 64 bit 
-  R12    R12D       R12W        R12B              Only on 64 bit 
-  R13    R13D       R13W        R13B              Only on 64 bit 
-  R14    R14D       R14W        R14B              Only on 64 bit 
-  R15    R15D       R15W        R15B              Only on 64 bit 
+  R7     R7D        R7W         R7B               Only on 64 bit
+  R8     R8D        R8W         R8B               Only on 64 bit
+  R9     R9D        R9W         R9B               Only on 64 bit
+  R10    R10D       R10W        R10B              Only on 64 bit
+  R11    R11D       R11W        R11B              Only on 64 bit
+  R12    R12D       R12W        R12B              Only on 64 bit
+  R13    R13D       R13W        R13B              Only on 64 bit
+  R14    R14D       R14W        R14B              Only on 64 bit
+  R15    R15D       R15W        R15B              Only on 64 bit
   ------------------------------------------------------------
 
 
-- There are Special Registers: 
+- There are Special Registers:
         RIP = Instruction Pointer. Location in RAM where next instruction
-              is present. 
-        RFLAGS = Helps to check condition/results of previous instruction. 
+              is present.
+        RFLAGS = Helps to check condition/results of previous instruction.
         S[] = Set of registers used by floating point unit (called x87
-        floating unit). They are 80 bits wide and work like a stack.  
-        SIMD = Many SIMD registers, depending on CPU. 
+        floating unit). They are 80 bits wide and work like a stack.
+        SIMD = Many SIMD registers, depending on CPU.
         - Many registers specific to CPU such as: counting clock ticks,
-          measuring performance of branching, segment regs, etc.  
+          measuring performance of branching, segment regs, etc.
 
-- CS - Code Segment Register 
+- CS - Code Segment Register
   DS - Data Segment
   SS - Stack Segment
-  ES - Extra 
+  ES - Extra
 
-  The above 4 registers are no longer in x64, but were there earlier. 
+  The above 4 registers are no longer in x64, but were there earlier.
 
             BASIC   INSTRUCTIONS
             ====================
-- mov, add, sub, inc, dec, neg, imul, ret  
+- mov, add, sub, inc, dec, neg, imul, ret
 
 
-- C and C++, each have their own calling conventions. 
+- C and C++, each have their own calling conventions.
 - In x64, the first 6 integer variables (function parameters) is passed
   via registers. Pretty much anything that can be represented as integer
-  variable is passed via registers. 
+  variable is passed via registers.
 
-         Param        Register 
+         Param        Register
          -----        --------
-             1        RDI 
-             2        RSI 
-             3        RCX 
-             4        RDX 
-             5        R8 
-             6        R9 
-            >6        passed on Stack 
-   
-   Ex:      void Func(int a, char b, unsigned long c) 
-            int a: passed in EDI portion of RDI register 
-            char b: passed in SIL portion of RSI register 
-            unsigned long c: passed in RDX 
+             1        RDI
+             2        RSI
+             3        RCX
+             4        RDX
+             5        R8
+             6        R9
+            >6        passed on Stack
 
-- Integer values are returned in C++ in RAX registers. 
+   Ex:      void Func(int a, char b, unsigned long c)
+            int a: passed in EDI portion of RDI register
+            char b: passed in SIL portion of RSI register
+            unsigned long c: passed in RDX
+
+- Integer values are returned in C++ in RAX registers.
          Type         Register
          ----         --------
-        char/bool     AL 
-        short         AX 
-        int           EAX 
-        long          RAX 
+        char/bool     AL
+        short         AX
+        int           EAX
+        long          RAX
 
 
 MEMORY ADDRESSING MODES
@@ -154,98 +154,98 @@ MEMORY ADDRESSING MODES
 (c) Complete Memory Addressing Mode. The most general form:
         D(Rb, Ri, S) = Mem[Reg(Rb) + S*Reg(Ri) + D]
         Ex: leal instructions use this
-            leal (%eax, %ebx, 4), %ecx 
-(d) PC Relative Addressing. 
+            leal (%eax, %ebx, 4), %ecx
+(d) PC Relative Addressing.
         0x100   cmp r2, r3
-        0x102   je  0x70        # PC relative addressing  
+        0x102   je  0x70        # PC relative addressing
         0x104   ...
         ...     ...
         0x172   add r3, r4
 
-        PC relative addressing are relocatable. Absolute branches are not. 
+        PC relative addressing are relocatable. Absolute branches are not.
 
 
 - Some Arithmetic Ops
 
       Instr     S, D    Result
       addl      S, D    D = D+S
-      subl      S, D    D = D-S 
-      imull     S, D    D = D*S 
+      subl      S, D    D = D-S
+      imull     S, D    D = D*S
       sall      S, D    D = D<<S
-      sarl      S, D    D = D>>S  # Arithmetic shift 
-      shrl      S, D    D = D>>S  # Logical shift 
+      sarl      S, D    D = D>>S  # Arithmetic shift
+      shrl      S, D    D = D>>S  # Logical shift
       xorl      S, D    D = D^S
       andl      S, D    D = D&S
-      orl       S, D    D = D|S 
-   
+      orl       S, D    D = D|S
+
    + There is no distiction between signed and unsigned numbers in
-   Assembly. 
+   Assembly.
 
-- Jump instructions 
+- Jump instructions
 
-      jX         Condition              Description 
+      jX         Condition              Description
       ---------------------------------------------
-      jmp        1                      Unconditional 
-      je         ZF                     Equal/Zero 
-      jne        ~ZF                    Not Equal/Not Zero 
-      js         SF                     Negative 
-      jns        ~SF                    Nonnegative 
+      jmp        1                      Unconditional
+      je         ZF                     Equal/Zero
+      jne        ~ZF                    Not Equal/Not Zero
+      js         SF                     Negative
+      jns        ~SF                    Nonnegative
       jg         ~(SF^OF) & ~ZF         Greater (Signed)
       jge        ~(SF^OF)               Greater or Equal (Signed)
-      jl         (SF^OF)                Less (Signed) 
-      jle        (SF^OF) | ZF           Less or Equal (Signed) 
-      ja         ~CF & ~ZF              Above (Unsigned) 
-      jb         CF                     Below (Unsigned) 
+      jl         (SF^OF)                Less (Signed)
+      jle        (SF^OF) | ZF           Less or Equal (Signed)
+      ja         ~CF & ~ZF              Above (Unsigned)
+      jb         CF                     Below (Unsigned)
 
-- Status registers (implicitly set, most of instructions): 
-        CF = Carry Flag, only for unsigned 
-        ZF = Zero Flag 
+- Status registers (implicitly set, most of instructions):
+        CF = Carry Flag, only for unsigned
+        ZF = Zero Flag
         SF = Sign Flag, only for signed
-        OF = Overflow Flag 
+        OF = Overflow Flag
 
-Conditionals: x86-64 (Performance Improvement using `cmovle` instruction) 
-    int absdiff(int x, int y)      |  # function prologue  
+Conditionals: x86-64 (Performance Improvement using `cmovle` instruction)
+    int absdiff(int x, int y)      |  # function prologue
     {                              |  movl %edi, %eax    # eax = x
             int res;               |  movl %esi, %edx    # edx = y
             if (x > y)             |  subl %esi, %eax    # eax = x-y
-                    res = x-y;     |  subl %edi, %eax    # edx = y-x 
+                    res = x-y;     |  subl %edi, %eax    # edx = y-x
             else                   |  cmpl %esi, %edi    # x:y
-                    res = y-x;     |  cmovle %edx, %eax  # eax = edx, if <= 
-            return res;            |  ret  
-    }  
+                    res = y-x;     |  cmovle %edx, %eax  # eax = edx, if <=
+            return res;            |  ret
+    }
 
 
-+ Jump Tables: 
-        - Represents switch statements in C. Indirect addressing is used. 
-        - Doesn't show up in disassembled code. 
-        - Can inspect using GDB 
-                db asm-cntl 
-        - Preferred if the range of cases are small. 
++ Jump Tables:
+        - Represents switch statements in C. Indirect addressing is used.
+        - Doesn't show up in disassembled code.
+        - Can inspect using GDB
+                db asm-cntl
+        - Preferred if the range of cases are small.
 
 
-+ Program Stack [from 5] 
++ Program Stack [from 5]
 
-R = Readable; O = Read-Only; W = Writeable; X = Executable 
+R = Readable; O = Read-Only; W = Writeable; X = Executable
 
         +-----------------------------------+
-   RW   |             STACK                 | 
-        +-----------------------------------+   
+   RW   |             STACK                 |
+        +-----------------------------------+
         |                                   |
         |                                   |
         |                                   |
         |                                   |
-        +-----------------------------------+   
+        +-----------------------------------+
    RW   |     HEAP (Dynamic Data)           | malloc()
-        +-----------------------------------+   
+        +-----------------------------------+
    RW   |   Static Data & Global Vars       |
-        +-----------------------------------+   
+        +-----------------------------------+
    O    |        String Literals            |
-        +-----------------------------------+   
+        +-----------------------------------+
    OX   |     Program Instructions          |
-        +-----------------------------------+  
+        +-----------------------------------+
 
 
-+ Stack Overview 
++ Stack Overview
 
         +-----------+ <--+
         |           |    |
@@ -269,79 +269,79 @@ R = Readable; O = Read-Only; W = Writeable; X = Executable
         +-----------+ <---%esp
 
 
-+ Register saving conventions (IA32/Linux): 
++ Register saving conventions (IA32/Linux):
         - Caller saves following registers if its being used after call to
           another routine: %eax, %edx, %ecx
         - Callee saves following registers if it wants to use them: %ebx,
-          %esi, %edi 
+          %esi, %edi
         - %eax is used to return integer value.
         - %esp, %ebp: special form of callee save-restored to original
-          values upon exit from procedure. 
+          values upon exit from procedure.
 
-+ X64-64 Procedure Call Highlights 
- - Arguments (up to first 6) are in registers. 
- - Local vars also in registers if there is room. 
- - callq instruction stores 64-bit return address on stack. 
- - No frame pointer (%ebp): 
++ X64-64 Procedure Call Highlights
+ - Arguments (up to first 6) are in registers.
+ - Local vars also in registers if there is room.
+ - callq instruction stores 64-bit return address on stack.
+ - No frame pointer (%ebp):
         - All references to stack frame made relative to %rsp. Eliminates
           need to update %ebp/%rbp, which is now available for general
           purpose use.
- - Functions can access memory up to 128 bytes beyond %rsp: the "red zone" 
-   - Can store some temps on stack without altering %rsp 
- - Registers still designated "caller saved" or "callee saved" 
+ - Functions can access memory up to 128 bytes beyond %rsp: the "red zone"
+   - Can store some temps on stack without altering %rsp
+ - Registers still designated "caller saved" or "callee saved"
  - Ideally, x86-64 functions need no stack frame at all !!!!!!!
         - Just a return address is pushed on to the stack.
- - A func does need a stack frame when it: 
+ - A func does need a stack frame when it:
         - Has too many local vars
-        - Has local vars that are arrays or structs 
-        - Uses & operator to compute address of local var 
-        - Calls another function that takes more than 6 args 
-        - Needs to save the state of callee-save regs b4 modifying them. 
+        - Has local vars that are arrays or structs
+        - Uses & operator to compute address of local var
+        - Calls another function that takes more than 6 args
+        - Needs to save the state of callee-save regs b4 modifying them.
 
 
 
-        Cache Performance Metrics 
+        Cache Performance Metrics
         =========================
-Miss Rate: 
+Miss Rate:
         - Fraction of memory references NOT found in cache
-          (misses/accesses) = (1 - hit rate) 
-        - Typical numbers = 3% to 10% for L1 cache 
+          (misses/accesses) = (1 - hit rate)
+        - Typical numbers = 3% to 10% for L1 cache
 
-Hit Time: 
+Hit Time:
         - Time to deliver a line in the cache to the processor. Includes
-          time to determine if line is in the cache. 
-        - Typical hit times: 1-2 clock cycles for L1 cache. 
+          time to determine if line is in the cache.
+        - Typical hit times: 1-2 clock cycles for L1 cache.
 
-Miss Penalty: 
-        - Additional time required because of a miss. 
-        - Typically 50 - 200 cycles. 
+Miss Penalty:
+        - Additional time required because of a miss.
+        - Typically 50 - 200 cycles.
 
 
-                Memory Hierarcy 
+                Memory Hierarcy
                 ===============
 
-                registers 
+                registers
                     |
                 on-chip L1
                 cache (SRAM)
                     |
                 off/on-chip L2
-                cache (SRAM) 
+                cache (SRAM)
                     |
-                main memory 
-                 (DRAM) 
+                main memory
+                 (DRAM)
                     |
-                local secondary 
-                 storage 
+                local secondary
+                 storage
                     |
-                remote disks 
+                remote disks
 
 
-Example: Intels Core i7 Cache Hierarchy 
+Example: Intels Core i7 Cache Hierarchy
 
         Core 0                          Core 1
         ------                          ------
-        registers                       registers 
+        registers                       registers
            |                                |
      +-----+-----+                    +-----+-----+
      |           |                    |           |
@@ -349,30 +349,30 @@ Example: Intels Core i7 Cache Hierarchy
     L1           L1                  L1           L1
   d-cache      i-cache             d-cache       i-cache
      |           |                    |            |
-     L2 unified cache                 L2 unified cache 
+     L2 unified cache                 L2 unified cache
            |                                 |
            |                                 |
-           L3 unified cache, shared by all cores 
+           L3 unified cache, shared by all cores
                              |
                              |
-                        Main Memory 
+                        Main Memory
 
-+ L1 i-cache and d-cache: 
-        32KB, 8-way set-associative, Access: 4 cycles 
-+ L2 unified cache: 
-        256KB, 8-way set-associative, Access: 11 cycles 
-+ L3 unified cache: 
++ L1 i-cache and d-cache:
+        32KB, 8-way set-associative, Access: 4 cycles
++ L2 unified cache:
+        256KB, 8-way set-associative, Access: 11 cycles
++ L3 unified cache:
         8MB, 16-way, Access: 30-40 cycles
-+ Block Size: 64 Bytes for all caches. 
++ Block Size: 64 Bytes for all caches.
 
 
         Cache Organization
         ==================
-+ Where will data go in cache? 
++ Where will data go in cache?
         (a) Direct Mapped Caching: Data in memory is directly mapped to
         location in cache.
         (b) Fully Associative Caching: Data in memory can go anywhere in
-        cache. 
+        cache.
         (c) Set-Associative Caching: Cache is divided in to fixed number
         of sets. Data can go anywhere in those sets.
 
@@ -380,56 +380,56 @@ Example: Intels Core i7 Cache Hierarchy
         +-------------+------------+----+
         |             |            |    |
         +-------------+------------+----+
-            (Tag)        (Index)    (Offset) 
+            (Tag)        (Index)    (Offset)
 
-        Offset - Location of data inside a set. 
-        Index  - Indicates which set. 
-        Tag -    Type of data in Cache. 
+        Offset - Location of data inside a set.
+        Index  - Indicates which set.
+        Tag -    Type of data in Cache.
 
 + K-way associativity means, in EACH set in the cache, there are K
   entries to fill. So, number of sets in a Cache = (M/K) where M is size
-  of Cache. 
+  of Cache.
 
-+ General Cache Organization: 
++ General Cache Organization:
         - There are S sets in a cache (2^s, where small 's' indicates
-          # of bits representing sets).  
+          # of bits representing sets).
         - Each set has E blocks (or cache lines) = 2^e where small 'e'
-          indicates # of bits representing blocks or cache lines.  
+          indicates # of bits representing blocks or cache lines.
         - Each block or cache line has: V (a valid bit), Tag (certain # of
           bits indicating data type), B bytes of data (2^b, where b = # of
           bits).
         - Size of Cache = S * E * B bytes
 
-+ When processor gets an address, it does following: 
++ When processor gets an address, it does following:
         - Locate Set.
-        - Check if any line in the Set has matching tag. 
+        - Check if any line in the Set has matching tag.
                 - Yes + Valid bit set = Hit
-                - Else miss. 
+                - Else miss.
         - Locate data starting at offset.
 
 
-+ How are writes handled in Cache? 
-        - Write-Through: write immediately to main memory. 
++ How are writes handled in Cache?
+        - Write-Through: write immediately to main memory.
         - Write-Back: Defer write to main memory until line is evicted.
                 Need a dirty bit to indicate if line is different than
-                main memory. 
+                main memory.
         - Write-Allocate: Load data in to Cache and update line in cache.
-                Good if more writes to the location follow. 
-        - No-Write-Allocate: Just write immediately to memory. 
+                Good if more writes to the location follow.
+        - No-Write-Allocate: Just write immediately to memory.
 
 
 + Types of Cache Misses: CCC
         - Compulsory
-        - Conflict 
-        - Capacity 
+        - Conflict
+        - Capacity
 
 
 + Exceptions: Synchronous and Asynchronous.
         - Asynchronous: Occurs due to events outside processor control.
-                        Interrupts are an example.  
-        - Synchronous: 
+                        Interrupts are an example.
+        - Synchronous:
                 - Traps: Intentional transfer control of OS to perform
-                  some function. Ex: Sys calls, breakpoints. 
+                  some function. Ex: Sys calls, breakpoints.
                 - Faults: Unintentional but possibly recoverable. Ex: Page
                   Faults (recoverable), Segment Faults (unrecov),
                   Divide/Zero (unrecov).
@@ -442,91 +442,91 @@ Virtual Addresses to Physical Addresses.
 + Page Tables can be stored in Cache/Memory. But that can slow down Page
 Table lookup's. Hence, TLB (Translation Lookaside Buffer) to speed Page
 Table Lookup's. On Intel Core2 Duo, there can be 128 or 256 entries in
-TLB. 
+TLB.
 
 
         Dynamic Memory Allocation
         =========================
 + sbrk() syscall is used by malloc/calloc family of routines to increase,
-decrease or allocated memory from heap. 
+decrease or allocated memory from heap.
 
-+ What info is needed by memory allocator to keep track of blocks in heap? 
++ What info is needed by memory allocator to keep track of blocks in heap?
 
-+ When calling free(void *p), how does free know the size to free? 
-        - Keep size info in previous word. Standard practice. 
++ When calling free(void *p), how does free know the size to free?
+        - Keep size info in previous word. Standard practice.
 
-+ How to keep track of free blocks? 
++ How to keep track of free blocks?
         Method 1: Implicit Lists: Linked list of blocks (first word being
-        length) - links ALL blocks, even the used blocks. 
+        length) - links ALL blocks, even the used blocks.
         Method 2: Explicit Lists: Linked list of free blocks.
         Method 3: Segregated free lists: Different free lists for
-        different size classes. 
+        different size classes.
         Method 4: Blocks sorted by size: Can use a balanced tree (R-B
         Tree) with pointers within each free block, and the length used as
-        key. 
+        key.
 
-+ How to keep track if block is allocated or not? 
++ How to keep track if block is allocated or not?
         - Standard trick to save memory. If blocks are aligned, the first
-          word is size (typically, multiples of 8 bytes). 
+          word is size (typically, multiples of 8 bytes).
         - The last bit of these sizes are always 0. Use it to determine
           allocated/free flag.
-        - When reading size, must remember to mask out this bit. 
+        - When reading size, must remember to mask out this bit.
 
-+ How to find a free block (using Implicit Lists)? 
++ How to find a free block (using Implicit Lists)?
         - First fit: Search the list from beginning and return first
-          match. 
-        - Drawbacks: Linear time, 'Splinters' at the beginning. 
+          match.
+        - Drawbacks: Linear time, 'Splinters' at the beginning.
 
         - Next fit: Start from where you stopped last time. Faster than
-          'First Fit' as it avoids scanning unhelpful blocks.  
-        - Drawback: Some research suggests that fragmentation is worse. 
+          'First Fit' as it avoids scanning unhelpful blocks.
+        - Drawback: Some research suggests that fragmentation is worse.
 
         - Best fit: Choose best (closest match in size) free block. This
-          keeps fragementation small. 
-        - Drawback: Slower. 
+          keeps fragementation small.
+        - Drawback: Slower.
 
 
 
 
 + Common C related memory pitfalls and perils:
-        1 Dereferencing bad pointers. 
-        2 Reading uninitialized memory. 
+        1 Dereferencing bad pointers.
+        2 Reading uninitialized memory.
         3 Overwriting memory.
                 - bad memory assignments
-                - Off-by-one error. 
-                - Not checking max string size (classic buffer overflow). 
+                - Off-by-one error.
+                - Not checking max string size (classic buffer overflow).
                 - Misunderstanding pointer arithmetic.
-                - Referencing a pointer instead of object it points to. 
-                
+                - Referencing a pointer instead of object it points to.
+
         4 Referencing non-existent variables.
                 - Local variables disappear after returning from
-                  functions. 
+                  functions.
 
-        5 Freeing blocks multiple times. 
-        6 Referencing freed blocks. 
-        7 Failing to Free Blocks (Memory Leaks) 
-                - Returning without freeing. 
-                - Freeing only part of data structure. 
+        5 Freeing blocks multiple times.
+        6 Referencing freed blocks.
+        7 Failing to Free Blocks (Memory Leaks)
+                - Returning without freeing.
+                - Freeing only part of data structure.
 
 
         3 Overwriting memory
 
-        Ex: 
+        Ex:
         --
-        int **p; 
-        p = (int **) malloc (N * sizeof(int)); 
+        int **p;
+        p = (int **) malloc (N * sizeof(int));
         // Incorrect. It should be sizeof(int *). Here sizeof(int) is
-        // assigned, which can be 4 bytes each. 
+        // assigned, which can be 4 bytes each.
 
         for (i=0; i<N; i++)
                 p[i] = (int *) malloc (M * sizeof(int));
                 // because of above, on a 64-bit m/c, p[i] will get 8
-                // bytes each, hence an overwrite of memory. 
+                // bytes each, hence an overwrite of memory.
 
 
-+ Data Representation in Java: 
-        - For Chars, 2 bytes (unlike 1 byte in C). 
-        - Chars are NOT null terminated. 
++ Data Representation in Java:
+        - For Chars, 2 bytes (unlike 1 byte in C).
+        - Chars are NOT null terminated.
         - Beginning of the string has length field.
 
         - Same as above for Arrays. First field is length of Array.
@@ -537,9 +537,9 @@ decrease or allocated memory from heap.
         C                       Java
        ---                      ----
    struct rec {                 class Rec {
-        int i;                          int i; 
-        int a[3];                       int[] a = new int[3]; 
-        struct rec *p;                  Rec p; 
+        int i;                          int i;
+        int a[3];                       int[] a = new int[3];
+        struct rec *p;                  Rec p;
    };                           };
 
 
@@ -547,7 +547,7 @@ decrease or allocated memory from heap.
    ---------------                      ------------------
 
    +---+---------------+----+           +----+----+----+
-   | i |       a       | p  |           | i  | a  | p -|---> 
+   | i |       a       | p  |           | i  | a  | p -|--->
    +---+---------------+----+           +----+----+----+
                                                |
                                                |
@@ -556,8 +556,8 @@ decrease or allocated memory from heap.
                                         | 3  |   int [3]      |
                                         +----+----------------+
 
-+ References in Java (pointers equivalent) can only point to an object. 
-+ And it can point only to first element (not to middle of it). 
++ References in Java (pointers equivalent) can only point to an object.
++ And it can point only to first element (not to middle of it).
 
 
 
@@ -566,7 +566,7 @@ decrease or allocated memory from heap.
 
 
 
-Reference: 
+Reference:
 [1]
 http://www.youtube.com/watch?v=zRqLU_AxNdU&feature=share&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOvME&index=3
 
@@ -576,73 +576,92 @@ http://www.youtube.com/watch?v=nDj35pMLBQE&list=PLKK11Ligqiti8g3gWRtMjMgf1KoKDOv
 [3] Complete code set for IA32
 http://www.jegerlehner.ch/intel/IntelCodeTable.pdf
 
-[4] Very good description of instructions 
+[4] Very good description of instructions
 http://web.itu.edu.tr/kesgin/mul06/intel/index.html
 
-[5] Notes from Hardware Software Interface course on Coursera. 
+[5] Notes from Hardware Software Interface course on Coursera.
 
 
 
 @@@@@@@@@@@@@@@@@@@@@     ENDIANNESS EXPLAINED     @@@@@@@@@@@@@@@@@@@@@@@@@
 
 Consider four byte number: 0x0a0b0c0d; left being smallest memory address
-and right being highest. 
+and right being highest.
 
-  Number: 0x0a0b0c0d. Here LSB is 0x0d and MSB is 0x0a 
+  Number: 0x0a0b0c0d. Here LSB is 0x0d and MSB is 0x0a
 
-  Memory Address: 0x100    0x101    0x102    0x103     
+  Memory Address: 0x100    0x101    0x102    0x103
                   +--------+--------+--------+--------+
-                  |        |        |        |        | 
+                  |        |        |        |        |
                   +--------+--------+--------+--------+
 
 Little-Endian: In LE, LSB is in lowest memory and MSB in highest memory
-address. So, the number is stored as: 0x0d0c0b0a in memory.  
+address. So, the number is stored as: 0x0d0c0b0a in memory.
 Ex: Intel x86
 
-  Number: 0x0a0b0c0d. Here LSB is 0x0d and MSB is 0x0a 
+  Number: 0x0a0b0c0d. Here LSB is 0x0d and MSB is 0x0a
 
-  Memory Address: 0x100    0x101    0x102    0x103     
+  Memory Address: 0x100    0x101    0x102    0x103
                   +--------+--------+--------+--------+
-                  |  0x0d  |  0x0c  |  0x0b  |  0x0a  | 
+                  |  0x0d  |  0x0c  |  0x0b  |  0x0a  |
                   +--------+--------+--------+--------+
 
-  code: 
-        int i = 0x0a0b0c0d; 
-        char *c = (char *) &i; 
-        printf ("0x%x\n", *c); 
+  code:
+        int i = 0x0a0b0c0d;
+        char *c = (char *) &i;
+        printf ("0x%x\n", *c);
 
-        // Output is 0xd = little-endian. 
+        // Output is 0xd = little-endian.
 
 Big-Endian (aka Network Byte Order): In BE, MSB is in lowest memory address
 and LSB in highest. It looks the way numbers are written down on paper.
-So, the number is stored as: 0x0a0b0c0d in memory.  
-Ex: Motorola 68k, Data transfer on networks use NBO,  
+So, the number is stored as: 0x0a0b0c0d in memory.
+Ex: Motorola 68k, Data transfer on networks use NBO,
 
-  Number: 0x0a0b0c0d. 
+  Number: 0x0a0b0c0d.
 
-  Memory Address: 0x100    0x101    0x102    0x103     
+  Memory Address: 0x100    0x101    0x102    0x103
                   +--------+--------+--------+--------+
-                  |  0x0a  |  0x0b  |  0x0c  |  0x0d  | 
+                  |  0x0a  |  0x0b  |  0x0c  |  0x0d  |
                   +--------+--------+--------+--------+
 
-  code: 
-        int i = 0x0a0b0c0d; 
-        char *c = (char *) &i; 
-        printf ("0x%x\n", *c); 
+  code:
+        int i = 0x0a0b0c0d;
+        char *c = (char *) &i;
+        printf ("0x%x\n", *c);
 
-        // Output is 0xa = big-endian. 
+        // Output is 0xa = big-endian.
 
 Host-Byte Order: Ordering on the host machine. If processor is x86, its
-little-endian, if its Motorola's 68k, its big-endian. 
- 
+little-endian, if its Motorola's 68k, its big-endian.
+
 Mixed-Endian (or Middle-Endian): Ordering of bytes within 16-bit word may differ
-from ordering of 16-bit words within 32-bit word. 
+from ordering of 16-bit words within 32-bit word.
 
 Bi-Endian: Architectures allowing switchable endianness in data segment, code
 segment or both. 'Bi-Endian' refers how processor accesses data. Instruction
 access (fetching instruction words) is usually fixed endian. Intel's Itanium CPU
-allows bi-endian data and instruction access.   
-Ex: ARM version 3 and above, PowerPC,  
+allows bi-endian data and instruction access.
+Ex: ARM version 3 and above, PowerPC,
 
-Reference: 
-[1] http://en.wikipedia.org/wiki/Endianness 
+Reference:
+[1] http://en.wikipedia.org/wiki/Endianness
+
+
+@@@@@@@@@@@@@@@@  C TO ASSEMBLY CODE GENERATION & OTHER TOOLS @@@@@@@@@@@@@@@@@@
+$ gcc -c -S test.c
+/* generates a test.s assembly file */
+
+$ gcc -g -c test.c
+/* generates test.o object file, with debug symbols present (-g flag) */
+
+$ objdump
+$ readelf
+$ nm
+$ strings
+$ size <object or exec file>
+
+Reference:
+[1] Section 3 in:
+https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
+
