@@ -135,7 +135,7 @@ RAX = 64 bit register.
    Ex:      void Func(int a, char b, unsigned long c)
             int a: passed in EDI portion of RDI register
             char b: passed in SIL portion of RSI register
-            unsigned long c: passed in RDX
+            unsigned long c: passed in RCX
 
 - Integer values are returned in C++ in RAX registers.
          Type         Register
@@ -146,7 +146,7 @@ RAX = 64 bit register.
         long          RAX
 
 
-MEMORY ADDRESSING MODES
+MEMORY ADDRESSING MODES (for x86)
 (a) Indirect        (R)         Mem[Reg(R)]
         Ex: movl  (%ecx), %eax
 (b) Displacement    D(R)        Mem[Reg(R)+D]
@@ -163,6 +163,256 @@ MEMORY ADDRESSING MODES
         0x172   add r3, r4
 
         PC relative addressing are relocatable. Absolute branches are not.
+
+More on Addressing Modes:
+-------
++ Direct Addressing (or Absolute Addressing)
++ Immediate Addressing
++ Register (Direct) Addressing
++ Register (Indirect) Addressing
+
+
+DIRECT (or ABSOLUTE) ADDRESSING
+----
+The operand is in memory. Address of the operand is held in instruction.
+
+            instruction
+                ---
+    operation, <register>, <memory-location>
+                                    |
+                                    |
+                                    +-----> memory-location
+                                              +---------+
+                                              | Operand |
+                                              +---------+
+Ex:
+    ld, r2, (100)   ; r2 = contents of memory. Address is 100
+
+    instruction
+       ---
+    +---------------+
+    | ld | r2 | 100 |
+    +---------------+        Memory
+            |    |          +-------+
+            |    |          |       |
+            |    |          +-------+
+            |    +----> 100 |       |-----------+
+            |               +-------+           |
+            |               |       |           |
+            |               +-------+           |
+            |                                   |
+            |                Registers          |
+            |               +----------+        |
+            |           r1  |          |        |
+            |               +----------+        |
+            +---------> r2  |          |<-------+
+                            +----------+
+                        r3  |          |
+                            +----------+
+                                ...
+
+
+Another example of Direct (or Absolute) Addressing
+
+Ex:
+    st, r2, (100)   ; r2 = contents of memory. Address is 100
+
+    instruction
+       ---
+    +---------------+
+    | ld | r2 | 100 |
+    +---------------+        Memory
+            |    |          +-------+
+            |    |          |       |
+            |    |          +-------+
+            |    +----> 100 |       |<----------+
+            |               +-------+           |
+            |               |       |           |
+            |               +-------+           |
+            |                                   |
+            |                                   |
+            |                Registers          |
+            |               +----------+        |
+            |           r1  |          |        |
+            |               +----------+        |
+            +---------> r2  |          |--------+
+                            +----------+
+                        r3  |          |
+                            +----------+
+                                ...
+
+
+
+IMMEDIATE ADDRESSING
+----
+The operand is held in the instruction.
+
+            instruction
+                ---
+    operation, <register>, <operand>
+                            
+Ex: mov r2, 123     ; r2=123
+
+    instruction
+       ---
+    +---------------+
+    |mov | r2 | 123 |---------------------------+
+    +---------------+                           |
+            |                                   |
+            |                Registers          |
+            |               +----------+        |
+            |           r1  |          |        |
+            |               +----------+        |
+            +---------> r2  |          |<-------+
+                            +----------+
+                        r3  |          |
+                            +----------+
+                                ...
+
++ Useful for constants: int x = 123;
+
+    C code                      Assembly code
+    ------                      -------
+    int x = 123;                mov r1, 123
+    a = b+34;                   add r3, r4, 34  ; r3 is a, r4 is b
+
+
+REGISTER DIRECT ADDRESSING
+----
+The operand is held in a register, which is specified in instruction.
+
+            instruction
+                ---
+    operation, <register>, <register-no>
+                                |
+                                |
+                                v
+                            register-no
+                            +---------+
+                            | Operand |
+                            +---------+
+                            
+Ex: mov r3, r2      ; r3=r2
+
+    instruction
+       ---
+    +---------------+
+    |mov | r3 | r2  |
+    +---------------+                            
+                                                 
+                             Registers           
+                            +----------+         
+                        r1  |          |         
+                            +----------+         
+                        r2  |    |     |         
+                            +----|-----+         
+                        r3  |    v     |
+                            +----------+
+                                ...
+
++ Useful for integer variables. 
+        C Code              Assembly 
+        ------              --------
+        x = y;              mov r1, r2
+        a = b+c             mov r3, r4, r5
+
+                            
+
+REGISTER INDIRECT ADDRESSING
+----
+The operand is held in memory. The address of operand location is held in a
+register, that is specified in instruction.
+
+            instruction
+                ---
+    operation, <register>, <register-no>
+                                |
+                                |
+                                v
+                            register-no
+                            +---------+
+                            |  Memory |
+                            | Address |
+                            +---------+
+                                |
+                                |
+                                v
+                            Memory Address 
+                            +-----------+
+                            | Operand   |
+                            +-----------+
+                            
+
+Ex:     ld, r3, (r2)        ; r3=contents of memory, address in r2 
+
+    +---------------+
+    | ld | r3 |(r2) |
+    +---------------+        Memory
+            |    |          +-------+
+            |    |          |       |
+            |    |          +-------+
+            |    |          |   *   |100 <------+
+            |    |          +---|---+           |
+            |    |          |   |   |           |
+            |    |          +---|---+           |
+            |    |              |               |
+            |    |              +----------+    |
+            |    |                         |    |
+            |    |           Registers     |    |
+            |    |          +----------+   |    |
+            |    |      r1  |          |   |    |
+            |    |          +----------+   |    |
+            |    +----> r2  |  100     |---|----+
+            |               +----------+   |
+            +---------> r3  |          |<--+
+                            +----------+
+                                ...
+
+
+    C Code                              Assembly Code 
+    ------                              -------------
+    int *b  
+    int a; // say address of a is 100
+    b = &a;                             mov r1, 120
+    *b = 123;                           ld  (r1), 123 
+
+
+REGISTER INDIRECT ADDRESSING PLUS OFFSET
+----
+Similar to above except an offset held in the instruction is added to register
+contents to form the effective address.
+
+            instruction
+                ---
+    operation, <register>, <register-no>, offset
+                                |           |
+                                |           |
+                                v           |
+                            register-no     |
+                            +---------+     |
+                            |  Memory |-----+
+                            | Address |     |
+                            +---------+     |
+                                            |
+                                            |
+                                            v
+                                    Memory Address 
+                                    +-----------+
+                                    | Operand   |
+                                    +-----------+
+
+Ex: ld, r3, 100(r2)
+
+
+REGISTER INDIRECT ADDRESSING VARIATION 
+(Index Register Addressing)
+-----
++ Register Indirect Addressing in which register is seen as an "index" in to a
+list (1D array). 
+
++ Register holds number of locations from starting point. Starting point given
+in instruction. 
+
 
 
 - Some Arithmetic Ops
@@ -581,6 +831,7 @@ http://web.itu.edu.tr/kesgin/mul06/intel/index.html
 
 [5] Notes from Hardware Software Interface course on Coursera.
 
+[6] http://webpages.uncc.edu/abw/ITCS3182F09/slides3.pdf
 
 
 @@@@@@@@@@@@@@@@@@@@@     ENDIANNESS EXPLAINED     @@@@@@@@@@@@@@@@@@@@@@@@@
@@ -661,7 +912,67 @@ $ nm
 $ strings
 $ size <object or exec file>
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  readelf commands @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+/* header info */
+$ readelf --file-header <elf-file>
+
+Ex:
+$ readelf --file-header vim.core
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 09 00 00 00 00 00 00 00 00
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - FreeBSD
+  ABI Version:                       0
+  Type:                              CORE (Core file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x0
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          0 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         79
+  Size of section headers:           64 (bytes)
+  Number of section headers:         0
+  Section header string table index: 0
+
+/* notes sections of elf-files have more info about the file (like .core files) */
+$ readelf --notes <elf-file>
+
+Ex:
+$ readelf --notes vim.core
+
+Notes at offset 0x00001188 with length 0x0000ad18:
+  Owner         Data size       Description
+  FreeBSD       0x00000078      NT_PRPSINFO (prpsinfo structure)
+  FreeBSD       0x000000e0      NT_PRSTATUS (prstatus structure)
+  FreeBSD       0x00000200      NT_FPREGSET (floating point registers)
+  FreeBSD       0x00000018      NT_THRMISC (thrmisc structure)
+  FreeBSD       0x000000e0      NT_PRSTATUS (prstatus structure)
+  FreeBSD       0x00000200      NT_FPREGSET (floating point registers)
+  FreeBSD       0x00000018      NT_THRMISC (thrmisc structure)
+  FreeBSD       0x00000884      NT_PROCSTAT_PROC (proc data)
+  FreeBSD       0x0000156c      NT_PROCSTAT_FILES (files data)
+  FreeBSD       0x00008574      NT_PROCSTAT_VMMAP (vmmap data)
+  FreeBSD       0x00000008      NT_PROCSTAT_GROUPS (groups data)
+  FreeBSD       0x00000006      NT_PROCSTAT_UMASK (umask data)
+  FreeBSD       0x000000d4      NT_PROCSTAT_RLIMIT (rlimit data)
+  FreeBSD       0x00000008      NT_PROCSTAT_OSREL (osreldate data)
+  FreeBSD       0x0000000c      NT_PROCSTAT_PSSTRINGS (ps_strings data)
+  FreeBSD       0x00000114      NT_PROCSTAT_AUXV (auxv data)
+
+/* segments info. Segments are info on chunks of code from various files that a
+ * process/binary includes. */
+$ readelf --segments <elf-file>
+
 Reference:
 [1] Section 3 in:
 https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
+[2] Info on coredump:
+http://backtrace.io/blog/blog/2015/10/03/whats-a-coredump/
+
 
