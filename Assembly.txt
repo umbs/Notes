@@ -418,6 +418,7 @@ in instruction.
 - Some Arithmetic Ops
 
       Instr     S, D    Result
+     --------------------------
       addl      S, D    D = D+S
       subl      S, D    D = D-S
       imull     S, D    D = D*S
@@ -778,7 +779,6 @@ decrease or allocated memory from heap.
         - For Chars, 2 bytes (unlike 1 byte in C).
         - Chars are NOT null terminated.
         - Beginning of the string has length field.
-
         - Same as above for Arrays. First field is length of Array.
 
 
@@ -808,11 +808,6 @@ decrease or allocated memory from heap.
 
 + References in Java (pointers equivalent) can only point to an object.
 + And it can point only to first element (not to middle of it).
-
-
-
-
-
 
 
 

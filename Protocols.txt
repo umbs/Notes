@@ -1902,42 +1902,7 @@ Basic Principles
 
 
 /********************************************************************/
- *                                                                  *
- * TODO:                                                            *
- *    IPv6 Overview                                                 *
- *    IPv6 Fundamentals                                             *
- *    IPv6 Fundamentals CLI Demo                                    *
- *    IPv6 Transition Mechanisms Fundamentals                       *
- *    IP Multicast - Overview                                       *
- *    IP Multicast - Fundamentals                                   *
- *                                                                  *
- * ---------- IGP TOPICS ----------                                 *
- *    Dist Vect Prot Operations                                     *
- *    Dist Vect Prot Convergence                                    *
- *    Link State Prot Operations                                    *
- *    LS Convergence & Scalability                                  *
- *    OSPF Overview                                                 *
- *    OSPF Network Components                                       *
- *    OSPFv3 Fundamentals                                           *
- *    IS-IS Overview                                                *
- *    IS-IS Fundamentals                                            *
- *    IS-IS Fundamentals Addendum                                   *
- *                                                                  *
- *    (THERE ARE OTHER IS-IS & OSPF NOTES)                          *
- *                                                                  *
- *                                                                  *
- * ---------- BGP TOPICS ----------                                 *
- *    ALL TOPICS COVERED                                            *
- *                                                                  *
- * ---------- MPLS TOPICS ----------                                *
- *    ALL TOPICS COVERED                                            *
- *                                                                  *
- * ---------- L3VPN TOPICS ----------                               *
- *    ALL TOPICS COVERED                                            *
- *                                                                  *
- * ---------- QOS   TOPICS ----------                               *
- *    ALL TOPICS COVERED                                            *
- *                                                                  *
+ *                  IPv6 Addressing Basics                          * 
 /********************************************************************/
 
 

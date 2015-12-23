@@ -81,64 +81,6 @@ Advanced Git: Graphs, Hashes and Compressions
 https://www.youtube.com/watch?v=ig5E8CcdM9g
 
  
-       GIT  INTERNALS 
-       ==============
-$ git init      // creates .git/ directory
-
-$ ls .git/
-    HEAD
-    branches/
-    config -- local git config 
-    description 
-    hooks/ -- contains client/server hook scripts 
-    index
-    info/  -- contains .gitignore file 
-    objects/
-    refs/
-
-Core parts of Git: HEAD, index, objects, refs
-
-objects/ -- Stores all content for your database. 
-refs/ -- Stores pointers in to commit objects in that branches. 
-HEAD -- Points to branch you currently checkedout. 
-index -- Files containing staging area info. 
-
-
-Tree Objects
----
-$ git update-index --add --cacheinfo SHA-1 <filename>
-    updates staging area/index with <filename> from version SHA-1. --add
-    flag adds files to staging area. --cacheinfo pulls content from
-    database and not the file itself. 
-
-$ git write-tree 
-    Writes contents of staging area to a tree object. 
-
-$ git read-tree --prefix=<name> SHA-1
-$ git write-tree 
-    Read trees in to your staging area. 
-
-$ git commit-tree SHA-1
-    Builds a commit tree object. 
-
-$ git update-ref <ref-file> SHA-1
-
-
-
-
-Plumbing Commands
----
-git hash-object
-        $ echo 'test contents' | git hash-object -w --stdin 
-        d670460b4b4aece5915caf5c68d12f560a9fe3e4
-        $
-        // -w indicates store the content; --stdin indicates the content
-        // comes from stdin instead of a file. 
-
-git cat-file -p SHA 
-git cat-file -t SHA 
-
-
 Patching: 
 --------
 - Create a patch to a file.  
@@ -183,39 +125,6 @@ Reference:
     http://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
     http://makandracards.com/makandra/2521-git-how-to-create-and-apply-patches 
  
-Staging: 
---------
-Addition: 
-# git add file 
-# git add . 
-
-Removal of a file: 
-# git rm file 
-
-Rename: 
-# git mv old new 
-
-Ignore files: 
-# put them in .gitignore 
-
-Committing: 
-# git commit -a -m "some comment" 
-  ! will create a commit of ALL [if -a is used] or only staged items 
-  ! Without `-a`, git will only commit what is in the index meaning all 
-  ! the files that git is tracking. It will not contain new files and 
-  ! files that have been removed but not told to git. 
-
-
-
-Bootstrapping 
--------------
-# mkdir project 
-# cd project 
-# git init 
-
-Repo Status
-------------
-# git status 
 
 Diffs 
 -----
@@ -286,48 +195,6 @@ References
    ! remote branches 
 
 
-Create a branch 
----------------
-# git branch name <commit>
-   ! new branch "name" on HEAD or point to a specified commit 
-
-# git checkout -f name 
-   ! check out files from branch "name" by switching to that branch 
-   ! optionally, force overwriting changed files 
-
-# git checkout -b name <commit> 
-   ! create a new branch and switch to it. Two operations in one 
-   ! command. Optionally, specify a commit to which the new branch 
-   ! should point to.  
-
-# git checkout name
-   ! if there are changes in local branch which is not committed yet
-   ! then switch to "name" will throw error. 
-
-# git checkout -m name 
-   ! merge outstanding diff/changes on to branch "name". This can result 
-   ! in conflict 
-
-
-Merging
--------
-# git merge branch1 branch2 ...
-
-Rebasing
---------
-# git rebase branch 
-
-! Undoing a rebase 
-
-
-Remotes 
--------
-# git clone <remote> 
-   ! brings in changes from remote and populates local one. 
-
-# git fetch 
-   ! 
-
 Git is slow
 -----------
 # git gc 
@@ -336,4 +203,64 @@ Git is slow
    ! Pre-loads index in parallel 
 # git update-index --asume-unchanged <file> 
    ! Does not index file and hence saves time 
+
+
+       GIT  INTERNALS 
+       ==============
+$ git init      // creates .git/ directory
+
+$ ls .git/
+    HEAD
+    branches/
+    config -- local git config 
+    description 
+    hooks/ -- contains client/server hook scripts 
+    index
+    info/  -- contains .gitignore file 
+    objects/
+    refs/
+
+Core parts of Git: HEAD, index, objects, refs
+
+objects/ -- Stores all content for your database. 
+refs/ -- Stores pointers in to commit objects in that branches. 
+HEAD -- Points to branch you currently checkedout. 
+index -- Files containing staging area info. 
+
+
+Tree Objects
+---
+$ git update-index --add --cacheinfo SHA-1 <filename>
+    updates staging area/index with <filename> from version SHA-1. --add
+    flag adds files to staging area. --cacheinfo pulls content from
+    database and not the file itself. 
+
+$ git write-tree 
+    Writes contents of staging area to a tree object. 
+
+$ git read-tree --prefix=<name> SHA-1
+$ git write-tree 
+    Read trees in to your staging area. 
+
+$ git commit-tree SHA-1
+    Builds a commit tree object. 
+
+$ git update-ref <ref-file> SHA-1
+
+
+
+
+Plumbing Commands
+---
+git hash-object
+        $ echo 'test contents' | git hash-object -w --stdin 
+        d670460b4b4aece5915caf5c68d12f560a9fe3e4
+        $
+        // -w indicates store the content; --stdin indicates the content
+        // comes from stdin instead of a file. 
+
+git cat-file -p SHA 
+git cat-file -t SHA // gives type of commit 
+git cat-file blob SHA // gives content of the blob (if it's blob) 
+git cat-file commit SHA // gives detailed info about SHA 
 
