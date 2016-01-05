@@ -1,0 +1,81 @@
+@@@@@@@@@@@    STANDARD   TEMPLATE   LIBRARY    @@@@@@@@@@@@@
+
+Vectors 
+=======
+#include <vector> 
+
+using namespace std;
+
+vector<T> N;    // Empty vector 
+vector<T> N[10]; // An array of 10 vectors. "May be" not what we want. 
+vector<T> N(10); // Vector of size 10. 
+int count = v.size();   // size of vector. Don't use this to determine if vector
+                        // is empty.
+bool is_empty = v.empty(); 
+
+vector<int> v; 
+v.push_back(100);   // adds 100 at end of vector. Don't worry about memory
+                    // allocation. It's NOT done one at a time.  
+
+v.resize();     // resize 
+
+NOTE: Is you push_back() after resize(), new elements are added AFTER newly
+created memory and NOT INTO it. 
+
+v.clear();  // vector now has zero elems. 
+
+
+Vector Initialization
+-------
+vector<int> v1;     // Default values are zeros 
+...
+vector<int> v2 = v1; 
+vector<int> v3(v1);
+
+
+vector<int> nums (20, 5);   // Default values are 5. 
+vector<string> names (20, "Unknowns");  // Defaults to "Unknowns" 
+
+
+Multidimensional Vectors
+--------
+vector< vector<int> > Matrix;
+vector< vector<int> > Matrix(N, vector<int>(M));    // of size NxM, with zero
+                                                    // default values
+vector< vector<int> > Matrix(N, vector<int>(M, -1));    // of size NxM, -1
+                                                        // initial value.  
+
+
+
+Pairs
+=====
+
+A simple form: 
+
+template<typename T1, typename T2> struct pair { 
+     T1 first; 
+     T2 second; 
+}; 
+
+pair<int, int> P;   // pair of ints 
+pair<string, pair<int, int> > P;    // pair of string and two ints. 
+
+ pair<string, pair<int,int> > P; 
+ string s = P.first; // extract string 
+ int x = P.second.first; // extract first int 
+ int y = P.second.second; // extract second int 
+
+
+
+Iterators
+=========
+
+References: 
+[1]
+https://www.topcoder.com/community/data-science/data-science-tutorials/power-up-c-with-the-standard-template-library-part-1/
+[2] 
+http://cs.brown.edu/~jak/proglang/cpp/stltut/tut.html
+[3] 
+http://www.tutorialspoint.com/cplusplus/cpp_stl_tutorial.htm
+[4] 
+http://en.cppreference.com/w/cpp 
