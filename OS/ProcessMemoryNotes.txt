@@ -1,0 +1,84 @@
+               PROCESS        MEMORY 
+               =====================
+
+
+         +----------------------------------------------+
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         |                                              |
+         +----------------------------------------------+
+
+ 
+ Virtual Memory: 
+ - Each process has its own VM space. 
+ - 4 advantages: 
+        1. Process memory isolation unless explicitly shared. 
+        2. Kernel is free to play around with memory abstraction of
+        hardware.
+        3. Create address space for resources not in RAM (main purpose of
+        mmap). We can map a whole hard drive to virtual space. 
+        4. Sharing physical resources needs to be loaded only once to RAM.
+        
+- COW: Copy-on-Write is consequence of #4 above. When one process writes
+  to shared resource that other processes should not see, a copy of data
+  is made. In Linux, Kernel SamePage Merge [KSM] does this. 
+
+- fork() duplicates all resources between processes, including (virtual)
+  memory. If either parent or child modifies data, only then is a copy
+  made in RAM (example of COW). 
+
+- Virtual Memory is implemented in pages of 4KiB size (in kernel).
+  Finer-grained API (like malloc()) exists only in user space. 
+
+
+- 4 types of memory
+
+             |    PRIVATE               |    SHARED 
+-------------+--------------------------+-------------------------------
+             |                          |
+ANONYMOUS    |    stack                 |    mmap(ANON, SHARED)
+             |    malloc()              |
+             |    mmap(ANON, PRIVATE)   |
+             |    brk()/sbrk()          |
+             |                          |
+-------------+--------------------------+-------------------------------
+             |                          |
+FILE-BACKED  |    mmap(fd, PRIVATE)     |    mmap(fd, SHARED) 
+             |    binary/shared libs    |
+-------------+--------------------------+-------------------------------
+
+- /proc/<pid> directory gives an opening to peek in process memory and
+  gain in-depth understanding. 
+
+- proc manpage gives lot of details. procps[2] is a frontend to this info. 
+
+- Tools needed to understand detailed memory map: 
+  Linux: top, pmap, htop, pahole[3,4], procps[2], read files in /proc/<pid>/*,
+  Mac OSX: top, vmmap, vm_stat, 
+
+References: 
+[1] https://techtalk.intersec.com/2013/07/memory-part-1-memory-types/
+[2] http://sourceforge.net/projects/procps-ng/
+[3] Utility to find holes in structures. 
+http://lwn.net/Articles/206805/
+[4] http://lwn.net/Articles/335942/
+

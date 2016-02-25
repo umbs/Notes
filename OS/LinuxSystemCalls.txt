@@ -1,0 +1,23 @@
+                LINUX      SYSTEM       CALLS
+                =============================
+
+FILE: 
+-----
+fopen - file open and return FILE *
+fdopen - given file desc, return FILE * 
+fclose -
+fdclose - 
+
+fread - 
+fgets - gets `size`-1 characters into an input string. 
+fgetc - get one char. 
+getw - get next integer from input stream. 
+
+fwrite - 
+feof -
+
+open - 
+read - 
+write - 
+close - 
+lseek - 
