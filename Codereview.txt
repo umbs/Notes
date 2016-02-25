@@ -39,18 +39,22 @@ Read/Write to Event Queues:
 
 
 @@@@@@@@@@@@@@@@@@@@@@@    STATIC CODE ANALYZERS     @@@@@@@@@@@@@@@@@@@@@@
-Free Tools [1]:
+Static Analysis Tools
 ---
-Splint (Secure Programming Lint)
-cppcheck
-PScan
-Flawfinder
-RATS (Rough Auditing Tool for Security)
-MOPS (MOdelchecking Programs for Security Properties)
+Free
+* cppcheck
+* valgrind (not a static checker, but code profiler)
+* Uno
+* Coverity Prevent (there is a free version)
+* Sparse - Used in linux kernel dev.
+* splint (or even lint is good and constantly updated).
+* RATS
+* SMATCH
+* FlawFinder - Written by David Wheeler.
+* PScan
 
 
-
-Reference:
-[1]
-https://www.sans.org/reading-room/whitepapers/securecode/secure-software-development-code-analysis-tools-389
-
+Paid
+* cppdefender
+* Flexelint
+* pc-lint
