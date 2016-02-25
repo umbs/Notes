@@ -1,38 +1,38 @@
-Window Splitting 
+Window Splitting
 ----------------
-:vsp // Vertical split 
-:sp  // Horizontal split 
-:vsp <file> // Opens <file> in new window 
-:10sp // Specify split height 
+:vsp // Vertical split
+:sp  // Horizontal split
+:vsp <file> // Opens <file> in new window
+:10sp // Specify split height
 :set splitright // Opens window in right [for vertical splits] and becomes
                   active
-:set splitbelow // same for horizontal window 
-ctrl+w <number> < // reduce width of window by <number> 
-ctrl+w <number> > // increase width of window by <number> 
-<number> ctrl+w +   // increase length of window by <number> 
-<number> ctrl+w -   // decrease length of window by <number> 
-ctrl+w | // max out window width 
-ctrl+w _ // max out window height 
-ctrl+w = // normalize all window sizes (equal sizes) 
-ctrl+w R // swap both windows [including buffers] 
+:set splitbelow // same for horizontal window
+ctrl+w <number> < // reduce width of window by <number>
+ctrl+w <number> > // increase width of window by <number>
+<number> ctrl+w +   // increase length of window by <number>
+<number> ctrl+w -   // decrease length of window by <number>
+ctrl+w | // max out window width
+ctrl+w _ // max out window height
+ctrl+w = // normalize all window sizes (equal sizes)
+ctrl+w R // swap both windows [including buffers]
 
 <number> ctrl+w w // switch to window <number>
-ctrl+w T // make current split window in to a tab (capital T)  
+ctrl+w T // make current split window in to a tab (capital T)
 
-vim -O file1 file2 // open two files side by side 
+vim -O file1 file2 // open two files side by side
 
-Tab Views 
+Tab Views
 ----------
-:tabnew <file> // opens <file> in a new tab 
-:tabp // previous tab 
-:tabn // next tab 
+:tabnew <file> // opens <file> in a new tab
+:tabp // previous tab
+:tabn // next tab
 
-In Normal mode 
-gt // go to next tab 
-gT // go to previous tab 
-ngt // got to tab no. n 
+In Normal mode
+gt // go to next tab
+gT // go to previous tab
+ngt // got to tab no. n
 
-vim -p file1 file 2 // open multiple files in tab mode 
+vim -p file1 file 2 // open multiple files in tab mode
 
 
 Regular Expressions
@@ -76,43 +76,43 @@ Notes:
 2. Regular expressions are to be used where pattern is specified
 
 
-Very good resource on Vim Regex 
+Very good resource on Vim Regex
 --------------------------------
 http://vimregex.com/
 
 
-Substituting Tips 
+Substituting Tips
 -----------------
 Save typing by using \zs and \ze to set the start and end of a pattern.
-For example, instead of: 
+For example, instead of:
 
 :s/Copyright 2007 All Rights Reserved/Copyright 2008 All Rights Reserved/
 
-Use: 
+Use:
 
 :s/Copyright \zs2007\ze All Rights Reserved/2008/
 
 
 Diff
 ----
-vimdiff file1 file2 // diff two files side by side 
+vimdiff file1 file2 // diff two files side by side
 
 
 
 Code Folding
 ------------
-Reference - :help folding 
-            :help za 
+Reference - :help folding
+            :help za
             :help zo
             :help zc
 
 Synopsis - Using commands here, code in a file can be temporarily folded
 [hidden]. Folding helps in navigating a file quickly as parts of the file
-is hidden. 
+is hidden.
 
-zc - close a fold 
-zo - open a fold 
-za - toggle a fold [open if its closed and vice versa] 
+zc - close a fold
+zo - open a fold
+za - toggle a fold [open if its closed and vice versa]
 
 zC, zO, zA are similar but inner folding levels are also affected by them,
 not just the level at which cursor is present.
@@ -120,42 +120,42 @@ not just the level at which cursor is present.
 
 Page Scroll
 -----------
-^d ^u   Scroll half a page down or up 
+^d ^u   Scroll half a page down or up
 ^f ^b   Scroll full page up or down
 
 Reformatting
 ------------
-In the .vimrc file, `set textwidth=80` (or whatever column width). 
-- `gg`  go to top of file
-- `gqG` globally set the entire file to 80 width column. It joins lines. If you
-        dont want lines to be joined, have a blank one in between. 
-- `gq}` change only current paragraph 
-- `G`   go to beginning of last line 
-- `ga`  Gives ASCII value of character under cursor 
+In the .vimrc file, `set textwidth=80` (or whatever column width).
+gg  - go to top of file
+gqG - globally set the entire file to 80 width column. It joins lines. If you
+        dont want lines to be joined, have a blank one in between.
+gq} - change only current paragraph
+G   - go to beginning of last line
+ga  - Gives ASCII value of character under cursor
 
-Power of g command 
+Power of g command
 ------------------
-:[range]g/pattern/command 
+:[range]g/pattern/command
 - Above command acts on [range] (default - whole file), by executing 'cmd'
-  command, for each line matching 'pattern'. 
+  command, for each line matching 'pattern'.
 
-Examples: 
+Examples:
 :g/pattern/d
-- Delete all lines matching 'pattern' 
+- Delete all lines matching 'pattern'
 
-:g/pattern/z#.5 
-- Display context (5 lines) for all occurrences of a pattern. 
+:g/pattern/z#.5
+- Display context (5 lines) for all occurrences of a pattern.
 
 :g/pattern/z#.5 | echo "==========="
 - Same as above but with some beautification.
 
 :g!/pattern/d
-:v/pattern/d 
+:v/pattern/d
 - Do NOT delete lines matching 'pattern'
 
 :g/^\s*$/d
 - Delete all blank lines. '^' start of line, '\s*' is zero or more white
-  spaces, '$' end of line. 
+  spaces, '$' end of line.
 
 
 
@@ -168,13 +168,13 @@ Wikia Tips
     http://vim.wikia.com/wiki/Insert_line_numbers
 
     :%s/^/\=printf("%d", line("."))   // prints current line number. Read
-                                      // above link for more granularity.   
+                                      // above link for more granularity.
 2. VIM as a logfile viewer.
-    
+
 
 Code Indentation
 ----------------
-1. Shift+V and then up/down 
+1. Shift+V and then up/down
 2. hit =
 
 Key Mappings

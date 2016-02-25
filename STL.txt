@@ -44,6 +44,19 @@ Notes:
 
 @@@@@@@@@@@    STANDARD   TEMPLATE   LIBRARY    @@@@@@@@@@@@@
 
+- STL containts five kinds of components:
+    * Containers: vectors, bit vectors, lists, deques, sets, multisets, maps,
+                  multimaps, queues, stacks and priority queues.
+    * Iterators
+    * Algorithms
+    * Function Objects
+    * Allocators
+
+-
+
+
+
+
 Vectors
 =======
 #include <vector>
