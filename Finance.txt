@@ -469,3 +469,110 @@ http://www.nasdaq.com/quotes/company-financials.aspx
 
 [3]
 https://www.youtube.com/watch?v=GtaoP0skPWc&list=PL9ECA8AEB409B3E4F
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+                UNDERSTANDING   FINANCIAL   MARKETS
+                ===================================
+
+GENERAL CONCEPTS:
+-----
+Key takeaways when investing in bonds:
+    * Be aware of limitations of benchmarking in bond market.
+    * Consider the fundamentals of borrower you lend to.
+    * Lower the starting yield, lower the expected return.
+    * Buy bonds if you expect a macroeconomic slowdown and vice versa.
+
+Key takeaways when investing in equities:
+    * Be aware of limitations of benchmarking in equity market.
+    * Strong GDP growth does not always imply higher equity returns.
+    * Don't chase past performance.
+    * Look for truly active managers.
+
+Participants in Financial Markets:
+    * Firms looking to raise money.
+    * Investors.
+    * Government - Insures market integrity, protect investors from price abuse.
+    * Intermediaries - Brokers, Market Makers etc.
+
++ Ratio of Value of equity market vs GDP indicates ...
+
++ What is the function of financial markets?
+    * Pooling of resources (like money) and subdividing shares of companies so
+      that investors can own part of it.
+    * Trasfering resources across time and space.
+    * Managing risks. Three suggested ways:
+        - Diversify.
+        - Insurance by purchasing derivative products.
+        - Securitization - Not sure I understood this.
+    * Providing information for buyers and sellers.
+
++ Expectations from well functioning Financial Markets:
+    * Trading info: price, volume, order book ...; all this must be available to
+      all participants.
+    * Trading technology:
+    * Company info:
+    * Market opportunities:
+
+
+BASIC CONCEPTS:
+-----
++ Returns (well understood, but neverthless) of stock A:
+                July            August
+    Price       100             101
+
+        Return: 101-100
+                ------- = 1%
+                  100
+
++ Now, which of following stock has higher return?
+                July    August  September
+    Stock A     1%      1%      13%
+    Stock B     13%     3%      2%
+
+    Average monthly returns is:
+    Stock A: 5%
+    Stock B: 6%
+
+    Stock B is better.
+
++ Risk
+                July    August  September
+    Stock A     1%      1%      13%
+    Stock B     5%      5%      5%
+
+    Both stocks average the same. Which one to buy?
+    Stock B because it's "risk-free"
+
+                July    August  September
+    Stock A     7%      10%     13%
+    Stock B     9%      10%     11%
+
+    Stock B is risk-free because of less variability.
+
++ Return-Risk Tradeoff
+    * We want higher return.
+    * We want less risk.
+    * Use average return vs risk ratio. Higher this ratio, better it is.
+
++ Summary:
+    * Compute average returns over a period of time instead of a point in time.
+    * Draw up a histogram of window of return (0-10%, 10-20% etc) and number of
+      times you got those returns, divided by total number of returns.
+    *
+
+
+
+
+
+
+
+
+
+
+
+References:
+[1] Coursera Course:
+https://www.coursera.org/learn/understanding-financial-markets/home/welcome
+
+[2]
