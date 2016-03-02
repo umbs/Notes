@@ -475,6 +475,8 @@ https://www.youtube.com/watch?v=GtaoP0skPWc&list=PL9ECA8AEB409B3E4F
                 UNDERSTANDING   FINANCIAL   MARKETS
                 ===================================
 
+Week 1:
+-------
 GENERAL CONCEPTS:
 -----
 Key takeaways when investing in bonds:
@@ -557,17 +559,50 @@ BASIC CONCEPTS:
 
 + Summary:
     * Compute average returns over a period of time instead of a point in time.
+    * Calculate Return-Risk ratio. Higher ratio is better.
     * Draw up a histogram of window of return (0-10%, 10-20% etc) and number of
       times you got those returns, divided by total number of returns.
-    *
 
 
+Week 2:
+-------
+
++ DISCOUNTING: Mechanism used in finance to estimate today's value of an amount
+of money to be received in the future.
+
+How Much is a Company Worth in Stock Market?
+----
++ Net Present Value (NPV) Rule is typically used in evaluating value.
+
+    NPV = PV (Benefits) - PV (Costs)
+
+    * invest in projects with positive NPV.
+
+Example 1:
+
+    -150        20      50      70      70  <-- cash flows
+     |----------|-------|--------|-------|
+    t=0       t=1      t=2      t=3     t=4 <--- time
+
+If the discount rate is 10%, what is the NPV of the project?
+
+    NPV = -150 + 20/(1.10) + 50/(1.10)^2 + 70/(1.10)^3 + 70/(1.10)^4
+        = 9.91
+
+    NPV is positive and thus invest.
 
 
+Example 2:
 
+    100        -90      20     -90      40  <-- cash flows
+     |----------|-------|--------|-------|
+    t=0       t=1      t=2      t=3     t=4 <--- time
 
+If the discount rate is 10%, what is the NPV of the project?
 
+    NPV = 100 - 90/(1.10) + 20/(1.10)^2 - 90/(1.10)^3 + 40/(1.10)^4
 
+    NPV is negative and thus do not invest.
 
 
 

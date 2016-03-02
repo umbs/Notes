@@ -148,6 +148,13 @@ Reference:
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@    Yocto Project     @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+- What is purpose of Yocto Project?
+    * To build custom linux OS for any embedded devices.
+    * It is NOT an embedded linux distribution. It creates one for you.
+
+- Hosted by Linux Foundation.
+
+- The build system used by Yocto is called Poky.
     Poky = BitBake + Metadata
 
 Poky    = Build system used by Yocto Project.
@@ -162,6 +169,76 @@ Metadata = Task definitions
     * Recipes (.bb) = Logical units of software/images to build, ex. recipe for
                 GNU tar command, GTK library, and so on. Recipes are also used
                 define what packages get included in your final image.
+
+Recipe = Set of instructions for building packages including
+    * where to obtain upstream sources and which patches to apply.
+    * dependencies.
+    * configurations/compilation options.
+    * define what files go in to what output packages. Like documentation has
+      it's own package.
+
+
+- Build System Workflow
+
+1) Download upstream software, called as fetching the sources.
+2)
+
+
+Recipe has following.
+
+Summary:
+Description:
+Homepage:
+License:
+Depends: // declare build time dependencies.
+
+SRC_URI:
+    // Variable PV is used to indicate Packet Version. Usually, recipes have
+    // version number in it's name (like: ethtool_2.6.36.bb). PV indicates
+    // 2.6.36 in this case.
+
+
+- Standard Recipe Build Steps:
+    * Following functions are typical steps. They can be overridden when needed.
+
+    do_fetch
+    do_unpack
+    do_patch
+    do_configure
+    do_compile
+    do_install
+    do_package
+
+
++ LAYERS:
+    - Powerful software abstraction used by Yocto build system.
+    - Yocto build system consists of many layers.
+    - Layer is a logical collection of recipes representing Core, BSP (Board
+      Support Package) or an application stack.
+    - All layers have a priority and can override policy and config settings of
+      layers beneath it.
+
+
++ Example usage of layers:
+
+            Developer-Specific Layer
+            Commercial Layer (from OSV)
+            UI Specific Layer
+            Hardware Specific BSP
+            Yocto Specific Layer Metadata (meta-yocto)
+            OpenEmbedded Core Metadata (oe-core)
+
+
+>>>> End of video.
+
+
+
+
+Resources:
+[1] Gettnig Started with Yocto Project:
+    https://vimeo.com/36450321
+
+[2] http://aosabook.org/en/yocto.html
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // GCC flags:
