@@ -601,12 +601,111 @@ Example 2:
 If the discount rate is 10%, what is the NPV of the project?
 
     NPV = 100 - 90/(1.10) + 20/(1.10)^2 - 90/(1.10)^3 + 40/(1.10)^4
+        = -5.59
 
     NPV is negative and thus do not invest.
 
++ EQUITY: A firms equity = Assets - Liabilities.
+    * Equity is split in to many small chunks called "shares".
+
++ Two important rights that come with owning shares.
+    * If firm were to liquidate, after payoff of liabilities, shareholders get a
+      portion of what is leftover.
+    * Receive part of dividends.
+
++ Which methods do investors use to value companies?
+    * Discounted cash flow (DCF).
+    * Valuation based on comparable firms (multiples).
+
++ DISCOUNTED CASH FLOW:
+    - What cashflow to use? Free Cash Flow (FCF), that firm has available to pay
+      _all_ investors, both debt and equity holders.
+    - We forecast FCFs over an explicit forecast horizon of N years.
+
++ Cash flows beyond the forcast horizon is assumed to grow at a constant rate: g
++ This assumption allows us to compute "terminal value" that represents the
+  value of the firm from end of explicit forecast horizon onwards.
+
+    Terminal Value = V
+    Growth rate beyond explicit forecast horizon = g
+    Weighted average cost of capital = r
+
+    V = (1+g/(r-g)) x FCF
+
++ Which discount rate to be used (what is 'r' in above equation?)
+    - Weighted average cost of capital (WACC). It is the average cost of capital
+      the firm must pay to all it's investors.
+    - It corresponds to the expected return of investors in company.
+
++ Enterprise value (V) is:
+
+    V0 = FCF1/(1+r) + FCF2/(1+r)^2 + FCF3/(1+r)^3 + ... FCFn/(1+r)^n
+
++ Price of one share P:
+    P0 = (V0-Debt0)/Shares Outstanding0
 
 
-References:
++ Example
+
+         2016   2017    2018    2019    2020
+    -----------------------------------------
+    FCF  100    110     120     127     134
+
+    - From 2020, firm will grow at 4%.
+    - Firms WACC is 12%
+    - Has 500 million USD in debt.
+    - Has 100 miliion outstanding shares.
+
+    What is the price of one share?
+
+    V0 = 100/1.12 + 110/1.12^2 + 120/1.12^3 + 127/1.12^4 + (134+1742)/1.12^5
+        = USD 1407.60 million, value of the company.
+
+    **** The $1742 is the terminal value at year 5 of that company.
+
++ Price of one share = (1407.60-500)/100 = 9.08 USD
+
+
+
++ VALUATION BY MULTIPLES:
+    It's a 3 step process:
+    * Find comparable listed firms.
+    * Compute ratio of Market Value/Earnings.
+    * Infer value of company of interest.
+
+
+Example 1:
++ We want to value privately held firm A.com
++ Has earnings of $10 million.
++ Comparable listed e-commerce firms have P/E of 20.
++ Value of A.com = 10 * 20 = $200 million.
+
+
+Example 2:
++ Want to value privately held firm B Inc.
++ EBITDA = $30.7 mil
++ Has 5.4 mil shares outstanding and debt of $125 mil.
++ Comparable firms have Enterprise Value to EBITDA multiple of 7.4
++ What is value of one share of B Inc?
+
++ Enterprise Value = 7.4 * 30.7 = $227.18 mil
++ Subtracting debt and dividing by outstanding shares
+    P = (227.18 - 125)/5.4 = $18.92
+
+
+OTHER MULTIPLES:
++ Depending on industry, various multples exists:
+    * P/E ratio = Market Cap/Net Income
+    * EBITDA multiple = Enterprise Value/EBITDA
+    * EBIT multiple = Enterprise Value/EBIT
+    * Sales multiple = Enterprise Value/Sales
+    ...
+
++ HOw to choose a multiple?
+    * One that's operating in same industry.
+
+
+References
 [1] Coursera Course:
 https://www.coursera.org/learn/understanding-financial-markets/home/welcome
 
