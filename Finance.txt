@@ -630,7 +630,7 @@ If the discount rate is 10%, what is the NPV of the project?
     Growth rate beyond explicit forecast horizon = g
     Weighted average cost of capital = r
 
-    V = (1+g/(r-g)) x FCF
+    V = ((1+g)/(r-g)) x FCF
 
 + Which discount rate to be used (what is 'r' in above equation?)
     - Weighted average cost of capital (WACC). It is the average cost of capital
@@ -705,8 +705,404 @@ OTHER MULTIPLES:
     * One that's operating in same industry.
 
 
++ Fixed Income - Government Bonds
+--------
+Glossary in Bonds:
+-----
+COUPON
+
+PRINCIPAL
+
+MATURITY
+
+DURATION - It's weighted average maturity of a bond's cash flow. It is an
+average of the times (in years) until the payment of each cash flow.
+
+    Duration = Equilibrium point of all the PV of cash flows (coupons and
+               principal)
+
+Example: Cash flow chart.
+    First coupon: 1 year
+    Second coupon: 2 years
+    Third coupon: 3 years
+    Fourth coupon: 4 years
+    Fifth coupon + Principal: 5 years
+
+    What is the simple (ie., non-weighted) average of these different times (in
+    years).
+
+    = (1+2+3+4+5)/5 = 3 years.
+
+- Remember the experiment shown by professor. Water was poured a little bit in
+  different glasses (representing coupons) and a big bottle (representing
+  principal). They were all placed on wooden beam. The beam was balanced on
+  small block (obviously, the block is off of center). This position of the
+  block represents Duration.
+
+
+YIELD
+
+YIELD TO MATURITY: It's the Internal Rate of Return (IRR) you get on a bond if
+you hold it until maturity and all cash flows are paid as agreed.
+
+Example:
+Suppose you pay $95 for a bond, maturing in 1 year, with coupon of $5 and face
+value of $100 (ie., you get $100 back at maturity + $5 as coupon)
+
+What is Yield to Maturity of this bond?
+    (105-95)/95 = 10.53%
+
+What is rationale for lower bond price when yield is high?
+
+The value/price of a bond:
+    Price = sum of all cash flow in present value + principal in present value
+    This is same as NPV formula.
+
+FACE VALUE:
+
+
+AT PAR:
+
+
+- Bonds are issued in domestic currency.
+- It's backed by full faith of government.
+
+
+Benefits:
+- Pre-determined stream of revenue (coupons), including the capital at maturity.
+- Seen as low risk because it depends on probability of government defaulting,
+  which is very low.
+-
+
+
+Risks in Investing in Bonds:
+-----
+- There are 5 types of risks in bonds
+    * Economic
+    * Political
+    * Interest Rate
+    * Inflation
+    * Currency
+
+* Economic Risk: Like Greece, Argentina. Govt can default. Govt some times can
+raise tax, which will make investors to ask more returns.
+
+* Political Risk: Similar to Economic but slightly different. Govt can devalue
+currency, for instance, to boost export. It happened in Russia around 1998.
+Existing bond holders will loose lot of money because Russian bonds will loose
+credit rating. To attract investors, Govt has to issue higher yield. Therefore,
+existing bond holders (with lower interest rates) will have bonds no one wants
+(thus lowering it's price in bond market).
+
+* Interest Rate Risk: This is captured by "Duration" of the bond.
+    (Approximate) percent change in the price of bond =
+            -D(delta r/(1+r)) x 100
+
+    D = duration
+    delta r = change in interest rates
+    r = current interest rate
+
+Example: How interest rate changes impact bond prices.
+    D = 6.55, r = 10%, r increases to 12%, price of bond is $100.
+
+    -D (delta r/(1+r)) x 100
+    = -6.55 (.02/1.1) x 100 = -11.91%
+
+    - This is the drop in price of "existing" bond.
+
+
+* Inflation Risk: Since fixed coupons are given to investors, if inflation goes
+up a lot, the coupon's has less buying power (and it's fixed). The new bonds
+will carry more yield to attract investors. Existing bonds will loose value.
+
+
+* Currency Risk: If a US investor buys Japanese Govt bonds and Yen goes down in
+value against Dollar, then there is risk of making loss.
+
+
+Corporate and High Yield Bonds:
+---
+- Global debt market is 3 times larger than global stock market.
+
+    Bond Yield = Risk Free Interest + Risk Premium
+
+    // I didn't understand above equation.
+
+
+Money Markets
+---
+- What are reasons for holding cash.
+    * cash consumption (paying bills)
+    * Iron reserve (to cover unforseen events - sickness, accidents etc). Can be
+      viewed as insurance.
+    * Portfolio Protection - If investor sees lower returns or prices falling,
+      they may hold money to use it buy assets later at cheaper value. But this
+      is risky as investor is trying to time market.
+
+- For above reasons, investors may hold excess cash. It is a drag on their
+  portfolio returns and opportunity costs.
+
+- Inflation equates loss in money if holding cash.
+
+
+Currencies - A Separate Asset Class
+-----------------------------------
+
+- Currencies represent LARGEST financial asset.
+- There are two ways of defining currencies in FOREX market.
+    Direct Quote:
+        - Number of units of domestic currency corresponding to 1 unit of
+          foreign currency:
+        - Examples, for Swiss Franc based investor:
+            + .99 CHF = 1 USD
+            + 1.08 CHF = 1 EUR
+        - It is norm in all countries except: UK, Australia, New Zealand,
+          Canada and Eurozone.
+
+    Indirect Quote:
+        - Number of units of foreign currencies corresponding to 1 unit of
+          domestic currency.
+        - It is norm in UK, Australia, New Zealand, Canada and Eurozone.
+        - Ex:
+            + 1 EUR = 1.09 USD
+            + 1 AUD = 0.71 USD
+
+
+What's real value of currency?
+---
+- There are many yard sticks to measure the value of currency.
+
+- A method called: Purchasing Power Parity (PPP) is popular. It is used to
+  estimate a _theoretical_ exchange rate between two currencies.
+
+- Ex: Say a basket of goods costs $100. Same costs 110 CHF (Swiss Franc). If PPP
+  holds then 1 USD = 1.1 CHF. Then CHF and USD has same purchasing power.
+
+- Ex: Suppose we have 4 burgers in 4 different countries
+
+
+                                    Exchange Rates
+                                    --------------
+        Cost of Burger      USD     PPP     July, 05    Over or Undervalued vs
+        (local currency)                                USD
+US          4.79            4.79
+
+China       17              2.74    3.55    6.21        -42.84%
+
+Swiss       6.50            6.82    1.36    0.95        +42.84%
+
+India       116.25          1.83    24.27   63.43       -61.74%
+
+
+
+
+
+Relative PPP
+------------
+- Compare changing prices of a basket of goods and not absolute prices between
+  basket of goods between currencies.
+
+    PPP rate = E x (PP*)
+
+    where E = nominal exchange rate between currencies.
+        P = domestic inflation
+        P* = foriegn inflation
+
+// Watch this video again.
+
+
+Risk-Adjusted Returns
+----
+    Sharpe Ratio = (Total Return - Risk Free Rate)
+                    -----------------------------
+                        Standard   Deviation
+
+Ex:
+US Treasuries
+                   4% - 1%
+    Sharpe Ratio = ------- = 0.3
+                      5%
+
+US Equities
+
+                   14% - 1%
+    Sharpe Ratio = ------- = 1.3
+                      10%
+
+
+
+Alternative Asset Classes
+-------------------------
+[1] Emerging Markets Stocks
+
+- What are Emerging Markets? The ratio of Market Cap to GDP is an indicator of
+  market development. Swiss, US and UK have this ratio in excess of 100%, while
+  many other countries are below 100% (vis India, Thailand, China, Brazil etc).
+
+- Not all of the market cap is investible. So, a new term is introduced: IWF
+
+- Investable Weight Factor (IWF) and Free Float
+
+    IWF = 1 - sum (% held by strategic shareholders)
+
+    Ex:
+    Stock A                 # of shares         %
+    ------------------------------------------------
+    Total Shares            1,000,000          100%
+    Family members holding  200,000            20%
+    Govt holding            100,000            10%
+    Holding by publicly     100,000            10%
+     traded company "B"
+
+    IWF = 100% - (20%+10%+10%) = 60%
+    // aka Free Float.
+
+- Investibility also depends on foreign ownership limits, set by Govts.
+
+- Understand the risks in EM. There are many:
+    * Political
+    * Macroeconomic
+    * Liquidity
+    * Currency
+
+
+[2] Emerging Markets Bonds
+
+- When investing in EM bonds (aka Sovereign Bonds), the Yield Spread plays an
+  important rold.
+
+    Yield Spread = Yield on EM dollar denominated bond (with maturity 'm')
+                    - Yield on US Treasury (with same maturity 'm')
+
+    Examples:
+    * Yield on 10 yr Brazil dollar denominated bond = 7%
+    * Yield on 10 yr US Treasury bond = 2%
+    * Yield spread = 7%-2% = 5% (or 500 basis points [bp])
+
+What are the risks?
+---
+
+- Interest Rate Risk
+- Country and Credit Risk
+- Currency Risk: Only for local currency denominated bond.
+- Liquidity Risk - Has higher costs
+
+
+Emerging Markets and Gold
+Gold: The Ultimate Currency?
+----------------------------
+- Gold moves inversely to dollar movement. Why? Gold is priced in USD. When USD
+  falls, the attractiveness to purchase/invest in Gold for non-US investor
+  increases and Gold is bought.
+
+- Gold is seen as "save haven" and whenever there is political tension, price of
+  Gold increases.
+
+- Gold price increases with inflation.
+
+- What is the cost of "owning" Gold? There is an opportunity cost such as money
+  spent on storing it in safe box.
+
+- Ketchup Inflation: When central banks embark on money printing to support
+money spending, people loose faith in currency. They start buying goods (or
+Gold) thinking cost of goods will go up due to inflation (caused by money
+printing). This increases velocity in money circulation, resulting in more
+inflation, thus triggering something called: Hyper Inflation. Gold is then used
+as insurance and people purchase it. This type of event is called Black Swan
+events, very unlikely, but if it happens, has devastating effects.
+
+
+
+Real Estate
+-----------
+- World Wide Commercial Real Estate is worth $34 trillion and about 20%. Bonds
+  are 45% and Stocks 35%
+
+- Return and Risk
+
+US 1990-2015        Real Estate     Stocks      Bonds
+Avg Return (%)      9.0             10.5        6.3
+Volatility (%)      11.5            15.9        5.1
+Sharpe Ratio        0.51            0.46        0.63
+
+Correlation with
+Real Estate                         0.04        0.00
+
+
+- Financial Benefits:
+    * International diversification is very beneficial
+    * Hedge against inflation. If inflation goes up, Real Estate goes up,
+      largely because rents go up as well.
+
+
+
+
+Hedge Funds
+-----------
+
+- Uses LEVERAGE and SHORT SELLING to make money.
+- Fee: 2% and 20% commission on performance.
+
+- Alfred William Jones started 1st Hedge Fund in 1949 and by 1964 outperformed
+  market significantly, hence the phrase: Keeping up with Jones.
+
+- LEVERAGE: It's borrowing money to increase profits (if fund gains).
+  Unfortunately, it goes both ways. You'll loose a lot if fund goes down.
+
+- Is LEVERAGE = Risk?
+    Yes
+
+- SHORT SELLING:
+    - We borrow stock/shares from bank, sell it, keep the money at the
+      bank/broker as collateral. We CANNOT use that money. After the price
+      falls, you can use that money to buy shares back and return the shares to
+      the bank and keep the profit.
+
+- Are the risks in long vs short positions same? No.
+
+    Ex. If long position makes losses but portfolio is same, what is the losses?
+
+    At time=0                   At time=later
+    Stock A: $100               Stock A: $20 // 80% loss
+    Rest: $900                  Rest: $980  // making total portfolio same.
+    Total: $1000                Total: $1000
+    ------------                ---------------
+    Stock = 10% of portfolio    Stock = 2% of portfolio
+
+
+    Ex: If short position goes wrong
+
+    At time=0                   At time=later
+    Stock A: $100               Stock A: $120 // 20% loss
+    Rest: $900                  Rest: $880  // making total portfolio same.
+    Total: $1000                Total: $1000
+    ------------                ---------------
+    Stock = 10% of portfolio    Stock = 12% of portfolio
+    Now the Stock is 12% of portfolio and has more exposure.
+
+
+Private Markets
+---------------
+- Consider having investment in Private Markets in your portfolio.
+
+
+
+
+Financial Markets and Economy
+-----------------------------
+
+Role of Central Banks
+---------------------
+
+
+
+
+
+
+
+
+
+
 References
 [1] Coursera Course:
 https://www.coursera.org/learn/understanding-financial-markets/home/welcome
-
-[2]
