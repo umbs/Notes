@@ -1091,10 +1091,134 @@ Private Markets
 Financial Markets and Economy
 -----------------------------
 
-Role of Central Banks
+Role of Central Banks: Has 3 goals (for US Fed Reserve)
 ---------------------
+    * Maximum employment.
+    * Stable prices.
+    * Moderate long term interest rates.
+
+    // Other central banks have slightly varying goals/mandates.
+
+- When economy is slowing down, it's advisable to increase relative weight of
+  bonds in you portfolio.
+
+- Jan Tinbergen (first Nobel Laureate in Economics) said that you need as many
+  tools as there are objectives for Central Bank policies.
+    Ex: If Central Bank is targeting both inflation and employment, interest
+        rates alone will not do that job if stagflation prevails.
+        // Brazil is currently (yr 2016) experiencing this.
+
+- It is FAR easier for Central Bank to cool an overheating economy (stop growth)
+  than to stimulate an economy (stimulate growth).
 
 
+Link between equity markets and growth inflation.
+----
+- Economic growth (measured by GDP) need not mean high equity returns (S&P
+  Index).
+- During economic slowdown, choose bonds, during economic recovery buy stocks,
+  a.k.a: Equities for recoveries, bonds for slowdowns.
+-
+
+	                Strong GDP Growth
+	                        |
+	                        |
+	  Ideal condition       |
+	   for equity market    |       Overheating Economy
+	  (has a name:          |
+	Goldilock Scenario)     |       SELL   BONDS
+	                        |
+	BUY  EQUITIES           |
+Low                         |                       High
+Inflation ------------------+--------------------- Inflation
+	                        |
+	                        |
+	                        |
+	                        |
+	 Deflation              |       Stagflation
+	                        |
+	BUY   BONDS             |       SELL EQUITIES
+	                        |
+	                        |
+	                        |
+	                Low GDP Growth
+
+
+Alternate Definition of Market Conditions (Regime)
+------
+
+    Regime                  Frequency           Real Return
+    ------                  ---------           -----------
+    Warming                 46%                 7.5%
+    Perfection              16%                 14.6%
+    Cooling                 20%                 12.0%
+    Too Hot                 11%                 -5.9%
+    Too Cold                7%                  -21.6%
+
+
+Warming = Starting off from a rising growth regime, we have inflation picking up
+to the point where it slows down growth (most likely subsequent to a tightening
+of monetary policy).
+
+Too Hot: rising inflation chokes off growth.
+
+Cooling: growth falls further and brings inflation along.
+
+Too Cold: to the point where inflation turns negative and activity contracts
+severely (deflation).
+
+Perfection: growth is positive and inflation is low.
+
+
+
+
+Link between Bond Markets and Growth-Inflation Mix
+-----------
+- Yield Curve: It's Yield vs Time to Maturity graph.
+- Normal Yield Curve is upward sloping, meaning that long maturity terms have
+  higher yields and vice versa.
+- Inverted Yiled Curve is possible but not common. Yield is high on short term
+  bonds.
+- When Central Banks want a easier monetary policy, they lower interest rates
+  and increase interest rates when they want a tighter monetary policy.
+
+- Short Term interest rates are determined by Central Banks. Long Term are
+  determined by Stocks and Bonds and market conditions, generally.
+
+- Slope of Yield Curve can be predictor of economic activity, especially when
+  Banks conduct conventional monetary policy. But not so much when Banks conduct
+  "unconventional" monetary policy (like Quantitative Easing).
+
+
+
+
+How Interest Rates effect Equity Markets
+-----------
+
+    NPV = sum from t=1 to T (Ct /(1+r)^t) - C0
+
+    C0 = Initial cash outflow (Cost of project or price of asset etc).
+    Ct = Net cash inflow during period 't'
+    r = discount rate
+    T = total number of time periods.
+
+- When interest rates go down, stock/equity goes up (generally) unless economic
+  activity slows down. Vice versa is true as well.
+
+
+
+How Interest Rates effect Bond Markets
+-----------
+
+
+    Bond Price = sum from t=1 to N [Coupon at t/(1+YTM)^t] + Principal/(1+YTM)^N
+
+- There is perfect correlation between short term interest rates and performance
+  of bond market. If one goes up, other does too and vice versa.
+
+- Bond returns increase as interest rates falls and vice versa.
+- Duration must be used to adjust your bond portfolio to expected changes in
+  yield curve.
 
 
 
