@@ -1,0 +1,52 @@
+
+Week 1: Boolean Logic
+-----
+Commutative Law:
+---
+x AND y = y AND x
+x OR y = y OR x
+
+Associative Law:
+---
+x AND (y AND z) = (x AND y) AND z
+x OR (y OR z) = (x OR y) OR z
+
+Distributive Law:
+---
+x AND (y OR z) = (x AND y) OR (x AND z)
+x OR (y AND z) = (x OR y) AND (x OR z)
+
+
+De Morgan Law:
+---
+NOT (x OR y) = NOT (x) AND NOT (y)
+NOT (x AND y) = NOT (x) OR NOT (y)
+
+Idempotent Law:
+---
+w AND w = w
+w OR w = w
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Reference:
+https://www.coursera.org/learn/build-a-computer/
