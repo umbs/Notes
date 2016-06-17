@@ -11,7 +11,7 @@ sar - System Activity Reporter
 mpstat - Multiprocessor Usage
 pmap - Process Memory Usage
 netstat - Networks stats
-ss - Network stats
+ss - Utility to investigate sockets, similar to netstat
 iptraf - Realtime network traffic
 tcpdump -
 strace - System Calls
@@ -22,7 +22,7 @@ FAN - Fully Automated Nagios
 nmap - Port Scanning
 lsof - list open files, network connections and more.
 ntop
-
+dig - Swiss Army Knife for DNS querying.
 
 + How to check linux flavor/version
 Method 1:
@@ -644,4 +644,15 @@ host 2.2.2.2".
 #tcpdump src 192.168.1.100 and dst 192.168.1.2 and port ftp
   - Display FTP packets with given src and dst addr
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   dig     NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+$ dig www.google.com
+    // DNS record from a Name Server
+
+$ dig +trace www.google.com
+    // Trace of wherell the Name Server got the record from.
+
+$ dig -x <ip-addr>
+    // Reverse lookup.
 

@@ -116,13 +116,14 @@ $ ldd -r lib.so
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@     MAKE NOTES     @@@@@@@@@@@@@@@@@@@@@@@
-$@      The name of the target.
-$%      The target member name, when the target is an archive member.
-$<      The name of the first (or only) prerequisite.
-$?      The names of all the prerequisites that are newer than the target, with spaces between them.
-$^
-$+      The names of all the prerequisites, with spaces between them. The value of $^ omits duplicate prerequisites, while $+ retains them and preserves their order.
-$*      The stem with which an implicit rule matches.
+$@  The file name of the target.
+$%  The target member name, when the target is an archive member.
+$<  The name of the first (or only) prerequisite/dependency.
+$?  The names of all the prerequisites that are newer than the target separated by spaces.
+$^  The names of all dependencies separated by space, but duplicates removed.
+$+  The names of all the prerequisites, with spaces between them. The value of $^ omits duplicate prerequisites, while $+ retains them and preserves their order.
+$*  The stem with which an implicit rule matches.
+
 $(@D)
 $(@F)   The directory part and the file-within-directory part of $@
 $(*D)

@@ -1902,7 +1902,7 @@ Basic Principles
 
 
 /********************************************************************/
- *                  IPv6 Addressing Basics                          * 
+ *                  IPv6 Addressing Basics                          *
 /********************************************************************/
 
 
@@ -3558,6 +3558,16 @@ Queuing
 
 >>>>> Gratuitous ARP <<<<<
 - When a host sends ARP request looking for its own IP address.
+
+
+/****************************************************/
+               Domain Name System (DNS)
+/****************************************************/
+- Put simply, its a globally distributed key-value store. Servers around the
+  world can give you value associated with a key.
+- If they don't know, they'll ask other servers for answer.
+- 'dig' command on Linux is very useful in examining DNS  messages.
+
 
 
 /****************************************************/

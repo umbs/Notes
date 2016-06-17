@@ -77,6 +77,11 @@ git merge friend/branch
 
 
 ****
+How to make an existing Git branch track a remote branch?
+
+http://stackoverflow.com/questions/520650/make-an-existing-git-branch-track-a-remote-branch
+
+****
 Advanced Git: Graphs, Hashes and Compressions
 https://www.youtube.com/watch?v=ig5E8CcdM9g
 

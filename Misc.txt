@@ -1,0 +1,82 @@
+// Notes on all other technical stuff I learn.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@     TOR    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Tor:
+- Passing traffic by bouncing them across various Tor nodes across the globe.
+  Minimum, Tor traffic passes through 3 nodes: Entry/Gaurd, Relay & Exit.
+
+- Traffic is encrypted in layers (like Onion) before it is sent out from source.
+    # of layers of encryption = # of Tor nodes traffic is passing.
+
+- As traffic passes through each node, that node knows how to decrypt it's layer
+  and forward to next Tor node.
+
+
+@@@@@@@@    MUNICIPAL SOLID WASTE MANAGEMENT IN DEVELOPING COUNTRIES @@@@@@@@
+
+Facts:
+- Humans generate 7-10 billion tons of waste per year worldwide.
+- Waste from 2 billion people is not collected from their homes and
+  neighborhoods.
+- By end of century, 83% of world population will be in Asia and Africa.
+- There are 3 billion people who lack access to controlled disposal facilities.
+- By 2030 there will be 40 megacities (cities with 10 million or more
+  population). Of that 32 will be in Asia and Africa.
+
+
+Municipal Waste Generation and Characterization:
+- Estimating Lower Calorific Value (LCV)
+    LCV = 40(a+b+c+d) + 90e - 46W
+    LCV in kcal/kg
+    a = Paper
+    b = Textiles
+    c = Wood and leaves
+    d = Food waste
+    e = Plastic and rubber
+    W = Water
+    all of above in % of wet weight.
+
+- Incineration without adding fuel requies LCV > 1000 kcal/kg
+- Incineration with energy recovery requires LCV > 1500-1650 kcal/kg
+
+
+[1]
+https://www.coursera.org/learn/solid-waste-management/home/welcome
+
+@@@@@@@@@@@@@   Open/R  @@@@@@@@@@@@@@
+
+- Build a routing _platform_ and not a routing _protocol_
+- Applications are built on top of this platform in C++. Routing is one
+  application.
+- Each node in this network as following 4 components:
+    * Decision
+    * FIB
+    * KV-Store
+    * Link Monitor
+- Zero MQ for message passing between nodes.
+- Thrift: Message encoding. Populat open source library.
+
+- Key-Value Store:
+    - Key = Strings, Value = Thrift objects
+
+Optimization in KV Store:
+- Group nodes in to clusters
+- STP within clusters
+- Between clusters, similar to BGP's path tracing mechanism is used.
+
+Scaling in KV Store:
+-
+
+Neighbor Discovery:
+- Runs as a separate process.
+- Works on link-level
+
+
+
+
+[1]
+https://code.facebook.com/posts/1036362693099725/networking-scale-may-2016-recap/
+
+[2]
+https://code.facebook.com/posts/1142111519143652/introducing-open-r-a-new-modular-routing-platform/
+
