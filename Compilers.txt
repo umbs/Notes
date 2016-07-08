@@ -241,6 +241,45 @@ Resources:
 
 [2] http://aosabook.org/en/yocto.html
 
+@@@@@@@@@@@@@@@        AUTOTOOLS              @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- Common name for autoconf, automake, libtool etc
+
+- Autotools: What do user do, a very simplified view.
+    ./configure --> Makefile
+        // probes the build system and generate Makefile
+
+    make
+        // uses Makefile
+
+    make install
+
+
+
+    configure.ac -------> autoconf ------>   ./configure ----+
+                    |                                ^       |
+                    |                                |       |
+    Makefile.in ----v---> automake ---> Makefile.in--+       |
+                                                             |
+                                               Makefile <----+
+                                                  |
+                                                  |
+                                                  |
+                                                  v
+                                                 make
+                                                  |
+                                                  v
+                                             make install
+
+
+- autoconf and automake are invoked in order using autoreconf.
+
+-
+
+[1]
+https://www.youtube.com/watch?v=4q_inV9M_us&index=1&list=WL
+
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // GCC flags:
 // gets preprocessed file, object file and assembly output

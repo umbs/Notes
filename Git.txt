@@ -1,53 +1,53 @@
-Some (not Frequently) Q&A's 
+Some (not Frequently) Q&A's
 ---------------------------
 ****
 How to backout all changes committed to local repo but not yet pushed to
-remote? 
-  git fetch 
-  git reset --hard origin/master 
+remote?
+  git fetch
+  git reset --hard origin/master
 
 ****
-Forgot to commit local changes and checked out [or merged] another branch. How 
+Forgot to commit local changes and checked out [or merged] another branch. How
 do I get back older changes?
-  git reset --merge 
+  git reset --merge
 
 ****
-Revert single uncommitted file 
+Revert single uncommitted file
   git checkout filename  # this is also used to checkout branches. If
                          # filename is same as branch, this doesn't work
-  git checkout -- filename # is preferred 
+  git checkout -- filename # is preferred
 
 ****
-Revert single committed file to earlier commit 
-  git checkout <commit-ref> path/to/file 
+Revert single committed file to earlier commit
+  git checkout <commit-ref> path/to/file
 
 ****
-How to fix log of last committed message. 
-  git commit --ammend    # will open an editor to change commit message. 
-  git commit --ammend -m "New message, which will overwrite old one" 
-  git commit --ammend -author "New Author Name <email@address.com>" 
- 
+How to fix log of last committed message.
+  git commit --ammend    # will open an editor to change commit message.
+  git commit --ammend -m "New message, which will overwrite old one"
+  git commit --ammend -author "New Author Name <email@address.com>"
+
 ****
-How to fix logs of last few committed messages. Multple ways to do this: 
-  (a) Using git rebase: 
+How to fix logs of last few committed messages. Multple ways to do this:
+  (a) Using git rebase:
      - `git rebase -i $parent_of_flawed_commit`
      - i) Editor will pop up. Change `pick` to `edit` or appropriate
-          option. 
-       ii) Save and git will replay listed commits. 
+          option.
+       ii) Save and git will replay listed commits.
      - Git will drop you in to an editor for every commit you want to
-       change. 
-       i) Change commit as you like. 
-       ii) git commit --ammend 
+       change.
+       i) Change commit as you like.
+       ii) git commit --ammend
        iii) git rebase --continue
   (b) Using git filter-branch. Read following references:
- 
+
 http://stackoverflow.com/questions/750172/how-do-i-change-the-author-of-a-commit-in-git
-http://schacon.github.io/git/git-filter-branch.html   
+http://schacon.github.io/git/git-filter-branch.html
 https://help.github.com/articles/changing-author-info
 
 ****
-How to revert a single local commit? 
-A definitive answer at SO: http://stackoverflow.com/a/6866485/630866 
+How to revert a single local commit?
+A definitive answer at SO: http://stackoverflow.com/a/6866485/630866
 
 ****
 Squash multiple commits in to a single one?
@@ -56,24 +56,24 @@ Easy way:
 git reset origin/master
 
 # All changes are unstaged and present in working directory. Add them and
-# commit as one commit. 
-git add --all 
+# commit as one commit.
+git add --all
 git commit
 
-Longer way: 
-git rebase -i 
+Longer way:
+git rebase -i
 
-**** 
-How to add remote repo (say a friends code base) 
+****
+How to add remote repo (say a friends code base)
 git remote add <nickname> <full url> // this full url can be ssh also
 
-Ex: 
+Ex:
 git remote add friend ssh://sarma@<hostname or IP>/path/to/repo/
 git remote -v   // should show 'fetch' and 'merge' links to friend's repo.
 
-Fetch & Merge using: 
-git fetch friend    // all branches are fetch'ed 
-git merge friend/branch 
+Fetch & Merge using:
+git fetch friend    // all branches are fetch'ed
+git merge friend/branch
 
 
 ****
@@ -85,152 +85,152 @@ http://stackoverflow.com/questions/520650/make-an-existing-git-branch-track-a-re
 Advanced Git: Graphs, Hashes and Compressions
 https://www.youtube.com/watch?v=ig5E8CcdM9g
 
- 
-Patching: 
+
+Patching:
 --------
-- Create a patch to a file.  
+- Create a patch to a file.
     git format-patch <branch> --stdout > file.patch
-    // <branch> is optional and defaults to current branch. 
-    
-- Create patch file for each local commit. Let's say, you have two commits.  
+    // <branch> is optional and defaults to current branch.
+
+- Create patch file for each local commit. Let's say, you have two commits.
     git format-patch HEAD~~
 
-    //This creates two patches 
+    //This creates two patches
     0001-make-stuff-more-awesome.patch
     0002-allow-users-to-be-locked.patch
 
-- Create patch of last commit 
-    git format-patch -1 --stdout > file.patch 
+- Create patch of last commit
+    git format-patch -1 --stdout > file.patch
 
-- Before applying look for stats 
-    git apply --stat file.patch 
+- Before applying look for stats
+    git apply --stat file.patch
 
-- Check for errors 
-    git apply --check file.patch 
+- Check for errors
+    git apply --check file.patch
 
 // You can use 'git apply <some>.patch' to have the changes applied to CWD.
-// They'll be unstaged and needs to be committed. 
+// They'll be unstaged and needs to be committed.
 
-- To apply a patch as a commit (with its commit message), use 
+- To apply a patch as a commit (with its commit message), use
         'git am <some>.patch'
-    git am --signoff < file.patch   // --signoff and '<' are optional  
+    git am --signoff < file.patch   // --signoff and '<' are optional
     git am -3 file.patch // do a 3 way merge. If there is conflict, it
-                          // can be resolved with help of <<<, ===, >>>> 
+                          // can be resolved with help of <<<, ===, >>>>
     git am *.patch // all patches are applied, in the order. You cannot apply
                    // out of sequence patches, individually.
 
 Patching (TLDR;)
 ---------------
-$ git format-patch HEAD--  // generate patches 
-$ git am *.patch    // apply patches, sequentially, including commit msgs. 
+$ git format-patch HEAD--  // generate patches
+$ git am *.patch    // apply patches, sequentially, including commit msgs.
 
 
 
-Reference: 
+Reference:
     http://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/
-    http://makandracards.com/makandra/2521-git-how-to-create-and-apply-patches 
- 
+    http://makandracards.com/makandra/2521-git-how-to-create-and-apply-patches
 
-Diffs 
+
+Diffs
 -----
-# git diff 
-   ! changes between index/staging and working files 
+# git diff
+   ! changes between index/staging and working files
 
-# git diff --staged 
-   ! changes between HEAD and index/staging 
+# git diff --staged
+   ! changes between HEAD and index/staging
    ! `git diff --cached` also does the same thing. `staged` and `cached`
-   ! can be used interchangeably. 
+   ! can be used interchangeably.
 
-# git diff HEAD 
-   ! changes between HEAD and working files 
+# git diff HEAD
+   ! changes between HEAD and working files
 
-# git diff $commit $commit 
-   ! changes between 2 commits 
+# git diff $commit $commit
+   ! changes between 2 commits
 
-# git diff origin 
-   ! diff between HEAD & remote/origin 
+# git diff origin
+   ! diff between HEAD & remote/origin
 
 Shows
 -----
-# git show 
-# git show --stat   
-    ! a bit more brief 
-# git show --name-status 
-    ! SVN like output: Add, Delete, Modified etc 
-# git show HEAD 
-# git show HEAD^^^ 
+# git show
+# git show --stat
+    ! a bit more brief
+# git show --name-status
+    ! SVN like output: Add, Delete, Modified etc
+# git show HEAD
+# git show HEAD^^^
     ! prior to 3 commits
-# git show master ~10 
+# git show master ~10
     ! prior to 10 commits
 # git show master@{May.16}
-    ! Master branch on May 16th 
-# git show HEAD:file 
-    ! show contents of a file 
+    ! Master branch on May 16th
+# git show HEAD:file
+    ! show contents of a file
 
 Stash commands
 -----
-# git stash 
-    ! Push contents of working directory on to stash 
-# git stash list 
-    ! List contents of stash stack 
-# git stash pop 
-    ! Pop topmost entry of stack 
-# git stash apply 
-    ! Apply topmost entry of stach without popping 
+# git stash
+    ! Push contents of working directory on to stash
+# git stash list
+    ! List contents of stash stack
+# git stash pop
+    ! Pop topmost entry of stack
+# git stash apply
+    ! Apply topmost entry of stach without popping
 # git stash show [stash@{WIP}]
     ! List file names of topmost
-# git stash show -p 
-    ! Show contents of topmost entry on stack 
+# git stash show -p
+    ! Show contents of topmost entry on stack
 
 Searching [git grep is 10% faster than grep]
 ---------
-# git grep -e "pattern" file 
+# git grep -e "pattern" file
 
-# git grep -e "pattern" branch  
+# git grep -e "pattern" branch
 
 References
 ----------
-# git branch -l 
-   ! shows all the local branches 
+# git branch -l
+   ! shows all the local branches
 
-# git tag -l 
-   ! shows all local tags 
+# git tag -l
+   ! shows all local tags
 
-# git branch -r 
-   ! remote branches 
+# git branch -r
+   ! remote branches
 
 
 Git is slow
 -----------
-# git gc 
+# git gc
    ! Run git garbage collection
-# git config preloadindex 
-   ! Pre-loads index in parallel 
-# git update-index --asume-unchanged <file> 
-   ! Does not index file and hence saves time 
+# git config preloadindex
+   ! Pre-loads index in parallel
+# git update-index --asume-unchanged <file>
+   ! Does not index file and hence saves time
 
 
-       GIT  INTERNALS 
+       GIT  INTERNALS
        ==============
 $ git init      // creates .git/ directory
 
 $ ls .git/
     HEAD
     branches/
-    config -- local git config 
-    description 
-    hooks/ -- contains client/server hook scripts 
+    config -- local git config
+    description
+    hooks/ -- contains client/server hook scripts
     index
-    info/  -- contains .gitignore file 
+    info/  -- contains .gitignore file
     objects/
     refs/
 
 Core parts of Git: HEAD, index, objects, refs
 
-objects/ -- Stores all content for your database. 
-refs/ -- Stores pointers in to commit objects in that branches. 
-HEAD -- Points to branch you currently checkedout. 
-index -- Files containing staging area info. 
+objects/ -- Stores all content for your database.
+refs/ -- Stores pointers in to commit objects in that branches.
+HEAD -- Points to branch you currently checkedout.
+index -- Files containing staging area info.
 
 
 Tree Objects
@@ -238,17 +238,16 @@ Tree Objects
 $ git update-index --add --cacheinfo SHA-1 <filename>
     updates staging area/index with <filename> from version SHA-1. --add
     flag adds files to staging area. --cacheinfo pulls content from
-    database and not the file itself. 
+    database and not the file itself.
 
-$ git write-tree 
-    Writes contents of staging area to a tree object. 
+$ git write-tree
+    Writes contents of staging area to a tree object.
 
 $ git read-tree --prefix=<name> SHA-1
-$ git write-tree 
-    Read trees in to your staging area. 
+    Read trees in to your staging area.
 
 $ git commit-tree SHA-1
-    Builds a commit tree object. 
+    Builds a commit tree object.
 
 $ git update-ref <ref-file> SHA-1
 
@@ -258,14 +257,20 @@ $ git update-ref <ref-file> SHA-1
 Plumbing Commands
 ---
 git hash-object
-        $ echo 'test contents' | git hash-object -w --stdin 
+        $ echo 'test contents' | git hash-object -w --stdin
         d670460b4b4aece5915caf5c68d12f560a9fe3e4
         $
         // -w indicates store the content; --stdin indicates the content
-        // comes from stdin instead of a file. 
+        // comes from stdin instead of a file.
 
-git cat-file -p SHA 
-git cat-file -t SHA // gives type of commit 
-git cat-file blob SHA // gives content of the blob (if it's blob) 
-git cat-file commit SHA // gives detailed info about SHA 
+git cat-file -p SHA
+git cat-file -t SHA // gives type of SHA
+git cat-file blob SHA // gives content of the blob (if it's blob)
+git cat-file commit SHA // gives detailed info about SHA
 
+git ls-tree SHA // if the SHA is that of a tree, list its contents
+git ls-tree -d SHA  // list only tree within SHA
+git ls-tree --name-only // only blobs (files)
+git ls-tree -r SHA // recursively list the tree
+
+git ls-files

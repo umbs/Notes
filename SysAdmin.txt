@@ -24,6 +24,12 @@ lsof - list open files, network connections and more.
 ntop
 dig - Swiss Army Knife for DNS querying.
 
+pidstat
+mpstat
+sar
+dstat
+
+
 + How to check linux flavor/version
 Method 1:
 $ cat /etc/*-release
@@ -40,6 +46,152 @@ $ uname -a
 $ uname -mrs
 
 ---------------------------
+@@@@@@@@@@@@@@@@@  SYSTEM PERFORMANCE CHECK @@@@@@@@@@@@@@
+// Notes from Brendan Gregg's videos
+
+----- First 60 seconds investigation ------
+uptime
+dmesg | tail
+vmstat 1
+mpstat -P ALL 1
+pidstat 1
+iostat -xz 1
+free -m
+sar -n DEV 1    // network throughput
+sar -n TCP,ETCP 1
+top
+
+-------- Detailed -------------
+- Performance is slow. What to do?
+
+- 4 types of tools
+    * Observability Tools: No impact on system.
+        + Basic: vmstat, iostat, mpstat, ps, top ...
+        + Intermediate: tcpdump, netstat, nicstat, pidstat, sar, ...
+        + Advanced: ss, slaptop, perf_events, ...
+
+    * Benchmarking Tools: Affects the system.
+    * Tuning:
+    * Static performance tuning:
+
+
+Basic Tools >>>>>>>>
+
+- uptime
+    Get a quick overview on load averages.
+- top (or htop or atop)
+    %CPU is summed across all CPUs
+    Can miss short-lived processes. 'atop' wont.
+- ps
+    has lots of flags and custom fields can be set.
+- vmstat
+    'r' is runnable tasks
+    Gives high level CPU summary
+- iostat (ATT Unix system)
+    block I/O (disk) stats.
+
+- mpstat ($ mpstat -P ALL 1)
+    multi processor stats
+    look for unbalanced (hot) CPUs, which means one thread is hogging CPU.
+
+- free -m
+    'buffers': block device I/O cache
+    'cached': virtual page cache
+
+Intermediate Tools >>>>>>>
+
+- strace (system call tracer)
+    $ strace -tttT -p 313
+        * Translates syscall args. Very helpful for solving system usage issues.
+    strace is based on ptrace. Has massive overhead.
+    Can slow target by > 100x. Use extreme caution.
+
+- tcpdump
+    sniff packets for post analysis
+
+- netstat
+    -s  Various protocol stats
+    -i  Interface stats
+    -r  route table
+    -p  process details
+    -c  per-second interval
+
+- pidstat
+    Very useful process stats, eg, by-thread, disk I/O
+
+- swapon -s
+    Show swap device usage.
+
+- lsof
+
+- sar (System Activity Reporter)
+    Archive or Live Mode
+
+Advanced Tools >>>>>>>
+
+- ss
+    Info about socket stats
+
+- iptraf
+    Nice histogram about network pkt size per interface
+
+- iotop
+
+- slabtop
+    Kernel slab allocator memory usage
+
+- pcstat (available on Github)
+
+- perf_events
+    multi tool with many capabilities
+        CPU profiling
+        PMC profiling (Performance Monitoring Counters) - very low level
+        static and dynamic tracing
+
+- tiptop
+    front end to PMC
+
+- rdmsr
+    * Model Specific Registers (MSRs), unlike PMCs, can be read by default in Xen
+    guests: timestamp clock, temp, power ...
+    * Use rdmsr from the msr-tools package to read them.
+
+More Advanced Tools >>>>>>>
+    ltrace      Library call tracer
+    ethtool     Mostly interface tuning; some stats
+    snmpget     SNMP network host statistics
+    lldptool    Can get LLDP broadcast stats
+    blktrace    Block I/O event tracer
+    /proc       Many raw kernel counters
+    pmu-tools   On- and off-core CPU counter tools
+
+
+Benchmarking >>>>>>>
+- lmbench
+    * CPU, memory and kernel micro-benchmarks
+
+- fio
+    * File System or disk I/O micro-benchmarking
+
+- pchar
+    * traceroute with bandwidth per hop
+
+
+Tuning Tools >>>>>>>
+- Read Slides [4]
+
+Profiling Tools >>>>>
+- Read Slides [4]
+
+
+
+[1] https://www.youtube.com/watch?v=ZdVpKx6Wmc8
+[2] https://www.youtube.com/watch?v=FJW8nGV4jxY
+[3]
+[4]
+http://cdn.oreillystatic.com/en/assets/1/event/122/Linux%20perf%20tools%20Presentation.pdf
+[5] https://github.com/brendangregg/msr-cloud-tools
+
 @@@@@@@@@@@@@@@@@@@@@ TAR commands @@@@@@@@@@@@@@@@@@@@@@@
 + 'tar' command examples [2]
 // Note that '-' is a mess and may or may not be used.
@@ -655,4 +807,3 @@ $ dig +trace www.google.com
 
 $ dig -x <ip-addr>
     // Reverse lookup.
-
