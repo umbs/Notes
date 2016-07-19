@@ -80,3 +80,130 @@ https://code.facebook.com/posts/1036362693099725/networking-scale-may-2016-recap
 [2]
 https://code.facebook.com/posts/1142111519143652/introducing-open-r-a-new-modular-routing-platform/
 
+
+@@@@@@@@@@@@@   Networks Illustrated: Principles w/o Calculus @@@@@@@@@@@@@@
+
+Lesson 1:
+---
+- 8 principles in this course:
+- Sharing (network medium) is hard
+- Consensus is hard
+    * Referral system.
+    * Auction system with systems bidding.
+    * Voting system.
+- Crowds are wise
+    * Amazon trying to solve Rating problem.
+    * Netflix trying to solve Recommendation problem.
+
+- Crowds are NOT wise:
+    * Information cascade can happen and crowds may not think for themselves.
+
+- Network is Expensive:
+- Network of Networks:
+    * internet is combination of many networks within networks.
+
+- Layers on Layers:
+- Bigger & Bigger:
+
+
+Lesson 2:
+---
+- Mobile penetration rate:
+    # of mobile subscriptions/total population
+
+- Multiple Access
+    * Morse devised Morse Code to use Telegraph Cable to transmit ./- notation.
+    * Bell devised multiple transmitters and recievers on same Telegraph Cable.
+
+- Frequency Division Multiple Access (FDMA)
+    * N MHz = N cycles per second.
+
+- 0G
+    MTS (1946) - Mobile Telephone System
+        * FDMA system
+        * An operator was required
+    IMTS (1964) - Improved MTS
+        * No operator required
+    DynaTAC (1973)
+        * From Qualcomm
+
+- Attenuation
+    WiFi is in unlicensed frequency
+    Cellular is in licensed frequency
+    Attenuation is decaying of signal over distance
+
+- Cell & 1G
+    + Due to attenuation, we divided regions in to cells of hexagon shape.
+    + Cell towers are at the center of hexagons and base stations at
+      intersection of edges of hexagons. With this design, a base station can
+      serve 3 cells.
+    + Frequency ranges in one cell doesn't match with next cell to avoid
+      interference, but they can match with non-adjacent cells. This is done for
+      spectral efficiency.
+
+- Frequency Reuse Factor
+    + Number of frequency bands used.
+
+- 1G
+    + Cells were used first time in 1G.
+    + AMPS (1986) - Advanced Mobile Phone System. Operated in 800 MHz band
+      system.
+    + Cellular technology transformed from 0G to 1G.
+    + First operated in Chicago with 90 people and 10 cells. Demonstrated
+      feasibility.
+
+- 2G
+    + Migration from Analog to Digital is the most significant change from 1G to
+      2G
+    + Digital screens started appearing.
+    + Texting was a feature.
+    + 2000 was the year when 2G came.
+
+- TDMA (Time Division)
+    + TDMA uses Frequency Division with Time Division.
+    + Why didn't we do this before? Analog signalling didn't allow this.
+    + Sometimes called F/TDMA.
+
+- GSM (Global System for Mobile Communication) 1982
+    + First system to employ TDMA
+    + 3x more than Analog capacity.
+    + GSM was quickly adopted by Europe.
+
+- CDMA (Code Division Multiple Access) 1988
+    + CTIA (Cellular Technology Industries Assoc) wanted 10x improvement.
+    + Qualcomm had a different idea. They added a different dimension to time
+      and frequency. A code is added with each communication.
+
+- Codes?
+    + Along with digital data signal, a "spreading code" is used to transmit
+      data. data signal x spreading code is transmitted.
+    + Receiver uses spreading code to decode data signal.
+    + Designing spreading code is very tough.
+    + It needs to have a property called "Orthogonal" that two spreading codes
+      should cancel out.
+
+- Qualcomm's CDMA improvements
+    + Supposedly 40x improvement (theoretically). But in reality, much less.
+    + CTIA voted Qualcomm's CDMA as a 2G standard in US.
+
+- Near-Far Problem
+    + Channel quality depends on distance from base station and obstacles in
+      between.
+    + How much power is needed to transmit data? It's measure in Watts (W). In
+      fact, phones need power in milli Watts (mW) to transmit data.
+    + Phones that are farther from BS transmit data at, say, 20 mW and by the
+      time it reaches BS, it's say 2 mW. While those near to BS may be received
+      at 10 mW. It is important to make these signals reach BS at constant
+      power. There's easy algo for this.
+    + BS tells phones at what power to transmit so it receives at constant
+      power.
+    + Transmit Power Control (TCP) Algorithm to solve NF Problem.
+
+- Signal Quality
+    + Power is not the problem. Quality is.
+    + Increasing power by a phone causes interference.
+    +
+
+
+
+[1] https://www.coursera.org/learn/networks-illustrated/home

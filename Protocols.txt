@@ -28,6 +28,7 @@ ECA-IP Questions
 
 /*************************************************************/
  *           CCNA: From IT University Online Classes         *
+ *           CCNA: From Andrew Crouthamel Youtube Series     *
 /*************************************************************/
 ICND-1
 
@@ -186,9 +187,42 @@ cisco(config)# switchport trunk native vlan 20
 cisco(config)# switchport trunk allowed vlans 1, 10, 20, 30, 41, 45, 300
 
 
+>>>>>>>>  Andrew Crouthamel Youtube Series  <<<<<<<<<<<
+
+IANA Ports List
+
+- Well known ports: 0-1023
+- Registered ports: 1024-49151
+- Dynamic/Private ports (aka Ephemeral ports).
+    49152-65535
+
+- Nodes that are explicitly configured to listen to multicast address will
+  receive multicast traffic.
+
+Usable IP address ranges:
+    Host IP: 0.0.0.0 to 223.255.255.255
+    Multicast: 224.0.0.0 to 239.255.255.255
+    Experimental: 240.0.0.0 to 255.255.255.255 << never used
+    Private: 10.0.0.0/8
+             192.168.0.0/16
+             172.16.0.0/12
+             These are NOT routable. Routers drop packets with these IP.
+
+    Sepcial Addresses:
+             0.0.0.0    Default Route
+             127.0.0.1  Loopback
+             169.254.0.0 to
+             169.254.255.255 Link-Local or APIPA
+                            (Automatic Private IP Addressing)
 
 
-
+Classful Addressing
+---
+    Class A: 1-127  (/8)
+    Class B: 128-191 (/16)
+    Class C: 192-223 (/24)
+    Class D: 224-239 Multicast
+    Class E: 240-255 Experimental
 
 
 /*************************************************************/
