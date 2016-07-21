@@ -202,7 +202,12 @@ Lesson 2:
 - Signal Quality
     + Power is not the problem. Quality is.
     + Increasing power by a phone causes interference.
-    +
+    + Signal to Interference Ratio (SIR).
+
+- DPC (Distributed Power Control)
+    + Cells transmit data to BS. BS sends SIR to phones. Phones adjust power.
+    + This process iterates and finally converges on a power.
+
 
 
 
