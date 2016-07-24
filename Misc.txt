@@ -212,3 +212,7 @@ Lesson 2:
 
 
 [1] https://www.coursera.org/learn/networks-illustrated/home
+
+
+
+@@@@@@@@@@@@@   Cloud Computing Concepts nciples w/o Calculus @@@@@@@@@@@@@@

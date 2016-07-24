@@ -224,6 +224,171 @@ Classful Addressing
     Class D: 224-239 Multicast
     Class E: 240-255 Experimental
 
+IPv6 Addressing
+---
+- Types of IPv6 addresses:
+    * Global Unicast - Routable, can be assigned using DHCP.
+    * Link Local - Not routable. Only for local subnet.
+    * Loopback - all zeros except last bit--> ::1/128
+    * Unspecified - It's all zeros (or just ::)
+    * Unique Local - Similar to private addresses of IPv4
+        FC00::/7 to FDFF::/7
+    * Multicast -
+    * Anycast - Unicast address assigned to multiple devices.
+    * Subnetting - Recommended on /64 boundary.
+        2001:0DB1:ACAD:0000::/64
+        2001:0DB1:ACAD:0001::/64
+        2001:0DB1:ACAD:0002::/64
+
+IPv6 Unicast and Multicast
+---
+- Global Unicast Addresses has 3 parts
+    * Global routing prefix
+    * Subnet ID
+    * Interface ID
+
+- Dynamic IPv6 Address assignment.
+    * SLAAC or DHCPv6.
+    * SLAAC = Stateless Address Autoconfiguration
+- ICMPv6
+- Router Advertisement (RA) tells how to configure your device with IPv6
+  address.
+
+-
+TODO: Watch lessons on IPV6 again.
+
+Data Link Layer
+---
+- Two parts: LLC and MAC
+    * LLC - Logical Link Control. Identifies the protocol to be used to send
+      pkts out.
+    * MAC
+
+- LL Protocols are:
+    * Ethernet - Uses CSMA/CD
+    * 802.11 Wireless - Uses CSMA/CA
+    * PPP
+    * HDLC, Frame Relay
+
+Physical Layer
+---
+- MAC addresses has OID and DID (Manufactures ID and Device ID).
+
+Few types of encodings:
+- Manchester Encoding to transmit bits
+    * Going from high to low = 0
+    * Going from low to high = 1
+- Non-Return to Zero (NRZ)
+    *
+- 4B/5B
+- 8B/10B
+
++ On Radio Waves, modulations is used (amplitude and frequency) or Pulse Code
+Modulation (PCM)
+
+
+Network Media Types
+---
+- Copper
+    + Interference is biggest issue
+        * EMI - Flourescent lighting
+        * RFI - Microwaves
+        * Crosstalk - wires picking electrical signals from other wires. But not
+          so much these days. Twisted pair reduces it.
+            @ UTP (Unshielded Twisted Pair) - cheaper; uses RJ45 connector.
+            @ STP (Shielded Twisted Pair) - costly; uses RJ45 connector.
+            @ Coaxial - Cable and TV installations.
+- UTP cables: Cat 5 (100 Mbps), 5e (1 Gbps), 6 (1 Gbps), 6a
+- Types of UTP: Straight Through, Crossover, Rollover.
+    * Straight Through - End device to switch
+    * Crossover - similar devices (host to host or switch to switch)
+    * Rollover - Cisco implementation
+
+- Fiber Optic
+    + Single Mode Fibre and Multi Mode Fibre
+    + SMF - Uses Laser and range is in kilometer. Costly. Yellow color.
+    + MMF - Uses LED and in range of few meters. Cheap. Orange color.
+
+- Wireless: 802.11 (WiFi), 802.15 (Bluetooth), 802.16 (WiMax)
+    + 2.4 GHz - can penetrate through walls.
+    + 5 GHz - line of sight.
+
+- Within 802.11 (WiFi), lot of substandards
+    + 802.11a - 5 GHz - 54 Mbps
+    + 802.11b - 2.4 GHz - 11 Mbps
+    + 802.11g - 2.4 GHz - 54 Mbps
+    + 802.11n - 2.4 or 5 GHz - 100 to 600 Mbps
+    + 802.11ac - 2.4 and 5 GHz - 250 to 1.3 Gbps
+    + 802.11ad - 2.4 and 5 and 60 GHz - WiGig - up to 7 Gbps
+
+    These standards are backwards compatible.
+
+
+Topology Basics
+---
+- Ethernet Bus
+- Point to Point
+- (a) Star Topology (b) Hub and Spoke Topology
+- Mesh
+- Ring Topology
+
+
+Ethernet Basics
+---
+- LAN (L2 protocol). Data Link Layer tech.
+- 10, 100, 1 G, 10 G, 40 G, 100 Gbps
+- LLC is done in software
+- MAC in hardware
+- Max size of Ethernet pkt = 1518 bytes
+- Min size of Ethernet pkt = 64 bytes
+- If it's less than 64 bytes, it's either a collison pkt or runt frame (bad FCS)
+  and discarded.
+- If larger than 1518 bytes it's discarded unless it's 802.3ac which is 1522
+  bytes allowing VLANs.
+
+Ethernet Fields
+---
+    Preamble
+    Start Frame
+    Dest MAC
+    Src MAC
+    Length
+    Data
+    FCS
+
+- Unicast, Multicast and Broadcast addresses
+- Multicast starts with 01-00-5E
+
+
+ARP
+---
+- L2 destination resolution, given an L3 address.
+- L3 destination resolution is DNS (but only name to IP resolution).
+
+Reverse ARP
+---
+- Given MAC, provide IP.
+
+Switch Basics
+---
+- Two ways of packet forwarding
+    (a) Store and Forward
+        * Read entire frame
+        * Do CRC check and foward frame.
+        * Slow
+    (b) Cut Through
+        * Fast-Forward: Forward after reading Dest MAC
+        * Fragment Free: Save first 64 bytes because if there's collision, it's
+          usually in first 64 bytes. Doesn't do CRC checks.
+- Buffering:
+    (a) Port based - One queue per port
+    (b) Shared - Common queue
+
+
+IOS Device Basics
+---
+
+
 
 /*************************************************************/
  *           CCNA Syllabus                                    *

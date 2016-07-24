@@ -1,50 +1,46 @@
 ABC - Always Be Coding
 
-1. FOCUSED PRACTICE: 
+1. FOCUSED PRACTICE:
 ABC - Always be coding, on different projects. Have goals and very FOCUSED
-practice. 
-  - Work on new & short projects. At least one project every 6 months.  
-  - Publish on GitHub CONTINUOUSLY. 
+practice.
+  - Work on new & short projects. At least one project every 6 months.
+  - Publish on GitHub CONTINUOUSLY.
 
-Suggestions: 
-  - Build a database of ideas and start working. 
-  - Start contributing to open source: Linux Kernel, Mininet, Linux
-    Containers, Some OS related repo. 
+Suggestions:
+  - Build a database of ideas and start working.
   - TopCoder; CodeChef; CodeEval; USACO; Project-Euler
 
-2. Re-Build The Wheel:  
-Code all basic data structures in various languages: 
-        Dynamic Array 
-        Singly-Linked List (sorted/unsorted) 
-        Doubly-Linked List 
-        Skip List 
-        Binary Search Tree 
-        Cartesian Tree 
-        B-Tree 
+2. Re-Build The Wheel:
+Code all basic data structures in various languages:
+        Dynamic Array
+        Singly-Linked List (sorted/unsorted)
+        Doubly-Linked List
+        Skip List
+        Binary Search Tree
+        Cartesian Tree
+        B-Tree
         Red-Black Tree
         B+ Tree
-        Splay Tree 
+        Splay Tree
         AVL Tree
         Trie/Patricia Tree
-        Stack 
-        Queue 
-        Circular Queues 
-        Hash Table 
-        Hash Map 
-        Hash Tree 
-        Set 
-        Heaps/Priority Queue  
+        Stack
+        Queue
+        Circular Queues
+        Hash Table/Map/Tree
+        Set
+        Heaps/Priority Queue
 
-Heaps 
-        Binary Heap 
-        Binomial Heap 
-        Fibonacci Heap 
+Heaps
+        Binary Heap
+        Binomial Heap
+        Fibonacci Heap
 
-Graphs 
-        Adjacency List 
-        Incidence List 
-        Adjacency Matrix 
-        Incidence Matrix 
+Graphs
+        Adjacency List
+        Incidence List
+        Adjacency Matrix
+        Incidence Matrix
 
 
 3. Solve word problems. Spend time coding solutions to different types of
@@ -69,27 +65,27 @@ Again, just keep coding. Keep a growing list of projects and ideas for
 what you can build in minutes, days and weeks.
 
 ================
-NETWORKING 
-CCNA Notes: 
-Other Protocols: 
+NETWORKING
+CCNA Notes:
+Other Protocols:
   Bridging, STP, RSTP, OSPF, BGP, MPLS, PW, IPv6, SNMP
 
 ================
 ALGORITHMS
 ================
-Data Structures: 
+Data Structures:
   Basic: Linked Lists, Stack, Dynamic Arrays (Vectors), Queues
-  
+
   Indexing: Binary Search Trees [BST], AVL (Balanced BST), Red-Black
   Trees, Splay Trees, Open Hash Tables (Closed Addressing), Closed Hash
   Table (Open Addressing), Closed Hash Tables (using buckets), B Trees, B+
   Trees
 
   Heap-like DS: Heaps, Min-Heap, Binomial Queues, Fibonacci Heaps, Leftist
-  Heaps, Skew Heaps 
+  Heaps, Skew Heaps
 
-Sorting Algos: 
-  Comparison Sorting: Bubble, Selection, Insertion, Shell, Merge, Quick.  
+Sorting Algos:
+  Comparison Sorting: Bubble, Selection, Insertion, Shell, Merge, Quick.
   Non-Comparison: Bucket, Counting, Radix, Heap
 
 Graph Algos: BFS, DFS, Connected Components, Dijkstra's Shortest Path,
@@ -103,33 +99,33 @@ Recursion: Factorial, Reversing a String, N-Queens Probl
 
 Geometric Algos: 2D rotation and scale matrices, 2D rotation and
 translation matrices, 2D changing and coordinate systems, 3D rotation and
-scale matrices, 3D changing coordinate system.  
+scale matrices, 3D changing coordinate system.
 
-String Matching: 
+String Matching:
 
-Compression/Regex: 
+Compression/Regex:
 
 ================
 SYSTEMS/OS
 ================
-Linux/OS: 
-  Understanding system calls 
+Linux/OS:
+  Understanding system calls
   Multithreading/Concurrency: Synchronization, Signaling, Message Passing,
-  Shared Mem, Piping. 
-  Device Drivers: 
-  Memory Management: 
+  Shared Mem, Piping.
+  Device Drivers:
+  Memory Management:
   File Systems:
   Process creation and scheduling:
-  Performance Tuning: 
+  Performance Tuning:
 
 ===============
-C BIT TWIDLING 
+C BIT TWIDLING
 ================
 MORE READING
-- mmap(), mprotect(), 
-- execX() series of syscalls 
-- brk()/sbrk() syscalls 
-- madvise()  
+- mmap(), mprotect(),
+- execX() series of syscalls
+- brk()/sbrk() syscalls
+- madvise()
 ================
 
 
@@ -138,7 +134,7 @@ MORE READING
 http://www.quora.com/Computer-Programming/How-do-you-keep-your-programming-skills-sharp
 
 [2]
-https://medium.com/tech-talk/d5f8051afce2 
+https://medium.com/tech-talk/d5f8051afce2
 
 [3]
 http://bigocheatsheet.com/
