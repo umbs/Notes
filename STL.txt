@@ -3,8 +3,6 @@ Readup More On:
 - References (vs Pointers)
 - try/catch (Exception Handling)
 
-
-
 Notes:
 - Access global variables in local scope using ::
 
@@ -51,10 +49,6 @@ Notes:
     * Algorithms
     * Function Objects
     * Allocators
-
--
-
-
 
 
 Vectors

@@ -215,4 +215,20 @@ Lesson 2:
 
 
 
-@@@@@@@@@@@@@   Cloud Computing Concepts nciples w/o Calculus @@@@@@@@@@@@@@
+@@@@@@@@@@@@@   Cloud Computing Concepts Part 1    @@@@@@@@@@@@@@
+
+- AWS
+    * EC2: Elastic Compute Cloud
+    * S3: Simple Storage Service
+    * EBS: Elastic Block Storage
+
+- 4 Features New in Today's Cloud
+    * Massive Scale
+    * On-Demand Access: Pay as you go model.
+    * Data intensive nature
+    * New cloud programming paradigms
+
+- Energy usage:
+    WUE (Water Usage Efficiency) = Annual Water Usage/IT Equipment Energy
+    (L/kWh) - low is good.
+    PUE (Power Usage Efficiency) = Total Facility Power/IT Equipment Power

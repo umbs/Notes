@@ -387,7 +387,34 @@ Switch Basics
 
 IOS Device Basics
 ---
+IOS Commands Basics
+---
+Switch Config Basics
+---
+VLAN Basics
+---
+- Default VLAN is 1
+- Data VLAN
+- Voice VLAN
+- Trunk: Allows multiple VLANs per cable.
+- Management VLAN
+- Native - untagged traffic
 
+Creating VLANs
+---
+- Standard Range - 1 to 1005; 1002 to 1005 are for Token Ring and FDDI
+    + VLAN 1, 1002 to 1005 are already created by Cisco devices.
+    + Stored on VLAN.dat file on compact flash.
+
+- Extended Range - 1006 to 4094
+    + Not on VLAN.dat file
+    + Not learnt through VTP (VLAN Trunking Protocol).
+- VTP - Cisco proprietary protocol
+    + GVRP - Non-Cisco protocol
+
+VLAN Trunks
+---
+-
 
 
 /*************************************************************/
