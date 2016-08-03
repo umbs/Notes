@@ -232,3 +232,198 @@ Lesson 2:
     WUE (Water Usage Efficiency) = Annual Water Usage/IT Equipment Energy
     (L/kWh) - low is good.
     PUE (Power Usage Efficiency) = Total Facility Power/IT Equipment Power
+
+- MapReduce:
+    * Map
+    * Reduce
+    * Resource Manager (for Hadoop, YARN is the resource mgr)
+
+- YARN Scheduler = Yet Another Resource Negotiator
+    + Treats each server as collection of 'containers'
+        ~ Container = CPU + Memory (not same as Docker container)
+    + 3 main components
+        ~ Global Resource Manager (RM) for scheduling
+        ~ Per-server Node Manager (NM) for server specific functions
+        ~ Per-application Application Manager (AM)
+- MapReduce Fault Tolerance
+    + Heartbeats are periodically sent across managers for health checks.
+    + Stragglers: Slow execution.
+        ~ Speculative Execution: If % executed is very low, a replicate
+          execution is started on a new VM/container.
+
+- Building blocks of Distributed Systems
+    + Gossip and Epidemic Protocols
+    + Failure Detection and Membership Protocols
+- Grid computing is pre-cursor to cloud computing.
+
+
+Multicast Problem
+---
+- Multicast protocol must be fault-tolerant and scalable.
+- IP multicast is not attractive because it is MAY not be implemented in
+  underlying routers/servers.
+- This is application level multicast protocol.
+
+How to solve?
+---
+Centralized: Sender has a list of destination node. Opens socket and sends
+             TCP/UDP packets.
+- Problem?
+    * fault-tolerance: It is not.
+    * more latency (longer time)
+
+Tree based multicast protocols:
+    + eg., IP multicast, SRM, RMTP, TRAM, TMTP
+- Problems? If nodes fail, re-create the tree.
+- Spanning trees are built among nodes. This is used to disseminate messages.
+- Use ACKs or NACKs to repair unreceived multicast packets.
+
+SRM (Scalable Reliable Multicast):
+    + Uses NACKs
+    + Uses random delays and exponential backoff to avoid NACK storms
+
+RMTP (Reliable Multicast Transport Protocol):
+    + Uses ACKs
+    + ACKs sent to designated receivers, which then re-transmit missing
+      multicasts.
+
+- These protocols still cause O(N) ACK/NACK overhead.
+
+Gossip Protocol (Epidemic Multicast)
+---
+- Sender randomly picks 'b' random targets and sends Gossip Messages.
+- 'b' is called Gossip fan out. Typically 2 or so targets.
+- When nodes receive the Gossip, it is 'infected' by Gossip.
+- Receiver starts doing the same.
+- There may be duplicate received by nodes.
+- "Infected Nodes" - those that received multicast message.
+- "Uninfected Nodes" - those that did NOT receive multicast message.
+
+Push vs Pull
+---
+- Gossip protocol is a push protocol.
+- If multiple multicast messages exist, gossip a subset of them.
+- There's a "Pull" gossip.
+    + Periodically poll a few randomly selected targets for new multicast
+      messages that you haven't received.
+- There's a hybrid variant too: push-pull.
+
+Gossip Analysis
+---
+- Push based Gossip protocol is
+    + lightweight in large groups.
+    + spreads multicast quickly.
+    + is highly fault-tolerant.
+
+- Analysis is based on mathematical branch of Epidemiology.
+    + Population of n+1 individuals mixing homogeneously.
+    + Contact rate between any individual pair is B
+
+- TODO: Watch videos for analysis.
+
+Group Membership
+---
+- Failure rate are norm in datacenters.
+
+- Say, the rate of failure of one machine is 10 years (120 months). In a DC with
+  120 servers, Mean Time To Failure (MTTF) is 1 month. MTTF reduces with more
+  servers.
+
+- Two Sub Protocols are essential in Group Membership.
+    + Failure Detection
+    + Info Dissemination
+
+Failure Detectors
+---
+- Frequency of failures goes up linearly with size of DC.
+- Properties of Failure Detectors
+    + Completeness - each failure is detected.
+    + Accuracy - no mistaken detection.
+    + Speed - time to first detection of failure.
+    + Scale - load balance each member.
+
+- Completeness + Accuracy = Very hard to acheive. Consensus problem in
+  distributed systems.
+
+- What *really* happens?
+    + Completeness - Gauranteed
+    + Accuracy - partial/probabilistic gaurantee.
+
+
+Failure Detector Protocols
+
+Centralized Heartbeating.
+---
+- A process receives heartbeat from all other processes. After timeout, a
+  process is marked failed.
+- A process can be overloaded with heartbeats. Hotspot problemm.
+
+Ring Heartbeating
+---
+- Form a ring. Processes send/receive heartbeats to its neighbors.
+- Multiple simultaneous failures causes problems.
+
+All-to-All Heartbeating
+---
+- All processes send to all other processes.
+- Has equal load per member.
+- Protocol is complete.
+- Too many messages though.
+
+
+Gossip-Style Membership
+---
+- Nodes maintain a membership list with 3 values:
+    + IDs of Nodes.
+    + Heartbeat counter. A counter unique to a node.
+    + Local time when heartbeat was received from a node.
+
+- Each node randomly shares this membership list with peers. Peers can update
+  their membership list based on this message.
+
+- There's a timeout if heartbeat is not received from a node, called T_fail.
+- After a wait time of T_cleanup (mostly same as T_fail), the entry is deleted.
+
+- If a heartbeat is received *directly* from the node then entry is added back
+  to membership table.
+
+- If membership tables are received from other nodes in T_fail time and before
+  T_cleanup time, not updated.
+
+
+Which is best failure detector?
+---
+- Failure Detector Properties:
+    + Completeness - Guarantee always
+    + Accuracy - Probability Mistake in T time units: PM(T)
+    + Speed - T time units (time to first failure detection)
+    + Scale - N x L (nodes x load per node)
+
+- All-to-All heartbeating:
+    + Each node sends N heartbeats every T time units. Load = N/T
+
+- Gossip-Style:
+    + tg = gossip period.
+    + T = time when all nodes receive gossip.
+    + T = (log N) x tg
+    + L = Load per node = N/tg = (N x (log N))/T
+
+- What's best/optimal?
+    + TODO: Watch video 2.4 of Week 2 for analysis
+
+
+SWIM Failure Detection Protocol
+---
+- TODO: Watch videos 2.5 & 2.6 of Week 2 for analysis.
+
+
+Grid Computing
+---
+- Scheduling jobs on the Grid is one problem.
+- Globus Protocol - inter-site job scheduling protocol
+- HTCondor Protocol (High Through Condor) - intra-site job scheduling and
+  monitoring protocol.
+- Globus Alliance - bunch of univs and research labs.
+- Globus Toolkit: Lot of tools (free and open-source) for Grid computing.
+
+- Is Grid Computing and Cloud Computing converging? It's an open question.
