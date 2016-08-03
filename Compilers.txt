@@ -139,13 +139,33 @@ $(+F)   The directory part and the file-within-directory part of $+
 $(?D)
 $(?F)   The directory part and the file-within-directory part of $?
 
+>>>> Notes from [5]
+Drawbacks:
+---
+- 'make' itself is not bad or buggy. But the way Makefiles are constructed,
+  particularly for large projects, 'make' becomes very inefficient.
+- Makefiles are poorly written and don't capture correct dependencies and
+  create incorrect DAGs (Direct Acyclic Graph).
+- make is a macro language. It reads dependencies as strings and uses Deferred
+  Evaluation. Hence it keeps replacing variables with strings.
+- Order of dependency evaluation effects the build. To overcome, make is
+  repeated or Makefile is written to clean up object files (overkill).
+
+
+Efficiently writing Makefiles:
+---
+- Use Immediate Evaluation wherever possible.
+- Use single, project level Makefile and use module.mk for modules.
+- Use make's 'include' functionality.
+- Use VPATH Semantics to build 'Sand Boxes'
+
 
 Reference:
 [1] http://www.schacherer.de/frank/technology/tools/make.html
 [2] https://www.gnu.org/software/make/manual/html_node/Quick-Reference.html
 [3] http://martinvseticka.eu/temp/make/normal.html
 [4] http://www2.inf.fh-brs.de/~rberre2m/sonstiges/make_short.pdf
-
+[5] http://aegis.sourceforge.net/auug97.pdf
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@    Yocto Project     @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
