@@ -427,3 +427,25 @@ Grid Computing
 - Globus Toolkit: Lot of tools (free and open-source) for Grid computing.
 
 - Is Grid Computing and Cloud Computing converging? It's an open question.
+
+
+@@@@@@@@@@@@@@@@@@@@@@@   C++ for C Programmers    @@@@@@@@@@@@@@@@@@@@@@@@
+
+- static_cast <new_type> (expression), dynamic_cast <new_type> (expression)
+  const_cast <new_type> (exp), reinterpret_cast <new_type> (exp)
+
+C++ is better than C (really?)
+---
+    + More type safe
+    + More libraries
+    + Less reliance on preprocessor
+    + OO vs imperative
+
+C++ Templates
+---
+    template <class T>
+    inline void swap (T& d, T& s)
+    {   T temp = s;
+        s = d;
+        d = temp;
+    }
