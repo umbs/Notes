@@ -116,6 +116,9 @@ $ ldd -r lib.so
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@     MAKE NOTES     @@@@@@@@@@@@@@@@@@@@@@@
+
+Symbols/Notations
+---
 $@  The file name of the target.
 $%  The target member name, when the target is an archive member.
 $<  The name of the first (or only) prerequisite/dependency.
@@ -139,6 +142,21 @@ $(+F)   The directory part and the file-within-directory part of $+
 $(?D)
 $(?F)   The directory part and the file-within-directory part of $?
 
+Debugging make
+---
+- make can be debug by passing -d flag. This can spit out lot of details.
+        $ make -d
+
+$ make --debug // this is same as make
+$ make --debug=FLAGS
+    where FLAGS can be:
+        a - for all debugging. Same as 'make -d' and 'make --debug'
+        b - for basic debugging
+        v - slightly more verbose basic debugging.
+        i - implicit rules
+        j - invocation info
+        m - info during makefile remakes
+
 >>>> Notes from [5]
 Drawbacks:
 ---
@@ -159,6 +177,29 @@ Efficiently writing Makefiles:
 - Use make's 'include' functionality.
 - Use VPATH Semantics to build 'Sand Boxes'
 
+Including Other Makefiles [6]
+---
+    include filenames ...
+
+- 'include' directive tells make to suspend reading current makefile and read
+  one or more makefiles before continuing.
+- 'filenames' can contain shell patterns. For example, if you have 3 .mk files
+  (a.mk, b.mk, c.mk) and $(bar) expands to 'bish bash' then:
+
+        include foo *.mk $(bar)
+
+is equivalent to
+
+        include foo a.mk b.mk c.mk bish bash
+
+- Having a '-' before include indicates that if there's any error, do not throw
+  to stdout.
+
+
+Double-Colon Rules [7]
+---
+
+
 
 Reference:
 [1] http://www.schacherer.de/frank/technology/tools/make.html
@@ -166,6 +207,8 @@ Reference:
 [3] http://martinvseticka.eu/temp/make/normal.html
 [4] http://www2.inf.fh-brs.de/~rberre2m/sonstiges/make_short.pdf
 [5] http://aegis.sourceforge.net/auug97.pdf
+[6] https://www.gnu.org/software/make/manual/html_node/Include.html
+[7] https://www.gnu.org/software/make/manual/html_node/Double_002dColon.html#Double_002dColon
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@    Yocto Project     @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
