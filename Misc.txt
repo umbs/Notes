@@ -428,6 +428,132 @@ Grid Computing
 
 - Is Grid Computing and Cloud Computing converging? It's an open question.
 
+P2P Systems Intro
+---
+
+Napster
+---
++ Each user runs a client called Peers.
++ When a file is uploaded, it stays local.
++ Meta data about the file is uploaded to Servers (file name, IP, port number,
+artists name etc).
++ Servers don't save files (hence no legal liability).
++ When someone searches for a file, Server responds with data.
++ Clients then establish connection and transfer files. Server is not involved.
++ Message exchanges using TCP sockets.
++ Every Server is root of a Ternary tree, with Peers as children.
+
+How do Peers join Servers?
+---
++ Send a http request to well-known URL like: www.myp2pservice.com
+
+Problems
+---
++ Centralized server a source of congestion, single point of failure, no
+security.
++ Indirect infringment of copyright law.
+
+Gnutella
+---
++ There's no Servers. Clients themselves act as Servers to find and retrieve
+data. It's called "Servants"
++ Peers stores files locally and have info about neighbor Peers.
++ This forms an Overlay Graph.
++ Gnutella protocol has 5 main message types:
+    - Query (Search)
+    - QueryHit (response to search)
+    - Ping (to probe network for other peers)
+    - Pong (reply to ping)
+    - Push (used to initiate file transfer)
+
++ Gnutella Protocol Header
+    +----------------------------------------------------+-------
+    | Desc ID | Payload Descr | TTL | Hops | Payload len | ...
+    +----------------------------------------------------+-------
+
+    Desc ID: ID of this search
+    Payload Descr: 0x00 Ping; 0x01 Pong; 0x40 Push; 0x80 Query;
+                    0x81 QueryHit
+    TTL: Initially 7-10, drop after reaching 0.
+    Hops: Increment at each Hop. Used this because TTL is not same for all
+        clients. Many clients don't use Hops that much.
+    Payload len: # of bytes of message following this header.
+
++ Queries are flooded, TTL-restricted, duplicates are not forwarded.
++ QueryHit looks as follows:
+    +--------------------------------------------------------------+
+    |# of hits|port|IP addr|speed|(file idx,fname,fsize)|servent_id|
+    +--------------------------------------------------------------+
+
+    - servant_id is mostly not used.
+    - Peers maintain reverse route, where they received Query msg from.
+    - QueryHits are forwarded back on the same route.
+
+Avoiding Excessive Traffic
+---
+- Query forwarded to all neighbors except one from which it received.
+- Each Query forwarded only once.
+- QueryHit routed back only to peer from which Query was received.
+- If peer is missing, QueryHit is dropped.
+
+
+Dealing with Firewalls
+---
+- Push message handles this (TODO: I didn't understand)
+
+- Ping & Pong are used to update neighbor info.
+
+Problems
+---
+- Ping/Pong constituted 50% of traffic (this has been solved).
+- Cache and forward that info, reducing ping/pong messages.
+- Problem of "freeloaders". 70% of users are freeloaders.
+- Can the Query be directed instead of flooding?
+
+
+FastTrack & BitTorrent
+---
+- FastTrack is proprietary. Hybrid between Gnutella and Napster.
+- Uses "healthier" peers in Gnutella, called Super Nodes.
+- Peers become Super Nodes based on reputation and contribution.
+- Super Node maintains directory of files and related info. Queries are not
+  flooded but searched locally.
+
+
+BitTorrent
+---
+- Incentivize peers to participate.
+- Tracker keeps track of peers. When a peer comes online, it contacts Tracker to
+  send details of other peers.
+- Peers are either Seed (contains full file) or Leech (partial file).
+- Files are divided in to blocks (usually of equal size 32K-256KB).
+- Leeches get blocks from Seed and other Leeches.
+
+Which blocks are transferred to a Leech?
+---
+- Download Local Rarest First block policy
+    + prefer early download of blocks that are least replicated among neighbors.
+
+- Tit for tat bandwidth usage: Provide blocks to neighbors that provided it best
+  download rates.
+    + Incentive for nodes to provide good download rates.
+
+- Choking: Limit number of neighbors to which concurrent uploads (less than 5).
+  These are *best* neighbors.
+
+
+Chord (came from Academia)
+---
+- Distributed Hash Table.
+- Performance Concerns of DHT
+    + load balancing
+    + fault-tolerant
+    + efficiency of lookups and inserts
+    + locality
+
+
+
+
 
 @@@@@@@@@@@@@@@@@@@@@@@   C++ for C Programmers    @@@@@@@@@@@@@@@@@@@@@@@@
 
