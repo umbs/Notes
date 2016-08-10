@@ -551,9 +551,25 @@ Chord (came from Academia)
     + efficiency of lookups and inserts
     + locality
 
+- Chord is O(log N) memory, lookup latency and # of messages for a lookup.
+- Chord uses Consistent Hashing on nodes peer address
+    + SHA-1 (ip address, port) --> 160 bit string.
+    + Truncated to m bits
+    + Called peer id (number between 0 and 2^m -1)
+    + Not unique, but id conflicts very unlikely.
+    + Can then map peers to one of 2^m logical points on a circle.
 
+- Peer Pointers (1):
+    + Peers are placed on a ring, with an id between 0 and 2^m-1
+    + Peers talk to their neighbors, called successors.
 
+- Peer Pointers (2): Finger Tables
+    + TODO: Watch video 5 around 11th minute to understand.
 
+- Where are files stored?
+    + SHA-1 (filename) --> 160 bit string (key)
+    + File is stored at first peer with id >= it's key (mod 2^m)
+    + TODO: Very mathematical. Watch the video if required.
 
 @@@@@@@@@@@@@@@@@@@@@@@   C++ for C Programmers    @@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -575,3 +591,23 @@ C++ Templates
         s = d;
         d = temp;
     }
+
+
+@@@@@@@@@@@@@@@@@@@@@@@   OpenSwitch Tutorials     @@@@@@@@@@@@@@@@@@@@@@@@
+
+OVSDB Overview and Troubleshooting
+---
+- Pub/Sub model
+- Daemons connect to OVSDB server on unix socket and register for set of
+  tables/columns they are interested.
+- Daemons get notifications on change to these tables/columns.
+- Notifications have old and new values.
+- Communication happens over JSON-rpc and follows OVSDB RFC.
+
+- vswitch.extschema - contains info on all tables/columns. OVSDB server looks
+  for this on start.
+- vswitch.xml - explanation of each table/column.
+
+Commands
+--
+$ ps -ef | grep ovsdb-server
