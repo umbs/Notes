@@ -592,6 +592,172 @@ C++ Templates
         d = temp;
     }
 
+C++ Generics: Sum an array
+---
+
+template <class T>  //T is a generic type
+T sum (const T data[], int size, T s=0)
+{
+    for (int i=0; i<size; i++)
+        s += data[i]; // += must work for T
+
+    return s;
+}
+
+- Defaults for function parameter in C++ must be at the end of the param list.
+- When multiple default params exists, in a function call, values are assigned
+  left to right.
+        void func(int x=10, int y=20, int z=30);
+        func(1, 2, 3);  // x=1, y=2, z=3
+        func(1, 2);     // x=1, y=2, z=30
+        func(1);        // x=1, y=20, z=30
+        func();         // x=10, y=20, z=30
+
+
+Multiple Template Arguments
+---
+- Be careful, as it can get very dangerous.
+
+template <class T1, class T2>
+void copy (const T1 src[], T2 dst[], int size)
+{
+    for (int i=0; i<size; i++) {
+        dst[i] = static_cast<T2> (src[i]);
+    }
+}
+
+- static_cast<> This is safe casting.
+
+C++ casts
+---
+- 4 types of casting in C++
+    + static_cast <type>    // considered safe
+    + dynamic_cast <type>   // used with classes
+    + reinterpret_cast <type>   // highly unsafe, similar to C
+    + const_cast <type>     // cast away const-ness
+
+    reinterpret_cast and const_cast are usually discouraged by instructor.
+
+Representation of Graph
+---
+- Edge list representation
+- Connectivity matrix (also distances).
+
+
+List representation:
+---
+- Representation of directed graph with n verticies using an array of n lists of
+  vertices.
+- List i contains vertex of j if there is an edge from vertex i to vertex j.
+- A weighted graph may be represented with a list of vertex/weight pairs.
+- An undirected graph may be represented by having vertex j in the list for
+  vertex i and vertex i in the list for vertex j.
+
+Matrix Representation:
+---
+- Well known.
+
+- Both these don't capture weight.
+
+
+Dijkstra Shortest Path
+---
+TODO: Watch Prof. Bob Sedgwick's video.
+
+
+Enum
+---
+typedef enum color {
+    RED,
+    WHITE,
+    GREEN,
+} color;
+
+- enum is of type int.
+- Unary operators can be overloaded. Their precedence cannot be overriden.
+
+
+Operator Overloading
+---
+
+- Example of overloading ++ operator
+
+typedef enum days {
+    SUN,
+    MON,
+    TUE,
+    WED,
+    THU,
+    FRI,
+    SAT
+} days;
+
+inline days operator++ (days d)
+{
+    return static_cast <days> ((static_cast<int>(d)+1)%7);
+}
+
+- Example of overloading << operator
+
+ostream& operator<< (ostream& out, const days& d)
+{
+    switch (d) {
+        case SUN: out << "SUN"; break;
+        case MON: out << "MON"; break;
+        ...
+    }
+
+    return out;
+}
+
+- Combine above two examples
+
+int main()
+{
+    days d = MON, e;
+    e = ++d;    // this is calling operator++ (days) function
+    cout << d << '\t' << e << endl; // calling operator<< (out, days)
+}
+
+
+C++ Classes
+---
+- Using example of a point in 2D graphs
+
+class Point {
+    public:
+        double getx () {return x;}
+        void setx (double v) {x=v;}
+
+    private:
+        double x,y;
+
+}
+
+- public, private (default), protected are access levels.
+
+point operator+ (point &p1, point& p2)
+{
+    point sum = {p1.x+p2.x, p1.y+p2.y};
+    return sum;
+}
+
+ostream& operator<< (ostream& out, const point &p)
+{
+    out << "(" << p.x << ", " << p.y << ")";
+    return out;
+}
+
+- constructors
+    + default constructor has no args.
+    + Same name as class name.
+
+- 'this' keyword is self referential pointer.
+- destructor
+
+
+
+
 
 @@@@@@@@@@@@@@@@@@@@@@@   OpenSwitch Tutorials     @@@@@@@@@@@@@@@@@@@@@@@@
 
