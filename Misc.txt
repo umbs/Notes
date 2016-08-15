@@ -755,9 +755,74 @@ ostream& operator<< (ostream& out, const point &p)
 - 'this' keyword is self referential pointer.
 - destructor
 
+- Constructor Example:
 
+class point {
+public:
+    point (double x=0.0, double y=0.0):x(x), y(y) {} // constructor
+    ...
+private:
+    double x,y;
+}
 
+    - Note the initializer list x(x), y(y). This is equivalent to
+        this->x = x, this->y = y;
+    - Can be done only in constructors.
 
+Memory Management
+---
+- new --> equivalent to malloc()
+- delete --> equivalent to free()
+- They both are allocated from heap. Unlike Java, memory from heap are not
+  garbage collected automatically.
+
+Ex:
+    char *s = new char[sz];
+    int *p = new int(9); // single int, initialized to 9
+    delete []s; // delete an array
+    delete p;   // delete single element
+
+~ destructor
+---
+- Destructor always has empty arg list.
+- Can't be overloaded.
+
+Randomly Generated Graph
+---
+    bool** graph;
+    srand(time(0)); // seed
+    graph = new bool*[size];
+    for (int i=0; i<size; i++)
+        graph[i] = new bool[size];
+
+//2D array representing a graph
+
+Density = Probability an edge exists, between 0 and 1
+
+- Suppose Density=0.19
+
+    for (int i=0; i<size; i++)
+        for (int j=0; j<size; j++) {
+            if (i==j) graph[i][j] = false;
+            else graph[i][j] = graph[j][i] = (prob()<density);
+        }
+
+is_connected algorithm
+---
+    bool is_connected (bool* graph[], int size)
+    {
+        int old_size=0, c_size=0;
+        bool* close = new bool[size];
+        bool* open = new bool[size];
+        for (int i=0; i<size; i++)
+            open[i] = close[i] = false;
+        open[0] = true;
+        ...
+    }
+
+- Each iteration, add one node to closed set.
+
+- Copy Constructors, Deep Copy vs Shallow Copy (or Referential Copy).
 
 @@@@@@@@@@@@@@@@@@@@@@@   OpenSwitch Tutorials     @@@@@@@@@@@@@@@@@@@@@@@@
 
