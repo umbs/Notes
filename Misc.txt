@@ -571,6 +571,92 @@ Chord (came from Academia)
     + File is stored at first peer with id >= it's key (mod 2^m)
     + TODO: Very mathematical. Watch the video if required.
 
+
+Key-Value Store Abstraction
+---
+- Similar to dictionary data struct, but distributed. Distributed hash as in
+  P2P systems.
+- In RDBMS (ex. MySQL), data is structured and stored in tables with few
+  main items:
+        Primary Key, Secondary Key, Foriegn Key and few columns.
+- Data in today's world is different than problems solved by RDBMS
+    + Data is large and unstructured
+    + Lots of random read/writes (sometimes write heavy)
+    + Foreign keys rarely needed
+    + Joins are infrequent
+
+- Requirements of Today's workload
+    + Speed
+    + Avoid single point of failure (SPoF)
+    + Low TCO (Total Cost of Operation)
+    + Scale out and not up
+
+- Scale Out, Not Scale Up
+    Scale Up = grow cluster capacity by replacing with more powerful m/c
+    Scale Out = grow by adding COTS m/c (off the shelf)
+
+Key-Value (NoSQL) Data Model
+---
+- NoSQL = "Not Only SQL"
+- Main operations = get(key), put(key, value)
+    + and few more extended operations
+- Tables have following properties
+    + "Column Families" in Cassandra, "Table" in HBase, "Collection" in
+      MogoDB
+    + Unstructured.
+    + Don't always support JOIN or have Foreign Keys
+    + Can have index tables like RDBMS
+
+
+
+
+- Tables have following properties
+    + "Column Families" in Cassandra, "Table" in HBase, "Collection" in
+      MogoDB
+    + Unstructured.
+    + Don't always support JOIN or have Foreign Keys
+    + Can have index tables like RDBMS
+
+
+Column-Oriented Storage
+---
+- RDBMS store an entire row together
+- NoSQL systems typically store a column together (or group of columns)
+    + given a key, entries within a column are indexed are easy to locate
+      and vice-versa.
+- Searches involving columns are fast.
+    + Ex: Get all blog id's that were updated in last month.
+- Prevents fetching entire table (or row) on a search.
+
+
+Apache Cassandra
+---
+- Facebook is original designer. Now managed by Apache and many companies
+  use it.
+
+Key->Server Mapping
+---
+- Uses Virtual Ring DHT described in Chord protocol/lecture.
+    DHT = Distributed Hash Table
+
+Data Placement Strategies
+---
+Two Options:
+    + SimpleStrategy
+    + NetworkTopologyStrategy
+
+SimpleStrategy:
+    + Uses Partitioner, of which there are two kids
+        * RandomPartitioner - Chord like hash partitioning.
+        * ByteOrderPartitioner - Assigns ranges of keys to servers.
+
+NetworkTopologyStrategy: for multi-DC deployments
+    + 2 replicas/DC, 3 replicas/DC
+    + Per D:
+        * First replica placed according to Partitioner
+        * Then go clockwise around ring until you hit a different rack.
+
+
 @@@@@@@@@@@@@@@@@@@@@@@   C++ for C Programmers    @@@@@@@@@@@@@@@@@@@@@@@@
 
 - static_cast <new_type> (expression), dynamic_cast <new_type> (expression)
