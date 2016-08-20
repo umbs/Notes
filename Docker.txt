@@ -1,81 +1,83 @@
-Commands: 
+@@@@@@@@@@@@@@@@@@@         Docker Cmds       @@@@@@@@@@@@@@@@@@@@@@
+
+Commands:
 ---------
-sudo usermod -aG docker <username> 
+sudo usermod -aG docker <username>
 
 docker ps
-docker ps -aq 
+docker ps -aq
 
-docker run [options] [image] [command] [args]   // runs the container 
-docker run -ti [image] bash 
-docker run -d [image] 
+docker run [options] [image] [command] [args]   // runs the container
+docker run -ti [image] bash
+docker run -d [image]
 docker logs [container-id]
 
 docker stop [image-id]
 docker rm [image-id]
- 
- 
 
-                    INTRO TO DOCKER 
+
+
+                    INTRO TO DOCKER
                     ===============
-Glossary: 
+Glossary:
 
-+ Docker Engine (aka Docker Daemon): 
++ Docker Engine (aka Docker Daemon):
     * Program that enables containers to be built, shipped and run.
-    * Uses Linux Kernel namespaces and control groups. 
-    * Docker uses following namespaces from Kernel: 
-        - PID for process isolation 
-        - NET for managing network stack  
-        - IPC 
-        - MNT for mounting and managing mount points.  
+    * Uses Linux Kernel namespaces and control groups.
+    * Docker uses following namespaces from Kernel:
+        - PID for process isolation
+        - NET for managing network stack
+        - IPC
+        - MNT for mounting and managing mount points.
         - UTS
 
 
 // To add a user to docker group do this. After this, user need not enter 'sudo'
-// before running docker commands 
-$ sudo usermod -aG docker <username> 
+// before running docker commands
+$ sudo usermod -aG docker <username>
 
 + Docker has a Client/Server architecture, with Server being the Daemon mentioned
-above. Example: 
-    'docker run <>' 
-Above, CLI is being used as a Client. Kitematic is a GUI Client for Docker. 
+above. Example:
+    'docker run <>'
+Above, CLI is being used as a Client. Kitematic is a GUI Client for Docker.
 
-+ Docker Images: 
-    * Read only template to build containers. 
-    * Built by you or other Docker users. 
-    * Stored in Docker Hub or your local Registry. 
++ Docker Images:
+    * Read only template to build containers.
+    * Built by you or other Docker users.
+    * Stored in Docker Hub or your local Registry.
 
-+ Docker Containers: 
-    * Isolated application platform. 
-    * Contains everything needed to run your application. 
-    * Bsed on one or more images. 
++ Docker Containers:
+    * Isolated application platform.
+    * Contains everything needed to run your application.
+    * Bsed on one or more images.
 
-+ Docker Registry and Repositories: 
-    * Place to store all images. 
-    * Can run local registry or use public registry such as Docker Hub. 
-    * Each Registry can have multiple Repo, such as: Ubuntu, RedHat, NGINX. 
-    * Each Repo can have multiple images for that Repo. 
++ Docker Registry and Repositories:
+    * Place to store all images.
+    * Can run local registry or use public registry such as Docker Hub.
+    * Each Registry can have multiple Repo, such as: Ubuntu, RedHat, NGINX.
+    * Each Repo can have multiple images for that Repo.
 
-+ Docker Hub: 
-    * Public registry of images. Similar to App store. 
++ Docker Hub:
+    * Public registry of images. Similar to App store.
 
-+ Docker Orchestration Tools: 
-    * There are 3 tools for Orchestration: Machine, Swarm and Compose. 
++ Docker Orchestration Tools:
+    * There are 3 tools for Orchestration: Machine, Swarm and Compose.
 
-$ docker run [options] [image] [command] [args]   // runs the container 
-// image is specified with repository:tag 
-Examples: 
-    $ docker run ubuntu:14.04 echo "Hello World!" 
-    $ docker run ubuntu ps ax 
+$ docker run [options] [image] [command] [args]   // runs the container
+// image is specified with repository:tag
+Examples:
+    $ docker run ubuntu:14.04 echo "Hello World!"
+    $ docker run ubuntu ps ax
 
 
 
-Accessing Terminal Inside Docker 
+Accessing Terminal Inside Docker
 ----
-Use following flags: 
-    -i = Tells Docker to connect to STDIN on container 
-    -t = Tells Docker to get pseudo terminal 
+Use following flags:
+    -i = Tells Docker to connect to STDIN on container
+    -t = Tells Docker to get pseudo terminal
 
-$ docker run -i -t ubuntu:latest bash 
+$ docker run -i -t ubuntu:latest bash
 
 + Inside the container, PID = 1 for the bash process in above example. The PID
 of 'bash' on host machine is different. PPID of bash = PID of Docker.
@@ -83,14 +85,214 @@ of 'bash' on host machine is different. PPID of bash = PID of Docker.
 + Containers have: Short ID, Long ID and Name
 
 
-Running Containers in Detached Mode (use -d flag)  
--------- 
+Running Containers in Detached Mode (use -d flag)
+--------
 $ docker run -d ...
-// To observe output: $ docker logs [container id] 
-// -P flag maps container ports to host ports 
+// To observe output: $ docker logs [container id]
+// -P flag maps container ports to host ports
 
 
                         DOCKER FUNDAMENTALS
                         ===================
 
-+ Docker images are comprised of multiple layers (layers are other images)  
++ Docker images are comprised of multiple layers (layers are other images)
+
+
+
+@@@@@@@@@@@@@@@@       Mininet        @@@@@@@@@@@@@@@@@@@@@
+
+Terminology:
+------------
+OF Controller: Sits above OF interface and acts as Ethernet learning switch in
+combination with OF switch.
+
+OF Switch: Sits below OF interface. Default available switches are "user-space"
+switch and Open vSwitch (from Nicira) which is kernel based.
+
+dpctl: CLI utility to send quick OF messages for viewing switch ports, flow
+stats, inserting flow entries etc.
+
+Wireshark:
+
+iperf: utility to test bandwidth of single TCP connection.
+
+Mininet: Network emulator platform.
+
+cbench: test flow setup rate of OF controllers.
+
+
+
+# Display startup options
+$ sudo mn -h
+
+# Open wireshark
+$ sudo wireshark &
+
+# Start minimal topology. It has 2 hosts, 1 switch and 1 controller
+$ sudo mn
+
+
+            +--------------+
+            | Controller   |
+            | port 6633    |
+            |     C0       |
+            +------+-------+
+                   |
+                   |
+                   |
+            +------+-------+
+            |   OpenFlow   | 127.0.0.1:6634
+            |    Switch    |-------- dpctl (user-space process)
+            |              |
+            +--------------+
+      s1-eth0  /      \ s1-eth1
+              /        \
+    h1-eth0  /          \ h2-eth0
+        +--------+    +----------+
+        |  H1    |    |    H2    |
+        |10.0.0.2|    | 10.0.0.3 |
+        +--------+    +----------+
+
+# Clean up
+$ sudo mn -c
+
+Basic CLI options:
+  --topo - defines a topology via CLI
+  --switch - defines switch (default OVSK, Open vSwitch)
+  --controller - defines controller to be used.
+
+# Create minimal topology
+$ sudo mn --topo minimal
+
+# Linear topo with 4 hosts & 4 switches
+$ sudo mn --topo linear,4
+
+# 3 hosts to a switch
+$ sudo mn --topo single,3
+
+# Tree topology
+$ sudo mn --topo tree,depth=2,fanout=2
+
+
+
+
+
+Advanced Options:
+
+# Run regression tests directly without entering in to CLI mode
+$ sudo mn --test pingpair
+
+# Run pingall between all the hosts
+$ sudo mn --test pingall --topo single,3
+
+# Default topology: Single switch connected to two hosts
+# topology with single switch and 3 hosts
+$ sudo mn --topo single,3
+
+# 3 hosts, mac address of each host equals IP, Open vSwitch, connect to remote
+# controller
+$ sudo mn --topo single,3 --mac --switch ovsk --controller remote
+
+# linear topology (each switch has single host and all switches connect in a
+# single line
+$ sudo mn --topo linear,4
+
+# Setting link parameters
+$ sudo mn --link tc,bw=10,delay=10ms
+
+# Verbosity. Default is 'info'
+$ sudo mn -v debug     # lots of extra messages
+$ sudo mn -v output    # print just the output
+
+# Creating custom topologies from file
+$ sudo mn --custom ~/mininet/custom/topo-2sw-2host.py --topo mytopo
+
+# Create small, user-friendly MAC addr
+$ sudo mn --mac
+
+
+# XTerm Display
+$ sudo mn -x    # spawns a new xterm for each mininet session
+
+# Other types of switches
+$ sudo mn --switch user --test iperf    # iperf bandwidth will be much lower due
+                                        # to user-space switch
+
+$ sudo mn --switch ovsk --test iperf    # Open vSwitch. TCP speed should be
+                                        # similar to OpenFlow kernel module speed.
+
+# To record setup & tear down time of a topology, use test 'none'
+$ sudo mn --test none
+
+# All devices in their own namespace (works for user switch only)
+$ sudo mn --inamespace --switch user
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mininet CLI commands:
+
+# Help commands
+mininet> help
+
+# Display nodes
+mininet> nodes
+
+# Display links
+mininet> net
+
+# Dump info about all nodes
+mininet> dump
+
+# To execute a command on a device, do $ <device-name> <command>
+$ h1 ifconfig -a   # run 'ifconfig -a' on h1
+
+# Switch is in root namespace whereas hosts are in their own namespace.
+$ s1 ifconfig -a
+
+# Processes are same for all hosts. Its only the networks that are virtualized.
+$ s1 ps -a
+$ h1 ps -a
+
+# Test connectivity between hosts
+$ h1 ping -c 1 h2
+
+# All pair ping
+$ pingall
+
+# Web server & client
+$ h1 python -m SimpleHTTPServer 80 &
+$ h2 wget -O - h1
+...
+$ h1 kill %python
+
+# Exit cli
+$ exit
+
+
+
+
+
+
+
+
+dpctl Example Usage
+Most OF switches can start up with passive listening port (currently 6634), from
+which we can poll for data.
+
+# Dumps port state & capabilities
+$ dpctl show tcp:127.0.0.1:6634
+
+#
+$ dpctl dump-flows tcp:127.0.0.1:6634
