@@ -970,4 +970,3 @@ https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
 [2] Info on coredump:
 http://backtrace.io/blog/blog/2015/10/03/whats-a-coredump/
 
-
