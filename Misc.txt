@@ -545,12 +545,13 @@ Which blocks are transferred to a Leech?
 Chord (came from Academia)
 ---
 - Distributed Hash Table.
-- Performance Concerns of DHT
+- Performance Goals of DHT
     + load balancing
     + fault-tolerant
     + efficiency of lookups and inserts
     + locality
 
+- Napster, Gnutella, FastTrack are all sort of DHTs, but Chord is accurate DHT.
 - Chord is O(log N) memory, lookup latency and # of messages for a lookup.
 - Chord uses Consistent Hashing on nodes peer address
     + SHA-1 (ip address, port) --> 160 bit string.
@@ -565,11 +566,36 @@ Chord (came from Academia)
 
 - Peer Pointers (2): Finger Tables
     + TODO: Watch video 5 around 11th minute to understand.
+    + ith entry in finger table for peer n is first peer with:
+            id >= (n + 2^i) (mod 2^m)
 
 - Where are files stored?
     + SHA-1 (filename) --> 160 bit string (key)
     + File is stored at first peer with id >= it's key (mod 2^m)
     + TODO: Very mathematical. Watch the video if required.
+
+- How do file searches work?
+    + Hash the unique file name (or URL) using consistent hashing algo.
+    + It gives key K.
+    + At node N, send query for key K to largest successor/finger entry <= K
+      If none exists, send query to successor(N). Largest successor means, on
+      the virtual ring, it's the right most, but less than K.
+
+
+
+
+Pastry
+---
+- Assigns IDs to nodes, similar to Chord.
+- Each node knows its successors and predecessors.
+- Routing tables based on prefix matching, thus log(N)
+- Among potential neighbors, one with shortest RTT is chosen.
+- Shorter prefix neighbors are closer than longer prefix neighbors.
+- But overall the longest neighbors RTT is comparable to underlying internet
+  speed.
+
+
+
 
 
 Key-Value Store Abstraction
@@ -634,7 +660,7 @@ Apache Cassandra
 - Facebook is original designer. Now managed by Apache and many companies
   use it.
 
-Key->Server Mapping
+Key->Server Mapping (called Partitioner)
 ---
 - Uses Virtual Ring DHT described in Chord protocol/lecture.
     DHT = Distributed Hash Table
@@ -652,9 +678,84 @@ SimpleStrategy:
 
 NetworkTopologyStrategy: for multi-DC deployments
     + 2 replicas/DC, 3 replicas/DC
-    + Per D:
+    + Per DC:
         * First replica placed according to Partitioner
         * Then go clockwise around ring until you hit a different rack.
+
+Snitches:
+- Maps IPs to Nodes in Racks and DCs. Configured in cassandra.yaml
+- SimpleSnitch: Unaware of Topology (rack-unaware)
+- RackInferring: Octect of IP indicates DC and Rack.
+    + x.<DC>.<rack>.<node> - This is a best effort.
+- PropertyFileSnitch: Uses a config file to assign IP
+- EC2Snitch:
+- Variety of snitch options available.
+
+Writes - How are they implemented?
+---
+- Need to be lock-free and fast (no disk seeks)
+- Clients sends write to a coordinator in Cassandra cluster.
+- Coordinator uses Partitioner to send query to all replica nodes responsible
+  for key.
+- When X replicas respond, coordinator returns an ACK to client.
+    + What is X?
+- Replicas must be ALWAYS writable. How to achieve?
+    + Hinted Handoff Mechanism
+        * If replica is down, coordinator writes to all other replicas, but
+          waits for replica to come up within a time limit.
+        * If ALL replicas are down, coordinator waits for a time (few hours) and
+          then writes to replica.
+    + One ring per DC.
+        * Per DC coordinator elected to talk to other DCs.
+        * Election of coordinator done via Zookeeper.
+
+When writes come, what does Replica do?
+---
+- log the request.
+- Make changes to Memtable (in-memory representation of key-value pairs)
+- memtable can be searched. It's a write-back cache as opposed to write-through
+  cache.
+- When memtable is full, flush to disk.
+- Before flushing to disk, sort keys of Memtable in to SSTable (Sorted String
+  Table). This is a Data File.
+- Create an Index file: An SSTable of (key, position in data SSTable).
+- Add a Bloom Filter to tell if a key is present in SSTable. Very efficient.
+    + An item NOT in present can return as present.
+    + An item present ALWAYS returns as present.
+
+Compaction
+---
+- Over time, key may be in multiple SSTable and compaction is process of merging
+  them. Runs periodically and locally at each server.
+
+Deletes
+---
+- Don't delete item rightaway, but put a marker called "tombstone". When
+  Compaction is run, it deletes.
+
+
+Reads
+---
+- Coordinator can contact X replicas. From responses, Coordinator returns latest
+  time-stamped response.
+- Coordinator also fetches value from other replicas (in background) to check
+  consistency and initiating *read repaid*.
+- Due to this, Reads are slower than Writes.
+
+Membership
+---
+- Every server in cluster has list of all others in the cluster.
+
+
+Suspicion Mechanisms
+---
+-
+
+
+
+
+
+
 
 
 @@@@@@@@@@@@@@@@@@@@@@@   C++ for C Programmers    @@@@@@@@@@@@@@@@@@@@@@@@
@@ -1064,3 +1165,4 @@ http://cs.brown.edu/~jak/proglang/cpp/stltut/tut.html
 http://www.tutorialspoint.com/cplusplus/cpp_stl_tutorial.htm
 [4]
 http://en.cppreference.com/w/cpp
+
