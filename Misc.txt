@@ -749,7 +749,319 @@ Membership
 
 Suspicion Mechanisms
 ---
--
+- Mechanism to confirm failure of a server is indeed true (or false).
+- Accrual Detector: it outputs a value called Phi, which represents suspicion.
+- Phi calculations for a member:
+    + takes in to account inter-arrival times for gossip messages from a server.
+    + Phi(t) = -log(CDF)/log10
+        * CDF = Cumulative Distribution Function or Prob(t_now - t_last)
+    + Phi determines the detection timeout by taking in to historical inter
+      arrival time.
+
+- In practice, Phi=5 means about 10-15s detection time.
+
+Cassandra Vs RDBMS (MySQL): On 50 GB of data
+---
+- MySQL:
+    + writes 300ms avg; reads 350ms avg
+- Cassandra:
+    + writes .12ms avg and reads 15ms avg
+
+
+
+CAP Theorem
+---
+- Consistency, Availability, Partition-Tolerance
+- Only 2 out of 3 can be satisfied.
+- Cassandra: Eventual (Weak) Consistency, Availability & Paritition-Tolerance.
+- RDBMs: Strong Consistency over Availability.
+
+- RDBMS provide ACID
+    + Atomicity
+    + Consistency
+    + Isolation
+    + Durability
+
+- Key-Value Stores like Cassandra provide BASE
+    + Basically Available Soft-state Eventual Consistency
+
+- What is X in Cassandra?
+    + Represents consistency levels
+- X = ANY
+    + Any server can respond to read. Fastest.
+
+- X = ALL
+    + All replicas must respond. Slowest.
+
+- X = ONE
+    + At least one replica must respond. Faster than ALL. Can't tolerate
+      failure.
+
+- X = QUORUM
+    + Look at Vide (1.3) around 13th minute.
+    + Faster than ALL. Gives greater consistency than ONE.
+    + Many NoSQL uses Quorum (Cassandra, RIAK)
+
+Reads with Quorum
+---
+- Client specifies R (# of replicas).
+- Read must be received from R replicas.
+
+Write with Quorum
+---
+- Client specifies W and writes to W replicas and returns.
+- Coordinator (a) blocks until quorum is reached OR (b) Asynchronous; two
+  flavors exist.
+
+- For strong consistency two conditions required:
+    1) W+R > N
+    2) W > N/2
+    R = read replica count; W = write replica count
+
+
+QUORUM Variations
+---
+- QUORUM: across all DCs
+- LOCAL_QUORUM: in coordinators DC
+- EACH_QUORUM: in every DC
+
+Consistency Spectrum
+---
+- From Weak to Strong
+- Eventual, Causal, per-key Sequential, Red-Blue, Probabilistic, CRDTs,
+  Sequential.
+- Per-Key Sequential: Per-Key basis, all operations have a global order.
+- CRDTs (Commutative Replicated Data Types):
+    + Operations for which commutated writes give same result.
+    + Ordering is unimportant in that case.
+- Red-Blue: Divide operations in to Red and Blue. Order is MUST/important for
+  Red operations but not so for Blue.
+- Causal: Reads and Write are causally linked. One happens before other or
+  depends on other.
+
+What are models of Strong Consistency?
+---
+- Linearizability: Each op is visible instantaneously to all other clients.
+- Sequential Consistency [Leslie Lamport]:
+- Some NoSQL are supporting ACID.
+
+
+HBase
+---
+- Yahoo implemented Google's BigTable called HBase.
+- API Functions:
+    + get/put(row)
+    + scan(row range, filter) - range queries
+    + multiput
+- HBase prefers consistency over availability.
+
+
+HBase Architecture
+---
+- Lookup online.
+- HDFS is underlying storage.
+
+
+HBase Storage Hierarchy
+---
+- HBase Table
+    + Split in to multiple regions and replicated.
+    + ColumnFamily = subset of columns with similar query patterns.
+    + One "Store" per combination of ColumnFamily and Region.
+        * "Memstore" for each Store: in-memory updates to Store. Flushed to disk
+          when full.
+        * StoreFiles for each Store (HFile is underlying format)
+
+- HFile
+    + SSTable from Google's BigTable
+
+How does HBase maintain Strong Consistency?
+---
+- Using Write-Ahead Log, called HLog.
+- HLog is written so if there's a failure in Memstore, HRegionServer/HMaster can
+  replay the message from HLog and write to Memstore.
+
+
+
+Cross-Datacenter Replication
+---
+- Single "Master" cluster.
+- Other "Slave" clusters replicate same tables.
+- Master cluster synchronously sends HLogs over to Slave clusters.
+- Coordination among clusters via Zookeeper.
+- Zookeeper can be used as a file system to store control info.
+
+
+
+Time and Ordering
+---
+Asynchronous Distributed Systems:
+---
+- Different clocks and diff systems all together.
+
+Clock Skew vs Clock Drift
+---
+- CS: Relative diff in clock values of two processes
+    + Like distance between two vehicles on a road.
+- CD: Relative diff in clock frequencies (rates) of two processes.
+    + Like difference in speeds of two vehicles on the road.
+
+- non-zero CS means, clocks are not synchronized.
+- non-zero CD causes CS to increase.
+
+
+How often to synchronize?
+---
+- MDR: Maximum Drift Rate of a clock
+- Coordinated Universal Time (UTC): is "correct" time at any point.
+- Absolute MDR is defined relative to UTC.
+- Max drift rate between two clocks with similar MDR = 2*MDR
+- Given a max acceptable skew M, between any pair of clocks, need to synchronize
+  at least once every: M/(2*MDR)
+    + Since time = distance/speed
+
+
+External vs Internal Synchronization
+---
+External Sync
+---
+- Each process clock C is within a bound D of a well-known external clock S.
+    |C-S| < D at all times.
+- Ex: Cristian's algorithm and NTP
+
+Internal Sync
+---
+- Every pair of processes in a group have clocks within bound D
+    |C(i) - C(j)| < D at all times for processes i and j.
+- Ex: Berkeley algo.
+
+- External Sync with D = Internal Sync with 2*D
+- Internal Sync does not imply External Sync
+    + In fact, the entire system may drift away from external clock S
+
+
+Cristian's Algorithm
+---
+- External time sync. All processes P sync with external time server S.
+- P measures RTT of message exchanges.
+- min1 = minimum P->S latency
+- min2 = minimum S->P latency
+- Actual time at P when it receives response is between:
+    [t+min2, t+RTT-min1]
+        Note that RTT > (min1+min2)
+- P sets its time to halfway through this interval
+    t+(RTT+min2-min1)/2
+- Erro is at most (RTT-min2-min1)/2
+    + Bounded error.
+
+Gotchas
+---
+- Allowed to increase clock value but not decrease, to maintain linearity of
+  events. Otherwise it may violate ordering of events within a process.
+- Allowed to increase or decrease clock speed.
+- If error is too high, take multiple readings and average them.
+
+
+NTP
+---
+- NTP servers organized in a tree.
+- Root of tree = Primary Servers, where UTC time/clock present.
+- Children of Root = Secondary Servers.
+- Grandchildren of Root = Tertiary Servers.
+- Each client is leaf of the tree.
+
+
+                 TR1     TS2
+Child ------------^---------------------^-------------------------->
+        \        /         \           / Parent sends
+         \      /M1         \ M2      / (TS1, TR2)
+          \    /             \       /
+Parent ----v------------------v------------------------------------>
+           TS1               TR2
+
+- Child uses all these times to calculate it's clock.
+
+- Offset O = (TR1-TR2+TS2-TS1)/2
+
+- Suppose real offset between Child and Parent is oreal
+    + Child is ahead of Parent by oreal
+    + Parent is ahead of Child by -oreal
+
+- Suppose one-way latency of M1 is L1 and of M2 is L2. L1 and L2 are unknown.
+- TR1 = TS1 + L1 + oreal
+- TR2 = TS2 + L2 - oreal
+- Subtracting both equations to get oreal
+
+    oreal = (TR1-TR2+TS2=TS1)/2 + (L2-L1)/2
+    oreal = O + (L2-L1)/2
+    |oreal-O| < |(L2-L1)/2| < |(L2+L1)/2|
+        + Thus, the error is bounded by RTT.
+
+- There's always non-zero error. Can't we *not* synchronize clocks? Directly
+  address the issue of events ordering?
+
+
+Lamport (Logical) Timestamps
+---
+- Assign timestamps to events that were not *absolute* time, but obey
+  *causaility*.
+
+- Define a logical relation Happens-Before among pairs of events.
+- Happens-Before denoted as ->
+
+Three Rules
+    1) On the same process: a -> b, if time(a) < time(b), using local clock.
+    2) If p1 sends m to p2: send(m) -> receive(m)
+    3) If a -> b and b-> c then a -> c (Transitive Property)
+        + Not all events related to each other via ->
+
+- These rules create partial order among events. Two processes that never
+  communicate have their events that are concurrent.
+
+
+Implementation of Lamport Timestamps
+---
+Goal: Assign logical timestamps to each event.
+- Timestamps obey causality.
+- Rules:
+    + Each process uses a local counter, an int, initialized to 0.
+    + Process increments its counter when a *send* or an *instruction* happens
+      at it. Counter is assigned to the event.
+    + A *send* message event carries its timestamp
+     + For receive message event, the counter is updated by:
+        receive timestamp = max(local clock, message timestamp) + 1
+
+Concurrent Events
+---
+- A pair of concurrent events doesn't have causal path from one event to
+  another.
+- Lamport timestamps not guaranteed to be ordered or unequal for concurrent
+  events.
+- E1 -> E2 means timestamp(E1) < timestamp(E2), However, opposite is not true:
+    if timestamp(E1) < timestamp(E2) then E1 -> E2 OR E1 and E2 are concurrent.
+- Concurrent events can't be identified.
+
+Vector Clocks
+---
+- Used in Key-Value store like Riak
+- Each process uses a vector of integer clocks.
+- Supposed there are N processes in the group then each vector has N elements.
+- Process i maintains vector Vi[1...N]
+- jth element of vector clock at process i, Vi[i], is i's knowledge of latest
+  events at process j.
+- Each msg carries senders vector
+- On receiving a message at process i:
+        Vi[i] = Vi[i] + 1
+        Vi[j] = max(Vmsg[j], Vi[j]) for i not equal j
+
+- Obey's causality. Watch video 2.5 at 5min 40s.
+- More space consuming, but this idea can capture concurrent events.
+
+
+
+
+
+
 
 
 
