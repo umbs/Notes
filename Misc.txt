@@ -1058,11 +1058,150 @@ Vector Clocks
 - More space consuming, but this idea can capture concurrent events.
 
 
+Global Snapshot
+---
+- In a distributed system, how do you calculate a "global snapshot"? What
+  does it even mean and uses?
+    + Checkpointing: can restart applications on failure.
+    + Garbage Collection: of unused objects.
+    + Deadlock Detection: useful in DB transactions.
+    + Termination of Computation: useful in batch computing.
+
+- Global Sanpshot = Global State = Individual state of each process +
+  Individual state of each communication chaneel. Channels are FIFO ordered.
+
+- Capture *instantaneous* state of each process.
+- Capture *instantaneous* state of each communication channel.
+
+First Solution:
+---
+- Sync all processes and record states at time t.
+- Probs:
+    + Time sync always has errors.
+    + Doesn't record state of msgs in channels.
+- However, sync is not required. Causality is enough.
 
 
+                Cji
+       <---------------------
+    Pi                       Pj
+       --------------------->
+                Cij
 
 
+- Next solutions obey causality.
 
+Chandy-Lamport Algorithm of Global Snapshot (classical algo)
+---
+Problem: Record a global snapshot for each process state and comm channel.
+System Model:
+- N processes in the system.
+- Two uni-directional comm channel between processes Pi and Pj
+    + FIFO ordered
+
+Assumptions:
+- No failure on channel
+- All messages arrive intact and no duplicates.
+
+Requirements:
+- Snapshot shouldn't interfere with normal apps.
+- Each process is able to record it's own state.
+- Global state is collected in distributed manner.
+- Any process may initiate a snapshot.
+
+Snapshot Initiator Process Pi
+---
+- Pi records its own state first.
+- Pi creates special messages called "Marker" messages.
+
+for j=1 to N, except i
+    Pi sends out a Marker msg on outgoing channel Cij
+    // thats N-1 channels
+- Starts recording incoming messages on each of incoming channels at Pi:
+    Cji for j=1 to N except i
+
+When Pi receives a Marker message on Cki
+---
+- If this is 1st Marker Pi is seeing
+    + Pi records it's own state first.
+    + Marks the state of channel Cki as "empty"
+    + for j=1 to N except i
+        * Pi sends out a Marker msg on outgoing channel Cij
+    + Starts recording the incoming messages on each of incoming channels at
+      Pi: Cji for j=1 to N except i and k
+- Else // already seen a Marker msg
+    + Mark all messages received since first Marker on Cki as part of the
+      state of Cki and stop recording state on that channel.
+
+- Note that state of a channel is Marked by the receiving end of the
+  channel.
+
+- Algo Termination:
+    + All processes receives a Marker msg.
+    + All processes have received a Marker on all N-1 incoming channels
+
+- This algo is Causally Correct.
+
+
+Consistent Cuts
+---
+Cut = Time point at each process and at each channel.
+- Events at the process/channel that happen before the cut are "in the cut"
+  and after the cut are "out of the cut".
+
+Consistent Cut: a cut that obeys causality
+- A cut C is consistent iff for each pair of events e and f such that event
+  e is in the cut C and if f->e (f happens-before e) then f is in cut C.
+
+
+- In Chandy-Lamport Global Snapshot algo, the Consisten Cut is the line
+  through all the starting points of each process recording time.
+
+
+Safety & Liveness Properties
+---
+- These properties determine "Correctness" in distributed systems.
+
+- Liveness = guarantee that something "good" will happen "eventually".
+    Ex:
+    + Distributed computation will terminate eventually.
+    + Every failure is eventually detected by some non-faulty process.
+    + In Consensus, all processes eventually decide on a value.
+
+- Safety = guarantee that something "bad" will "never" happen.
+    Ex:
+    + There's no deadlock in a distributed transaction system.
+    + No object is orphaned in a distributed object system.
+    + "Accuracy" in failure detectors.
+    + In Consensus, no two processes decide on different values.
+
+- Very hard to guarantee both Liveness and Safety in Async Dist systems.
+    Failure Detector: Completeness (Liveness) and Accuracy (Safety) cannot
+                      both be guaranteed.
+    Consensus: Decisions (Liveness) and Correct Decisions (Safety) cannot
+               both be guaranteed.
+    Legal: Very hard for legal systems to guarantee that all criminals will
+           be jailed (Liveness) and no innocent is ever jailed (Safety).
+
+
+What does Liveness and Safety mean in Global Snapshot/State world?
+---
+- Dist sys moves from one state to another.
+- Liveness, w.r.t a property Pr in a given state S means
+    + S satisfies Pr or there is some causal path from S to S' where S'
+      satisfies Pr.
+- Safety w.r.t a property Pr in a given state S means
+    + S satisfies Pr and all global states S' reachable from S also satisfy
+      Pr.
+
+- Stable Properties = once true, stays true forever.
+- Chandy-Lamport algo can be used to detect global stable properties.
+
+- Stable Liveness example: Computation terminated.
+- Stable non-Safety example: There's deadlock.
+
+- Due to its Causal correctness, all stable properties can be detected using
+  Chandy-Lamport algo.
 
 
 
