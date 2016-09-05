@@ -1230,3 +1230,16 @@ How Interest Rates effect Bond Markets
 References
 [1] Coursera Course:
 https://www.coursera.org/learn/understanding-financial-markets/home/welcome
+
+@@@@@@@@@@@@@@@     FAQs  ON  RETIREMENT  PLANS     @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// Notes to self in Q&A style
+
+FAQs on 401K
+FAQs on IRA
+FAQs on Roth IRA
+FAQs on Social Security
+FAQs on FSA (Flexible Spending Account)
+FAQs on HSA (Health Spending Account)
+FAQs on Medicare/Medicaid
+FAQs on Federal and State Income Taxes
