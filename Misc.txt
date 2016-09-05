@@ -1204,6 +1204,79 @@ What does Liveness and Safety mean in Global Snapshot/State world?
   Chandy-Lamport algo.
 
 
+Multicast Ordering
+---
+- A msg sent to multiple processes in a group.
+
+Who uses mutlicast?
+---
+- Widely used abstraction in all cloud systems.
+- Replica servers for a key multicasts read/writes within the replica group.
+- Membership info is multicast across all servers in a cluster.
+
+- Types of ordering in Multicast
+    + FIFO
+    + Causal
+    + Total Ordering
+
+- Causal ordering implies FIFO ordering. Reverse is NOT true.
+- Causal ordering is intuitive and preferred.
+- Total ordering is aka "Atomic Broadcast".
+- Unlike FIFO and Causal, Total Ordering does not pay attention to order of
+  multicast sending.
+- Total ordering ensures all receivers receive all multicasts in the same
+  order.
+
+
+FIFO Multicast: Data Structs
+---
+- Each receiver maintains a per-sender sequence numbers
+    + Process P1 through Pn
+    + Pi maintains a vector of seq. no. Pi [1...n], zero initialized.
+    + Pi[j] is latest seq. no. Pi has received from Pj.
+
+- Sender Pj:
+    + Pj[j]++
+    + Include new Pj[j] in multicast msg.
+
+- Receive multicast: If Pi receives a multicast from Pj with seq. no S in
+  msg then:
+    + if (S == Pi[j] + 1) then
+        * deliver msg to application
+        * set Pi[j]++
+    + else buffer this multicast until above condition is true.
+
+
+Ex: Please see lecture 2.2 starting at 4.00 minutes
+
+Total Ordering: Ensures ordering of messages are same across all receivers.
+---
+- Sequence based approach.
+- Special process elected as leader or sequencer.
+
+- Sender Pi sends multicast msg to group and sequencer.
+
+- Sequencer:
+    + Maintains a global sequence number S (initially 0)
+    + When it receives a multicast msg M, it increments S and multicasts M
+      and S.
+
+- Receive multicast at Pi:
+    + Pi maintains a local received global seq. no. Si (initially 0).
+    + If Pi receives a multicast M from Pj, it buffers it until following
+      two conditions are satisfied:
+        * Pi receives <M, S(M)> from Sequencer AND
+        * Si + 1 = S(M)
+        * Then deliver its msg to application and set Si=Si+1
+
+
+Causal Ordering Impl: Data Struct
+---
+- Each receiver maintains a vector of per-sender seq. no.
+- Similar to FIFO multicast, but updating rules are diff.
+- Processes P1 to Pn
+- Pi maintains a vector Pi[1...n] (initially 0)
+- Pi[j] is the latest seq. no Pi has received from Pj
 
 
 
