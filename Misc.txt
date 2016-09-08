@@ -1806,8 +1806,57 @@ Project 1: 3 types of logic gates will be built.
 
 
 
+Consensus Problem (Paxos)
+---
+- five-9's or seven-9's of reliability.
+- 100% is not possible due to consensus problem.
+
+Classical Problems in Distributed Systems
+---
+Reliable Multicast: All nodes in a group receive same updates in same order as
+each other.
+Membership/Failure Detection: Maintain local lists of members and when one
+leaves or fails, everyone is updated.
+Leader Election: Elect a leader in the group and let everyone know.
+Mutual Exclusion: Ensure mutually exclusive access to critical resources
+(similar to synchronization problem).
+
+- Above problems are related to Consensus Problem.
+
+Formal definition of Consensus
+---
+- N processes. Each process p has
+    + input variable xp (initially 0 or 1)
+    + output variable yp: (initially b and can be changed only once).
+- Consensus problem: design a protocol so that at the end, either
+    + All processes set their output variables to 0 (all zeros)
+    + OR all processes set their output variables to 1 (all ones)
+
+- Goal is to have all processes decide same value. Once a process decides, it
+  cannot be changed.
+
+- Synchronous and Asynchronous System Models exist in which to solve consensus
+  problem.
+
+Synchronous Dist Sys
+---
+- Each msg is received within bounded time.
+- Drift of each process' local clock has a known bound.
+- Each step in a process takes LB < time < UB
+- Consensus probl is solvable in Sync Dist Sys.
+
+Asynchronous Dist Sys
+---
+- No bounds on process execution.
+- Drift rate of a clock is arbitrary
+- Consensus probl is NOT solvable in Sync Dist Sys.
 
 
+Consensus in Synchronous Dist Sys.
+---
+- System Model
+    + Bounds on msg delays, drift rates and max time of each step.
+    + Process once fail, doesn't recover (assumption).
 
 
 

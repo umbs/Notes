@@ -29,6 +29,15 @@ mpstat
 sar
 dstat
 
+ngrep
+mitmproxy
+opensnoop
+eBPF
+perf
+
+
+
+
 
 + How to check linux flavor/version
 Method 1:

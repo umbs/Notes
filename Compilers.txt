@@ -16,6 +16,30 @@ GCC Flags:
         .cfi_end_proc
         .cfi_offset_cfa_register
 
+// CFA = Call Frame Address
+// CFI = Call Frame Information
+
+.cfi_start_proc
+    Beginning of a function; must have a corresponding end.
+
+.cfi_end_proc
+    End of a function.
+
+.cfi_def_cfa <register>, <offset>
+    Define a rule for computing CFA as "take address from register and add
+    offset to it"
+
+.cfi_offset <register>, <offset>
+    Previous value of <register> is saved at offset <offset> from CFA
+
+.cfi_def_cfa_register <register>
+    From now on <register> will be used instead of old one for computing CFA.
+
+.cfi_def_cfa_offset <offset>
+    Modify a rule for computing CFA. Register remains the same, but offset is
+    new. Note that it is the absolute offset that will be added to a defined
+    register to compute CFA address.
+
 -c  Compile or assemble the source, but don't link.
 -S  Stop after compilation. Don't assemble.
 -E  Stop after preprocessing. Don't compile.
@@ -25,8 +49,8 @@ GCC Flags:
 
 Reference:
 [1] http://en.wikipedia.org/wiki/Call_stack#Structure Call Frame Information
-
 [2] https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
+[3] https://sourceware.org/binutils/docs-2.17/as/CFI-directives.html#CFI-directives
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@        GDB Commands      @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
