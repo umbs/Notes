@@ -1279,7 +1279,107 @@ Causal Ordering Impl: Data Struct
 - Pi[j] is the latest seq. no Pi has received from Pj
 
 
+Classical Distributed Algorithms
+---
 
+Consensus Problem (Paxos)
+---
+- five-9's or seven-9's of reliability.
+- 100% is not possible due to consensus problem.
+
+Classical Problems in Distributed Systems
+---
+Reliable Multicast: All nodes in a group receive same updates in same order as
+each other.
+Membership/Failure Detection: Maintain local lists of members and when one
+leaves or fails, everyone is updated.
+Leader Election: Elect a leader in the group and let everyone know.
+Mutual Exclusion: Ensure mutually exclusive access to critical resources
+(similar to synchronization problem).
+
+- Above problems are related to Consensus Problem.
+
+Formal definition of Consensus
+---
+- N processes. Each process p has
+    + input variable xp (initially 0 or 1)
+    + output variable yp: (initially b and can be changed only once).
+- Consensus problem: design a protocol so that at the end, either
+    + All processes set their output variables to 0 (all zeros)
+    + OR all processes set their output variables to 1 (all ones)
+
+- Goal is to have all processes decide same value. Once a process decides, it
+  cannot be changed.
+
+- Synchronous and Asynchronous System Models exist in which to solve consensus
+  problem.
+
+Synchronous Dist Sys
+---
+- Each msg is received within bounded time.
+- Drift of each process' local clock has a known bound.
+- Each step in a process takes LB < time < UB
+- Consensus probl is solvable in Sync Dist Sys.
+
+Asynchronous Dist Sys
+---
+- No bounds on process execution.
+- Drift rate of a clock is arbitrary
+- Consensus probl is NOT solvable in Sync Dist Sys.
+
+
+Consensus in Synchronous Dist Sys.
+---
+- System Model
+    + Bounds on msg delays, drift rates and max time of each step.
+    + Process once fail, doesn't recover (assumption).
+
+Paxos
+---
+- Consensus is impossible to solve in Async systems.
+- Paxos solves consensus and most popular.
+- Paxos provides safety and eventual liveness.
+- Safety: Consensus is not violated
+- Eventual Liveness: Eventually consensus is reached but not gauranteed.
+
+- Paxos has rounds; each round has a unique ballot id
+- Rounds are async
+    + If a process is in round j and gets a msg from round j+1, abort everything
+and move over to j+1
+    + Can also use timeouts.
+- Each round itself broken in to phases
+    + Phase 1: A leader is elected (Election)
+    + Phase 2: Leader proposes a value, processes ACK (Bill)
+    + Phase 3: Leader multicasts final value (Law)
+
+Phase 1 - Election
+---
+- Potential leader chooses a unique ballot id, higher than anything seen so far.
+- Multicasts to all processes.
+- Processes wait, respond once to highest ballot id.
+    + If potential leader sees a higher ballot id, it can't be a leader.
+    + Paxos tolerant to multiple leaders (only one leader case studied here).
+    + Processes also log received ballot id on disk.
+- If a process has decided value 'v' in previous round, include that in this
+  round.
+- If majority (quorum) respond OK then you are the leader. Else, start new
+  round.
+- A round cannot elect two leaders if things go right. But edge cases exist.
+
+
+Phase 2 - Proposal (Bill)
+---
+- Leader sends proposed value 'v' to all
+- Recipients logs msgs on disk and responds OK.
+
+
+Phase 3 - Decision (Law)
+---
+- If leader hears a majority of OKs, it lets everyone know of the decision.
+- Recipients receive decision, lot if on disk.
+
+
+- When is consensus reached? End of Bill phase.
 
 
 @@@@@@@@@@@@@@@@@@@@@@@   C++ for C Programmers    @@@@@@@@@@@@@@@@@@@@@@@@
@@ -1805,58 +1905,6 @@ Project 1: 3 types of logic gates will be built.
     Multi-way variants: Or8Way, Mux4Way16, Mux8Way16, DMux4Way, DMux8Way
 
 
-
-Consensus Problem (Paxos)
----
-- five-9's or seven-9's of reliability.
-- 100% is not possible due to consensus problem.
-
-Classical Problems in Distributed Systems
----
-Reliable Multicast: All nodes in a group receive same updates in same order as
-each other.
-Membership/Failure Detection: Maintain local lists of members and when one
-leaves or fails, everyone is updated.
-Leader Election: Elect a leader in the group and let everyone know.
-Mutual Exclusion: Ensure mutually exclusive access to critical resources
-(similar to synchronization problem).
-
-- Above problems are related to Consensus Problem.
-
-Formal definition of Consensus
----
-- N processes. Each process p has
-    + input variable xp (initially 0 or 1)
-    + output variable yp: (initially b and can be changed only once).
-- Consensus problem: design a protocol so that at the end, either
-    + All processes set their output variables to 0 (all zeros)
-    + OR all processes set their output variables to 1 (all ones)
-
-- Goal is to have all processes decide same value. Once a process decides, it
-  cannot be changed.
-
-- Synchronous and Asynchronous System Models exist in which to solve consensus
-  problem.
-
-Synchronous Dist Sys
----
-- Each msg is received within bounded time.
-- Drift of each process' local clock has a known bound.
-- Each step in a process takes LB < time < UB
-- Consensus probl is solvable in Sync Dist Sys.
-
-Asynchronous Dist Sys
----
-- No bounds on process execution.
-- Drift rate of a clock is arbitrary
-- Consensus probl is NOT solvable in Sync Dist Sys.
-
-
-Consensus in Synchronous Dist Sys.
----
-- System Model
-    + Bounds on msg delays, drift rates and max time of each step.
-    + Process once fail, doesn't recover (assumption).
 
 
 
