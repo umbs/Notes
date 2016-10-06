@@ -1058,6 +1058,8 @@ Vector Clocks
 - More space consuming, but this idea can capture concurrent events.
 
 
+Week 5
+---
 Global Snapshot
 ---
 - In a distributed system, how do you calculate a "global snapshot"? What
@@ -1121,13 +1123,14 @@ for j=1 to N, except i
     Cji for j=1 to N except i
 
 When Pi receives a Marker message on Cki
+// Pi can be any process and need not be Initiator process.
 ---
-- If this is 1st Marker Pi is seeing
+- If this is 1st Marker Pi is seeing on channel Cki
     + Pi records it's own state first.
-    + Marks the state of channel Cki as "empty"
+    + Marks the state of incoming channel Cki as "empty"
     + for j=1 to N except i
         * Pi sends out a Marker msg on outgoing channel Cij
-    + Starts recording the incoming messages on each of incoming channels at
+    + Starts recording the msgs on each of incoming channels at
       Pi: Cji for j=1 to N except i and k
 - Else // already seen a Marker msg
     + Mark all messages received since first Marker on Cki as part of the
