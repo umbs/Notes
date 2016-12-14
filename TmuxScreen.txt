@@ -1,52 +1,53 @@
 https://gist.github.com/MohammedAlaa/2961058
 
-tmux 
-tmux new -s <name> 
+tmux
+tmux new -s <name>
 
-tmux a # (or at, or attach)  
-tmux a -t myname 
+tmux a # (or at, or attach)
+tmux a -t myname
+tmux a -d -t myname // the -d detaches all *other* sessions
 
-tmux ls 
+tmux ls
 
 tmux kill-session -t myname
 
-Hit "Prefix" ctrl+b for the rest: 
+Hit "Prefix" ctrl+b for the rest:
 
 Sessions:
-s  list session 
+s  list session
 $  name session
 
-Windows (tabs): 
-c  new window 
-w  list windows 
+Windows (tabs):
+c  new window
+w  list windows
 f  find windows
-,  name window 
-&  kill window 
+,  name window
+&  kill window
 
 
-     PANES MANAGEMENT 
+     PANES MANAGEMENT
     ==================
-Panes (splits): 
-%  horizontal split  
+Panes (splits):
+%  horizontal split
 "  vertical split
 
-"arrow"  switch between panes: 
-Up switch to pane above 
-Down switch to pane below 
+"arrow"  switch between panes:
+Up switch to pane above
+Down switch to pane below
 Right
-Left 
+Left
 
-o  swap panes 
-q  show pane numbers 
-x  kill pane 
-+  break pane into window (e.g., to select text by mouse to copy) 
--  restore pane from window 
-   space - toggle between layouts 
-PREFIX q (show pane numbers, when the numbers show up, type the key to go to that pane) 
-PREFIX { (move the current pane left/top) 
-PREFIX } (move current pane right/bottom) 
+o  swap panes
+q  show pane numbers
+x  kill pane
++  break pane into window (e.g., to select text by mouse to copy)
+-  restore pane from window
+   space - toggle between layouts
+PREFIX q (show pane numbers, when the numbers show up, type the key to go to that pane)
+PREFIX { (move the current pane left/top)
+PREFIX } (move current pane right/bottom)
 
-        RESIZING PANES 
+        RESIZING PANES
        ================
 PREFIX : resize-pane (By default it resizes the current pane down)
 PREFIX : resize-pane -U (Resizes the current pane upward)
@@ -62,16 +63,16 @@ PREFIX : resize-pane -t -L 20 (Resizes the pane with the id of 2 left by
 20 cells)
 
 
-d  detach 
-t  big clock 
-?  list shortcuts 
-:  prompt 
- 
+d  detach
+t  big clock
+?  list shortcuts
+:  prompt
+
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SCREEN COMMANDS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Source: www.linuxjournal.com/article/6340?page=0,0
-Source: http://news.softpedia.com/news/GNU-Screen-Tutorial-44274.shtml 
+Source: http://news.softpedia.com/news/GNU-Screen-Tutorial-44274.shtml
 
 
 Command character: Ctrl-a
@@ -82,37 +83,37 @@ Abbreviations: Ctrl = C, Shift = S
 
 New screen         -> C-a c [or C-a C-c]
 List of screens    -> C-a"
-Switch screens     -> C-a' [or C-a C-'] 
+Switch screens     -> C-a' [or C-a C-']
 
 
-Previous screen    -> C-a p [or C-a C-p] 
+Previous screen    -> C-a p [or C-a C-p]
 Next screen        -> C-a n [or C-a C-n]
-Toggle             -> C-a a [or C-a C-a]  # toggles between last two screens 
+Toggle             -> C-a a [or C-a C-a]  # toggles between last two screens
 
-Set screen name    -> C-a S-a 
-Kill a screen      -> C-a S-k 
-Detach a screen    -> C-a d [or C-a C-d] 
+Set screen name    -> C-a S-a
+Kill a screen      -> C-a S-k
+Detach a screen    -> C-a d [or C-a C-d]
 
 
 Monitor output in current window    -> C-A S-M
-Monitor for silence -> C-a_ [30 sec by default] 
+Monitor for silence -> C-a_ [30 sec by default]
 
-List screens       -> screen -ls 
-Attach to a screen -> screen -r sessionname 
-Start a new screen -> screen -R 
-Multi attach a screen  -> screen -x sessionname 
+List screens       -> screen -ls
+Attach to a screen -> screen -r sessionname
+Start a new screen -> screen -R
+Multi attach a screen  -> screen -x sessionname
 
 Scrollback         -> To scroll through screens history, first enable the
                       copy mode by pressing C-A [
                       Now, use page-up, page-down, home and end keys to
-                      scroll through screens history. 
+                      scroll through screens history.
 
 Copy mode          -> C-A [ or copy. Pressing Enter will starting marking
                       text. Enter again to copy the text to clipboard.
-                      Now, paste using C-A ] 
+                      Now, paste using C-A ]
 
 Paste              -> C-A ]
 
 Copy/Paste did not work for me
 
-List of commands   -> C-A ? 
+List of commands   -> C-A ?

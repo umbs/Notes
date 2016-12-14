@@ -1,151 +1,170 @@
                   ALGORITHMS          COLLECTION
                   ===============================
 
-Dynamic Programming Problems: 
+Dynamic Programming Problems:
 1 Sequence Alignment
-2 Tower of Hannoi Puzzle 
-3 Egg dropping puzzle 
-4 Matrix chain multiplication 
-5 
+2 Tower of Hannoi Puzzle
+3 Egg dropping puzzle
+4 Matrix chain multiplication
+5
 
-References: 
+References:
 [1] http://en.wikipedia.org/wiki/Dynamic_programming
 [2] http://www.quora.com/Programming-Interviews/What-are-the-top-10-most-popular-dynamic-programming-problems-among-interviewers
 
 
 
 
-- Dynamic Connectivity Problem (How many connected components exist) 
+- Dynamic Connectivity Problem (How many connected components exist)
 - Quick Find
-          // algo 
+          // algo
           id[component] = component
-          union(p, q): 
+          union(p, q):
                 id[p] = id[q]
                 each element that has id[p] has to be changed to id[q]
-                (this is O(N) step) 
-          connected(p, q): 
+                (this is O(N) step)
+          connected(p, q):
                 return (id[p] == id[q])
 
-        Algo          Initialize         Union       Find 
+        Algo          Initialize         Union       Find
         -------------------------------------------------
-     Quick-Find            N               N           1 
+     Quick-Find            N               N           1
 
 - Problem: Union is expensive. N^2 time for N union's
 - Too slow algo.
 
-- Quick Union: Lazy approach to above problem. 
+- Quick Union: Lazy approach to above problem.
    Data Structure
-   - Integer array id[] of size N 
-   - Interpretation: id[i] is parent of i 
+   - Integer array id[] of size N
+   - Interpretation: id[i] is parent of i
    - Root of i is id[id[...id[i] ...]]] - keep going until there is no
-     change. Algo ensures no cycles. 
+     change. Algo ensures no cycles.
 
-   Find(): 
-        - Check if p and q have same root? 
-   Union(): 
+   Find():
+        - Check if p and q have same root?
+   Union():
         - Merge components containing p and q, set the id of p's root to
-          id of q's root. Only one value changes. 
+          id of q's root. Only one value changes.
 
-   // Algo 
-   private int root(int i) 
+   // Algo
+   private int root(int i)
    {
         while(i != id[i])
-                i = id[i]; 
-        return i; 
+                i = id[i];
+        return i;
    }
 
-   public bool connected(int p, int q) 
+   public bool connected(int p, int q)
    {
-        return root(p) == root(q); 
+        return root(p) == root(q);
    }
 
    public void union(int p, int q)
    {
-        int pr = root(p); 
-        int qr = root(q); 
+        int pr = root(p);
+        int qr = root(q);
 
-        id[pr] = qr; 
+        id[pr] = qr;
    }
 
-        Algo          Initialize         Union       Find 
+        Algo          Initialize         Union       Find
         -------------------------------------------------
-     Quick-Find            N               N           1 
-     Quick-Union           N               N*          1 
+     Quick-Find            N               N           1
+     Quick-Union           N               N*          1
 
-     * - includes cost of finding roots 
+     * - includes cost of finding roots
 
-- Quick Union with Weighting (Improvement #1) 
-  - Modify QU to avoid tall trees 
-  - Keep track of size of each tree (# of objects) 
-  - Balance by linking root of smaller tree to root of larger tree. 
+- Quick Union with Weighting (Improvement #1)
+  - Modify QU to avoid tall trees
+  - Keep track of size of each tree (# of objects)
+  - Balance by linking root of smaller tree to root of larger tree.
 
-  // Algo 
+  // Algo
   - Maintain sz[i] = size of tree rooted at i
-  Find()/Connected(p, q): 
-        return root(p) == root(q); 
+  Find()/Connected(p, q):
+        return root(p) == root(q);
 
-  QUwithWeight(p, q) 
+  QUwithWeight(p, q)
   {
-        int pr = root(p); 
-        int qr = root(q); 
+        int pr = root(p);
+        int qr = root(q);
 
-        if(pr == qr) return; // same tree 
+        if(pr == qr) return; // same tree
 
-        if(sz[pr] < sz[qr]) 
-                id[pr] = qr; 
+        if(sz[pr] < sz[qr])
+                id[pr] = qr;
                 sz[qr] += sz[pr];
-        else 
-                id[qr] = pr; 
-                sz[pr] += sz[qr]; 
+        else
+                id[qr] = pr;
+                sz[pr] += sz[qr];
   }
-  
-  - Depth of each node is atmost lg N (base 2 log) 
 
-        Algo          Initialize         Union       Find/Connected 
+  - Depth of each node is atmost lg N (base 2 log)
+
+        Algo          Initialize         Union       Find/Connected
         -------------------------------------------------
-     Quick-Find            N               N           1 
-     Quick-Union           N               N*          1 
+     Quick-Find            N               N           1
+     Quick-Union           N               N*          1
      Weighted QU           N              lg N        lg N
 
 
 
-- Weighted QU (Improvement #2): Path compression. Flatten the tree. 
+- Weighted QU (Improvement #2): Path compression. Flatten the tree.
   - After computing root of p, set id of each examined node to point to
-    that root. 
+    that root.
   - Starting from empty data structure, any sequence of M union-find ops
-    on N objects makes <= c (N + M lg* N) array accesses. 
-    lg* N = 5 for 2^65536, which is pretty much constant. 
-  - Therefore, almost linear time algo. 
-  
-              Algo              worst-cast time  
+    on N objects makes <= c (N + M lg* N) array accesses.
+    lg* N = 5 for 2^65536, which is pretty much constant.
+  - Therefore, almost linear time algo.
+
+              Algo              worst-cast time
         -------------------------------------------------
-          Quick-Find            MN  
-          Quick-Union           MN  
+          Quick-Find            MN
+          Quick-Union           MN
           Weighted QU           N + Mlog N
-     QU + Path Compression      N + Mlog N 
-     Weighted QU + Path Comp    N + Mlg *N 
+     QU + Path Compression      N + Mlog N
+     Weighted QU + Path Comp    N + Mlg *N
 
-        M union-find ops on set of N objects 
+        M union-find ops on set of N objects
 
-Example: 10^9 union-finds with 10^9 objects 
-  - WQUPC reduces time from 30 years to 6 seconds. 
+Example: 10^9 union-finds with 10^9 objects
+  - WQUPC reduces time from 30 years to 6 seconds.
 
 
-Applications: 
+Applications:
   - Percolation
   - Games (Go, Hex)
 
-Percolation Problem Modeling 
-- How to check whether an NxN system percolates? 
+Percolation Problem Modeling
+- How to check whether an NxN system percolates?
   1 Create an object for each site and name them 0 to N^2-1
-  2 Sites are in same component if connected by open sites. 
+  2 Sites are in same component if connected by open sites.
   3 Percolates iff any site on bottom row is connected to site on top row.
   This can be brute force and N^2 calls to connected() routine.
   4. Instead, create a virtual site at top & bottom that is connected to
-  all nodes at top row and bottom row respectively. 
+  all nodes at top row and bottom row respectively.
 
 
+Stacks & Queues
+--------
 
+Stacks: LIFO principle
+-------
+- push(), pop(), is_empty(), size() are main APIs
+- Can be implemented using Linked Lists, Arrays.
+- Arrays are very fast implementation
+    * resizing problem is fundamental to Arrays
+
+- How to grow an array?
+    * "Repeated Doubling" - new array of double size. Copy elements.
+- How to shrink the array?
+    * Half the array when 1/4 full. Otherwise can run in to "Thrashing"
+
+
+Queue: FIFO principle
+-------
+- enqueue(), dequeue(), is_empty(), size() etc
+- Linked Lists, Arrays (though tricky to implement)
 
 
 
@@ -153,55 +172,55 @@ Percolation Problem Modeling
 SUM in an Array Algos:
 -------
 2SUM/3SUM - Given N distinct integers, how many triples (or doubles) sum
-to zero (or a particular number). 
+to zero (or a particular number).
 
 // Algos
 - Brute Force - N^3
 
 BinarySearch of an Array
 --------
-// Code - from lecture (non-recursive)  
+// Code - from lecture (non-recursive)
 
-   public static int binarySearch(int[] a, int key) 
+   public static int binarySearch(int[] a, int key)
    {
-        int lo = 0, hi = a.length-1; 
+        int lo = 0, hi = a.length-1;
 
         while(lo <= hi)
         {
-                int mid = lo + (hi-lo)/2; 
-                if      (key < a[mid]) hi = mid-1; 
-                else if (key > a[mid]) lo = mid+1; 
-                else return mid; 
+                int mid = lo + (hi-lo)/2;
+                if      (key < a[mid]) hi = mid-1;
+                else if (key > a[mid]) lo = mid+1;
+                else return mid;
         }
 
-        return -1; 
+        return -1;
    }
 
 - An (N^2)log N algo for 3-SUM
   - Sort N distinct number (Nlog N)
   - For each pair of numbers in a[i] and a[j], binary search for
-    negative (a[i]+a[j]) - this is (N^2)log N step. 
+    negative (a[i]+a[j]) - this is (N^2)log N step.
   - Total: (N^2)log N + (Nlog N)
 
 
 Memory Usage for Primitive Data Types in Java
 ---------
-          
+
           Type           Bytes
           --------------------
         boolean            1
           byte             1
-          char             2 
+          char             2
           int              4
-          float            4 
-          long             8 
-         double            8 
-         char[]           2N + 24 
-         int[]            4N + 24 
-       double[]           8N + 24 
+          float            4
+          long             8
+         double            8
+         char[]           2N + 24
+         int[]            4N + 24
+       double[]           8N + 24
 
-- Object overhead in Java = 16 bytes 
-- Reference overhead = 8 bytes 
+- Object overhead in Java = 16 bytes
+- Reference overhead = 8 bytes
 - Memory alignment = Each object uses multiples of 8 (on 64 bit machine)
 
 
@@ -211,363 +230,404 @@ SORTING
 ========
 Selection Sort:
 -------
-- In iteration i, find index of smallest remaining entry (call it `min`) 
-- Swap a[i] and a[min]. 
+- In iteration i, find index of smallest remaining entry (call it `min`)
+- Swap a[i] and a[min].
 
-Invariants: 
+Invariants:
 -------
-- No entry to right of i is smaller than elements less than i. 
+- No entry to right of i is smaller than elements less than i.
 
-  // Code 
-  public static void selectionSort(Comparable[] a) 
+  // Code
+  public static void selectionSort(Comparable[] a)
   {
-        int N = a.length; 
-        for (int i=0; i<N; i++) 
+        int N = a.length;
+        for (int i=0; i<N; i++)
         {
-                int min = i; 
-                for (int j=i+1; j<N; j++) 
+                int min = i;
+                for (int j=i+1; j<N; j++)
                 {
                         if(less(a[j], a[min])
-                                min = j; 
+                                min = j;
                 }
-                exch(a, i, min); 
+                exch(a, i, min);
          }
    }
 
-- ~(N^2)/2 compares and N exchanges. 
-- Quadratic time input, even if input is sorted. 
+- ~(N^2)/2 compares and N exchanges.
+- Quadratic time input, even if input is sorted.
 
 
 Insertion Sort:
 -------
-- In iteration i, swap a[i] with each larger entry to its left. 
-- All entries to left of i is sorted. 
+- In iteration i, swap a[i] with each larger entry to its left.
+- All entries to left of i is sorted.
 
-  // Code 
-  public static void insertionSort(Comparable[] a) 
+  // Code
+  public static void insertionSort(Comparable[] a)
   {
-        int N = a.length; 
-        for (int i=0; i<N; i++) 
-                for (int j=i; j>0; j--) 
-                        if (less(a[j], a[j-1])) 
-                                exch(a, j, j-1) 
-                        else 
-                                break; 
+        int N = a.length;
+        for (int i=0; i<N; i++)
+                for (int j=i; j>0; j--)
+                        if (less(a[j], a[j-1]))
+                                exch(a, j, j-1)
+                        else
+                                break;
   }
 
-- On average, ~1/4(N^2) compares and ~1/4(N^2) exchanges. 
+- On average, ~1/4(N^2) compares and ~1/4(N^2) exchanges.
 - Best case: If array is in sorted (say, ascending order), only N-1
-  compares and 0 exchanges. 
+  compares and 0 exchanges.
 - Worst case: If array is in descending order, ~1/2(N^2) compares and
-  ~1/2(N^2) exchanges. 
+  ~1/2(N^2) exchanges.
 
 Insertion Sort: Partially-Sorted Array
 -------
-Def: An inversion is a pair of keys that are out of order. 
+Def: An inversion is a pair of keys that are out of order.
          A E E L M O T R X P S
 
-         There are 6 inversions in above array. 
-         T-R T-P T-S R-P X-P X-S 
+         There are 6 inversions in above array.
+         T-R T-P T-S R-P X-P X-S
 
-Def: An array is partially sorted if the number of inversions is <= cN 
-(some constant times N). 
+Def: An array is partially sorted if the number of inversions is <= cN
+(some constant times N).
 
 - For partially sorted arrays, insertion sort runs in linear time because
-  number of exchanges = number of inversions. 
+  number of exchanges = number of inversions.
   number of compares = number of exchanges + (N-1)
 
 
 
-Shell Sort: 
+Shell Sort:
 --------
-Idea: Move entries more than one position at a time by h-sorting array. 
+Idea: Move entries more than one position at a time by h-sorting array.
 
-an h-sorted array is h interleaved sorted subsequence. 
+An h-sorted array is h interleaved sorted subsequence.
 
 - How to h-sort an array? Insertion sort, with stride length of h
-- Why insertion sort? 
+- Why insertion sort?
   - Big increments = small subarrays.
-  - Small increments = nearly in order (or partially sorted). 
+  - Small increments = nearly in order (or partially sorted).
 
-- Worst case: number of compares is O(N^(3/2)) for 3x+1 increments. 
-- Why are we interested in shellsort? 
+- Worst case: number of compares is O(N^(3/2)) for 3x+1 increments.
+- Why are we interested in shellsort?
   - Useful in practice.
-  - Fast unless array size is huge. 
+  - Fast unless array size is huge.
   - Tiny, fixed footprint of code (used in embedded sys).
-  - Hardware sort prototype. 
+  - Hardware sort prototype.
 
 
-Shuffling: How do you shuffle a deck of cards? 
+Shuffling: How do you shuffle a deck of cards?
 -------
 - Generate a random number for each card and sort them. But there is a
-  cost of sorting the deck. 
-- Can we do better? Yes! Knuth Shuffle. 
+  cost of sorting the deck.
+- Can we do better? Yes! Knuth Shuffle.
 
-Knuth Shuffle: 
+Knuth Shuffle:
 -------
-- In iteration i, pick integer r between 0 and i uniformly at random. 
-- Swap a[i] and a[r]. 
-- This is linear time shuffling algo, making use of random number. 
+- In iteration i, pick integer r between 0 and i uniformly at random.
+- Swap a[i] and a[r].
+- This is linear time shuffling algo, making use of random number.
 
-  // Code 
-  public void knuthShuffle(Object[] a) 
+  // Code
+  public void knuthShuffle(Object[] a)
   {
-        int N = a.length; 
-        for(int i=0; i<N; i++) 
+        int N = a.length;
+        for(int i=0; i<N; i++)
         {
-                int r = StdRandom.uniform(i+1); 
-                exch(a, i, r); 
+                int r = StdRandom.uniform(i+1);
+                exch(a, i, r);
         }
   }
 - Bug: Choosing to swap a random number between 0 and N-1. It is not
-  uniformly random. However, choosing between i and N-1 will work. 
-  
+  uniformly random. However, choosing between i and N-1 will work.
 
 
+Convex Hull:
+-------
+Smallest perimeter fence enclosing all points in a plane.
+
+Mechanical Algo: Hammer nails on points and stretch elastic rubber band around
+points.
+
+Convex Hull Applications:
+-----------
+Robot Motion Planning: Path from point s to t and an obstacle in between.
+    - If there's no direct, straight path between s and t, then it's along the
+      perimeter of Convex Hull including points s and t.
+
+Farthest Pair Problem: Given N points in plane, find a pair of points with
+largest Euclidean distance between them.
+    - Those points are on Convex Hull.
+
+
+Graham Scan: To determine Convex Hull
+------
+- Choose point p with smallest y-coordinate
+- Sort points by polar angle with p
+- Consider points in order; discard unless it create a ccw turn.
+- There's lot of implementation challenges to Graham Scan
+    - How to find point p with smallest y-coordinate?
+    - How to sort points by polar angle w.r.t p?
+    - How to determine p1->p2->p3 is CCW direction?
+    - How to sort efficiently?
+
+Implementing CCW
+------
+Given 3 points a, b and c, is a->b->c a CCW turn?
+    - Determinant (or cross product) gives 2x signed area of planar triangle
+
+
+                            | ax ay 1 |
+        2 x Area(a,b,c) =   | bx by 1 | = (bx-ax)(cy-ay) - (by-ay)(cx-ax)
+                            | cx cy 1 |
+
+- If signed area > 0, then a->b->c is CCW
+- If signed area < 0, then a->b->c is CW
+- If signed area = 0, then a->b->c is collinear (straight line)
 
 
 
 String Problems:
 -------
 Longest palindrome in a string.
-  - Manacher's algorithm is fastest: O(N) running and O(N) space. 
+  - Manacher's algorithm is fastest: O(N) running and O(N) space.
 
 
 Undirected Graphs
 --------
-Graph: Set of "vertices" connected pairwise by "edges" 
+Graph: Set of "vertices" connected pairwise by "edges"
 
-Terminology: 
-    Path: Sequence of vertices connected by edges. 
-    Cycle: Path whose first and last vertices are the same. 
+Terminology:
+    Path: Sequence of vertices connected by edges.
+    Cycle: Path whose first and last vertices are the same.
     Connected Components: Subset of graph
 
-Graph Probs: 
+Graph Probs:
 ---------
 PATH: Is there a path between `s` and `t`
-SHORTEST PATH: 
+SHORTEST PATH:
 
-CYCLE: Is there a cycle in graph? 
-EULER TOUR: Is there a cycle that uses each edge exactly once? 
-HAMILTON TOUR: Is there a cycle that uses each vertex exactly once? 
+CYCLE: Is there a cycle in graph?
+EULER TOUR: Is there a cycle that uses each edge exactly once?
+HAMILTON TOUR: Is there a cycle that uses each vertex exactly once?
 
-CONNECTIVITY: Is there a way to connect all of the vertices? 
-MST: Best way to connect all vertices? 
-BICONNECTIVITY: Vertex whose removal disconnects the graph? 
+CONNECTIVITY: Is there a way to connect all of the vertices?
+MST: Best way to connect all vertices?
+BICONNECTIVITY: Vertex whose removal disconnects the graph?
 
-PLANARITY: Draw a graph in a plane with no crossing edges? 
+PLANARITY: Draw a graph in a plane with no crossing edges?
 GRAPH ISOMORPHISM: Do two adjacency lists represent the same graph?
 
-Graph Representation: 
+Graph Representation:
 -----------
 - Adjacency-Matrix with 0 indicating no connection, 1 indicating its
-  connected. Not scalable (V^2 size). 
+  connected. Not scalable (V^2 size).
 - Adjacency-List: Each vertex has a list of adjacency nodes/vertices. Most
-  commonly used representation. 
+  commonly used representation.
         +---+      +---+      +---+      +---+
-        |   | ---> |   | ---> |   | ---> |   |  
+        |   | ---> |   | ---> |   | ---> |   |
         +---+      +---+      +---+      +---+
-        +---+      +---+ 
-        |   | ---> |   | 
-        +---+      +---+ 
+        +---+      +---+
+        |   | ---> |   |
+        +---+      +---+
         +---+      +---+      +---+
-        |   | ---> |   | ---> |   | 
+        |   | ---> |   | ---> |   |
         +---+      +---+      +---+
         +---+      +---+      +---+      +---+
-        |   | ---> |   | ---> |   | ---> |   |  
+        |   | ---> |   | ---> |   | ---> |   |
         +---+      +---+      +---+      +---+
         |   |
         +---+
 
 - In real world, graphs have lots of vertices but small degree (fewer
-  edges). 
+  edges).
 
 
 DEPTH FIRST SEARCH [DFS]
 -------------
-- Tremaux Maze exploration algo: 
+- Tremaux Maze exploration algo:
      - Unroll a ball of string behind you.
-     - Mark each visited intersection and each visited passage. 
-     - Retrace steps when no visited options. 
+     - Mark each visited intersection and each visited passage.
+     - Retrace steps when no visited options.
 
-  DFS (vertex v)   // algo  
+  DFS (vertex v)   // algo
      mark v as visited
-     recursively visit all unmarked vertices adjacent to v 
+     recursively visit all unmarked vertices adjacent to v
 
 BREADTH FIRST SEARCH [BFS]
 --------------
-   BFS (vertex v)  // rough algo 
+   BFS (vertex v)  // rough algo
       - add v to FIFO Q & mark as visited
-       repeat until Q is empty 
-          - remove least recently added vertex v 
+       repeat until Q is empty
+          - remove least recently added vertex v
           - add each unvisited adjacent vertex of v to Q and mark them as
-            visited. 
+            visited.
 
 - BFS computes Shortest Path
 
 Connected Components
 --------------
-Def: Vertices v & w are connected if there is a path between them. 
+Def: Vertices v & w are connected if there is a path between them.
 Goal: Preprocess graph to answer queries: is v connected to w?
-Def: A connected component is a maximal set of vertices in a graph. 
+Def: A connected component is a maximal set of vertices in a graph.
 
-- Similar to Union-Find problem. 
-- DFS can be used. 
+- Similar to Union-Find problem.
+- DFS can be used.
 
-Practical Use: 
-- STD like health issues. 
+Practical Use:
+- STD like health issues.
 - Flood Fill in paint softwares.
 
 
 Graph Challenges
 -------------
 1) Is a graph bipartite? Can graph be divided in to 2 set of
-vertices each vertex in one set connecting to another in other set? 
-  - DFS can solve this prob. 
+vertices each vertex in one set connecting to another in other set?
+  - DFS can solve this prob.
 
-2) Does a graph have cycle? 
-  - DFS can solve this prob. 
+2) Does a graph have cycle?
+  - DFS can solve this prob.
 
 3) Euler Tour: Given a graph, is there a cycle that uses each edge exactly
-once? 
-  - Yes, iff connected and all vertices have even degree. 
+once?
+  - Yes, iff connected and all vertices have even degree.
 
 4) TSP/Hamilton Tour: Find a cycle that visits each vertex only once.
-  - NP-complete problem. 
+  - NP-complete problem.
 
 5) Are two graphs identical (except vertex names)? Graph Isomorphism
-Problem: 
-  - No one knows how to classify this problem. 
+Problem:
+  - No one knows how to classify this problem.
 
-6) Layout a graph in a plane without crossing edges. 
+6) Layout a graph in a plane without crossing edges.
   - There is a linear-time DFS-based planarity algo discovered by Tarjan
-    in 1970s (too complicated for most practitioners). 
+    in 1970s (too complicated for most practitioners).
 
 
 
 Directed Graphs (Digraphs)
 -----------
-- Set of vertices connected pairwise by directed edges. 
-- in-degree: number of edges pointing to a vertex. 
-- out-degree: number of edges pointing away from a vertex. 
+- Set of vertices connected pairwise by directed edges.
+- in-degree: number of edges pointing to a vertex.
+- out-degree: number of edges pointing away from a vertex.
 
 Typical Problems
 -----------
 - Is there a directed path from s to t
-- What is shortest directed path from s to t 
-- Can you draw a graph so that all edges point upwards? 
+- What is shortest directed path from s to t
+- Can you draw a graph so that all edges point upwards?
 
 
-Digraph Search - DFS can be used  
+Digraph Search - DFS can be used
 ----------
 - Reachability Application - Program control flow analysis (static
   analysis tools)
-- Garbage Collection - Mark & Sweep algos use Digraphs. 
-  - Mark all reachable objects. 
-  - Sweep objects (garbage collect) if it is unmarked. 
+- Garbage Collection - Mark & Sweep algos use Digraphs.
+  - Mark all reachable objects.
+  - Sweep objects (garbage collect) if it is unmarked.
 
-BFS - can be used to get Shortest Path from s to t in a Digraph.  
+BFS - can be used to get Shortest Path from s to t in a Digraph.
 - A variation can be done to get multiple-source shortest path.
 
-Applications: Web crawler is an example of BFS on Digraphs. 
+Applications: Web crawler is an example of BFS on Digraphs.
 
 
 TOPOLOGICAL SORT/PRECEDENCE SCHEDULING
 --------
 - Use DFS
-- Sample applications: 
+- Sample applications:
     - Scheduling of courses in university.
-    - Scheduling of manufacturing tasks. 
+    - Scheduling of manufacturing tasks.
 
     // Algo
     - Run DFS
-    - Return vertices in reverse postorder 
+    - Return vertices in reverse postorder
 
 Directed Cycle Detection
 ---------
-- If directed cyclec, topological order is impossible. 
-- DFS can be used. 
+- If directed cyclec, topological order is impossible.
+- DFS can be used.
 
 
 Strongly-Connected Components
 ---------
 Def: Vertices v and w are strongly connected if there is a directed graph
-from v to w and w to v. 
+from v to w and w to v.
 
 Applications
 ---------
 Food Web Graph:
-    Vertex = species 
-    Edge = From producer to consumer 
+    Vertex = species
+    Edge = From producer to consumer
 
 Algo to solve Strongly Connected Components
 ----------
 Kosaraju-Sharir Algo
 - Strong comp in graph G is same as reverse G
-- Kernel DAG - Contract each strong component in to a single vertex. 
+- Kernel DAG - Contract each strong component in to a single vertex.
 
-  // Algo 
-  Phase 1: run DFS on reverse G to compute reverse postorder. 
-  Phase 2: run DFS on G, considering order given in phase 1. 
+  // Algo
+  Phase 1: run DFS on reverse G to compute reverse postorder.
+  Phase 2: run DFS on G, considering order given in phase 1.
 
 Minimum Spanning Trees [MST]
 ----------
-Given: Undirected graph G with positive edge weights (connected) 
-Def: A spanning tree of G is a subgraph T that is connected and acyclic. 
-Goal: Find a min weight spanning tree. 
+Given: Undirected graph G with positive edge weights (connected)
+Def: A spanning tree of G is a subgraph T that is connected and acyclic.
+Goal: Find a min weight spanning tree.
 
 
 Simple Greedy Algo
 ----------
-Assumptions: 
-  - Edge weights are distinct. 
-  - Graph is connected. 
+Assumptions:
+  - Edge weights are distinct.
+  - Graph is connected.
 
 Definition:
-  - Cut: partition in graph in to two sets of vertices. 
-  - Crossing Edge: connects vertex in one set to vertex in other set. 
+  - Cut: partition in graph in to two sets of vertices.
+  - Crossing Edge: connects vertex in one set to vertex in other set.
   - Cut property: Given any cut, the crossing edge of min weight is in
-    MST. 
+    MST.
 
 Kruskal's Algo
 -------
-- Sort all edges by weight. 
-- Keep adding edges to MST in order unless they create a cycle. 
+- Sort all edges by weight.
+- Keep adding edges to MST in order unless they create a cycle.
 - MST is computed in Elog E (in worst case)
 
-Prim's Algo 
+Prim's Algo
 --------
-- Start with vertex 0 and greedily grow tree T. 
-- Add to T the min weight edge with exactly one endpoint in T. 
-- Repeat until V-1 edges. 
-- E log E running time and extra storage space proportional to E. 
+- Start with vertex 0 and greedily grow tree T.
+- Add to T the min weight edge with exactly one endpoint in T.
+- Repeat until V-1 edges.
+- E log E running time and extra storage space proportional to E.
 
 Shortest Path
 -------
-- Given an edge-weighted digraph, find the shortest path from s to t. 
-- Variants: 
-    - Source-sink: from one vertex to another. 
-    - Single source: from one vertex to every other. 
-    - All pairs: between all pairs of vertices. 
+- Given an edge-weighted digraph, find the shortest path from s to t.
+- Variants:
+    - Source-sink: from one vertex to another.
+    - Single source: from one vertex to every other.
+    - All pairs: between all pairs of vertices.
 
-Dijkstra's Algo (Shortest path) 
+Dijkstra's Algo (Shortest path)
 -------
 - Consider vertices in increasing order of distance from s (lowest
-  distTo[] value). 
+  distTo[] value).
 - Add vertex to tree and update distTo[] of all vertices pointing from
   that vertex.
 
 - Prim's and Dijkstra's algos are same. Prim's is for undirected graph. It
   looks for closest vertex to the spanning tree. Dijkstra's is for
   directed graph. It looks for closest vertex along a shortest path
-  starting at source. 
+  starting at source.
 
 Longest Path Edge-Weighted DAGs
 ---------
 (applications)
 Parallel Job Scheduling:
     Create a graph G such that, vertices are start times of job and edges
-    are job duration. 
+    are job duration.
 
     Use longest path from the source to schedule each job ??
 
@@ -575,23 +635,23 @@ Parallel Job Scheduling:
 MINCUT PROBLEM
 -------
 Input: An edge-weight digraph, source vertex s and target vertex t. All
-edges are positive. 
+edges are positive.
 
 Definition: A st-cut(cut) is a partition of vertices in to two disjoint
 sets with s in set A and t in set B.
-Definition: Capacity is sum of capacities of edges from A to B. 
+Definition: Capacity is sum of capacities of edges from A to B.
 
 Goal: Find a cut of minimum capacity.
 
 
 MAXFLOW PROBLEM
 -------
-Input: An edge-weighted digraph, source vertex s and target vertex t. 
+Input: An edge-weighted digraph, source vertex s and target vertex t.
 Capacity Constraints: 0<= edge's flow <= edge capacity
-Local Equilibrium: inflow = outflow at every vertex (except s & t). 
+Local Equilibrium: inflow = outflow at every vertex (except s & t).
 
-Def: Value of a flow is the inflow at t. 
-Goal: Find a flow of max value. 
+Def: Value of a flow is the inflow at t.
+Goal: Find a flow of max value.
 
 
 Ford-Fulkerson Algo
@@ -600,85 +660,85 @@ Ford-Fulkerson Algo
 
 Strings in Java
 ------
-- Strings are immutable. 
-- StringBuilder is mutable. 
+- Strings are immutable.
+- StringBuilder is mutable.
 
 String Sorting Algos
 ------
-Key-Indexed Counting   // basic algo 
-Goal: Sort an array a[] of N integers between 0 and R-1. 
+Key-Indexed Counting   // basic algo
+Goal: Sort an array a[] of N integers between 0 and R-1.
 
-// Algo 
-- Count frequency of each letter using key as index. 
-- Compute frequency cumulates which specify destination. 
-- Access cumulates using key as index to move items. 
-- Copy back in to original array. 
+// Algo
+- Count frequency of each letter using key as index.
+- Compute frequency cumulates which specify destination.
+- Access cumulates using key as index to move items.
+- Copy back in to original array.
 
-  int N = a.length 
-  int[] count = new int[R+1]; 
+  int N = a.length
+  int[] count = new int[R+1];
 
   // compute frequency of each letter
-  for(int i=0; i<N; i++) 
-      count[a[i]+1]++; 
+  for(int i=0; i<N; i++)
+      count[a[i]+1]++;
 
-  // compute cumulates 
-  for(int r=0; r<R; r++) 
-      count[r+1] += count[r]; 
-  
-  // move items to aux array 
-  for(int i=0; i<N; i++) 
-      aux[count[a[i]]++] = a[i]; 
+  // compute cumulates
+  for(int r=0; r<R; r++)
+      count[r+1] += count[r];
+
+  // move items to aux array
+  for(int i=0; i<N; i++)
+      aux[count[a[i]]++] = a[i];
 
   // get them to original array
   for(int i=0; i<N; i++)
-      a[i] = aux[i]; 
+      a[i] = aux[i];
 
 
 
 LSD String (Radix) Sort
 --------
-- Consider chars from right to left. 
-- Stably sort using dth char as key (using key-indexed counting) 
+- Consider chars from right to left.
+- Stably sort using dth char as key (using key-indexed counting)
 
 MSD Radix Sort
 --------
 
 Suffix Sort
 --------
-- Create an array of suffixes of a given string. 
-- Sort the suffix strings. 
+- Create an array of suffixes of a given string.
+- Sort the suffix strings.
 
 Longest repeated substring
 -------
 (Used in Genomics, Cryptanalysis)
-- Get suffix arrays and sort. 
-- Compare length of longest common prefix. 
+- Get suffix arrays and sort.
+- Compare length of longest common prefix.
 
 
 Substring Matching
 -------
 - Brute Force: MN char compares in worst case (M= pattern length, N = text
-  size). 
-- 
+  size).
+-
 
 
 Knuth-Morris-Pratt Algo
 -------
-- Construct a DFA to match/mismatch input chars and state changes. 
-- A state indicates number of matching chars in pattern. 
-- Building the DFA is trickiest. Read/understand more. 
-- 
+- Construct a DFA to match/mismatch input chars and state changes.
+- A state indicates number of matching chars in pattern.
+- Building the DFA is trickiest. Read/understand more.
+-
 
-Boyer-Moore 
+Boyer-Moore
 --------
 
-Rabin-Karp 
+Rabin-Karp
 --------
 - There are variation of vanilla Rabin-Karp version called: Monte Carlo,
-  Las Vegas versions. 
+  Las Vegas versions.
 
 
-Floyd-Warshall Algo (All Pairs Shortest Path) 
+Floyd-Warshall Algo (All Pairs Shortest Path)
 
 
 
@@ -686,82 +746,82 @@ Floyd-Warshall Algo (All Pairs Shortest Path)
 Geometric Applications of Binary Search Trees (BST)
 ---------
 
-1-d Range Search 
+1-d Range Search
 ---------
-- Geometric objects intersections. 
-- Finding points in a 2d range 
-- Intersections of orthogonal rectangles. 
-- Many applications. 
+- Geometric objects intersections.
+- Finding points in a 2d range
+- Intersections of orthogonal rectangles.
+- Many applications.
 
 Range Search: Find all keys between k1 and k2.
-Range Count: # of keys between k1 and k2. 
+Range Count: # of keys between k1 and k2.
 
-Geometric Interpretation: 
-- Keys are points on a line 
+Geometric Interpretation:
+- Keys are points on a line
 - Find/count points in a given interval in 1-dimension (1d).
 
-       DS           insert       range count         range search 
-Unordered Array        1              N                    N 
+       DS           insert       range count         range search
+Unordered Array        1              N                    N
 Ordered Array          N            log N               R + log N
-Goal                 log N          log N               R + log N 
+Goal                 log N          log N               R + log N
 
-N = number of keys 
-R = number of keys that match 
+N = number of keys
+R = number of keys that match
 
 - Keep a rank(node) function that counts # of keys less than that node in
-  a BST. 
+  a BST.
 - Range(low, high) = rank(high) - rank(low) [+1 depending on high/low are
   part of the query]
 
 
-// Algo: Find all keys between lo and hi 
+// Algo: Find all keys between lo and hi
 - Recursively find all keys in left subtree
-- Check key in current node 
-- Recursively find all keys in right subtree 
+- Check key in current node
+- Recursively find all keys in right subtree
 
 
 
-Line Segment Intersection Search 
+Line Segment Intersection Search
 -------
-// Algo 
-- Sweep vertical line from left to right 
-- x-coordinates define events. 
-- h-line (left endpoint): insert y-coord in to BST 
+// Algo
+- Sweep vertical line from left to right
+- x-coordinates define events.
+- h-line (left endpoint): insert y-coord in to BST
 - h-line (right endpoint): remove y-coord from BST
 - v-line: do a 1d-range search in BST for y-range
 
 
-Line Sweep Algos 
+Line Sweep Algos
 -------
-Applications: 
-- Closest Pair of points. 
+Applications:
+- Closest Pair of points.
 - Line segment intersections.
-- Area of union of rectangles. 
-- Convex hull. 
+- Area of union of rectangles.
+- Convex hull.
 
-Kd-Trees 
+Kd-Trees
 --------
-Extension of 1d-range 
+Extension of 1d-range
 - Operations: Insert a 2d key; Delete a 2d key; Search for a 2d key
-- Range search: find all keys that lie in a 2d range. 
+- Range search: find all keys that lie in a 2d range.
 - Range count: # of keys that lie in a 2d range.
 
-Geometric Interpretation: 
-- Keys are point in a plane. 
-- Find/count points in a given h-v rectangle. 
+Geometric Interpretation:
+- Keys are point in a plane.
+- Find/count points in a given h-v rectangle.
 
-Applications: 
-- Networking, Circuit Design, Databases. 
+Applications:
+- Networking, Circuit Design, Databases.
 
 Grid Implementation
 --------
-- Divide space in to MxN squares/grids. 
-- Create a list of points contained in each square. 
-- Use 2d array to directly index relevant square. 
-- Insert: add(x,y) to list for corresponding square. 
-- Range Search: Examine only squares that intersect 2d range query. 
+- Divide space in to MxN squares/grids.
+- Create a list of points contained in each square.
+- Use 2d array to directly index relevant square.
+- Insert: add(x,y) to list for corresponding square.
+- Range Search: Examine only squares that intersect 2d range query.
 
-Space-Time Tradeoff: 
+Space-Time Tradeoff:
 ---------
 - Space: M^2 + N
 - Time: 1 + N/(M^2) per square examined, on average
@@ -770,52 +830,52 @@ Choose grid square size to tune performance
 ---------
 - Too small: wastes space.
 - Too large: too many points per square.
-- Rule of thumb: sqrt(N) by sqrt(N) grid. 
+- Rule of thumb: sqrt(N) by sqrt(N) grid.
 
 Running Time
 ---------
 - Initialize DS: N
-- Insert point: 1 
-- Range search: 1 per point in range. 
+- Insert point: 1
+- Range search: 1 per point in range.
 
 Clustering
 --------
-- Grid implementation is poor. 
-- Other options: 
+- Grid implementation is poor.
+- Other options:
   2d Tree
-  Quadtree 
+  Quadtree
   BSP Tree
 
 
 2d Tree
 -------
-// Algo 
+// Algo
 - Recursively partition plane in to two half planes (alternating between
   horizontal & vertival partitions).
 - All points to left of a vertical will be in left sub-tree and vice
-  versa. 
-- Similarly for horizontal partition. 
-- Build a BST in above fashion. 
+  versa.
+- Similarly for horizontal partition.
+- Build a BST in above fashion.
 
 
 Application
 -------
 - Given a set of points in a plane and a rectangle, find all the points
-  within that rectangle. 
-- Nearest neighbor search. 
+  within that rectangle.
+- Nearest neighbor search.
 
 
 
 Drawback
 
 
-2-3 Tree (2-3 are # of nodes in the tree and not the keys. Keys are 1-2) 
+2-3 Tree (2-3 are # of nodes in the tree and not the keys. Keys are 1-2)
 ---------
-Allow 1 or 2 keys per node 
-- 2 node: one key, 2 children 
-- 3 node: two keys, 3 children 
+Allow 1 or 2 keys per node
+- 2 node: one key, 2 children
+- 3 node: two keys, 3 children
 
-Perfect Balance: Every path from root to null link has same length. 
-Symmetric Order: Inorder traversal yields keys in ascending order. 
+Perfect Balance: Every path from root to null link has same length.
+Symmetric Order: Inorder traversal yields keys in ascending order.
 
 Red-Black Trees (RB-Trees)
