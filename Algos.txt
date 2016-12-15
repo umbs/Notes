@@ -387,6 +387,47 @@ Given 3 points a, b and c, is a->b->c a CCW turn?
 
 
 
+Mergesort:
+Split an input array in to two halves recursively, sort each one and merge
+
+Runtime: O(N lgN)
+Memory: O(N) as it uses auxiliary array
+
+- A sorting algo is considered in-place if it uses <= c(lgN) extra memory, for
+  a constant c.
+  Ex: Insertion, Shell, Selection sorts.
+
+Practical Improvements to Mergesort:
+------
+- Too much overhead for small arrays (or subarrays within a large array).
+- Cutoff to insertion sort is ~7 items
+- Biggest item in first half <= smallest item in second half. Stop.
+
+
+Bottom-Up Mergesort:
+------
+- Pass through array, merging subarrays of size 1.
+- Repeat for subarrays of size 2, 4, 8, 16, ...
+- Uses O(N) auxiliary space
+- Runs O(N lgN) time
+- Overhead is much smaller. Easier to code.
+
+    void merge(int arr, int lo, int mid, int hi) {/* standard */}
+    void sort(int arr)
+        for (int sz=1; sz<N; sz = sz+sz)
+            for (int lo=0; lo=N-sz; lo+=sz+sz)
+                merge(arr, lo, lo+sz-1, min(lo+sz+sz-1, N-1))
+
+
+Stability of Sorting Algos:
+------
+Stable sort is one that preserves relative position of items with equal keys.
+- Insertion and Mergesort are stable. Shell and Selection are not.
+
+
+
+
+
 String Problems:
 -------
 Longest palindrome in a string.
