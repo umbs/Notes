@@ -427,6 +427,90 @@ Stable sort is one that preserves relative position of items with equal keys.
 
 
 
+Quicksort:
+------
+- Shuffle the array
+- Partition so that, for some j
+    * entry a[j] is in place
+    * no larger entry to the left of j
+    * no smaller entry to the right of j
+- Sort each piece recursively
+
+Phase 1: Repeat until i and j pointer cross.
+    - Scan i from left to right so long as a[i] < a[lo]
+    - Scan j from right to left so long as a[j] > a[lo]
+    - Exchange a[i] with a[j]
+
+Phase 2: When pointers cross
+    - Exchane a[lo] with a[j]
+
+********* array is partitioned at this point *******
+
+Partition Code:
+------
+int partition(int a[], int lo, int hi)
+{
+    int i = lo, j = hi+1;   /* 1st elem is partitioning elem */
+    while (true)
+    {
+        while (less(a[++i], a[lo]))     /* find item on left */
+            if (i == hi) break;
+
+        while (less(a[lo], a[--j]))     /* find item on right */
+            if (j == lo) break;
+
+        if (i >= j) break;          /* check if pointers cross */
+        exch(a, i, j);              /* swap */
+    }
+
+    exch(a, lo, j);
+    return j;   /* index of partition item which is in place */
+}
+
+void Quicksort(int a[], int lo ,int hi)
+{
+    /* shuffle the array for performance gaurantee */
+
+    if (hi <= lo)   return;
+    int j = partition(a, lo, hi); /* j elem is in place now */
+    Quicksort(a, lo, j-1);
+    Quicksort(a, j+1, hi);
+}
+
+Worst Case: O(N^2)
+Average Case: ~1.39(N lgN) --> O(N lgN)
+
+
+Selection Problem: Given an array of N items, find the Kth largest.
+------
+Partition array so that:
+- Entry a[j] is in place
+- No larger entry to left of j
+- No smaller entry to the right of j
+- Repeat in one subarray, depending on j
+- Done when j == k
+
+void select(int a[], int k)
+{
+    /* shuffle the array */
+
+    int lo = 0, hi = a.length - 1;
+
+    while (hi > lo)
+    {
+        int j = partition(a, lo, hi);
+        if      (j < k) lo = j + 1;
+        else if (j > k) hi = j - 1;
+        else    return a[k];
+    }
+
+    return a[k];
+}
+
+Average: Linear time
+Worst Case: Quadratic time, but with random shuffle, very rare
+
+
 
 String Problems:
 -------
