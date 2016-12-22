@@ -323,7 +323,7 @@ SRC_URI:
 
 
 Resources:
-[1] Gettnig Started with Yocto Project:
+[1] Getting Started with Yocto Project:
     https://vimeo.com/36450321
 
 [2] http://aosabook.org/en/yocto.html

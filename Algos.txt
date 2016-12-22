@@ -511,6 +511,126 @@ Average: Linear time
 Worst Case: Quadratic time, but with random shuffle, very rare
 
 
+Dijkstra 3-Way Partitioning. (AKA 3-way Quicksort)
+-----
+Goal: Partition an array in to 3 parts so that:
+
+    +----------------------------------------------+
+    |  < V     |      = V                |   > V   |
+    +----------------------------------------------+
+
+where V is the partitioning element.
+
+
+Priority Queues:
+---------------
+Queues with elements having priorities. Usually implemented using Heaps.
+
+Challenge: Find largest M items in a stream of N items.
+    - Many applications
+Constraint: Not enough memory to store N items.
+
+Solution:
+- Maintain a Min PQ, maintains M lowest number on front of PQ.
+
+while (input)
+    PQ.insert(input);
+    if (PQ.size() > M)  // PQ contains largest M items
+        PQ.delMin();    // Min in the PQ is front of PQ
+
+Basic PQ implementations:
+------
+    Algo            Time        Space
+    ---------------------------------
+    sort            N lgN       N
+    elementary PQ   M N         M
+    Binary Heap     N lgM       M
+    Best            N           M
+
+PQ implementations
+---
+- Unordered Array: Keep inserting as elems come in. Search when required.
+- Ordered Array: Insert elems as they come in. Shift elems around to maintain
+  order.
+- Linked List:
+
+Goal of PQ implementation: lg N insert, lg N max, lg N delete
+
+Practical PQ Implementation: Complete binary tree
+------
+Array Representation:
+- Keys are elems of array
+- Parent's key no smaller than children's keys
+- Indices start at 1
+- Take nodes in level order
+- No explicit links needed
+
+    a[] = T S R P N O A E I H G
+
+                                T
+                        S                   R
+                    P       N           O       A
+                  E   I   H   G
+
+
+- Largest key is a[1], which is root of binary tree
+- Parent of node at k is at k/2
+- Children of node at k are at 2k and 2k+1
+
+Scenario1: Child's key becomes larger than it's parent's key
+- Exchange key in child with parent
+- Repeat until heap order is restored
+
+void swim(int k)
+{
+    while (k>1 && less(k/2, k))
+    {
+        exch(k, k/2);
+        k = k/2;
+    }
+}
+
+Insertion: Add node at end and swim up
+Cost: At most 1+lg N compares
+
+void insert(Key x)
+{
+    pq[++N] = x;
+    swim(N);
+}
+
+Scenario2: Parent's key becomes smaller than one or both of it's children.
+- Exchange key in parent with key in larger child
+- Repeat until heap order is restored
+
+void sink(int k)
+{
+    while (2*k <= N)
+    {
+        int j = 2*k;
+        if (j<N && less(j, j+1)) j++;
+        if (!less(k, j)) break;
+        exch(k, j);
+        k = j;
+    }
+}
+
+Delete Max: Exchange root with node at end, then sink it down
+Cost: At most 2*lgN compares
+
+Key delMax()
+{
+    Key max = pq[1];
+    exch(1, N--);
+    sink(1);
+    pq[N+1] = null;
+    return max;
+}
+
+
+Heapsort
+--------
+
 
 String Problems:
 -------
