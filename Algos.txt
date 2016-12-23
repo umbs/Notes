@@ -630,6 +630,206 @@ Key delMax()
 
 Heapsort
 --------
+- Create max-heap with all N keys
+- Repeatedly remove the max key
+- In-place sorting algo with N lgN worst case
+
+    Mergesort: takes linear extra space
+    Quicksort: quadratic worst case
+    Heapsort: gauranteed N lgN worst case
+
+Disadvantages of Heapsort
+-----
+- Makes poor use of cache memory. In modern systems, caching is very
+  important. Lot of references in array.
+- Not stable.
+
+
+        Summary of Sorting Algorithms
+        =============================
+            inplace?  stable?  worst  average  best     remarks
+
+Selection   Yes                N^2/2  N^2/2    N^2/2    N exchanges
+
+Insertion   Yes       Yes      N^2/2  N^2/4    N        use for small or
+                                                        partially ordered array
+
+Shell       Yes                ??     ??       N        tight code
+
+Quick       Yes                N^2/2  2N lgN   N lgN    fastest in practice
+
+3-way Quick Yes                N^2/2  2N lgN   N        improves Quicksort
+                                                        when duplicate keys are
+                                                        present
+
+Merge                 Yes      N lgN  N lgN    N lgN    N lgN gaurantee, stable
+
+Heap        Yes                2N lgN 2N lgN   N lgN    N lgN gaurantee, in-place
+
+????        Yes       Yes       N lgN  N lgN   N lgN    N lgN gaurantee, in-place
+
+
+
+N body simulation
+------
+- Application of PQ
+- Uses Hard disc model
+    + Moving particles interact via elastic collisions with each other and
+      walls.
+    + Each particle is a disc with known position, velocity, mass and radius.
+    + No other forces.
+
+Event-driven Simulation
+-------
+Problem: To find when two bodies collide using brute force is hard problem
+(Quadratic time).
+Solution: Event-Driven Simulation
+
+- Change state only when something happens
+- Between collisions, particles move in straight-line trajectories
+- Focus only on (predicted) times when collisions occur
+- Maintain PQ of collision events, prioritize by time
+- Remove the min, get next collision
+
+
+Collision Prediction: Given position, velocity and radius of particle, when
+will it collide next with a wall or another particle?
+
+Collision Resolution: If collision occurs, update colliding particle(s)
+according to laws of elastic collisions.
+
+
+Todo: Watch video: Event Driven simulation
+
+
+
+Symbol Tables
+-------------
+Key-Value pair abstraction, with two main operations
+- Insert a value with specified key
+- Given a key, search for the corresponding value
+
+Eg: DNS lookup, given URL, provide IP and vice versa
+
+Data Struct: Unordered Linked List of Key-Value pairs.
+Search: Scan through all keys until you find a match.
+Insert: Search. If no match, add to front.
+
+Data Struct: Maintain an ordered array of KV pairs. Use binary search to find
+keys.
+Problem: Insert - need to shift all greater keys over.
+
+Binary Search Trees (BSTs)
+---------------
+- Binary tree in symmetric order.
+    + Symmetric means: Every node's key is larger than all keys in it's left
+      subtree and smaller than all keys in its right subtree.
+
+- There's 1-1 correspondance between BSTs and Quicksort partitioning
+
+How to find following in BSTs
+------
+Min:    Smallest key in table
+
+Max:    Largest key in table
+
+Floor:  Largest key <= to a given key
+
+Ceiling: Smallest key >= to a given key
+// floor and ceiling isn't straightforward
+
+Count:  Store # of nodes in the subtree rooted at that node. To
+        implement size(), return count at the root
+
+Rank:   How many keys < k?
+        //Easy recursive algo
+
+Inorder Traversal: Keys traversed in ascending order
+    + Traverse left subtree
+    + Enqueue key
+    + Traverse right subtree
+
+Deletion in BST: Hibbard Deletion
+
+Deleting a node in BSTs
+
+Case 1: Deleting node N has no subtrees.
+Case 2: Deleting node N has 1 subtree.
+                parent(child(N)) = parent(N)
+Case 3: Deleting node N has 2 subtrees
+                + find successor node X to N (smallest node > N)
+                + Replace N with X and free N
+                + X is minimum node to right subtree of N
+
+- Why is successor node X chosen and not predecessor? No real reason.
+
+Disadvantages:
+- Tree becomes unbalanced after repeated deletion/addition. Choosing
+  predecessor and successor randomly doesn't solve the problem
+- The height of the tree becomes sqrt(N) instead of lgN
+- Long standing open problem
+
+
+
+Red-Black BST: Gaurantees logarithmic performance
+--------
+
+2-3 Trees
+---------
+- Allow 1 or 2 keys per node
+- 2-node: 1 key and 2 children
+- 3-node: 2 keys and 3 children
+
+Perfect Balance: Every path from root to null link has same length
+
+Symmetric Order: Inorder traversal yields keys in ascending order
+
+Insert:
+Case 1: Insert in to a 2-node at bottom
+Case 2: Insert in to a 3-node at bottom. More work.
+        + Add new key to 3-node to create temporary 4 node
+        + Move middle key in 4 node in to parent, along with any child
+        // See video for clarity
+
+Tree height:
+------
+Worst Case: lgN     //all 2-nodes
+Best Case: lg_3N ~ 0.631 lgN    // all 3-nodes. Base 3 log
+Between 12 and 20 for a million nodes
+Between 18 and 30 for a billion nodes
+
+- Gauranteed logarithmic performnace for search and insert
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 String Problems:
