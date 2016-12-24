@@ -801,8 +801,198 @@ Between 18 and 30 for a billion nodes
 - Gauranteed logarithmic performnace for search and insert
 
 
+//TODO: Watch this video again. Very detailed implementation of RB BST
+
+Red-Black Trees (left-leaning RB tree)
+---------------
+- RB Trees can be represent using 2-3 tree
+- Take the largest elem in a 3-node and make it root, with smaller elem on
+  left subtree (hence left-leaning RB BSTs)
+- Call this link as Red link
+- Black links are those pointing to a 2-node
+
+- Vice Versa is true. Given a BST, there's a direct correspondance to RB tree.
+
+A BST such that:
+- No node has 2 red links connected to it
+- Every path from root to null link has same number of black links
+- Red links lean left
 
 
+- Search in RB BST: Same as BST. Most other operations are same.
+- Change w.r.t BST, have a 'color' field to indicate left link (RED) and right
+  link (BLACK)
+
+Applications:
+----
+- java.util.TreeMap, TreeSet use RB trees
+- C++ STIL: map, multimap, multiset
+- Linux kernel: CFS, libux/rbtree.h
+
+// TODO: Watch video
+
+B-Trees
+-------
+- Generalized version of 2-3 trees
+
+- Variants: B+ tree, B* tree, B# tree ...
+
+Applications:
+----
+- Windows NTFS
+- Mac: HFS, HFS+
+- Linux: ReiserFS, XFS, Ext3FS, JFS
+- Databases: Oracle, DB2, INGRES, SQL, PostgreSQL
+
+
+
+Geometric Applications of Binary Search Trees (BST)
+---------
+
+1d Range Search
+---------------
+Problems:
+[1] How many points in a plane lie within a rectangle
+[2] If we have set of rectangles, how many are intersecting or how many of
+them are intersecting
+
+- Geometric objects intersections.
+- Finding points in a 2d range
+- Intersections of orthogonal rectangles.
+- Many applications.
+
+
+Operations:
+- Insert KV pairs
+- Search for key k
+- Delete key k
+- Range search: find all keys between k1 and k2
+- Range count: number of keys between k1 and k2
+
+
+Application: Database queries
+
+Geometric Interpretation:
+- Keys are points on a line
+- Find/count points in a given interval in 1-dimension (1d).
+
+    **  * * *****    * * *  **  * **   * *
+         ^                  ^
+         S                  E
+
+- How many points/keys between S and E?
+
+
+Implementation Costs
+----
+
+
+       DS           insert       range count         range search
+Unordered Array        1              N                    N
+Ordered Array          N            log N               R + log N
+Goal                 log N          log N               R + log N
+
+N = number of keys
+R = number of keys that match
+
+- Keep a rank(node) function that counts # of keys less than that node in
+  a BST.
+- Range(low, high) = rank(high) - rank(low) [+1 depending on high/low are
+  part of the query]
+
+
+// Algo: Find all keys between lo and hi
+- Recursively find all keys looking for lo. Identify keys that's >= lo
+- Recursively find all keys looking for hi. Identify keys that's <= hi
+
+
+
+Line Segment Intersection Search
+-------
+// Algo
+- Sweep vertical line from left to right
+- x-coordinates define events.
+- h-line (left endpoint): insert y-coord in to BST
+- h-line (right endpoint): remove y-coord from BST
+- v-line: do a 1d-range search in BST for y-range
+
+
+Line Sweep Algos
+-------
+Applications:
+- Closest Pair of points.
+- Line segment intersections.
+- Area of union of rectangles.
+- Convex hull.
+
+Kd-Trees
+--------
+Extension of 1d-range
+- Operations: Insert a 2d key; Delete a 2d key; Search for a 2d key
+- Range search: find all keys that lie in a 2d range.
+- Range count: # of keys that lie in a 2d range.
+
+Geometric Interpretation:
+- Keys are point in a plane.
+- Find/count points in a given h-v rectangle.
+
+Applications:
+- Networking, Circuit Design, Databases.
+
+Grid Implementation
+--------
+- Divide space in to MxN squares/grids.
+- Create a list of points contained in each square.
+- Use 2d array to directly index relevant square.
+- Insert: add(x,y) to list for corresponding square.
+- Range Search: Examine only squares that intersect 2d range query.
+
+Space-Time Tradeoff:
+---------
+- Space: M^2 + N
+- Time: 1 + N/(M^2) per square examined, on average
+
+Choose grid square size to tune performance
+---------
+- Too small: wastes space.
+- Too large: too many points per square.
+- Rule of thumb: sqrt(N) by sqrt(N) grid.
+
+Running Time
+---------
+- Initialize DS: N
+- Insert point: 1
+- Range search: 1 per point in range.
+
+Clustering
+--------
+- Grid implementation is poor.
+- Other options:
+  2d Tree
+  Quadtree
+  BSP Tree
+
+
+2d Tree
+-------
+// Algo
+- Recursively partition plane in to two half planes (alternating between
+  horizontal & vertival partitions).
+- All points to left of a vertical will be in left sub-tree and vice
+  versa.
+- Similarly for horizontal partition.
+- Build a BST in above fashion.
+
+
+Application
+-------
+- Given a set of points in a plane and a rectangle, find all the points
+  within that rectangle.
+- Nearest neighbor search.
+
+
+
+Drawback
 
 
 
@@ -1188,139 +1378,3 @@ Floyd-Warshall Algo (All Pairs Shortest Path)
 
 
 
-Geometric Applications of Binary Search Trees (BST)
----------
-
-1-d Range Search
----------
-- Geometric objects intersections.
-- Finding points in a 2d range
-- Intersections of orthogonal rectangles.
-- Many applications.
-
-Range Search: Find all keys between k1 and k2.
-Range Count: # of keys between k1 and k2.
-
-Geometric Interpretation:
-- Keys are points on a line
-- Find/count points in a given interval in 1-dimension (1d).
-
-       DS           insert       range count         range search
-Unordered Array        1              N                    N
-Ordered Array          N            log N               R + log N
-Goal                 log N          log N               R + log N
-
-N = number of keys
-R = number of keys that match
-
-- Keep a rank(node) function that counts # of keys less than that node in
-  a BST.
-- Range(low, high) = rank(high) - rank(low) [+1 depending on high/low are
-  part of the query]
-
-
-// Algo: Find all keys between lo and hi
-- Recursively find all keys in left subtree
-- Check key in current node
-- Recursively find all keys in right subtree
-
-
-
-Line Segment Intersection Search
--------
-// Algo
-- Sweep vertical line from left to right
-- x-coordinates define events.
-- h-line (left endpoint): insert y-coord in to BST
-- h-line (right endpoint): remove y-coord from BST
-- v-line: do a 1d-range search in BST for y-range
-
-
-Line Sweep Algos
--------
-Applications:
-- Closest Pair of points.
-- Line segment intersections.
-- Area of union of rectangles.
-- Convex hull.
-
-Kd-Trees
---------
-Extension of 1d-range
-- Operations: Insert a 2d key; Delete a 2d key; Search for a 2d key
-- Range search: find all keys that lie in a 2d range.
-- Range count: # of keys that lie in a 2d range.
-
-Geometric Interpretation:
-- Keys are point in a plane.
-- Find/count points in a given h-v rectangle.
-
-Applications:
-- Networking, Circuit Design, Databases.
-
-Grid Implementation
---------
-- Divide space in to MxN squares/grids.
-- Create a list of points contained in each square.
-- Use 2d array to directly index relevant square.
-- Insert: add(x,y) to list for corresponding square.
-- Range Search: Examine only squares that intersect 2d range query.
-
-Space-Time Tradeoff:
----------
-- Space: M^2 + N
-- Time: 1 + N/(M^2) per square examined, on average
-
-Choose grid square size to tune performance
----------
-- Too small: wastes space.
-- Too large: too many points per square.
-- Rule of thumb: sqrt(N) by sqrt(N) grid.
-
-Running Time
----------
-- Initialize DS: N
-- Insert point: 1
-- Range search: 1 per point in range.
-
-Clustering
---------
-- Grid implementation is poor.
-- Other options:
-  2d Tree
-  Quadtree
-  BSP Tree
-
-
-2d Tree
--------
-// Algo
-- Recursively partition plane in to two half planes (alternating between
-  horizontal & vertival partitions).
-- All points to left of a vertical will be in left sub-tree and vice
-  versa.
-- Similarly for horizontal partition.
-- Build a BST in above fashion.
-
-
-Application
--------
-- Given a set of points in a plane and a rectangle, find all the points
-  within that rectangle.
-- Nearest neighbor search.
-
-
-
-Drawback
-
-
-2-3 Tree (2-3 are # of nodes in the tree and not the keys. Keys are 1-2)
----------
-Allow 1 or 2 keys per node
-- 2 node: one key, 2 children
-- 3 node: two keys, 3 children
-
-Perfect Balance: Every path from root to null link has same length.
-Symmetric Order: Inorder traversal yields keys in ascending order.
-
-Red-Black Trees (RB-Trees)
