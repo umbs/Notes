@@ -997,6 +997,103 @@ Drawback
 
 
 
+Hashing:
+--------
+- All Java classes inherit a method hashCode(), which returns a 32-bit int.
+- Requirement: In Java, x.equals(y) then x.hashCode() == y.hashCode()
+- Highly desirable: If !x.equals(y) then x.hashCode() != y.hashCode()
+- Default implementation: Memory address of x
+
+- Java library implementations
+
+    public final class Integer
+    {
+        private final int value;
+        ...
+        ...
+        public int hashCode()
+        {   return value;   }
+    }
+
+    public final class Boolean
+    {
+        private final boolean value;
+        ...
+        ...
+        public int hashCode()
+        {
+            if (value)  return 1231;
+            else        return 1237;
+        }
+    }
+
+    public final class Double
+    {
+        private final double value;
+        ...
+        ...
+        public int hashCode()
+        {
+            long bits = doubleToLongBits(value);
+            return (int) (bits ^ (bits >>> 32));
+        }
+    }                           ^
+                                |
+                                |
+                                |
+        Convert to IEEE 64-bit representation. XOR most significant 32-bits
+        with least significant 32-bits
+
+- For String, Horner's method to hash string is used.
+
+- Idea is to involve all char's in the String (or all bits in Double) for
+  hashing.
+
+
+Uniform Hashing: Each key is equally likely to hash to an integer between 0
+and M-1
+
+Bins and Balls: Throw balls uniformly at random in to M bins.
+
+Birthday Problem: Expect 2 balls in same bin after ~sqrt(pi * M/2) tosses
+Coupon Collector Problem: Expect every bin has >=1 ball after ~M tosses
+
+
+Collisions: (a) Separate Chaining (b) Linear Probing (Open Addressing)
+-----------
+Separate Chaining: Linked Lists
+- Hash: map key to int i between 0 and M-1
+- Insert: put at front of ith chain (if not already there)
+- Search: need to search only ith chain
+
+Linear Probing (Open Addressing)
+- Hash: Map key to int i between 0 and M-1
+- Insert: Put at idx i if free; if not try i+1, i+2 ...
+- Search: Same way as Insert till you hit empty position or wrap around
+- Array size M must be greater than number of K-V pairs
+
+Knuth's Parking Problem:
+    Model: Cars arrive at one-way street with M parking spaces. Each desires a
+    random space i: if space i is taken, try i+1, i+2 ...
+
+    Q: What's mean displacement of a car?
+    Ans: With M/2 (half-full), mean displacement is ~3/2
+         If full, with M cars, mean displacement is ~sqrt(pi * M/8)
+
+
+Suggested array size M and N keys:
+    M too large: too many empty array entries
+    M too small: search time blows up
+    Typical choice: alpha = N/M ==> approx 1/2
+    * With above choice, avg probes for search hit ~3/2 and avg probes for
+    * search miss is ~5/2
+
+Many variants of Hashing:
+- Two-probe hashing: Has to two positions. Insert key in shorter of 2 chains
+- Double hashing: Linear probing but skip variable amount, not just 1
+- Cuckoo hashing: Hash key to 2 positions. Insert key into either. If
+  occupied, reinsert displaced key into its alternative position
+
 
 
 
