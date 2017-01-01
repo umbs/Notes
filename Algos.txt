@@ -1,5 +1,5 @@
-                  ALGORITHMS          COLLECTION
-                  ===============================
+                  ALGORITHMS PART 1 (PRINCETON)
+                  =============================
 
 Dynamic Programming Problems:
 1 Sequence Alignment
@@ -992,10 +992,6 @@ Application
 
 
 
-Drawback
-
-
-
 
 Hashing:
 --------
@@ -1095,6 +1091,10 @@ Many variants of Hashing:
   occupied, reinsert displaced key into its alternative position
 
 
+Applications of Symbol Tables (Hashing)
+---------
+Sets: A collection of distinct keys
+Dictionary Lookups
 
 
 
@@ -1102,22 +1102,8 @@ Many variants of Hashing:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  ALGORITHMS PART 2 (PRINCETON)
+                  =============================
 
 String Problems:
 -------
@@ -1127,7 +1113,7 @@ Longest palindrome in a string.
 
 Undirected Graphs
 --------
-Graph: Set of "vertices" connected pairwise by "edges"
+Graph: Set of "vertices" connected by pairwise "edges"
 
 Terminology:
     Path: Sequence of vertices connected by edges.
@@ -1156,6 +1142,8 @@ Graph Representation:
   connected. Not scalable (V^2 size).
 - Adjacency-List: Each vertex has a list of adjacency nodes/vertices. Most
   commonly used representation.
+
+
         +---+      +---+      +---+      +---+
         |   | ---> |   | ---> |   | ---> |   |
         +---+      +---+      +---+      +---+
@@ -1171,8 +1159,9 @@ Graph Representation:
         |   |
         +---+
 
+
 - In real world, graphs have lots of vertices but small degree (fewer
-  edges).
+  edges) - Sparse graphs.
 
 
 DEPTH FIRST SEARCH [DFS]
@@ -1186,6 +1175,43 @@ DEPTH FIRST SEARCH [DFS]
      mark v as visited
      recursively visit all unmarked vertices adjacent to v
 
+Algo:
+- Use recursion
+- Mark each visited vertex (and keep track of edge taken to visit it)
+- Return when no visited options
+
+Data Structs:
+- boolean marked[] - to mark visited vertices
+- int edgeTo[] to keep track of paths. (edgeTo[w] == v) means that edge v-w
+  taken to visit w for first time
+
+
+public class DepthFirstPaths
+{
+    private boolean[] marked;
+    private int[] edgeTo;
+    private int s;  // root??
+
+    public DepthFirstPaths(Graph G, int s)
+    {
+        ...
+        dfs(G,s);
+    }
+
+    private void dfs(Graph G, int v)
+    {
+        marked[v] = true;
+        for (int w : G.adj(v))
+            if (!marked[w])
+            {
+                dfs(G, w);
+                edgeTo[w] = v;
+            }
+    }
+}
+
+
+
 BREADTH FIRST SEARCH [BFS]
 --------------
    BFS (vertex v)  // rough algo
@@ -1195,37 +1221,51 @@ BREADTH FIRST SEARCH [BFS]
           - add each unvisited adjacent vertex of v to Q and mark them as
             visited.
 
-- BFS computes Shortest Path
+- BFS computes Shortest Path (fewest # of edges) from s to all other vertices
+  in graph in time proportional to E+V
+
+DFS: Put unvisited vertices on Stack
+BFS: Put univisited vertices on Queues
+
+Intuition: BFS examines vertices in increasing distance from s.
+
 
 Connected Components
 --------------
-Def: Vertices v & w are connected if there is a path between them.
-Goal: Preprocess graph to answer queries: is v connected to w?
-Def: A connected component is a maximal set of vertices in a graph.
+Def: Vertices v & w are connected if there is a path between them
+Goal: Preprocess graph to answer queries: is v connected to w? Provide this in
+constant time
+Def: A connected component is a maximal set of vertices in a graph
 
-- Similar to Union-Find problem.
+- Similar to Union-Find problem but not exactly same.
 - DFS can be used.
 
 Practical Use:
 - STD like health issues.
 - Flood Fill in paint softwares.
 
+Algo:
+- Use DFS
+- Instead of edgeTo[], use a cc[] that's slightly different. It has the
+  connected component number instead of it's parent node number
+
+
 
 Graph Challenges
 -------------
 1) Is a graph bipartite? Can graph be divided in to 2 set of
 vertices each vertex in one set connecting to another in other set?
-  - DFS can solve this prob.
+  - DFS can solve this prob
 
 2) Does a graph have cycle?
-  - DFS can solve this prob.
+  - DFS can solve this prob
 
 3) Euler Tour: Given a graph, is there a cycle that uses each edge exactly
 once?
-  - Yes, iff connected and all vertices have even degree.
+  - Yes, iff connected and all vertices have even degree
 
-4) TSP/Hamilton Tour: Find a cycle that visits each vertex only once.
-  - NP-complete problem.
+4) TSP/Hamilton Tour: Find a cycle that visits each vertex only once
+  - NP-complete problem
 
 5) Are two graphs identical (except vertex names)? Graph Isomorphism
 Problem:
@@ -1248,23 +1288,35 @@ Typical Problems
 - Is there a directed path from s to t
 - What is shortest directed path from s to t
 - Can you draw a graph so that all edges point upwards?
+- Combination circuits
+- Implication graphs
+... many more
+
 
 
 Digraph Search - DFS can be used
 ----------
-- Reachability Application - Program control flow analysis (static
-  analysis tools)
+- Reachability Application 
+    - Program control flow analysis (static analysis tools).
+    - All vertices reachable from a node s
+
 - Garbage Collection - Mark & Sweep algos use Digraphs.
   - Mark all reachable objects.
-  - Sweep objects (garbage collect) if it is unmarked.
+  - Sweep objects (garbage collect) if it is unmarked. Mark-Sweep algo
 
-BFS - can be used to get Shortest Path from s to t in a Digraph.
+BFS on Digraphs
+    - can be used to get Shortest Path from s to t in a Digraph.
+
 - A variation can be done to get multiple-source shortest path.
 
 Applications: Web crawler is an example of BFS on Digraphs.
 
+Multiple-Source Shortest Path
+-----------------------------
 
-TOPOLOGICAL SORT/PRECEDENCE SCHEDULING
+
+
+Topological Sort/Precedence Scheduling
 --------
 - Use DFS
 - Sample applications:
