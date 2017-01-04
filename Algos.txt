@@ -1296,7 +1296,7 @@ Typical Problems
 
 Digraph Search - DFS can be used
 ----------
-- Reachability Application 
+- Reachability Application
     - Program control flow analysis (static analysis tools).
     - All vertices reachable from a node s
 
@@ -1354,6 +1354,9 @@ Kosaraju-Sharir Algo
   Phase 1: run DFS on reverse G to compute reverse postorder.
   Phase 2: run DFS on G, considering order given in phase 1.
 
+
+
+
 Minimum Spanning Trees [MST]
 ----------
 Given: Undirected graph G with positive edge weights (connected)
@@ -1368,7 +1371,8 @@ Assumptions:
   - Graph is connected.
 
 Definition:
-  - Cut: partition in graph in to two sets of vertices.
+  - Cut: partition in graph in to two sets of vertices. Vertices in one set
+    belongs to MST while other's are not yet in MST.
   - Crossing Edge: connects vertex in one set to vertex in other set.
   - Cut property: Given any cut, the crossing edge of min weight is in
     MST.
@@ -1377,14 +1381,50 @@ Kruskal's Algo
 -------
 - Sort all edges by weight.
 - Keep adding edges to MST in order unless they create a cycle.
-- MST is computed in Elog E (in worst case)
+- MST is computed in E*lnE (in worst case)
+
+Implementation Challenge:
+------
+- Use union-find data struct
+- Maintain a set for each connected component in T
+- If v and w are in same set, then adding v-w edge would create a cycle
+
+
 
 Prim's Algo
 --------
 - Start with vertex 0 and greedily grow tree T.
 - Add to T the min weight edge with exactly one endpoint in T.
 - Repeat until V-1 edges.
-- E log E running time and extra storage space proportional to E.
+- E*lnE running time and extra storage space proportional to E.
+
+Implementation Challenge (Lazy Implementation):
+------
+- Use PQ with one end point in tree T
+- Key = edge; Priority = weight of the edge
+- delete-min to determine next edge e=v-w to add to T
+- Disregard if both endpoints v and w are in T. union-find DS can be used
+- Otherwise, let w be vertex not in T:
+    - add to PQ any edge incident to w (assuming other endpoint not in T)
+    - add w to T
+
+Eager Implementation:
+------
+//TBD - Not worth at this time
+
+Brovuka's Algo
+--------
+- Combines Kruskal and Prim's algo
+
+K-Clustering: Divide a set of objects in to K coherent groups
+Distance Function: Numeric value specifying "closeness" of two objects
+Goal: Divide in to clusters so that objects in different cluster are far apart
+
+Single-Link Clustering Algo:
+- Well known problem and algo exists.
+- Kruskals algo. Stop when k connected components
+- Alternately, run Prims algo and delete k-1 max weight edges
+
 
 Shortest Path
 -------
