@@ -1952,3 +1952,163 @@ Host Static Website:
 References:
 [1] http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html
 [2] http://docs.aws.amazon.com/gettingstarted/latest/swh/setting-up.html
+
+
+
+@@@@@@@@@@@@@@@@  HTML5, CSS & Javascript for Web Developers   @@@@@@@@@@@@
+
+// starting browser-sync
+$ browser-sync start --server --directory --files "*"
+
+- HTML elements and tags are same. Used interchangeably.
+- Tags have attributes (name-value pairs)
+    <p id="myId"> ... </p>
+- Attributes have their own requirements. For ex. id attribute must be unique
+  across HTML document.
+
+HTML Content Models: (1) Block-Level Elements (2) Inline Elements
+- HTML5 has 7 types of elements
+
+- Semantic HTML5 tags
+    - May help SEO ranking. But varying opinions
+
+- HTML5 Lists: Ordered and Unordered Lists
+
+Character Entity Reference:
+---
+<   use '&lt;' instead
+>   use '&gt;' instead
+&   use '&amp;' instead
+- There are many more (like copyright symbol etc)
+
+Links
+-----
+- Internal links
+    <a href="">
+    // value in href is absolute or relative url
+- In HTML5, <a> tag is both block and inline tag (flow and phrasing content).
+  So, we can take a <a> tag and have <div> tag within it.
+
+- <a href="#section1"> text </a>
+  ...
+  <section id="section1"> more text </section>
+
+- <img src="" width="" height="" alt=""> &quot; text
+
+
+
+Intro to CSS3
+------
+- Every browser comes with default style. CSS rules override it.
+
+Anatomy of CSS Rule:
+------
+    p {
+        color: blue;
+    }
+
+p = selector
+CSS declaration --> color: blue;
+color = Property
+blue = Value
+
+- Collection of CSS rules is a Style Sheet
+
+Element, Class and ID Selectors
+------
+Element Selector - we select element name (like 'p' above)
+Class Selector -
+    .blue {     <!-- note the . in front -->
+        color: blue;
+    }
+
+    - we create a 'blue' CSS class above
+
+- How is Class Selector used?
+
+    <p class='blue'> ... </p>
+    <div class='blue'> ... </div>
+
+ID Selector
+
+    #name {     <!-- note the pound sign   -->
+        color: blue;
+    }
+
+    <p id='name'> ... </p>
+    <div id='name'> ... </div>
+
+
+Grouping Selectors with commas
+
+    div, .blue {
+        color: blue;
+    }
+
+    <p class='blue'> ... </p>
+    <p> ... </p>    <!-- no effect -->
+    <div> ... </div>
+
+
+- id attribute is least reusable as it can appear only once in the document
+
+Combining Selectors
+----
+
+[1]
+    p.big {
+        font-size: 20pm;
+    }
+
+
+    <p class='big'> ... </p>    <!-- CSS rule applied here>
+    <div class='big'> ... </div> <!-- CSS rule NOT applied here>
+
+[2] Child Selector: Every 'p' that's direct child of 'article'
+
+    article > p {
+        color: blue;
+    }
+
+    <article>
+        <p> ... </p>
+    </article>
+
+    <article>
+        <div> <p> ... </p> </div>   <!-- unaffected -->
+    </article>
+
+
+[3] Descendant Selector: Every 'p' in side (at any level) of 'article'
+
+    article p {
+        color: blue;
+    }
+
+
+[4]
+- 1, 2, 3 are not limited to Element Selectors. It can be applied to class and
+  id selectors
+
+    .colored p {
+        color: blue;
+    }
+
+    article > .colored {
+        color: blue;
+    }
+
+
+
+
+
+
+References:
+[1] jsfiddle.net
+[2] css-tricks.com
+[3] codepen.io
+[4] caniuse.com // Keeps track of changes to HTML5/CSS etc
+[5] w3c.org
+[6] validator.w3c.org
+[7] csszengarden.com
+[8]
