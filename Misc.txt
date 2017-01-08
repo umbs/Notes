@@ -2145,6 +2145,78 @@ Conflict Resolution
     [3] Inheritance: DOM Tree
         A rule declared on a parent is inherited on all it's children
     [4] Specificity: Most specific selector combination wins
+        - inline 'style' is highest score
+        - !important ---> overrides all other CSS rules. Avoid using this.
+
+
+                Specificity Score
+
+    inline Style |  ID   |  Class, pseudo-class,   |    # of elements
+                 |       |      attribute          |
+     -----------------------------------------------------------------
+                 |       |                         |
+
+- Calculate the scores above and in conflict, highest score wins.
+
+Styling
+-------
+- Lots of CSS properties that affect styling
+
+    font-family: "Times New Roman", Times, serif, San Serif;
+    color: #0000FF;     // RGB specification
+    font-style: italic;
+    font-weight: bold;
+    font-size: 24px;    // its diff than points
+    text-transform: lowercase;  // uppercase and others
+    text-align: center;     // many more alignments
+
+    // em = width of 'm'. It's relative font-size
+
+
+//TODO: Listen to Lecture 18 Part 2, Styling Text. Instructor talks about
+//cumulative doubling of font-size
+
+The Box Model
+-------------
+
+[6] General Sibling Selector
+
+    selector ~ selector
+
+
+
+Pseudo Class Selectors
+------
+
+    selector:pseudo-class {
+        ...
+    }
+
+- Many pseudo-class selectors exists, but we cover following 5:
+    :link
+    :visited
+    :hover
+    :active
+    :nth-child(...)
+
+// TODO
+- Pseudo-class selectors are very powerful. Watch Lesson 15 to get a feel.
+  More reading is necessary for this.
+
+
+Style Placement
+------
+- Have external style file and use it in all HTML files
+
+Conflict Resolution
+------
+- 4 concepts come in to play to resolve conflict
+    [1] Origin Precedence: Last declaration wins
+    [2] Declarations Merge: Two declaration (non-conflicting) refering to same
+        element gets merged. Both rules will be applied to the element.
+    [3] Inheritance: DOM Tree
+        A rule declared on a parent is inherited on all it's children
+    [4] Specificity: Most specific selector combination wins
 
 
 References:
