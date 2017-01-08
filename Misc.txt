@@ -2060,13 +2060,12 @@ Combining Selectors
         font-size: 20pm;
     }
 
-
-    <p class='big'> ... </p>    <!-- CSS rule applied here>
-    <div class='big'> ... </div> <!-- CSS rule NOT applied here>
+    <p class='big'> ... </p>    <!-- rule applied>
+    <div class='big'> ... </div> <!-- rule NOT applied>
 
 [2] Child Selector: Every 'p' that's direct child of 'article'
 
-    article > p {
+    article > p {   <!-- p is DIRECT child of article element -->
         color: blue;
     }
 
@@ -2078,29 +2077,74 @@ Combining Selectors
         <div> <p> ... </p> </div>   <!-- unaffected -->
     </article>
 
-
-[3] Descendant Selector: Every 'p' in side (at any level) of 'article'
+[3] Descendant Selector: Every 'p' inside (at any level) of 'article'
 
     article p {
         color: blue;
     }
 
+    <article>
+        <div> <p> ... </p> </div>   <!-- rule applied -->
+    </article>
 
 [4]
 - 1, 2, 3 are not limited to Element Selectors. It can be applied to class and
   id selectors
 
+    <!-- every 'p' inside (at any level) an elem with class='colored'  -->
     .colored p {
         color: blue;
     }
 
+    <!-- every elem with class='colored' that's DIRECT child of 'article' elem
+    -->
     article > .colored {
         color: blue;
     }
 
 
+[5] Adjacent Sibling Selector
+
+    selector + selector
+
+[6] General Sibling Selector
+
+    selector ~ selector
 
 
+
+Pseudo Class Selectors
+------
+
+    selector:pseudo-class {
+        ...
+    }
+
+- Many pseudo-class selectors exists, but we cover following 5:
+    :link
+    :visited
+    :hover
+    :active
+    :nth-child(...)
+
+// TODO
+- Pseudo-class selectors are very powerful. Watch Lesson 15 to get a feel.
+  More reading is necessary for this.
+
+
+Style Placement
+------
+- Have external style file and use it in all HTML files
+
+Conflict Resolution
+------
+- 4 concepts come in to play to resolve conflict
+    [1] Origin Precedence: Last declaration wins
+    [2] Declarations Merge: Two declaration (non-conflicting) refering to same
+        element gets merged. Both rules will be applied to the element.
+    [3] Inheritance: DOM Tree
+        A rule declared on a parent is inherited on all it's children
+    [4] Specificity: Most specific selector combination wins
 
 
 References:
