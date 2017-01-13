@@ -438,6 +438,20 @@ $ find / -type f -name *.mp3 -size +10M -exec rm {} \;
 
 Part VI - Exclude directories during search [4]
 
+@@@@@@@@@@@@@@@@@@@@@ CUT commands @@@@@@@@@@@@@@@@@@@@@@@
+$ cut -c1 data.txt      // Select (or cut) 1st character/column of chars
+$ cut -c1-4 data.txt    // Select 1 to 4 chars
+$ cut -c-6 data.txt     // Select first 6 chars
+$ cut -c4- data.txt     // Select from 4th char to end
+$ cut -f 2 data.txt     // Select 2nd field (TAB is default delim)
+$ cut -f 1 -d ':' data.txt  // Delim is ':' now
+$ cut -f 1,4 data.txt   // Select 1 and 4th field
+$ cut -f 1-4 data.txt   // 1 to 4 fields
+$ cut -f 2- data.txt    // 2nd to end fields
+$ cut -f 1,4-6,8 data.txt   // Get 1, 4 to 6 and 8th fields
+
+Now it's intuitive. Playing around with chars (c) and field (f) flags
+
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     LINUX NETWORKING COMMANDS
