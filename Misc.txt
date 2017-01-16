@@ -2178,46 +2178,115 @@ Styling
 
 The Box Model
 -------------
+- Around the content, 3 terms are used:
+    * Padding
+    * Border
+    * Margin
 
-[6] General Sibling Selector
-
-    selector ~ selector
 
 
+                            (page  layout)
+        +----------------------------------------------------+
+        |                                                    |
+        |    +==========================================+    | ---
+        |    |                                          |    |  ^
+        |    |    +-------------------------------+     |    |  |
+        |    |    |                               |     |    |  |
+        |    |    |                               |     |    |  |
+        |    |    |                               |     |    |
+        |    |    |           CONTENT             |     |    |height
+        |    |    |                               |     |    |
+        |    |    |                               |     |    |  |
+        |    |    |                               |     |    |  |
+        |    |    +-------------------------------+  ^  |    |  |
+        |    |                                       |  |    |  v
+        |    +=======================================|==+    | ---
+        |  ^                    ^                    |       |
+        +--|--------------------|--------------------|-------+
+           |                    |                    |
+        margin               border               padding
 
-Pseudo Class Selectors
+             |<-----------     width   ----------------->|
+
+
+
+- Margins DO NOT define width of the box
+- CDT (Chrome Dev Tools) have all these details
+
+Star Selector
 ------
+- Universal selector. Select "every" elem and apply the rule
 
-    selector:pseudo-class {
-        ...
+    * {
+        property: value;
+        // box-sizing: border-box;
     }
 
-- Many pseudo-class selectors exists, but we cover following 5:
-    :link
-    :visited
-    :hover
-    :active
-    :nth-child(...)
+- Margins are cumulative. If 2 boxes are adjacent to each other, then margin
+  between the boxes add up.
+- It's not same for 2 boxes, top and bottom. Larger margin takes effect.
 
-// TODO
-- Pseudo-class selectors are very powerful. Watch Lesson 15 to get a feel.
-  More reading is necessary for this.
+- 'box-sizing: border-box' - prefered CSS property.
+- 'width' property applies to just the content. With 'box-sizing: border-box'
+  it is applied to entire box.
 
 
-Style Placement
+
+- Content overflow
+    - 'overflow' property: 'auto', 'hidden', 'visible', 'scroll'
+    - Lookup to understand
+    - Users do not prefer 'double scrolling': Having two scroll bars in a
+      browser.
+
+
+Background Properties
 ------
-- Have external style file and use it in all HTML files
+    background-color: blue;
+    background-image: url("");
+    background-repeat: no-repeat; // other options
+    background-position: bottom right;  // other options
 
-Conflict Resolution
-------
-- 4 concepts come in to play to resolve conflict
-    [1] Origin Precedence: Last declaration wins
-    [2] Declarations Merge: Two declaration (non-conflicting) refering to same
-        element gets merged. Both rules will be applied to the element.
-    [3] Inheritance: DOM Tree
-        A rule declared on a parent is inherited on all it's children
-    [4] Specificity: Most specific selector combination wins
+    background: url("") no-repeat right center; // all properties in one
+    // background overrides all other individual properties since it's listed
+    // last?
 
+Position Elems by Floating
+----
+    float: right;
+    clear: left;    // nothing should float to left of this elem
+    // It's all getting confusing and messy. Must listen few more times to
+    // this lecture.
+
+- Floats can produce flexible layouts
+
+2 Column Layout
+----
+
+Relative Positioning
+    CSS offset properties: top, bottom, left, right
+- Elem is positioned relative to its position in normal doc flow
+- Elem is NOT taken out of normal doc flow. Even if moved, its original spot
+  is preserved ex:
+
+        position: relative;
+        top: 50px;  // negative values allowed
+        left: 50px;
+
+- html elem is ALWAYS relative=positioned
+- Absolute positioning depends on closest ancestor elem whose positioning is
+  set to non-static value.
+
+Media Queries
+-----
+
+    @media (max-width: 700px) {
+        p {
+            color: blue;
+        }
+    }
+
+- If media feature (in this case "max-width: 700px") is true, the styles
+  within curly braces apply.
 
 References:
 [1] jsfiddle.net
@@ -2227,4 +2296,3 @@ References:
 [5] w3c.org
 [6] validator.w3c.org
 [7] csszengarden.com
-[8]
