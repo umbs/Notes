@@ -2288,6 +2288,34 @@ Media Queries
 - If media feature (in this case "max-width: 700px") is true, the styles
   within curly braces apply.
 
+- max-width and min-width are most common.
+- media features can be combined with 'and' and comma operators.
+    Ex:
+    @media (min-width: 768px) and (max-width: 991px) {...}
+
+- Comma is treated as OR
+    Ex:
+    @media (min-width: 768px), (max-width: 991px) {...}
+
+
+Responsive Design
+------
+- Site designed to adapt its layout to viewing environment by using fluid,
+  proportion-based grids, flexible images, and CSS3 media queries.
+
+- 12 column grid responsive layout is most common layout
+    * 12 is used because of it's factors: 1, 2, 3, 4, 6, 12
+    * To achieve fluid width, use %
+- Viewport meta tag is used to turn off default mobile zooming.
+    - Mobile phones zoom out the page and display it
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    - This tells browser to consider the width of device as real width of
+      screen and set zoom level to 1 (100%)
+
+
+
+
 References:
 [1] jsfiddle.net
 [2] css-tricks.com
