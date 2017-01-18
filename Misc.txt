@@ -2314,6 +2314,36 @@ Responsive Design
       screen and set zoom level to 1 (100%)
 
 
+Twitter Bootstrap
+------
+- Bootstrap is the most popular HTML, CSS and JS framework for developing
+  responsive, mobile first projects on web
+
+- Bootstrap grid system basics
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"> Col 1</div>
+            ...
+        </div>
+    </div>
+
+    - Instead of 'div', can use other elems too
+    - "container" or 'container-fluid" classes must be at top
+    - All columns inside .row class
+    - "row" class has negative width to align with rest of the regular
+      content. Listen to Lecture 26 Part 1 for details
+
+- col-SIZE-SPAN
+    - SIZE: Screen width range identifier. Columns will collapse on each other
+      (they'll stack) if width is less than SIZE
+    - SPAN: How many columns the elem must span (1 to 12)
+
+
+
+
+
+
 
 
 References:
@@ -2324,3 +2354,5 @@ References:
 [5] w3c.org
 [6] validator.w3c.org
 [7] csszengarden.com
+[8] HTML5, CSS and JS course from Coursera (John Hopkins, Yaakov Chaikin)
+
