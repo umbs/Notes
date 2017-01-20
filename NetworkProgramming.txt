@@ -1,4 +1,18 @@
-DATA STRUCTURES & FUNCTIONS 
+        server          client
+-----------------------------------------
+getaddrinfo()
+socket()
+bind()
+listen()
+                        getaddrinfo()
+                        socket()
+accept()                connect()
+send() & recv()         send() & recv()
+close()                 close()
+
+
+
+DATA STRUCTURES & FUNCTIONS
 -----
 struct addrinfo {
     int              ai_flags;     // AI_PASSIVE, AI_CANONNAME, etc.
@@ -14,13 +28,13 @@ struct addrinfo {
 struct sockaddr {
     unsigned short    sa_family;    // address family, AF_xxx
     char              sa_data[14];  // 14 bytes of protocol address
-}; 
+};
 
 // (IPv4 only--see struct sockaddr_in6 for IPv6)
 struct sockaddr_in {
     short int          sin_family;  // Address family, AF_INET
     unsigned short int sin_port;    // Port number
-    struct in_addr     sin_addr;    // IP addr 
+    struct in_addr     sin_addr;    // IP addr
     unsigned char      sin_zero[8]; // Same size as struct sockaddr
 };
 
@@ -44,7 +58,7 @@ struct in6_addr {
 
 // In some cases, we don't know if v4 or v6 structure is returned. So,
 // using below struct, pass both v4 and v6 structs in parallel and
-// depending on family type (ss_family), cast to sockaddr_in or _in6.   
+// depending on family type (ss_family), cast to sockaddr_in or _in6.
 struct sockaddr_storage {
     sa_family_t  ss_family;     // address family
 
@@ -55,21 +69,21 @@ struct sockaddr_storage {
 };
 
 int getaddrinfo(const char *node, const char *service, const struct addrinfo *hints, struct addrinfo **res);
-int socket(int domain, int type, int protocol); 
+int socket(int domain, int type, int protocol);
 int bind(int sockfd, struct sockaddr *my_addr, int addrlen);
 int connect(int sockfd, struct sockaddr *serv_addr, int addrlen);
-int listen(int sockfd, int backlog); 
-int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
-int send(int sockfd, const void *msg, int len, int flags); 
+int listen(int sockfd, int backlog);
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+int send(int sockfd, const void *msg, int len, int flags);
 int recv(int sockfd, void *buf, int len, int flags);
-sendto() and recvfrom() - DGRAM sockets 
-close(sockfd); 
-int getpeername(int sockfd, struct sockaddr *addr, int *addrlen); 
-int gethostname(char *hostname, size_t size); 
-int select(int numfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout); 
+sendto() and recvfrom() - DGRAM sockets
+close(sockfd);
+int getpeername(int sockfd, struct sockaddr *addr, int *addrlen);
+int gethostname(char *hostname, size_t size);
+int select(int numfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 
-inet_pton() 
-inet_ntop() 
+inet_pton()
+inet_ntop()
 FD_SET(int fd, fd_set *set)
 FD_CLR(int fd, fd_set *set)
 FD_ISSET(int fd, fd_set *set)
@@ -80,44 +94,44 @@ FD_ZERO(fd_set *set)
 NOTES [1]
 -----
 
-Socket descriptor type: int 
+Socket descriptor type: int
 
 struct addrinfo
 - Above struct is filled and then getaddrinfo() is called. OS will return
-  a pointer to linked list of above structs filled with all required data. 
+  a pointer to linked list of above structs filled with all required data.
 
 struct sockaddr
 - sa_data within this struct contains destination IP and port number and
   is not easy to use. So, sockaddr_in is created to use interchangeably
-  with sockaddr (typecast between the two).  
+  with sockaddr (typecast between the two).
 
 // (IPv4 only--see struct sockaddr_in6 for IPv6)
-struct sockaddr_in 
-- sin_zero is zero'd out. Its only used as padding to match sockaddr size. 
-- sin_family in sockaddr_in corresponds to sa_family in sockaddr 
+struct sockaddr_in
+- sin_zero is zero'd out. Its only used as padding to match sockaddr size.
+- sin_family in sockaddr_in corresponds to sa_family in sockaddr
 
 // Internet address (a structure for historical reasons)
-struct in_addr 
-- Now for below variable, accessing IP address is: 
-  struct sockaddr_in ina; 
-  ina.sin_addr.s_addr; 
+struct in_addr
+- Now for below variable, accessing IP address is:
+  struct sockaddr_in ina;
+  ina.sin_addr.s_addr;
 
 // (IPv6 only--see struct sockaddr_in and struct in_addr for IPv4)
-struct sockaddr_in6 
-struct in6_addr 
+struct sockaddr_in6
+struct in6_addr
 
 
 SYSTEM CALLS
 -------
 
 [1]
-/* 
- * node = host name or IP to connect to. 
+/*
+ * node = host name or IP to connect to.
  * service = Port number or any service such as http, ftp, telnet etc. It
- *           can be found in /etc/services file. 
+ *           can be found in /etc/services file.
  * hints = structure that we fill out
- * res = pointer to linked list of results 
- */ 
+ * res = pointer to linked list of results
+ */
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -128,29 +142,29 @@ int getaddrinfo(const char *node,     // e.g. "www.example.com" or IP
                 struct addrinfo **res);
 
 - Workhorse of a function. It helps setup structs that will be used later
-  on.  
+  on.
 
 
 [2]
-/* 
- * domain = AF type (AF_INET, AF_INET6) etc.  
- * type   = Socket type (SOCK_STREAM, SOCK_DGRAM) etc. 
- * protocol = 
+/*
+ * domain = AF type (AF_INET, AF_INET6) etc.
+ * type   = Socket type (SOCK_STREAM, SOCK_DGRAM) etc.
+ * protocol =
  */
 #include <sys/types.h>
 #include <sys/socket.h>
 
-int socket(int domain, int type, int protocol); 
+int socket(int domain, int type, int protocol);
 
 - Returns a socket descriptor that can be used in later sys calls. Its not
-  useful by itself, but is a pre-req before calling other sys calls. 
+  useful by itself, but is a pre-req before calling other sys calls.
 
-[3] 
+[3]
 /*
- * sockfd = File descriptor returned by socket() call.  
- * my_addr = Contains info about your IP addr. 
- * addrlen = Length in bytes of your IP addr. 
- */ 
+ * sockfd = File descriptor returned by socket() call.
+ * my_addr = Contains info about your IP addr.
+ * addrlen = Length in bytes of your IP addr.
+ */
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -161,9 +175,9 @@ int bind(int sockfd, struct sockaddr *my_addr, int addrlen);
   listen() for incoming connections on a specific port (like Servers).
   Kernel uses this to match incoming packet to a process's socket
   descriptor. If your process is a client, bind() is not required. Client
-  only needs to connect() to the Server's socket. 
+  only needs to connect() to the Server's socket.
 
-WARNING: Donot bind to a port below 1024 as they are reserved. 
+WARNING: Donot bind to a port below 1024 as they are reserved.
 
 NOTE: Sometimes, bind() fails with "Address already in use" message. Its
 due to an earlier socket still hanging around. You can wait for a minute
@@ -177,17 +191,17 @@ int yes=1;
 if (setsockopt(listener,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int)) == -1) {
     perror("setsockopt");
     exit(1);
-} 
+}
 
 NOTE2: Sometimes bind() call is unnecessary. When connecting to remote
 machine (as in telnet), where local port number is unimportant, you can
 call connect(). It will check if socket is unbound and bind() it to unused
-local port, if required. 
+local port, if required.
 
 [4]
-/* sockfd =  
- * serv_addr = Destination IP addr info 
- * addrlen   = 
+/* sockfd =
+ * serv_addr = Destination IP addr info
+ * addrlen   =
  */
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -200,32 +214,32 @@ int connect(int sockfd, struct sockaddr *serv_addr, int addrlen);
 
 
 [5]
-/* sockfd = 
+/* sockfd =
  * backlog = Number of connections allowed on incoming queue until we
- * accept() them.   
+ * accept() them.
  */
-int listen(int sockfd, int backlog); 
+int listen(int sockfd, int backlog);
 
 - Servers listen() on certain ports for incoming connections. To establish
-  the connection, they have to make following calls: 
-        getaddrinfo() 
-        socket() 
-        bind() 
-        listen() 
+  the connection, they have to make following calls:
+        getaddrinfo()
+        socket()
+        bind()
+        listen()
         accept()
 
 
-[6] 
+[6]
 /*
- * sockfd = 
- * addr   = 
+ * sockfd =
+ * addr   =
  * addrlen =
- * return value = Its a socket descriptor to handle new connection. 
+ * return value = Its a socket descriptor to handle new connection.
  */
 #include <sys/types.h>
 #include <sys/socket.h>
 
-int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 
 - Here is the scenario: A Client tries to connect() to us, the Server and
   is waiting in queue. Server is listen()'ing on a port and accept()'s the
@@ -235,24 +249,24 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
   connection.
 
 
-[7] 
-/* sockfd = SD to send data to. 
- * msg = 
- * len = 
- * flags = Set it to 0.  
+[7]
+/* sockfd = SD to send data to.
+ * msg =
+ * len =
+ * flags = Set it to 0.
  */
-int send(int sockfd, const void *msg, int len, int flags); 
+int send(int sockfd, const void *msg, int len, int flags);
 
 - sockfd is SD you want to send data to (whether it's one returned by
   socket() call or accept() call). It returns number of bytes of data
-  actually sent out. 
+  actually sent out.
 
 
-/* 
- * sockfd = SD to read from 
- * buf = buffer to read data in to 
- * len = max len of buffer. 
- * flags = set to 0. 
+/*
+ * sockfd = SD to read from
+ * buf = buffer to read data in to
+ * len = max len of buffer.
+ * flags = set to 0.
  */
 int recv(int sockfd, void *buf, int len, int flags);
 
@@ -261,69 +275,69 @@ int recv(int sockfd, void *buf, int len, int flags);
 
 NOTE: send() and recv() transfer data over STREAM sockets.
 
-[8] 
-sendto() and recvfrom() - DGRAM sockets 
+[8]
+sendto() and recvfrom() - DGRAM sockets
 
 [9]
-close(sockfd); 
+close(sockfd);
 
 - Close the socket. Both send() and recv() are not allowed anymore and
   will return an error.
 
-/* how = indicates HOW to shutdown 
- *    0 = further receives are not allowed 
- *    1 = further sends are not allowed 
- *    2 = Both send and receives are not allowed 
+/* how = indicates HOW to shutdown
+ *    0 = further receives are not allowed
+ *    1 = further sends are not allowed
+ *    2 = Both send and receives are not allowed
  */
-int shutdown(int sockfd, int how); 
+int shutdown(int sockfd, int how);
 
 - shutdown() does not close the SD. It only changes its usability. To
-  close it, you have to call close(). 
+  close it, you have to call close().
 
 
 [10]
 #include <sys/socket.h>
 
-int getpeername(int sockfd, struct sockaddr *addr, int *addrlen); 
+int getpeername(int sockfd, struct sockaddr *addr, int *addrlen);
 
 [11]
 
 #include <unistd.h>
 
-int gethostname(char *hostname, size_t size); 
+int gethostname(char *hostname, size_t size);
 
 
-ADVANCE TOPICS 
+ADVANCE TOPICS
 ------
 - socket() returns descriptor that blocks on read/accept calls. It can be
   set to NON-BLOCKING using fcntl() function as follows:
 
-  sockfd = socket(PF_INET, SOCK_STREAM, 0); 
-  fcntl(sockfd, F_SETFL, O_NONBLOCK); 
+  sockfd = socket(PF_INET, SOCK_STREAM, 0);
+  fcntl(sockfd, F_SETFL, O_NONBLOCK);
 
-- We can then 'poll' the socket for data. But it's inefficient. 
+- We can then 'poll' the socket for data. But it's inefficient.
 
 [12]
 
-/* 
- * numfds = largest sockfd+1 
- * readfds = set of fd's to be read 
- * writefds = set of fd's to be written to 
- * exceptfds = set of fd's to be monitored for exception 
- * timeout = 
+/*
+ * numfds = largest sockfd+1
+ * readfds = set of fd's to be read
+ * writefds = set of fd's to be written to
+ * exceptfds = set of fd's to be monitored for exception
+ * timeout =
  */
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
 
 int select(int numfds, fd_set *readfds, fd_set *writefds,
-           fd_set *exceptfds, struct timeval *timeout); 
+           fd_set *exceptfds, struct timeval *timeout);
 
 - select() allows to monitor several sockets at once. It indicates which
   sockets are ready to read, write and threw exceptions. However, its
-  slow. 'libevent' is a popular alternative. 
+  slow. 'libevent' is a popular alternative.
 
-- Use FD_SET/CLR/ISSET/ZERO() macros to manipulate fd sets. 
+- Use FD_SET/CLR/ISSET/ZERO() macros to manipulate fd sets.
 
 
 
@@ -332,12 +346,12 @@ UTILITY FUNCTIONS
 
 
 inet_pton()
----------- 
+----------
 - Converts an IP addr in to 'struct in_addr' or 'struct in6_addr' form,
 depending on AF_INET or AF_INET6.
- 
-Example:  
-struct sockaddr_in sa; // IPv4 
+
+Example:
+struct sockaddr_in sa; // IPv4
 struct sockaddr_in6 sa6; // IPv6
 
 inet_pton(AF_INET, "192.0.2.1", &(sa.sin_addr)); // IPv4
@@ -345,10 +359,10 @@ inet_pton(AF_INET6, "2001:db8:63b3:1::3490", &(sa6.sin6_addr)); // IPv6
 
 
 inet_ntop()
----------- 
-- Does opposite of inet_pton()  
+----------
+- Does opposite of inet_pton()
 
-Example:  
+Example:
 // IPv4:
 char ip4[INET_ADDRSTRLEN];  // space to hold the IPv4 string
 struct sockaddr_in sa;      // pretend this is loaded with something
@@ -362,11 +376,11 @@ inet_ntop(AF_INET6, &(sa6.sin6_addr), ip6, INET6_ADDRSTRLEN);
 printf("The address is: %s\n", ip6);
 
 
-FD_SET(int fd, fd_set *set)     Add fd to 'set' 
+FD_SET(int fd, fd_set *set)     Add fd to 'set'
 FD_CLR(int fd, fd_set *set)     Remove fd from 'set'
 FD_ISSET(int fd, fd_set *set)   Return true if fd is in 'set'
-FD_ZERO(fd_set *set)            Clear all entries from 'set' 
+FD_ZERO(fd_set *set)            Clear all entries from 'set'
 
 
-Reference: 
+Reference:
 [1] http://www.beej.us/guide/bgnet/
