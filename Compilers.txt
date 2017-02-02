@@ -456,3 +456,24 @@ https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
 [2] Info on coredump:
 http://backtrace.io/blog/blog/2015/10/03/whats-a-coredump/
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  objdump commands @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+ -f header info
+ -p more specific object file format
+ -h Section headers
+ -x ALL headers (file and section) in one command
+ -d Assembler contents of executable portions of object file
+ -s Full contents of all sections
+ -g Debug info
+ -t Contents of symbol table
+ -T Contents of Dynamic symbol table
+ -R Relocation entries in file
+ -j <section-name>  Display specific section
+
+
+
+
+
+Reference:
+[1]
+http://www.thegeekstuff.com/2012/09/objdump-examples/?utm_source=feedburner

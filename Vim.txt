@@ -98,6 +98,13 @@ Diff
 vimdiff file1 file2 // diff two files side by side
 
 
+Cursor Positioning
+------------
+zt puts current line to top of screen
+z. or zz puts current line to center of screen
+zb puts current line to bottom of screen
+
+Ref: http://unix.stackexchange.com/a/110252/45157
 
 Code Folding
 ------------

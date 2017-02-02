@@ -214,4 +214,6 @@ MEMORY SAFETY
 
 
 References: 
-[1] Coursera: Software Security from University of Maryland. 
+[1] Coursera: Software Security from University of Maryland
+[2] CNIT 127 Exploit Development - City College of San Francisco
+ 
