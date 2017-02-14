@@ -266,10 +266,44 @@ Recipe = Set of instructions for building packages including
       it's own package.
 
 
-- Build System Workflow
+Build System Workflow:
+- Build process starts by setting shell env for the build: oe-init-build-env.
+- Sourcing above file creates config files and shell scripts that Poky uses.
+- Poky verifies if system reqs have been met to create minimal image.
+- During creation of image, bitbake does following
+    * include additional layers
+    * include classes, tasks or recipes
+    * create ordered, weighted dependency chain in form of a map.
 
-1) Download upstream software, called as fetching the sources.
-2)
+
+- BitBake uses this map to order task executions. Tasks required most by other
+  tasks have higher weight and executed earlier.
+- BitBake spawns threads for each task and begins executing.
+- Tasks can be modified using recipe.
+
+
+Poky Build System Concepts:
+---------------------------
+- In Poky, every aspect of build system is controlled by metadata.
+- Loosely, metadata is combination of config files and package recipes.
+- Recipe contains data used by BitBake. BitBake can use this to set additional
+  variables or build-time tasks.
+
+- Config files are 2 types:
+    * Those configuring BitBake and overall build process
+    * Those configuring layers that Poky uses
+
+- A layer is grouping of metadata to provide some additional functionality
+// It all seems so hand-wavy at this point to me :(
+
+- Sourcing oe-build-init-env generates bblayers.conf as one of the many config
+  files. This contains BBLAYERS, which BitBake uses in building.
+
+
+BitBake:
+--------
+-
+
 
 
 Recipe has following.

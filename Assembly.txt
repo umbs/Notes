@@ -250,7 +250,7 @@ The operand is held in the instruction.
             instruction
                 ---
     operation, <register>, <operand>
-                            
+
 Ex: mov r2, 123     ; r2=123
 
     instruction
@@ -291,32 +291,32 @@ The operand is held in a register, which is specified in instruction.
                             +---------+
                             | Operand |
                             +---------+
-                            
+
 Ex: mov r3, r2      ; r3=r2
 
     instruction
        ---
     +---------------+
     |mov | r3 | r2  |
-    +---------------+                            
-                                                 
-                             Registers           
-                            +----------+         
-                        r1  |          |         
-                            +----------+         
-                        r2  |    |     |         
-                            +----|-----+         
+    +---------------+
+
+                             Registers
+                            +----------+
+                        r1  |          |
+                            +----------+
+                        r2  |    |     |
+                            +----|-----+
                         r3  |    v     |
                             +----------+
                                 ...
 
-+ Useful for integer variables. 
-        C Code              Assembly 
++ Useful for integer variables.
+        C Code              Assembly
         ------              --------
         x = y;              mov r1, r2
         a = b+c             mov r3, r4, r5
 
-                            
+
 
 REGISTER INDIRECT ADDRESSING
 ----
@@ -337,13 +337,13 @@ register, that is specified in instruction.
                                 |
                                 |
                                 v
-                            Memory Address 
+                            Memory Address
                             +-----------+
                             | Operand   |
                             +-----------+
-                            
 
-Ex:     ld, r3, (r2)        ; r3=contents of memory, address in r2 
+
+Ex:     ld, r3, (r2)        ; r3=contents of memory, address in r2
 
     +---------------+
     | ld | r3 |(r2) |
@@ -369,12 +369,12 @@ Ex:     ld, r3, (r2)        ; r3=contents of memory, address in r2
                                 ...
 
 
-    C Code                              Assembly Code 
+    C Code                              Assembly Code
     ------                              -------------
-    int *b  
+    int *b
     int a; // say address of a is 100
     b = &a;                             mov r1, 120
-    *b = 123;                           ld  (r1), 123 
+    *b = 123;                           ld  (r1), 123
 
 
 REGISTER INDIRECT ADDRESSING PLUS OFFSET
@@ -396,7 +396,7 @@ contents to form the effective address.
                                             |
                                             |
                                             v
-                                    Memory Address 
+                                    Memory Address
                                     +-----------+
                                     | Operand   |
                                     +-----------+
@@ -404,14 +404,14 @@ contents to form the effective address.
 Ex: ld, r3, 100(r2)
 
 
-REGISTER INDIRECT ADDRESSING VARIATION 
+REGISTER INDIRECT ADDRESSING VARIATION
 (Index Register Addressing)
 -----
 + Register Indirect Addressing in which register is seen as an "index" in to a
-list (1D array). 
+list (1D array).
 
 + Register holds number of locations from starting point. Starting point given
-in instruction. 
+in instruction.
 
 
 
@@ -479,10 +479,10 @@ Conditionals: x86-64 (Performance Improvement using `cmovle` instruction)
 R = Readable; O = Read-Only; W = Writeable; X = Executable
 
         +-----------------------------------+
-   RW   |             STACK                 |
-        +-----------------------------------+
-        |                                   |
-        |                                   |
+   RW   |             STACK                 |   |
+        +-----------------------------------+   | grows down
+        |                                   |   |
+        |                                   |   v
         |                                   |
         |                                   |
         +-----------------------------------+

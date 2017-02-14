@@ -1,90 +1,90 @@
                         NOTES FROM [1]
                         =============
-        STACK SMASHING/OVERFLOW 
+        STACK SMASHING/OVERFLOW
 
         HEAP OVERFLOW
         =============
-Example: 
+Example:
 typedef struct _vulnerable_struct {
-        char buff[MAX_LEN]; 
-        int (*cmp) (char *, char *); 
-} vulnerable; 
+        char buff[MAX_LEN];
+        int (*cmp) (char *, char *);
+} vulnerable;
 
-int foo (vulnerable *s, char *one, char *two) 
+int foo (vulnerable *s, char *one, char *two)
 {
-        strcpy (s->buff, one); // copy one in to buff 
+        strcpy (s->buff, one); // copy one in to buff
         strcpy (s->buff, two); // copy two in to buff
 
-        return s->cmp (s->buff, "file://foobar"); 
+        return s->cmp (s->buff, "file://foobar");
 }
-// works only if strlen(one) + strlen(two) < MAX_LEN. 
-// Otherwise, we overwrite s->cmp function pointer. 
+// works only if strlen(one) + strlen(two) < MAX_LEN.
+// Otherwise, we overwrite s->cmp function pointer.
 
 - In C++, vtable represents objects and its data/methods. With Heap
   Overflow attacks, vtable can be corrupted and object methods can be
-  overwritten.  
+  overwritten.
 
-- Variants of Heap Overflow include: 
+- Variants of Heap Overflow include:
         - Overflow in to C++ vtable (as mentioned above).
-        - Overflow in to adjacent objects. 
-        - Overflow in to heap metadata. 
+        - Overflow in to adjacent objects.
+        - Overflow in to heap metadata.
                 - Hidden header just before the pointer returned by
-                  malloc. Flow in to that header to corrupt heap itself. 
+                  malloc. Flow in to that header to corrupt heap itself.
 
 
 
-        INTEGER OVERFLOW 
+        INTEGER OVERFLOW
         ================
-- Wrapping around of integers. 
+- Wrapping around of integers.
 
-void vulnerable() 
+void vulnerable()
 {
-        char *response; 
-        int nresp = packet_get_int(); 
+        char *response;
+        int nresp = packet_get_int();
 
         if (nresp > 0) {
-                response = malloc(nresp * sizeof(char *)); 
-                for (i=0; i<nresp; i++) 
-                        response[i] = packet_get_string(NULL); 
+                response = malloc(nresp * sizeof(char *));
+                for (i=0; i<nresp; i++)
+                        response[i] = packet_get_string(NULL);
         }
 }
 
 - If nresp is very large and sizeof(char *) is 4 (32-bit) then their
-  product will wrap and become zero (??). 
-- Subsequent writes to that buffer are overflowing it.  
+  product will wrap and become zero (??).
+- Subsequent writes to that buffer are overflowing it.
 
-- So far, code was corrupted. But its possible to corrupt data. 
+- So far, code was corrupted. But its possible to corrupt data.
 
         READ OVERFLOW
         =============
 
-int main() 
+int main()
 {
-        char buff[100], *p; 
-        int i, len; 
+        char buff[100], *p;
+        int i, len;
 
         while(1) {
-                // read integer, which is len. 
-                p = fgets(buf, sizeof(buf), stdin); 
+                // read integer, which is len.
+                p = fgets(buf, sizeof(buf), stdin);
                 if (p==NULL)
-                        return 0; 
-                len = atoi(p); 
-               
-                // read message 
-                p = fgets(buf, sizeof(buf), stdin); 
+                        return 0;
+                len = atoi(p);
+
+                // read message
+                p = fgets(buf, sizeof(buf), stdin);
                 if (p==NULL)
                         return 0;
 
                 // print message. If len is more than message length, its
-                // a problem. 
+                // a problem.
                 for (i=0; i<len; i++) {
-                        if (!iscntrl(buf[i])) 
-                                putchar (buf[i]); 
-                        else 
-                                putchar ('.'); 
+                        if (!iscntrl(buf[i]))
+                                putchar (buf[i]);
+                        else
+                                putchar ('.');
                 }
 
-                printf("\n"); 
+                printf("\n");
         }
 }
 
@@ -93,62 +93,62 @@ int main()
         STALE MEMORY BUGS
         =================
 - Dangling pointer bug. An attacker can arrange for the freed memory to be
-  reallocated and under his control. 
+  reallocated and under his control.
 
 struct foo {
-        int (*cmp) (char *, char *); 
-}; 
+        int (*cmp) (char *, char *);
+};
 
-struct foo *p = malloc(...); 
+struct foo *p = malloc(...);
 ...
-free (p); 
+free (p);
 ...
-q = malloc (...) //reuses memory 
+q = malloc (...) //reuses memory
 ...
-*q = 0xdeadbeef; // attacker controlled memory 
+*q = 0xdeadbeef; // attacker controlled memory
 ...
-p->cmp ("hello", "hello"); // dangling pntr. Attacker controlled memory. 
+p->cmp ("hello", "hello"); // dangling pntr. Attacker controlled memory.
 
 
         FORMAT STRING ATTACK
         ====================
 
-void safe() 
+void safe()
 {
-        char buf[80]; 
-        if (fgets (buf, sizeof(buf), stdin) == NULL) 
-                return; 
-        printf ("%s", buf); 
+        char buf[80];
+        if (fgets (buf, sizeof(buf), stdin) == NULL)
+                return;
+        printf ("%s", buf);
 }
 
-void vulnerable() 
+void vulnerable()
 {
-        char buf[80]; 
-        if (fgets (buf, sizeof(buf), stdin) == NULL) 
-                return; 
-        printf (buf); // (1)  
+        char buf[80];
+        if (fgets (buf, sizeof(buf), stdin) == NULL)
+                return;
+        printf (buf); // (1)
 }
 
 (1) In this printf, contents of 'buf' is interpreted. So, if it contains
 format string specifiers, they are interpreted. How can this be used to
 attack?
 
-How is below code represented on Stack? 
+How is below code represented on Stack?
 
-int i = 10; 
-printf ("%d %p\n", i, &i);  
+int i = 10;
+printf ("%d %p\n", i, &i);
 
         ------+----------+----------+------+---+----+----------------
-          ... | old %ebp | ret addr | &fmt | i | &i | caller frame  
+          ... | old %ebp | ret addr | &fmt | i | &i | caller frame
         ------+----------+----------+------+---+----+----------------
 
 - Note that stack grows Right to Left.
 - When printf() sees %d, it looks for 'i', and %p looks for '&i'.
-- Look at following code: 
-        printf("%d %x"); 
+- Look at following code:
+        printf("%d %x");
 
         ------+----------+----------+------+-------------------------
-          ... | old %ebp | ret addr | &fmt |     caller frame  
+          ... | old %ebp | ret addr | &fmt |     caller frame
         ------+----------+----------+------+-------------------------
 
 - In above stack, printf() reads and interprets contents of caller frame.
@@ -160,23 +160,23 @@ printf("100% dave");
         * because, printf ignores space between % and next letter ('d').
 printf("%s");
         * Prints bytes pointed to by that stack entry till it encounters
-        * NULL. 
-printf("%d %d %d ..."); 
-        * Prints a series of stack entries as integers. 
-printf("%08x %08x %08x ...") 
-        * Same as above but formatted in hex. 
+        * NULL.
+printf("%d %d %d ...");
+        * Prints a series of stack entries as integers.
+printf("%08x %08x %08x ...")
+        * Same as above but formatted in hex.
 printf("100% no way!");
         * WRITES the number 3 to address pointed to by stack entry because
         * %n is used to write progress that printf() made in printing to
         * output stream. In this case, printf() would have printed 3
-        * characters (100) and hence, it prints 3 on stack.  
+        * characters (100) and hence, it prints 3 on stack.
 
 DEFENSE AGAINST OVERFLOW ATTACKS
 =====
 - Memory safety and type safety. Coding in a way to ensure application is
   immune to memory attacks.
 - Automatic defenses: (a) Stack Canaries (b) ASLR: Automatic Space Layout
-  Randomization. OS/Compiler does above things for us. 
+  Randomization. OS/Compiler does above things for us.
 - Return-Oriented Prog (ROP) attack overcomes above two techniques.
   Control Flow Integrity (CFI) can defeat ROP. But it is in its infancy.
 
@@ -197,6 +197,35 @@ MEMORY SAFETY
 
 
 
+Format String Bugs
+==================
+- printf() accepts %x format specifier without an argument. It prints contents
+  of stack
+    printf("%x");   /* works, with a warning */
+
+    // printf accepts without argument and print whatever is available next on
+    // the stack.
+
+    void main(int argc, char *argv[])
+    {
+        char buf[4];
+        strcpy(buf, argv[1]);
+        printf(buf);
+    }
+
+    $ ./a.out %x.%x.%x
+    *** stack smashing detected ***: ./a.out terminated
+    b650caac.78252e.252e7825.4006b0Aborted
+
+
+- %n writes number of chars printed so far, to mem location pointed to by a
+  param
+
+- Stack defenses don't help
+    * Canary value
+    * ASLR and NX (non-executable stack) makes it hard, but not impossible
+    * Static code analysis tools generally find this
+    * GCC warns, but no defense
 
 
 
@@ -213,7 +242,9 @@ MEMORY SAFETY
 
 
 
-References: 
+
+
+References:
 [1] Coursera: Software Security from University of Maryland
 [2] CNIT 127 Exploit Development - City College of San Francisco
- 
+

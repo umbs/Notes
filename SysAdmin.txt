@@ -765,6 +765,11 @@ Applying the patch.
 git am --signoff < patch.txt
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@@   ARP     NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// Add static entry. To reach IP <ip>, use destination mac as <mac>
+$ sudo arp -s <ip> <mac>
+
+//
 @@@@@@@@@@@@@@@@@@@@@@@@@   TCPDUMP NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 SYNTAX:   Protocol Direction  Host(s)   Value Operation   Other Expression
 EXAMPLE:     tcp     dst      10.1.1.1    80     and      tcp dst 10.2.2.2
