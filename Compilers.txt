@@ -296,14 +296,55 @@ Poky Build System Concepts:
 - A layer is grouping of metadata to provide some additional functionality
 // It all seems so hand-wavy at this point to me :(
 
-- Sourcing oe-build-init-env generates bblayers.conf as one of the many config
-  files. This contains BBLAYERS, which BitBake uses in building.
+- Sourcing oe-build-init-env generates bblayers.conf as first of the many
+  config files. This contains BBLAYERS, which BitBake uses in building.
 
 
-BitBake:
---------
--
+bblayers.conf looks like this:
 
+    # LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
+    # changes incompatibly
+    LCONF_VERSION = "4"
+    BBFILES ?= ""
+    BBLAYERS = " \
+    /home/eflanagan/poky/meta \
+    /home/eflanagan/poky/meta-yocto \
+    /home/eflanagan/poky/meta-intel/crownbay \
+    /home/eflanagan/poky/meta-x32 \
+    /home/eflanagan/poky/meta-baryon\
+    /home/eflanagan/poky/meta-myproject \
+    "
+
+- After parsing bblayers.conf, BitBake parses conf/layers.conf file
+- After that, it adds additional recipes, classes and configuration to the
+  build.
+
+(Example of meta-baryon layer: git://git.yoctoproject.org/meta-baryon)
+
+                    Custom Layer (meta-myproject)
+                    -----------------------------
+                    Sofware Layer (meta-baryon)
+Additional Layers   -----------------------------
+                    Kernel Enablement Layer (experimental/meta-x32)
+                    -----------------------------
+                    Hardware Enablement Layer
+                    (meta-intel/meta-fsl-ppc)
+==========================================================
+                    Yocto Layer (./meta-yocto)
+Default Layers      --------------------------
+                    OE-Core (./meta)
+
+
+
+
+- BitBake config files generate BitBake datastore which is used during
+  creation of task execution queue.
+- BitBakes "BBCooker" class is started at beginning of build.
+- BBCooker builds task execution queue by "Baking" the "Recipes".
+- BBCooker's "parseConfigurationFiles" method first looks for bblayers.conf
+  file
+- After this, BitBake parses each layer's layer.conf file
+- After this, BitBake parses bitbake.conf
 
 
 Recipe has following.
@@ -351,7 +392,10 @@ SRC_URI:
             OpenEmbedded Core Metadata (oe-core)
 
 
->>>> End of video.
+
+
+BitBake Architecture
+====================
 
 
 
