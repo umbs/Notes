@@ -2406,3 +2406,51 @@ Questions:
 
 [1] Edmond Lau: "The Effective Engineer" | Talks at Google
 https://www.youtube.com/watch?v=BnIz7H5ruy0&list=WL&index=5&t=177s
+
+===============================================================================
+Deep Dive in to Hyper-V Networking [1]
+---
+Few key concepts:
+                            Availability
+                            Reliability
+          Manageability     Predictability
+                            Security
+                            Extensibility
+
+
+- Built concepts similar to LAG for NIC failover (called LBFO - Load Balancing
+  Fail Over).
+
+
+    +--------------------+
+    |   Management OS    |
+    |                    |
+    |                    |    VM1   VM2   VM3  .....  VMn
+    |                    |
+    |   Live  Migration  |    +--------------------------+
+    |                    |    |                          |
+    |      Storage       |    |  Hyper-V virtual switch  |
+    |                    |    |                          |
+    |    Management      |    +--------------------------+
+    |                    |                |
+    +--------------------+    +---------------------------+
+                              |     LBFO Team NIC         |
+                              +---------------------------+
+                                          |
+                                       PHY NICs
+
+
+- Few other concepts: Port ACLs, Private VLANs, DHCP Guard
+
+- Single Route - IO Virtualization (SR-IOV). Single physical NIC talks
+  directly to VM instead of going through Hyper-V Switch.
+- For SR-IOV to work, Physical NICs must be capable of this feature.
+
+- Dynamic VM Queue
+- Many more features, that I saw in Cisco/Juniper type switches. Wonder why
+  they are all built in to Windows Server.
+
+
+
+
+[1] https://channel9.msdn.com/Events/BUILD/BUILD2011/SAC-437T
