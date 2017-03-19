@@ -2356,3 +2356,53 @@ References:
 [7] csszengarden.com
 [8] HTML5, CSS and JS course from Coursera (John Hopkins, Yaakov Chaikin)
 
+
+
+@@@@@@@@@@@@@@@@     NOTES    FROM     VARIOUS    TALKS     @@@@@@@@@@@@
+The Effective Engineer [1]:
+---
+- Effort != Impact
+    People like Jeff Dean work whose impact is 10x that of junior engineer
+
+- Leverage = (Impact Produced)/(Time Invested)
+    a.k.a ROI, Pereto Principle.
+
+- Leverage: Guiding metric that effective engineers use to determine where to
+  invest their time and effort.
+
+- 5 High Leverage Activities for Engineers
+    * Optimize for learning
+
+1 Optimize for learning:
+    - Learning compounds over time
+        How? Read books, take classes, build side projects, attend
+             talks/conferences
+
+2 Invest in Iteration Speed: How fast can you get things done?
+    - By investing in Tools. Rule: if you have to do twice, build tool for
+      third time.
+    - How to speed up debugging, build times.
+
+3 Validate your ideas aggressively and iteratively:
+    - Incrementally validating hypothesis is a high leverage approach. It can
+      save months of wasted effort later.
+
+4 Minimizing operational maintenance
+    - Minimize time spent on maintaining existing software.
+    - New features introduces new fire-fighting in future. Think carefully
+      before introducing them.
+
+    Types of complexities:
+        Code Complexity
+        System Complexity
+        Product Complexity
+        Organizational Complexity
+
+Questions:
+- What's high leverage activities you can work on?
+- What's one thing that you did not like in your previous company's culture?
+
+
+
+[1] Edmond Lau: "The Effective Engineer" | Talks at Google
+https://www.youtube.com/watch?v=BnIz7H5ruy0&list=WL&index=5&t=177s
