@@ -3949,9 +3949,121 @@ OpenVPN & SSTP
 - Read further in [4] below.
 
 
-        ********************
+
+/**************************************************************************/
+ *                       MULTICAST (L2 and L3)                            *
+/**************************************************************************/
+
+L3 multicast is split in to different address ranges
+
+224.0.0.0 - 224.0.0.255: Local multicast, not forwarded by L3 nodes. EIGRP,
+OSPF uses addresses in this range.
+
+224.0.1.0 - 224.0.1.255: Routed multicast, forwarded by L3 nodes.
+
+232.0.0.0 to 232.255.255.255: Source Specific Multicast (SSM).
+
+233.0.0.0 to 233.255.255.255: GLOP addressing. Must be used on experimental
+basis.
+
+239.0.0.0 to 239.255.255.255: Cannot be advertised outside.
+
+- Rest of multicast space is transient.
+
+
+L2 multicast address (MAC address) is constructed purely from L3 address.
+- First half of L2 MAC: 01-00-5E
+- Second half is built as follows
+
+    Step1: Convert multicast IP to binary
+    Step2: Take last 23 binary bits and add 0 to the front
+    Step3: Convert the 24 bits to hex and make it as 2nd half of MAC
+
+
+Multicast Routing
+-----------------
+- Multicast IPs are not found in FIB. For forwarding PIM (Protocol Independent
+  Multicast) is used.
+
+
+PIM-DM (Dense Mode)
+-------------------
+- Assumption is that most of the devices on the LAN/network want multicast
+  traffic.
+- When router receives multicast pkt, it's forwarded on all interfaces except
+  receiving intf.
+- Routers can request to be pruned from receiving multicast traffic if no one
+  in it's downstream needs it.
+
+- To avoid loops in network, RPF (Reverse Path Forwarding) check is performed.
+- When new multicast group starts sending traffic, router receiving traffic
+  picks an RPF interface.
+- RPF intf is determined as follows:
+        * Check the source IP of multicast stream
+        * Do a unicast lookup on that source IP
+        * The intf that IP points in routing table is RPF intf
+
+- Multicast pkts received on RPF intf are accepted. All other's are dropped.
+- After RPF is determined, routers exchange pruning messages to prune links
+  off of multicast tree.
+
+
+Multicast Join
+--------------
+- Two ways of joining a multicast group: Solicited and Unsolicited
+
+Unsolicited Join:
+- When host joins multicast group, it sends IGMP group membership report to
+  multicast address.
+- This signals the router that this host would like to get multicast stream.
+
+Solicited Join:
+- Routers send IGMP query messages. Hosts responding to these messages join
+  multicast group. Query msgs are sent to 224.0.0.1 (all multicast devices)
+
+- When a router/switch wants to join a multicast group, it sends PIM Graft
+  (Join) message. The upstream router ACKs this.
+- Upstream router updates its OIL (Outgoing Intf List) for (MC Source, MC
+  Group) pair to include new intf on which new router is present.
+
+
+Leaving MC group
+----------------
+- Hosts send IGMP leave msgs to 224.0.0.2 (all multicast devices)
+- Hosts indicates the MC group it wants to leave
+- After receiving this, router sends a IGMP query out the intf it received
+  IGMP leave msg.
+- Interested devices must respond with IGMP report.
+- If none interested, router doesn't receive response to IGMP query. It stops
+  forwarding MC traffic out that intf.
+- A router can request to be excluded from MC by sending PIM Prune msgs
+  upstream.
+
+
+Multicast with Multiple Paths
+-------
+- RPF allows loop free topology. But there can still be multiple paths for a
+  multicast packet to take (refer to [1]).
+- PIM Assert msg determines which one to take.
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1] http://www.dasblinkenlichten.com/understanding-ip-multicast/
+
+
+/**************************************************************************/
       EVPN (Ethernet VPN) [5-8]
-        ********************
+/**************************************************************************/
 
 - EVPN introduces the concept of routing MAC addresses using BGP over MPLS
   core. MAC routing is done by BGP and actual transport of packets is done
