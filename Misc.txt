@@ -2454,3 +2454,111 @@ Few key concepts:
 
 
 [1] https://channel9.msdn.com/Events/BUILD/BUILD2011/SAC-437T
+
+===============================================================================
+Intro to Architecture and Systems Design Interviews
+---
+- Architecture interviews determine your worth to the company. Compensation is
+  heavily dependent on architecture interviews.
+- Drive the interview showing passion.
+- Incorrect numbers are OK, but must be in rough ballpark.
+- Must nail the area of your expertise. Other areas, must talk intelligently
+  and take good decisions.
+- Complacency = death in this industry. If an engineer doesn't grow rapidly in
+  X years, Facebook lets them go. They are not motivated to grow.
+
+
+[1] https://www.youtube.com/watch?v=As2gOXtcPVQ
+
+===============================================================================
+Scalability (Lecture by David Malan from Harvard Univ)
+---
+Topics Covered:
+- Vertical and Horizontal Scaling
+- Load Balancing and Caching
+- Shared Session State
+- RAID technologies
+- Shared Storage Technology
+- Database Replication
+- Load Balancing Tech
+- Session Affinity
+- In-Memory Caching
+- Data Replication: Active/Passive, Active/Active
+- Partitioning
+- Data Center Redundancy
+- Security
+
+- VPS vs Shared Hosts. In VPS, you get a share of hardware resources (VM)
+  unlike shared hosts.
+- How will you scale website? Two types:
+    (a) Vertical Scaling (b) Horizontal Scaling
+
+Vertical
+----
+- Add more resources (hardware). But you'll soon hit physical and financial
+  limits soon
+- SSD drives (faster than Mechanical drives) - much faster, much costly
+
+
+Horizontal
+----
+- Adding commodity hardware and scale
+
+- Sessions are typically implemented per server. So, as long as sessions are
+  alive, requests must be sent to that server only.
+
+Q: How can load balancer send requests from a session to same server?
+A: Have a common hard disk for all servers and have session info stored there
+instead of locally?
+A: Alternately, load balancer can have storage that saves session info. LB is
+now doing more work.
+
+
+Storage Technologies
+---
+RAID: Redundant Array of Independent Disk
+----
+- RAID0, RAID1, RAID5, RAID6 and RAID10 and more
+- RAID0: 2 HD of identical types. "Striping" is a method to write to them.
+    - Server writes little bit to HD1 and then HD2 and so on.
+    - Good for performance
+- RAID1: 2 HD of identical types. Data is mirrored. Provides redundancy.
+- RAID5, 6, 10 are combination of above with benefits and performance
+  improvements.
+
+Fiber Chanel (FC) - Another storage tech
+iSCSI - Storage over IP over Ethernet. Inexpensive.
+NFS - It's a protocol to share storage over network.
+
+
+Load Balancers
+----
+Software Solution: Amazon's Elastic LB, HAProxy (Open Source), Linux Virtual
+Server (LVS) ...
+Hardware Solution: Barracuda, Cisco, Citrix, F5
+
+Sticky Sessions
+----
+
+Caching
+---
+- .html, MySQL, memcached
+- Query caching. Some DBs provide it. If rows are not updated, previous result
+  of the query is returned.
+- Memcached: Memory Cached
+    - Method to store contents in RAM.
+    - Cache can be consumed. So, cache management is needed (LRU, etc)
+
+DB Replication
+---
+- master-slave connection. Slaves get a copy of every row from Master
+- Slaves can replace Master with minimal config changes, in case of failures
+  on Master.
+- Load balancing can be done on DBs also. Especially, in events of
+  read-heavy queries.
+
+- DB Partitioning is another paradigm to load balance
+
+
+
+[1] https://www.youtube.com/watch?v=-W9F__D3oY4&list=WL&t=34s&index=14
