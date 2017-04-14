@@ -862,8 +862,10 @@ them are intersecting
 - Many applications.
 
 
+Solution: Binary Search Trees (and extensions)
+
 Operations:
-- Insert KV pairs
+- Insert KV pairs in to Symbol Table
 - Search for key k
 - Delete key k
 - Range search: find all keys between k1 and k2
@@ -895,26 +897,65 @@ Goal                 log N          log N               R + log N
 N = number of keys
 R = number of keys that match
 
+
+Implementation
+----
 - Keep a rank(node) function that counts # of keys less than that node in
   a BST.
 - Range(low, high) = rank(high) - rank(low) [+1 depending on high/low are
   part of the query]
 
+                                S 6
+                               / \
+                              /   X 7
+                             E 2
+                            / \
+                         0 A   \
+                            \   \
+                           1 C   R 5
+                                /
+                               H 3
+                                \
+                                 M 4
+
+    public int size(Key lo, Key hi) {
+        if (contains(hi))   return rank(hi) - rank(lo) + 1;
+        else                return rank(hi) - rank(lo);
+    }
+
+- Num of keys between E and S?
+
 
 // Algo: Find all keys between lo and hi
-- Recursively find all keys looking for lo. Identify keys that's >= lo
-- Recursively find all keys looking for hi. Identify keys that's <= hi
+- Recursively find all keys in left subtree.
+- Check key in current node.
+- Recursively find all keys in right subtree.
 
-
+- Run time is R + logN
 
 Line Segment Intersection Search
 -------
 // Algo
 - Sweep vertical line from left to right
-- x-coordinates define events.
-- h-line (left endpoint): insert y-coord in to BST
-- h-line (right endpoint): remove y-coord from BST
-- v-line: do a 1d-range search in BST for y-range
+- x-coordinates define events. Put x-coordinates in a PQ (or sort) - N log N
+- h-line (left endpoint): insert y-coord in to BST - N log N
+- h-line (right endpoint): remove y-coord from BST - N log N
+- v-line: do a 1d-range search in BST for y-range - R + N log N
+
+Bottom Line: Sweep line reduces 2d orthogonal line segment intersection search
+to 1D range search.
+
+2D Orthogonal Range Search
+----
+- Insert 2D key
+- Delete a 2D key
+- Search for a 2D key
+
+Problem:
+---
+- Range Search: Find all keys that lie in a 2D range
+- Range Count: Number of keys that lie in a 2D range
+
 
 
 Line Sweep Algos

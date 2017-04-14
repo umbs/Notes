@@ -1687,7 +1687,10 @@ STP PORT STATES
 
 BLOCKING ---> LISTENING ---> LEARNING ---> FORWARDING
 
-
+STP Port Roles
+- Root Ports
+- Designated Ports
+- Blocked Ports
 
 
 /*************************************************************/
@@ -3988,6 +3991,8 @@ Multicast Routing
 
 PIM-DM (Dense Mode)
 -------------------
+- In DM, multicast pkts are initially flooded downstream. Routers that don't
+  have receivers downstream, prune back the traffic.
 - Assumption is that most of the devices on the LAN/network want multicast
   traffic.
 - When router receives multicast pkt, it's forwarded on all interfaces except
@@ -4047,6 +4052,24 @@ Multicast with Multiple Paths
 - PIM Assert msg determines which one to take.
 
 
+IGMP Messages
+-------------
+IGMP Join
+IGMP Query
+IGMP Report
+
+
+PIM-SM (Sparse Mode)
+--------------------
+
+Rendezvous Point (RP) Selection
+-------
+
+PIM-SM Messages
+----
+Join
+Prune
+
 
 
 
@@ -4059,7 +4082,7 @@ Multicast with Multiple Paths
 
 
 [1] http://www.dasblinkenlichten.com/understanding-ip-multicast/
-
+[2] http://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/ip-multicast/whitepaper_c11-508498.html
 
 /**************************************************************************/
       EVPN (Ethernet VPN) [5-8]
@@ -4488,5 +4511,3 @@ is one of them?
     - Root
     - Designated
     * Alternative
-
-

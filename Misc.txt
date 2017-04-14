@@ -2562,3 +2562,99 @@ DB Replication
 
 
 [1] https://www.youtube.com/watch?v=-W9F__D3oY4&list=WL&t=34s&index=14
+
+===============================================================================
+System Design from InterviewBit
+----------
+Terminology:
+
+- Replication:
+- Consistency: Data is same across multiple systems on which it's stored.
+- Eventual Consistency:
+- Availability: Ability to read/write requests
+- Partition Tolerance: In a DB cluster, even if two nodes can't communicate with
+  each other, the cluster continues to function.
+- Horizontal Scaling: Add more servers/hardware
+- Vertical Scaling: Increase resources of server (RAM, Storage, CPU etc)
+- Sharding: Splitting a very large database in to small, manageable and fast
+  parts called shards (databases)
+
+- CAP Theorem
+
+Steps to approach problem
+---
+1) Feature Requirements: Get clear understanding or reqs.
+2) Estimations: Estimate scale of required system.
+3) Design Goals: Figure most important goals.
+4) Skeleton Design: High level design.
+5) Deep Dive:
+
+Problems
+----
+Design a Cache (as in Memcached, Redis etc)
+-----
+
+           1                  3
+    App -----------> Cache ------------> DB
+        <-----------       <------------
+           2                   4
+
+1 Check if data is in Cache
+2 If present, return data from cache
+3 Else, request DB
+4 Add data to Cache and send to App
+
+
+
+1) Features of Cache
+    My responses:
+    * Fast lookup/retrieval. Must be in RAM or fast in-memory store
+    * Data must be latest and consistent
+    * Cache must be resilient (always available)
+    * Implement some management mechanism
+
+    InterviewBit responses:
+    * How much data must be cached? Google/Twitter scale? Then few TBs of
+      data.
+    * What is eviction strategy?
+    * What is access pattern for cache?
+        - Write Through Cache: Writes to cache are also written to DB. More
+          latency.
+        - Write Around: Write to DB. Cache reads from DB on miss. Slightly
+          faster than "Write Through"
+        - Write Back: Write to cache, which later (asynchronously) writes to
+          DB.
+
+2) Estimation: Important part is QPS (Queries Per Second)
+    My responses:
+    * At Twitter scale, 500 mil tweets per day ~ 6000 tweets/s
+    * Each tweet = 140 chars, So 6k * 140 * 8 bytes = 6.72MB/s of writes
+
+
+[1] https://www.interviewbit.com/courses/system-design/
+
+
+===============================================================================
+Memcached
+- Distributed in-memory hash table service
+- "Hot" data from DB stored in cache
+
+
+            Web Servers
+                ^
+                | 100M requests/s
+                |
+                v
+             Memcache <-------- 28 TB of RAM
+                ^
+                | 5M requests/s
+                |
+                v
+              MySQL DB
+
+- Memcached queries take < 0.5ms and 95% cache hit rate
+- FB is heaviest user of memcachd: 20+ TB of RAM and 800+ servers
+
+
+
+[1] https://www.youtube.com/watch?v=UH7wkvcf0ys&list=WL&index=14&t=142s

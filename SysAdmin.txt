@@ -818,3 +818,14 @@ $ nicstat 1 5   // print every sec for 5 times
 $ nicstat -t    // TCP stats
 $ nicstat -u    // UDP stats
 $ nicstat -S [intf:speed[fd|hd]]    // read manpage
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   WIRESHARK    NOTES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Display Filters
+----
+- Protocol pkts, just type their name: ssh, tcp, udp etc
+- Multiple filters
+    tcp and (ip.src==15.111.202.135 and ip.dst==15.116.49.238)
+
+[1] https://wiki.wireshark.org/DisplayFilters
