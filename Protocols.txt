@@ -2244,26 +2244,6 @@ Multiple Area Networks
 - 3 routing levels exists: Level 1 only, Level 2 only, Level 1-2
 
 
-IS Router Configuration on SEOS
---------------------------------
-context IS-Router
-router isis 1
-net 49.0001.0000.bbbb.3333.00
-is type level-1
-dynamic-hostname router-name IS-Router
-interface intf
-  metric 10
-interface link-3
-  metric 15
-
-SEOS Route Show Commands
--------------------------
-> show ip route
-> show ip route all
-> show ip route isis
-> show isis route
-
-
 LSP Entries in IS-IS Database
 -----------------------------
 - For every broadcast link on Level 1, there is a pseudo node created
@@ -2283,21 +2263,6 @@ SysID.XX-YY
 
 Example: IS-Router.01-00
          router.00-00
-
-
-IS-IS Show Commands
---------------------
-> show isis topology
-> show isis adjacency
-> show isis adj-log [interface | is]
-> show isis interface
-
-
-IS-IS Summary Commands
------------------------
-> show isis <id> protocol-summary
-
-
 
 
 
@@ -4310,83 +4275,162 @@ References:
 [9] http://technet.microsoft.com/en-us/library/cc778019(v=ws.10).aspx
 
 
+/**************************************************************************/
+                        VXLAN (Virtual Extensible LAN)
+/**************************************************************************/
 
-IOS Hints, Tips & Tricks
--------------------------
-- When booting, if router does NOT find IOS, it asks
-
-  Would you like to enter the initial configuration dialog? [yes/no]: no
-
-  If we enter config mode, we can get out by pressing Ctrl-C.
-
-- show version - Displays info about many things. Some are listed here
-                 (a) IOS version and location
-                 (b) bootstrap program
-                 (c) Hardware info such as RAM, NVRAM, Flash
-                 (d) Configuration Register
-
-- hostname <name> - Changes the router to <name>. Done in config mode.
-- enable secret <word> - Creates <word> as a password for entering privilege EXEC mode.
-                         So, when we type "enable", router prompts us to enter a password.
-                         We have to enter <word>
-
-- Creating password for console
-
-(config)# line console 0
-(config-line)# password <word>
-(config-line)# login
-
-- Creating password for telnet connections
-
-(config)# line vty 0 4
-(config-line)# password <word>
-(config-line)# login
+- Provides same VLAN services but much more flexibility and extendability.
+- Some benefits are:
+    + Flexibility: Underlying network infra can be abstracted away to look
+                   like an L2 segment.
+    + Scalability: With 24 bit VXLAN network identifier (VNID), up to 16M
+                   VXLAN segments can coexists
+    + Better Utilization: VLAN uses STP to prevent loops, shutting down half
+                   network links. VXLAN, on the contrary, uses underlying L3
+                   protocols (ECMP, LAG etc). Much better utilization of
+                   available links.
 
 
-- Configuring a banner
+Packet Format
+=============
 
-(config) banner motd #
-Enter TEXT message. End with the character '#'
+    +-----------+----------+------+-------------------------------------+
+    | Outer MAC | Outer IP |  UDP |  VXLAN  + Original L2 frame  |  FCS |
+    |    Hdr    |    Hdr   |  Hdr |   Hdr                        |      |
+    +-----------+----------+------+-------------------------------------+
 
+a) Out MAC Hdr --> DMAC + SMAC + (VLAN Type + VLAN Tag) + EtherType
+    Total of 14 bytes (4 bytes are optional)
 
-- Configuring 'clock rate'
+b) Outer IP Hdr --> Misc Data + Protocol (0x11) + ChkSum + Src IP + Dst IP
+    Total of 20 bytes
 
-(config-if)#clock rate 6400 - on the DCE end of PPP connection/cable
+c) UDP Hdr --> Src Port + Dst Port + UDP len + ChkSum
+                           (VXLAN)
+    Total of 8 bytes
 
-- show running-config
-- show ip route - Displays routing table used by IOS
-- show ip protocols
-- show ip interface brief - Brief info about intf
-- show interfaces - Detailed info about interfaces
-
-- Unsolicited Messages from IOS. Use "logging synchronous"
-
-- "undebug all" will stop all the debug commands
-
-- To disable CDP on the entire box: (config)#no cdp run
-- To disable CDP on an interface: (config-if)#no cdp enable
-
-- show cdp neighbor
-- show cdp neighbor detail
-
-- passive-interface intf-type intf-number
-It indicates which intf is passive and RIP updates should not be sent out
-on that intf. However, subnets along that intf are advertised.
-
-- default-information originate
-Advertise default route info.
+d) VXLAN Hdr --> Total 8 bytes
+                        +----------------------+
+                        |   VXLAN  RRRR1RRR    |  1 byte
+                        +----------------------+
+                        |      Reserved        |  3 bytes
+                        +----------------------+
+                        |         VNID         |  3 bytes
+                        +----------------------+
+                        |      Reserved        |  1 byte
+                        +----------------------+
 
 
-EIGRP Commands
-----
-# show ip eigrp neighbor
-# show ip eigrp topology
+VXLAN Tunnel Endpoint (VTEP)
+=====================
+- VXLAN uses VTEP to map hosts to VXLAN segments that it belongs to.
+- VTEP is used to encap/decap VXLAN packets.
+- VTEP has 2 functionalities:
+    a) IP interface to transport network
+    b) Switch interface to local LAN
 
-AS = Autonomous System Number
-RID = Router ID
-FD = Feasible Distance
-RD = Route Distance
+- Interfaces on a VTEP device/box:
 
+            IP Network
+                ^
+                |
+                |
+    +---------------------------+
+    |      IP    Interface      |
+    +---------------------------+
+    |     Local LAN Segment     |
+    +---------------------------+
+       |     |      |
+       v     v      v
+      Host1  H2     H3
+
+
+- VTEP device maintains MAC-to-VTEP mappings and exit IP interfaces.
+
+- For more detailed info, read [1]
+
+
+Reference:
+[1] http://www.cisco.com/c/en/us/products/collateral/switches/nexus-9000-series-switches/white-paper-c11-729383.html
+
+
+
+/**************************************************************************/
+                        GRE (Generic Route Encapsulation)
+/**************************************************************************/
+- Protocol can be used to establish point-to-point tunnel and carry any L3
+  traffic. Cisco's invention.
+- Can encapsulate IPv6 and multicast traffic.
+- Typical protocol stack looks like
+
+        Session (SSH etc)
+        Transport (UDP, TCP)
+        Network (IPv6)
+        Encapsulated in GRE
+        Network (IPv4)
+        Data Link (Ethernet)
+        Physical (Wired/Wireless)
+
+Packet Header
+=============
+
+    +-----+-------------+---------+-------------------------+
+    |C|K|S|  Reserved0  | Version |     Protocol  Type      |
+    +-----+-------------+---------+-------------------------+
+    |     Checksum (optional)     |   Reserved1 (optional)  |
+    +-----------------------------+-------------------------+
+    |                      Key (optional)                   |
+    +-------------------------------------------------------+
+    |               Sequence Number (optional)              |
+    +-------------------------------------------------------+
+
+C - Checksum bit. Set to 1 if present
+K - Key bit. Set to 1 if present
+S - Sequence number. Set to 1 if present
+
+Reserved0 (9 bits) - Set to 0
+Version (3 bits) - GRE version. Set to 0
+Protocol Type (16 bits) - EtherType of encapsulated payload. For IPv4, it is 0x800
+Checksum (16 bits) - Checksum for GRE header and payload
+Reserved1 (16 bits) - Set to 0
+Key (32 bit)
+Sequence Number (32 bit)
+
+
+
+Reference:
+[1] https://en.wikipedia.org/wiki/Generic_Routing_Encapsulation
+[2] http://searchenterprisewan.techtarget.com/definition/Generic-routing-encapsulation-GRE
+[3] https://www.juniper.net/documentation/en_US/junos12.3/topics/concept/gre-tunnel-services.html
+
+/**************************************************************************/
+        OAM Protocols (Operations, Administration and Maintenance)
+/**************************************************************************/
+- [1] gives very good overview. Authors (from Marvell Semiconductors) have
+  similar draft paper in IETF [2]
+
+
+Reference:
+[1] http://www.marvell.com/switching/assets/Marvell_OAM_Puzzle_001_white_paper.pdf
+[2] https://tools.ietf.org/html/rfc7276
+
+
+/**************************************************************************/
+                    BFD (Bidirectional Forwarding Detection)
+/**************************************************************************/
+- Operates in Asynchronous and On-Demand modes.
+- Enabled in forwarding plane to detect link failures.
+- BFD agent sits in forwarding plane and talks to BFD master in control plane.
+- Routing protocols (BGP, OSPF etc) can get updates from BFD master in control
+  plane and take quick routing decisions (sub-second).
+- Routing protocols can have slow link failure detection mechanisms (keepalive
+  and hello failures etc). BFD can be used to leverage that.
+
+Disadvantages:
+- Depending on scale, it can have high resource utilization.
+
+[1] https://www.nanog.org/meetings/nanog45/presentations/Monday/Scholl_BFD_N45.pdf
+[2] https://tools.ietf.org/html/rfc7276
 
 
 Terms & Definitions
@@ -4404,110 +4448,3 @@ ISDN: Integrated Services Digital Network Communication protocol, offered
 by telephone companies that permits telephone networks to carry data,
 voice and other source traffic.
 
-
-Knowledge Assessment:
----
-* = Answer
-- = Not an answer
-? = Unsure
-WARNING: Not all my answers are correct.
-
-Ethernet Transport Fundamentals
----
-+ A host connected directly to Hub operates in which mode?
-    * Half Duplex
-    - MIMO
-    - Backoff Priority Mode
-    - Full Duplex
-
-+ Which of the following Port states apply to Spanning Tree Protocol but
-not to Rapid Spanning Tree Protocol?
-    * Listening
-    - Forward
-    - Blocking
-    - Learning
-
-+ When the Ethernet Ring Protection topology changes, what message is sent
-out to all switches by the Master?
-    * Flush FDB Message
-    - Link Fail Message
-    - Root Election BPDU
-    - ARP
-
-+ Why are loops more of a problem for Ethernet than for IP?
-    - ETH has no TTL field.
-    ? ETH doesn't use logical addressing.
-    - ETH n/w are larger and contain more redundancy.
-    - ETH does not use a STP.
-
-+ Which of the following does not exist in a modern network using switches
-rather than hubs?
-    - Broadcasts
-    - VLANs
-    - Bridging Table
-    * Collisions
-
-+ A 1000BaseLX ETH connection operates at which speed?
-    - 10 Gbps
-    - 100 Mbps
-    * 1 Gbps
-    - 100 bits per sec
-
-+ Where can the 802.1q tag be found in an ETH frame?
-    - Before the DST address.
-    - After the carried data.
-    * After the Type field and before the carried data.
-    - Between the SRC and Type field.
-
-+ Fill in the two blans with correct terms
-    Typically, switches process frames:
-            - in software
-            * in hardware
-    Whereas bridges process frames:
-            * in software
-            - in hardware
-
-+ What protocol is used for connection oriented ETH Traffic Engineering?
-    - 802.1d
-    - 802.2
-    - 802.11
-    * 802.1Qay
-
-+ Bridges and Switches increases the number of collision domains in a n/w
-    - True
-    * False
-
-+ Which of the following conditions are NOT required, for links to
-successfully be aggregated?
-    * Spanning Tree Disabled
-    - Same Speed
-    - Full Duplex
-    - Point to Point
-
-+ Which of the following OSI Layers does ETH operate on?
-    - Session
-    - Presentation
-    - Applicatino
-    - Network
-    * Data Link
-
-+ Which of the following are STP states in which MAC addresses are NOT
-learned?
-    - Loading
-    - Forward
-    * Listening
-    - Learning
-
-+ What is the name of the messages ETH switches running STP send to each
-other?
-    - Root Messages
-    - ISL
-    - BID (Bridge ID)
-    * BPDU (Bridging Protocol Data Units)
-
-+ RSTP includes two port roles not defined in STP. Which of the following
-is one of them?
-    - Dedicated
-    - Root
-    - Designated
-    * Alternative
