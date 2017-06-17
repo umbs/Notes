@@ -1030,6 +1030,77 @@ Application
 - Given a set of points in a plane and a rectangle, find all the points
   within that rectangle.
 - Nearest neighbor search.
+- Find all nodes in a plane that are at K distance from a given node.
+
+
+
+Interval Search Problem
+--------
+- Data structure to hold set of overlapping intervals. Operations allowed:
+    * Insert an interval (lo, hi)
+    * Search an interval (lo, hi)
+    * Delete an interval (lo, hi)
+    * Query: Given (lo, hi), find one or all intervals that intersects with
+      (lo, hi)
+
+
+Rectangle Intersection Problem: Orthogonal Rectangles
+----
+- Modification of Sweep Line algo
+- Sweep vertical line from left to right
+    + x-coord of left and right endpoints define events. Put them on a PQ (or
+      sort them) - N log N
+    + When Sweep Line meets rectangle, insert y-interval in to interval search
+      tree - N log N
+    + When Sweep Line leaves rectangle, remove y-interval from search tree
+        - N log N
+    + Interval searches for y-intervals - (N log N + R log N)
+
+
+Geometric Applications of BSTs
+==============================
+
+        Problem             Example                 Solution
+    ----------------------------------------------------------------
+  1d range search       ** ** * **** *  *           BST
+                            ^     ^
+
+
+                           |    --------            Sweep Line reduces to
+  2d orthogonal line    ---+---- |  ------              1d range search
+segment intersection       |     |      |
+search                     |  ---+---   |
+                                 |      |
+
+
+
+                        *  *    *
+                          *  *   *  *
+    Kd range search    *   * +-----+*               Kd tree
+                         *   |*   *|  *
+                       * **  |  ** |*  *
+                         *   |     | **
+                        *   *+-----+ *
+                          *   **  *
+
+
+                        |-----|  |-------------|
+  1d interval search       |----|    |----|   |-----|   Interval search tree
+
+
+
+
+                          +------+
+                          |      |         +-+
+                          |    +--------+  | |
+  2d orthogonal rectangle +----|-+      |  | |      Sweep line reduces to 1d
+intersection search            +--------+  | |      interval search problem
+                                           | |
+                              +-------------------+
+                              |            | |    |
+                              +-------------------+
+                                           | |
+                                           +-+
 
 
 

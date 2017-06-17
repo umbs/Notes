@@ -2658,3 +2658,116 @@ Memcached
 
 
 [1] https://www.youtube.com/watch?v=UH7wkvcf0ys&list=WL&index=14&t=142s
+
+===============================================================================
+Messaging at Scale at Instagram
+
+- Photos from accounts you follow show up on your feed.
+- Photos are time ordered. Newest on top.
+
+Naive Approach
+--------------
+- Basic SQL command would be
+
+    SELECT * FROM photos
+        WHERE author_id IN
+            (SELECT target_id FROM following WHERE
+                source_id = %(user_id) d)
+        ORDER BY creation_time DESC
+        LIMIT 10;
+
+    * Fetch all accounts you follow
+    * Fetch all photos by those accounts
+    * Sort photos by creation time
+    * Return first 10
+
+- Fanout-On-Write Approach:
+    + When a user posts a photo/media, insert it in to memory pool maintained
+      for each user. This pool is per account list of media IDs (Redis).
+    + O(1) read cost and O(N) write cost.
+    + Best when reads are much higher than writes. For Instagram, its 100:1 or
+      more.
+
+Disadvantages:
+    + Reliability problems.
+        - DB servers fail
+        - Web request is complex
+        - Justin Bieber Problem (millions of followers)
+
+
+Run of the mill Async request architecture
+
+                        Broker
+                        +----+
+                        | 46 |---------> Worker(46)
+                        +----+
+                        |142 |
+                        +----+
+                        |709 |---------> Worker(709)
+                        +----+
+                        | 98 |
+                        +----+
+                        | 12 |
+                        +----+
+            Web ------->| 51 |
+                        +----+
+                        |    |
+                        |    |
+                        |    |
+                        |    |
+                        +----+
+
+- Web requests are inserted in to Broker.
+- Workers handle the requests.
+- If Workers fail, the request is redistributed to Broker, thus providing
+  reliability.
+
+Justin Bieber Problem:
+----
+- Chained Tasks: Each Task delivers media posted by celebrities to small
+  groups, one group at a time.
+- Group size can be up to 10K followers.
+- Tasks are like recursive calls.
+- Failure of a task will have less impact.
+- Much fine-grained load balancing.
+
+Other features done when a user posts a media
+----
+- Cross-Posting to other networks
+- Search Indexing
+- Spam Analysis
+- Account Deletion ??
+- API Hook ??
+
+Various Broker Systems
+----
+Redis:
+    + Very fast, efficient
+    - Polling based task distribution. Workers poll for tasks.
+    - Messy non-asynchronous replication.
+    - In-Memory DB. So, if server runs out of memory, data is lost.
+
+Beanstalk:
+    + Purpose built task queue
+    + Very fast, efficient.
+    + Pushes to consumer.
+    + Spills to disk
+    - No replication
+    - Useless for anything else
+
+RabbitMQ:
+    + Reasonably fast, efficient.
+    + Spills to disk
+    + Low maintenance synchronous replication
+    + Excelent Celery compatibility
+    + Supports other use cases
+
+
+Concurrency Models
+-------
+- Multiprocessing (not same as fork())
+- eventlet ??
+- gevents
+- threads
+
+[1] https://www.youtube.com/watch?v=E708csv4XgY&list=WL&index=17

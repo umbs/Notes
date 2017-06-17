@@ -829,3 +829,22 @@ Display Filters
     tcp and (ip.src==15.111.202.135 and ip.dst==15.116.49.238)
 
 [1] https://wiki.wireshark.org/DisplayFilters
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   BASH   SHELL  NOTES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+- Arguments passed to bash scripts are called "Positional Parameters"
+- Some special parameters exists, given below
+
+$0      the first positional parameter, equivalent to argv[0] in C
+$FUNCNAME   the function name (attention: inside a function, $0 is still the $0 of the shell, not the function name)
+$1 … $9 the argument list elements from 1 to 9
+${10} … ${N}    the argument list elements beyond 9 (note the parameter expansion syntax!)
+$*  all positional parameters except $0
+$@  all positional parameters except $0
+$#  the number of arguments, not counting $0
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   WINDOWS   NETWORKING   CMDS   @@@@@@@@@@@@@@@@@@@@@@@
+$ tracert <IP>      // traceroute equivalent command
+$ route print       // ip route show equivalent command
+$ ifconfig   /displaydns    // DNS cache maintained locally
