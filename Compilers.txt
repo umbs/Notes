@@ -59,6 +59,34 @@ Reference:
 (gdb) list              // +/- few lines around code of interest.
 (gdb)
 
+Examining Memory
+----------------
+(gdb) x/nfu addr
+    x - examine memory (can also use p)
+    n - repeat count; how many times to show
+    f - format
+        s = null terminated string
+        i = assembly, machine instruction
+        x = hex opcode
+    u - unit size
+        b = bytes
+        h = half words (2 bytes)
+        w = words (4 bytes)
+        g = giant words (8 bytes)
+
+- Order of unit size and formatting unit doesn't matter
+
+Example:
+(gdb) x/3uh 0x54320
+    Display 3 halfwords(h) of memory, formatted as unsigned decimal(u),
+    starting at 0x54320.
+
+(gdb) x/4xw $sp
+    Prints 4 words(w) of memory in hex(x) above stack pointer($sp)
+
+Reference:
+[1] http://www.delorie.com/gnu/docs/gdb/gdb_toc.html
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@        GDB Macros        @@@@@@@@@@@@@@@@@@@@@@@@@@@
 GDB macro-coding language basic structure:
 

@@ -36,6 +36,8 @@ eBPF
 perf
 
 
+cpuid - Dump detailed info about CPUs
+
 
 
 

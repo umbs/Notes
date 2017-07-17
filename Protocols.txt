@@ -3749,7 +3749,11 @@ Queuing
   another network.
 
 >>>>> Gratuitous ARP <<<<<
-- When a host sends ARP request looking for its own IP address.
+- When a host sends ARP request with it's own IP and MAC.
+- Both src and dst IP are host's IP. MAC is broadcast address.
+- No response is expected for this ARP request.
+- If an ARP response is received as a result of Gratuitous ARP, it means
+  there's an IP conflict/collison.
 
 
 /****************************************************/

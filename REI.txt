@@ -1,8 +1,76 @@
+@@@@@@@@@@@@@@@   TERMINOLOGY   @@@@@@@@@@@@@
+Annual Cash-on-Cash Return: This is ratio of pre-tax cash flow to total
+cash invested, expressed as %. It is often used to evaluate investment
+performance.
+
+
+
+Annual ROI:
+- Property appreciation is used in calculating ROI
+
+Net Operating Income:
+Internal Rate of Return (IRR)[2]:
+Cap Rate (CR)[1]:
+
+Rent (R):
+Vacancy Rate (V):
+Maintanence Fee (M): RxM/100
+Management Fee (M): (R-V)xM/100
+Leasing Fee (L): (R/18)x(L/100) // tenants stay for 18 months on average
+Tax Benefits: Annual Depreciation is used in Tax Benefits
+
+References:
+[1] http://www.investopedia.com/terms/c/capitalizationrate.asp
+[2] http://www.investopedia.com/terms/i/irr.asp
 
 @@@@@@@@@@@@@@@   NOTES FROM [1]  @@@@@@@@@@@
+Ch 1
 - Look at "Landlording Tasks" in Ch 1. Lots of items. We will get clarity on
   tasks involved.
+
+Ch 2
+- 8 steps to Landlording like a business
+    1 Implement systems and repeatable processes
+    2 Strive for continuous improvement
+    3 Firm but Fair
+    4 Outsource and Delegate
+    5 Keep Strict Financial Control (Incoming cash, Outflow, Bookkeeping etc)
+    6 Focus on Customer Service
+    7 Understand Rules and Laws That Govern The Business
+        * Fair Housing Laws:
+          Can deny housing to
+            (a) Past evictions
+            (b) Drug charges/addicts
+          CANNOT deny housing to 7 protected classes:
+            + race, color, religion, sex, handicap, familial status, and
+              national origin
+            + Some states have sexual orientation, Section 8 included
+        * Landlord/Tenant Laws
+        * Local Laws/Codes
+    8 Ask for Help
+
+Ch 3
+- 7 Things to do Before Signing Your First Lease
+    1 Consider Asset Protection
+        * Must buy property on own name. Can transfer it to LLC later, but
+          banks have "due on sale" clause.
+    2 Get Insurance
+        Two Types: (a) Full Replacement Coverage (b) Actual Cash Value
+    3 Setup Bank Account: Checkings and Savings
+    4 Gather all Documents Before Leasing
+    5 Create a Policy Binder
+    6 Get to Know the Neighbors
+    7 Setup Bookkeeping
+
+- Inheriting a Tenant
+    - Review Existing Lease
+    - Get Estoppel Agreement in place
+
+
 
 [1] The Book on Managing Rental Properties: A Proven System for Finding,
 Screening, and Managing Tenants with Fewer Headaches and Maximum Profit
 --- Brandon and Heather Turner
+
+[2] How To Rent Your House:
+https://www.biggerpockets.com/renewsblog/2013/01/04/how-to-rent-your-house/
