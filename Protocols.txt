@@ -1,31 +1,3 @@
----------------------------------------------------
-ECA-IP Questions
-
-- IGMPv1 and multicast
-- Questions on IPv6 prefix notation and basic questions
-- NTP runs on which transport protocol
-- DHCP role
-- ARP functionality
-- MPLS, LIB building:- many questions
-- Command to verify LSP for a destination IP
-- LDP
-- "show ldp bindings"
-- Size of MPLS label
-- EXP bigs, FIB/RIB, LIB/LFIB
-- RD, RT, BGP, L3VPN
-- VPN, many questions
-- VRF?
-- DiffServ priority
-- QoS [DSCP, Rate limiting]
-- iBGP, eBGP configs on SE
-- How is BGP session established
-- IS-IS and OSPF details
-- NSAP details
-- DIS server
-- Backup Designated Router [BDR]
-
----------------------------------------------------
-
 /*************************************************************/
  *           CCNA: From IT University Online Classes         *
  *           CCNA: From Andrew Crouthamel Youtube Series     *
@@ -4154,7 +4126,7 @@ BGP EVPN NLRI:
                 |       its variable length         |
                 +-----------------------------------+
 
-                        Fig 29.2
+                              Fig 29.2
 
         Route Type = Defines encoding of rest of EVPN NLRI
                      (type = 0x02)
@@ -4435,6 +4407,21 @@ Disadvantages:
 
 [1] https://www.nanog.org/meetings/nanog45/presentations/Monday/Scholl_BFD_N45.pdf
 [2] https://tools.ietf.org/html/rfc7276
+
+
+/**************************************************************************/
+                  Virtual Router Redundancy Protocol (VRRP)
+/**************************************************************************/
+- Collection of routers act as a single router.
+- One router acts as Master and rest are Backup.
+- Master uses 00-00-5E-00-01-XX as MAC address.
+- Last byte (XX) is Virtual Router Identifier (VRID), which is different for
+  each virtual router in the network.
+- Physical routers within clusters must communicate within themselve using
+  multicast IP address (224.0.0.18) and IP protocl number 112.
+- Routers have a priority between 1-254 and highest priority becomes master.
+  Default priority is 100.
+
 
 
 Terms & Definitions
