@@ -964,9 +964,99 @@ Notes at offset 0x00001188 with length 0x0000ad18:
  * process/binary includes. */
 $ readelf --segments <elf-file>
 
+
+@@@@@@@@@@@@@@@@@@@@@@@       UDEMY's ASSEMBLY    ADVENTURES     @@@@@@@@@@@@@
+
+FASM (Flat Assembler) Instructions
+---
+
+First Instructions
+
+mov dst, src    ; move contents of source to destination
+add dst, src    ; dst = dst + src
+sub dst, src    ; dst = dst - src = dst + (-src), 2's complement
+                ; in 'add' and 'sub', dst can wrap around. Wrap around is done
+                ; as per arg size. So, if there's a carry over, it's dropped.
+
+
+Arithmetic Instructions
+
+inc dst     ; increment dst by 1. Wrap around can happen.
+dec dst     ; decrement dst by 1. Underflow is possible.
+mul arg     ; multiply numbers (unsigned numbers)
+
+arg is of following forms
+    ax = al * arg           ; if arg is of size 8 bits
+    dx:ax = ax * arg        ; if arg is of size 16 bits
+    edx:eax = eax * arg     ; if arg is of size 32 bits
+                            ; there's a 64 bit version too
+
+dx:ax mean concatenation of bits in dx and ax registers
+
+Examples:
+
+mul ecx         ; multiply eax and ecx and store in edx:eax
+mul si          ; dx:ax = ax * si
+mul al          ; ax = al * al
+mul 2Ah         ; Invalid although there's no strong reason. Probably
+                ; historical reasons
+
+
+div arg         ; Divides one number by another number (unsigned division)
+
+arg is of following forms:
+    * arg of size 8 bits:
+        al = ax/arg     ; Quotient (integral division)
+        ah = ax%arg     ; Remainder (integral remainder)
+
+    * arg of size 16 bits:
+        ax = dx:ax/arg  ; Quotient
+        dx = dx:ax%arg  ; Remainder
+
+    * arg of size 32 bits:
+        eax = edx:eax/arg   ; Quotient
+        edx = edx:eax%arg   ; Remainder
+
+Examples:
+
+div ch      ; Divides ax by ch and al=Quotient, ah=Remainder
+div esi     ; Divides edx:eax by esi. eax=Quotient, edx=Remainder
+div di      ; Divides dx:ax by di. ax=Quotient, dx=Remainder
+div 5Cah    ; Invalid
+
+
+Exceptions: Two possible exceptions
+1) Divide by zero
+2) Quotient overflow
+
+
+
+Tools
+=====
+Total Commander
+- File Explorer for Windows. Has some additional features to regular file
+  explorer
+
+HxD: www.mh-nexus.org
+- Hex Editor. Very stable and understands many file formats (txt, exe, png and
+  many more).
+- Key features of Hex Editor
+    * Must have ability to change # of columns
+    * Must be searchable, either text or hex values
+    * Copy/Paste (access to Clipboard)
+    * Editable!!
+
+Hex Workshop
+- Other Hex editor. Paid.
+
+010 Editors
+- Other Hex editor. Paid.
+
+
+
 Reference:
 [1] Section 3 in:
 https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/
 [2] Info on coredump:
 http://backtrace.io/blog/blog/2015/10/03/whats-a-coredump/
-
+[3] Udemy's Assembly Adventures course

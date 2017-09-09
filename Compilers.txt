@@ -84,6 +84,12 @@ Example:
 (gdb) x/4xw $sp
     Prints 4 words(w) of memory in hex(x) above stack pointer($sp)
 
+n-curses Window (TUI mode: Text User  Interface)
+---
+- Ctrl+xa, doing same thing switches to CLI
+- Ctrl+l, repaints the screen, if chars are distorted
+- Ctrl+x2, gives 2 windows
+
 Reference:
 [1] http://www.delorie.com/gnu/docs/gdb/gdb_toc.html
 
