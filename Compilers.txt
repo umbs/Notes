@@ -589,3 +589,269 @@ http://backtrace.io/blog/blog/2015/10/03/whats-a-coredump/
 Reference:
 [1]
 http://www.thegeekstuff.com/2012/09/objdump-examples/?utm_source=feedburner
+
+@@@@@@@@@@@@@@@@@@    PROGRAMMING    PARADIGMS     @@@@@@@@@@@@@@@@@
+
+- Data types (in C/C++)
+    * bool
+    * char  - 1 byte
+    * short - 2 bytes
+    * int   - 4 bytes
+    * long  - 4 bytes
+    * float - 4 bytes
+    * double - 8 bytes
+
+- Two's complement representation is used for negative numbers because it's
+  easy to do binary add/subtract
+    Ex: I want a + (-a) = 0. To do this, how to represent (-a)?
+        Two's complement representation was born
+
+- When down casting or up casting variables, bytes are truncated or added. In
+  case of negative numbers, 'Sign Extension' happens
+    char c = 'A';
+    int i = c;  // i gets 65
+
+    short s = 67;
+    int i = 67; // lower 2 bytes of i will have 67
+
+    short s = -1;   // 111...11 (sixteen 1's)
+    int i = s;      // 111...11 (thirty two 1's) - This is Sign Extension
+
+- How are floating points represented?
+
+        7.5 = 0001 1111 0000 0000   // last 2 bytes
+
+
+bits:   1         8                               23
+      +---+-------------------+-------------------------------------------+
+      |   |                   |                                           |
+      +---+-------------------+-------------------------------------------+
+
+    1: Signed bit
+    8: Unsigned number BEFORE the decimal point
+    23: Number AFTER the decimal point
+
+// WIP
+// Listen to Lec 2 from 39th minute
+
+Lec 3-7:
+=====
+    short s = 45;   // 2 bytes
+    double d = *(doube *)&s;    // d will point to s and following 6 bytes is
+                                // assumed part of d
+
+Q: What about endianness?
+
+- Memory layout for structs
+
+    struct fraction {
+        int num;
+        int denom;
+    };
+
+    struct fraction pi;
+
+    &pi and &(pi.num) will have same address
+
+- Memory layout for arrays
+    int array[10];
+    // The following are synonymous
+    // array and  &array[0]
+    // *array and array[0]
+    // array+k and &array[k]
+    // *(array+k) and array[k]
+
+- Generics in C
+
+void swap(void *vp1, void *vp2, int sz) {   // sz is # of bytes of being
+                                            // swapped
+    char buf[sz];
+    memcpy(buf, vp1, sz);
+    memcpy(vp1, vp2, sz);
+    memcpy(vp2, buf, sz);
+}
+
+void *lsearch(void *key, void *base, int n, int elemSize) {
+    for(int i=0; i<n; i++) {
+        // note the type cast of char *
+        void *elem = (char *)base + (i * elemSize);
+
+        // doesn't work well for structs, char *, function pointers
+        // works for standard data types
+        if(memcmp(key, elem, elemSize)==0) {
+            return elem;
+        }
+    }
+
+    return NULL;
+}
+
+// We are assuming cmpFunc takes care of comparisons
+void *lsearch(void *key, void *base, int n, int elemSize,
+              int (*cmpFunc)(void *, void *)) {
+    for(int i=0; i<n; i++) {
+        void *elem = (char *)base + (i * elemSize);
+
+        if(cmpFunc(key, elem)==0) {
+            return elem;
+        }
+    }
+
+    return NULL;
+}
+
+int cmpFunc(void *elem1, void *elem2) {
+    int *ip1 = elem1;   // implicit type casting
+    int *ip2 = elem2;
+
+    return *ip1 - *ip2;
+}
+
+
+// Generic Stack API
+typedef struct {
+    void *head;
+    int elemSize;
+    int logLength;
+    int allocLength;
+} stack;
+
+void StackNew(stack *s, int elemSize) {
+    if(s == NULL)   // this shouldn't happen
+        return;
+
+    s->elemSize = elemSize;
+    s->logLength = 0;
+    s->allocLength = CAPACITY;
+    s->head = malloc(CAPACITY * elemSize);
+}
+
+void StackDispose(stack *s) {
+
+    free(s->head);
+}
+
+static void StackGrow(stack *s) {
+    s->allocLength *= 2;
+    s->head = realloc(s->head, s->allocLength * s->elemSize);
+}
+
+void StackPush(stack *s, void *elemAddress) {
+    if(s->logLength == s->allocLength) {
+        StackGrow(s);
+    }
+
+    void *target = (char *) s->head + s->logLength * s->elemSize;
+    memcpy(target, elemAddress, s->elemSize);
+    s->logLength++;
+}
+
+void StackPop(stack *s, void *elemAddr) {
+    // check for zero elements??
+
+    void *src = (char *)s->head + s->logLength * s->elemSize;
+    memcpy(elemAddr, src, s->elemSize);
+    s->logLength--;
+}
+
+Lec 8:
+=====
+
+Heap Memory Layout
+---
+- When a program starts, the Heap memory address range is advertised to malloc
+  library that maintains the Heap.
+
+- 4 or 8 bytes of book keeping at beginning of each malloc() returned to
+  client (or requester). Address of B is returned to client.
+
+    A   B                                                      C
+    +---+------------------------------------------------------+
+    |   |                                                      |
+    |   |                                                      |
+    |   |                                                      |
+    +---+------------------------------------------------------+
+
+- free(B) knows that meta data is stores at A (4 bytes back) and uses it to
+  free the memory.
+
+- What is saved at A?
+    * If memory at B is already allocated then it has size of requested memory
+        + Some extra info may be there indicating what comes after
+
+    * If not, it has size of available free memory and linked list to next
+      available free memory.
+
+- Linked list of free nodes are maintained in Heap. There may be other
+  algorithms
+    * slabs of memory is one (512, 1024, 2048 byte slabs)
+    * linked list of free memory for each slab available
+    * coalescing of free memory and all such things are done
+
+
+- Activation Record (goes in a Stack Frame)
+    * It's the memory for local variables inside a function.
+
+
+Lec 9:
+======
+Mock Assembly Instructions
+    M[R1 + 4]  = 10;    // Store 10 in to memory region at R1 + 4
+    R2 = M[R1 + 4];     // Load operation
+    R3 = R2 + 7;        // ALU operation
+    M[R1] = R3;         // Store op
+
+    R2 = M[R1];
+    R2 = R2 + 1;
+
+- There are 6 relational operators between two integers (or int types)
+    <, <=, >, >=, ==, !=
+
+- How will following code translate to assembly look like?
+
+    int arr[4];
+    int i;
+
+    for(i=0; i<4; i++) {
+        arr[i] = 0;
+    }
+    i--;
+
+    Few things to look for in assembly:
+    * i<4 test
+    * for loop operation (jump/branch instruction)
+    * array implementation
+
+
+Lec 10:
+=======
+
+Activation Records
+---
+- Area of memory on stack that contains function local variables
+
+void foo(int bar, int *baz) {
+    char sink[4];
+    short *why;
+}
+
+        |<-----  4  bytes ----->|
+        +-----------------------+
+        |                       |  baz (has address to int var)
+        +-----------------------+
+        |                       |  bar
+        +-----------------------+
+        |                       |  RESERVED (or Return Address??)
+        +-----------------------+
+        |                       |  sink[0..3]
+        +-----------------------+
+        |                       |  why (has address to short var)
+        +-----------------------+
+
+- Above memory layout is how an activation record looks like.
+
+
+
+
+Reference:
+[1] Jerry Cain's lectures at Stanford on "Programming Paradigms"

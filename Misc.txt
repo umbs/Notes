@@ -1,5 +1,40 @@
 // Notes on all other technical stuff I learn.
 
+
+@@@@@@@@@@@@@@@@@@@@@      PROGRAMMING       @@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Rob Pike's 5 Rules of Programming
+
+Rule 1. You can't tell where a program is going to spend its time. Bottlenecks
+        occur in surprising places, so don't try to second guess and put in a
+        speed hack until you've proven that's where the bottleneck is.
+
+Rule 2. Measure. Don't tune for speed until you've measured, and even then
+        don't unless one part of the code overwhelms the rest.
+
+Rule 3. Fancy algorithms are slow when n is small, and n is usually small.
+        Fancy algorithms have big constants. Until you know that n is
+        frequently going to be big, don't get fancy. (Even if n does get big,
+        use Rule 2 first.)
+
+Rule 4. Fancy algorithms are buggier than simple ones, and they're much harder
+        to implement. Use simple algorithms as well as simple data structures.
+
+Rule 5. Data dominates. If you've chosen the right data structures and
+        organized things well, the algorithms will almost always be
+        self-evident. Data structures, not algorithms, are central to
+        programming.
+
+Pike's rules 1 and 2 restate Tony Hoare's famous maxim "Premature optimization
+is the root of all evil." Ken Thompson rephrased Pike's rules 3 and 4 as "When
+in doubt, use brute force.". Rules 3 and 4 are instances of the design
+philosophy KISS. Rule 5 was previously stated by Fred Brooks in The Mythical
+Man-Month. Rule 5 is often shortened to "write stupid code that uses smart
+objects".
+
+Reference:
+http://users.ece.utexas.edu/~adnan/pike.html
+
 @@@@@@@@@@@@@@@@@@@@@@@@@     TOR    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Tor:
 - Passing traffic by bouncing them across various Tor nodes across the globe.
@@ -2471,6 +2506,51 @@ Intro to Architecture and Systems Design Interviews
 [1] https://www.youtube.com/watch?v=As2gOXtcPVQ
 
 ===============================================================================
+System Design Interview - Framework/Blueprint
+1) Gather use cases and constraints
+2) Abstract/High Level design
+3) Bottlenecks
+4) Scalability
+
+Gather Use Cases:
+=====
+- Collect use cases (in TinyURL, it's following)
+    * Shortening URL: Take URL and shorten it
+    * Redirection: Given short URL, redirect them to webpage
+
+    /* Many other use cases. Ask interviewer */
+    * Custom URL
+    * Analytics
+    * Automatic link expiration
+    etc
+
+Gather Constraints:
+====
+- # of requests per second (or month, preferred)
+- Size of data being saved?
+    * Data size per object (500 bytes per URL. 6 bytes per hash.)
+- Scale it for next 5 years
+
+Abstract Design
+====
+- Application service layer (serving requests)
+    * Shortening service
+    * Redirection service
+- Data storage layer (hash=>URL mapping)
+
+- Simple hash can solve this
+    hashed_url = convert_to_base62(md5hash(original_url + random_salt))
+
+
+Understanding Bottlenecks
+====
+
+Scalability
+====
+
+
+https://www.hiredintech.com/courses/system-design
+===============================================================================
 Scalability (Lecture by David Malan from Harvard Univ)
 ---
 Topics Covered:
@@ -2491,27 +2571,61 @@ Topics Covered:
 - VPS vs Shared Hosts. In VPS, you get a share of hardware resources (VM)
   unlike shared hosts.
 - How will you scale website? Two types:
-    (a) Vertical Scaling (b) Horizontal Scaling
+    (a) Vertical Scaling: In same node, add RAM or Cache to improve
+performance
+    (b) Horizontal Scaling: Add more nodes/servers
+
+Hard Drives
+===
+- ATA, SATA, SAS Drives --> Mechanical Drives
+- SSD - All flash drives. No moving parts. Very expensive.
 
 Vertical
 ----
 - Add more resources (hardware). But you'll soon hit physical and financial
   limits soon
-- SSD drives (faster than Mechanical drives) - much faster, much costly
-
 
 Horizontal
 ----
-- Adding commodity hardware and scale
+- Adding commodity hardware and scale. Try not to hit limits _per_ hardware
+- Now many servers are handling user requests. Inbound requests must be
+  distributed equally to all servers (Load Balancers).
+- HTTP(S) Sessions are typically implemented per server. So, as long as
+  sessions are alive, requests must be sent to that server only.
 
-- Sessions are typically implemented per server. So, as long as sessions are
-  alive, requests must be sent to that server only.
+Q: When user enters www.google.com, which IP should be served to user?
+A: Return IP of LB (a public IP). LB balances inbound requests to one of the
+servers. Assumption is that any server can serve the request (same content).
+
+- Some times, the DNS server itself can return IP of one of the servers
+  instead of using Load Balancer. BIND DNS can do this today.
+- BIND does Round Robin scheduling, which isn't always great algorithm.
+
+Pros of using DNS:
+    * Simplicity
+Cons:
+    * Round Robin
+    * DNS record can be cached and subsequent request can go to same server
+    * although records expire after some time.
+
+- If DNS returns IP of LB then, LB will take care of Load Balancing.
 
 Q: How can load balancer send requests from a session to same server?
 A: Have a common hard disk for all servers and have session info stored there
 instead of locally?
-A: Alternately, load balancer can have storage that saves session info. LB is
-now doing more work.
+A: Alternately, load balancer can store session info. LB is now doing more
+work.
+
+Q: What happens if LB fails/dies?
+A: No easy answer. Instead, use RAID servers as hard drive (Redundant Array of
+Independent Disks)
+
+
+Load Balancers
+----
+Software Solution: Amazon's Elastic LB, HAProxy (Open Source), Linux Virtual
+Server (LVS) ...
+Hardware Solution: Barracuda, Cisco, Citrix, F5
 
 
 Storage Technologies
@@ -2526,19 +2640,9 @@ RAID: Redundant Array of Independent Disk
 - RAID5, 6, 10 are combination of above with benefits and performance
   improvements.
 
-Fiber Chanel (FC) - Another storage tech
+Fiber Chanel (FC) - Very fast and expensive. Enterprise use.
 iSCSI - Storage over IP over Ethernet. Inexpensive.
 NFS - It's a protocol to share storage over network.
-
-
-Load Balancers
-----
-Software Solution: Amazon's Elastic LB, HAProxy (Open Source), Linux Virtual
-Server (LVS) ...
-Hardware Solution: Barracuda, Cisco, Citrix, F5
-
-Sticky Sessions
-----
 
 Caching
 ---
@@ -2549,6 +2653,12 @@ Caching
     - Method to store contents in RAM.
     - Cache can be consumed. So, cache management is needed (LRU, etc)
 
+PHP Accelerators
+---
+- Interpreted languages are slow (compared to compiled).
+- If content is in PHP files, PHP accelerators will enhance speed.
+
+
 DB Replication
 ---
 - master-slave connection. Slaves get a copy of every row from Master
@@ -2557,7 +2667,12 @@ DB Replication
 - Load balancing can be done on DBs also. Especially, in events of
   read-heavy queries.
 
-- DB Partitioning is another paradigm to load balance
+DB Partitioning: is another paradigm to load balance DBs
+
+High Availability (HA): Two or more servers (or DBs) are checking each other's
+heartbeat to make sure services are not down.
+
+
 
 
 
