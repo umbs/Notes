@@ -2886,3 +2886,113 @@ Concurrency Models
 - threads
 
 [1] https://www.youtube.com/watch?v=E708csv4XgY&list=WL&index=17
+
+===============================================================================
+Distributed Systems has 3 characteristics
+    * Multiple compute nodes
+    * Each node can fail independently
+    * They do not have a synchronized clocks
+
+3 Main Things to consider:
+    * Storage (DBs)
+    * Computation
+    * Messaging
+
+Storage
+=======
+- Typically in highly scaled system, many more reads than writes. How NOT to
+  load the system?
+    * Read Replication (Scale Read servers).
+    * Writes to one of the server is replicated to all Read Servers
+
+- But what's the problem?
+    * We broke consistency. Possible that 'Read' gets old info.
+
+- Sharding is another form of breaking up database. What's the problem?
+    * Join's is not possible across DBs.
+    * How to solve?
+        + Denormalization
+        + Consistent Hashing
+
+- Consistent Hashing
+    * Imagine bunch of nodes around a circle
+    * Write to one node in circle and copy to two more nodes, for replica
+    * But this introduces consistency problems, right? Yes, it does.
+        + That's why when reading, read from 2 nodes and they should be same.
+        + You can read from all three and compare. But in practice, only two
+          nodes are used.
+
+Computation
+===========
+- CAP Theorem:
+    * Consistency
+    * Availability
+    * Partition Tolerant
+
+- MapReduce: It's a compute pattern. It's not a product. Hadoop is a product.
+    * Map words and their count
+    * Shuffle the words around, so similar words are together
+    * Reduce: Add up the numbers of same word to get total count
+
+- Hadoop: Rapidly deployed, but becoming obsolete. It's ecosystem is in use
+    * MapReduce API
+    * MapReduce Job Management
+    * HDFS (Hadoop Distributed File System) - Going to last long.
+    * Enormous ecosystem - Ex: Hive
+
+- Spark: Taken over of Hadoop
+    * Scatter/Gather paradigm (similar to MapReduce)
+    * Transform/Action, similar to Map/Reduce
+    * Spark gave an object, an abstraction on top of data, that can be
+      programmed, call methods etc.
+    * Spark programming model is friendly.
+    * Spark does not have storage requirements: HDFS, Cassandra data etc
+
+- Kafka: Everything is a stream of data. Computation can be done on it.
+    * Even Spark has stream processing API.
+    * In Kafka, stream is first class citizens.
+    * Kafka is not just messaging framework, but also computation framework.
+
+
+Messaging
+=========
+Concepts:
+    - Means to loosely couple subsystems
+    - Messages are consumed by SUBSCRIBER
+    - Created by PRODUCER
+    - Organized in to named TOPICS
+    - Processed by BROKER. It's just a compute node.
+    - Persistent over short term
+
+What if a TOPIC becomes too big for a computer?
+    - Messages are too big?
+    - Producers are too many?
+    - Subscribers are slow
+    - How to gaurantee delivery?
+
+
+Apache Kafka: It's a message bus.
+- When TOPIC becomes big, we partition the TOPIC
+- Each partition has one BROKER
+- Ordering of messages is not gauranteed globally (but within partition is
+  possible)
+
+
+Lambda Architecture
+===================
+AWS Lambda: Serverless Computing (Google Functions, Microsoft has Azure
+Functions, IBM has OpenWhisk)
+- It's an event driven computing platform
+- Lambda runs when triggered by an event and executes code that's been loaded
+  in to the system
+- Ex: When an image is loaded to S3, a function is executed to resize it.
+- Clients only pay when lambda function resize() runs.
+
+
+
+
+
+
+
+[1] Distributed Systems in One Lesson by Tim Berglund
+https://www.youtube.com/watch?v=Y6Ev8GIlbxc&t=1096s&index=18&list=WL
