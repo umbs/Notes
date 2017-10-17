@@ -295,7 +295,7 @@ Lesson 2:
 Multicast Problem
 ---
 - Multicast protocol must be fault-tolerant and scalable.
-- IP multicast is not attractive because it is MAY not be implemented in
+- IP multicast is not attractive because it MAY not be implemented in
   underlying routers/servers.
 - This is application level multicast protocol.
 
@@ -1944,18 +1944,6 @@ Project 1: 3 types of logic gates will be built.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 Reference:
 https://www.coursera.org/learn/build-a-computer/
 
@@ -2898,18 +2886,26 @@ Distributed Systems has 3 characteristics
     * Computation
     * Messaging
 
+More detailed things to consider:
+        Storage:  Relational/Mongo, Cassandra, HDFS
+    Computation:  Hadoop, Spark, Storm
+Synchronization:  NTP, vector clocks
+      Consensus:  Paxos, Zookeeper
+      Messaging:  Kafka
+
 Storage
 =======
 - Typically in highly scaled system, many more reads than writes. How NOT to
   load the system?
-    * Read Replication (Scale Read servers).
-    * Writes to one of the server is replicated to all Read Servers
+    * Read Replication (Scale Read servers) - 1st strategy in scaling web.
+    * Writes to one of the server is replicated to all Read Servers.
 
 - But what's the problem?
     * We broke consistency. Possible that 'Read' gets old info.
 
 - Sharding is another form of breaking up database. What's the problem?
-    * Join's is not possible across DBs.
+    * Join's is not possible across DBs. If you have a query that has to touch
+      all the shards, that doesn't go well with Sharding.
     * How to solve?
         + Denormalization
         + Consistent Hashing
@@ -2921,6 +2917,11 @@ Storage
         + That's why when reading, read from 2 nodes and they should be same.
         + You can read from all three and compare. But in practice, only two
           nodes are used.
+    * Rough rule of thumb for consistency:
+        R + W > N  ==> provides strong consistency
+            R = Number of reads
+            W = Number of writes
+            N = Number of replicas
 
 Computation
 ===========
@@ -2928,6 +2929,24 @@ Computation
     * Consistency
     * Availability
     * Partition Tolerant
+
+Distributed Transactions
+---
+- ACID Transactions
+    * Atomic
+    * Consistent - This is different consistency than in CAP theorem. It means
+      that DB is left in valid state after writing.
+    * Isolated - One transaction cannot "see" other until that is completed.
+      In practice, its much more complex.
+    * Durable - DB remembers what's written, forever.
+
+Responses to Failure
+---
+    - Write-Off: In case of coffee shop, you made the drink, but customer is
+      gone w/o taking it. Coffee is wasted.
+    - Retry: 
+
+
 
 - MapReduce: It's a compute pattern. It's not a product. Hadoop is a product.
     * Map words and their count
@@ -2989,10 +3008,210 @@ Functions, IBM has OpenWhisk)
 - Clients only pay when lambda function resize() runs.
 
 
-
-
-
-
-
 [1] Distributed Systems in One Lesson by Tim Berglund
 https://www.youtube.com/watch?v=Y6Ev8GIlbxc&t=1096s&index=18&list=WL
+
+[2] Distributed Systems in One Lesson by Tim Berglund
+Safari Online Video - 4 hours long
+
+===============================================================================
+System Design Interview Strategies
+---
+
+Requirements
+- Break up the problem in to smaller parts
+
+Constraints/Estimations
+- Think about Peaks and Troughs in traffic
+- For simple problems, keep data structure in mind. What DS will you use?
+
+- Work with Interviewer for direction and details
+- While working in the weeds, keep big picture in mind and MOST IMPORTANTLY,
+  keep consumers interest in mind
+
+- KEEP GOING, never give up.
+
+[1] Jackson Gabbard talk
+
+===============================================================================
+Envoy, an L7 Proxy from Lyft - Talk by Architect Matt Klien
+
+- Lyft's architecture was very simple in 2013
+
+
+    client <---> internet <----> Amazon ELB <----> PHP/Apache <------> DB
+                                                    monolith
+
+
+- By 2015 architecture changed
+
+
+    client <---> internet <----> Amazon ELB <----> PHP/Apache <------> Amazon ELB
+                                 (external)         monolith           (internal)
+                                                       +                   ^
+                                                HAProxy+Messaging          |
+                                                       |                   |
+                                                       |                   |
+                       +------------------------------ +                   |
+                       |                               |                   |
+                       |                               |                   |
+                       v                               v                   v
+                    MongoDB                         DynamoDB <--------> Python
+                                                                       Services
+
+
+- State of SoA (Service Oriented Architecture) Networking in Industry
+// Very detailed. Watch video
+
+- What is Envoy?
+    - It's a self contained proxy. It is NOT a library. Think like HAProxy.
+      It's like a server (Nginx).
+    - Other names used is 'sidecar'.
+    - It's an L3/L4 filtering mechanism: It's byte proxy at it's core. Can be
+      used for things other than HTTP
+    - L7 filter architecture: Packets can be routed based on L7 info
+    - Built with HTTP/2 first in mind. Uses gRPC
+    - Does Service Discovery and Active/Passive health checking.
+    - Advanced Load Balancing: Retry, circuit breaking, timeouts, rate
+      limiting, outlier detection, shadowing etc
+    - Best in class Observability: stats, logging, tracing
+    - Edge proxy: routing and TLS (can be used as Nginx replacement)
+
+
+    +------------------------+                 +-----------------------+
+    |    Service Cluster     |                 |    Service Cluster    |
+    |                        |                 |                       |
+    |       Service          |                 |       Service         |
+    |         ^              |                 |         ^             |
+    |         |              |                 |         |             |
+    |         |              |                 |         |             |
+    |         v              |     HTTP/2      |         v             |
+    |       Envoy <----------------------------------> Envoy           |
+    |         ^              |   REST/gRPC     |         ^             |
+    |         |              |                 |         |             |
+    +---------|--------------+                 +---------|-------------+
+              |                                          |
+              |                                          |
+              +-----------> External Services <----------+
+              |              (DynamoDB etc)              |
+              |                                          |
+              +----------->    Discovery      <----------+
+
+- Service in a cluster only talks to Envoy client in local cluster
+
+
+- With Envoy, Lyft's architecture today
+
+       clients                        +---> Legacy Monolith <--+--> MongoDB
+         ^                            |      (+Envoy)          |
+         |                            |                        |
+         |                            |                        |
+         v                            |                        |
+    internet <----> "Front" Envoy <---+---> Go Services <------+--> DynamoDB
+                    (via TCP ELB)     |      (+Envoy)          |
+                                      |                        |
+                                      |                        |
+                                      +---> Python Services <--+--> Stats, Tracing
+                                             (+Envoy)          |
+                                                               |
+                                                               |
+                                                               +--> Discovery
+
+
+Eventually Consistent Service Discovery
+----
+- Fully consistent service discovery problems are very popular (etcd,
+  Zookeeper, consul).
+- They are very hard to run at scale.
+- Service discovery is an eventually consistent problem. Envoy is designed for
+  it.
+
+Advanced LB:
+----
+- Different Service Discovery types
+- Zone aware LB
+- Dynamic stats: Per zone, canary specific stats etc
+- Circuit breaking: Max connections, requests, retries
+- Rate limiting:
+- Request Shadowing: Fork traffic to test cluster (similar to port mirroring)
+- Retries:
+- Timeouts:
+- Outlier detection: Consecutive 5xx
+- Deploy control
+
+
+Envoy Deployment @Lyft
+----
+- > 100 services
+- > 10000 hosts
+- > 2M RPS (Requests Per Sec)
+- All service to service traffic (REST and gRPC)
+- Many more
+
+
+[1] Lyft's Envoy L7 Proxy
+https://www.youtube.com/watch?v=RVZX4CwKhGE&list=WL&index=20&t=25s
+
+===============================================================================
+- CAP Theorem
+- Vertical Scaling - Scaling up (more RAM/CPU). There's a limit.
+- Horizontal Scaling - More servers/nodes
+
+- Sticky sessions - Users session is pinned to a Web Server (or LB carrying
+  session info)
+    * Downside - if that Web Server/LB fails?
+
+Caching Mechanism:
+    - Add caches within App server
+        * Object cache
+        * Session cache
+        * API
+        * Page
+
+HTTP Accelerator (does following)
+    - Redirect static content to lighter httpd server
+    - Cache contents based on rules
+    - Use Async Non Blocking IO
+    - Maintain limited pool of Keep-Alive connections to App Server
+    - Intelligent LB
+
+- CDNs
+
+[1] Best practices for scaling web apps
+https://www.youtube.com/watch?v=tQ2V9QSv48M&list=WL&t=4s&index=16
+===============================================================================
+SDI - How do you design a parking lot
+
+- Gather requirements (Handle ambuiguity)
+    * Who are we designing this system for?
+    * Should we write data structs/APIs etc?
+    * Do you want class hierarcy?
+
+- Systematic approach. Ask clarifying questions
+    * How many spots?
+    * One building? Multiple buildings? Open parking lot? Multiple entrances
+      (concurrency issues)
+    * Fill up upper levels and go down or similar constraints?
+    * Price per lot?
+    * Dependancy between spots/levels?
+    * Premium vs Regular vs Disability vs Cheaper spots
+
+Requirements (given by interviewer)
+- 4 sizes of parking spots (Small, Medium, Large, XLarge)
+- Smaller vehicles can park in bigger spots
+- Same price for each spot?
+
+Design
+- Represent vehicles (motorcycles, compact cars, big cars, bus)
+- An abstract class called Vehicle
+    struct vehicle {
+        char license[8];    // or VIN?
+        enum color;
+    };
+
+- 4 classes of vehicles: S, M, L, XL
+- APIs
+    int parkingSpot(struct vehicle v);
+
+
+[1] https://www.youtube.com/watch?v=DSGsa0pu8-k&index=20&list=WL
