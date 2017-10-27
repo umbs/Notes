@@ -1,0 +1,23 @@
+===============================================================================
+Object Oriented Java (Coursera Course)
+
+Map Providers:
+1) http://unfoldingmaps.org/javadoc/
+2) https://processing.org/reference/ - Flexible software sketchbook. Amazing
+software for visual arts.
+3)
+http://unfoldingmaps.org/javadoc/de/fhpotsdam/unfolding/providers/package-summary.html
+
+===============================================================================
+Web Development with Steve Huffman (Udacity Course)
+
+HTML Tags:
+---
+<b></b> - bold tag
+<em></em> - italics
+
+HTML Tag Attributes:
+---
+<
+Resources:
+[1] www.udacity.com/html_playground
