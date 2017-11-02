@@ -93,6 +93,54 @@ n-curses Window (TUI mode: Text User  Interface)
 Reference:
 [1] http://www.delorie.com/gnu/docs/gdb/gdb_toc.html
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@   GDB Process Record     @@@@@@@@@@@@@@@@@@@@@@@@@@@
+// You can start 'recording' any time after 'run'.
+(gdb) record        // or 'target record' to start recording
+(gdb) record stop   // to stop recording
+(gdb) record delete // to delete recording
+(gdb) record save <filename> // default filename is gdb_record.process_id
+(gdb) record restore <filename> // restore execution log from <filename>
+
+
+- If you run till end of program, but process record will ask and stop recording
+- All gdb commands have counter commands, in reverse direction
+
+continue; reverse-continue
+next; reverse-next
+step; reverse-step
+finish; reverse-finish
+
+- We can set execution direction
+(gdb) set exec-direction reverse
+(gdb) set exec-direction forward
+(gdb) show exec-direction
+
+- Set the number of instructions to be recorded
+(gdb) show record insn-number-max
+Record/replay buffer limit is 200000.
+(gdb) set record insn-number-max 400000
+(gdb)
+
+- Memory/Buffer layout. Internal memory can be treated as linear or circular.
+- If linear then when limit is reached, recording is stopped.
+- If treated as circular then recording can go forever but memory is
+  overwritten. So, recording can't go back to the beginning.
+
+(gdb) show record stop-at-limit
+Whether record/replay stops when record/replay buffer becomes full is on.
+(gdb) set record stop-at-limit off
+(gdb)
+
+- Show how many instructions are saved in memory
+
+(gdb) info record insn-number
+Record instruction number is 1287.
+(gdb)
+
+
+Reference:
+[1] https://sourceware.org/gdb/wiki/ProcessRecord/Tutorial
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@        GDB Macros        @@@@@@@@@@@@@@@@@@@@@@@@@@@
 GDB macro-coding language basic structure:
 
