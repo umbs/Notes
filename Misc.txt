@@ -2944,7 +2944,7 @@ Responses to Failure
 ---
     - Write-Off: In case of coffee shop, you made the drink, but customer is
       gone w/o taking it. Coffee is wasted.
-    - Retry: 
+    - Retry:
 
 
 
@@ -3215,3 +3215,239 @@ Design
 
 
 [1] https://www.youtube.com/watch?v=DSGsa0pu8-k&index=20&list=WL
+
+===============================================================================
+Introduction to Virtual Memory
+
+- Simple systems have single address space:
+    * no protection
+    * processes can stomp on each other's memory
+
+- x86 Physical Memory Map
+
+    +---------------------------------+
+    |   Memory Mapped I/O (PCI)       |
+    +---------------------------------+
+    |   Extended Memory               |
+    |                +----------------+
+    |                | High Mem Area  |
+    +---------------------------------+
+    |  BIOS                           |
+    +---------------------------------+
+    |  VGA Memory                     |
+    +---------------------------------+
+    |  DOS Area                       |
+    +---------------------------------+
+
+- Hard to develop for Physical Memory.
+
+Advantages of VM
+- Each process can have it's own view of memory
+- Kernel memory is invisible to user space
+- Process Memory can be moved and/or swapped to disk, all this is done by Kernel
+  and user space program doesn't know.
+- Physical RAM can be mapped to multiple processes at once (shared mem)
+- Memory regions can have access permissions
+    * read/write/exec
+
+Memory Management Unit (MMU)
+- Hardware responsible for implementing virtual memory
+- Sits between CPU core and RAM. On most CPUs, it's part of the core.
+- Separate from RAM controller
+- Responsible for mapping user space programs to RAM and/or peripheral devices
+- Handles Load/Store instructions
+- Generates exceptions (Page Faults) on invalid access
+    * Unmapped address or insufficient permission
+
+Translation Lookaside Buffer (TLB)
+- TLB is a list of mappings from virtual memory to physical address in H/W.
+    * Also holds permission bits
+- TLB is part of MMU.
+- There are fixed # of entries in TLB, varies by CPU.
+
+
++-----------------------------------+
+| SoC                               |
+|                   +-------+       |
+|                   |  ALU  |       |       +-------+
+|                   +-------+       |       |  RAM  |
+|                       |           |       |       |
+|                       |           |       |       |
+|   +-------+       +-------+       |       |       |
+|   |  TLB  +-------+  MMU  |       |       |       |
+|   +-------+       +-------+       |       |       |
+|   +-------+           |           |       |       |
+|   +-------+           |           |       |       |
+|   +-------+       +-------+       |       |       |
+|                   |Memory |       |       |       |
+|                   |Contro-|-------|-------|       |
+|                   |ller   |       |       +-------+
+|                   +-------+       |
+|                                   |
++-----------------------------------+
+
+TLB Task
+- Maps virtual address to physical address
+- If not present or insufficient permission, generate a page fault
+
+Page Faults
+- It's a CPU exception, generated when software attempts to use invalid virtual
+  address
+    * virtual address is invalid or not mapped to physical addr
+    * process has insufficient permissions
+    * virtual address is valid, but swapped out
+
+Kernel Virtual Memory
+- In Linux, kernel uses virtual memory, just like user space processes. Not all
+  OSes do this.
+- Virtual address space is split
+    * upper part is used by kernel
+    * lower part is used by user space
+- On 32-bit, split is at: 0xC0000000 (3GB)
+
+    +-------------------+ 0xFFFFFFFF
+    | Kernel Address    |
+    +-------------------+ CONFIG_PAGE_OFFSET
+    |                   | (default 0xC0000000)
+    |                   |
+    |                   |
+    +-------------------+ 0x00000000
+
+- Virtual address space is 4GB on 32-bit system, regardless of how much RAM we
+  have.
+- Kernel uses top 1GB and user space uses bottom 3GB
+
+- 3 kinds of Virtual Addresses
+    * Kernel:
+        + Logical Address (kmalloc)
+        + Virtual Address (vmalloc)
+    * User space:
+        + Virtual Address
+
+- Kernel Logical Address:
+    * Direct mapping to physical memory. If physical memory is small (say 8MB),
+      then logical address maps entire 8MB directly. It helps in DMA and such.
+    * In large memory systems, not all physical memory can be mapped in to
+      kernel's address space. So, it's top 1GB of VM is mapped to BOTTOM half of
+      physical RAM.
+    * ~104MB at top of kernel VM is reserved for non-contiguous allocations
+        + Used by vmalloc()
+        + This is on 32-bit only. On 64-bit, there's lot more address space.
+
+
+
+            Virtual Address Space
+         +------------------------+ 0xFFFFFFFF
+         |                        |
+         | Kernel Virtual Address |
+         |                        |
+         +-------------------------------------+
+         |                        |            |
+         |Kernel Logical Address  |            |
+         |                        |0xC0000000  |
+         +-----------------------------+       |
+         |                        |    |       |
+         |                        |    |       |
+         |                        |    |       |
+         |                        |    |       |           Physical RAM
+         |                        |    |       |      +------------------------+
+         |                        |    |       |      | RAM without direct     |
+         |   User Space Address   |    |       |      | mapping in to kernel   |
+         |                        |    |       |      | space (aka High Mem)   |
+         |                        |    |       +----> +------------------------+
+         |                        |    |              | RAM with direct        |
+         |                        |    |              | mapping in to kernel   |
+         |                        |    |              | space (aka Low Mem)    |
+         +------------------------+    +------------> +------------------------+
+
+
+- Kernel Virtual Address:
+    * Area above Kernel Logical Address space. Also called vmalloc area.
+    * Non-contiguous memory mapping
+    * Often used for large buffers, using vmalloc()
+    * Used for memory-mapped I/O
+        + Map peripheral devices in to kernel (PCIe, SoC IP blocks)
+        + request_mem_region(), kmap()
+
+User Space Virtual Addresses
+----
+- Only used portion of RAM are mapped, memory is non-contiguous, may be swapped
+  out and can be moved.
+- User space VA makes full use of MMU.
+- Each process has it's own memory map:
+    struct mm, pointers in task_struct
+- At context switch time, the memory map is changed
+
+
+
+Memory Management Unit (MMU)
+---
+- H/W component that maps VM to Physical RAM
+- Page, basic unit of memory size:
+    ARM - 4K
+    ARM64 - 4K to 6K
+    MIPS - widely configurable during kernel build time
+    x86 - 4K
+
+Terminology:
+---
+- Page: Unit of memory sized and aligned at page size.
+- Page Frame (Frame): refers to page-sized and page-aligned physical memory
+  block.
+- Page is abstract, Frame is concrete
+- pfn: Page Frame Number refers to physical page frames
+
+
+MMU
+---
+- TLB holds VA + PA + Permissions
+
+Page Faults
+---
+- Process accesses region of memory that's not mapped, MMU will generate a PF
+- Fact of life in MMU, not a bad thing but want to minimize
+- Page faults at context switch time
+- Lazy allocation: Kernel will wait until pages are actually used to allocate it
+  in Phys RAM
+
+Shared Memory
+---
+- mmap() sys call allows user space process to request specific virtual address
+  to map the shared mem region.
+    * kernel may not be able to grant this request and mmap() can fail
+
+Lazy Allocation
+---
+- User space program is never aware of page faults
+- For processes that are time-sensitive, pages can be pre-faulted, or simply
+  touched, at start of execution (something like setting to zero using memset)
+    * If required, mlock() and mlockall() locks these pages in Physical memory
+      and does not swap them out to disk.
+
+Page Tables
+---
+- Entries in TLBs are limited resource.
+- Far more mappings exists than in TLB at one time. Kernel must keep track of
+  all of them.
+- Kernel stores this in Page Tables
+    * See struct_mm and vm_area_struct
+
+User Space Memory Allocation
+---
+- There are *alloc() functions
+- mmap() can be directly used to allocate and map pages
+    MAP_ANONYMOUS - normal mem alloc
+    MAP_SHARED - shared mem with other process
+- brk()/sbrk() can be used to resize heap
+- malloc/calloc uses
+    brk() - for small mem alloc
+    mmap() - for large mem alloc
+- Stack expansion:
+    * If process access mem beyond stack, page fault happens
+    * Kernel allocates new page to extend the stack
+    * See __do_page_fault() in arch/arm/mm/fault.c
+
+
+
+
+[1] https://www.youtube.com/watch?v=EWwfMM2AW9g&index=16&list=WL&t=2s
