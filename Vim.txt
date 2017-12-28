@@ -176,8 +176,6 @@ Wikia Tips
 
     :%s/^/\=printf("%d", line("."))   // prints current line number. Read
                                       // above link for more granularity.
-2. VIM as a logfile viewer.
-
 
 Code Indentation
 ----------------
@@ -195,3 +193,14 @@ where
 {lhs}  left hand side, is a sequence of one or more keys that are being
        mapped.
 {rhs}  right hand side, is the sequence of keys that the {lhs} keys are
+
+Vim Tips from Youtube talks
+---------------------------
+1) Highlight 80th column
+
+" Make the 81st column stand out with magenta color
+highlight ColorColumn ctermbg=magenta
+" Call ColorColumn on 81st column virtually.
+call matchadd('ColorColumn', '\81xv', 100)
+
+[1] https://www.youtube.com/watch?v=aHm36-na4-4&index=7&list=WL

@@ -3451,3 +3451,13 @@ User Space Memory Allocation
 
 
 [1] https://www.youtube.com/watch?v=EWwfMM2AW9g&index=16&list=WL&t=2s
+
+===============================================================================
+VBA Scripting
+
+Dim <varname>
+MsgBox
+
+If answer = vbYes Then
+Else
+End If

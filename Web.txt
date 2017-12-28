@@ -18,6 +18,91 @@ HTML Tags:
 
 HTML Tag Attributes:
 ---
-<
+
 Resources:
 [1] www.udacity.com/html_playground
+===============================================================================
+Web Dev (Udemy course) - Rob Percival
+
+HTML Tags:
+
+Header:         h1, h2, ... h6
+Self closing:   <br />
+Line break:     <br>
+Horizontal rule: <hr />
+Bold: <strong>. Earlier, it was <b>, but it's deprecated
+Italics: <em>. Can also use <i>
+Underline: <u>
+Strike through: <strike>
+
+Unordered Lists:
+    <ul>
+        <li> Pizza </li>
+        <li> Chocolate </li>
+        <li> Curry </li>
+    </ul>
+
+Ordered Lists:
+    <ol>
+        <li> Jeans </li>
+        <li> Shirt </li>
+        <li> Socks </li>
+    </ol>
+
+Images:
+    <img src="images/example.jpg" />
+    <img src="URL" width="200" height="200"/>   <--this is 200px wide/height
+
+Forms: Lots of options within form tag
+    <form>
+        <input type="text" value="example" />
+        <input type="email" />
+        <input type="text" placeholder="type here ..." />
+
+        <br /><br />
+
+        <textarea> My content goes here </textarea>
+
+        <select>
+            <option> Select an option </option>
+            <option> 1 </option>
+            <option> 2 </option>
+            <option> 3 </option>
+        </select>
+
+        <br /><br />
+
+        // name="something" groups the radio input in to one
+        // then you take only one input
+        <input type="radio" name="color" /> Red
+        <input type="radio" name="color" /> Green
+
+        <br /><br />
+
+        <input type="checkbox" name="color" /> Dog
+        <input type="checkbox" name="color" /> Fish
+        <input type="checkbox" name="color" /> Cat
+
+        <br /><br />
+
+        <input type="submit" value="Click Me" />
+
+    </form>
+
+Links:
+    <p> <a href="https://www.google.com"> Google </a> </p>
+
+    <a name="top"> </a>
+    <a href="#top"> Back to top </a>
+
+Tables:
+    <tr> // table row tag
+    <th> // table header tag. Each tag will be a column
+    <td> // Cells of a table
+
+
+    <table>
+        <tr> <th>Names</th> <th>Age</th> <th>Gender</th> </tr>
+        <tr> <td>Rob</td> <td>30</td> <td>M</td> </tr>
+
+    </table>
