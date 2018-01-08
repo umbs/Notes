@@ -391,7 +391,7 @@ Centralized Heartbeating.
 ---
 - A process receives heartbeat from all other processes. After timeout, a
   process is marked failed.
-- A process can be overloaded with heartbeats. Hotspot problemm.
+- A process can be overloaded with heartbeats. Hotspot problem.
 
 Ring Heartbeating
 ---
@@ -535,7 +535,6 @@ Avoiding Excessive Traffic
 Dealing with Firewalls
 ---
 - Push message handles this (TODO: I didn't understand)
-
 - Ping & Pong are used to update neighbor info.
 
 Problems
@@ -661,15 +660,6 @@ Key-Value (NoSQL) Data Model
 - NoSQL = "Not Only SQL"
 - Main operations = get(key), put(key, value)
     + and few more extended operations
-- Tables have following properties
-    + "Column Families" in Cassandra, "Table" in HBase, "Collection" in
-      MogoDB
-    + Unstructured.
-    + Don't always support JOIN or have Foreign Keys
-    + Can have index tables like RDBMS
-
-
-
 
 - Tables have following properties
     + "Column Families" in Cassandra, "Table" in HBase, "Collection" in
@@ -707,7 +697,7 @@ Two Options:
     + NetworkTopologyStrategy
 
 SimpleStrategy:
-    + Uses Partitioner, of which there are two kids
+    + Uses Partitioner, of which there are two kinds
         * RandomPartitioner - Chord like hash partitioning.
         * ByteOrderPartitioner - Assigns ranges of keys to servers.
 
@@ -1195,6 +1185,8 @@ Consistent Cut: a cut that obeys causality
 - In Chandy-Lamport Global Snapshot algo, the Consisten Cut is the line
   through all the starting points of each process recording time.
 
+- Proof of Consistent Cut in Chandy-Lamport algo is in video 5.2.3 (Consistent
+  Cuts)
 
 Safety & Liveness Properties
 ---
@@ -1217,7 +1209,8 @@ Safety & Liveness Properties
     Failure Detector: Completeness (Liveness) and Accuracy (Safety) cannot
                       both be guaranteed.
     Consensus: Decisions (Liveness) and Correct Decisions (Safety) cannot
-               both be guaranteed.
+               both be guaranteed. Time bound Liveness is hard to gaurantee.
+               Paxos gaurantee's eventual Liveness.
     Legal: Very hard for legal systems to guarantee that all criminals will
            be jailed (Liveness) and no innocent is ever jailed (Safety).
 
@@ -1246,7 +1239,7 @@ Multicast Ordering
 ---
 - A msg sent to multiple processes in a group.
 
-Who uses mutlicast?
+Who uses multicast?
 ---
 - Widely used abstraction in all cloud systems.
 - Replica servers for a key multicasts read/writes within the replica group.
