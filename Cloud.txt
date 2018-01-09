@@ -1,0 +1,1787 @@
+// Notes on Cloud Computing, Distributed Systems, SDI (System Design
+// Interviews) and all the High Scalability, Web Scaling talks from YouTube
+
+@@@@@@@@@@@@@   Cloud Computing Concepts Part 1    @@@@@@@@@@@@@@
+
+- AWS
+    * EC2: Elastic Compute Cloud
+    * S3: Simple Storage Service
+    * EBS: Elastic Block Storage
+
+- 4 Features New in Today's Cloud
+    * Massive Scale
+    * On-Demand Access: Pay as you go model.
+    * Data intensive nature
+    * New cloud programming paradigms
+
+- Energy usage:
+    WUE (Water Usage Efficiency) = Annual Water Usage/IT Equipment Energy
+    (L/kWh) - low is good.
+    PUE (Power Usage Efficiency) = Total Facility Power/IT Equipment Power
+
+- MapReduce:
+    * Map
+    * Reduce
+    * Resource Manager (for Hadoop, YARN is the resource mgr)
+
+- YARN Scheduler = Yet Another Resource Negotiator
+    + Treats each server as collection of 'containers'
+        ~ Container = CPU + Memory (not same as Docker container)
+    + 3 main components
+        ~ Global Resource Manager (RM) for scheduling
+        ~ Per-server Node Manager (NM) for server specific functions
+        ~ Per-application Application Manager (AM)
+- MapReduce Fault Tolerance
+    + Heartbeats are periodically sent across managers for health checks.
+    + Stragglers: Slow execution.
+        ~ Speculative Execution: If % executed is very low, a replicate
+          execution is started on a new VM/container.
+
+- Building blocks of Distributed Systems
+    + Gossip and Epidemic Protocols
+    + Failure Detection and Membership Protocols
+- Grid computing is pre-cursor to cloud computing.
+
+
+Multicast Problem
+---
+- Multicast protocol must be fault-tolerant and scalable.
+- IP multicast is not attractive because it MAY not be implemented in
+  underlying routers/servers.
+- This is application level multicast protocol.
+
+How to solve?
+---
+Centralized: Sender has a list of destination node. Opens socket and sends
+             TCP/UDP packets.
+- Problem?
+    * fault-tolerance: It is not.
+    * more latency (longer time)
+
+Tree based multicast protocols:
+    + eg., IP multicast, SRM, RMTP, TRAM, TMTP
+- Problems? If nodes fail, re-create the tree.
+- Spanning trees are built among nodes. This is used to disseminate messages.
+- Use ACKs or NACKs to repair unreceived multicast packets.
+
+SRM (Scalable Reliable Multicast):
+    + Uses NACKs
+    + Uses random delays and exponential backoff to avoid NACK storms
+
+RMTP (Reliable Multicast Transport Protocol):
+    + Uses ACKs
+    + ACKs sent to designated receivers, which then re-transmit missing
+      multicasts.
+
+- These protocols still cause O(N) ACK/NACK overhead.
+
+Gossip Protocol (Epidemic Multicast)
+---
+- Sender randomly picks 'b' random targets and sends Gossip Messages.
+- 'b' is called Gossip fan out. Typically 2 or so targets.
+- When nodes receive the Gossip, it is 'infected' by Gossip.
+- Receiver starts doing the same.
+- There may be duplicate received by nodes.
+- "Infected Nodes" - those that received multicast message.
+- "Uninfected Nodes" - those that did NOT receive multicast message.
+
+Push vs Pull
+---
+- Gossip protocol is a push protocol.
+- If multiple multicast messages exist, gossip a subset of them.
+- There's a "Pull" gossip.
+    + Periodically poll a few randomly selected targets for new multicast
+      messages that you haven't received.
+- There's a hybrid variant too: push-pull.
+
+Gossip Analysis
+---
+- Push based Gossip protocol is
+    + lightweight in large groups.
+    + spreads multicast quickly.
+    + is highly fault-tolerant.
+
+- Analysis is based on mathematical branch of Epidemiology.
+    + Population of n+1 individuals mixing homogeneously.
+    + Contact rate between any individual pair is B
+
+- TODO: Watch videos for analysis.
+
+Group Membership
+---
+- Failure rate are norm in datacenters.
+
+- Say, the rate of failure of one machine is 10 years (120 months). In a DC with
+  120 servers, Mean Time To Failure (MTTF) is 1 month. MTTF reduces with more
+  servers.
+
+- Two Sub Protocols are essential in Group Membership.
+    + Failure Detection
+    + Info Dissemination
+
+Failure Detectors
+---
+- Frequency of failures goes up linearly with size of DC.
+- Properties of Failure Detectors
+    + Completeness - each failure is detected.
+    + Accuracy - no mistaken detection.
+    + Speed - time to first detection of failure.
+    + Scale - load balance each member.
+
+- Completeness + Accuracy = Very hard to acheive. Consensus problem in
+  distributed systems.
+
+- What *really* happens?
+    + Completeness - Gauranteed
+    + Accuracy - partial/probabilistic gaurantee.
+
+
+Failure Detector Protocols
+
+Centralized Heartbeating.
+---
+- A process receives heartbeat from all other processes. After timeout, a
+  process is marked failed.
+- A process can be overloaded with heartbeats. Hotspot problem.
+
+Ring Heartbeating
+---
+- Form a ring. Processes send/receive heartbeats to its neighbors.
+- Multiple simultaneous failures causes problems.
+
+All-to-All Heartbeating
+---
+- All processes send to all other processes.
+- Has equal load per member.
+- Protocol is complete.
+- Too many messages though.
+
+
+Gossip-Style Membership
+---
+- Nodes maintain a membership list with 3 values:
+    + IDs of Nodes.
+    + Heartbeat counter. A counter unique to a node.
+    + Local time when heartbeat was received from a node.
+
+- Each node randomly shares this membership list with peers. Peers can update
+  their membership list based on this message.
+
+- There's a timeout if heartbeat is not received from a node, called T_fail.
+- After a wait time of T_cleanup (mostly same as T_fail), the entry is deleted.
+
+- If a heartbeat is received *directly* from the node then entry is added back
+  to membership table.
+
+- If membership tables are received from other nodes in T_fail time and before
+  T_cleanup time, not updated.
+
+
+Which is best failure detector?
+---
+- Failure Detector Properties:
+    + Completeness - Guarantee always
+    + Accuracy - Probability Mistake in T time units: PM(T)
+    + Speed - T time units (time to first failure detection)
+    + Scale - N x L (nodes x load per node)
+
+- All-to-All heartbeating:
+    + Each node sends N heartbeats every T time units. Load = N/T
+
+- Gossip-Style:
+    + tg = gossip period.
+    + T = time when all nodes receive gossip.
+    + T = (log N) x tg
+    + L = Load per node = N/tg = (N x (log N))/T
+
+- What's best/optimal?
+    + TODO: Watch video 2.4 of Week 2 for analysis
+
+
+SWIM Failure Detection Protocol
+---
+- TODO: Watch videos 2.5 & 2.6 of Week 2 for analysis.
+
+
+Grid Computing
+---
+- Scheduling jobs on the Grid is one problem.
+- Globus Protocol - inter-site job scheduling protocol
+- HTCondor Protocol (High Through Condor) - intra-site job scheduling and
+  monitoring protocol.
+- Globus Alliance - bunch of univs and research labs.
+- Globus Toolkit: Lot of tools (free and open-source) for Grid computing.
+
+- Is Grid Computing and Cloud Computing converging? It's an open question.
+
+P2P Systems Intro
+---
+
+Napster
+---
++ Each user runs a client called Peers.
++ When a file is uploaded, it stays local.
++ Meta data about the file is uploaded to Servers (file name, IP, port number,
+artists name etc).
++ Servers don't save files (hence no legal liability).
++ When someone searches for a file, Server responds with data.
++ Clients then establish connection and transfer files. Server is not involved.
++ Message exchanges using TCP sockets.
++ Every Server is root of a Ternary tree, with Peers as children.
+
+How do Peers join Servers?
+---
++ Send a http request to well-known URL like: www.myp2pservice.com
+
+Problems
+---
++ Centralized server a source of congestion, single point of failure, no
+security.
++ Indirect infringment of copyright law.
+
+Gnutella
+---
++ There's no Servers. Clients themselves act as Servers to find and retrieve
+data. It's called "Servants"
++ Peers stores files locally and have info about neighbor Peers.
++ This forms an Overlay Graph.
++ Gnutella protocol has 5 main message types:
+    - Query (Search)
+    - QueryHit (response to search)
+    - Ping (to probe network for other peers)
+    - Pong (reply to ping)
+    - Push (used to initiate file transfer)
+
++ Gnutella Protocol Header
+    +----------------------------------------------------+-------
+    | Desc ID | Payload Descr | TTL | Hops | Payload len | ...
+    +----------------------------------------------------+-------
+
+    Desc ID: ID of this search
+    Payload Descr: 0x00 Ping; 0x01 Pong; 0x40 Push; 0x80 Query;
+                    0x81 QueryHit
+    TTL: Initially 7-10, drop after reaching 0.
+    Hops: Increment at each Hop. Used this because TTL is not same for all
+        clients. Many clients don't use Hops that much.
+    Payload len: # of bytes of message following this header.
+
++ Queries are flooded, TTL-restricted, duplicates are not forwarded.
++ QueryHit looks as follows:
+    +--------------------------------------------------------------+
+    |# of hits|port|IP addr|speed|(file idx,fname,fsize)|servent_id|
+    +--------------------------------------------------------------+
+
+    - servant_id is mostly not used.
+    - Peers maintain reverse route, where they received Query msg from.
+    - QueryHits are forwarded back on the same route.
+
+Avoiding Excessive Traffic
+---
+- Query forwarded to all neighbors except one from which it received.
+- Each Query forwarded only once.
+- QueryHit routed back only to peer from which Query was received.
+- If peer is missing, QueryHit is dropped.
+
+
+Dealing with Firewalls
+---
+- Push message handles this (TODO: I didn't understand)
+- Ping & Pong are used to update neighbor info.
+
+Problems
+---
+- Ping/Pong constituted 50% of traffic (this has been solved).
+- Cache and forward that info, reducing ping/pong messages.
+- Problem of "freeloaders". 70% of users are freeloaders.
+- Can the Query be directed instead of flooding?
+
+
+FastTrack & BitTorrent
+---
+- FastTrack is proprietary. Hybrid between Gnutella and Napster.
+- Uses "healthier" peers in Gnutella, called Super Nodes.
+- Peers become Super Nodes based on reputation and contribution.
+- Super Node maintains directory of files and related info. Queries are not
+  flooded but searched locally.
+
+
+BitTorrent
+---
+- Incentivize peers to participate.
+- Tracker keeps track of peers. When a peer comes online, it contacts Tracker to
+  send details of other peers.
+- Peers are either Seed (contains full file) or Leech (partial file).
+- Files are divided in to blocks (usually of equal size 32K-256KB).
+- Leeches get blocks from Seed and other Leeches.
+
+Which blocks are transferred to a Leech?
+---
+- Download Local Rarest First block policy
+    + prefer early download of blocks that are least replicated among neighbors.
+
+- Tit for tat bandwidth usage: Provide blocks to neighbors that provided it best
+  download rates.
+    + Incentive for nodes to provide good download rates.
+
+- Choking: Limit number of neighbors to which concurrent uploads (less than 5).
+  These are *best* neighbors.
+
+
+Chord (came from Academia)
+---
+- Distributed Hash Table.
+- Performance Goals of DHT
+    + load balancing
+    + fault-tolerant
+    + efficiency of lookups and inserts
+    + locality
+
+- Napster, Gnutella, FastTrack are all sort of DHTs, but Chord is accurate DHT.
+- Chord is O(log N) memory, lookup latency and # of messages for a lookup.
+- Chord uses Consistent Hashing on nodes peer address
+    + SHA-1 (ip address, port) --> 160 bit string.
+    + Truncated to m bits
+    + Called peer id (number between 0 and 2^m -1)
+    + Not unique, but id conflicts very unlikely.
+    + Can then map peers to one of 2^m logical points on a circle.
+
+- Peer Pointers (1):
+    + Peers are placed on a ring, with an id between 0 and 2^m-1
+    + Peers talk to their neighbors, called successors.
+
+- Peer Pointers (2): Finger Tables
+    + TODO: Watch video 5 around 11th minute to understand.
+    + ith entry in finger table for peer n is first peer with:
+            id >= (n + 2^i) (mod 2^m)
+
+- Where are files stored?
+    + SHA-1 (filename) --> 160 bit string (key)
+    + File is stored at first peer with id >= it's key (mod 2^m)
+    + TODO: Very mathematical. Watch the video if required.
+
+- How do file searches work?
+    + Hash the unique file name (or URL) using consistent hashing algo.
+    + It gives key K.
+    + At node N, send query for key K to largest successor/finger entry <= K
+      If none exists, send query to successor(N). Largest successor means, on
+      the virtual ring, it's the right most, but less than K.
+
+
+
+
+Pastry
+---
+- Assigns IDs to nodes, similar to Chord.
+- Each node knows its successors and predecessors.
+- Routing tables based on prefix matching, thus log(N)
+- Among potential neighbors, one with shortest RTT is chosen.
+- Shorter prefix neighbors are closer than longer prefix neighbors.
+- But overall the longest neighbors RTT is comparable to underlying internet
+  speed.
+
+
+
+
+
+Key-Value Store Abstraction
+---
+- Similar to dictionary data struct, but distributed. Distributed hash as in
+  P2P systems.
+- In RDBMS (ex. MySQL), data is structured and stored in tables with few
+  main items:
+        Primary Key, Secondary Key, Foriegn Key and few columns.
+- Data in today's world is different than problems solved by RDBMS
+    + Data is large and unstructured
+    + Lots of random read/writes (sometimes write heavy)
+    + Foreign keys rarely needed
+    + Joins are infrequent
+
+- Requirements of Today's workload
+    + Speed
+    + Avoid single point of failure (SPoF)
+    + Low TCO (Total Cost of Operation)
+    + Scale out and not up
+
+- Scale Out, Not Scale Up
+    Scale Up = grow cluster capacity by replacing with more powerful m/c
+    Scale Out = grow by adding COTS m/c (off the shelf)
+
+Key-Value (NoSQL) Data Model
+---
+- NoSQL = "Not Only SQL"
+- Main operations = get(key), put(key, value)
+    + and few more extended operations
+
+- Tables have following properties
+    + "Column Families" in Cassandra, "Table" in HBase, "Collection" in
+      MogoDB
+    + Unstructured.
+    + Don't always support JOIN or have Foreign Keys
+    + Can have index tables like RDBMS
+
+
+Column-Oriented Storage
+---
+- RDBMS store an entire row together
+- NoSQL systems typically store a column together (or group of columns)
+    + given a key, entries within a column are indexed are easy to locate
+      and vice-versa.
+- Searches involving columns are fast.
+    + Ex: Get all blog id's that were updated in last month.
+- Prevents fetching entire table (or row) on a search.
+
+
+Apache Cassandra
+---
+- Facebook is original designer. Now managed by Apache and many companies
+  use it.
+
+Key->Server Mapping (called Partitioner)
+---
+- Uses Virtual Ring DHT described in Chord protocol/lecture.
+    DHT = Distributed Hash Table
+
+Data Placement Strategies
+---
+Two Options:
+    + SimpleStrategy
+    + NetworkTopologyStrategy
+
+SimpleStrategy:
+    + Uses Partitioner, of which there are two kinds
+        * RandomPartitioner - Chord like hash partitioning.
+        * ByteOrderPartitioner - Assigns ranges of keys to servers.
+
+NetworkTopologyStrategy: for multi-DC deployments
+    + 2 replicas/DC, 3 replicas/DC
+    + Per DC:
+        * First replica placed according to Partitioner
+        * Then go clockwise around ring until you hit a different rack.
+
+Snitches:
+- Maps IPs to Nodes in Racks and DCs. Configured in cassandra.yaml
+- SimpleSnitch: Unaware of Topology (rack-unaware)
+- RackInferring: Octect of IP indicates DC and Rack.
+    + x.<DC>.<rack>.<node> - This is a best effort.
+- PropertyFileSnitch: Uses a config file to assign IP
+- EC2Snitch:
+- Variety of snitch options available.
+
+Writes - How are they implemented?
+---
+- Need to be lock-free and fast (no disk seeks)
+- Clients sends write to a coordinator in Cassandra cluster.
+- Coordinator uses Partitioner to send query to all replica nodes responsible
+  for key.
+- When X replicas respond, coordinator returns an ACK to client.
+    + What is X?
+- Replicas must be ALWAYS writable. How to achieve?
+    + Hinted Handoff Mechanism
+        * If replica is down, coordinator writes to all other replicas, but
+          waits for replica to come up within a time limit.
+        * If ALL replicas are down, coordinator waits for a time (few hours) and
+          then writes to replica.
+    + One ring per DC.
+        * Per DC coordinator elected to talk to other DCs.
+        * Election of coordinator done via Zookeeper.
+
+When writes come, what does Replica do?
+---
+- log the request.
+- Make changes to Memtable (in-memory representation of key-value pairs)
+- memtable can be searched. It's a write-back cache as opposed to write-through
+  cache.
+- When memtable is full, flush to disk.
+- Before flushing to disk, sort keys of Memtable in to SSTable (Sorted String
+  Table). This is a Data File.
+- Create an Index file: An SSTable of (key, position in data SSTable).
+- Add a Bloom Filter to tell if a key is present in SSTable. Very efficient.
+    + An item NOT in present can return as present.
+    + An item present ALWAYS returns as present.
+
+Compaction
+---
+- Over time, key may be in multiple SSTable and compaction is process of merging
+  them. Runs periodically and locally at each server.
+
+Deletes
+---
+- Don't delete item rightaway, but put a marker called "tombstone". When
+  Compaction is run, it deletes.
+
+
+Reads
+---
+- Coordinator can contact X replicas. From responses, Coordinator returns latest
+  time-stamped response.
+- Coordinator also fetches value from other replicas (in background) to check
+  consistency and initiating *read repaid*.
+- Due to this, Reads are slower than Writes.
+
+Membership
+---
+- Every server in cluster has list of all others in the cluster.
+
+
+Suspicion Mechanisms
+---
+- Mechanism to confirm failure of a server is indeed true (or false).
+- Accrual Detector: it outputs a value called Phi, which represents suspicion.
+- Phi calculations for a member:
+    + takes in to account inter-arrival times for gossip messages from a server.
+    + Phi(t) = -log(CDF)/log10
+        * CDF = Cumulative Distribution Function or Prob(t_now - t_last)
+    + Phi determines the detection timeout by taking in to historical inter
+      arrival time.
+
+- In practice, Phi=5 means about 10-15s detection time.
+
+Cassandra Vs RDBMS (MySQL): On 50 GB of data
+---
+- MySQL:
+    + writes 300ms avg; reads 350ms avg
+- Cassandra:
+    + writes .12ms avg and reads 15ms avg
+
+
+
+CAP Theorem
+---
+- Consistency, Availability, Partition-Tolerance
+- Only 2 out of 3 can be satisfied.
+- Cassandra: Eventual (Weak) Consistency, Availability & Paritition-Tolerance.
+- RDBMs: Strong Consistency over Availability.
+
+- RDBMS provide ACID
+    + Atomicity
+    + Consistency
+    + Isolation
+    + Durability
+
+- Key-Value Stores like Cassandra provide BASE
+    + Basically Available Soft-state Eventual Consistency
+
+- What is X in Cassandra?
+    + Represents consistency levels
+- X = ANY
+    + Any server can respond to read. Fastest.
+
+- X = ALL
+    + All replicas must respond. Slowest.
+
+- X = ONE
+    + At least one replica must respond. Faster than ALL. Can't tolerate
+      failure.
+
+- X = QUORUM
+    + Look at Vide (1.3) around 13th minute.
+    + Faster than ALL. Gives greater consistency than ONE.
+    + Many NoSQL uses Quorum (Cassandra, RIAK)
+
+Reads with Quorum
+---
+- Client specifies R (# of replicas).
+- Read must be received from R replicas.
+
+Write with Quorum
+---
+- Client specifies W and writes to W replicas and returns.
+- Coordinator (a) blocks until quorum is reached OR (b) Asynchronous; two
+  flavors exist.
+
+- For strong consistency two conditions required:
+    1) W+R > N
+    2) W > N/2
+    R = read replica count; W = write replica count
+
+
+QUORUM Variations
+---
+- QUORUM: across all DCs
+- LOCAL_QUORUM: in coordinators DC
+- EACH_QUORUM: in every DC
+
+Consistency Spectrum
+---
+- From Weak to Strong
+- Eventual, Causal, per-key Sequential, Red-Blue, Probabilistic, CRDTs,
+  Sequential.
+- Per-Key Sequential: Per-Key basis, all operations have a global order.
+- CRDTs (Commutative Replicated Data Types):
+    + Operations for which commutated writes give same result.
+    + Ordering is unimportant in that case.
+- Red-Blue: Divide operations in to Red and Blue. Order is MUST/important for
+  Red operations but not so for Blue.
+- Causal: Reads and Write are causally linked. One happens before other or
+  depends on other.
+
+What are models of Strong Consistency?
+---
+- Linearizability: Each op is visible instantaneously to all other clients.
+- Sequential Consistency [Leslie Lamport]:
+- Some NoSQL are supporting ACID.
+
+
+HBase
+---
+- Yahoo implemented Google's BigTable called HBase.
+- API Functions:
+    + get/put(row)
+    + scan(row range, filter) - range queries
+    + multiput
+- HBase prefers consistency over availability.
+
+
+HBase Architecture
+---
+- Lookup online.
+- HDFS is underlying storage.
+
+
+HBase Storage Hierarchy
+---
+- HBase Table
+    + Split in to multiple regions and replicated.
+    + ColumnFamily = subset of columns with similar query patterns.
+    + One "Store" per combination of ColumnFamily and Region.
+        * "Memstore" for each Store: in-memory updates to Store. Flushed to disk
+          when full.
+        * StoreFiles for each Store (HFile is underlying format)
+
+- HFile
+    + SSTable from Google's BigTable
+
+How does HBase maintain Strong Consistency?
+---
+- Using Write-Ahead Log, called HLog.
+- HLog is written so if there's a failure in Memstore, HRegionServer/HMaster can
+  replay the message from HLog and write to Memstore.
+
+
+
+Cross-Datacenter Replication
+---
+- Single "Master" cluster.
+- Other "Slave" clusters replicate same tables.
+- Master cluster synchronously sends HLogs over to Slave clusters.
+- Coordination among clusters via Zookeeper.
+- Zookeeper can be used as a file system to store control info.
+
+
+
+Time and Ordering
+---
+Asynchronous Distributed Systems:
+---
+- Different clocks and diff systems all together.
+
+Clock Skew vs Clock Drift
+---
+- CS: Relative diff in clock values of two processes
+    + Like distance between two vehicles on a road.
+- CD: Relative diff in clock frequencies (rates) of two processes.
+    + Like difference in speeds of two vehicles on the road.
+
+- non-zero CS means, clocks are not synchronized.
+- non-zero CD causes CS to increase.
+
+
+How often to synchronize?
+---
+- MDR: Maximum Drift Rate of a clock
+- Coordinated Universal Time (UTC): is "correct" time at any point.
+- Absolute MDR is defined relative to UTC.
+- Max drift rate between two clocks with similar MDR = 2*MDR
+- Given a max acceptable skew M, between any pair of clocks, need to synchronize
+  at least once every: M/(2*MDR)
+    + Since time = distance/speed
+
+
+External vs Internal Synchronization
+---
+External Sync
+---
+- Each process clock C is within a bound D of a well-known external clock S.
+    |C-S| < D at all times.
+- Ex: Cristian's algorithm and NTP
+
+Internal Sync
+---
+- Every pair of processes in a group have clocks within bound D
+    |C(i) - C(j)| < D at all times for processes i and j.
+- Ex: Berkeley algo.
+
+- External Sync with D = Internal Sync with 2*D
+- Internal Sync does not imply External Sync
+    + In fact, the entire system may drift away from external clock S
+
+
+Cristian's Algorithm
+---
+- External time sync. All processes P sync with external time server S.
+- P measures RTT of message exchanges.
+- min1 = minimum P->S latency
+- min2 = minimum S->P latency
+- Actual time at P when it receives response is between:
+    [t+min2, t+RTT-min1]
+        Note that RTT > (min1+min2)
+- P sets its time to halfway through this interval
+    t+(RTT+min2-min1)/2
+- Erro is at most (RTT-min2-min1)/2
+    + Bounded error.
+
+Gotchas
+---
+- Allowed to increase clock value but not decrease, to maintain linearity of
+  events. Otherwise it may violate ordering of events within a process.
+- Allowed to increase or decrease clock speed.
+- If error is too high, take multiple readings and average them.
+
+
+NTP
+---
+- NTP servers organized in a tree.
+- Root of tree = Primary Servers, where UTC time/clock present.
+- Children of Root = Secondary Servers.
+- Grandchildren of Root = Tertiary Servers.
+- Each client is leaf of the tree.
+
+
+                 TR1     TS2
+Child ------------^---------------------^-------------------------->
+        \        /         \           / Parent sends
+         \      /M1         \ M2      / (TS1, TR2)
+          \    /             \       /
+Parent ----v------------------v------------------------------------>
+           TS1               TR2
+
+- Child uses all these times to calculate it's clock.
+
+- Offset O = (TR1-TR2+TS2-TS1)/2
+
+- Suppose real offset between Child and Parent is oreal
+    + Child is ahead of Parent by oreal
+    + Parent is ahead of Child by -oreal
+
+- Suppose one-way latency of M1 is L1 and of M2 is L2. L1 and L2 are unknown.
+- TR1 = TS1 + L1 + oreal
+- TR2 = TS2 + L2 - oreal
+- Subtracting both equations to get oreal
+
+    oreal = (TR1-TR2+TS2=TS1)/2 + (L2-L1)/2
+    oreal = O + (L2-L1)/2
+    |oreal-O| < |(L2-L1)/2| < |(L2+L1)/2|
+        + Thus, the error is bounded by RTT.
+
+- There's always non-zero error. Can't we *not* synchronize clocks? Directly
+  address the issue of events ordering?
+
+
+Lamport (Logical) Timestamps
+---
+- Assign timestamps to events that were not *absolute* time, but obey
+  *causaility*.
+
+- Define a logical relation Happens-Before among pairs of events.
+- Happens-Before denoted as ->
+
+Three Rules
+    1) On the same process: a -> b, if time(a) < time(b), using local clock.
+    2) If p1 sends m to p2: send(m) -> receive(m)
+    3) If a -> b and b-> c then a -> c (Transitive Property)
+        + Not all events related to each other via ->
+
+- These rules create partial order among events. Two processes that never
+  communicate have their events that are concurrent.
+
+
+Implementation of Lamport Timestamps
+---
+Goal: Assign logical timestamps to each event.
+- Timestamps obey causality.
+- Rules:
+    + Each process uses a local counter, an int, initialized to 0.
+    + Process increments its counter when a *send* or an *instruction* happens
+      at it. Counter is assigned to the event.
+    + A *send* message event carries its timestamp
+     + For receive message event, the counter is updated by:
+        receive timestamp = max(local clock, message timestamp) + 1
+
+Concurrent Events
+---
+- A pair of concurrent events doesn't have causal path from one event to
+  another.
+- Lamport timestamps not guaranteed to be ordered or unequal for concurrent
+  events.
+- E1 -> E2 means timestamp(E1) < timestamp(E2), However, opposite is not true:
+    if timestamp(E1) < timestamp(E2) then E1 -> E2 OR E1 and E2 are concurrent.
+- Concurrent events can't be identified.
+
+Vector Clocks
+---
+- Used in Key-Value store like Riak
+- Each process uses a vector of integer clocks.
+- Supposed there are N processes in the group then each vector has N elements.
+- Process i maintains vector Vi[1...N]
+- jth element of vector clock at process i, Vi[i], is i's knowledge of latest
+  events at process j.
+- Each msg carries senders vector
+- On receiving a message at process i:
+        Vi[i] = Vi[i] + 1
+        Vi[j] = max(Vmsg[j], Vi[j]) for i not equal j
+
+- Obey's causality. Watch video 2.5 at 5min 40s.
+- More space consuming, but this idea can capture concurrent events.
+
+
+Week 5
+---
+Global Snapshot
+---
+- In a distributed system, how do you calculate a "global snapshot"? What
+  does it even mean and uses?
+    + Checkpointing: can restart applications on failure.
+    + Garbage Collection: of unused objects.
+    + Deadlock Detection: useful in DB transactions.
+    + Termination of Computation: useful in batch computing.
+
+- Global Sanpshot = Global State = Individual state of each process +
+  Individual state of each communication chaneel. Channels are FIFO ordered.
+
+- Capture *instantaneous* state of each process.
+- Capture *instantaneous* state of each communication channel.
+
+First Solution:
+---
+- Sync all processes and record states at time t.
+- Probs:
+    + Time sync always has errors.
+    + Doesn't record state of msgs in channels.
+- However, sync is not required. Causality is enough.
+
+
+                Cji
+       <---------------------
+    Pi                       Pj
+       --------------------->
+                Cij
+
+
+- Next solutions obey causality.
+
+Chandy-Lamport Algorithm of Global Snapshot (classical algo)
+---
+Problem: Record a global snapshot for each process state and comm channel.
+System Model:
+- N processes in the system.
+- Two uni-directional comm channel between processes Pi and Pj
+    + FIFO ordered
+
+Assumptions:
+- No failure on channel
+- All messages arrive intact and no duplicates.
+
+Requirements:
+- Snapshot shouldn't interfere with normal apps.
+- Each process is able to record it's own state.
+- Global state is collected in distributed manner.
+- Any process may initiate a snapshot.
+
+Snapshot Initiator Process Pi
+---
+- Pi records its own state first.
+- Pi creates special messages called "Marker" messages.
+
+for j=1 to N, except i
+    Pi sends out a Marker msg on outgoing channel Cij
+    // thats N-1 channels
+- Starts recording incoming messages on each of incoming channels at Pi:
+    Cji for j=1 to N except i
+
+When Pi receives a Marker message on Cki
+// Pi can be any process and need not be Initiator process.
+---
+- If this is 1st Marker Pi is seeing on channel Cki
+    + Pi records it's own state first.
+    + Marks the state of incoming channel Cki as "empty"
+    + for j=1 to N except i
+        * Pi sends out a Marker msg on outgoing channel Cij
+    + Starts recording the msgs on each of incoming channels at
+      Pi: Cji for j=1 to N except i and k
+- Else // already seen a Marker msg
+    + Mark all messages received since first Marker on Cki as part of the
+      state of Cki and stop recording state on that channel.
+
+- Note that state of a channel is Marked by the receiving end of the
+  channel.
+
+- Algo Termination:
+    + All processes receives a Marker msg.
+    + All processes have received a Marker on all N-1 incoming channels
+
+- This algo is Causally Correct.
+
+
+Consistent Cuts
+---
+Cut = Time point at each process and at each channel.
+- Events at the process/channel that happen before the cut are "in the cut"
+  and after the cut are "out of the cut".
+
+Consistent Cut: a cut that obeys causality
+- A cut C is consistent iff for each pair of events e and f such that event
+  e is in the cut C and if f->e (f happens-before e) then f is in cut C.
+
+
+- In Chandy-Lamport Global Snapshot algo, the Consisten Cut is the line
+  through all the starting points of each process recording time.
+
+- Proof of Consistent Cut in Chandy-Lamport algo is in video 5.2.3 (Consistent
+  Cuts)
+
+Safety & Liveness Properties
+---
+- These properties determine "Correctness" in distributed systems.
+
+- Liveness = guarantee that something "good" will happen "eventually".
+    Ex:
+    + Distributed computation will terminate eventually.
+    + Every failure is eventually detected by some non-faulty process.
+    + In Consensus, all processes eventually decide on a value.
+
+- Safety = guarantee that something "bad" will "never" happen.
+    Ex:
+    + There's no deadlock in a distributed transaction system.
+    + No object is orphaned in a distributed object system.
+    + "Accuracy" in failure detectors.
+    + In Consensus, no two processes decide on different values.
+
+- Very hard to guarantee both Liveness and Safety in Async Dist systems.
+    Failure Detector: Completeness (Liveness) and Accuracy (Safety) cannot
+                      both be guaranteed.
+    Consensus: Decisions (Liveness) and Correct Decisions (Safety) cannot
+               both be guaranteed. Time bound Liveness is hard to gaurantee.
+               Paxos gaurantee's eventual Liveness.
+    Legal: Very hard for legal systems to guarantee that all criminals will
+           be jailed (Liveness) and no innocent is ever jailed (Safety).
+
+
+What does Liveness and Safety mean in Global Snapshot/State world?
+---
+- Dist sys moves from one state to another.
+- Liveness, w.r.t a property Pr in a given state S means
+    + S satisfies Pr or there is some causal path from S to S' where S'
+      satisfies Pr.
+- Safety w.r.t a property Pr in a given state S means
+    + S satisfies Pr and all global states S' reachable from S also satisfy
+      Pr.
+
+- Stable Properties = once true, stays true forever.
+- Chandy-Lamport algo can be used to detect global stable properties.
+
+- Stable Liveness example: Computation terminated.
+- Stable non-Safety example: There's deadlock.
+
+- Due to its Causal correctness, all stable properties can be detected using
+  Chandy-Lamport algo.
+
+
+Multicast Ordering
+---
+- A msg sent to multiple processes in a group.
+
+Who uses multicast?
+---
+- Widely used abstraction in all cloud systems.
+- Replica servers for a key multicasts read/writes within the replica group.
+- Membership info is multicast across all servers in a cluster.
+
+- Types of ordering in Multicast
+    + FIFO
+    + Causal
+    + Total Ordering
+
+- Causal ordering implies FIFO ordering. Reverse is NOT true.
+- Causal ordering is intuitive and preferred.
+- Total ordering is aka "Atomic Broadcast".
+- Unlike FIFO and Causal, Total Ordering does not pay attention to order of
+  multicast sending.
+- Total ordering ensures all receivers receive all multicasts in the same
+  order.
+
+
+FIFO Multicast: Data Structs
+---
+- Each receiver maintains a per-sender sequence numbers
+    + Process P1 through Pn
+    + Pi maintains a vector of seq. no. Pi [1...n], zero initialized.
+    + Pi[j] is latest seq. no. Pi has received from Pj.
+
+- Sender Pj:
+    + Pj[j]++
+    + Include new Pj[j] in multicast msg.
+
+- Receive multicast: If Pi receives a multicast from Pj with seq. no S in
+  msg then:
+    + if (S == Pi[j] + 1) then
+        * deliver msg to application
+        * set Pi[j]++
+    + else buffer this multicast until above condition is true.
+
+
+Ex: Please see lecture 2.2 starting at 4.00 minutes
+
+Total Ordering: Ensures ordering of messages are same across all receivers.
+---
+- Sequence based approach.
+- Special process elected as leader or sequencer.
+
+- Sender Pi sends multicast msg to group and sequencer.
+
+- Sequencer:
+    + Maintains a global sequence number S (initially 0)
+    + When it receives a multicast msg M, it increments S and multicasts M
+      and S.
+
+- Receive multicast at Pi:
+    + Pi maintains a local received global seq. no. Si (initially 0).
+    + If Pi receives a multicast M from Pj, it buffers it until following
+      two conditions are satisfied:
+        * Pi receives <M, S(M)> from Sequencer AND
+        * Si + 1 = S(M)
+        * Then deliver its msg to application and set Si=Si+1
+
+
+Causal Ordering Impl: Data Struct
+---
+- Each receiver maintains a vector of per-sender seq. no.
+- Similar to FIFO multicast, but updating rules are diff.
+- Processes P1 to Pn
+- Pi maintains a vector Pi[1...n] (initially 0)
+- Pi[j] is the latest seq. no Pi has received from Pj
+
+
+Classical Distributed Algorithms
+---
+
+Consensus Problem (Paxos)
+---
+- five-9's or seven-9's of reliability.
+- 100% is not possible due to consensus problem.
+
+Classical Problems in Distributed Systems
+---
+Reliable Multicast: All nodes in a group receive same updates in same order as
+each other.
+Membership/Failure Detection: Maintain local lists of members and when one
+leaves or fails, everyone is updated.
+Leader Election: Elect a leader in the group and let everyone know.
+Mutual Exclusion: Ensure mutually exclusive access to critical resources
+(similar to synchronization problem).
+
+- Above problems are related to Consensus Problem.
+
+Formal definition of Consensus
+---
+- N processes. Each process p has
+    + input variable xp (initially 0 or 1)
+    + output variable yp: (initially b and can be changed only once).
+- Consensus problem: design a protocol so that at the end, either
+    + All processes set their output variables to 0 (all zeros)
+    + OR all processes set their output variables to 1 (all ones)
+
+- Goal is to have all processes decide same value. Once a process decides, it
+  cannot be changed.
+
+- Synchronous and Asynchronous System Models exist in which to solve consensus
+  problem.
+
+Synchronous Dist Sys
+---
+- Each msg is received within bounded time.
+- Drift of each process' local clock has a known bound.
+- Each step in a process takes LB < time < UB
+- Consensus probl is solvable in Sync Dist Sys.
+
+Asynchronous Dist Sys
+---
+- No bounds on process execution.
+- Drift rate of a clock is arbitrary
+- Consensus probl is NOT solvable in Sync Dist Sys.
+
+
+Consensus in Synchronous Dist Sys.
+---
+- System Model
+    + Bounds on msg delays, drift rates and max time of each step.
+    + Process once fail, doesn't recover (assumption).
+
+Paxos
+---
+- Consensus is impossible to solve in Async systems.
+- Paxos solves consensus and most popular.
+- Paxos provides safety and eventual liveness.
+- Safety: Consensus is not violated
+- Eventual Liveness: Eventually consensus is reached but not gauranteed.
+
+- Paxos has rounds; each round has a unique ballot id
+- Rounds are async
+    + If a process is in round j and gets a msg from round j+1, abort everything
+and move over to j+1
+    + Can also use timeouts.
+- Each round itself broken in to phases
+    + Phase 1: A leader is elected (Election)
+    + Phase 2: Leader proposes a value, processes ACK (Bill)
+    + Phase 3: Leader multicasts final value (Law)
+
+Phase 1 - Election
+---
+- Potential leader chooses a unique ballot id, higher than anything seen so far.
+- Multicasts to all processes.
+- Processes wait, respond once to highest ballot id.
+    + If potential leader sees a higher ballot id, it can't be a leader.
+    + Paxos tolerant to multiple leaders (only one leader case studied here).
+    + Processes also log received ballot id on disk.
+- If a process has decided value 'v' in previous round, include that in this
+  round.
+- If majority (quorum) respond OK then you are the leader. Else, start new
+  round.
+- A round cannot elect two leaders if things go right. But edge cases exist.
+
+
+Phase 2 - Proposal (Bill)
+---
+- Leader sends proposed value 'v' to all
+- Recipients logs msgs on disk and responds OK.
+
+
+Phase 3 - Decision (Law)
+---
+- If leader hears a majority of OKs, it lets everyone know of the decision.
+- Recipients receive decision, lot if on disk.
+
+
+- When is consensus reached? End of Bill phase.
+
+
+
+@@@@@@@@@@@@@@@@     NOTES    FROM     VARIOUS    TALKS     @@@@@@@@@@@@
+Intro to Architecture and Systems Design Interviews
+---
+- Architecture interviews determine your worth to the company. Compensation is
+  heavily dependent on architecture interviews.
+- Drive the interview showing passion.
+- Incorrect numbers are OK, but must be in rough ballpark.
+- Must nail the area of your expertise. Other areas, must talk intelligently
+  and take good decisions.
+- Complacency = death in this industry. If an engineer doesn't grow rapidly in
+  X years, Facebook lets them go. They are not motivated to grow.
+
+
+[1] https://www.youtube.com/watch?v=As2gOXtcPVQ
+
+===============================================================================
+System Design Interview - Framework/Blueprint
+1) Gather use cases and constraints
+2) Abstract/High Level design
+3) Bottlenecks
+4) Scalability
+
+Gather Use Cases:
+=====
+- Collect use cases (in TinyURL, it's following)
+    * Shortening URL: Take URL and shorten it
+    * Redirection: Given short URL, redirect them to webpage
+
+    /* Many other use cases. Ask interviewer */
+    * Custom URL
+    * Analytics
+    * Automatic link expiration
+    etc
+
+Gather Constraints:
+====
+- # of requests per second (or month, preferred)
+- Size of data being saved?
+    * Data size per object (500 bytes per URL. 6 bytes per hash.)
+- Scale it for next 5 years
+
+Abstract Design
+====
+- Application service layer (serving requests)
+    * Shortening service
+    * Redirection service
+- Data storage layer (hash=>URL mapping)
+
+- Simple hash can solve this
+    hashed_url = convert_to_base62(md5hash(original_url + random_salt))
+
+
+Understanding Bottlenecks
+====
+
+Scalability
+====
+
+
+https://www.hiredintech.com/courses/system-design
+===============================================================================
+Scalability (Lecture by David Malan from Harvard Univ)
+---
+Topics Covered:
+- Vertical and Horizontal Scaling
+- Load Balancing and Caching
+- Shared Session State
+- RAID technologies
+- Shared Storage Technology
+- Database Replication
+- Load Balancing Tech
+- Session Affinity
+- In-Memory Caching
+- Data Replication: Active/Passive, Active/Active
+- Partitioning
+- Data Center Redundancy
+- Security
+
+- VPS vs Shared Hosts. In VPS, you get a share of hardware resources (VM)
+  unlike shared hosts.
+- How will you scale website? Two types:
+    (a) Vertical Scaling: In same node, add RAM or Cache to improve
+performance
+    (b) Horizontal Scaling: Add more nodes/servers
+
+Hard Drives
+===
+- ATA, SATA, SAS Drives --> Mechanical Drives
+- SSD - All flash drives. No moving parts. Very expensive.
+
+Vertical
+----
+- Add more resources (hardware). But you'll soon hit physical and financial
+  limits soon
+
+Horizontal
+----
+- Adding commodity hardware and scale. Try not to hit limits _per_ hardware
+- Now many servers are handling user requests. Inbound requests must be
+  distributed equally to all servers (Load Balancers).
+- HTTP(S) Sessions are typically implemented per server. So, as long as
+  sessions are alive, requests must be sent to that server only.
+
+Q: When user enters www.google.com, which IP should be served to user?
+A: Return IP of LB (a public IP). LB balances inbound requests to one of the
+servers. Assumption is that any server can serve the request (same content).
+
+- Some times, the DNS server itself can return IP of one of the servers
+  instead of using Load Balancer. BIND DNS can do this today.
+- BIND does Round Robin scheduling, which isn't always great algorithm.
+
+Pros of using DNS:
+    * Simplicity
+Cons:
+    * Round Robin
+    * DNS record can be cached and subsequent request can go to same server
+    * although records expire after some time.
+
+- If DNS returns IP of LB then, LB will take care of Load Balancing.
+
+Q: How can load balancer send requests from a session to same server?
+A: Have a common hard disk for all servers and have session info stored there
+instead of locally?
+A: Alternately, load balancer can store session info. LB is now doing more
+work.
+
+Q: What happens if LB fails/dies?
+A: No easy answer. Instead, use RAID servers as hard drive (Redundant Array of
+Independent Disks)
+
+
+Load Balancers
+----
+Software Solution: Amazon's Elastic LB, HAProxy (Open Source), Linux Virtual
+Server (LVS) ...
+Hardware Solution: Barracuda, Cisco, Citrix, F5
+
+
+Storage Technologies
+---
+RAID: Redundant Array of Independent Disk
+----
+- RAID0, RAID1, RAID5, RAID6 and RAID10 and more
+- RAID0: 2 HD of identical types. "Striping" is a method to write to them.
+    - Server writes little bit to HD1 and then HD2 and so on.
+    - Good for performance
+- RAID1: 2 HD of identical types. Data is mirrored. Provides redundancy.
+- RAID5, 6, 10 are combination of above with benefits and performance
+  improvements.
+
+Fiber Chanel (FC) - Very fast and expensive. Enterprise use.
+iSCSI - Storage over IP over Ethernet. Inexpensive.
+NFS - It's a protocol to share storage over network.
+
+Caching
+---
+- .html, MySQL, memcached
+- Query caching. Some DBs provide it. If rows are not updated, previous result
+  of the query is returned.
+- Memcached: Memory Cached
+    - Method to store contents in RAM.
+    - Cache can be consumed. So, cache management is needed (LRU, etc)
+
+PHP Accelerators
+---
+- Interpreted languages are slow (compared to compiled).
+- If content is in PHP files, PHP accelerators will enhance speed.
+
+
+DB Replication
+---
+- master-slave connection. Slaves get a copy of every row from Master
+- Slaves can replace Master with minimal config changes, in case of failures
+  on Master.
+- Load balancing can be done on DBs also. Especially, in events of
+  read-heavy queries.
+
+DB Partitioning: is another paradigm to load balance DBs
+
+High Availability (HA): Two or more servers (or DBs) are checking each other's
+heartbeat to make sure services are not down.
+
+
+
+
+
+[1] https://www.youtube.com/watch?v=-W9F__D3oY4&list=WL&t=34s&index=14
+
+===============================================================================
+System Design from InterviewBit
+----------
+Terminology:
+
+- Replication:
+- Consistency: Data is same across multiple systems on which it's stored.
+- Eventual Consistency:
+- Availability: Ability to read/write requests
+- Partition Tolerance: In a DB cluster, even if two nodes can't communicate with
+  each other, the cluster continues to function.
+- Horizontal Scaling: Add more servers/hardware
+- Vertical Scaling: Increase resources of server (RAM, Storage, CPU etc)
+- Sharding: Splitting a very large database in to small, manageable and fast
+  parts called shards (databases)
+
+- CAP Theorem
+
+Steps to approach problem
+---
+1) Feature Requirements: Get clear understanding or reqs.
+2) Estimations: Estimate scale of required system.
+3) Design Goals: Figure most important goals.
+4) Skeleton Design: High level design.
+5) Deep Dive:
+
+Problems
+----
+Design a Cache (as in Memcached, Redis etc)
+-----
+
+           1                  3
+    App -----------> Cache ------------> DB
+        <-----------       <------------
+           2                   4
+
+1 Check if data is in Cache
+2 If present, return data from cache
+3 Else, request DB
+4 Add data to Cache and send to App
+
+
+
+1) Features of Cache
+    My responses:
+    * Fast lookup/retrieval. Must be in RAM or fast in-memory store
+    * Data must be latest and consistent
+    * Cache must be resilient (always available)
+    * Implement some management mechanism
+
+    InterviewBit responses:
+    * How much data must be cached? Google/Twitter scale? Then few TBs of
+      data.
+    * What is eviction strategy?
+    * What is access pattern for cache?
+        - Write Through Cache: Writes to cache are also written to DB. More
+          latency.
+        - Write Around: Write to DB. Cache reads from DB on miss. Slightly
+          faster than "Write Through"
+        - Write Back: Write to cache, which later (asynchronously) writes to
+          DB.
+
+2) Estimation: Important part is QPS (Queries Per Second)
+    My responses:
+    * At Twitter scale, 500 mil tweets per day ~ 6000 tweets/s
+    * Each tweet = 140 chars, So 6k * 140 * 8 bytes = 6.72MB/s of writes
+
+
+[1] https://www.interviewbit.com/courses/system-design/
+
+
+===============================================================================
+Memcached
+- Distributed in-memory hash table service
+- "Hot" data from DB stored in cache
+
+
+            Web Servers
+                ^
+                | 100M requests/s
+                |
+                v
+             Memcache <-------- 28 TB of RAM
+                ^
+                | 5M requests/s
+                |
+                v
+              MySQL DB
+
+- Memcached queries take < 0.5ms and 95% cache hit rate
+- FB is heaviest user of memcachd: 20+ TB of RAM and 800+ servers
+
+
+
+[1] https://www.youtube.com/watch?v=UH7wkvcf0ys&list=WL&index=14&t=142s
+
+===============================================================================
+Messaging at Scale at Instagram
+
+- Photos from accounts you follow show up on your feed.
+- Photos are time ordered. Newest on top.
+
+Naive Approach
+--------------
+- Basic SQL command would be
+
+    SELECT * FROM photos
+        WHERE author_id IN
+            (SELECT target_id FROM following WHERE
+                source_id = %(user_id) d)
+        ORDER BY creation_time DESC
+        LIMIT 10;
+
+    * Fetch all accounts you follow
+    * Fetch all photos by those accounts
+    * Sort photos by creation time
+    * Return first 10
+
+- Fanout-On-Write Approach:
+    + When a user posts a photo/media, insert it in to memory pool maintained
+      for each user. This pool is per account list of media IDs (Redis).
+    + O(1) read cost and O(N) write cost.
+    + Best when reads are much higher than writes. For Instagram, its 100:1 or
+      more.
+
+Disadvantages:
+    + Reliability problems.
+        - DB servers fail
+        - Web request is complex
+        - Justin Bieber Problem (millions of followers)
+
+
+Run of the mill Async request architecture
+
+                        Broker
+                        +----+
+                        | 46 |---------> Worker(46)
+                        +----+
+                        |142 |
+                        +----+
+                        |709 |---------> Worker(709)
+                        +----+
+                        | 98 |
+                        +----+
+                        | 12 |
+                        +----+
+            Web ------->| 51 |
+                        +----+
+                        |    |
+                        |    |
+                        |    |
+                        |    |
+                        +----+
+
+- Web requests are inserted in to Broker.
+- Workers handle the requests.
+- If Workers fail, the request is redistributed to Broker, thus providing
+  reliability.
+
+Justin Bieber Problem:
+----
+- Chained Tasks: Each Task delivers media posted by celebrities to small
+  groups, one group at a time.
+- Group size can be up to 10K followers.
+- Tasks are like recursive calls.
+- Failure of a task will have less impact.
+- Much fine-grained load balancing.
+
+Other features done when a user posts a media
+----
+- Cross-Posting to other networks
+- Search Indexing
+- Spam Analysis
+- Account Deletion ??
+- API Hook ??
+
+Various Broker Systems
+----
+Redis:
+    + Very fast, efficient
+    - Polling based task distribution. Workers poll for tasks.
+    - Messy non-asynchronous replication.
+    - In-Memory DB. So, if server runs out of memory, data is lost.
+
+Beanstalk:
+    + Purpose built task queue
+    + Very fast, efficient.
+    + Pushes to consumer.
+    + Spills to disk
+    - No replication
+    - Useless for anything else
+
+RabbitMQ:
+    + Reasonably fast, efficient.
+    + Spills to disk
+    + Low maintenance synchronous replication
+    + Excelent Celery compatibility
+    + Supports other use cases
+
+
+Concurrency Models
+-------
+- Multiprocessing (not same as fork())
+- eventlet ??
+- gevents
+- threads
+
+[1] https://www.youtube.com/watch?v=E708csv4XgY&list=WL&index=17
+
+===============================================================================
+Distributed Systems has 3 characteristics
+    * Multiple compute nodes
+    * Each node can fail independently
+    * They do not have a synchronized clocks
+
+3 Main Things to consider:
+    * Storage (DBs)
+    * Computation
+    * Messaging
+
+More detailed things to consider:
+        Storage:  Relational/Mongo, Cassandra, HDFS
+    Computation:  Hadoop, Spark, Storm
+Synchronization:  NTP, vector clocks
+      Consensus:  Paxos, Zookeeper
+      Messaging:  Kafka
+
+Storage
+=======
+- Typically in highly scaled system, many more reads than writes. How NOT to
+  load the system?
+    * Read Replication (Scale Read servers) - 1st strategy in scaling web.
+    * Writes to one of the server is replicated to all Read Servers.
+
+- But what's the problem?
+    * We broke consistency. Possible that 'Read' gets old info.
+
+- Sharding is another form of breaking up database. What's the problem?
+    * Join's is not possible across DBs. If you have a query that has to touch
+      all the shards, that doesn't go well with Sharding.
+    * How to solve?
+        + Denormalization
+        + Consistent Hashing
+
+- Consistent Hashing
+    * Imagine bunch of nodes around a circle
+    * Write to one node in circle and copy to two more nodes, for replica
+    * But this introduces consistency problems, right? Yes, it does.
+        + That's why when reading, read from 2 nodes and they should be same.
+        + You can read from all three and compare. But in practice, only two
+          nodes are used.
+    * Rough rule of thumb for consistency:
+        R + W > N  ==> provides strong consistency
+            R = Number of reads
+            W = Number of writes
+            N = Number of replicas
+
+Computation
+===========
+- CAP Theorem:
+    * Consistency
+    * Availability
+    * Partition Tolerant
+
+Distributed Transactions
+---
+- ACID Transactions
+    * Atomic
+    * Consistent - This is different consistency than in CAP theorem. It means
+      that DB is left in valid state after writing.
+    * Isolated - One transaction cannot "see" other until that is completed.
+      In practice, its much more complex.
+    * Durable - DB remembers what's written, forever.
+
+Responses to Failure
+---
+    - Write-Off: In case of coffee shop, you made the drink, but customer is
+      gone w/o taking it. Coffee is wasted.
+    - Retry:
+
+
+
+- MapReduce: It's a compute pattern. It's not a product. Hadoop is a product.
+    * Map words and their count
+    * Shuffle the words around, so similar words are together
+    * Reduce: Add up the numbers of same word to get total count
+
+- Hadoop: Rapidly deployed, but becoming obsolete. It's ecosystem is in use
+    * MapReduce API
+    * MapReduce Job Management
+    * HDFS (Hadoop Distributed File System) - Going to last long.
+    * Enormous ecosystem - Ex: Hive
+
+- Spark: Taken over of Hadoop
+    * Scatter/Gather paradigm (similar to MapReduce)
+    * Transform/Action, similar to Map/Reduce
+    * Spark gave an object, an abstraction on top of data, that can be
+      programmed, call methods etc.
+    * Spark programming model is friendly.
+    * Spark does not have storage requirements: HDFS, Cassandra data etc
+
+- Kafka: Everything is a stream of data. Computation can be done on it.
+    * Even Spark has stream processing API.
+    * In Kafka, stream is first class citizens.
+    * Kafka is not just messaging framework, but also computation framework.
+
+
+Messaging
+=========
+Concepts:
+    - Means to loosely couple subsystems
+    - Messages are consumed by SUBSCRIBER
+    - Created by PRODUCER
+    - Organized in to named TOPICS
+    - Processed by BROKER. It's just a compute node.
+    - Persistent over short term
+
+What if a TOPIC becomes too big for a computer?
+    - Messages are too big?
+    - Producers are too many?
+    - Subscribers are slow
+    - How to gaurantee delivery?
+
+
+Apache Kafka: It's a message bus.
+- When TOPIC becomes big, we partition the TOPIC
+- Each partition has one BROKER
+- Ordering of messages is not gauranteed globally (but within partition is
+  possible)
+
+
+Lambda Architecture
+===================
+AWS Lambda: Serverless Computing (Google Functions, Microsoft has Azure
+Functions, IBM has OpenWhisk)
+- It's an event driven computing platform
+- Lambda runs when triggered by an event and executes code that's been loaded
+  in to the system
+- Ex: When an image is loaded to S3, a function is executed to resize it.
+- Clients only pay when lambda function resize() runs.
+
+
+[1] Distributed Systems in One Lesson by Tim Berglund
+https://www.youtube.com/watch?v=Y6Ev8GIlbxc&t=1096s&index=18&list=WL
+
+[2] Distributed Systems in One Lesson by Tim Berglund
+Safari Online Video - 4 hours long
+
+===============================================================================
+System Design Interview Strategies
+---
+
+Requirements
+- Break up the problem in to smaller parts
+
+Constraints/Estimations
+- Think about Peaks and Troughs in traffic
+- For simple problems, keep data structure in mind. What DS will you use?
+
+- Work with Interviewer for direction and details
+- While working in the weeds, keep big picture in mind and MOST IMPORTANTLY,
+  keep consumers interest in mind
+
+- KEEP GOING, never give up.
+
+[1] Jackson Gabbard talk
+
+===============================================================================
+- CAP Theorem
+- Vertical Scaling - Scaling up (more RAM/CPU). There's a limit.
+- Horizontal Scaling - More servers/nodes
+
+- Sticky sessions - Users session is pinned to a Web Server (or LB carrying
+  session info)
+    * Downside - if that Web Server/LB fails?
+
+Caching Mechanism:
+    - Add caches within App server
+        * Object cache
+        * Session cache
+        * API
+        * Page
+
+HTTP Accelerator (does following)
+    - Redirect static content to lighter httpd server
+    - Cache contents based on rules
+    - Use Async Non Blocking IO
+    - Maintain limited pool of Keep-Alive connections to App Server
+    - Intelligent LB
+
+- CDNs
+
+[1] Best practices for scaling web apps
+https://www.youtube.com/watch?v=tQ2V9QSv48M&list=WL&t=4s&index=16
+===============================================================================
+SDI - How do you design a parking lot
+
+- Gather requirements (Handle ambuiguity)
+    * Who are we designing this system for?
+    * Should we write data structs/APIs etc?
+    * Do you want class hierarcy?
+
+- Systematic approach. Ask clarifying questions
+    * How many spots?
+    * One building? Multiple buildings? Open parking lot? Multiple entrances
+      (concurrency issues)
+    * Fill up upper levels and go down or similar constraints?
+    * Price per lot?
+    * Dependancy between spots/levels?
+    * Premium vs Regular vs Disability vs Cheaper spots
+
+Requirements (given by interviewer)
+- 4 sizes of parking spots (Small, Medium, Large, XLarge)
+- Smaller vehicles can park in bigger spots
+- Same price for each spot?
+
+Design
+- Represent vehicles (motorcycles, compact cars, big cars, bus)
+- An abstract class called Vehicle
+    struct vehicle {
+        char license[8];    // or VIN?
+        enum color;
+    };
+
+- 4 classes of vehicles: S, M, L, XL
+- APIs
+    int parkingSpot(struct vehicle v);
+
+
+[1] https://www.youtube.com/watch?v=DSGsa0pu8-k&index=20&list=WL
+
+===============================================================================
