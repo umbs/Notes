@@ -908,7 +908,7 @@ When Pi receives a Marker message on Cki
         * Pi sends out a Marker msg on outgoing channel Cij
     + Starts recording the msgs on each of incoming channels at
       Pi: Cji for j=1 to N except i and k
-- Else // already seen a Marker msg
+- Else // already seen a Marker msg on Cki
     + Mark all messages received since first Marker on Cki as part of the
       state of Cki and stop recording state on that channel.
 
@@ -916,8 +916,12 @@ When Pi receives a Marker message on Cki
   channel.
 
 - Algo Termination:
-    + All processes receives a Marker msg.
-    + All processes have received a Marker on all N-1 incoming channels
+    + All processes received a Marker msg to record it's own state.
+    + All processes have received a Marker on all N-1 incoming channels to
+      record the state of all channels.
+
+- Then, if needed, a central server collects all these partial state pieces to
+  obtain the full global snapshot.
 
 - This algo is Causally Correct.
 
@@ -1009,6 +1013,16 @@ Who uses multicast?
 - Total ordering ensures all receivers receive all multicasts in the same
   order.
 
+- Hybrid Variants exist.
+    * Since FIFO/Causal are orthogonal to Total ordering, we can have hybrid
+      ordering protocols
+    * FIFO-Total hybrid protocol
+        + Satisfies both FIFO and Total ordering
+    * Causal-Total hybrid protocol
+        + Satisfies both Causal and Total ordering
+
+Implementation Details
+=====
 
 FIFO Multicast: Data Structs
 ---
@@ -1059,6 +1073,45 @@ Causal Ordering Impl: Data Struct
 - Processes P1 to Pn
 - Pi maintains a vector Pi[1...n] (initially 0)
 - Pi[j] is the latest seq. no Pi has received from Pj
+
+Reliable Multicast
+----
+- Need all _correct_ (ie., non-faulty) processes to receive the same set of
+  multicasts as all other correct processes
+
+How to implement reliable multicast?
+---
+- Lets assume we have reliable unicast available (e.g., TCP)
+- First-cut: Sender Pi sends a message to all group members (like a for loop
+  or something)
+    + Unreliable. What happens if sender fails mid-way? Some processes will
+      multicast message while others don't.
+
+- Second-cut: Receivers, after receiving multicast message, will also send it
+  to all other processes.
+
+Analysis
+---
+- Not efficient, but is reliable.
+- Can be proved by contradiction
+
+
+Virtual Synchrony or View Synchrony
+---
+- Attempts to preserve multicast ordering and reliability in spite of failures
+- Combines membership protocol and multicast protocol.
+
+- Each process maintains a membership list called VIEW
+- An update to this list is called VIEW CHANGE (process leave, join or
+  failure)
+- Virtual Synchrony guarantees that all VIEW CHANGES are delivered in same
+  order at all correct processes
+    * If P1 receives {P1}, {P1, P2, P3}, {P1, P2}, {P1, P2, P4} then any other
+      correct process receives same seq. of VIEW CHANGES
+- VIEWS may be delivered at diff _physical_ times at processes but delivered
+  in same _order_
+
+Ex: Watch Lecture Week 5, Lec 3.4 (Virtual Synchrony)
 
 
 Classical Distributed Algorithms
@@ -1161,8 +1214,11 @@ Phase 3 - Decision (Law)
 - Recipients receive decision, lot if on disk.
 
 
-- When is consensus reached? End of Bill phase.
+- When is consensus reached? End of Bill phase. Processes may not know it yet.
 
+
+Safety? How can this algo gaurantee it?
+---
 
 
 @@@@@@@@@@@@@@@@     NOTES    FROM     VARIOUS    TALKS     @@@@@@@@@@@@
@@ -1594,7 +1650,7 @@ Storage
     * Join's is not possible across DBs. If you have a query that has to touch
       all the shards, that doesn't go well with Sharding.
     * How to solve?
-        + Denormalization
+        + Denormalization (no more Join's)
         + Consistent Hashing
 
 - Consistent Hashing
@@ -1606,8 +1662,8 @@ Storage
           nodes are used.
     * Rough rule of thumb for consistency:
         R + W > N  ==> provides strong consistency
-            R = Number of reads
-            W = Number of writes
+            R = Number of reads client reads from
+            W = Number of writes client writes to
             N = Number of replicas
 
 Computation
@@ -1616,6 +1672,8 @@ Computation
     * Consistency
     * Availability
     * Partition Tolerant
+
+Distributed Computation
 
 Distributed Transactions
 ---
@@ -1655,19 +1713,22 @@ Responses to Failure
     * Spark does not have storage requirements: HDFS, Cassandra data etc
 
 - Kafka: Everything is a stream of data. Computation can be done on it.
+    * Focuses on real-time analysis, not batch jobs
     * Even Spark has stream processing API.
     * In Kafka, stream is first class citizens.
-    * Kafka is not just messaging framework, but also computation framework.
+
+- Kafka is both messaging framework and computation framework.
 
 
 Messaging
 =========
-Concepts:
-    - Means to loosely couple subsystems
+Concepts/Definitions used in Kafka Messaging:
+    - Messaging is a means to loosely couple subsystems
+    - MESSAGE: immutable array of bytes
     - Messages are consumed by SUBSCRIBER
     - Created by PRODUCER
     - Organized in to named TOPICS
-    - Processed by BROKER. It's just a compute node.
+    - Processed by BROKER. It's just a compute node in Kafka cluster.
     - Persistent over short term
 
 What if a TOPIC becomes too big for a computer?
@@ -1678,7 +1739,8 @@ What if a TOPIC becomes too big for a computer?
 
 
 Apache Kafka: It's a message bus.
-- When TOPIC becomes big, we partition the TOPIC
+- When TOPIC becomes big, we partition the TOPIC. Imagine it like a pipe with
+  messages flowing.
 - Each partition has one BROKER
 - Ordering of messages is not gauranteed globally (but within partition is
   possible)
