@@ -248,3 +248,29 @@ References:
 [1] Coursera: Software Security from University of Maryland
 [2] CNIT 127 Exploit Development - City College of San Francisco
 
+
+@@@@@@@@@@@@@@@@@    ATTACK     NAMES    @@@@@@@@@@@@@@@@
+
+TCP Attacks
+---
+TCP Reset: https://en.wikipedia.org/wiki/TCP_reset_attack
+TCP Sequence Prediction:
+https://en.wikipedia.org/wiki/TCP_sequence_prediction_attack
+MITM: https://en.wikipedia.org/wiki/Man-in-the-middle_attack
+SYN Flood: https://en.wikipedia.org/wiki/SYN_flood
+Sockstress: https://en.wikipedia.org/wiki/Sockstress
+PUSH & ACK Floods: https://en.wikipedia.org/wiki/PUSH_and_ACK_floods
+TCP Veto:
+
+UDP Attacks
+---
+UDP Flood: https://en.wikipedia.org/wiki/UDP_flood_attack
+
+
+DNS Attacks
+---
+DNS Rebinding: https://en.wikipedia.org/wiki/DNS_rebinding
+DNS Hijacking: https://en.wikipedia.org/wiki/DNS_hijacking
+DNS Spoofing: https://en.wikipedia.org/wiki/DNS_spoofing
+DNS Cache Poisoning: https://en.wikipedia.org/wiki/DNS_cache_poisoning
+

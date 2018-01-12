@@ -1002,16 +1002,24 @@ Who uses multicast?
 
 - Types of ordering in Multicast
     + FIFO
-    + Causal
-    + Total Ordering
+        * Multicasts from each sender are received in the order they are sent,
+          at all receivers
 
-- Causal ordering implies FIFO ordering. Reverse is NOT true.
-- Causal ordering is intuitive and preferred.
-- Total ordering is aka "Atomic Broadcast".
-- Unlike FIFO and Causal, Total Ordering does not pay attention to order of
-  multicast sending.
-- Total ordering ensures all receivers receive all multicasts in the same
-  order.
+    + Causal
+        * Multicasts whose send events are causally related, must be received
+          in the same causality-obeying oder at all receivers
+        * Formally: If multicast(g,m1) -> multicast(g,m2) then any correct
+          process that delivers m2 would have delivered m1.
+        * -> is Lamport's "happens-before"
+        * Causal ordering implies FIFO ordering. Reverse is NOT true.
+        * Causal ordering is intuitive and preferred.
+
+    + Total Ordering
+        * Total ordering is aka "Atomic Broadcast".
+        * Unlike FIFO and Causal, Total Ordering does not pay attention to
+          order of multicast sending.
+        * Total ordering ensures all receivers receive all multicasts in the
+          same order.
 
 - Hybrid Variants exist.
     * Since FIFO/Causal are orthogonal to Total ordering, we can have hybrid
@@ -1043,7 +1051,7 @@ FIFO Multicast: Data Structs
     + else buffer this multicast until above condition is true.
 
 
-Ex: Please see lecture 2.2 starting at 4.00 minutes
+Ex: Please see lecture 2.2 starting at 3:30 minutes
 
 Total Ordering: Ensures ordering of messages are same across all receivers.
 ---
@@ -1055,15 +1063,15 @@ Total Ordering: Ensures ordering of messages are same across all receivers.
 - Sequencer:
     + Maintains a global sequence number S (initially 0)
     + When it receives a multicast msg M, it increments S and multicasts M
-      and S.
+      and S, <M, S(M)>
 
 - Receive multicast at Pi:
-    + Pi maintains a local received global seq. no. Si (initially 0).
+    + Pi maintains a local copy of received global seq. no. Si (initially 0).
     + If Pi receives a multicast M from Pj, it buffers it until following
       two conditions are satisfied:
-        * Pi receives <M, S(M)> from Sequencer AND
+        * Pi receives same multicast msg M from Sequencer, <M, S(M)> AND
         * Si + 1 = S(M)
-        * Then deliver its msg to application and set Si=Si+1
+          Then deliver the msg to application and set Si=Si+1
 
 
 Causal Ordering Impl: Data Struct
@@ -1073,6 +1081,24 @@ Causal Ordering Impl: Data Struct
 - Processes P1 to Pn
 - Pi maintains a vector Pi[1...n] (initially 0)
 - Pi[j] is the latest seq. no Pi has received from Pj
+
+Causal Multicast: Updating Rules
+---
+- Send multicast at Pj:
+    * Pj[j]++
+    * Include entire vector Pj[1..N] in multicast msg
+
+- Receive multicast at Pi from sender Pj with vector M[1..N]. Following two
+  conditions MUST be met:
+    * This msg is next one Pi is expecting from Pj, ie.,
+        + M[j] = Pi[j] + 1
+    * All multicast, anywhere in the group, which happened-before M have been
+      received at Pi, ie.,
+        + For all k not equals j: M[k] <= Pi[k]
+        + Receiver satisfies causality
+
+    Then deliver M to application and set Pi[j] = M[j]
+
 
 Reliable Multicast
 ----
