@@ -1139,6 +1139,19 @@ Virtual Synchrony or View Synchrony
 
 Ex: Watch Lecture Week 5, Lec 3.4 (Virtual Synchrony)
 
+VSync Multicasts
+---
+- A multicast M is said to be "delivered in View V at process Pi" if
+    * Pi receives view V and then some time before Pi receives next view, it
+      delivers multicast M
+- Virtual synchrony ensure that
+    * Set of multicasts delivered in a given view is same set at all correct
+      processes that were in that view
+    * Sender of multicast msg also belongs to that view
+    * If process Pi does NOT deliver multicast M in view V while other
+      processes in view V deliver M in V then Pi is FORCIBLY REMOVED from next
+      view delivered after V at other processes.
+
 
 Classical Distributed Algorithms
 ---
