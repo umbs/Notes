@@ -3,6 +3,11 @@
 
 @@@@@@@@@@@@@   Cloud Computing Concepts Part 1    @@@@@@@@@@@@@@
 
+Week 1
+Topics
+    * Intro to Cloud Computing (history, challenges, economics etc)
+    * MapReduce
+
 - AWS
     * EC2: Elastic Compute Cloud
     * S3: Simple Storage Service
@@ -30,7 +35,10 @@
     + 3 main components
         ~ Global Resource Manager (RM) for scheduling
         ~ Per-server Node Manager (NM) for server specific functions
-        ~ Per-application Application Manager (AM)
+        ~ Per-application Application Master (AM).
+            * Responsible for negotiation with RM and NM
+            * Detecting task failures of that job
+
 - MapReduce Fault Tolerance
     + Heartbeats are periodically sent across managers for health checks.
     + Stragglers: Slow execution.
@@ -42,6 +50,11 @@
     + Failure Detection and Membership Protocols
 - Grid computing is pre-cursor to cloud computing.
 
+
+Week 2
+Topics
+    * Gossip & Epidemic protocols
+    * Group Membership, it's applications
 
 Multicast Problem
 ---
@@ -187,21 +200,36 @@ Which is best failure detector?
 
 - All-to-All heartbeating:
     + Each node sends N heartbeats every T time units. Load = N/T
+    + P_i is heartbeat sequence, then i++
 
 - Gossip-Style:
     + tg = gossip period.
     + T = time when all nodes receive gossip.
     + T = (log N) x tg
     + L = Load per node = N/tg = (N x (log N))/T
+    + Note that Gossip-Style heartbeat has higher load than All-to-All
+      heartbeating. That's because Gossip is trying better accuracy by using
+      more messages.
 
 - What's best/optimal?
-    + TODO: Watch video 2.4 of Week 2 for analysis
+    + Find out worst case load (L*) per member as a function of T, PM(T), N
+    and Independent Message Loss Probability (P_ml)
+        L* = (1/T) * (log(PM(T))/log(P_ml))
+    + Note that worst case load is independent of N.
 
 
 SWIM Failure Detection Protocol
 ---
-- TODO: Watch videos 2.5 & 2.6 of Week 2 for analysis.
+- SWIM follows opposite technique of Heart beating. It uses ping.
+- Each protocol period = T time units. Failure detection happens here.
 
+Protocol:
+- Process P_i sends direct ping to P_j. If P_j ACKS then no failure, else,
+- P_i sends indirect ping to P_j by via K random processes. If any one process
+  get response from P_j, it ACKS to P_i then no failure
+- Otherwise, P_j is marked as failed
+
+- TODO: Watch videos 2.5 & 2.6 of Week 2 for analysis.
 
 Grid Computing
 ---
@@ -213,6 +241,14 @@ Grid Computing
 - Globus Toolkit: Lot of tools (free and open-source) for Grid computing.
 
 - Is Grid Computing and Cloud Computing converging? It's an open question.
+
+
+
+Week 3
+Topic
+    * P2P systems (Napster, Gnutella, Fasttrack, Bittorrent, Chord, Pastry,
+      Kelips)
+
 
 P2P Systems Intro
 ---
@@ -264,6 +300,12 @@ data. It's called "Servants"
     Hops: Increment at each Hop. Used this because TTL is not same for all
         clients. Many clients don't use Hops that much.
     Payload len: # of bytes of message following this header.
+
++ Query (0x80)
+    +------------+------------------------------+
+    | Min Speed  |   Search criteria (keywords) |
+    +------------+------------------------------+
+    0            1 ...
 
 + Queries are flooded, TTL-restricted, duplicates are not forwarded.
 + QueryHit looks as follows:
@@ -345,6 +387,8 @@ Chord (came from Academia)
     + Not unique, but id conflicts very unlikely.
     + Can then map peers to one of 2^m logical points on a circle.
 
+- Nodes maintain two types of Peer Pointers
+
 - Peer Pointers (1):
     + Peers are placed on a ring, with an id between 0 and 2^m-1
     + Peers talk to their neighbors, called successors.
@@ -354,10 +398,64 @@ Chord (came from Academia)
     + ith entry in finger table for peer n is first peer with:
             id >= (n + 2^i) (mod 2^m)
 
+Example: Suppose there are following nodes in the cluster
+    * 16, 32, 45, 80, 96 and 112
+
+FT for Node 80 looks as follows (m=7 here):
+    i   FT[i]
+    0   96
+    1   96
+    2   96
+    3   96
+    4   96
+    5   112
+    6   16
+
 - Where are files stored?
     + SHA-1 (filename) --> 160 bit string (key)
     + File is stored at first peer with id >= it's key (mod 2^m)
-    + TODO: Very mathematical. Watch the video if required.
+
+Example: In above cluster, if node 80 gets a file with id = 30 to be inserted,
+what does it do?
+1) File 30 must be inserted at Node 32
+2) Node 80 looks up it's finger table. There's no pointer to 32. It hands off
+to it's successor to look up it's FT. This continues till Node 32 is reached.
+3) Node 80 hands off to Node 96, whose finger table looks as follows
+
+    i   FT[i]
+    0   112
+    1   112
+    2   112
+    3   112
+    4   112
+    5   16
+    6   16
+
+4) There's no pointer to Node 32 in above table. So, Node 96 will hand it off
+to Node 112, it's successor, whose finger table looks as follows
+
+    i   FT[i]
+    0   16
+    1   16
+    2   16
+    3   16
+    4   16
+    5   16
+    6   80
+
+5) Again, Node 112's FT doesn't have pointer to 32. This sucks. It hands off
+to it's successor, Node 16,
+
+    i   FT[i]
+    0   32
+    1   32
+    2   32
+    3   32
+    4   32
+    5   80
+    6   80
+
+6) Node 16 is able to pass the file to Node 32 which will store it.
 
 - How do file searches work?
     + Hash the unique file name (or URL) using consistent hashing algo.
@@ -366,7 +464,8 @@ Chord (came from Academia)
       If none exists, send query to successor(N). Largest successor means, on
       the virtual ring, it's the right most, but less than K.
 
-
+Analysis: Finding key K (Search) takes O(log N), where N is number of nodes in
+cluster
 
 
 Pastry
@@ -381,7 +480,12 @@ Pastry
 
 
 
-
+Week 4
+Topics
+    * Key-Value stores, NOSQL
+    * CAP theorem
+    * Cassandra, HBase
+    * Time ordering, NTP, Cristian's Algo, Vector Clocks, Lamports Timestamps
 
 Key-Value Store Abstraction
 ---
@@ -438,8 +542,11 @@ Apache Cassandra
 
 Key->Server Mapping (called Partitioner)
 ---
-- Uses Virtual Ring DHT described in Chord protocol/lecture.
+- Uses Virtual Ring DHT described in Chord protocol/lecture but without finger
+  tables or routing tables.
     DHT = Distributed Hash Table
+- Coordinator: One coordinator per DC
+- Partitioner: Maintains Key to Server mapping
 
 Data Placement Strategies
 ---
@@ -450,7 +557,8 @@ Two Options:
 SimpleStrategy:
     + Uses Partitioner, of which there are two kinds
         * RandomPartitioner - Chord like hash partitioning.
-        * ByteOrderPartitioner - Assigns ranges of keys to servers.
+        * ByteOrderPartitioner - Assigns ranges of keys to servers. This helps
+          in range queries
 
 NetworkTopologyStrategy: for multi-DC deployments
     + 2 replicas/DC, 3 replicas/DC
@@ -491,13 +599,48 @@ When writes come, what does Replica do?
 - Make changes to Memtable (in-memory representation of key-value pairs)
 - memtable can be searched. It's a write-back cache as opposed to write-through
   cache.
-- When memtable is full, flush to disk.
-- Before flushing to disk, sort keys of Memtable in to SSTable (Sorted String
-  Table). This is a Data File.
-- Create an Index file: An SSTable of (key, position in data SSTable).
+- When memtable is full, flush to disk. Disk will have following:
+    * Data File: An SSTable (Sorted String Table) - list of KV pairs, sorted
+      by key
+    * Index File: Another SSTable of Key, position in Data SSTable
+        + Search for a missing Key is expensive. A binary search will incur
+          log(M)/SSTable if there are M entries in SSTable. COSTLY!!
+    * Bloom Filter, for efficient search
+
 - Add a Bloom Filter to tell if a key is present in SSTable. Very efficient.
-    + An item NOT in present can return as present.
+    + An item NOT present can return as present.
     + An item present ALWAYS returns as present.
+
+// Video on Cassandra, 16th min
+
+Bloom Filter
+---
+- Compact way of representing a set of items
+- Checking for existence in set is cheap
+- Some probability of false positives
+    + An item NOT in any set MAY return as present
+- Never false negatives
+    + An item present ALWAYS returns as present
+
+How does it work?
+---
+- It's a large bitmap
+- Filter uses a large bitmap and n Hash functions: H1, H2, ... Hn
+- All bits are initialized to 0. Output of Hash function is one of the bits in
+  the bitmap
+
+Insert Key, K:
+    for each hash function, Hi:
+        bitmap[Hi(k)] = 1   // just set the bit
+
+Is Key, K, present?
+    for each hash function, Hi:
+        if bitmap[Hi(K)] == 0
+            return false
+    return true
+
+- For large Bloom Filters, probability of false positives is very very low
+
 
 Compaction
 ---
@@ -515,7 +658,7 @@ Reads
 - Coordinator can contact X replicas. From responses, Coordinator returns latest
   time-stamped response.
 - Coordinator also fetches value from other replicas (in background) to check
-  consistency and initiating *read repaid*.
+  consistency and initiating *read repair*.
 - Due to this, Reads are slower than Writes.
 
 Membership
@@ -574,7 +717,7 @@ CAP Theorem
       failure.
 
 - X = QUORUM
-    + Look at Vide (1.3) around 13th minute.
+    + Look at Video (1.3) around 13th minute.
     + Faster than ALL. Gives greater consistency than ONE.
     + Many NoSQL uses Quorum (Cassandra, RIAK)
 
@@ -804,8 +947,10 @@ Goal: Assign logical timestamps to each event.
     + Process increments its counter when a *send* or an *instruction* happens
       at it. Counter is assigned to the event.
     + A *send* message event carries its timestamp
-     + For receive message event, the counter is updated by:
+    + For receive message event, the counter is updated by:
         receive timestamp = max(local clock, message timestamp) + 1
+
+- Watch video Lamports-Timestamps for example
 
 Concurrent Events
 ---
@@ -823,9 +968,10 @@ Vector Clocks
 - Each process uses a vector of integer clocks.
 - Supposed there are N processes in the group then each vector has N elements.
 - Process i maintains vector Vi[1...N]
-- jth element of vector clock at process i, Vi[i], is i's knowledge of latest
+- jth element of vector clock at process i, Vi[j], is i's knowledge of latest
   events at process j.
 - Each msg carries senders vector
+- Sender, i, increments it's own count (Vi[i]++) and sends the msg
 - On receiving a message at process i:
         Vi[i] = Vi[i] + 1
         Vi[j] = max(Vmsg[j], Vi[j]) for i not equal j
@@ -835,6 +981,12 @@ Vector Clocks
 
 
 Week 5
+Topic
+    * Global snapshots (Chandy-Lamport algo, Consistent Cuts, Safety and
+      Liveness)
+    * Multicast ordering
+    * Paxos
+
 ---
 Global Snapshot
 ---
@@ -1049,7 +1201,10 @@ FIFO Multicast: Data Structs
         * deliver msg to application
         * set Pi[j]++
     + else buffer this multicast until above condition is true.
-
+    + j'th element in the vector represents # of multicast msgs received from
+      Pj
+- In FIFO, a receiver does not look at ordering of messages from different
+  senders. FIFO must be followed for same sender, otherwise, buffer old msgs
 
 Ex: Please see lecture 2.2 starting at 3:30 minutes
 
@@ -1094,8 +1249,10 @@ Causal Multicast: Updating Rules
         + M[j] = Pi[j] + 1
     * All multicast, anywhere in the group, which happened-before M have been
       received at Pi, ie.,
-        + For all k not equals j: M[k] <= Pi[k]
-        + Receiver satisfies causality
+        + For all k not equals j: M[k] <= Pi[k]; this satisfies causaility at
+          receiver
+        + Else, if M[k] > Pi[k] for any k, then buffer the multicast from Pj
+          and deliver it only after multicast from Pk is delivered at Pi
 
     Then deliver M to application and set Pi[j] = M[j]
 
@@ -1376,7 +1533,7 @@ Pros of using DNS:
 Cons:
     * Round Robin
     * DNS record can be cached and subsequent request can go to same server
-    * although records expire after some time.
+      although records expire after some time.
 
 - If DNS returns IP of LB then, LB will take care of Load Balancing.
 
@@ -1395,7 +1552,7 @@ Load Balancers
 ----
 Software Solution: Amazon's Elastic LB, HAProxy (Open Source), Linux Virtual
 Server (LVS) ...
-Hardware Solution: Barracuda, Cisco, Citrix, F5
+Hardware Solution: Barracuda, Cisco, Citrix, F5, NetScaler
 
 
 Storage Technologies
@@ -1886,3 +2043,16 @@ Design
 [1] https://www.youtube.com/watch?v=DSGsa0pu8-k&index=20&list=WL
 
 ===============================================================================
+Collection of resources for High Scalability, System Design etc
+
+SDI List
+https://github.com/checkcheckzz/system-design-interview
+https://github.com/donnemartin/system-design-primer
+https://www.educative.io
+www.hiredintech.com
+
+Systems Engineering
+https://github.com/mmcgrana/services-engineering
+
+Distributed Systems Reading List
+http://dancres.github.io/Pages/
