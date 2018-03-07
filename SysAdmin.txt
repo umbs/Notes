@@ -850,3 +850,7 @@ $#  the number of arguments, not counting $0
 $ tracert <IP>      // traceroute equivalent command
 $ route print       // ip route show equivalent command
 $ ifconfig   /displaydns    // DNS cache maintained locally
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   MTR     NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+$ mtr - a network diagnostic tool
+
