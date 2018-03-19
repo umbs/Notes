@@ -203,4 +203,46 @@ highlight ColorColumn ctermbg=magenta
 " Call ColorColumn on 81st column virtually.
 call matchadd('ColorColumn', '\81xv', 100)
 
-[1] https://www.youtube.com/watch?v=aHm36-na4-4&index=7&list=WL
+Completion tips (tags, file name etc):
+-------
+2)
+ctrl+r --> insert text from a register
+ctrl+a --> insert last inserted text (access . register)
+
+ctrl+p --> Keyword completion. 'p' means, look back in the document
+ctrl+n --> Keyword completion. 'n' mean next
+
+ctrl+x --> puts you in a special X mode (submode of insert mode). This allows
+           you to autocomplete tags using tags file.
+ctrl+x ctrl+] --> completes a class name (and such tags) when pressed after
+                   letter
+
+3) Vim keeps track of Jump List: files that Vim jumped to.
+ctrl+i, ctrl+o --> you can go in and out of that list
+
+4) Filename completion:
+ctrl+x, ctrl+f --> vim completes file names from current directory
+
+5) Context aware completion
+ctrl+x, ctrl+p or ctrl+n
+ctrl+x, ctrl+l --> context aware line completion
+
+6) Context aware Omni completion
+ctrl+x, ctrl+o
+
+7) Auto completion settings
+:set complete
+    complete=.,w,b,u,t,i
+    . = look in current buffer
+    w = look in split window buffer (adjacent window)
+    b = Other buffers, this or other Vim tab
+    u = look in unloaded buffer, not active in any window
+    t = look in tags file
+    i = look in inserted file
+
+
+
+
+
+[1] https://www.youtube.com/watch?v=aHm36-na4-4
+[2] https://www.youtube.com/watch?v=3TX3kV3TICU
