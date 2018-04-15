@@ -246,3 +246,124 @@ ctrl+x, ctrl+o
 
 [1] https://www.youtube.com/watch?v=aHm36-na4-4
 [2] https://www.youtube.com/watch?v=3TX3kV3TICU
+
+Vim Navigation
+----
+L   last line of current screen
+M   middle line of current screen
+^e  move the screen by one line down, with cursor staying in its place
+^y  move the screen up by one line
+
+0   beginning of the line
+$   end of the line
+^   first non-blank character of the line
+g_  last non-blank character of the line
+
+n%  takes you to nth percent position of the file
+
+*   search for occurance of word under cursor
+#   same as *, but move in opposite direction
+
+Q: What is a word in Vim?
+- Hyphen, Exclamation, Period delianated ... stuff?
+
+Word wise navigation:
+w   small word
+W   big word
+e vs E
+b vs B
+
+
+Vim Marks
+---------
+
+`m  takes you position where mark is set
+'m  takes you to beginning of line where mark is set
+
+
+Vim Scripting Language
+-------
+Syntax of the Language: Verb + Noun
+---
+d   for delete
+w   for word
+combine to be "delete word"
+
+- Commands are repeatable and undoable
+
+Verbs in Vim
+---
+d   Delete
+c   Change (delete and enter insert mode)
+>   Indent
+<   Outdent
+v   Visually select
+y   Yank (copy)
+
+Nouns in Vim -- Motions
+---
+w   word (forward by a "word")
+b   back (back by a "word")
+2j  down 2 lines
+
+
+Nouns in Vim -- Text Objects
+---
+iw      "inner word" (works from anywhere in a word)
+it      "inner tag" (the contents of an HTML tag)
+i"      "inner quotes"
+ip      "inner paragraph"
+as      "a sentence"
+
+
+Nouns in Vim -- Parameterized Text Objects
+---
+f, F    "find" the next character
+t, T    "find" the next character
+/,?     Search up to next match
+
+
+Tips for Mastering Vim Language
+-----
+- The 'dot' command should be guiding rule
+- Visual mode means something is wrong
+
+
+File Navigation
+---
+set path+=**    " recursive search all files in subdirectories
+                " accepts wild chars. Works like fuzzy file search
+                " Use with wildmenu
+
+:b *file        " searches for files in buffer
+
+
+Tag Jumping
+----
+command! MakeTags !ctags -R .
+
+- Use ^] to jump to tag under cursor
+- Use g^] for ambiguous tags
+- Use ^t to jump back the tag stack
+
+Autocomplete
+----
+^x^n    for just this file
+^x^f    for file names
+^x^]    tags only
+^n      for anything specified by complete option
+
+^n and ^p   go back and forth in suggestion list
+
+Read docs at |ins-completion|
+
+
+Intermediate Vim
+===
+
+
+[1] https://www.youtube.com/watch?v=aHm36-na4-4
+[2] https://www.youtube.com/watch?v=Qem8cpbJeYc
+[3] https://www.youtube.com/watch?v=wlR5gYd6um0
+[4] https://www.youtube.com/watch?v=XA2WjJbmmoM
+[5] https://www.youtube.com/watch?v=v0W7JkzQAzA

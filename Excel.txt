@@ -1,0 +1,11 @@
+Notes on Excel
+---
+
+FORMULAE
+---
+=IF()
+=LEFT()
+=RIGHT()
+=VLOOKUP()
+=MATCH()
+

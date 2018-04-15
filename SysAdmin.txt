@@ -854,3 +854,16 @@ $ ifconfig   /displaydns    // DNS cache maintained locally
 @@@@@@@@@@@@@@@@@@@@@@@@@   MTR     NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 $ mtr - a network diagnostic tool
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@   CURL    NOTES   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+[1] POST using JSON file
+curl -v -H "Content-Type: application/json" -X POST --data @params.json -u your_username:your_password http://localhost:8000/env/add_server
+
+[2]
+
+
+References:
+- StackOverflow
+-
+
