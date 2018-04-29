@@ -1711,6 +1711,19 @@ REST API's with Flask and Python
 
 Python Concepts
 ====
+- Dynamically-typed, strong-reference language
+- Lists, Tuples, Sets & Dictionaries
+- OOP:
+    * @classmethod and @staticmethod
+    *
+- Functions are first-class citizens
+- Nested functions
+- decorators, generators
+- named args and positional args to functions
+- Context Managers (Ex: with open(...) as foo:)
+- List slicing
+- List comprehension and Dictionary comprehension
+
 
 Lists, Tuples & Sets
 ----
@@ -2380,4 +2393,115 @@ eBPF
 [] https://github.com/iovisor/bcc
 
 
+===============  LEARNING REST - STARING WITH REST API  ==============
+
+Contents
+--------
+Theory                          Applied
+REST Defined                    A nodeJS Dev environment
+REST & HTTP                     nodeJS and REST
+REST & CRUD ops                 REST routes
+Designing for REST              REST controllers
+                                Testing our REST APIs
+
+- REST: REpresentational State Transfer
+    An architectural style for designing networked applications
+
+HTTP Request Types
+-----
+GET: Retrieves content from a specified resource
+POST: Submits data for processing to a URI
+PUT: Sends info to update a server resource
+DELETE: Sends request to delete a resource
+
+Others: HEAD, OPTIONS, PARTIAL
+
+API Structure Example
+-----
+GET: https://mydomain/api/items
+GET: https://mydomain/api/items/details/22
+POST: https://mydomain/api/items/details/22
+
+- There can be multiple request types to same end point
+
+
+REST + CRUD ops
+---------------
+
+
+API Type -->    Create      Read        Update      Delete
+                new item    an item     an item     an item
+------------------------------------------------------------
+HTTP Request    POST        GET         UPDATE      DELETE
+                                        (or PUT)
+
+Database        Create      Read        Update      Delete
+
+
+Example APIs
+------------
+https://api.chucknorris.io
+https://api.chucknorris.io/jokes/random
+https://api.chucknorris.io/jokes/random?category={category}
+https://api.chucknorris.io/jokes/categories
+https://api.chucknorris.io/jokes/search?query={query
+
+< --- stopped the video after a while. It went too much in to Node and stuff,
+which I was not interested at this time ---->
+
+[1] Safari Books Online Video
+
+===============  KUBERNETES 101  ==============
+
+- Kubernetes have 2 _types_ of nodes: HEAD Node and WORKER Nodes
+
+- What's in a HEAD node?
+-----------
+    * API Server
+    * Scheduler
+    * Controller Manager
+    * Etcd
+    * Sometimes:
+        - kubelet: agent running on HEAD. Managed by systemd
+        - docker
+
+- kubelet config is in /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+- Manifest files will be (usually) in: /etc/kubernetes/manifests/
+        * bunch of YAML files in this directory
+
+
+- What's in WORKER node? Lots of them.
+-----------
+    * kubelet: agent running on all WORKER nodes. It talks to API server on
+      HEAD and local docker containers to manage them
+    * kube-proxy: manages IP tables in that node
+    * docker
+
+POD:
+- Lowest unit of computing maintained by kubectl
+
+Installing Kubernetes (3 techniques)
+----
+- First install kubectl (brew install kubectl on MacOS)
+- minikube
+- GKE (Google Kubernetes Engine)
+- kubeadm
+
+
+
+COMMANDS
+--------
+$ systemctl status kubelet      # gives status of kubernetes on that node
+
+$ minikube start
+$ minikube status
+$ kubectl version
+$ kubectl get nodes
+
+
+
+[1] Safari Books Online: Kubernetes Fundamentals - Sebastien Goasguen
+[2] kubernetes.io
+[3] cncf.io
+[4] github.io/kubernetes-incubator
 
