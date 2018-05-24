@@ -1,0 +1,291 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@   BASH  SCRIPTING @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- All scripts start with 'shebang' (#!/bin/bash)
+- Running the script starts a new shell
+- Good practice to explicitly exit the script with a status
+- Store the script in a directory in $PATH or in $USER/bin or run using
+  ./myscript
+
+INTERNAL vs EXTERNAL commands
+--
+- Internal commands are faster
+$ type COMMAND  # tells if COMMAND is internal (or builtin) vs external
+$ help COMMAND gives details about it
+
+- On typing a COMMAND, internal COMMAND is executed first, if it exists and
+  only if it doesn't, the external COMMAND is run
+
+VARIABLES, ARGUMENTS, OPTIONS & PARAMETERS
+--
+- 3 ways to define variables
+    * static: VARIABLE=value (CAPS is a best practice)
+    * As an argument using $1, $2 etc notations
+    * Interactively, using 'read' command
+
+- Use $ before VARIABLE to evaluate it (or interpret it)
+- A variable, if defined, exists in current shell only. If you want it in
+  subshells, it must be 'exported'
+- There is no way to make the variable available for parent shell
+
+- Debugging a shell script:
+    $ bash -X myscript
+
+NOTES on LINUX SHELL SCRIPTS
+--
+- /etc/profile is processed at login
+- Specific vars can be in ~/.bash_profile
+- /etc/bashrc gets executed for each subshell
+
+SOURCING (source of .)
+--
+- Contents of one script can be included in another
+- Very common method to separate static script code from dynamic code
+- DO NOT USE 'exit' at the end of sourced script
+
+
+SPECIAL CHARS (& QUOTING)
+--
+~   Home directory
+`   Command substitution
+#   Comment
+$   Variable expression
+&   Background jobs
+*   String wildcard
+(   Start of subshell
+)   End of subshell
+\   Quote next char
+.. and many more special chars exist
+
+- Single quotes are strong quotes. It strips the meaning of all special chars
+  in a string
+- Double quotes are weak quotes. It partially strips meaning of special chars.
+
+BEST PRACTICE: Always use single quotes unless you specifically need
+parameter, command or arithmetic substitution
+
+SCRIPT ARGUMENTS
+--
+$1, $2 ..   read only args, provided to script
+$0          name of script
+${nn}       for args > 9 or use 'shift'
+$@          refers to all args provided as input
+$#          number of args
+$*          single string that contains all args
+
+
+- 'shift' keyword. It shifts the arg space to the right and $1 will take $2
+  value and so on.
+- You can address double digit args using ${nn} style but some old shells
+  don't support it
+- 'shift' is a portable way of doing, at the cost of loosing $1, $2 and so on
+
+COMMAND SUBSTITUTION
+---
+`   deprecated way of command sub
+$(...)  preferred way
+
+STRING VERIFICATION
+---
+- "test -z" to check if a string is empty. True if string is empty
+    Ex: test -z $1 && exit 1
+- Use [[ ... ]] to check for specific patterns
+    Ex: [[ $1 == '[a-z]*' ]] || echo $1 does not start with a letter
+
+HERE DOCS
+---
+- Used in scripts where I/O redirection is used to feed a command list in to
+  an interactive program/command list FTP or cat
+- Where is it used?
+    * If in a script a command is called that opens it's own interface (like
+      ftp)
+    * In a script to replace long texts in 'echo'
+
+SUBSTITUTION OPERATORS (a.k.a string operators)
+---
+- Ensures variables exists
+- Set defaults for variables
+- Catch errors that results from non-existant variables
+- Remove portion of variables
+
+${VAR:-word}    display 'word' if VAR is empty
+${VAR:=word}    set VAR to "word" if empty
+${VAR:?message} display message if VAR is empty
+${VAR:offset.length}    display substring from offset to length
+
+PATTERN MATCHING
+---
+${VAR#pattern}      shortest match. Search from left to right
+${VAR##pattern}     longest match. Search from l to r
+${VAR%pattern}      shortest match. Search from r to l
+${VAR%%pattern}     longest match. Search from r to l
+
+CALCULATIONS
+---
+$(( ... ))          Ex: $((1+1)). Done within script
+let "$1 $2 $3"      Ex: ./lets.sh 2 + 3
+                        5
+bc                  Used in interactive or non-interactive mode, by piping the
+                    output to bc
+
+EXTERNAL TOOLS
+---
+grep, test, sed, awk, cut, sort, tr, head, tail
+
+
+grep        Generic Regular Expression Parser
+--
+grep -v "text"      exclude the line containing 'text'
+grep -e 'what' -e 'where'   Search for both what and where
+
+
+test
+--
+    expression: test (ls /etc/hosts)
+    string:     test -z $1
+    integers:   test $1=6
+    file comparison:    test file1 -nt file2
+    file properties:    test -x file1
+
+- test is now an internal command and faster. Newer form
+    [ -z $1 ]
+    [[ ... ]] is used in modern shells
+
+cut
+sort
+--
+sort -n -k3 -t : /etc/passwd
+
+-n  numerical sort
+-k3 sort on 3rd field
+-t  delimiter is :
+
+sed
+--
+- It's a programming language in itself
+
+awk: Advanced filtering utility
+--
+awk '/search pattern/ {actions}' file
+
+awk -F : '{ print $4 }' /etc/passwd      prints 4th column
+awk -F : '/user/ { print $1 }' /etc/passwd  prints 1st column for user
+awk -F : '{ print $1, $NF}' /etc/passwd  $NF means last field
+awk -F : '$NF ~bash' /etc/passwd  if last column contains bash print it
+
+tr: helps in transforming strings
+echo hello | tr [a-z][A-Z]
+echo hello | tr [:lower:][:upper:]
+
+
+CONDITIONALS
+---
+if exp1
+then
+    cmd1
+elif exp2
+then
+    cmd2
+else
+    cmd3
+fi
+
+.....................
+
+for i in something
+do
+    cmd1
+done
+
+Ex:
+for i in {200..210}; do ping -c 1 192.168.122.$i > /dev/null && echo 192.168.122.$i is available; done
+
+RANGE OF NUMBERS: {100..150}
+
+Example Script
+--
+#!/bin/bash
+echo which directory do you want to count?
+read DIR
+cd $DIR
+COUNTER=0
+
+for i in *      # the * here indicates ALL files in the directory
+do
+    COUNTER=$((COUNTER+1))
+done
+echo I have counted $COUNTER files in $DIR directory
+
+.....................
+
+case $VAR in
+    yes)            # case statements
+        echo ok;;   # commands, ends with double ;
+    no|nee)         # multiple case statements
+        echo too bad
+        ;;          # double ; can be in separate line
+    *)              # default case, best practice
+        echo try again
+        ;;
+esac
+
+
+Working with Options (Watch 6.1)
+
+Functions
+
+Syntax1:
+function help
+{
+    echo this is help
+}
+
+Syntax2:
+function help()
+{
+    echo this is help
+}
+
+Arrays
+--
+names=(linda lisa laura lori)   # one way of array assignment
+names[0] = linda    # other way of array assignment.
+names[1] = lisa
+names[2] = laura
+names[3] = lori
+
+- If we choose later way of assigning array values, how is the array size
+  initialized? No initialization required. You can dynamically assign values
+  to array
+
+echo ${names[2]}    # print 3rd array elem
+echo ${names[@]}    # print all array elem
+echo ${#names[@]}   # print number of elems
+
+Creating Menu Interfaces (Watch 6.4 video)
+--
+- Using 'select'
+
+Using trap: Used to catch a signal in script
+
+Debugging Scripts
+--
+- In Vim use :set list to show hidden chars
+
+bash -v     show verbose output (including errors)
+bash -n     check for syntax errors
+bash -x     show xtrace info
+
+- Use DEBUG trap to show debugging info. It's used in part of the code
+
+...
+...
+
+trap DEBUG      # turn on DEBUG
+# suspect code goes here
+trap - DEBUG    # turn off DEBUG
+
+...
+
+
+
+[1] Safari Books Online video "Bash Scripting" (9 hrs long)
