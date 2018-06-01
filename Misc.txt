@@ -2220,12 +2220,156 @@ $ kubectl get nodes
 [3] cncf.io
 [4] github.io/kubernetes-incubator
 
-======================================================================
-Notes from Python Talks
-
+==================    NOTES   FROM   PYTHONG   TALKS   ===============
 - Look these up:
     reversed(), enumerate(), zip(), izip(), sorted()
 
 [1] Transforming Code in to Beautiful, Idiomatic Python - Raymond Hettinger
 https://www.youtube.com/watch?v=anrOzOapJ2E&list=WL&index=23&t=19s
+
+
+===============   LEARNING DB DESIGN WITH MYSQL   =====================
+Contents
+---
+- Junction Tables
+- Relations & Foriegn Keys
+- Aliases & Joins
+- Math, IN clauses, GROUP BY, ORDER BY
+- Subqueries
+
+
+// there are not_null, primary_key and such important attributes to add for
+// each field
+CREATE TABLE <tablename> (field1 TYPE ...)
+
+INSERT INTO <tablename> (field1, field2, ...) VALUES ("value1", "value2", ....)
+
+// ALTER is used to change datatype of a field
+ALTER TABLE <tablename> MODIFY <field> type
+
+SELECT field1, field2 FROM database.table
+
+- search names (or part of fields) using % char (similar to * for grep
+  searches)
+- && is logical AND. Can use either
+- || is logical OR
+
+- ORDER BY <field> [DESC]; orders the fields in ascending or descending order
+- LIMIT <start>, <end>; that many records are displayed
+
+- UPDATE <tablename> SET name="New name" WHERE id=<id>
+
+// foriegn key constraints needs to be addressed first.
+// CASCADE - if primary entry is deleted, all foriegn key entries are deleted
+// RESTRICT - prevent deletion of entry if foriegn key exists
+// no restriction - deleting an entry leaves foriegn keys in respective tables
+- DELETE FROM <tablename> WHERE id=<id>
+
+Aliases & Joins
+// Column aliasing
+- SELECT first_name AS "first name",
+         last_name AS "last name"
+  FROM customers
+
+
+// Table aliasing
+- SELECT p.name, pc.name, p.price
+  FROM product_categories AS pc, products AS p
+  WHERE p.category=pc.id
+
+
+// JOINS
+- INNER, LEFT, RIGHT
+
+// INNER JOIN
+SELECT <fields>
+FROM table_a A
+INNER JOIN table_b B
+ON A.key = B.key
+
+// LEFT JOIN
+SELECT *
+FROM table_a A
+LEFT JOIN table_b B
+ON A.key = B.key
+
+// RIGHT JOIN
+SELECT *
+FROM table_a A
+RIGHT JOIN table_b B
+ON A.key = B.key
+
+// INNER JOIN 3 tables
+SELECT <fields>
+FROM table_a A
+INNER JOIN table_b B ON A.key = B.key
+INNER JOIN table_c C ON C.key = B.key
+ORDER BY C.first_name   // optional
+
+
+// Concat, Count, Union
+- Union of two tables only if both have same # of columns and datatypes of
+  those columns. Column names can be different
+
+// Gives one instance of each city in both tables
+SELECT city FROM customers
+UNION
+SELECT city FROM vendors
+ORDER BY city
+
+- UNION ALL will gives all instances of eacy city in tables
+SELECT city, zipcode FROM customers
+WHERE zipcode='11111'
+UNION ALL
+SELECT city, zipcode FROM vendors
+WHERE zipcode='11111'
+ORDER BY city
+
+// Concat
+SELECT id, CONCAT(first_name, '-', email) AS "Name & Email" FROM customers
+
+// Count
+SELECT COUNT(*) FROM products
+
+// Distinct option
+SELECT COUNT(DISTINCT category) FROM products
+
+
+// IN clause, similar to OR statements
+// NOT IN clause is opposite of IN clause
+SELECT city, state FROM customers WHERE state IN ("MA", "FL", "MD")
+
+// Output with operations as column names and result as values
+SELECT (1+1), (2*3), (4/2)
+
+// Max, Min, Avg
+SELECT MAX(price) FROM products
+SELECT MIN(price) FROM products
+SELECT AVG(price) FROM products
+
+// Subqueries
+SELECT name, MIN(price) FROM products
+WHERE id IN (SELECT id FROM products WHERE description LIKE "%treadmill%")
+
+
+// Version of SQL
+SELECT VERSION()
+
+// Date & Time
+SELECT NOW()
+
+
+// GROUP BY function
+SELECT customer, COUNT(*) AS "Number of Orders" FROM orders WHERE customer=1
+
+SELECT customer, COUNT(*) AS "Number of Orders" FROM orders GROUP BY customer
+
+TODO: Whatever fields are SELECT'ed, must also be present in GROUP BY.
+Research more on this.
+
+
+Resources:
+[1] Udemy course on Database Design - 
+
+===============   CHROME DEVELOPER TOOLS          =====================
 

@@ -18,6 +18,15 @@ Table of Contents
 - List comprehension and Dictionary comprehension
 
 
+- Tips
+
+
+
+
+
+
+
+
 Lists, Tuples & Sets
 ----
 - Tuples are immutable
@@ -360,6 +369,25 @@ product = reduce((lambda x, y: x * y), [1, 2, 3, 4])
 
 Decorators: Functions that modify behavior of other functions.
 - Very useful concept. Read up online.
+
+
+
+TIPS
+====
+- sort() can be applied on lists (and ...??). It sorts the list in place.
+  sorted() requires new list
+
+    mylist.sort(reverse=True)   # sorts in reverse order
+
+- For list of lists, sort() function sorts on first element in the list
+
+- Understand the difference between append()'ing and extend()'ing a list to
+  another list
+
+- Deep copy of a list can be done by slicing [:]
+
+    mylist = [5, 9, 3]
+    dcopy = mylist[:]
 
 
 Reference:
