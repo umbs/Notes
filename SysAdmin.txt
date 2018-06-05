@@ -41,6 +41,10 @@ cpuid - Dump detailed info about CPUs
 
 
 
+
+
+
+
 + How to check linux flavor/version
 Method 1:
 $ cat /etc/*-release
@@ -865,3 +869,164 @@ curl -v -H "Content-Type: application/json" -X POST --data @params.json -u your_
 
 References:
 - StackOverflow
+
+
+@@@@@@@@@@@@@@@@@@@    SSH     PORT     FORWARDING      @@@@@@@@@
+
+- A simple SSH connection through a firewall:
+$ ssh user1@HostB
+
+                                      +--+
+                                      |  |
+    +----------------------+          |  |           +-----------------------+
+    |  Host A              |          |  |           |   Host B              |
+    |                      |          |  |           |                       |
+    |                      |          |  |           |                       |
+    |                      |          |  |           |                       |
+    |                      |          |  |           |                       |
+    |+-------------+       |          |  |        22 | +-------------+       |
+    || SSH Client  |       +--->------+--+-------->--+ | SSH Server  |       |
+    ++-------------+-------+          |  |           +-+-------------+-------+
+                                      |  |
+                                      +--+
+
+                                    Firewall
+
+
+
+
+- Here, Imap client on Host C wants to connect to Imap Server on Host D, but
+  the firewall is blocking them.
+
+- SSH port forwarding can help:
+$ ssh -g -L2001:HostD:143 user1@HostB
+$ Client on Host C has to run IMAP HostA:2001
+
+
++----------------------+                         +-----------------------+
+|   Host C             |                         |     Host D            |
+|                      |                         |                       |
+|                      |                    143  |                       |
+|  IMAP Client         +->--+     +--+       +->-+---IMAP Server         |
+|                      |    |     |  |       |   |                       |
++----------------------+    |     |  |       ^   +-----------------------+
+                            |     |  |       |
+                            v     |  |       |
+                            |     |  |       |
++----------------------+    |     |  |       |   +-----------------------+
+|  Host A              |    |     |  |       ^   |   Host B              |
+|                      |    |     |  |       |   |                       |
+|                      |2001|     |  |       |   |                       |
+|      +------<--------+--<-+     |  |       +---+---<---+               |
+|      |               |          |  |           |       |               |
+|      v               |          |  |           |       ^               |
+|      |               |          |  |        22 |       |               |
+|  SSH Client----->----+---->------------->------+-- SSH Server          |
++----------------------+          |  |           +-----------------------+
+                                  |  |
+                                  +--+
+
+                                Firewall
+
+
+- Lets break this command down
+
+
+$ ssh -g -L2001:HostD:143 user1@HostB
+
+user1@HostB     Authenticate with HostB SSH server, as usual
+-L              Enable local port forwarding
+2001            Listening port on client
+143             Target port to which to forward traffic
+HostD           Target host to which to forward traffic
+-g              Allow remote connections (Gateway Ports)
+                This is the most liberal SSH port forwarding
+
+
+
+
+- If you remove '-g' option then local port fowarding is limited as below
+$ ssh -L2001:localhost:143 user1@HostB
+$ IMAP Client on Host A has to run IMAP locahost:2001
+
+                                  +--+
++----------------------+          |  |           +-----------------------+
+|  Host A              |          |  |           |   Host B              |
+|                      |          |  |       143 |                       |
+|  IMAP client ---->---+->--+     |  |       +->-+---IMAP Server         |
+|                      |    |     |  |       |   |                       |
+|                      |    v     |  |       |   |                       |
+|                      |    |     |  |       ^   |                       |
+|                      |2001|     |  |       |   |                       |
+|       +-----<--------+--<-+     |  |       +-<-+-----<---+             |
+|       |              |          |  |           |         |             |
+|       |              |          |  |           |         ^             |
+|       |              |          |  |        22 |         |             |
+|  SSH Client----->----+--->-------------->------+   SSH Server          |
++----------------------+          |  |           +-----------------------+
+                                  +--+
+                                Firewall
+
+
+- Local Forwarding but separate destination host
+
+# ssh -L2001:HostD:143 user1@HostB
+
+                                                 +-----------------------+
+                                                 |     Host D            |
+                                            143  |                       |
+                                  +--+       +->-+-- IMAP Server         |
+                                  |  |       |   |                       |
+                                  |  |       |   +-----------------------+
+                                  |  |       ^
++----------------------+          |  |       |   +-----------------------+
+|  Host A              |          |  |       |   |   Host B              |
+|                      |          |  |       |   |                       |
+|  IMAP Client --->----+->--+     |  |       |   |                       |
+|                      |    |     |  |       ^   |                       |
+|                      |    v     |  |       |   |                       |
+|                      |2001|     |  |       |   |                       |
+|      +------<--------+--<-+     |  |       +-<-+--<----+               |
+|      |               |          |  |           |       |               |
+|      |               |          |  |        22 |       |               |
+|  SSH Client ---->----+----->------------>------+-- SSH Ser^er          |
++----------------------+          |  |           +-----------------------+
+                                  |  |
+                                  +--+
+
+                                Firewall
+
+
+
+Remote Port Forwarding
+$ ssh -R2001:localhost:143 user1@HostB
+
+
+                                  +--+
++----------------------+          |  |           +-----------------------+
+|  Host A              |          |  |           |   Host B              |
+|                      |  143     |  |           |                       |
+|  IMAP Server ----<------<-+     |  |      +-<--+-<--  IMAP Client      |
+|                      |    |     |  |      |    |                       |
+|                      |    ^     |  |      v    |                       |
+|                      |    |     |  |      |    |                       |
+|                      |    |     |  |      |    |                       |
+|       +------>--------->--+     |  |      +-->----->---+               |
+|       |              |          |  |    2001   |       |               |
+|       ^              |          |  |           |       |               |
+|       |              |          |  |        22 |       v               |
+|  SSH Client+----<----+---<--------------<------+--<-- SSH Server       |
++----------------------+          |  |           +-----------------------+
+                                  |  |
+                                  +--+
+
+                                Firewall
+
+
+- SSH Flags so far: -L, -R, -g
+- Equivalent confis in ssh_config file:
+	* LocalForward
+	* RemoteForward
+	* GatewayPorts
+
+
