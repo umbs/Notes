@@ -2,31 +2,49 @@
                     ===============
 Table of Contents
 ---
+- Overview
+- Loops: If, While, For etc
+- Data Structures: Lists, Tuples, Sets, Dictionary
+- Functions: Decorators, Generators
+- *args and **kwargs
+- OOP
+    * Instance variables vs Class variables
+- Map, Reduce, Filter
+- Lambda Functions
 
 
+Overview
+========
 - Dynamically-typed, strong-reference language
-- Lists, Tuples, Sets & Dictionaries
-- OOP:
-    * @classmethod and @staticmethod
-    *
-- Functions are first-class citizens
-- Nested functions
-- decorators, generators
-- named args and positional args to functions
-- Context Managers (Ex: with open(...) as foo:)
-- List slicing
-- List comprehension and Dictionary comprehension
+
+Loops: If, While, For ...
+=====================
+Loops
+----
+- Iterables are strings, lists, set, tuples and more
+
+my_string = "Hello"
+for c in my_string:
+    print(c)
 
 
-- Tips
+Input()
+----
+- Accepts input from CLI
+
+user_input = input("Please answer yes/no (y/n)?")   # Python 3.5 only
+if user_input == 'n':
+    # do something
+
+If statements
+----
 
 
 
 
 
-
-
-
+Data Structures
+===============
 Lists, Tuples & Sets
 ----
 - Tuples are immutable
@@ -67,26 +85,6 @@ Set operations
     print(set_one.difference())
 
 
-Loops
-----
-- Iterables are strings, lists, set, tuples and more
-
-my_string = "Hello"
-for c in my_string:
-    print(c)
-
-
-Input()
-----
-- Accepts input from CLI
-
-user_input = input("Please answer yes/no (y/n)?")   # Python 3.5 only
-if user_input == 'n':
-    # do something
-
-If statements
-----
-
 List Comprehension
 ----
 my_list = [x for x in range(5)]     # way of building a list
@@ -122,6 +120,78 @@ universities = {
     lottery_player['numbers']
 
 
+Functions: Decorators, Generators
+=================================
+- Functions are first class objects in Python. It can be passed as args to
+  other functions and returned from a function
+
+Positional Arguments: Arguments to a function...that's it.
+Keyword Arguments: A key=value pair in arguments. Order is not important
+
+
+*args and **kwargs
+---
+- *args means variable function arguments, passed as List
+- **kwargs means variable keyword arguments, passed as Set. Note that keyword
+  arguments MUST follow positional arguments
+
+Mutable Objects: Set, List, Dictionary
+Immutable Objects: String, Integer, Float, Tuple, bool
+
+
+
+Decorators
+----------
+# the function outer is the decorator
+def outer(some_func):
+    def inner():
+		# do some work before the function
+        ret = some_func()
+        # do some work after the function
+        return ret + 1
+    return inner # we alway return inner function
+
+def re_one():
+    return 1
+
+# First method to use a decorator
+outer(re_one)()
+# outer is the decorator for re_one. Any calls to re_one won't get the
+# original re_one, instead will get the decorated version.
+
+# Second method to use a decorator
+@outer
+def re_two():
+    return 1
+
+re_two()
+
+
+
+
+Generators:
+-----------
+- Generators: They are Iterators that can iterate only once. Usually
+  implemented as functions that 'yeild' and not 'return'
+
+- Used when calculating large sets of data where intermediate results is not
+  required to be saved for long.
+
+Ex: Fibonacci numbers
+
+# generator version
+def fibon(n):
+    a = b = 1
+    for i in range(n):
+        yield a
+        a, b = b, a + b
+
+This is used as follows:
+
+for x in fibon(10000):
+    print(x)
+
+
 @classmethod and @staticmethod
 ----
 - A method that doesn't change for various objects of class can be declared
@@ -145,64 +215,73 @@ class Student:
 
 OOP
 ---
-Inheritance in Python classes
+- Instance variables are created using __ (double underscore) before the
+  variable
+- Even private methods are created this way
+- How to access private methods?
+    * By other methods in same class
+    * Using round about way: instance._classname__privatemethod()
+- Old style class vs New style class
+- In Python there are no true private or protected variables
+- Python Classes are similar to C++ Classes. Python has most of the OOPs concepts
+- There is Garbage Collection in Python and hence, no need for explicit destroy
+  of objects
+- By default, class members are public
+
+
+Class
+-----
+class Name(object): # usual upper/lower case convention
+- Ideal to have __init__ method with attributes
+- 'self' is first attribute in all methods, including __init__
+- Class variable is created outside of any class method. One variable is
+  shared across all instances.
+
+Class Variable vs Instance Variables
 ---
-class Student:
-    """
-    all Student stuff
-    """
-    def __init__(self, name, school):
+- Instance variables are defined within a method and accessed using 'self'
+  attribute
+- Class variables are defined outside all methods in the class and don't need
+  'self' keyword to access it
+
+- Example:
+
+class Employee(object):
+    empCount = 0 #Class variable. No self. prefix
+    className = 'Employee' #Class variable. No self. prefix
+    def __init__(self, name, salary):
         self.name = name
-        self.school = school
-
-
-class WorkingStudent(Student):
-    def __init__(self, name, school, salary):
-        super().__init__(name, school)
         self.salary = salary
-
-- Combining @classmethod with Inheritance can become complex
-
-- Before object gets destroyed, __del__ is called
-
-class Class1(object):
-    def __init__(self,name):
-        self.name = name
-    def listname(self):
-        return self.name
-    # the following method is executed during object deletion
-    def __del__(self):
-        print self.name,"destroyed"
-obj1 = Class1('Darth Vader')
-
-# first method of deleting object
-del obj1	# __del__ is called here
-
-# second method of destroying an object? Make it point to some other object
-obj1 = 2
-
-- __str__ is special method (magic method) that's printed whenever object is
-  printed
-
-class Class1(object):
-    def __init__(self,name):
-        self.name = name # this is a instance variable
-    def listname(self):
-        return self.name
-    def __del__(self):
-        print self.name,"destroyed"
-    # in the following method, a string is returned whenever the print
-    # is called with the object as input
-    def __str__(self):
-        return "The name is %s " %self.name
-
-obj1 = Class1('Darth Vader')
-# This will call __str__ method, thus enabling a pretty printing of object
-print obj1
-del obj1
+        Employee.empCount +=1
 
 
-- In Python 3, it's recommended to have __repr__ instead of __str__
+- Classes have built-in attributes
+    __dict__    Dictionary containing class's namespace
+    __doc__     Class documentation string or None if undefined
+    __name__    Class name
+    __module__  Module name in which the class is defined. This attribute is
+                __main__ in interactive mode
+    __base__    Possibly empty tuple containing base classes, in the order of
+                their occurrence in base class list
+    __del__
+    __str__     In Python 3, it's recommended to have __repr__ instead of
+                __str__
+
+- Utility functions
+    hasattr()
+    getattr()
+    setattr()
+
+- hasattr() can be used to check if an instance has a specific attribute
+    $ hasattr(obj1, 'name')    # Returns true if 'name' attribute exists
+
+Deleting a Class Object
+----
+- Two ways to do it. But recommended way is 3rd one (Python's GC)
+    1) del obj1
+    2) obj1 = None
+
+
 
 Inheritance
 ---
@@ -237,11 +316,126 @@ print c.say_something()
     super(child_class_name, self).some_parent_method()
 
 
-*args and **kwargs
+# Method overloading in the same class.
+# Only the last method definition is used.
+class Animal(object):
+    name = 'Animal'
+    def eat(self):
+        print "Animal eating"
+
+    def drink(self,name):
+        print 'Animal %s drinking'%(name)
+
+    def drink(self, name = 'Dog'):
+        print 'Latest method - Animal %s drinking: '%(name)
+
+a = Animal()
+a.drink()
+b = Animal()
+b.drink('Cow')
+
+Latest method - Animal Dog drinking:
+Latest method - Animal Cow drinking:
+
+
+# Multiple inheritance.  A child can have multiple parents.
+class Organism(object):
+    name = 'Organism'
+    def eat(self):
+        print 'Organism eating'
+    def drink(self):
+        print 'Organism drinking'
+
+class Animal(object):
+    name = 'Animal'
+    def eat(self):
+        print "Animal eating"
+
+class Dog(Organism,Animal):
+    #name = 'Dog'
+    def eat(self):
+        print "Dog eating"
+
+d = Dog()
+d.eat()
+print d.name
+d.drink()
+
+
+Old Style Class vs New Style Class
 ---
-- *args means variable function arguments, passed as List
-- **kwargs means variable keyword arguments, passed as Set. Note that keyword
-  arguments MUST follow positional arguments
+In the old style class, the class will not inherit from Python object class
+and will have access to fewer attributes and methods.
+
+class ClassA:
+    def method1(self):
+        pass
+
+
+In new style class, the class will inherit from Python object class and will
+have access to more attributes and methods.
+
+class ClassA(object):
+    def method1(self):
+        pass
+
+
+Operator Overloading
+--------------------
+- Methods that needs overloaded for various operations
+	+		__add__
+	- 		__sub__
+	==		__eq__  This method is NOT used to overload !=
+	!=		__ne__
+	<		__lt__
+	>		__gt__
+	<=		__le__
+	>=		__ge__
+			__cmp__  This can be used to overload all 6 of above operators
+
+
+
+Python Modules
+---
+csv     For reading and writing in to CSV files
+xlrd    For reading from excel files
+xlwt    For writing in to excel files
+openpyxl    Another module to read/write to excel file
+sqlite3     Reading/Writing in to SQLite3 Database
+os      OS related dependent functionalities
+glob    Run regex on all pathnames/files to match files and directories
+
+Different ways of importing module
+---
+[1]
+# Import all functions in a given module.
+# We have to refer to the module name when
+# calling the function
+import math
+print math.sin(math.pi/4)
+
+[2]
+# Import all functions in a given module.
+# We do not need to refer to the module name when
+# calling the function
+from math import *
+print sin(pi/4)
+
+[3]
+# Give a shortcut name to the module.
+# Especially true for modules with long names such as matplotlib
+import math as ma
+print ma.sin(ma.pi/4)
+
+[4]
+# Only import the necessary functions from a module
+# This is memory efficient
+from math import sin,pi
+print sin(pi/4)
+
+
+
+
 
 
 
@@ -277,33 +471,20 @@ Strings & Texts
 
 - Iteration: Process of iterating
 
-Generators:
------------
-- Generators: They are Iterators that can iterate only once. Usually
-  implemented as functions that 'yeild' and not 'return'
 
-- Used when calculating large sets of data where intermediate results is not
-  required to be saved for long.
-
-Ex: Fibonacci numbers
-
-# generator version
-def fibon(n):
-    a = b = 1
-    for i in range(n):
-        yield a
-        a, b = b, a + b
-
-This is used as follows:
-
-for x in fibon(10000):
-    print(x)
-
-Map, Filter and Reduce
-----
+Map, Filter and Reduce and Lambda Functions
+======================
 - Functional approach to programming
 
-Map: Applies a function to all items in an input list
+Lambda Functions: Anonymous functions, used as throw away functions and only
+needed once
+- Syntax:
+    lambda inputs : output
+- Example:
+    lambda x : x%2 != 0
+
+
+Map: Applies a function to all items in an input list and returns a list
     map(function_to_apply, list_of_inputs)
 
 Ex:
@@ -367,11 +548,6 @@ from functools import reduce
 product = reduce((lambda x, y: x * y), [1, 2, 3, 4])
 
 
-Decorators: Functions that modify behavior of other functions.
-- Very useful concept. Read up online.
-
-
-
 TIPS
 ====
 - sort() can be applied on lists (and ...??). It sorts the list in place.
@@ -389,9 +565,33 @@ TIPS
     mylist = [5, 9, 3]
     dcopy = mylist[:]
 
+- dir(class_name) gives all methods in that class
+
+
+
 
 Reference:
 [1] https://learnpythonthehardway.org/python3/
 [2] http://book.pythontips.com/en/latest/
 [3] Safari Books Online: REST APIs with Flask and Python (video)
 [4] UCSC Extension Class: Python for Programmers
+
+Decorators
+[5] http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
+[6] http://thecodeship.com/patterns/guide-to-python-function-decorators/
+
+OOPS
+[7] http://www.tutorialspoint.com/python/python_classes_objects.htm
+[8] http://www.jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/
+
+Private Methods
+[9] http://stackoverflow.com/questions/70528/why-are-pythons-private- methods-not-actually-private
+[10] http://effbot.org/pyfaq/tutor-how-do-i-make-public-and-private-attributes- and-methods-in-my-classes.htm
+
+Multiple Inheritance
+[11] http://stackoverflow.com/questions/3277367/how-does-pythons-super-work-with-multiple-inheritance
+[12] http://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem
+
+Operator Overloading
+[13] https://docs.python.org/2/library/operator.html
+[14] http://thepythonguru.com/python-operator-overloading/
