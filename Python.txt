@@ -441,7 +441,51 @@ print sin(pi/4)
 
 Strings & Texts
 ----
-- f-strings:
+
+Slicing
+----
+message = "Hello World"
+
+- All 3 "arguments" below are optional
+message[start_idx:(end_idx+1):step=1]
+
+message[0:5]    # beginning to 4th char inclusive
+message[:5]     # beginning to 4th char inclusive
+message[3:]     # 3rd char to end of the string
+
+message[-1]     # last char, same as message[len-1]
+
+message[8:3:-1] # prints in reverse order
+message[::-1]   # prints entire list in reverse, but reversed() method is
+                # preferred
+
+message.lower()
+message.upper()
+message.count(str)  # count # of times str occurs in message
+message.find(str)   # starting index of str if present or -1 if not present
+message.replace(orig_str, new_str)
+
+
+Concatenation
+----
+- Concatenting strings is just addition, but there are other approaches
+    greeting = 'Hello'
+    name = 'Michael'
+    message = greeting + ', ' + name
+
+- Note that dir(variable) function gives all methods and variables available
+  on that variable "type". There's no explanation on each method.
+
+- Do help(class of object) and you'll get lot more info.
+    Ex: help(str) gives lot of info on strings
+        help(str.lower) gives info on lower method of strings
+
+
+
+
+
+- f-strings: Python 3.6 and above
+- Very cool feature
 
     ten = 10
     f"Hello world! There are {ten} people in world"
