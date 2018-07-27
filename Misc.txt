@@ -35,6 +35,118 @@ objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+@@@@@@@@@@@@@@@   CPU    CACHES      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+- Three common types of caches
+    * Data Cache (D-cache, aka D$)
+    * Instruction (I-cache, aka I$)
+    * Translation Lookaside Buffer (TLB)
+        - Caches virtual addr to real addr
+
+- Cache Hierarchies (per core)
+    * L1 I-cache, L1 D-cache
+    * L2 cache
+        - Holds both instructions and data
+    * L3 cache
+        - Holds both instructions and data
+
+- Assume 100MB program at runtime (code+data)
+    * 8% fits in L3 cache of Intel Core i79xx
+    * 0.25% fits in each L2 cache
+    * 0.03% fits in each L1 cache
+
+- Cache speeds (for Core i79xx)
+    * L1 latency is 4 cpu cycles
+    * L2 latency is 11 cpu cycles
+    * L3 latency is 39 cpu cycles
+    * Main Memory (RAM) is 107 cpu cycles
+
+Cache Lines
+---
+- Caches consists of "lines", each holding multiple adjacent words
+- On Core i7, cache lines hold 64 bytes (common for Intel/AMD processors)
+    64 bytes = 16 32-bit values, 8 64-bit values, etc
+        Eg., 16 32-bit array elements
+
+- Main memory read/written in terms of cache lines
+    * Reading a byte that's not in cache (cache miss) will read a full cache
+      line from main memory
+    * Writing a byte will write a full cache line to main memory (eventually)
+
+
+
+Reference:
+https://www.youtube.com/watch?v=WDIkqP4JbkE
+
+@@@@@@@@@@@@     YAML   SYNTAX   RULES       @@@@@@@@@@@@@@@@@@@@@@@@
+
+RULE 0: Indentation
+- YAML uses fixed indentation scheme to represent relationship between data
+  layers
+
+RULE 1: Scalars
+- Scalars are ordinary values: numbers, strings, booleans
+
+Ex:
+number-value: 42
+floating-point-value: 3.141592
+boolean-value: true
+# strings can be both 'single-quoted` and "double-quoted"
+string-value: 'Bonjour'
+
+
+
+RULE 2: Colons (or Dictionaries)
+- YAML uses dictionaries represented as key:value pairs, similar to Python
+  dictionaries
+
+Ex:
+[1]
+my_key: my_value
+
+[2] Uncommon, but this is valid
+my_key:
+  my_value
+
+
+- Dictionaries can be nested
+Ex:
+first_level_dict_key:
+  second_level_dict_key: value_in_second_level_dict
+
+- There's a space following colon and then value (this is mandatory)
+
+
+RULE 3: Dashes (or Lists)
+- To represent list of items, single dash followed by a space is used.
+- Multiple items belong to same list if indentation level is same.
+
+Ex:
+- list_value_one
+- list_value_two
+- list_value_three
+
+
+- Value of a dictionary can be list
+
+Ex:
+
+my_dictionary:
+  - list_value_one
+  - list_value_two
+  - list_value_three
+
+
+YAML Mutli Documents
+---
+- YAML allows multiple docs to be embedded in a single file. They only have to
+  be separated using triple-dash separator (---)
+
+
+Reference:
+https://docs.saltstack.com/en/latest/topics/yaml/
+https://gettaurus.org/docs/YAMLTutorial/
+
+
 @@@@@@@@@@@@@@@@@@@@@@@@@     TOR    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Tor:
 - Passing traffic by bouncing them across various Tor nodes across the globe.
@@ -2369,7 +2481,7 @@ Research more on this.
 
 
 Resources:
-[1] Udemy course on Database Design - 
+[1] Udemy course on Database Design -
 
 ===============   CHROME DEVELOPER TOOLS          =====================
 
