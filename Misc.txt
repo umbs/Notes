@@ -35,6 +35,69 @@ objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+@@@@@@@@@@@@@@@@@@@   UTF-8  INTRODUCTION     @@@@@@@@@@@@@@@@@@@@@@
+- Variable sized encoding. Size range from 1 to 4 bytes
+
+How are characters encoded in UTF-8?
+- Manipulating numbers at binary level
+- High order bits of first byte are important. They tell how many bytes are
+  used to encode a value
+
+- In 1 byte encoding, which range from 0 to 127, high order bit will always be
+  zero
+
+        +---------------------------+
+        | 0 |                       |
+        +---------------------------+
+
+- In 2 byte encoding, first 3 high order bits of first byte is 110 and first 2
+  high order bits of second byte is 10
+
+    +---------------------------+
+    | 1 | 1 | 0 |               |
+    +---------------------------+
+    +---------------------------+
+    | 1 | 0 |                   |
+    +---------------------------+
+
+- This gives 11 (5+6) bits to encode the char
+
+- In 3 byte encoding, we have 1110, 10 and 10 in higher order of each byte
+
+    +---------------------------+
+    | 1 | 1 | 1 | 0 |           |
+    +---------------------------+
+    +---------------------------+
+    | 1 | 0 |                   |
+    +---------------------------+
+    +---------------------------+
+    | 1 | 0 |                   |
+    +---------------------------+
+
+- This gives 16 bits (4+6+6) to work with
+
+- 4 byte encoding follows same pattern as 3 byte encoding
+
+    +---------------------------+
+    | 1 | 1 | 1 | 0 |           |
+    +---------------------------+
+    +---------------------------+
+    | 1 | 0 |                   |
+    +---------------------------+
+    +---------------------------+
+    | 1 | 0 |                   |
+    +---------------------------+
+    +---------------------------+
+    | 1 | 0 |                   |
+    +---------------------------+
+
+- Total of 21 chars to work with
+
+
+Reference
+https://www.youtube.com/watch?v=sqPTR_v4qFA
+
+
 @@@@@@@@@@@@@@@   CPU    CACHES      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 - Three common types of caches
     * Data Cache (D-cache, aka D$)
