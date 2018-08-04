@@ -207,6 +207,40 @@ Profiling Tools >>>>>
 http://cdn.oreillystatic.com/en/assets/1/event/122/Linux%20perf%20tools%20Presentation.pdf
 [5] https://github.com/brendangregg/msr-cloud-tools
 
+@@@@@@@@@@@@@@@   rsync   commands @@@@@@@@@@@@@@@@@@@@@@@
+
+-v: verbose
+-r: recursive copy of data. Doesn't keep permission or timestamp
+-a: archive.
+    Features of this flag:
+    * Preserves timestamp, file permissions, user & group ownership
+    * Copies files recursively
+    * Copies symlinks
+    + -a flag is superset of -r flag, looks like
+-z: compress data
+-h: Output numbers in human readable format
+
+rsync [options] <src> <dst>
+
+Copy/Sync a File on a Local Computer
+$ rsync -zvh backup.tar /tmp/backups/
+
+Copy/Sync a Directory on Local Computer
+$ rsync -avzh /root/rpmpkgs /tmp/backups/
+
+Copy a Directory from Local Server to a Remote Server
+$ rsync -avz rpmpkgs/ root@192.168.0.101:/home/
+
+Copy/Sync a Remote Directory to a Local Machine
+$ rsync -avzh root@192.168.0.100:/home/tarunika/rpmpkgs /tmp/myrpms
+
+Copy a File from a Remote Server to a Local Server with SSH
+$ rsync -avzhe ssh --progress root@192.168.0.100:/root/install.log /tmp/
+
+Reference:
+[1] https://www.tecmint.com/rsync-local-remote-file-synchronization-commands/
+
+
 @@@@@@@@@@@@@@@@@@@@@ TAR commands @@@@@@@@@@@@@@@@@@@@@@@
 + 'tar' command examples [2]
 // Note that '-' is a mess and may or may not be used.
