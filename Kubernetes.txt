@@ -1,0 +1,107 @@
+@@@@@@@@@@@@@@@@@@@   KUBERNETES  (UDEMY)     @@@@@@@@@@@@@@@@@@@@@@
+
+
+Commands
+
+kubectl --namespace=acp-system scale deployment acp-upgrade --replicas=0
+
+
+$ kubectl get nodes
+$ kubectl get events
+
+
+$ kubectl config get-contexts
+$ kubectl config use-context <context-name>
+
+$ kubectl run <deployment-name> --image=<image-location> --port=<port-num>
+$ kubectl expose deployment <deployment-name> --type=NodePort
+
+
+Kubernetes Structure:
+1) 'kubectl' is entry to Kubernetes deployment
+2) Controller Manager controls cluster-level functions
+3) Scheduler talks to nodes to allocate resources
+4) nodes then host pods
+5) kube-proxy runs on each node and controls the network on nodes
+6) pods then have groups of docker containers in them
+7) docker containers share the same logical volume
+
+Definitions:
+POD: A group of coordinating containers. It's the smallest unit the Scheduler
+understands. The containers within the pod share some context and interact,
+directly or indirectly, with each other.
+
+NODES: Closely associated with machines no network
+
+SERVICES:
+
+KUBE-PROXY: Manages network access on a node. Controls access to services on
+the node. It also does load balancing.
+
+SCHEDULER: Which Nodes have available resources and runs Pods on them.
+
+CONTROLLER MANAGER: controls all other cluster level functions
+
+KUBECTL: Talks to REST endpoint (Scheduler/Controller Mgr) to make it do
+things
+
+
+===============  KUBERNETES 101  ==============
+
+- Kubernetes have 2 _types_ of nodes: HEAD Node and WORKER Nodes
+
+- What's in a HEAD node?
+-----------
+    * API Server
+    * Scheduler
+    * Controller Manager
+    * Etcd
+    * Sometimes:
+        - kubelet: agent running on HEAD. Managed by systemd
+        - docker
+
+- kubelet config is in /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+- Manifest files will be (usually) in: /etc/kubernetes/manifests/
+        * bunch of YAML files in this directory
+
+
+- What's in WORKER node? Lots of them.
+-----------
+    * kubelet: agent running on all WORKER nodes. It talks to API server on
+      HEAD and local docker containers to manage them
+    * kube-proxy: manages IP tables in that node
+    * docker
+
+POD:
+- Lowest unit of computing maintained by kubectl
+
+Installing Kubernetes (3 techniques)
+----
+- First install kubectl (brew install kubectl on MacOS)
+- minikube
+- GKE (Google Kubernetes Engine)
+- kubeadm
+
+
+
+COMMANDS
+--------
+$ systemctl status kubelet      # gives status of kubernetes on that node
+
+$ minikube start
+$ minikube status
+$ kubectl version
+$ kubectl get nodes
+
+
+
+[1] Safari Books Online: Kubernetes Fundamentals - Sebastien Goasguen
+[2] kubernetes.io
+[3] cncf.io
+[4] github.io/kubernetes-incubator
+
+
+Resources:
+[1] O'Reilly Kubernetes Bootcamp: Get up to speed with Docker and Kubernetes -
+Zed Shaw
+

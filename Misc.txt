@@ -35,6 +35,94 @@ objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+
+@@@@@@@@@@@@@@@@@@@   ELASTIC    SEARCH   NOTES   @@@@@@@@@@@@@@@@@@
+- ES is a document datastore. Documents are stored in JSON format.
+- ES uses indices to track documents. We say "Document is added to index XXX"
+- Documents also have a type.
+
+Example: Adding a document to ES
+----
+
+ADD DOCUMENT TO ES:
+
+POST localhost:9200/accounts/person/1
+{
+    "name" : "John",
+    "lastname" : "Doe",
+    "job_description" : "Systems administrator and Linux specialit"
+}
+
+index = 'accounts'
+document type = 'person'
+id = 1
+Content of the document is the JSON
+
+Return to above HTTP POST will confirm document creation, as follows:
+
+{
+    "_index": "accounts",
+    "_type": "person",
+    "_id": "1",
+    "_version": 1,
+    "result": "created",
+    "_shards": {
+        total": 2,
+        "successful": 1,
+        "failed": 0
+    },
+    "created": true
+}
+
+
+- Let's get the same document back
+
+
+
+READ DOCUMENT FROM ES:
+
+GET localhost:9200/accounts/person/1
+
+Response:
+---
+{
+    "_index": "accounts",
+    "_type": "person",
+    "_id": "1",
+    "_version": 1,
+    "found": true,
+    "_source": {
+        "name": "John",
+        "lastname": "Doe",
+        "job_description": "Systems administrator and Linux specialit"
+    }
+}
+
+- Look at "_source" for your document
+
+UPDATE THE DOCUMENT:
+
+POST localhost:9200/accounts/person/1/_update
+{
+      "doc":{
+       "job_description" : "Systems administrator and Linux specialist"
+     }
+}
+
+- Notice that 'specialit' was incorrectly spelled. That is updated now.
+
+
+SEARCH DOCUMENTS:
+
+GET localhost:9200/_search?q=john
+
+
+
+
+References:
+[1] https://www.elastic.co/blog/a-practical-introduction-to-elasticsearch
+
+
 @@@@@@@@@@@@@@@@@@@   UTF-8  INTRODUCTION     @@@@@@@@@@@@@@@@@@@@@@
 - Variable sized encoding. Size range from 1 to 4 bytes
 
@@ -204,8 +292,8 @@ YAML Mutli Documents
 - YAML allows multiple docs to be embedded in a single file. They only have to
   be separated using triple-dash separator (---)
 
-
 Reference:
+https://learnxinyminutes.com/docs/yaml/  <<<< This is very good, quick intro
 https://docs.saltstack.com/en/latest/topics/yaml/
 https://gettaurus.org/docs/YAMLTutorial/
 
@@ -2340,60 +2428,6 @@ https://api.chucknorris.io/jokes/search?query={query
 which I was not interested at this time ---->
 
 [1] Safari Books Online Video
-
-===============  KUBERNETES 101  ==============
-
-- Kubernetes have 2 _types_ of nodes: HEAD Node and WORKER Nodes
-
-- What's in a HEAD node?
------------
-    * API Server
-    * Scheduler
-    * Controller Manager
-    * Etcd
-    * Sometimes:
-        - kubelet: agent running on HEAD. Managed by systemd
-        - docker
-
-- kubelet config is in /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-- Manifest files will be (usually) in: /etc/kubernetes/manifests/
-        * bunch of YAML files in this directory
-
-
-- What's in WORKER node? Lots of them.
------------
-    * kubelet: agent running on all WORKER nodes. It talks to API server on
-      HEAD and local docker containers to manage them
-    * kube-proxy: manages IP tables in that node
-    * docker
-
-POD:
-- Lowest unit of computing maintained by kubectl
-
-Installing Kubernetes (3 techniques)
-----
-- First install kubectl (brew install kubectl on MacOS)
-- minikube
-- GKE (Google Kubernetes Engine)
-- kubeadm
-
-
-
-COMMANDS
---------
-$ systemctl status kubelet      # gives status of kubernetes on that node
-
-$ minikube start
-$ minikube status
-$ kubectl version
-$ kubectl get nodes
-
-
-
-[1] Safari Books Online: Kubernetes Fundamentals - Sebastien Goasguen
-[2] kubernetes.io
-[3] cncf.io
-[4] github.io/kubernetes-incubator
 
 ==================    NOTES   FROM   PYTHONG   TALKS   ===============
 - Look these up:

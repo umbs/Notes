@@ -613,6 +613,40 @@ TIPS
 
 
 
+@@@@@@@@@@@@@@@@@@      CODING        COMPETITIONS      @@@@@@@@@@@@@@@@@@@@@@
+Few APIs/library calls that's useful
+
+chr(...)
+    chr(i) -> character
+    Return a string of one character with ordinal i; 0 <= i < 256.
+
+ord(...)
+    ord(c) -> integer
+    Return the integer ordinal of a one-character string.
+
+sort()
+    - method that can only be called on a list
+    - Does not work on any enumerable, unlike sorted()
+    - Does not return a list. It just sorts original list
+    - Method found in older code
+
+sorted(...)
+    sorted(iterable, cmp=None, key=None, reverse=False) --> new sorted list
+    - NOTE that this returns new list and does NOT modify existing list
+    - 'key' is a function. It runs on each input and returns a numeric value.
+      That value is used in sorting.
+
+  strs = ['ccc', 'aaaa', 'd', 'bb']
+  print sorted(strs, key=len)  ## ['d', 'bb', 'ccc', 'aaaa']
+
+    - Read more at this link:
+https://developers.google.com/edu/python/sorting
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 Reference:
 [1] https://learnpythonthehardway.org/python3/
