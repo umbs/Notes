@@ -18,7 +18,7 @@ $ kubectl expose deployment <deployment-name> --type=NodePort
 
 
 Kubernetes Structure:
-1) 'kubectl' is entry to Kubernetes deployment
+1) 'kubectl' is entry to Kubernetes cluster 
 2) Controller Manager controls cluster-level functions
 3) Scheduler talks to nodes to allocate resources
 4) nodes then host pods
@@ -52,10 +52,10 @@ things
 
 - What's in a HEAD node?
 -----------
-    * API Server
-    * Scheduler
-    * Controller Manager
-    * Etcd
+    * API Server: Exposes APIs
+    * Scheduler: Decides where to schedule pods, on which m/c etc
+    * Controller Manager: Makes sure state of cluster in right shape
+    * Etcd: Storage. It's possible etcd is outside the cluster
     * Sometimes:
         - kubelet: agent running on HEAD. Managed by systemd
         - docker
@@ -88,10 +88,27 @@ COMMANDS
 --------
 $ systemctl status kubelet      # gives status of kubernetes on that node
 
+
 $ minikube start
 $ minikube status
 $ kubectl version
 $ kubectl get nodes
+
+$ kubectl get pods
+$ kubectl delete pod <pod-name>
+ 
+
+$ kubectl -v=9 [command]    // very verbose. Underlying call is 'curl'
+
+$ kubectl api-version       // gives all api GROUPS in the cluster
+
+$ kubectl label pods <pod-name> [key=value] // key: value will sit in metadata
+                                            // of the pod
+$ kubectl get pods label <pod-name>         // returns all labels of the pod
+
+$ kubectl get rs    // gets replicasets
+$ kubectl scale rs <replicaset-name> --replicas=<number>
+
 
 
 

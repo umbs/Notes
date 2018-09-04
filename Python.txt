@@ -642,6 +642,10 @@ sorted(...)
     - Read more at this link:
 https://developers.google.com/edu/python/sorting
 
+reversed(...)
+
+enumerate(...)
+
 
 
 
