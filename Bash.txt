@@ -247,7 +247,8 @@ function help()
 
 Arrays
 --
-names=(linda lisa laura lori)   # one way of array assignment
+names=(linda lisa laura lori)   # one way of array assignment. Note, there are
+                                # no commas
 names[0] = linda    # other way of array assignment.
 names[1] = lisa
 names[2] = laura
@@ -260,6 +261,56 @@ names[3] = lori
 echo ${names[2]}    # print 3rd array elem
 echo ${names[@]}    # print all array elem
 echo ${#names[@]}   # print number of elems
+
+Iterate Through Array Values
+---
+Example:
+
+array=(one two three)
+files=("/etc/passwd" "/etc/group" "/etc/hosts" )
+limits=(0, 20, 26, 39, 48)
+
+To print an array use:
+
+printf "%s\n" "{array[@]}"
+printf "%s\n" "{files[@]}"
+printf "%s\n" "{limits[@]}"
+
+for i in "${array[@]}"
+do
+    echo $i  # or do whatever on $i
+done
+
+
+for i in "{files[@]}"
+do
+    cd $i
+    `ls -la`
+done
+
+TIP: Storing commands in variables is not advised. Instead use a function.
+Reference: https://mywiki.wooledge.org/BashFAQ/050
+
+
+basename and dirname
+----
+- These inbuilt operators give last directory/file name and it's prefix
+  respectively
+
+$ basename /Users/sarmaupadhyayula/practice/python
+python
+
+$ basename /Users/sarmaupadhyayula/practice/python/hello.py
+hello.py
+
+$ dirname /Users/sarmaupadhyayula/practice/python
+/Users/sarmaupadhyayula/practice    # without the trailing /
+
+$dirname /Users/sarmaupadhyayula/practice/python/hello.py
+/Users/sarmaupadhyayula/practic
+
+
+
 
 Creating Menu Interfaces (Watch 6.4 video)
 --
