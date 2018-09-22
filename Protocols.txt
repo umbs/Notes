@@ -2549,7 +2549,7 @@ Originate Default
 - BGP routers connected to different AS uses eBGP protocol.
 
 - Multi Homed AS
-    - AS connected to more than on other AS, for redundancy.
+    - AS connected to more than one other AS, for redundancy.
 
 
 - BGP is also used in L3VPN (more on this in L3VPN courses).
@@ -2568,7 +2568,7 @@ Originate Default
 
 Why BGP?
 --------
-- Its a 'selective' protocol. Only shared prefixes that it is asked to share.
+- Its a 'selective' protocol. Only shares prefixes that it is asked to share.
 - Typical network has one or two routers on edge of AS, running BGP. Rest of the
   routers run an IGP.
 

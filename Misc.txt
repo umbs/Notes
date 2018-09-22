@@ -26,15 +26,136 @@ Rule 5. Data dominates. If you've chosen the right data structures and
         programming.
 
 Pike's rules 1 and 2 restate Tony Hoare's famous maxim "Premature optimization
-is the root of all evil." Ken Thompson rephrased Pike's rules 3 and 4 as "When
-in doubt, use brute force.". Rules 3 and 4 are instances of the design
-philosophy KISS. Rule 5 was previously stated by Fred Brooks in The Mythical
-Man-Month. Rule 5 is often shortened to "write stupid code that uses smart
-objects".
+is the root of all evil."
+
+Ken Thompson rephrased Pike's rules 3 and 4 as "When in doubt, use brute
+force.".
+
+Rules 3 and 4 are instances of the design philosophy KISS.
+
+Rule 5 was previously stated by Fred Brooks in The Mythical Man-Month. Rule 5 is
+often shortened to "write stupid code that uses smart objects".
+
 
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+@@@@@@@@@@@@@@@@@@@   RabbitMQ  vs  Apache Kafka  @@@@@@@@@@@@@@@@@@
+
+Origins:
+========
+RMQ is a message broker and first mature open source implementation of AMQP.
+It's written in Erlang.  AMQP is an "Open Wire Protocol" for messaging with
+powerful routing features. While language specific message brokers existed, AMQP
+was first cross-language protocol and RMQ its most mature implementation.
+
+Kafka came from LinkedIn, written in Scala and solved the problem to connect
+different internal systems. Adopted by Apache SF and useful in event-driven
+architecture.
+
+
+Architecture & Design
+=====================
+RMQ is a general purpose message broker. A broker in RMQ comprises of two
+components: Exchange and Queues
+- Exchange takes messages from Producer and maps it to Queues
+- Consumer reads messages from Queues
+
+This way, Producer and Consumer are decoupled. Messaging can be synchronous or
+asynchronous as required. RMQ uses smart broker/dumb consumer model.
+
+There are 4 types of exchanges: Direct, Topic, Fanout, Headers
+
+Exchange uses "routing keys" to "bind" queues to message. A routing key is
+generated for a message and used to determine which queue(s) it must be
+forwarded to
+
+Direct Exchange: 1:1 mapping between message and queue
+Fanout: Every message is routed to ALL queues
+Topic:
+Header:
+
+Messages are removed from the queue after Consumer reads it.
+
+RMQ can be setup on multi-node cluster and make is distributed deployment (HA
+etc).
+
+
+
+Apache Kafka is not a message broker but more like a message "store" or message
+"log". It is fundamentally different in implementation (distributed). Kafka uses
+Zookeeper to implement and manage all distributed concepts (leader election,
+config management, replication state management etc)
+
+Kafka uses dumb broker/smart consumer model in the sense that consumer is
+responsible for maintaining message offsets.
+
+Topics and Partitions:
+---
+Kafka uses topics and partitions within the topics that acts similar to RMQ
+queue. A topic can have many partitions. Ordering of messages within a partition
+is FIFO.
+
+Consumer Groups:
+---
+Kafka has concept of Consumer Groups, where a bunch of Consumer nodes are
+grouped together (duh!). This is used to expand and reduce based on message flow
+in partitions. There is 1:1 mapping of partition and consumer node. There cannot
+be two consumer nodes from same consumer group reading from same partition.
+Offset maintenance will be a problem. Offsets per partition are maintained per
+consumer group.
+
+
+Requirements and Use Cases
+==========================
+TBD
+
+Security
+========
+TBD
+
+Developer Experience
+====================
+TBD
+
+Performance
+===========
+TBD
+
+Making the Call
+===============
+TBD
+
+
+Reference:
+[1]
+https://content.pivotal.io/blog/understanding-when-to-use-rabbitmq-or-apache-kafka
+[2] https://www.opsclarity.com/understanding-kafka-consumer-lag/
+
+@@@@@@@@@@@@@@@@@@@   SOAP     vs    REST         @@@@@@@@@@@@@@@@@@
+SOAP = Simple Object Access Protocol
+REST = Representational State Transfer
+
+- Both are communication protocol for web services
+
+- REST is a stateless protocol and operates through interfaces called resources
+  (or APIs).
+- SOAP exposes application logic as services rather than data.
+
+
+Benefits of REST over SOAP:
+- REST uses HTTP to communicate with APIs. Much simpler protocol than SOAP's
+  messaging protocols
+- REST allows variety of data formats (JSON, YAML). SOAP only uses XML
+- REST offers better support for browser clients and has superior performance
+- Uses less bandwidth
+
+
+Benefits of SOAP over REST
+-
+
+Reference:
+[1] https://stackify.com/soap-vs-rest/
 
 @@@@@@@@@@@@@@@@@@@   ELASTIC    SEARCH   NOTES   @@@@@@@@@@@@@@@@@@
 - ES is a document datastore. Documents are stored in JSON format.
