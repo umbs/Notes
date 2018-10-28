@@ -351,6 +351,13 @@ Autocomplete
 ^x^n    for just this file
 ^x^f    for file names
 ^x^]    tags only
+^x^d    definition (in Vim's dictionary)
+^x^i    Keywords
+^x^l    Lines (useful while writing Markdown)
+^x^t    Thesaurus (Needs an input file)
+^x^k    Dictionary
+^x^s    Spelling
+^x^v    Vim commands
 ^n      for anything specified by complete option
 
 ^n and ^p   go back and forth in suggestion list
@@ -358,8 +365,87 @@ Autocomplete
 Read docs at |ins-completion|
 
 
-Intermediate Vim
+Intermediate Vim [5]
 ===
+- Most commands are composed of an action and a motion
+    * Actions do something
+    * Motions move the cursor
+
+- Uncommon Motions
+    * Text objects: w, s, p, b, B, etc
+        * Pneumonic?
+            + "a word" -> aw
+            + "inner block" -> ib
+    * Last position in change list: g; (g, is go back)
+
+Copy & Paste
+---
+- Forget Copy/Paste and think Registers
+- You now have 35 copy buffers/registers
+"+ is X server (i.e system) copy/paste register, copy to here to copy out of Vim
+:reg    view content of registers
+<C-r> in insert mode puts the register
+
+
+Common Registers
+---
+"[1-9] history registers (or delete registers. It acts like a Queue)
+"0 the yank register
+"[a-z] are named registers
+"[A-Z] samd as "[a-z] but append
+
+
+Important Registers
+---
+"/  current search pattern
+"-  small delete
+"=  expression register
+"_  the black hole register
+
+
+Read-Only Registers
+---
+":  last :command
+".  last inserted text
+"%  filename of current buffer
+"#  filename of alternate file (last file you edited)
+:h registers
+
+Undo and Redo Trees
+---
+
+
+Macros
+---
+- Recording a Macros starts by hitting q and then a letter, then sequence of
+actions are recorded in that register.
+- Hit q again to stop recording
+- @<register-alphabet> will replay the macros actions
+
+
+Windows
+---
+:h windows
+- Lots of commands/help
+
+
+Digraphs & Special Characters
+---
+- Digraphs: insert weird chars like: é,ä,etc
+- In insert mode, ^k followed by one or two chars
+:h digraphs
+
+
+Templates
+---
+0r ~/path/to/template   << this puts entire template in to this file
+
+
+Snippets
+---
+:ab list of abbreviations
+- Ultisnips and Snipmate: provide better snippets support and advance features
+
 
 
 [1] https://www.youtube.com/watch?v=aHm36-na4-4

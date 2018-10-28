@@ -60,6 +60,46 @@ Ex:
 
 Set operations
 ----
+- Add element to a set
+    sets.add(60)
+
+- Union, Intersection, Difference of two sets
+    set_one = {1,2,3,4,5}
+    set_two = {1,3,5,7,9}
+    print(set_one.union(set_two))           # output: 1,2,3,4,5,7,9
+    print(set_one.intersection(set_two))    # output: 1,3,5
+    print(set_one.difference())
+
+
+
+Operation			Equivalent			Result
+len(s)	 								number of elements in set s (cardinality)
+x in s	 								test x for membership in s
+x not in s	 							test x for non-membership in s
+s.issubset(t)		s <= t				test whether every element in s is in t
+s.issuperset(t)		s >= t				test whether every element in t is in s
+s.union(t)			s | t				new set with elements from both s and t
+s.intersection(t)	s & t				new set with elements common to s and t
+s.difference(t)		s - t				new set with elements in s but not in t
+s.symmetric_difference(t)	s ^ t		new set with elements in either s or t but not both
+s.copy()	 							new set with a shallow copy of s
+
+
+s.update(t)			s |= t				return set s with elements added from t
+s.intersection_update(t)	s &= t		return set s keeping only elements also found in t
+s.difference_update(t)	s -= t			return set s after removing elements found in t
+s.symmetric_difference_update(t)	s ^= t	return set s with elements from s or t but not both
+s.add(x)	 							add element x to set s
+s.remove(x)	 							remove x from set s; raises KeyError if not present
+s.discard(x)	 						removes x from set s if present
+s.pop()	 								remove and return an arbitrary element from s;
+											raises KeyError if empty
+s.clear()	 							remove all elements from set s
+
+
+
+Tuples
+------
     tups = (77, 80, 99)
     tups = tups + (100,)    # Note the , after 100. That's important
     tups2 = (15)            # NOT a tuple. It's just a number with braces
@@ -72,17 +112,8 @@ Set operations
                     # replaced
 
 
-- Add element to a set
-    sets.add(60)
 - Add element to a list
     grades.append(60)
-
-- Union, Intersection, Difference of two sets
-    set_one = {1,2,3,4,5}
-    set_two = {1,3,5,7,9}
-    print(set_one.union(set_two))           # output: 1,2,3,4,5,7,9
-    print(set_one.intersection(set_two))    # output: 1,3,5
-    print(set_one.difference())
 
 
 List Comprehension
@@ -516,7 +547,7 @@ Concatenation
 - Iteration: Process of iterating
 
 
-Map, Filter and Reduce and Lambda Functions
+Map, Filter, Reduce and Lambda Functions
 ======================
 - Functional approach to programming
 

@@ -64,20 +64,47 @@ components: Exchange and Queues
 This way, Producer and Consumer are decoupled. Messaging can be synchronous or
 asynchronous as required. RMQ uses smart broker/dumb consumer model.
 
+
+                                      +---------+
+                                +---->| Queue   |---------> Consumer
+                                |     +---------+
+                                |
+                                |C
+                +-----------+   |
+            A   |           |   |     +----------+
+Producer -------> Exchange  |-------->| Queue    |--------> Consumer
+                |    B      |   |     +----------+
+                +-----------+   |
+                                |
+                                |     +----------+
+                                +---->| Queue    |--------> Consumer
+                                      +----------+
+
+            A = Message + Routing Key
+            B = Exchange Types (4 types)
+            C = Binding + Binding Key. Binding is mapping Exchange with Queue
+
+
 There are 4 types of exchanges: Direct, Topic, Fanout, Headers
+
+There's also a default (nameless) exchange where routing key is compared with
+queue name
+
 
 Exchange uses "routing keys" to "bind" queues to message. A routing key is
 generated for a message and used to determine which queue(s) it must be
 forwarded to
 
-Direct Exchange: 1:1 mapping between message and queue
+Direct Exchange: 1:1 mapping between message and queue. 
+        Routing Key == Binding Key
+
 Fanout: Every message is routed to ALL queues
-Topic:
-Header:
+Topic: Routing Key is partially matched to Binding Key. Not clear how it's done.
+Header: There's no routing key. Message header is used in Queue matching
 
 Messages are removed from the queue after Consumer reads it.
 
-RMQ can be setup on multi-node cluster and make is distributed deployment (HA
+RMQ can be setup on multi-node cluster and make it distributed deployment (HA
 etc).
 
 

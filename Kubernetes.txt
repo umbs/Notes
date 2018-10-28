@@ -16,9 +16,10 @@ $ kubectl config use-context <context-name>
 $ kubectl run <deployment-name> --image=<image-location> --port=<port-num>
 $ kubectl expose deployment <deployment-name> --type=NodePort
 
+$ kubectl explain
 
 Kubernetes Structure:
-1) 'kubectl' is entry to Kubernetes cluster 
+1) 'kubectl' is entry to Kubernetes cluster
 2) Controller Manager controls cluster-level functions
 3) Scheduler talks to nodes to allocate resources
 4) nodes then host pods
@@ -96,7 +97,7 @@ $ kubectl get nodes
 
 $ kubectl get pods
 $ kubectl delete pod <pod-name>
- 
+
 
 $ kubectl -v=9 [command]    // very verbose. Underlying call is 'curl'
 

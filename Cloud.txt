@@ -537,8 +537,114 @@ Column-Oriented Storage
 
 Apache Cassandra
 ---
+History
+-------
 - Facebook is original designer. Now managed by Apache and many companies
   use it.
+- Joined Apache Incubator in 2009
+- Apache top level project in 2010
+- 0.8 version in 2011 had CQL language
+- 2.0 version in 2013 had Light Weight Transactions (LWT)
+- 3.0 in 2015 had Materialized Views and SS Table Attached Secondary Indexes
+  (SASI)
+    * Materialized Views is similar to Relational Tables of SQL databased but
+      with few constraints (TODO)
+
+Cassandra Data Models
+-----
+- Tables
+    * Narrow Tables, but very tall
+    * There are no JOINs. Hence, tables are De-Normalized. That's because JOINs
+      are expensive and read's become slow if JOIN exists
+    * There are no Foreign Key constraints
+    * Tables always exists within a keyspace
+
+Example:
+cqlsh> CREATE KEYSPACE essentials WITH REPLICATION = {'class': 'SimpleStrategy',
+'replication_factor': 1};
+
+cqlsh> USE essentials;
+
+cqlsh:essentials> CREATE TABLE movies (
+    ... movie_id UUID,
+    ... title TEXT,
+    ... release_year INT,
+    ... PRIMARY KEY ((movie_id))  <<< why the double braces??
+    ... );
+
+cqlsh> insert into movies (movie_id, release_year, title) values (uuid(), 2011,
+'tree of life');
+
+cqlsh> select * from movies;
+
+
+
+- Keys
+    * All access to tables requires key. It is central concept
+    * Primary Key is composed of Partition Key and Cluster Key(s). There can be
+      multiple columns in Primary Key
+
+
+cqlsh> CREATE TABLE movies_by_actor (
+    ... actor TEXT,
+    ... release_year INT,
+    ... movie_id UUID,
+    ... title TEXT,
+    ... genres SET<TEXT>,
+    ... rating FLOAT,
+    ... PRIMARY KEY ((actor), release_year, movie_id)
+    ... ) WITH CLUSTERING ORDER BY (release_year DESC, movie_id ASC);
+
+
+- In above primary key, 'actor' is Partition Key. All rows of a partition are in
+  same server/node. All 'Brad Pitt' movies are on same node.
+
+- Clustering Keys are (release_year, movie_id). They order rows within a
+  Partition Key. Then queries within a partition are performant as they are
+  within same node.
+
+Ex: Return all Brad Pitt movies between 2011 and 2015.
+
+- Note that a column MUST be in Primary Key to be used in query
+- Partition Key is not orderable while Clustering Key can be ordered
+
+# Valid query
+cqlsh> select * from movies_by_actor where actor='Brad Pitt' and release_year < 2015
+
+# Invalid query because rating is not in PK
+cqlsh> select * from movies_by_actor where actor='Brad Pitt' and release_year <
+2015 and rating > 8
+
+
+Data Types
+----
+- text, int, bigint, float, double, boolean
+- decimal, varint
+- uuid, timeuuid
+- inet
+- tuple
+- timestamp
+- counter
+
+
+Collections
+----
+- Set
+- List << ordered elements
+- Map << key:value pairs
+
+
+Secondary Indexes
+---
+
+
+
+Nodes & Clusters
+---
+-
+
+
+
 
 Key->Server Mapping (called Partitioner)
 ---

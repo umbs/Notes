@@ -237,9 +237,22 @@ $ rsync -avzh root@192.168.0.100:/home/tarunika/rpmpkgs /tmp/myrpms
 Copy a File from a Remote Server to a Local Server with SSH
 $ rsync -avzhe ssh --progress root@192.168.0.100:/root/install.log /tmp/
 
+Excluding Dirs
+---
+To exclude directories, use --exclude=<relative-path> flag. Note that the
+directory is relative to the source
+
+$ rsync -a --exclude=/some/location/ /path/to/source /path/to/target
+
+Excluded dir is here: /path/to/source/some/location/
+
+
+
 Reference:
 [1] https://www.tecmint.com/rsync-local-remote-file-synchronization-commands/
-
+[2]
+https://unix.stackexchange.com/questions/2161/rsync-filter-copying-one-pattern-only/2503#2503
+[3]
 
 @@@@@@@@@@@@@@@@@@@@@ TAR commands @@@@@@@@@@@@@@@@@@@@@@@
 + 'tar' command examples [2]
