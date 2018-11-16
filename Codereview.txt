@@ -1,3 +1,21 @@
+@@@@@@@@    Checklist for HA/Distributed Systems Codereview    @@@@@@@@
+
+Running Time Complexity
+-----------------------
+- At a high level, measure the runtime complexity with few hundred/thousand
+  requests coming in
+
+
+DB/Cache Requests
+-----------------
+- With sample requests, check number of DB calls (or Redis Cache requests) being
+  made.
+    * Ex: DPS Monitoring App was making 80K+ Redis calls for 200 BoC with some
+      minimum uplinks. KairosDB and Cassandra calls were also huge and causing
+      lot of delays
+
+
+
 @@@@@@@@@@@@@@@@@@@    Checklist for C Codereview    @@@@@@@@@@@@@@@@@@
                        --------------------------
 NOTE: This list is prepared mostly from personal experience.
