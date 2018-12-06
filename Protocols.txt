@@ -3843,7 +3843,7 @@ Point-to-Point Tunneling Protocol (PPTP)
   Extensible Authentication Protocol (EAP) can be used to enhance security
   of PPTP.
 
-- PPTP is popular but may one day bereplaced by L2TP and IPSec.
+- PPTP is popular but may one day be replaced by L2TP and IPSec.
 
 
 Layer 2 Tunneling Protocol (L2TP)
@@ -3878,6 +3878,151 @@ IPSec
 - Often considered a standard solution for site-to-site VPNs connecting
   two LANs.
 - IPSec exists at Layer 3 and obviously needs IP to run.
+
+
+
+The Internet Security/Key Management Protocol and Oakley (ISAKMP)
+---
+- ISAKMP provides way for two nodes to agree on security settings (including key
+  exchanges) and use it to communicate securely.
+- Security Association (SA) provides all info needed for exchange between two
+  nodes. SA contains:
+    * Policy aggreement containings algos, keys etc
+
+- This involves two steps between two computers
+
+Step 1:
+---
+1. Encryption algo to be used (DES, triple DES etc)
+2. Algo used to verify messages (MD5 or SHA-1)
+3. How connections will be authenticated: public-key certs, shared secret key or
+Kerberos
+
+Step 2: Once above negotiations are sorted out, 2nd round of negotiations take
+place
+---
+1. Whether Authentication Header (AH) protocol will be used.
+2. Whenter Encapsulating Security Payload (ESP) protocol will be used.
+3. Which encryption algo will be used for ESP
+4. Which authentication protocol will be used for AH
+
+
+- IPSec has two mechanisms to securely send/recv data over public networks. You
+  can use both or just one of them.
+
+- Authentication Header (AH)
+- Encapsulating Security Payload (ESP)
+
+
+Authentication Header (AH) - 128 bits
+--------------------------
+- AH sits between IP and TCP(or UDP) layer as shown below.
+
+
+                       Checksum is on entire IP layer and above. It's stored in AH.
+               │                                                                         │
+               ◀─────────────────────────────────────────────────────────────────────────▶
+               │                                                                         │
+               ┌─────────────┬────────────────┬───────────────────┬──────────────────────┐
+               │             │                │                   │                      │
+               │     IP      │       AH       │    TCP or UDP     │        Data          │
+               │             │                │                   │                      │
+               └─────────────┴────────┬───────┴───────────────────┴──────────────────────┘
+                                      │
+                                      │
+                                      │
+                                      ▼
+
+                        8: Next Header (TCP or UDP etc)
+
+                        8: AH size (measured in 32 bit words)
+
+                        16: Reserved. MUST be set to zero.
+
+                        32: Security Parameter Index (SPI): It's an "arbitrary"
+                        32-bit value. SPI + Protocol (AH in this case) + Dest IP =
+                        Security Association (SA) for this datagram
+
+                        32: Sequence Number Field. Monotonically increasing mandatory
+                        number
+
+                        32: Authentication Data: Variable length field that contains
+                        Integrity Check Value (ICV) for this packet.
+
+- IP Header is modified with "Protocol ID" changed to 51
+
+AH Algorithms
+---
+- For point-to-point communication (such as Client-Server), suitable algos
+  include keyed Message Authentication Codes (MACs) based on symmetric
+  encryption algo (DES) or one-way hash functions (MD5 or SHA-1)
+
+- For multicast communication, one-way hash algos combined with asymmetric
+  signature algorithms are usually used. But they are CPU intensive.
+
+
+
+Encapsulating Security Payload (ESP)
+------------------------------------
+- AH can protect data from tampering, but not from snooping. For that IPSec uses
+  an encryption which provides ESP.
+- ESP is used to encrypt entire payload (Layer 4 and above)
+
+- ESP is complex, but it alone can provide authentication, replay-proofing and
+  integrity check.
+- ESP has 3 components
+    * Header
+    * Trailer
+    * Authentication Block
+
+
+                                 Checksum on ESP Hdr + TCP + Data + ESP Trailer
+                        │                                                          │
+                        │◀────────────────────────────────────────────────────────▶│
+                        │                                                          │
+          ┌─────────────┬──────────────┬──────────────┬─────────────┬──────────────┬─────────────┐
+          │             │              │              │             │              │             │
+          │             │    ESP       │   TCP/UDP    │     Data    │     ESP      │     ESP     │
+          │     IP      │   Header     │              │             │   Trailer    │     Auth    │
+          │             │              │              │             │              │             │
+          └─────────────┴──────────────┴──────────────┴─────────────┴──────────────┴─────────────┘
+                                       │                                           │
+                                       │◀─────────────────────────────────────────▶│
+                                       │                                           │
+                                           Encryption on TCP + Data + ESP Trailer
+
+- IP Header is modified with "Protocol ID" changed to 50
+
+ESP Header (64 bits)
+---
+32: Security Parameters Index: SPI is arbitrary value. SPI + Dest IP + ESP = SA
+(Security Association) for this datagram
+32: Sequence Number: Monotonically increasing counter
+
+
+ESP Trailer
+---
+0-2040 Padding (for Encryption). Takes different values depending on the
+encryption algorithm used
+8: Pad Length field indicates number of bytes immediately preceding it.
+8: Next Header. Strangely, it indicates type of data in Payload (Check this)
+
+
+ESP Authentication
+---
+Variable - Authentication Data: Variable length field containing an Integrity
+Check Value (ICV) computed over ESP packet minus Authentication Data
+
+
+Two Modes of IPSec
+----
+- Tunnel Mode (Default in most cases):
+    * Usually done for end-to-end encryption and to connect to remote networks
+
+- Transport Mode:
+    * Done to encrypt _other_ tunnels like GRE
+
+
 
 SSL/TLS
 ------
