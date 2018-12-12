@@ -4,4 +4,4 @@
 # object files 
 *.o
 
-
+*.DS_Store
