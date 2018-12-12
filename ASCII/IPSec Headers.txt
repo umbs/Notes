@@ -1,0 +1,29 @@
+                       Checksum is on entire IP layer and above. It's stored in AH.
+               │                                                                         │
+               ◀─────────────────────────────────────────────────────────────────────────▶
+               │                                                                         │
+               ┌─────────────┬────────────────┬───────────────────┬──────────────────────┐
+               │             │                │                   │                      │
+               │     IP      │       AH       │    TCP or UDP     │        Data          │
+               │             │                │                   │                      │
+               └─────────────┴────────┬───────┴───────────────────┴──────────────────────┘
+                                      │
+                                      │
+                                      │
+                                      ▼
+
+                        8: Next Header (TCP or UDP etc)
+
+                        8: AH size (measured in 32 bit words)
+
+                        16: Reserved. MUST be set to zero.
+
+                        32: Security Parameter Index (SPI): It's an "arbitrary"
+                        32-bit value. SPI + Protocol (AH in this case) + Dest IP =
+                        Security Association (SA) for this datagram
+
+                        32: Sequence Number Field. Monotonically increasing mandatory
+                        number
+
+                        32: Authentication Data: Variable length field that contains
+                        Integrity Check Value (ICV) for this packet.
