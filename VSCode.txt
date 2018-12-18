@@ -1,0 +1,12 @@
+Started using VSCode. Notes on the editor, cheatsheet, configs etc.
+
+Searching Files
+====
+Find Files
+Find Directory
+
+
+Searching Text
+====
+Search text in current file     /text   (Vim equivalent)
+Search text in current dir

@@ -95,7 +95,7 @@ Exchange uses "routing keys" to "bind" queues to message. A routing key is
 generated for a message and used to determine which queue(s) it must be
 forwarded to
 
-Direct Exchange: 1:1 mapping between message and queue. 
+Direct Exchange: 1:1 mapping between message and queue.
         Routing Key == Binding Key
 
 Fanout: Every message is routed to ALL queues
@@ -2723,6 +2723,23 @@ SELECT customer, COUNT(*) AS "Number of Orders" FROM orders GROUP BY customer
 
 TODO: Whatever fields are SELECT'ed, must also be present in GROUP BY.
 Research more on this.
+
+
+Cheat sheet
+----
+- Pretty print. Couple of methods:
+mysql> peer less -SFX
+mysql> SELECT * FROM sometable\G; << pretty print only this command
+
+- Details about current database
+mysql> SELECT database();
+mysql> \s
+mysql> status;
+mysql> show variables;  << tons of info
+
+- How to list all views?
+SHOW FULL TABLES IN database_name WHERE TABLE_TYPE LIKE 'VIEW';
+SHOW FULL TABLES WHERE TABLE_TYPE LIKE 'VIEW'; << if you are already in a database
 
 
 Resources:

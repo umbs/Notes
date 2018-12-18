@@ -1,3 +1,189 @@
+@@@@@@@@@@@@@@@@@    SSL    EXPLAINED    @@@@@@@@@@@@@@@@
+
+What is an SSL Certificate?
+---
+- SSL certs helps in creating trusted, secure, encrypted connection between
+  client/server
+- SSL certs contain a key pair: Public and Private key and a 'subject' that is
+  the identify of Certificate owner.
+
+
+How to get an SSL Certificate?
+---
+- First create a Certificate Signing Request (CSR) on your server. This creates
+  a Public and Private key pairs.
+
+- You'll send CSR data file to SSL Cert issuer (or Certificate Authority or CA).
+  This file contains your Public key.
+
+- CA uses this CSR data file to create data structure to match your Private key
+  without compromising it. CA never sees your Private key.
+
+- Once you receive SSL cert, you install it on your server. You install
+  intermediate cert that establishes the credibility of your SSL cert by tying
+  it to your CA's root cert.
+
+- "Certificate Chain" example
+
+     Root Cert                              Intermediate Cert                         Server Cert
+    ┌─────────────┐                        ┌─────────────┐                           ┌─────────────┐
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    │             │   ◀───────────────▶    │             │     ◀───────────────▶     │             │
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    └─────────────┘                        └─────────────┘                           └─────────────┘
+    Subject: Digicert Root CA              Subject: Digicert Root CA-1                Subject: www.digicert.com
+    Valid from 10/Nov/2006 to              Valid from 9/Nov/2007 to                   Valid from 22/Nov/2012 to
+    10/Nov/2031                            10/Nov/2021                                17/Nov/2014
+    Issuer: DigiCert                       Issuer: Digicert Root CA                   Issuer: Digicert Root CA-1
+
+
+Why do we have CA and how is it useful?
+---
+- Most important part of SSL cert is that it is digitally signed by trusted CA's
+  like DigiCert
+- Browsers only trust certs from organization on their list of trusted CAs
+  (called Trusted Root CA store). Browsers come with pre-installed list of
+  Trusted Root CA store.
+- An SSL cert issued by CA to an Org and it's website/domain indicates two
+  things:
+    1) CA has authenticated the Org's identity
+    2) Since browser trusts CA, browser can now trust the Org's identity too
+
+
+How does SSL Cert create a secure connection?
+---
+- When browser accesses a website that's secured by SSL, an SSL connection is
+  established between them starting with "SSL Handshake"
+
+                ┌────────────────┐                                  ┌────────────────┐
+                │                │   1 ───────────────────────▶     │                │
+                │                │                                  │                │
+                │                │   2 ◀───────────────────────     │                │
+                │                │                                  │                │
+                │                │   3 ───────────────────────▶     │                │
+                │                │                                  │                │
+                │                │   4 ◀───────────────────────     │                │
+                │                │                                  │                │
+                └────────────────┘   5 ◀======================▶     └────────────────┘
+                   Web Browser                                       Web Server
+
+
+                1) Browser connects to a web server (website) secured with SSL (https). Browser requests that
+                the server identify itself.
+
+                2) Server sends a copy of its SSL Certificate, including the server’s public key.
+
+                3) Browser checks the certificate root against a list of trusted CAs and that the certificate
+                is unexpired, unrevoked, and that its common name is valid for the website that it is
+                connecting to. If the browser trusts the certificate, it creates, encrypts, and sends back a
+                symmetric session key using the server’s public key.
+
+                4) Server decrypts the symmetric session key using its private key and sends back an
+                acknowledgement encrypted with the session key to start the encrypted session.
+
+                5) Server and Browser now encrypt all transmitted data with the session key.
+
+
+
+Is My Cert SSL or TLS?
+---
+- They are both same tech.
+- SSLv3.0 was last verion. Next version was called TLSv1.0 (instead of, say,
+  SSLv4.0)
+- Most recent TLS is v1.2
+
+
+
+Behind the scenes of SSL Cryptography
+---
+
+Asymmetric Encryption (or Public-Key Cryptography)
+---
+- Asymmetric encryption uses two keys for communication: Public and Private keys
+- Public key is shared with anyone who wants it. Anyone can use it to encrypt a
+  message.
+- Only those who have Private key (which is a secret) can decrypt the message.
+- RSA is the most popular asymmetric encryption algo
+- Asymmetric keys are typically use 2048 bit keys, though larger keys can be
+  created, the increased computation is a cause for concern.
+
+
+
+Symmetric Encryption
+---
+- Uses single key to encrypt and decrypt messages. Both sender and receiver must
+  have same key.
+- A 128-bit or 256-bit keys are used. SSL Certs don't dictate what key size to
+  use.
+
+
+Which one is Better?
+---
+- Since asymmetric encryption uses larger keys, it's harder to crack. But that's
+  not the only metric. Computational cost and ease of distribution are important
+  too.
+- Symmetric encryption has advantage of less computation, but hard to distribute
+  keys.
+
+
+How does SSL use Asymmetric and Symmetric encryption?
+---
+- Public Key Infrastructure (PKI) is set of hardware, software, people,
+  policies, and procedures. It's used to do:
+    * create, manage, distribute, use, store and revoke certs
+
+- PKI uses hybrid cryptosystem
+    1) In SSL communication, server's SSL cert has both Public and Private keys
+    2) The session key created during SSL Handshake is Symmetric
+
+
+Public-Key Encryption Algorithms
+---
+RSA:
+---
+It's based on assumption that factoring large integers (prime factorization) is
+very difficult. Full decryption of cipher text is considered infeasible due to
+this reason.
+
+A user of RSA creates and then publishes the product of two large prime numbers,
+along with an auxiliary value, as their public key. Prime factors must be kept
+secret.
+
+Anyone can use the public key to encrypt a message. But only those with
+knowledge of prime numbers can decrypt them.
+
+
+ECC (Elliptic Curve Cryptography):
+---
+This relies on algebriac structure of elliptic curves over finite fields.
+
+<TBD>
+
+
+
+Pre-Shared Key Encryption Algorithms
+---
+- Twofish, AES or Blowfish - AES is most popular
+- Two types of algorithms exists: Stream cipher and block ciphers
+- Stream ciphers are applied on stream of data, perhaps to each binary bit
+- Block ciphers, which are more common/popular, is applied to a block of data
+  (like 64 bits at a time)
+
+
+
+
+
+
+References:
+[1] https://www.digicert.com/ssl/
+[2] https://www.digicert.com/ssl-cryptography.htm
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         NOTES FROM [1]
                         =============
         STACK SMASHING/OVERFLOW

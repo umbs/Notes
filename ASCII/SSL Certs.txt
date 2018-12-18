@@ -1,0 +1,16 @@
+     Root Cert                              Intermediate Cert                         Server Cert
+
+    ┌─────────────┐                        ┌─────────────┐                           ┌─────────────┐
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    │             │   ◀───────────────▶    │             │     ◀───────────────▶     │             │
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    │             │                        │             │                           │             │
+    └─────────────┘                        └─────────────┘                           └─────────────┘
+
+    Subject: Digicert Root CA              Subject: Digicert Root CA-1                Subject: www.digicert.com
+    Valid from 10/Nov/2006 to              Valid from 9/Nov/2007 to                   Valid from 22/Nov/2012 to
+    10/Nov/2031                            10/Nov/2021                                17/Nov/2014
+    Issuer: DigiCert                       Issuer: Digicert Root CA                   Issuer: Digicert Root CA-1
