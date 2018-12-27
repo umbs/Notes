@@ -880,6 +880,8 @@ Display Filters
 - Protocol pkts, just type their name: ssh, tcp, udp etc
 - Multiple filters
     tcp and (ip.src==15.111.202.135 and ip.dst==15.116.49.238)
+- tcp.analysis.flags
+    * shows all bad TCP packets. Very useful filter
 
 [1] https://wiki.wireshark.org/DisplayFilters
 

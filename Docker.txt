@@ -237,12 +237,6 @@ $ sudo mn --inamespace --switch user
 
 
 
-
-
-
-
-
-
 Mininet CLI commands:
 
 # Help commands
@@ -298,8 +292,3 @@ $ dpctl show tcp:127.0.0.1:6634
 
 #
 $ dpctl dump-flows tcp:127.0.0.1:6634
-
-
-@@@@@@@@@@@@@@@@      NOTES    FROM    TALKS       @@@@@@@@@@@@@@@@@
-
-[1]

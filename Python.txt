@@ -1,3 +1,73 @@
+                    Python Internals
+                        (2.7.8)
+                    ================
+- Include, Objects folders are key
+
+
+Concepts
+====
+- Python Virtual Machine is called a Stack Machine as it uses a stack for all
+  it's operations. This stack is called Value Stack (VS). It's here in code
+
+ceval.c:
+ 698     register PyObject **stack_pointer;  /* Next free slot in value stack */
+
+
+TODO1: Identify start and end of ceval loop.
+
+IMPORTANT CODE
+==============
+
+OBJECTS
+---
+PyObject_HEAD       << Same header for all PyObjects
+PyObject_VAR_HEAD   << variable head for Python Object
+
+PyObject            << Used to represent all objects
+PyFrameObject       << frame object representation (struct _frame)
+PyCodeObject        << Bytecode object
+
+
+
+FUNCTIONS
+---
+PyEval_EvalFrameEx()    << main point of entry in ceval.c
+
+
+MACROS
+---
+
+
+
+FILES
+---
+Include/opcodes.h << All opcodes are declared here
+Python/ceval.c  << Main interpreter loop is in here
+Lib/dis.py      << disassembler module
+
+
+Commands
+---
+c = compile('test.py', 'helpful-name', 'exec')
+    * This will compile test.py and use 'helpful-name' in debug statements and
+      return code object in to c
+    * Do help(compile) for more info
+
+
+dir(c) - Gives lots of fields (variables and methods).
+    * co_code is most important
+
+
+
+
+Reference:
+[1] Philip Guo's CPython Internals Video series
+[2] Byteplay: Tool to manipulate Python disassembly
+    https://wiki.python.org/moin/ByteplayDoc
+
+
+
+
                     Python Concepts
                     ===============
 Table of Contents
