@@ -2728,7 +2728,7 @@ Research more on this.
 Cheat sheet
 ----
 - Pretty print. Couple of methods:
-mysql> peer less -SFX
+mysql> pager less -SFX
 mysql> SELECT * FROM sometable\G; << pretty print only this command
 
 - Details about current database
@@ -2745,5 +2745,83 @@ SHOW FULL TABLES WHERE TABLE_TYPE LIKE 'VIEW'; << if you are already in a databa
 Resources:
 [1] Udemy course on Database Design -
 
-===============   CHROME DEVELOPER TOOLS          =====================
+===============   PERFORCE  USEFUL  COMMANDS     =====================
+
+Setup Commands
+---
+P4CLIENT=bhaskar; export P4CLIENT
+- All p4 commands will now use workspace: bhaskar
+
+p4 client
+    - Describes client workspace to Perforce server
+    - Contains number of fields: Root and View are most imp
+    Root: Topmost directory where all files are saved.
+    View: Files in depot that are mapped to client workspace view
+
+p4 sync     - syncs all files in the view from depot to your workspace
+p4 sync ... - syncs only files in current directory from depot to workspace
+
+
+Few commands to look in to
+---
+p4 workspace
+p4 add, edit, delete, revert
+p4 submit
+
+
+
+Reporting Commands
+---
+p4 help commands
+p4 help <command>
+p4 help usage
+p4 help views
+p4 help
+p4 info
+
+p4 have
+p4 sync -n
+
+
+
+Typical Perforce Workflow
+---
+1. Run `p4 edit` on each file you want to edit. You need to tell Perforce which files
+you're editing. If you're adding new files, use `p4 add`. If you're deleting
+files, use `p4 delete`.
+
+2. Make your code changes.
+
+3. Run `p4 change` to create a changeset. Here you can create a description of your
+change and optionally add or remove files from your changeset too. You can run
+`p4 change CHANGE_NUMBER` to edit the description later if necessary.
+
+4. You can make additional code changes if you need to. If you need to
+add/edit/delete other files, you can use `p4 {add,edit,delete} -c CHANGE_NUMBER
+FILE`.
+
+5. Run `p4 sync` to pull in the latest changes from the server.
+
+6. Run `p4 resolve` to resolve any conflicts from syncing.
+
+7. When you're ready to submit your change, run `p4 submit -c CHANGE_NUMBER`.
+
+
+Reference:
+[1] https://stackoverflow.com/a/17306729/630866
+
+
+===============   GIT  vs   PERFORCE             =====================
+
+$ git checkout:
+    The equivalent is 'p4 sync' in CLI and 'Get latest revision' from GUI.
+
+$ git commit:
+    p4 submit. But this operation does more. It combines 'git commit and push'
+
+$ git push or pull:
+    There's no equivalent in p4
+
+Reference:
+[1] https://stackoverflow.com/a/17331274/630866
 
