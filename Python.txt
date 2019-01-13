@@ -65,7 +65,26 @@ Reference:
 [2] Byteplay: Tool to manipulate Python disassembly
     https://wiki.python.org/moin/ByteplayDoc
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    Lint Checkers
+                    =============
 
+Pylint
+---
+C = Code conventions
+W = Warnings
+R = Refactor
+E = Errors
+
+$ pylint --disable=<options> module (or filename)
+$ pylint --disable=C,R,W onboarding_process_site.py
+
+
+Another way to run pylint
+$ python -m pylint --errors-only module (or filename)
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
                     Python Concepts

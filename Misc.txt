@@ -2784,7 +2784,7 @@ p4 sync -n
 
 
 
-Typical Perforce Workflow
+Typical Perforce Workflow [1]
 ---
 1. Run `p4 edit` on each file you want to edit. You need to tell Perforce which files
 you're editing. If you're adding new files, use `p4 add`. If you're deleting
@@ -2805,6 +2805,24 @@ FILE`.
 6. Run `p4 resolve` to resolve any conflicts from syncing.
 
 7. When you're ready to submit your change, run `p4 submit -c CHANGE_NUMBER`.
+
+
+FAQ
+===
+1. How to see all changes submitted by a user
+    p4 changes -s submitted -u bruno //depot/...    entire depot
+    p4 changes -s submitted -u bruno ...            current repo
+    p4 changes -s submitted -u bruno <filename>     just this file
+
+
+2. Edit description of a changelist
+    p4 change <changelist-number>
+
+
+3. Show code changes in a changelist
+    p4 describe <changelist-number>
+
+
 
 
 Reference:

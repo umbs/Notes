@@ -1,5 +1,61 @@
 Started using VSCode. Notes on the editor, cheatsheet, configs etc.
 
+// open a directory in VS Code
+$ code <directory-name>
+
+// Command Palette
+cmd + p     ctrl + p
+
+// Terminal
+cmd + `     ctrl + `
+
+// All methods, properties etc in a file
+- Type @ in command palette
+
+
+// Zen mode
+cmd + k,z     ctrl + k,z
+
+
+// Symbols
+cmd + O
+
+
+// Code folding
+Fold folds the innermost uncollapsed region at the cursor:
+    Ctrl + Shift + [ on Windows
+    ⌥ + ⌘ + [ on macOS
+
+Unfold unfolds the collapsed region at the cursor:
+    Ctrl + Shift + ] on Windows
+    ⌥ + ⌘ + ] on macOS
+
+Fold All folds all region in the editor:
+    Ctrl + K, Ctrl + 0 (zero) on Windows
+    ⌘ + K, ⌘ + 0 (zero) on macOS
+
+Unfold All unfolds all regions in the editor:
+    Ctrl + K, Ctrl + J on Windows
+    ⌘ + K, ⌘ + J on macOS
+
+
+Explorer (hide and show):
+    cmd + b
+    ctrl + b
+
+Reference:
+https://stackoverflow.com/a/30077543/630866
+
+
+Plugins/Extensions
+---
+- Code Runner
+- Vim
+- C/C++
+- Python
+
+
+
 Searching Files
 ====
 Find Files

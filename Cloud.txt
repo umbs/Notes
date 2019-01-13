@@ -2162,3 +2162,95 @@ https://github.com/mmcgrana/services-engineering
 
 Distributed Systems Reading List
 http://dancres.github.io/Pages/
+
+===============================================================================
+Virtual Private Cloud (VPC) Architecture
+
+                                          Internet
+                                             ▲
+                                             │
+                                             │
+                                             │
+                                             │
+                                          .──┴──.
+                                        ,'       `.
+                                       ;  Gateway  :
+                                       :  Router   ;
+                                        ╲         ╱
+                                         `.     ,'
+                                           `───'
+                                             │
+                                             │
+                                             │
+                              ┌──────────────┴─────────────┐
+                              │Network Access Control Lists│
+                              │(NACLs)                     │
+                              └──────────────┬─────────────┘
+                                             │
+                                             │
+              ┌─────────────────────────────┬┘
+┌─────────────┼─────────────────────────────┼──────────────────────────────────┐
+│VPC          │                             │                                  │
+│  ┌──────────▼────────┐       ┌────────────▼──────┐                           │
+│  │Subnet1            │       │Subnet2            │                           │
+│  │ ┌───────────────┐ │       │ ┌───────────────┐ │                           │
+│  │ │Security Group │ │       │ │Security Group │ │                           │
+│  │ │(SG)           │ │       │ │(SG)           │ │                           │
+│  │ │               │ │       │ │               │ │                           │
+│  │ └───────────────┘ │       │ └───────────────┘ │                           │
+│  │                   │       │                   │       ..............      │
+│  │ ┌───────────────┐ │       │ ┌───────────────┐ │                           │
+│  │ │Instance       │ │       │ │Instance       │ │                           │
+│  │ │               │ │       │ │               │ │                           │
+│  │ │               │ │       │ │               │ │                           │
+│  │ └───────────────┘ │       │ └───────────────┘ │                           │
+│  └───────────────────┘       └───────────────────┘                           │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+NACLs
+-----
+- Route table in gateway router routes traffic. But NACLs will accept/deny them
+  to each subnet
+- Provides L4 control (inbound or outbount)
+- On creating a VPC, a default NACL is created.
+- Ordering of rules is important as first rule that matches is applied on
+  traffic
+- NACLs are stateless
+
+Security Groups (SG)
+----
+- Provides stateful firewall of SrcIP and DstIP rules for each interface of
+  Instance
+- Up to 5 SGs can exist for each interface
+- Rule order is independent
+
+
+Reference:
+1. Notes from Palo Alto Networks courses
+
+===============================================================================
+AWS re:Invent: Amazon DynamoDB Deep Dive: Advance Design Patterns for DynamoDB
+
+Why NoSQL?
+
+    SQL                                 NoSQL
+---------------------------------------------------------------------
+1 Optimized for storage                 Optimized for compute
+
+2 Normalized/relational                 Denormalized/heirarchical
+
+3 Ad hoc queries                        Instantiated views
+
+4 Scale vertically                      Scale horizontally
+
+5 Good for OLAP                         Built for OLTP at scale
+
+OLTP: Online Transaction Processing
+
+OLAP: Online Analytical Processing
+
+
+
+Reference:
+[1] https://www.youtube.com/watch?v=HaEPXoXVf2k
