@@ -183,6 +183,29 @@ References:
 [2] https://www.digicert.com/ssl-cryptography.htm
 
 
+@@@@@@@@@@@@@@@@@@@@        CTF        @@@@@@@@@@@@@@@@@@@@@@@
+
+CTF Tools
+=========
+Linux VM
+Disassembler
+    - IDA, Binary Ninja, Hopper, Radare2, objdump
+Debugger
+    - gdb, WinDbg, OllyDbg
+Wireshark
+pwdtools
+    - https://github.com/Gallopsled/pwntools-tutorial
+
+Beginner Level CTFs
+- picoCTF.com
+- CSAW (csaw.engineering.nyu.edu)
+- pwnable.kr
+- Many other that I bookmarked
+
+
+Reference:
+[1] Talk at Palo Alto Networks by Security Researcher
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         NOTES FROM [1]
                         =============
