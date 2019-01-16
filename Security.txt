@@ -8,6 +8,36 @@ What is an SSL Certificate?
   the identify of Certificate owner.
 
 
+What is Certificate Signing Request (CSR)?
+---
+- CSR is a message sent by a client to Certificate Authority requesting a
+  digital cert (a.k.a identify cert)
+- CSR contains following:
+    * public key for which cert should be issued
+    * identity information (such as domain name)
+    * integrity protection (digital signature)
+
+- Most common format for CSR is:
+    * PKCS#10
+    * Signed Public Key and Challenge SPKAC
+
+
+How to create a CSR?
+---
+1 Client first generates a key pair (Ex. using 'keytool' on MacOS). Private key
+is secret.
+
+2 CSR contains info about applicant, which is signed by its private key
+
+3 CSR also contains public key of client
+
+4 CSR contains other info of client
+    a Distinguished Name (DN): FQDN
+    b Business Name/Org, Department, Address, Email etc
+
+5 CA will send back Digital Cert signed by it's private key
+
+
 How to get an SSL Certificate?
 ---
 - First create a Certificate Signing Request (CSR) on your server. This creates
@@ -181,7 +211,15 @@ Pre-Shared Key Encryption Algorithms
 References:
 [1] https://www.digicert.com/ssl/
 [2] https://www.digicert.com/ssl-cryptography.htm
+[3] https://en.wikipedia.org/wiki/Certificate_signing_request
 
+
+@@@@@@@@@@@@@@@@@@@@        OpenSSL    Cheatsheet @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- TODO: After reading below blog, follow links in it's references
+
+Reference:
+[1] https://medium.freecodecamp.org/openssl-command-cheatsheet-b441be1e8c4a
 
 @@@@@@@@@@@@@@@@@@@@        CTF        @@@@@@@@@@@@@@@@@@@@@@@
 
