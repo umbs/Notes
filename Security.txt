@@ -1,11 +1,20 @@
+@@@@@@@@@@@@@@@@@@@@@    Mac OSX  tools for SSL certs @@@@@@@@@@@@@@@
+keytool
+openssl
+certool
+certutil
+pkcs12util
+
+
+
 @@@@@@@@@@@@@@@@@    SSL    EXPLAINED    @@@@@@@@@@@@@@@@
 
 What is an SSL Certificate?
 ---
 - SSL certs helps in creating trusted, secure, encrypted connection between
   client/server
-- SSL certs contain a key pair: Public and Private key and a 'subject' that is
-  the identify of Certificate owner.
+- SSL certs contains following: Public and a 'subject' that is the identify of
+  Certificate owner.
 
 
 What is Certificate Signing Request (CSR)?

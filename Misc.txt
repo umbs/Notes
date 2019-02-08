@@ -36,6 +36,7 @@ Rules 3 and 4 are instances of the design philosophy KISS.
 Rule 5 was previously stated by Fred Brooks in The Mythical Man-Month. Rule 5 is
 often shortened to "write stupid code that uses smart objects".
 
+@@@@@@@@@@@@@@@@@@@   NodeJS    Notes       @@@@@@@@@@@@@@@@@@@@@@@@
 
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
@@ -60,6 +61,90 @@ For me, following steps worked:
 3. Run above command
 
 
+@@@@@@@@@@@@@@@@@@@   NODEJS  NOTES      @@@@@@@@@@@@@@@@@@
+
+Reading/Learning NodeJS
+=====
+- Use of 'var' and 'const'
+- global object, modules
+- Module wrapper function:
+    * All code is wrapped inside this wrapper
+        (function (exports, require, module, __filename__, __dirname__) {
+            /* your code */
+        })
+
+- Template strings (Javascript concept - ES6)
+
+Events and Signals
+==================
+- Look at this code:
+    const EE = require('events');   // events class.
+    const em = new EE();
+    * here EE is a CLASS and not an object of a class, a method or a variable
+    * therefore, em is an instance of EE() class
+    em.emit("signalEvent", {id: 1, url: 'http://'});
+
+- A listener must listen to above event
+    em.on('signalEvent', function(eventArg) {
+        console.log('signalEvent invoked. Listener called', eventArg);
+    })
+
+- Arrow functions
+    em.on('signalEvent', (eventArg) => {
+        console.log('signalEvent invoked. Listener called', eventArg);
+    })
+
+
+Reference:
+[1] https://www.youtube.com/watch?v=TlB_eWDSMt4
+
+@@@@@@@@@@@@@@@@@@@@   GCP SDK Commands Cheatsheet   @@@@@@@@@@@@@@@@@@@@@@@@
+Deploy your app
+	$ gcloud app deploy
+
+List gcloud configurations
+	$ gcloud list
+
+You can stream logs from the command line by running
+	$ gcloud app logs tail -s default
+
+To view your application in the web browser run
+	$ gcloud app browse
+
+gcloud functions deploy  helloGCSGeneric --runtime nodejs6 --trigger-resource gcs-cf-nodejs --trigger-event google.storage.object.finalize
+
+
+
+[1] https://gist.github.com/pydevops/cffbd3c694d599c6ca18342d3625af97
+[2] https://github.com/gregsramblings/google-cloud-4-words
+
+@@@@@@@@@@@@@@   GCP Functions Emulator Commands Cheatsheet   @@@@@@@@@@@@@@@@@
+// prefix below commands with `gcloud` and you can do everything with gcloud SDK
+// instead of function emulators
+
+$ functions --help
+$ functions <command> --help
+
+$ functions config set projectId PROJECT_ID
+$ functions start
+
+$ functions deploy helloGET --trigger-http
+$ functions call helloGET
+$ functions call helloGreeting --data '{"name":"Local Emulator"}'
+
+$ functions debug <function-name>
+$ functions inspect <function-name>
+
+$ functions delete FUNCTION_NAME
+$ functions reset FUNCTION_NAME
+
+$ functions list
+$ functions logs read
+$ functions logs clear
+$ functions status  << status of log file
+
+$ functions stop
+$ functions kill
 
 @@@@@@@@@@@@@@@@@@@   RabbitMQ  vs  Apache Kafka  @@@@@@@@@@@@@@@@@@
 
