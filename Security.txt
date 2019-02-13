@@ -205,18 +205,67 @@ Pre-Shared Key Encryption Algorithms
 
 
 
-
-
-
 References:
 [1] https://www.digicert.com/ssl/
 [2] https://www.digicert.com/ssl-cryptography.htm
 [3] https://en.wikipedia.org/wiki/Certificate_signing_request
+[4] https://tls.ulfheim.net/
+[5] https://tls13.ulfheim.net/
 
 
 @@@@@@@@@@@@@@@@@@@@        OpenSSL    Cheatsheet @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-- TODO: After reading below blog, follow links in it's references
+
+RSA and ECDSA Keys
+==================
+- Replace [bits] with key size (ex: 2048, 4096 etc)
+
+Generate an RSA key
+$ openssl genrsa -out example.key [bits]
+
+
+Print public key or modulus only 
+$ openssl rsa -in example.key -pubout
+$ openssl rsa -in example.key -noout -modulus   << not sure what this does
+
+
+Print textual representation of RSA key
+$ openssl rsa -in example.key -noout -text
+
+
+Generate new RSA key and encrypt with a pass phrase based on AES CBC 256
+encryption
+$ openssl genrsa -aes256 -out example.key [bits]
+
+
+Check private key. If key has pass phrase, you'll be prompted
+$ openssl rsa -check -in example.key 
+
+
+Remove pass phrase from RSA key
+$ openssl rsa -in example.key -out example.key
+
+
+Encrypt existing private key with a pass phrase:
+$ openssl rsa -des3 -in example.key -out example_with_pass.key
+
+
+Generate ECDSA key. `curve` is to be replaced with: `prime256v1`, `secp384r1`,
+`secp521r1`, or any other supported elliptic curve:
+$ openssl ecparam -genkey -name [curve] | openssl ec -out example.ec.key
+
+
+Print ECDSA key textual representation:
+$ openssl ec -in example.ec.key -text -noout
+
+
+List available EC curves, that OpenSSL library supports:
+$ openssl ecparam -list_curves
+
+
+Create Certificate Signing Requests (CSRs)
+==========================================
+
 
 Reference:
 [1] https://medium.freecodecamp.org/openssl-command-cheatsheet-b441be1e8c4a
