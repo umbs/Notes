@@ -40,6 +40,27 @@ often shortened to "write stupid code that uses smart objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+@@@@@@@@@@@@@@@@@@@   QEMU    NOTES      @@@@@@@@@@@@@@@@@@
+
+// Basic qemu tutorial
+https://fosspost.org/tutorials/use-qemu-test-operating-systems-distributions
+
+// On Windows, download Intel's Hardware Acceleration (HAX) technology
+www.qemu.org/2017/11/22/haxm-usage-windows/
+
+// pre-built qcow2 images
+https://people.debian.org/~aurel32/qemu/amd64/
+
+// To start an image
+qemu-system-x86_64 -drive format=raw,file=debian-8.2.0-amd64-DVD-1.iso
+
+For me, following steps worked:
+1. Download qemu
+2. Download HAX
+3. Run above command
+
+
+
 @@@@@@@@@@@@@@@@@@@   RabbitMQ  vs  Apache Kafka  @@@@@@@@@@@@@@@@@@
 
 Origins:
