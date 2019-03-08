@@ -1,7 +1,118 @@
                     Python Internals
                         (2.7.8)
                     ================
-- Include, Objects folders are key
+- Include, Objects folders are key folders
+
+Include/
+    - Has all .h files.
+    opcode.h
+
+Objects/
+    - .c files, but all are object types
+Python/
+    - Core runtime code. Lot of .c files
+    ceval.c     //main interpreter loop is here, line 964
+
+
+Modules/
+    - Standard library (modules) of Python
+Lib/
+    -
+python interpreter
+---
+$ python
+>>> c = compile('test.py', 'my_test_file', 'exec')
+>>> c
+<code object <module> at 0x6ffffe938a0, file "my_test_file", line 1>
+
+>>> help(compile)
+>>> dir(compile)
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'co_argcount', 'co_cellvars', 'co_code', 'co_consts', 'co_filename', 'co_firstlineno', 'co_flags', 'co_freevars', 'co_kwonlyargcount', 'co_lnotab', 'co_name', 'co_names', 'co_nlocals', 'co_stacksize', 'co_varnames']
+>>>
+
+
+Let test.py contain following code
+  x = 1
+  y = 2
+  z = x + y
+  print z
+
+$ python2 -m dis test.py
+  1           0 LOAD_CONST               0 (1)
+              3 STORE_NAME               0 (x)
+
+  2           6 LOAD_CONST               1 (2)
+              9 STORE_NAME               1 (y)
+
+  3          12 LOAD_NAME                0 (x)
+             15 LOAD_NAME                1 (y)
+             18 BINARY_ADD
+             19 STORE_NAME               2 (z)
+
+  4          22 LOAD_NAME                2 (z)
+             25 PRINT_ITEM
+             26 PRINT_NEWLINE
+             27 LOAD_CONST               2 (None)
+             30 RETURN_VALUE
+
+
+- Above byte code is consumed by Python interpreter
+- First column is pointing to lines in actual code
+- 2nd column is offset in byte code
+- 3rd column is _actual_ opcode
+- 4th column is internal variable numbers, but we can ignore it
+- 5th colum, within braces, are variables or values the opcode is dealing with
+
+- Opcodes are defined in opcode.h
+- Every Opcode after 90 in that file takes an argument
+
+- Python interpreter uses "Value Stack" to decode above opcodes
+
+Below is description of each opcode (VS = Value Stack)
+
+$ python -m dis test.py
+
+''' Load object with value 1 on VS. Actually, a reference to this object is put
+on VS and refcount for that object is increment. Object itself is not placed on
+VS. However, for ease of understanding, I'll just say that object is placed on
+VS.  '''
+  1           0 LOAD_CONST               0 (1)
+
+
+''' Store it somewhere and have variable x reference it. The reference to this
+object is removed from VS '''
+			  3 STORE_NAME               0 (x)
+
+
+''' Reference to object with value 2 is put on VS '''
+  2           6 LOAD_CONST               1 (2)
+
+''' Same as above '''
+              9 STORE_NAME               1 (y)
+
+''' Load a reference to object 1 and 2 on to VS '''
+  3          12 LOAD_NAME                0 (x)
+             15 LOAD_NAME                1 (y)
+
+''' Pops object 1 and 2 and adds them and pushes on to the stack '''
+             18 BINARY_ADD
+
+''' z now points to object 2. VS is empty '''
+             19 STORE_NAME               2 (z)
+
+''' Load object 2 to VS '''
+  4          22 LOAD_NAME                2 (z)
+
+''' Print whatever is on top of VS and pop them. VS is empty '''
+             25 PRINT_ITEM
+             26 PRINT_NEWLINE
+
+''' Load NONE object on to VS. It's a special object. '''
+             27 LOAD_CONST               2 (None)
+
+''' Pop top of VS and return to caller '''
+             30 RETURN_VALUE
+
 
 
 Concepts
@@ -12,6 +123,8 @@ Concepts
 ceval.c:
  698     register PyObject **stack_pointer;  /* Next free slot in value stack */
 
+
+- PyEval_EvalFrameEx()		<< main entry point
 
 TODO1: Identify start and end of ceval loop.
 
