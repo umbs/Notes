@@ -221,7 +221,7 @@ References:
 $ ldd -r lib.so
 
 
-@@@@@@@@@@@@@@@@@@@@@@@@@     MAKE NOTES     @@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@     MAKEFILE NOTES     @@@@@@@@@@@@@@@@@@@@@@@
 
 Symbols/Notations
 ---

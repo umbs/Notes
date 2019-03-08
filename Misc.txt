@@ -2928,7 +2928,9 @@ FAQ
 3. Show code changes in a changelist
     p4 describe <changelist-number>
 
-
+4. Show list of modified (but not committed) files
+    p4 diff -f -sa
+    p4 diff -f -sa ...
 
 
 Reference:

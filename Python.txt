@@ -85,6 +85,13 @@ $ python -m pylint --errors-only module (or filename)
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    pytest
+                    ======
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
                     Python Concepts
@@ -330,8 +337,9 @@ class Student:
         print("I study at MIT")
 
     @staticmethod
-    def get_student():
-        print("I'm a student")
+    def get_school():
+        print("I study at MIT")
+
 
 - These methods are called using class name
 
@@ -345,7 +353,8 @@ OOP
     * By other methods in same class
     * Using round about way: instance._classname__privatemethod()
 - Old style class vs New style class
-- In Python there are no true private or protected variables
+- In Python there are no true private or protected variables. An underscore
+  before a variable indicates it's private.
 - Python Classes are similar to C++ Classes. Python has most of the OOPs concepts
 - There is Garbage Collection in Python and hence, no need for explicit destroy
   of objects
@@ -365,7 +374,12 @@ Class Variable vs Instance Variables
 - Instance variables are defined within a method and accessed using 'self'
   attribute
 - Class variables are defined outside all methods in the class and don't need
-  'self' keyword to access it
+  'self' keyword to access it.
+- Class variables can be accessed using class names or instance names.
+- Changing class variable will affect ALL instances that access them.
+- You can add new variables and methods to objects on the fly, but is not
+  advised.
+
 
 - Example:
 
