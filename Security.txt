@@ -13,8 +13,8 @@ What is an SSL Certificate?
 ---
 - SSL certs helps in creating trusted, secure, encrypted connection between
   client/server
-- SSL certs contains following: Public and a 'subject' that is the identify of
-  Certificate owner.
+- SSL certs contains following: Public key and a 'subject' that is the identity
+  of Certificate owner.
 
 
 What is Certificate Signing Request (CSR)?
@@ -233,7 +233,7 @@ Generate an RSA key
 $ openssl genrsa -out example.key [bits]
 
 
-Print public key or modulus only 
+Print public key or modulus only
 $ openssl rsa -in example.key -pubout
 $ openssl rsa -in example.key -noout -modulus   << not sure what this does
 
@@ -248,7 +248,7 @@ $ openssl genrsa -aes256 -out example.key [bits]
 
 
 Check private key. If key has pass phrase, you'll be prompted
-$ openssl rsa -check -in example.key 
+$ openssl rsa -check -in example.key
 
 
 Remove pass phrase from RSA key

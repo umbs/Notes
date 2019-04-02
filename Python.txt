@@ -21,7 +21,7 @@ Lib/
 python interpreter
 ---
 $ python
->>> c = compile('test.py', 'my_test_file', 'exec')
+>>> c = compile(open('test.py').read(), 'my_test_file', 'exec')
 >>> c
 <code object <module> at 0x6ffffe938a0, file "my_test_file", line 1>
 
@@ -60,8 +60,12 @@ $ python2 -m dis test.py
 - First column is pointing to lines in actual code
 - 2nd column is offset in byte code
 - 3rd column is _actual_ opcode
-- 4th column is internal variable numbers, but we can ignore it
-- 5th colum, within braces, are variables or values the opcode is dealing with
+- 4th column is internal variable numbers, but we can ignore it. It's an index
+  to input argument (but that's a bit vague)
+- 5th colum, within braces, are variables or values the opcode is dealing with.
+  This is the input argument referred above.
+
+
 
 - Opcodes are defined in opcode.h
 - Every Opcode after 90 in that file takes an argument
@@ -114,6 +118,48 @@ object is removed from VS '''
              30 RETURN_VALUE
 
 
+- PyEval_EvalFrameEx() executes ONE frame/function and returns a value to caller
+
+- Examine following code
+
+x = 10
+
+def foo(x):
+    y = x * 2
+    return bar(y)
+
+def bar(x):
+    y = x/2
+    return y
+
+z = foo(x)
+
+$ python -m dis test.py
+  1           0 LOAD_CONST               0 (10)
+              3 STORE_NAME               0 (x)
+
+  3           6 LOAD_CONST               1 (<code object foo at 0x100b0c3b0, file "test.py", line 3>)
+              9 MAKE_FUNCTION            0
+             12 STORE_NAME               1 (foo)
+
+  7          15 LOAD_CONST               2 (<code object bar at 0x100b0c1b0, file "test.py", line 7>)
+             18 MAKE_FUNCTION            0
+             21 STORE_NAME               2 (bar)
+
+ 11          24 LOAD_NAME                1 (foo)
+             27 LOAD_NAME                0 (x)
+             30 CALL_FUNCTION            1
+             33 STORE_NAME               3 (z)
+             36 LOAD_CONST               3 (None)
+             39 RETURN_VALUE
+
+- Python compiles the code and creates a 'code object' out of it.
+- At run time, it binds that code object to variable 'foo' or 'bar', which are
+  function names.
+
+- Function object has code object and context (environment) in which the
+  function is running. Function object is only created during runtime.
+
 
 Concepts
 ====
@@ -123,10 +169,9 @@ Concepts
 ceval.c:
  698     register PyObject **stack_pointer;  /* Next free slot in value stack */
 
+- Another stack in Python is Frame Stack. Running functions have a frame in this
+  stack.
 
-- PyEval_EvalFrameEx()		<< main entry point
-
-TODO1: Identify start and end of ceval loop.
 
 IMPORTANT CODE
 ==============
@@ -145,6 +190,7 @@ PyCodeObject        << Bytecode object
 FUNCTIONS
 ---
 PyEval_EvalFrameEx()    << main point of entry in ceval.c
+                        This function executes one frame/function.
 
 
 MACROS
@@ -177,6 +223,10 @@ Reference:
 [1] Philip Guo's CPython Internals Video series
 [2] Byteplay: Tool to manipulate Python disassembly
     https://wiki.python.org/moin/ByteplayDoc
+[3] Python Disassembly Module:
+    https://docs.python.org/2/library/dis.html
+[4] Python Tutor:
+    http://pythontutor.com/
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     Lint Checkers

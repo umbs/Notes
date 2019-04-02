@@ -2842,6 +2842,9 @@ mysql> SELECT database();
 mysql> \s
 mysql> status;
 mysql> show variables;  << tons of info
+mysql> show tables;     << list all tables in db, including views
+mysql> describe <table-name>;   << gives lot of details about the table
+
 
 - How to list all views?
 SHOW FULL TABLES IN database_name WHERE TABLE_TYPE LIKE 'VIEW';
@@ -2874,6 +2877,13 @@ p4 workspace
 p4 add, edit, delete, revert
 p4 submit
 
+
+// If you haven't checked out files that you edited, do following to get changes
+// tracked by Perforce
+p4 reconcile ...
+
+//
+p4 revert
 
 
 Reporting Commands
@@ -2931,6 +2941,19 @@ FAQ
 4. Show list of modified (but not committed) files
     p4 diff -f -sa
     p4 diff -f -sa ...
+
+5. All the files that's modified but not committed
+    p4 opened
+
+6. All commits to a file
+    p4 filelog <file-name>
+        -l  long form description
+
+7. Backing out submitted changelist
+    Read this article --> https://community.perforce.com/s/article/3474
+
+8. How to get diff of all files in pending changelist
+    p4 opened -c 999 | awk 'BEGIN { FS = "#" } // { print "p4 diff " $1 }' | csh
 
 
 Reference:
