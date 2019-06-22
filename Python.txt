@@ -255,6 +255,106 @@ $ python -m pylint --errors-only module (or filename)
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    PDB: Python Debugger
+                    ====================
+- pdb can be used to examine dead or running program
+- Most used/basic commands
+    * next
+    * step
+    * continue
+
+- pdb.set_trace() is most common, but you can also run pdb as a module. Then
+  entire program runs under pdb
+    $ python -m pdb <file>
+
+- pdb.run() and pdb.runcall() are two other ways of running programs under pdb
+
+Post Mortem Debugging
+====
+- If you run a program under PDB ($ python -m pdb <file>) and if it has an error
+  and Traceback's then you can do post mortem debugging
+
+
+- Some useful pdb commands
+    * help      # or ?. Can also do 'help list' or 'help help'
+
+- List of current context
+    * list      # or l
+    * list 1,10 # or any line range. Because next l will show next 10 lines
+    * Read documentation as there are subtlities
+
+- Print variables
+    * print or p <variable>
+    * <variable>    # This also prints the variable
+    * pp        # pretty print
+
+- Stepping through code
+	* next		# same as gdb next
+	* step		# step into a function
+    * until     # reach end of current loop
+    * return    # completes current func and returns
+
+- Breakpoints
+-------------
+- At a line in a file or callable function (in PYTHONPATH)
+- 'break' lists all breakpoints and # of times they were called
+- Conditional breakpoints can be set just like GDB. The condition is a python
+  truthy statement
+- Look at 'disable' and 'ignore' commands for breakpoints
+
+    * break or b <[file:]line | function> [, condition]    # condition is optional.
+    Ex:
+        $ break 11, this_year == 2019
+
+    * clear or cl   # clears a breakpoint
+- If program is running under PDB then pressing CTRL+C will restart the program.
+  Breakpoints will still be active
+
+- Traversing stack frames
+    * where         # shows current stack. Same as bt
+    * up/down       # travel up/down the stack
+    * pp            # pretty print. Useful for dict's
+    * locals()      # local variables
+
+- Misc help topics: exec pdb
+
+- Undocumented commands: retval, rv
+
+- Evaluate expressions using ! command
+
+- Some new features in py3:
+    - 'interact': It opens an interpreter in current scope
+    - 'longlist' or ll: Gives full method we are in
+
+- quit or q, quits pdb. It's unlike continue and quits the program
+
+- Alternatives: pdbpp, ipdb, rpdb (remote-pdb)
+
+- .pdbrc
+    * Setup aliases and enhance readline support
+
+- Can we 'watch' variables, as in gdb? Not sure.
+
+Extending PDB
+=============
+Aliases
+-------
+- alias dr pp dir(%1)   # better than 'dir self'
+- alias loc locals().keys()
+- Aliases can refer to other aliases. Arguments are passed on.
+- All aliases go in .pdbrc file
+
+
+Breakpoint Commands
+------
+- Bunch of commands that can be executed when a breakpoint is hit.
+- Commands list ends with either 'end' or any one of step/next/continue
+
+
+[1] https://www.youtube.com/watch?v=P0pIW5tJrRM
+[2] https://www.youtube.com/watch?v=lnlZGhnULn4
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
                     Python Concepts
@@ -430,8 +530,43 @@ Immutable Objects: String, Integer, Float, Tuple, bool
 
 
 
-Decorators
+Decorators: https://realpython.com/primer-on-python-decorators/
 ----------
+
+Inner Functions
+---------------
+- It's possible to define functions inside other functions (inner functions)
+    - They are locally scoped to parent function
+    - Order of definition does NOT matter. Order of invocation DOES matter.
+
+- Function can return functions, just like variables. Obviously they are
+  references to inner functions.
+
+
+def my_decorator(func):
+    def wrapper():
+        print("Something before func call")
+        func()
+        print("Something after func call")
+    return wrapper
+
+def say_whee():
+    print("Whee")
+
+say_whee = my_decorator(say_whee)
+say_whee()
+
+- say_whee is essentially referencing wrapper() function
+
+- Put simply, decorators wrap a function, modifying it's behavior
+
+- Syntactic sugar for all of the above is: @
+@my_decorator
+def say_whee():
+    print("Whee")
+- It's easier way of saying say_whee = my_decorator(say_whee)
+
+
 # the function outer is the decorator
 def outer(some_func):
     def inner():

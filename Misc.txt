@@ -2955,6 +2955,11 @@ FAQ
 8. How to get diff of all files in pending changelist
     p4 opened -c 999 | awk 'BEGIN { FS = "#" } // { print "p4 diff " $1 }' | csh
 
+9. Merge changes from one branch to another
+   p4 integ -d -i ~/pan/$1/...@$3,@$3 ~/pan/$2/...
+    $1 = source dir
+    $3 = changelist number
+    $2 = dest dir
 
 Reference:
 [1] https://stackoverflow.com/a/17306729/630866
