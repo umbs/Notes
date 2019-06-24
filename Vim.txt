@@ -447,9 +447,111 @@ Snippets
 - Ultisnips and Snipmate: provide better snippets support and advance features
 
 
+Notes from [6]
+---
+Vim Concepts
+---
+- Modal Editing: Normal, Insert, Visual, Ex (or Command) modes
+
+Scrolling
+---
+^E      Scroll window down
+^Y      Scroll window up
+^F      Scroll down one page
+^B      Scroll up one page
+H       Move cursor to top of window
+M       Move cursor to middle of window
+L       Move cursor to bottom of window
+
+
+text-objects
+---
+w       word
+s       sentence
+p       paragraph
+t       tags as in XML/HTML files
+
+
+Motions: Getting from a to b
+---
+word = Any set of alphanumeric chars. Does not include commas, period etc
+WORD - Chars separated by whitespace (or the like)
+
+Basics: wWbBeE
+w       Forward to beginning of next word
+W       Forward to beginning of next WORD
+b       Backwards to beginning of next word
+B       Backwards to beginning of next WORD
+e       Forward to next end of word
+E       Forward to next end of WORD
+0       Zeroth char of the line
+^       First non-blank char of line
+$       Last char of line
+
+
+Slightly less basic: fFtT
+All follow: [number]<verb><noun> syntax
+[n]f<o>     Forward until (nth) (o) Inclusive
+[n]F<o>     Backward until (nth) (o) Inclusive
+[n]t<o>     Forward until (nth) (o) Exclusive
+[n]T<o>     Backward until (nth) (o) Exclusive
+
+
+Searching
+/   Forward
+?   Backward
+*   Word under cursor - Forward search (bounded)
+g*  Word under cursor - Forward search (unbounded)
+#   Word under cursor - Backward search (bounded)
+g#  Word under cursor - Backward search (unbounded)
+
+Motions
+---
+a       all
+i       in
+t       until
+f       find
+F       Find backwards
+
+Commands
+---
+d       delete
+c       change (delete + insert mode)
+y       yank (copy)
+v       visually select
+
+[number]{command}{text object | motion}
+
+// TODO: Below commands are 'repeatable', meaning you can use DOT command to
+// repeat what they do
+
+diw
+daw
+ca[     change everything including []
+ci]     change everything inside []
+ca      << there's space after 'a'
+va"     visually select everything including "
+
+
+Basic Insert Mode Operations
+---
+i   Enter insert mode at cursor
+I   Enter insert mode at first non-blank char
+s   Delete char under cursor and enter insert mode
+S   Delete line and insert mode at beginning of same line
+a   Enter insert mode _after_ cursor
+A   Enter insert mode at end of line
+o   Enter insert mode on next line
+O   Enter insert mode above line
+C   Delete from cursor to end of line and enter insert mode
+
+
 
 [1] https://www.youtube.com/watch?v=aHm36-na4-4
 [2] https://www.youtube.com/watch?v=Qem8cpbJeYc
 [3] https://www.youtube.com/watch?v=wlR5gYd6um0
 [4] https://www.youtube.com/watch?v=XA2WjJbmmoM
 [5] https://www.youtube.com/watch?v=v0W7JkzQAzA
+[6] https://www.youtube.com/watch?v=5r6yzFEXajQ
+[7] https://www.youtube.com/watch?v=Nim4_f5QUxA << basic Vim stuff
+[8]
