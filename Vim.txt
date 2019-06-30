@@ -194,6 +194,17 @@ where
        mapped.
 {rhs}  right hand side, is the sequence of keys that the {lhs} keys are
 
+Ex:
+nnoremap <C-Tab> <ESC>:tabnext<CR>
+nnoremap <C-S-Tab> <ESC>:tabprevious<CR>
+
+# Unmap arrow keys
+no <up> <Nop>
+no <down> <Nop>
+no <left> <Nop>
+no <right> <Nop>
+
+
 Vim Tips from Youtube talks
 ---------------------------
 1) Highlight 80th column
@@ -568,7 +579,7 @@ filetype off
     * Select object first and perform operation.
 
 - Example. verb -> gU (change to Uppercase)
-           object -> char, word or line 
+           object -> char, word or line
 
 2) Visual Block Mode
 - CTRL-V puts vim into Visual Block mode
@@ -630,6 +641,23 @@ using :mksession <session-name>.vim
 
 11) You can edit a tar.gz file "live" from within Vim
 
+=======================
+
+Vim important links
+
+[1] https://raw.github.com/shawncplus/vim-classes/master/expert-1.md
+[2] https://raw.github.com/shawncplus/vim-classes/master/expert-2.md
+
+
+.vim/
+  - after/
+  - autoload/
+  - bundle/ <<< when using Pathogen/Vundle etc
+  - colors/
+  - plugins/
+  - syntax/
+
+
 
 [1] https://www.youtube.com/watch?v=aHm36-na4-4
 [2] https://www.youtube.com/watch?v=Qem8cpbJeYc
@@ -640,4 +668,4 @@ using :mksession <session-name>.vim
 [7] https://www.youtube.com/watch?v=Nim4_f5QUxA << basic Vim stuff
 [8] Ten Things You Don't Know About Vim
 https://www.youtube.com/watch?v=ZtfSm8nK1ag
-[9] 
+[9]
