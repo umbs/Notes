@@ -447,7 +447,7 @@ Snippets
 - Ultisnips and Snipmate: provide better snippets support and advance features
 
 
-Notes from [6]
+Notes from [6, 7]
 ---
 Vim Concepts
 ---
@@ -546,6 +546,90 @@ O   Enter insert mode above line
 C   Delete from cursor to end of line and enter insert mode
 
 
+==========   Ten Things You Don't Know About Vim [8]    ====================
+In .vimrc, do following
+set nocompatible    " not compatible with vi
+filetype off
+
+1) Help System. Very extensive
+:help i_CTRL-V      " tells what CTRL-V does in insert mode
+:help :help         " help about help
+:help text-objects  " help about concepts 'text-objects'
+:help gU            " help about key strokes
+:help 'compatible'  " options
+:help submatch()    " Vimscript functions
+:help surround      " help about plugins after installing
+
+- Vim is Upside-Down vs GUI editor. In Vim, action comes first and object next
+    * [number]<verb><object> or [number]<verb><adverb><object>
+    * Ex: diw, yw, c$
+
+- Visual Mode is somewhat similar to GUI
+    * Select object first and perform operation.
+
+- Example. verb -> gU (change to Uppercase)
+           object -> char, word or line 
+
+2) Visual Block Mode
+- CTRL-V puts vim into Visual Block mode
+
+
+3) Text-Object
+- aw or iw: around word, inner word
+- All text-objects start with a (around) or i (inner)
+- Around includes whitespace or things like that with object of your interest
+- Inner is just the object
+- word, sentence (ending with .), paragraph
+
+4) Registers
+- Put something in a register
+    "<alphabet><operation>
+- Play something from a register
+    @<register>
+
+5) Macros
+- Record operations in to a register and repeatedly apply them
+q 	start recording
+a	record in to register a
+<do your operations>
+q	end recording
+
+- But typing entire operation on a line and saving them into a register is more
+  convenient.
+
+- Suppose, at 36.48 in [1], user has list of names. He want's to number them and
+  add ; at the end. They can type this on a line
+
+A; I =b:i
+)  l~j:let b:i+=1
+
+6) Shell output in to Vim directly
+:4,8!<shell cmd>
+- Result of shell command is pasted in lines 4,8
+
+7) Advanced search & replace
+set hlsearch    " highlight search
+set incsearch   " find as you type
+
+- Search history by q/
+
+
+8) Regular Exp in search
+- Vim's regex is very bad
+- Instead use "magic v"
+
+/\v<regex>
+- Now regex behaves like Perl regex
+
+9) Browse vimrc session from within vim and live update settings and save it
+using :mksession <session-name>.vim
+
+- Later on, load that session using :source <session-name>.vim
+
+10) Open an HTTPS file using :edit https://github.com/umbs/dotfiles/vimrc
+
+11) You can edit a tar.gz file "live" from within Vim
+
 
 [1] https://www.youtube.com/watch?v=aHm36-na4-4
 [2] https://www.youtube.com/watch?v=Qem8cpbJeYc
@@ -554,4 +638,6 @@ C   Delete from cursor to end of line and enter insert mode
 [5] https://www.youtube.com/watch?v=v0W7JkzQAzA
 [6] https://www.youtube.com/watch?v=5r6yzFEXajQ
 [7] https://www.youtube.com/watch?v=Nim4_f5QUxA << basic Vim stuff
-[8]
+[8] Ten Things You Don't Know About Vim
+https://www.youtube.com/watch?v=ZtfSm8nK1ag
+[9] 
