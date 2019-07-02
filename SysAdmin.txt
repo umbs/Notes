@@ -43,7 +43,110 @@ cpuid - Dump detailed info about CPUs
 
 
 
+@@@@@@@@@@@@@@@     CRONTAB/CRONJOB       @@@@@@@@@@@@@@@@@@
+Format of cron job:
 
+    min(0-59) hour(0-24) day_of_month(1-31) month(1-12) day_of_week(0-6) cmd_to_run
+    0 = Sunday
+    6 = Saturday
+    7 = Sunday again
+- Asterisk means every/all instances.
+
+- Manpages
+$ man crontab
+
+- Display contents of crontab file
+$ crontab -l
+
+- Edit current users cron jobs:
+$ crontab -e
+
+- To remove all cron jobs
+$ crontab -r
+
+
+Examples:
+---------
+- Run cron job every minute
+* * * * * cmd_to_run
+
+- Run cron job every 5th minute
+*/5 * * * * cmd_to_run
+
+- Every quarter hour
+*/15 * * * * cmd_to_run
+
+- Every half hour
+30 * * * * cmd_to_run
+or
+*/30 * * * * cmd_to_run
+
+- Run every hour, 5 mins and 10 mins past every hour
+0,5,10 * * * * cmd_to_run
+
+- Run every hour
+0 * * * * cmd_to_run
+
+- Run every 2 hours
+0 */2 * * * cmd_to_run
+
+- Run a job everyday (at 00:00)
+0 0 * * * cmd_to_run
+
+- Run a job everyday at 3am
+0 3 * * * cmd_to_run
+
+- Run a job every Sunday (at 00:00)
+0 0 * * SUN cmd_to_run
+or
+0 0 * * 0 cmd_to_run
+
+- Run a job every weekday only
+0 0 * * 1-5 cmd_to_run
+
+- Run a job every month (1st day)
+0 0 1 * * cmd_to_run
+
+- Run a job at 16:15 on 1st day of month
+15 16 1 * * cmd_to_run
+
+- Run a job every quarter i.e., 1st day of every 3rd month
+0 0 1 */3 * cmd_to_run
+
+- Run a job on specific month at a specific time
+5 0 * 4 * cmd_to_run
+
+- Run a job every 6 months
+0 0 1 */6 * cmd_to_run
+
+- Run a job every year
+0 0 1 1 * cmd_to_run
+
+Following strings can also be used to define job
+
+We can also use the following strings to define job.
+------
+@reboot     Run once, at startup.
+@yearly     Run once a year.
+@annually   (same as @yearly).
+@monthly    Run once a month.
+@weekly     Run once a week.
+@daily      Run once a day.
+@midnight   (same as @daily).
+@hourly     Run once an hour.
+
+- Run a job everytime server is rebooted
+@reboot cmd_to_run
+
+Crontab Sytax Generators
+----
+https://crontab.guru/
+https://crontab-generator.org/
+
+
+[1] https://www.ostechnix.com/a-beginners-guide-to-cron-jobs/
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 + How to check linux flavor/version
 Method 1:
