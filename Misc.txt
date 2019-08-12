@@ -36,10 +36,23 @@ Rules 3 and 4 are instances of the design philosophy KISS.
 Rule 5 was previously stated by Fred Brooks in The Mythical Man-Month. Rule 5 is
 often shortened to "write stupid code that uses smart objects".
 
-@@@@@@@@@@@@@@@@@@@   NodeJS    Notes       @@@@@@@@@@@@@@@@@@@@@@@@
-
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
+
+@@@@@@@@@@   Miscellaneous  Software   Questions/Topics    @@@@@@@@@@@
+# These Q's are for general understanding of various concepts
+
+- Why do string objects in Java/Python immutable?
+    *
+
+@@@@@@@@@@   VLC Media Player Shortcut Keys  @@@@@@@@@@@
+
+Very short backwards jump: Shift + Left
+Very short forward jump: Shift + Right
+Short backwards jump: Alt + Left (or just Left)
+Short forward jump: Alt + Right (or just Right)
+Medium backwards jump: CTRL + left
+Medium forward jump: CTRL + Right
 
 @@@@@@@@@@@@@@@@@@@   QEMU    NOTES      @@@@@@@@@@@@@@@@@@
 
