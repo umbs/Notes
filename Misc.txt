@@ -2938,41 +2938,62 @@ FILE`.
 
 FAQ
 ===
+Users Specific
+---
 1. How to see all changes submitted by a user
-    p4 changes -s submitted -u bruno //depot/...    entire depot
-    p4 changes -s submitted -u bruno ...            current repo
-    p4 changes -s submitted -u bruno <filename>     just this file
+    p4 changes -s submitted -u bupadhyayula //depot/...    entire depot
+    p4 changes -s submitted -u bupadhyayula ...            current repo
+    p4 changes -s submitted -u bupadhyayula <filename>     just this file
 
 
-2. Edit description of a changelist
+Changelist Specific
+---
+1. Edit description of a changelist
     p4 change <changelist-number>
 
 
-3. Show code changes in a changelist
+2. Show code changes in a changelist
     p4 describe <changelist-number>
+    p4 describe -s <changelist-number>  Only description and changed files
 
-4. Show list of modified (but not committed) files
+3. Backing out submitted changelist
+    Read this article --> https://community.perforce.com/s/article/3474
+
+4. Changelists between certain dates
+    p4 changes -s submitted //...@2011/05/16:00:01:00,2011/05/16:07:00:00
+
+
+Files Specific
+---
+1. Show list of modified (but not committed) files
     p4 diff -f -sa
     p4 diff -f -sa ...
 
-5. All the files that's modified but not committed
+2. All the files that's modified but not committed
     p4 opened
 
-6. All commits to a file
+3. All commits to a file
     p4 filelog <file-name>
         -l  long form description
 
-7. Backing out submitted changelist
-    Read this article --> https://community.perforce.com/s/article/3474
-
-8. How to get diff of all files in pending changelist
+4. How to get diff of all files in pending changelist
     p4 opened -c 999 | awk 'BEGIN { FS = "#" } // { print "p4 diff " $1 }' | csh
 
-9. Merge changes from one branch to another
+
+Merges
+---
+- Merging algorithm and notes:
+  https://www.perforce.com/perforce/r14.2/manuals/p4guide/chapter.resolve.html
+
+
+Others
+---
+1. Merge changes from one branch to another
    p4 integ -d -i ~/pan/$1/...@$3,@$3 ~/pan/$2/...
     $1 = source dir
     $3 = changelist number
     $2 = dest dir
+
 
 Reference:
 [1] https://stackoverflow.com/a/17306729/630866
@@ -3017,8 +3038,133 @@ On Media:
 
 https://www.youtube.com/watch?v=f3NBQcAqyu4
 
-=============   AWS   re:Invent    Videos     ===========================
+
+========================================================================
+"Architectural Patterns of Resilient Distributed Systems" - Ines Sombra
+https://www.youtube.com/watch?v=ohvPnJYUW1E
+
+- Couldn't see full talk. My bad, I couldn't distill the knowledge from talk in
+  to practical/usable knowledge for current needs.
+
+===============     Python   Profiling    ==============================
+Amjith Ramanujam
+https://www.youtube.com/watch?v=QJwVYlDzAXs
+
+- cProfile - included with standard library
+    $ python -m cProfile lcm.py
+
+- You can output results from cProfile in to a file and analyze using pstats
+  (from standard library)
+    $ python -m cProfile -o file.prof script.py
+
+>>> import pstats
+>>> p = pstats.Stats('file.prof')
+>>> p.sort_stats('calls')
+>>> p.print_stats(5)
+
+- Can run primitive SQL like queries
+
+- RunSnakeRun is GUI version of pstats
+
+- Targeted Profiling, Hybrid Profiling, Instrumented
+
+- Statistical Profilers
+    * StatProf
+        - CLI based, no GUI
+    * PLOP (from Dropbox. Opensource)
+        - Has GUI (D3 based)
+    * NewRelic
+
+- mem_profiler gives memory profiler. Above ones are CPU profilers. But very
+  slow.
+
+===========     How Netflix does failovers in 7 minutes flat ===========
+Amjith Ramanujam
+https://www.youtube.com/watch?v=iQI56-up3Yk
+
+- Netflix infra is completely on AWS. Their CDN is called Open Connect and is
+  used for all video delivery.
+
+- Runs in 3 regions: us-west, us-east and eu-west
+
+- What problems must involve failover?
+    * Infra issue isolated to a region
+    * Problem does not follow on failover - like DDOS in specific region makes
+      it worst on failover
+
+- How does Netflix detect fail?
+    * SPS - Stream Starts Per Second. It's isolated per region.
+
+- Architecture
+    * Two actions: [a] Periodic Tasks [b] Triggered Tasks
+
+- Nanoservices:
+    [a] Python [b] Flask [c] RQ - Redis
+
+- Tech's used in Fallbacks
+    * AWS State - EDDA (Open Source by Netflix)
+    * Historical Data - ATLAS ( " )
+
+
+- Suggestions to build regional failover
+    * Build fallbacks, fallbacks, fallbacks
+    * Exercise it often
+    * Provide visibility
+
+
+====================   AWS re:Invent videos  ===========================
+re:Invent 2017: How to Design Multi-Region Active-Active Architecture
+https://www.youtube.com/watch?v=RMrfzR4zyM4
+
+- Availability of a bunch of components is same or less than availability of
+  weakest link
+    "Chain is as strong as it's weakest link"
+
+- Availability of parallel components increases than individual availability
+    "Component redundancy increases your availability significantly"
+
+- Each Availability Zone (AZ) is a containment of "Blast Radius".
+    Oregon - 4 AZ
+    N California - 3 AZ
+    and so on
+
+- DynamoDB provides default AZ. RDS does not. It must be configured.
+
+- As per the talk, it's easy to reach 99.99% availability within a region by
+  doing multi-AZ deployments.
+
+- Engineer recommends NOT TO DO multi-REGION active-active pattern
+    https://youtu.be/RMrfzR4zyM4?list=WL&t=799
+
+- In AWS, two closest regions are us-east-1 and us-east-2 (Virginia & Ohio) with
+  12ms one way time.
+
+- Challenges in multi-region deployment
+    Data Replication:
+        - Synchronous
+        - Async
+            * Lag of few seconds or minutes - continuous sync
+            * Batch (hourly/daily/...)
+            * But applications are not usually designed with this in mind
+
+    Code synchronization
+        - Staged deployment across regions
+            * Rolling or Canary deployments. Some functions/containers/EC2 will
+              have new code. Will your app survive?
+                + If it survives, continue, else rollback
+            * Blue-Green: Have a replica with new code and some point change IP
+              addresses and DNS and do a switchover.
+            * Rollback facility
+
+        - Parameterized localization
+
+
+    Traffic Segregation & Management
+
+
+=========================================================================
 AWS Messagin (SQS & SNS)
+https://www.youtube.com/watch?v=zwLC5xmCZUs
 
 SQS Key Features
 
@@ -3051,7 +3197,3 @@ message. Saves up to 400x cost (if there's 20 polls/s)
     How to do this? Two ways:
         - Tag the SQS queue
         - Individual requests can be marked as 'long poll'
-
-
-https://www.youtube.com/watch?v=zwLC5xmCZUs
-

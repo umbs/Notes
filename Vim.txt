@@ -288,7 +288,7 @@ b vs B
 Vim Marks
 ---------
 
-`m  takes you position where mark is set
+`m  takes you to position where mark is set
 'm  takes you to beginning of line where mark is set
 
 
@@ -657,6 +657,24 @@ Vim important links
   - plugins/
   - syntax/
 
+=============     Standard   Plugins  ==========
+- AKA Global Plugins
+- :help usr_05.txt (or :help standard-plugin)
+- :help standar-plugin-list will list all of them
+
+
+
+=============     Autocommands     =============
+- Run commands automatically, as trigger to certain events such as file
+  save/write etc.
+- :help usr_40.txt
+- :help autocmd.txt
+- Syntax
+    autocmd [group] {events} {file_pattern} [nested] {command}
+
+- :help autocmd-events
+
+// This is very extensive documentation. Read up for more info.
 
 
 [1] https://www.youtube.com/watch?v=aHm36-na4-4
