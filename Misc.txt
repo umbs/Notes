@@ -2992,3 +2992,66 @@ $ git push or pull:
 Reference:
 [1] https://stackoverflow.com/a/17331274/630866
 
+===============   Jeff Bezos Talk with David Rubenstein   ============
+
+On How He Operates:
+--------
+- He works on "Regret minimization framework". Projects himself to 80 years old
+  and works backwards. Do things so you wont regret at 80 years.
+
+- Executives make small but important decisions. Perhaps 3 decisions/day. Very
+  imp they rest and are in best shape to make those decisions.
+
+- High level executives must not be working on "current quarter". They must be
+  working on things 2-3 years from now.
+
+On Media:
+--------
+- On President Trump criticising media: Media is integral to success of
+  democracy. It's freedom is in Constitution. Must not be vilified.
+
+- Elected officials must accept that criticism is part of the job and is a good
+  thing.
+
+- Regulatory checks on big companies is good for the company.
+
+https://www.youtube.com/watch?v=f3NBQcAqyu4
+
+=============   AWS   re:Invent    Videos     ===========================
+AWS Messagin (SQS & SNS)
+
+SQS Key Features
+
+- Provides very high durability
+- Holds messages until you explicity delete them
+- Unlimited backlog up to 14 days
+- CloudWatch metrics for Queue depth, message rate and more
+
+SNS Key Features
+
+    producer ---> SNS Topic  ------> Multiple receivers
+
+- Receiver subscribe to SNS Topic
+- Receiver could be any AWS service or other things: SQS Queue, HTTP, Email, SMS
+  etc
+- Unlimited fanout with multiple protocol endpoints
+- Customizable delivery policies (retries, rate limiting etc)
+- CloudWatch metrics and alerts for publishes and notifications
+
+
+- AWS keep "Gaurantee"ing that messages in SQS will never be lost :)
+
+Best Practices:
+--------------
+1) Batch messages. Up to 10 messages can be batched.
+2) Set auto-scaling triggers on queue depth to automatically scale consumers up
+or down based on throughput
+3) Long polling requests persist up to 20 seconds and returning if there's a
+message. Saves up to 400x cost (if there's 20 polls/s)
+    How to do this? Two ways:
+        - Tag the SQS queue
+        - Individual requests can be marked as 'long poll'
+
+
+https://www.youtube.com/watch?v=zwLC5xmCZUs
+
