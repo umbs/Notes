@@ -1,0 +1,12 @@
+Rust Lang
+---------
+- No garbage collection, but user does not have to manage memory. A unique
+  combo.
+- Cargo is package manager
+- rustup is version controller/manager
+    $ rustup update
+
+
+Reference:
+[1]
+[2] https://www.youtube.com/watch?v=zF34dRivLOw

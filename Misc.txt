@@ -3160,10 +3160,62 @@ https://www.youtube.com/watch?v=RMrfzR4zyM4
 
 
     Traffic Segregation & Management
+        - Explicit segregation using different URLs (east, west, central etc)
+          for traffic
+        - Implicit segration using DNS and Route 53
+
+    Monitoring
+        - Very hard in multi-region deployments. But tools like Elasticsearch
+          make them easy
+
+
+Architectural Advice
+--------------------
+- Build tolerance for network partitioning
+- Minimal data must be replicated and ask following
+    - All data is required to replicate?
+    - Synchronous replication?
+    - Continuous vs Batch replication?
+
+- To replicate data, classify them and ask which data is critical
+
+- Wherever possible asynchronuous replication is preferred
+
+- Data replication must be done in "swim lanes"
+
+    ----------------------------------------------------------------
+        Synchronuous: Most ciritical data ==>
+    ----------------------------------------------------------------
+        Asynchronuous nearly continuous ==>
+    ----------------------------------------------------------------
+        Asynchronuous batch ==>
+    ----------------------------------------------------------------
+
+- Ideal replication system must have following metrics (at the least)
+    * report replication lag
+    * report record offset
+    * report failures and retries
+
+
+Distributed System Design Best Practice
+-----
+- Idempotency
+- Eventual Consistency: Hard to achieve but it's only way to scale.
+- Static Stability
+- Exponential Backoff
+- Throttling
+- Circuit Breaking
+
+
+- Inter Region VPC Peering: Make sure there's no overlapping IP address space
+
+- Before multi-region deployments, consider multi-AZ deployements
+    * Cross AZ failovers are automatic vs cross region where there's some work
+      required
 
 
 =========================================================================
-AWS Messagin (SQS & SNS)
+AWS Messaging (SQS & SNS)
 https://www.youtube.com/watch?v=zwLC5xmCZUs
 
 SQS Key Features
@@ -3197,3 +3249,57 @@ message. Saves up to 400x cost (if there's 20 polls/s)
     How to do this? Two ways:
         - Tag the SQS queue
         - Individual requests can be marked as 'long poll'
+
+
+=========================================================================
+Your Vitual Data Center: VPC Fundamentals and Connectivity Options
+https://www.youtube.com/watch?v=jZAvKgqlrjY
+
+Recommendations:
+---
+    * Use private address
+    * /16 given in all examples in presentation
+    * /24 out of those are used in subnets
+    * Non Overlapping IP addr when peering with other networks
+
+- Multiple AZs in VPC have a subnet
+- VPC have default rout, but each AZ has it's own routing table
+- VPC IP addr can be resized
+
+- Dual stack IP addr is possible
+- /56 addr space is given to VPC and /64 subnets are used by AZ's
+
+
+Security Groups: Tells what traffic to ingress/egress
+---
+    * Always follow principle of least priviledge
+
+Connectivity to VPC
+---
+    * Many architectures
+
+
+Inter-VPC Connectivity (VPC Peering)
+---
+- Full private IP connectivity between VPC as long as no overlapping addr space
+- Easier if VPC are in same region, can reuse Security Groups
+
+
+Connecting VPCs to on-prem network:
+---
+Two solutions:
+    - AWS VPN
+    - AWS Direct Connect
+
+Why connect to on-prem n/w?
+- To migrate to cloud
+- Operate in Hybrid model
+
+- It seems that genesis of VPC is above two reasons
+
+AWS VPN Basics
+---
+
+
+AWS Direct Connect Basics
+---
