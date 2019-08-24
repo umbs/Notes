@@ -363,7 +363,7 @@ Autocomplete
 ^x^f    for file names
 ^x^]    tags only
 ^x^d    definition (in Vim's dictionary)
-^x^i    Keywords
+^x^i    Keywords in included files
 ^x^l    Lines (useful while writing Markdown)
 ^x^t    Thesaurus (Needs an input file)
 ^x^k    Dictionary
@@ -687,3 +687,149 @@ Vim important links
 [8] Ten Things You Don't Know About Vim
 https://www.youtube.com/watch?v=ZtfSm8nK1ag
 [9]
+
+================   Autocompletion in Vim    ==============
+by Stephen Belcher
+
+- Works in 'Insert' mode
+- Ctrl-X puts you in special mode and then a command
+    * Line completion (Ctrl-l)
+    * File keywords (Ctrl-n/Ctrl-p)
+    * Keywords in included files (Ctrl-i)
+    * Dictionary Words (Ctrl-k)
+    * Thesaurus Words (Ctrl-t)
+    * Filenames (Ctrl-f)
+    * Definitions/Macros (Ctrl-d)   // C and C++ languages
+    * Vim command-line (Ctrl-v)
+    * User-defined functions (Ctrl-u). These functions are custom
+      auto-completion
+    * Omni Completion (Ctrl-o)
+
+- Use :pclose after Omni Completion suggestions
+
+- :help ins-complete
+
+[1] https://www.youtube.com/watch?v=VMPtoBe8Yi0
+
+================   Registers in Vim    ==============
+by Stephen Belcher
+
+- Like clipboard, but there are many of them
+- Persists between sessions
+    * Saved in .viminfo
+    * Read .viminfo, there'll be lot of useful info from previous Vim sessions
+
+- Registers are (almost) always prefixed with "
+    * Only scripts or macros prefix them with @
+
+- To write in to register 'r', do the following
+    "rdd    // dd is for write to
+
+- To read from register 'e', do the following
+    "ep     // p is for paste
+
+- Vim doc breaks registers in to 10 groups
+
+""  This is unnamed register. Any delete/change/x/s operation will put that text
+in to "" register and then to named register if provided.
+
+"0  Default destination for yanked text unless another register is provided like
+this "ay. Now, text is copied to "a register and unnamed register :)
+
+If you yank to unnamed register (""y) then a copy is made in "0 register. Vim
+probably wants to maintain two copies
+
+"1 thru "9 default destination for any multi-line deleted text
+
+"1 is written on every delete, unless another register is specified ("bd4j)
+
+Before delete in to "1, current contents of "1 are moved to "2, "2 to "3 and so
+on. Contents of "9 fall off.
+
+"-  deletions that are small (less than one line x, dw etc)
+
+"a to "z. Only written to/read from when specifically asked.
+
+"A thru "Z behave differently to "a thru "z
+    * "add overwrites the "a register
+    * "Add appends to "a register
+    * Useful when u want to append non-contiguous lines
+
+:help registers
+
+:let @x = "value"   This will manually set contents of x register
+
+
+[1] https://www.youtube.com/watch?v=sf1prtd_2E8
+
+================   Macros in Vim    ==============
+by Stephen Belcher
+
+Definition: Recorded series of commands that can easily be replayed again and
+again
+
+Recursive Macros: A macro which calls itself, so that the macro automatically
+repeats until it's finished
+
+Recording Macros:
+    * In NORMAL mode, press q and then any letter (example: qe). This is the
+      register where macro is recorded
+    * Follow with sequence of commands
+    * Return to NORMAL mode and press q to stop recording
+
+Playing Macros:
+    * In NORMAL mode, press @, then the letter of register (example: @e)
+    * This replays macros stored in register "e
+    * Macro replay will stop when finished or hit an error
+
+Viewing Macros:
+    * In NORMAL mode, just do "<register-alphabet> where macro is registered
+    * :registers
+    * :registers "e
+
+Editing Macros:
+- You can copy contents of a Macro to file like this: "ep
+- Edit the contents
+- Copy them back to the register as: "edaW
+
+    "e  -> In to register e
+    d   -> delete
+    a   ->
+    W   -> Big word
+
+More Macro Concepts:
+- Macros are transactional
+    * Entire actions of macros can be undone using 'u'
+    * What happens if macro opens new file. Can you undo it?
+
+- Macros can be repeated by pressing @@ in NORMAL mode
+    * Think like @@ is special macro-specific register containing last executed
+      macro
+
+- Like any regular macro, they have command to execute themselves
+    * Example: cw<REDACTED>^[n@e
+    * The last @e makes it recursive macro
+
+- Recursive Macros continue until they hit error condition
+
+
+Creating Recursive Macros
+
+Option 1:
+    * Empty a macro register (qeq)
+    * Record macro, including execution of current macro (@e) at the end
+
+Option 2:
+    * Record macro as usual (Example: qe ... q)
+    * Append a macro execution via special upper-case register. So, have @e in
+      your file, have cursor on @ and do this "E2x
+    * Since upper-case registers are append only, they'll append @e to the "E
+      register
+
+Option 3:
+    * Record macro as usual (Example: qe ... q)
+    * In command-line mode, run following Vimscript command
+        :let @e = @e . '@e'
+
+
+[1] https://www.youtube.com/watch?v=ejOF_N8Hd04
