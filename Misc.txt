@@ -2962,6 +2962,9 @@ Changelist Specific
 4. Changelists between certain dates
     p4 changes -s submitted //...@2011/05/16:00:01:00,2011/05/16:07:00:00
 
+5. Add a file to Changelist
+    p4 reopen -c <changelist-number> file    // can be used to move files between CL
+
 
 Files Specific
 ---
@@ -2978,6 +2981,9 @@ Files Specific
 
 4. How to get diff of all files in pending changelist
     p4 opened -c 999 | awk 'BEGIN { FS = "#" } // { print "p4 diff " $1 }' | csh
+
+5. Add a file to Changelist
+    p4 reopen -c <changelist-number> file    // can be used to move files between CL
 
 
 Merges
