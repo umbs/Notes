@@ -112,6 +112,46 @@ $ kubectl scale rs <replicaset-name> --replicas=<number>
 
 
 
+kubectl get deployments
+kubectl get deployment <my-dep>
+kubectl get nodes
+kubectl get pods --all-namespaces
+
+
+// debug command if pod fails to get deployed
+kubectl describe pod <pod-name>
+
+//
+kubectl describe deployment <pod-name/deployment-name>
+
+// deploy an image
+kubectl run <depl-name> --image=<image-location>
+
+// get top level status of pods
+kubectl get pods
+
+// more info about a pod
+kubectl describe pod <pod-name>
+
+kubectl logs <pod-name>
+
+// if a pod is restarted, previous logs can still be seen as
+kubectl logs <pod-name> --previous
+
+kubectl create configmap <name> --from-file=<directory or file>
+kubectl describe configmap <name>
+
+
+kubectl get deployments
+kubectl get deployment <name> -o yaml
+
+kubectl get configmaps
+kubectl get configmap <name> -o yaml
+
+kubectl scale deploy <deployment-name> --replicas=<number>
+
+[1] https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
 
 [1] Safari Books Online: Kubernetes Fundamentals - Sebastien Goasguen
 [2] kubernetes.io
