@@ -7,6 +7,10 @@ Window Splitting
 :set splitright // Opens window in right [for vertical splits] and becomes
                   active
 :set splitbelow // same for horizontal window
+
+ctrl+w is same as :wincmd
+    * Wherever we use ctrl+w, we can do :wincmd
+
 ctrl+w <number> < // reduce width of window by <number>
 ctrl+w <number> > // increase width of window by <number>
 <number> ctrl+w +   // increase length of window by <number>
@@ -18,6 +22,12 @@ ctrl+w R // swap both windows [including buffers]
 
 <number> ctrl+w w // switch to window <number>
 ctrl+w T // make current split window in to a tab (capital T)
+
+gf          ("goto file") Open file under cursor in current window
+ctrl+w f    Open file under cursor in (horizontal) split window
+ctrl+w gf   Open file under cursor in new tab
+More details here: https://vim.fandom.com/wiki/Open_file_under_cursor
+
 
 vim -O file1 file2 // open two files side by side
 
