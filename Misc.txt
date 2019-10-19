@@ -3104,6 +3104,20 @@ https://github.com/Shougo/neocomplete.vim/blob/master/doc/neocomplete.txt#L974
     other sources     -> [plugin-name-prefix]
 
 
+================     Hugo   CLI    Commands    ===========================
+- Creating new posts
+  hugo new posts/post-title.md
+
+- Start server with drafts
+  hugo server -D
+
+- Publish your website
+  hugo
+        * Publishes your website to public/ folder
+
+
+
+
 ===============     Writing in Sciences (Coursera Class)   =============
 Home Page: https://www.coursera.org/learn/sciwrite/home/welcome
 
