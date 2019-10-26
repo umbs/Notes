@@ -297,9 +297,21 @@ b vs B
 
 Vim Marks
 ---------
+- Marks are points in file(s) that you can jump between.
+- Three types of marks:
+    * Lowercase marks - for points within a buffer/file.
+    * Uppercase marks - for points across buffers/files.
+    * Numbered marks - unmodifiable marks stored in viminfo file
 
-`m  takes you to position where mark is set
-'m  takes you to beginning of line where mark is set
+- Mark can be set only in Normal mode as: m<alphabet>
+    * <alphabet> can be uppper or lower case.
+    * If reused, latest mark overrides previous mark.
+
+- Jumping to a mark:
+    `m  takes you to position where mark is set
+    'm  takes you to beginning of line where mark is set
+
+- Full power of mark is in combining them with other composable commands.
 
 
 Vim Scripting Language
