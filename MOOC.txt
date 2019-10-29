@@ -1,0 +1,182 @@
+===============     Writing in Sciences (Coursera Class)   =============
+Home Page: https://www.coursera.org/learn/sciwrite/home/welcome
+
+- Writing is good communication of ideas
+
+- How to improve your writing?
+    * Read and pay attention to how professional writers do it. Imitate them.
+    * Write in journal
+    * Talk about your subject with others before writing.
+        - Gives clarity to your ideas.
+        - Makes your writing conversational.
+    * Write to engage your readers. Don't bore them.
+    * Stop waiting for inspiration.
+    * Accept. Writing is hard.
+    * Revise. Nobody gets it perfect on first draft.
+    * Learn how to cut ruthlessly.
+    * Find a good editor.
+
+- Ask yourselves these questions:
+    * Is this sentence readable?
+    * Is this written to inform or obscure?
+
+Themes of this course:
+===
+- Complex ideas don't require complex language.
+- Scientific reading should be easy and even enjoyable to read.
+
+- Nouns slow the reader down. Verbs move the reader forward.
+
+    "dysregulation of physiologic microRNA, miR, activity has been shown to play an
+    important role in tumor initiation and progression, including gliomagenesis.
+    Therefore, molecular species that can regulate miR activity on their target RNAs
+    without affecting the expression of relevant mature miRs may play equally
+    relevant roles in cancer."
+
+    Nouns: dysregulation, initiation, progression, and expression.
+    Vague words: physiologic, molecular species
+    Unnecessary Acronyms: gliomagenesis
+
+- Use acronyms that are standard and don't create new ones.
+
+Use of Active Voice vs Passive Voice:
+====
+- We use Active Voice in our conversations: "She throws the ball". We don't say
+  "The ball is thrown by her" (Passive Voice).
+- Best to write sentences in Active Voice
+
+
+
+Overview: Principles of Effective Writing
+====
+Week 1: Cutting the clutter
+======
+1. Cut unnecessary words and phrases
+2. Use active voice (subject + verb + object)
+3. Write with verbs:
+    * Use strong verbs
+    * Avoid turning verbs in to nouns
+    * Don't bury the main verb
+
+Common clutter looks like
+====
+1. Dead weight words and phrases
+2. Empty words and phrases
+3. Long words or phases that can be short
+4. Unnecessary jargon and acronym
+5. Avoid repetitive words or phrases
+6. Avoid adverbs in writing
+
+
+Long words and phrases that can be short
+
+A majority of them              most
+A number of them                many
+Are of the same opinion         agree
+Less frequently occuring        rare
+All three of the                three
+Give rise to                    cause
+Due to the fact that            because
+Have an effect on               affect
+
+
+Week 2: Verbs
+======
+1. Using active voice, sentence looks like this:
+    * <subject> <verb> <object>
+    * <agent> <verb> <receipient>
+    * <cause> <effect>
+
+- Passive voice is reaaranging object and subject in active voice
+    * <object> <verb> <subject>
+    * <receipient> <verb> <agent>
+    * <effect> <cause>
+
+- Passive voice is a way to avoid responsibility.
+    "Cigerette ads were designed to appeal especially to children"
+    * Who designed it? Avoid responsibility
+
+- How to identify Passive Voice?
+    * Recognizing Passive Verb. They always has a "to be" verb
+
+Advantages of Active Voice:
+    1. Emphasizes author responsibility
+    2. Improves readability
+    3. Reduces ambiguity
+
+- Is there EVER a use for Passive Voice? Yes. Use it purposefully and sparingly.
+- Wherever, "what was done" is more important than "who has done".
+
+- Is it OK to use "We" or "I" in scientific paper? Yes.
+
+- Change negative verb in to positive verb.
+
+2. Use Strong Verbs
+    * Verbs moves sentences.
+
+a) Don't kill verbs by converting them in to nouns.
+    Example:
+    During DNA damage, recognition of H3K4me3 by ING2 results in recruitment of
+    Sin3/HDAC and repression of cell proliferation genes.
+
+    changed to:
+    During DNA damage, H3K4me3 recruits ING2 and Sin3/HDAC, which together
+    repress cell proliferation gene.
+
+
+    Don't Turn Verbs in to Nouns
+    ============================
+Obtain estimates of             estimate
+Has seen an expansion in        has expanded
+Provides a methodologic emphasis    emphasizes methodology
+Take an assessment of           assess
+
+Provide a review of             review
+Offer confirmation of           confirm
+Make a decision                 decide
+Shows a peak                    peaks
+Provides a description of       describe
+
+b) Don't bury the main Verb with a long Subject line. Get to the Verb as fast as
+possible.
+
+
+3. Reduce the distance between Subject and main Verb in a sentence.
+    * Get to main verb quickly.
+
+
+Grammar tips for Science Writing
+---
+1 "Data" is plural. So, "Data are" is correct. "Data is" is incorrect.
+    * "datum" is singular form.
+
+2 Affect vs Effect
+    * Affect is the verb form "to influence"
+        - The class affected her.
+    * Effect is noun form of this influence.
+        - The class had an effect on her.
+
+3 Compared to vs Compared with"
+    * "Compared to" = to point out similarities between different things.
+        - Shall I compare thee to a summer's day?
+    * "Compared with" = to point out differences between similar things.
+        - Brain tumors are relatively rare compared with more common cancers,
+          such as lung, breast and prostrate.
+
+4 That vs Which
+- "That" is restrictive (defining) pronoun.
+    * The vial that contained her RNA was lost.
+        - It appears that one vial, out of many, were lost.
+- "Which" is non-restrictive (non-defining) pronoun. It has commas.
+    * The vial, which contained her RNA, was lost.
+        - Looks like ONLY vial which has RNA was lost. In above sentence, we can
+          remove "which contained her RNA" and still retain meaning of sentence.
+
+
+THAT --> If it's essential you can't eliminate the clause from the sentence
+without changing the meaning. Use THAT.
+
+WHICH --> If it's non-essential information it can be set off with commas and it
+can be eliminated from the sentence without altering the meaning and then you
+use WHICH.
+
