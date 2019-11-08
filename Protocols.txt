@@ -3736,7 +3736,31 @@ Queuing
 - If they don't know, they'll ask other servers for answer.
 - 'dig' command on Linux is very useful in examining DNS  messages.
 
+- Common DNS record types
+    A (IPv4 Host address)
+		* name to IPv4 translation.
 
+    AAAA (IPv6 host address)
+		* name to IPv6 translation.
+
+    ALIAS (Auto resolved alias)
+    CNAME (Canonical name for an alias)
+    MX (Mail eXchange)
+    NS (Name Server)
+		* Identify DNS servers for a zone
+        * A zone contains one NS-record for each of it's own DNS servers, both
+          primary and secondary.
+
+    PTR (Pointer)
+    SOA (Start Of Authority)
+        * A zone contains exactly one SOA record containing properties of zone
+
+    SRV (location of service)
+    TXT (Descriptive text) typeslskdjf
+
+- Many more DNS record types exists.
+
+[1] https://simpledns.com/help/dns-record-types
 
 /****************************************************/
                Neighbor Discovery (ND) [9]
