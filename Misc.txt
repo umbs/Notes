@@ -2433,6 +2433,101 @@ Syntax		        All strings are in  |   Strings can be in single or double
 					double quotes       |   quotes
 										|
 
+
+				JSON			Python
+				----------------------
+				object			dict
+				array 			list
+				string 			str
+                number (int) 	int
+                number (real) 	float
+                true 			True
+                false 			False
+                null 			None
+
+Python
+------
+json.dump(j, f):    Write JSON object 'j' to file or file-like object 'f'. Here
+                    'j' is a python dictionary.
+				- Serialize object 'j' as JSON formatted stream to 'f'
+
+json.dumps(j):      Output JSON object 'j' as string.
+				- Serialize object 'j' in to string
+
+json.load(f):   Create a python dict from a file or file-like object containing
+                data in JSON format.
+				- Deserialize content in 'f' to a python object (dict)
+
+json.loads(s):  Do same thing as above, but input is a string in JSON format.
+         ^
+         The 's' here indicates string
+				- Deserialize string in JSON format, to a python object (dict)
+
+
+Example
+-------
+Assume following in file.txt:
+{
+    "title" : "Gattaca",
+    "release_year" : 1997,
+    "is_awesome" : true,
+    "won_oscar" : false,
+    "actors" : ["Ethan Hawke", "Uma Thurman", "Alan Arkin", "Loren Dean"],
+    "budget" : null,
+    "credits" : {
+            "director" : "Andrew Niccol",
+            "writer" : "Andrew Niccol",
+            "composer" : "Michael Nyman",
+            "cinematographer" : "Sławomir Idziak"
+        }
+}
+
+
+>>> json_file = open("/home/user/file.txt", "r", encoding="utf-8")
+>>> movie = json.load(json_file)
+>>> type(movie)
+<class 'dict'>
+>>>
+>>> movie
+{'title': 'Gattaca', 'release_year': 1997, 'is_awesome': True, 'won_oscar': False, 'actors': ['Ethan Hawke', 'Uma Thurman', 'Alan Arkin', 'Loren Dean'], 'budget': None, 'credits': {'director': 'Andrew Niccol', 'writer':'Andrew Niccol', 'composer': 'Michael Nyman', 'cinematographer': 'Sławomir Idziak'}}
+
+
+- Note that 'null' was converted to None, true to True and false to False in python dict.
+
+
+
+json.loads(s)
+---
+>>> s = """
+... {
+...     "title" : "Gattaca",
+...     "release_year" : 1997,
+...     "is_awesome" : true,
+...     "won_oscar" : false,
+...     "actors" : ["Ethan Hawke", "Uma Thurman", "Alan Arkin", "Loren Dean"],
+...     "budget" : null,
+...     "credits" : {
+...             "director" : "Andrew Niccol",
+...             "writer" : "Andrew Niccol",
+...             "composer" : "Michael Nyman",
+...             "cinematographer" : "Sławomir Idziak"
+...         }
+... }
+... """
+>>>
+>>>
+>>> movie = json.loads(s)
+>>> type(movie)
+<type 'dict'>
+>>> movie
+{u'won_oscar': False, u'release_year': 1997, u'title': u'Gattaca', u'budget': None, u'credits': {u'director': u'Andrew Niccol', u'writer': u'Andrew Niccol', u'cinematographer': u'S\u0142awomir Idziak', u'composer': u'Michael Nyman'}, u'actors': [u'Ethan Hawke', u'Uma Thurman', u'Alan Arkin', u'Loren Dean'], u'is_awesome': True}
+
+- Note that non-ASCII char is converted to unicode point (\u0142)
+- If you don't want that, use the following
+
+>>> movie = json.
+
+
 ===============  CELERY CONECPTS   ====================
 - Used for async task scheduling.
 - If a web app doesn't have to wait for a result (not-synchronous) they can
