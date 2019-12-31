@@ -3067,6 +3067,10 @@ Changelist Specific
 5. Add a file to Changelist
     p4 reopen -c <changelist-number> file    // can be used to move files between CL
 
+6. Show code diff in changelist that's not submitted yet
+    p4 describe $CHANGELIST | sed -ne 's:^\.\.\. \(.*\)#[0-9][0-9]* [a-z][a-z]*$:\1:p' | xargs p4 diff -du
+    https://stackoverflow.com/a/28323794/630866
+
 
 Files Specific
 ---
@@ -3216,3 +3220,113 @@ https://github.com/Shougo/neocomplete.vim/blob/master/doc/neocomplete.txt#L974
 - Publish your website
   hugo
         * Publishes your website to public/ folder
+
+
+================     Public Speaking Training  ===========================
+
+- Important elements in Public Speaking
+    1 Preparation
+    2 Presentation
+    3 Style
+    4 Content Delivery
+    5 Audience Engagement
+
+1 Preparation
+    a Know Your Audience
+        - What do they NEED, WANT and EXPECT?
+    b Organize Your Content
+        - Have structure, but don't chunk at each word.
+        - There's difference between 'writing for the stage' and 'writing for
+          the page'.
+        - Look to influence, instead of informing.
+            + 3 I's: Influence, Inform, Inspire.
+    c Practice
+        - More practice makes it appear natural and easy.
+
+
+2 Presentation
+    a Start presentation with a BANG, as we have only 7 seconds to make first
+      impression. Don't start with needless intro.
+    b Have "Hooks" in presentation called: "Attention Grabber". Ex:
+        * Ask questions
+        * Have analogy
+        * Personal story
+        * Can have humor/jokes, but make sure they are tasteful and relavant to
+          topic.
+        * Have quote, or some _shocking_ information and make sure to give
+          citation.
+
+    c Present ONE big idea.
+    d Keep the momentum.
+        - Every bit of info should build on previous and eventually lead to the
+          one whole idea.
+        - Use humor, anecdotes, story, insights, case study. Audience should
+          recall it like a story.
+
+3 Style
+    a Be Your Authentic Self
+
+    b Voice, Tonality, Pitch
+        - Voice is your most important tool.
+        - 5 kinds of voice: Pitch, Pace, Tone, Melody, Volume
+            * High Pitch is considered weak personality. Low Pitch is taken
+              seriously.
+            * Monotone is fastest way to loose audience.
+            * Create dynamics with change in volumes.
+
+    c Articulation
+        - Open your mouth while speaking.
+        - Articulate every single sylable.
+
+    d Body Language
+        - 1960s Albert Mahebian studied how much of meaning comes from:
+            * Visual, Vocal and Actual Words
+            * 55% of meaning of message comes from what people see.
+            * 38% from volume of message.
+            * 7% from actual words.
+
+        - Hands: Use your hands naturally.
+        - Stance:
+            * Stay in your stance, it's preferred.
+            * If you have to move, move it with a purpose. That is, go over to a
+              chart <<< I'm not so sure about this.
+            * NEVER DO THIS: Rocking stance.
+
+    e Energy
+        - Abstract concept. But it's the most important thing.
+        - Energy is contagious. If it is at right level, your audience will be
+          with you.
+
+
+4 Content Delivery
+    a Be a Story Teller
+        - Facts Tell, but Stories Sell.
+    b Make It Emotional
+    c Power of Pause
+        - Use pauses to let audience absorb
+        - Use sentence completion techniques where you stop halfway in a quote:
+            * When going gets tough, the tough gets ...
+            * Audience leans in to this.
+
+
+5 Audience Engagement
+    a Connect With Your Audience
+    b Audience Participation
+    c Incorporate Activities
+
+
+6 Closing
+    a Actionable Close. What action I want my audience to take?
+    b Stick To Your Time.
+    c End Speech on High Note.
+
+
+
+
+
+
+
+
+
+
+[1] https://www.youtube.com/watch?v=vB2pl1QbY3I
