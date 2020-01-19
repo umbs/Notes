@@ -2,10 +2,25 @@ Rust Lang
 ---------
 - No garbage collection, but user does not have to manage memory. A unique
   combo.
-- Cargo is package manager
+
+- Cargo is package manager, compiler, dependency checker ...
+- Cargo.toml is config file. Cargo.lock is list of dependencies file. Never have
+  to modify .lock file
+- 'crate' is package of code that's in [package] in .toml file
+
+- cargo commands:
+    new
+    build
+    build --release
+    run
+    check   // this is cool
+
 - rustup is version controller/manager
     $ rustup update
+    $ rustup default nightly    // makes nightly builds default
 
+
+- rustc is compiler
 
 Reference:
 [1]

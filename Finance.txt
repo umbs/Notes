@@ -572,7 +572,7 @@ of money to be received in the future.
 
 How Much is a Company Worth in Stock Market?
 ----
-+ Net Present Value (NPV) Rule is typically used in evaluating value.
++ NET PRESENT VALUE (NPV) Rule is typically used in evaluating value.
 
     NPV = PV (Benefits) - PV (Costs)
 

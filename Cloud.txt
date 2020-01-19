@@ -2212,7 +2212,7 @@ NACLs
 -----
 - Route table in gateway router routes traffic. But NACLs will accept/deny them
   to each subnet
-- Provides L4 control (inbound or outbount)
+- Provides L4 control (inbound or outbound)
 - On creating a VPC, a default NACL is created.
 - Ordering of rules is important as first rule that matches is applied on
   traffic

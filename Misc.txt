@@ -3322,11 +3322,71 @@ https://github.com/Shougo/neocomplete.vim/blob/master/doc/neocomplete.txt#L974
 
 
 
-
-
-
-
-
-
-
 [1] https://www.youtube.com/watch?v=vB2pl1QbY3I
+
+
+================     Bitcoin: Talk by Sarva    ===========================
+- 3 problems posed by Cryptocurrencies
+    * Currency creation rules
+    * Counterfeiting
+    * Double Spending Problem
+
+- Centralization solved all 3 problems above.
+
+Double Spending Problem
+----
+- Familiar problem in academic.
+- A public database maintains ALL bitcoin transactions. Every new transaction is
+  validated against this databse.
+
+- The DB in bitcoin is called Blockchain. It's a linked list of blocks.
+
+	┌─────────────────┐       ┌─────────────────┐                        ┌─────────────────┐
+	│                 │       │                 │                        │                 │
+	│  Block Header   │       │   Block Header  │                        │   Block Header  │
+	│                 │       │                 │                        │                 │
+	├─────────────────┤       ├─────────────────┤       .........        ├─────────────────┤
+	│                 │       │                 │                        │                 │
+	│   List of       │       │   List of       │                        │   List of       │
+	│   Transactions  │       │   Transactions  │                        │   Transactions  │
+	│                 │       │                 │                        │                 │
+	│                 │       │                 │                        │                 │
+	└─────────────────┘       └─────────────────┘                        └─────────────────┘
+		 Block 0                   Block 1                                     Block N
+	 (Genesis Block)
+
+
+
+					 Block Header (80 bytes)
+			┌──────────────────────────┐
+			│       nVersion           │       4 bytes
+			├──────────────────────────┤
+			│     hashPrevBlock        │       32 bytes
+			├──────────────────────────┤
+			│     hashMerkleRoot       │       32 bytes
+			├──────────────────────────┤
+			│         nTime            │       4 bytes
+			├──────────────────────────┤
+			│         nBits            │       4 bytes
+			├──────────────────────────┤
+			│        nNonce            │       4 bytes
+			└──────────────────────────┘
+
+
+[1] Dr. Saravana Vijayakumar
+https://www.youtube.com/watch?v=tySLqNScRIc
+
+
+
+================     Udemy Video Player Keyboard Shortcuts   =============
+Play/Pause      Space
+Speed Slower    Shift + <--
+Speed Faster    Shift + -->
+Fullscreen      F
+Exit Fullscreen ESC
+Add Bookmark    B
+Go back 5s      <--
+Go forward 5s   -->
+Volume up       up arrow
+Volume down     down arrow
+

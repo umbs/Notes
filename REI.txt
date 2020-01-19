@@ -23,6 +23,13 @@ References:
 [1] http://www.investopedia.com/terms/c/capitalizationrate.asp
 [2] http://www.investopedia.com/terms/i/irr.asp
 
+@@@@@@@@@@@@@@@   Notes From Real Estate Analysis Course by Symon He on Udemy  @@@@@@@@@@@
+- Housing Starts (New Constructions) trend
+    https://tradingeconomics.com/united-states/housing-starts
+
+
+
+
 @@@@@@@@@@@@@@@   NOTES FROM [1]  @@@@@@@@@@@
 Ch 1
 - Look at "Landlording Tasks" in Ch 1. Lots of items. We will get clarity on
