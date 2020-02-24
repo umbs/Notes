@@ -1,3 +1,98 @@
+Python Coding Competitions and Interviews
+===========
+Queues
+---
+Solution 1:
+---
+from collections import deque
+q = dequeu()
+
+q.append(x)
+q.appendleft(x)
+q.clear()
+q.count(x)
+q.extend(iterable)
+q.extendleft(iterable)
+q.index(x[, start[, stop]])
+q.insert(i, x)
+q.pop()
+q.popleft()
+q.remove(value)
+q.rotate(n=1)
+q.maxlen
+
+Reference: https://docs.python.org/3/library/collections.html#collections.deque
+
+
+Solution 2:
+---
+Basic FIFO Queue
+----
+import Queue
+
+q = Queue.Queue()
+
+for i in range(5):
+    q.put(i)
+
+while not q.empty():
+    print q.get()
+
+
+
+Stack (LIFO) Queue
+---
+import Queue
+
+q = Queue.LifoQueue()
+
+for i in range(5):
+    q.put(i)
+
+while not q.empty():
+    print q.get()
+
+
+
+Priority Queue
+---
+import Queue
+
+class Job(object):
+    def __init__(self, priority, description):
+        self.priority = priority
+        self.description = description
+        print 'New job:', description
+        return
+    def __cmp__(self, other):
+        return cmp(self.priority, other.priority)
+
+q = Queue.PriorityQueue()
+
+q.put( Job(3, 'Mid-level job') )
+q.put( Job(10, 'Low-level job') )
+q.put( Job(1, 'Important job') )
+
+while not q.empty():
+    next_job = q.get()
+    print 'Processing job:', next_job.description
+
+
+Reference: https://docs.python.org/3/library/queue.html
+
+
+
+HEAPS
+=====
+
+
+
+
+
+
+
+
+==============
                     Python Internals
                         (2.7.8)
                     ================
@@ -898,7 +993,7 @@ message.lower()
 message.upper()
 message.count(str)  # count # of times str occurs in message
 message.find(str)   # starting index of str if present or -1 if not present
-message.replace(orig_str, new_str)
+message.replace(old_substr, new_substr)
 
 
 Concatenation
