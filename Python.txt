@@ -84,6 +84,26 @@ Reference: https://docs.python.org/3/library/queue.html
 
 HEAPS
 =====
+from heapq import heappush, heappop, heappushpop, heapreplace, heapify
+from heapq import merge, nlargest, nsmallest
+
+
+- Start with empty list or already populated list.
+- Heap works on first element of the list.
+- In python, default is 'min' heap.
+
+- Example of 'item': [10, 2, 0] <-- heapify is done on 10
+
+heappush(heap, item)    # pushes 'item' on to 'heap'
+heappop(heap)           # pops and returns smallest item on heap
+heappushpop(heap, item) # push an item and pop smallest element
+heapreplace(heap, item) # Opposite of pushpop. Pop first and add item
+heapify(heap)           # Transforms 'heap' in to heap, in place in linear time
+merge(*iterables)       # Merges multiple sorted input in to sorted output.
+                        # Returns an iterator over sorted output.
+nlargest(n, iterable[, key])
+nsmallest(n, iterable[, key])
+
 
 
 
