@@ -308,8 +308,8 @@ Vim Marks
     * If reused, latest mark overrides previous mark.
 
 - Jumping to a mark:
-    `m  takes you to position where mark is set
-    'm  takes you to beginning of line where mark is set
+    `<alphabet>  takes you to position where mark is set
+    '<alphabet>  takes you to beginning of line where mark is set
 
 - Full power of mark is in combining them with other composable commands.
 

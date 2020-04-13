@@ -2964,12 +2964,25 @@ mysql> show tiggers like '%tablename%';     << list all triggers on table
 
 mysql> show create procedure <proc_name>;   << show procedure source code
 
+// List all procedures
+mysql> show procedure status [like 'pattern' | where search_condition];
+
 
 
 Resources:
 [1] Udemy course on Database Design -
 
 ===============   PERFORCE  USEFUL  COMMANDS     =====================
+Investigate these commands/flags?
+---
+p4 change -d 995890
+p4 revert -a -c 995890
+p4 revert -a //depot/saas/main/src/apps/orchestrator/lib/orchestrator.py
+p4 sync -f //depot/path/file1.py#84 //depot/path/file2.py  <<< version?
+p4 change -i
+p4 edit -c 995890 //depot/path/file1.py //depot/path/file2.py
+
+
 
 Setup Commands
 ---
@@ -3090,6 +3103,9 @@ Files Specific
 
 5. Add a file to Changelist
     p4 reopen -c <changelist-number> file    // can be used to move files between CL
+
+6. Changes to a file between two versions
+    p4 diff file#7 file#4
 
 
 Merges
@@ -3389,4 +3405,300 @@ Go back 5s      <--
 Go forward 5s   -->
 Volume up       up arrow
 Volume down     down arrow
+
+
+===============    CMU Databases Systems     ================
+Lec 1:
+
+Relational Algebra
+---
+R ∪ S = (SELECT * FROM R) UNION ALL (SELECT * FROM S)
+R ∩ S = (SELECT * FROM R) INTERSECT (SELECT * FROM S)
+R - S = (SELECT * FROM R) EXCEPT (SELECT * FROM S)
+R x S = SELECT * FROM R CROSS JOIN S;
+        SELECT * FROM R, S;
+R S = SELECT * FROM R NATURAL JOIN S;
+
+Rename, Assignment, Duplicate Elimination, Aggregation, Sorting, Division
+operators
+
+
+==================================================================
+Lec 2:
+
+Using following 3 tables for explanation
+    * STUDENT(sid, name, login)
+    * COURSE(cid, name)
+    * ENROLLED(sid, cid, grade)
+
+Aggregates: Aggregate functions can only be used in the SELECT output list.
+---
+AVG(col)
+MIN(col)
+MAX(col)
+SUM(col)
+COUNT(col)
+
+- Get # of students with a "@cs" login:
+    SELECT COUNT(login) AS cnt FROM student WHERE login LIKE '%@cs%';
+    SELECT COUNT(*) AS cnt FROM student WHERE login LIKE '%@cs%';
+    SELECT COUNT(1) AS cnt FROM student WHERE login LIKE '%@cs%';
+
+- Can have multiple aggregates in single statement:
+    SELECT AVG(gpa), COUNT(id) FROM student WHERE login LIKE '%@cs%';
+
+- DISTINCT aggregates are possible: COUNT, SUM, AVG support DISTINCT
+    SELECT COUNT(DISTINCT login) FROM student WHERE login LIKE '%@cs%';
+
+
+- Output of other columns along with aggregate is undefined.
+    SELECT AGV(s.gpa), e.cid
+      FROM enrolled AS e, student AS s
+    WHERE e.sid = s.sid
+
+    # Most DBs return an error.
+    # SET SESSION sql_mode='traditional' <<< returns random value for e.cid
+    # SET SESSION sql_mode='ansi'  <<<< returns error
+
+
+GROUP BY:
+--------
+- Project tuples in to subsets and calculate aggregates against each subset
+    SELECT AVG(s.gpa), e.cid
+      FROM enrolled AS e, student AS s
+    WHERE e.sid = s.sid
+    GROUP BY e.cid;
+    # This will group tuples by e.cid. Then computes average on those groups (or
+      subsets)
+
+- Non-aggregated values in SELECT clause output must appear in GROUP BY clause.
+    SELECT AVG(s.gpa), e.cid, s.name
+      FROM enrolled AS e, student AS s
+    WHERE e.sid = s.sid
+    GROUP BY e.cid, s.name;
+
+
+HAVING:
+-------
+- Following won't work because WHERE clause does filtering. Aggregation follows
+  that. Therefore, "avg_gpa > 3.9" cannot be in WHERE clause.
+    SELECT AVG(s.gpa) AS avg_gpa, e.cid
+      FROM enrolled AS e, student AS s
+    WHERE e.sid = s.sid
+      AND avg_gpa > 3.9
+    GROUP BY e.cid;
+
+-
+    SELECT AVG(s.gpa) AS avg_gpa, e.cid
+      FROM enrolled AS e, student AS s
+    WHERE e.sid = s.sid
+    GROUP BY e.cid
+    HAVING avg_gpa > 3.9;
+
+
+
+STRING OPERATIONS
+----
+                              STRING OPERATIONS
+          ───────────────────────────────────────────────────────────
+              DB             String Case            String Quotes
+          ───────────────────────────────────────────────────────────
+            SQL-92           Sensitive              Single Only
+            Postgres         Sensitive              Single Only
+            MySQL            Insensitive            Single/Double
+            SQLite           Sensitive              Single/Double
+            DB2              Sensitive              Single Only
+            Oracle           Sensitive              Single Only
+
+
+- LIKE clause.
+    * '%' matches any substring, including empty strings.
+    * '_' matches any one char.
+
+- SUBSTRING, UPPER, LOWER. Can be used  anywhere: SELECT, WHERE, HAVING etc.
+
+- Concatenation operation:
+    SQL-92:
+    SELECT name FROM student
+    WHERE login = LOWER(name) || '@cs';
+
+    MySQL:
+    SELECT name FROM student
+    WHERE login = LOWER(name) + '@cs';
+
+    Postgres:
+    SELECT name FROM student
+    WHERE login = CONCAT(LOWER(name), '@cs');
+
+
+DATE/TIME OPERATIONS
+----
+- Details get weird between DBs
+
+
+OUTPUT REDIRECTION
+----
+- Store query results in another table:
+    * Table must not already be defined.
+    * Table will have same # of columns with same types as the input.
+
+    SELECT DISTINCT cid INTO CourseIds FROM enrolled;
+    is same as following:
+    CREATE TABLE CourseIds (SELECT DISTINCT cid FROM enrolled);
+
+    INSERT INTO CourseIds (SELECT DISTINCT cid FROM enrolled);
+
+
+OUTPUT CONTROL
+----
+- ORDER BY <column*> [ASC|DESC]
+
+    SELECT sid FROM enrolled
+      WHERE cid = '15-721'
+    ORDER BY grade DESC, sid ASC; << note that grade is not part of output.
+
+
+- LIMIT <count> [offset]
+    * Can set an offset to return a "range".
+
+    SELECT sid, name FROM student
+      WHERE login LIKE '%@cs%'
+    LIMIT 20 OFFSET 10
+
+
+
+        ADVANCED  SQL
+        =============
+
+NESTED QUERIES
+----
+- Usually JOINs are better option.
+	* SELECT name FROM student WHERE sid IN (SELECT sid FROM enrolled)
+
+- Some other operators to use in nested queries:
+    IN, ALL, ANY, EXISTS
+
+- Nested queries can appear anywhere:
+    a) SELECT name FROM student WHERE sid = ANY(
+            SELECT sid FROM enrolled WHERE cid = '15-445'
+        );
+
+    b) SELECT (SELECT S.name FROM student AS S WHERE S.sid = E.sid) AS sname
+        FROM enrolled AS E
+       WHERE cid = '15-445';
+
+
+- Some complex nested queries:
+- Find student record with the highest id that is enrolled in at least one
+  course.
+
+    // This is wrong
+    SELECT MAX(e.sid), s.name FROM enrolled as e, student AS s
+    WHERE e.sid = s.sid
+
+    // Some logic like this
+    SELECT sid, name FROM student WHERE sid "is greater than every"
+       (SELECT sid FROM enrolled)
+
+    // Solution 1
+    SELECT sid, name FROM student WHERE sid => ALL (SELECT sid FROM
+    enrolled)
+
+    // Solution 2
+    SELECT sid, name FROM student WHERE sid IN (SELECT MAX(sid) FROM
+    enrolled)
+
+    // Solution 3
+    SELECT sid, name FROM student WHERE sid IN (SELECT sid FROM enrolled
+    ORDER BY sid DESC LIMIT 1)
+
+
+- Find all courses that has no students enrolled in it.
+    //My solution
+    SELECT * FROM course WHERE cid NOT IN (SELECT DISTINCT cid FROM enrolled);
+
+    // Professor solution
+    SELECT * FROM course WHERE NOT EXISTS (SELECT * FROM enrolled WHERE
+    course.cid = enrolled.cid)
+
+
+WINDOW FUNCTIONS
+----
+- Performs a calculation across a set of tuples that related to a single row.
+- Like aggregation but tuples are not grouped into a single output tuple.
+
+- Special window functions:
+    * ROW_NUMBER() -> # of current row.
+    * RANK() -> Order position of the current row.
+
+Ex:
+    SELECT *, ROW_NUMBER() OVER() AS row_num FROM enrolled
+    SELECT cid, sid, ROW_NUMBER OVER (PARTITION BY cid)
+      FROM enrolled ORDER BY cid
+
+- ORDER BY can also be used for grouping
+    SELECT *,
+        ROW_NUMBER() OVER (ORDER BY cid)
+    FROM enrolled
+    ORDER BY cid
+
+
+- Find student with highest grade for each course.
+    SELECT * FROM (
+        SELECT *,
+                RANK() OVER (PARTITION BY cid       << group tuples by cid
+                             ORDER BY grade ASC)    << then sort by grade
+                AS rank
+           FROM enrolled) AS ranking
+    WHERE ranking.rank = 1  <<< pick rank value 1
+
+
+- TODO: What's the difference between ORDER BY vs PARTITION?
+
+
+
+COMMON TABLE EXPRESSIONS (CTE)
+----
+- Provides a way to write auxiliary statements for use in larger query.
+    * Think of it like temp table just for one query.
+
+- Alternative to nested queries and views.
+
+    WITH cteName AS (
+        SELECT 1
+    )
+    SELECT * FROM cteName
+
+- You can bind output columns to names before the AS keyword.
+
+    WITH cteName (col1, col2) AS (
+        SELECT 1, 2
+    )
+    SELECT col1 + col2 FROM cteName
+
+- Find student record with the highest id that is enrolled in at least one
+  course.
+
+    WITH cteSource (maxId) AS (
+        SELECT MAX(sid) FROM enrolled
+    )
+    SELECT name FROM student, cteSource
+      WHERE student.sid = cteSource.maxId;
+
+
+- How is CTE different than Nested Queries?
+    * You can do recursion.
+
+    WITH RECURSIVE source (counter) AS (
+        (SELECT 1)
+        UNION ALL
+        (SELECT counter + 1 FROM cteSource
+            WHERE counter < 10)
+    )
+    SELECT * FROM cteSource
+
+
+==================================================================
+Lec 3: Storage
+
 

@@ -1243,3 +1243,16 @@ FAQs on FSA (Flexible Spending Account)
 FAQs on HSA (Health Spending Account)
 FAQs on Medicare/Medicaid
 FAQs on Federal and State Income Taxes
+
+
+@@@@@@@@@@@@@@@     UNDERSTANDING    TAX   FILING     @@@@@@@@@@@@@@@@@@@@@@@@@@@
+Forms:
+1040
+1098
+1099 (DIV, INT, MISC, G)
+1098-SA
+3922 - Stock
+5498-SA
+
+
+
