@@ -2967,10 +2967,19 @@ mysql> show create procedure <proc_name>;   << show procedure source code
 // List all procedures
 mysql> show procedure status [like 'pattern' | where search_condition];
 
+// List all indexes on a table
+mysql> show index from <yourtable>;
+
+// How to measure query time
+mysql> SET profile = 1;
+mysql> <run your query>
+mysql> SHOW PROFILES;
+mysql> SHOW PROFILE FOR QUERY 2; (your query number, to get details)
 
 
 Resources:
 [1] Udemy course on Database Design -
+[2] Many Stackoverflow links
 
 ===============   PERFORCE  USEFUL  COMMANDS     =====================
 Investigate these commands/flags?
@@ -3700,5 +3709,20 @@ COMMON TABLE EXPRESSIONS (CTE)
 
 ==================================================================
 Lec 3: Storage
+
+
+Buffer Pools: In memory process(?) that takes managers DB files on disk and
+bring them back and forth.
+- DB's do not rely on underlying OS for file management.
+
+
+Storage Manager: Responsible for maintaining DB files (same as Buffer Pools?)
+
+DB Pages
+---
+- A "page" is fixed-size block of data
+    * It can contain tuples, meta-data, indexes, log records ...
+- Each page has unique id
+    * DBs uses indirection layer to map page ids to physical location.
 
 

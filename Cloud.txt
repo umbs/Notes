@@ -2059,11 +2059,20 @@ Functions, IBM has OpenWhisk)
 - Clients only pay when lambda function resize() runs.
 
 
+1) Can you Lambda Functions survive cold start?
+---
+- Instantiate AWS clients and DB clients outside the scope of the handler to
+  take advantage of container reuse
+
+
 [1] Distributed Systems in One Lesson by Tim Berglund
 https://www.youtube.com/watch?v=Y6Ev8GIlbxc&t=1096s&index=18&list=WL
 
 [2] Distributed Systems in One Lesson by Tim Berglund
 Safari Online Video - 4 hours long
+
+[3] Serverless Architectural Patterns and Best Practices
+https://www.youtube.com/watch?v=Xi_WrinvTnM
 
 ===============================================================================
 System Design Interview Strategies
