@@ -659,7 +659,7 @@ using :mksession <session-name>.vim
 
 - Later on, load that session using :source <session-name>.vim
 
-10) Open an HTTPS file using :edit https://github.com/umbs/dotfiles/vimrc
+10) Open an HTTPS file using :edit https://github.com/umbs/dotfiles/blob/master/vimrc
 
 11) You can edit a tar.gz file "live" from within Vim
 
@@ -855,3 +855,247 @@ Option 3:
 
 
 [1] https://www.youtube.com/watch?v=ejOF_N8Hd04
+
+====================== Vim   Help   System     ========================
+:help
+    CTRL-]          Jump to tag
+    CTRL-T, CTRL-O  Jump back
+    CTRL-I          Jump forward
+
+    :help jumps     These are called jumplist
+
+
+:helpgrep
+    - This does text search in entire help manual.
+    - Results are in quickfix window.
+    - Do :copen and open results in quickfix.
+    - :copen, cclose
+
+:set wildmenu
+    - Now :help pyth<tab>   will show various options statusline like bar.
+
+$ vim -c "help help"    " Launch Vim. Enters :help help
+$ vim -c "help help | only | syntax enable"
+
+
+Bash function
+$ function vimhelp() { vim -u NONE -c "help help | only | syntax enable"; }
+$ vimhelp python    " this will open vim help for python
+
+
+[1] https://www.youtube.com/watch?v=ghKR9rclP_8
+
+====================== Vimscript (Steve Losh)  ========================
+- On Linux and Mac OSX, ~/.vimrc and Windows ~/_vimrc
+- :echo $MYVIMRC, tells where this file is on any OS
+
+Persistent Echoing
+---
+  :echo "Hello World"
+  :echom "Hello World, Again"   <<< persistent and shown in :messages
+  :messages
+
+Options
+===
+
+Boolean Options
+---
+  :set <option>     " :set number
+  :set <nooption>   " :set nonumber
+  :set <option>!    " :set number!  Toggles the option
+  :set <option>?    " :set number?  Find settings
+
+
+Option with Value
+---
+  :set <option>=<value>     " :set numberwidth=4
+  :set <option>?            " :set numberwidth?
+
+
+  :setlocal <option>=<value>    " set only for local buffer
+  " Not all options can be used with 'setlocal'. Read it's :help for details.
+
+Basic Mappings
+---
+    :map <lhs> <rhs>
+
+<lhs>   This could be basic chars or special chars like <space> or <c-d>
+<rhs>   Group of commands that'll be run
+
+- Modal Mapping: nmap, vmap, imap
+- Each of *map has a *noremap counterpart
+    map, noremap
+    nmap, nnoremap
+    vmap, vnoremap
+    imap, inoremap
+
+
+Leader Key: Vim let's you set any key as leader as follows:
+---
+    :let mapleader = "-"    " - is leader key
+
+<leader> means, whatever I have my leader key set to.
+
+- Why do you need <leader> key at all?
+    * Easy to change <leader> mapping.
+    * Other's can understand what <leader> means and can copy your .vimrc file.
+    * Many plugins use <leader> key in their mappings. Easy for you to use them.
+
+:nnoremap          <leader>d dd     " mapping applies to all buffers
+:nnoremap <buffer> <leader>x dd     " mapping applies to current buffer.
+
+- Instead of <buffer> in mappings, <localleader> is recommended.
+
+Local Leader Key: Used for mappings on specific file types (Python, HTML etc)
+---
+    :let maplocalleader = "\\"      " \ is escape char in Vimscript. Must use \\
+
+
+
+Abbreviations
+---
+- Very similar to mappings, but done in insert, replace and command modes.
+- Usually done for spelling corrections. For insert mode,
+    :iabbrev adn and
+    :iabbrev waht what
+    :iabbrev tehn then
+
+- Vim substitutes an abbreviation when you type "non-keyword character" after an
+  abbreviation.
+
+- What is "non-keyword character"?
+    * :set iskeyword?
+    * It's complicated. Read here :help isfname (too complicated)
+    * https://learnvimscriptthehardway.stevelosh.com/chapters/08.html
+    * Assume that abbrev expands when you type anything other than letter,
+      underscore or number
+
+- Difference between Mappings and Abbreviations
+    * Mappings don't take in to account chars before and after the map.
+    * Abbreviations. Vim pays more attention to chars before and after.
+
+
+- Read up
+    :help local-options
+    :help setlocal
+    :help map-local
+
+
+Shadowing
+---
+https://learnvimscriptthehardway.stevelosh.com/chapters/11.html
+
+
+Autocommands: a way to tell Vim to run certain commands whenever certain events
+happen.
+---
+- Syntax
+    autocmd [group] {events} {file_pattern} [nested] {command}
+
+- Ex:
+
+:autocmd BufNewFile * :write
+         ^          ^ ^
+         |          | |
+         |          | The command to run.
+         |          |
+         |          A "pattern" to filter the event.
+         |
+         The "event" to watch for.
+
+
+- :help autocmd-events
+
+- Autocommands offer many events to watch.
+
+
+Examples:
+" Save (Write to disk) a buffer whenever it is new and opened
+:autocmd BufNewFile * :write
+
+" Same as above, but only to files with .txt extension
+:autocmd BufNewFile *.txt :write
+
+
+" Just before saving html file, reindent
+:autocmd BufWritePre *.html :normal gg=G
+
+
+" Multiple events. Same as above, but while reading too.
+:autocmd BufWritePre,BufRead *.html :normal gg=G
+
+" When you read or open a new html file, don't wrap lines.
+:autocmd BufNewFile,BufRead *.html setlocal nowrap
+
+
+
+FileType Events
+---
+" Comment out an entire line in Javascript file when you do <localleader>c
+:autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+
+" Comment out an entire line in Python file when you do <localleader>c
+:autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
+
+
+Autocommands and Abbreviations
+---
+- Pair up Autocommands and buffer-local abbreviations to form our own snippet
+  system.
+
+    :autocmd FileType python    :iabbrev <buffer> iff if:<left>
+
+
+Autocommand Groups: Read LVSHW for details.
+    :help autocmd-groups
+
+- When you create same autocmd multiple times, Vim does not override
+  earlier one.
+- Problem compounds if you have autocmd in your .vimrc and each time you source
+  it, duplicate autocmds get created.
+
+- The extra space is not required. Done only for readability.
+
+:augroup testgroup
+:    autocmd BufWrite * :echom "Foo"
+:    autocmd BufWrite * :echom "Bar"
+:augroup END
+
+- When you use augroup multiple times, Vim "combines" them. Does union of
+  autocmds.
+- If you don't want union and want to clear a group, use 'autocmd!' at the
+  start.
+
+:augroup testgroup
+:    autocmd!
+:    autocmd BufWrite * :echom "Cats"
+:augroup END
+
+
+
+15. Operator-Pending Mappings
+---
+
+16. More Operator-Pending Mappings
+---
+
+17. Status Lines
+---
+
+
+
+Unclear
+----
+- In chapter 'Operator-Pending Mapping', unclear on \r translating to <cr>
+  inside the script
+
+Reading:
+----
+:help normal
+:help execute
+:help expr-quote
+:help pattern-overview
+:help statusline
+
+
+[1] https://learnvimscriptthehardway.stevelosh.com/

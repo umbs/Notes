@@ -40,6 +40,8 @@ cpuid - Dump detailed info about CPUs
 
 
 
+@@@@@@@@@@@@@@@     PMAP  PROCESS MEMORY  @@@@@@@@@@@@@@@@@@
+$ pmap PID
 
 
 
