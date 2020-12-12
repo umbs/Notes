@@ -894,7 +894,7 @@ Apply Patch
 patch --dry-run --ignore-whitespace -p0 -i patch.txt
 
 patch --ignore-whitespace -p0 -i patch.txt
-
+n
 On Git
 --------
 

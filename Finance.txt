@@ -391,11 +391,11 @@ Vid 10, 11, 12: Renting vs Buying
   5% interest, say $5K/mo in mortgage = $60K/yr in mortgage
 - If initially, the interest component is 2/3 of that amount (=$40K), that is tax
   deductible. By rough calculation (at 33% tax rate), about 1/3 is
-  recovered (=$13K). Hence, we pay abour $47K towards a home mortgage,
+  recovered (=$13K). Hence, we pay about $47K towards a home mortgage,
   EFFECTIVELY.
 
 - Params for renting (similar house as above): $3K/mo = $36K/yr and assume
-  there is a 4% interest on $250K (=$10K/yr). With this income, effect
+  there is a 4% interest on $250K (=$10K/yr). With this income, effective
   "loss" per year is $26K/yr
 - There is almost $20K difference, which we'll never see if we buy a home.
 

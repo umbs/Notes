@@ -204,7 +204,7 @@ where
        mapped.
 {rhs}  right hand side, is the sequence of keys that the {lhs} keys are
 
-Ex:
+Ex: Map Ctrl+Tab to next tab and Ctrl+Shift+Tab to prev tab
 nnoremap <C-Tab> <ESC>:tabnext<CR>
 nnoremap <C-S-Tab> <ESC>:tabprevious<CR>
 
@@ -884,6 +884,62 @@ $ vimhelp python    " this will open vim help for python
 
 
 [1] https://www.youtube.com/watch?v=ghKR9rclP_8
+
+====================== Vimscript (Talk by Prabir Shresta)  ========================
+:help variables
+    string          Job
+    number          Channel        
+    float           Blob
+    null
+    dictionary
+    list
+    funcref
+
+let string = "help"
+let number = 1
+let float = 1.0
+let list = [1, 2, "hello", "world"]
+let dictionary = {"message": "hello world"}
+
+
+- Multiline statement
+    let list = [
+        \ 1, 2,
+        \ "hello",
+        \ "world" ]
+
+- Some quirks. Comments cannot be inline in a multiline code. Example of multi
+  line code
+
+- Special Variables
+    let t = v:true
+    let f = v:false
+    let n = v:null
+    " All variables starting with v:<something> are read only.
+
+- Variable Scoping
+
+  	let g:global_var = "global variable accessible across all script"
+	let s:script_var = "script level variable accessible across the entire script/file"
+    let l:local_var = "local variable accessible only in the scope"
+    let b:buffer_var = "buffer scope"
+    let w:window_var = "window scope"
+    let t:tab_var = "tab scope"
+ 
+
+Functions
+---
+- :help function
+
+:help list
+:help dict
+	APIs to interact with list and dict
+	add, remove, has_key, copy, keys, items()
+
+:h write-plugin
+
+[1]
+https://www.youtube.com/watch?v=7fcJWwl1-SU&list=PLcTu2VkAIIWzD2kicFNHN2c35XQCeZdsv&index=18
 
 ====================== Vimscript (Steve Losh)  ========================
 - On Linux and Mac OSX, ~/.vimrc and Windows ~/_vimrc

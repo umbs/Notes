@@ -1,3 +1,51 @@
+@@@@@@@@@@  Information Visualization: Programming with D3.js  @@@@@@
+Intro to HTML and CSS
+
+Intro to D3
+
+Visualization Steps
+---
+1) Transform Data
+2) Map data to image space
+3) Compute layout
+4) Draw the chart
+
+
+D3 APIs
+---
+- Every API of D3 starts with d3.something
+- For: Transform Data
+    d3.cross, d3.max
+- For: Map data to image space
+    d3.scaleLinear, d3.scaleTime
+- Compute layout
+    d3.path, d3.treemap
+- Draw the chart
+    d3.select, d3.append
+
+
+D3 Selections
+---
+- Basic API of D3
+- Can be used to select elements on our HTML and then manipulate them to assign
+  data to them.
+
+- d3.select(selector)   <- any selector that's used in CSS can be used here too.
+- If there are multiple selectors on HTML page, first one is selected.
+
+    d3.select("p").select("main")   <- chaining selection
+
+    let selection = de.select("p")
+                      .select("main")
+
+- d3.selectAll(selector)    <- select all elements. You can chain them too.
+
+
+
+
+
+
+
 @@@@@@@@@@@@@@@@  HTML5, CSS & Javascript for Web Developers   @@@@@@@@@@@@
 
 // starting browser-sync

@@ -39,11 +39,22 @@ often shortened to "write stupid code that uses smart objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
-@@@@@@@@@@   Miscellaneous  Software   Questions/Topics    @@@@@@@@@@@
-# These Q's are for general understanding of various concepts
+@@@@@@@@@@   XML  @@@@@@@@@@@
+Various Nodes and their meaning
+---
+<union> - Collection of other nodes such as sequences, elements etc. Handlers
+cannot be on this node.
 
-- Why do string objects in Java/Python immutable?
-    *
+<sequence> - 0 or more collection of nodes, such as element nodes. Handlers are
+on this node.
+
+<element> - Can be optional. Must provide a value after this. This is leaf node
+in XML.
+
+<choice>
+<validator>
+<attr-req>
+
 
 @@@@@@@@@@   VLC Media Player Shortcut Keys  @@@@@@@@@@@
 
@@ -2402,7 +2413,7 @@ which I was not interested at this time ---->
 
 [1] Safari Books Online Video
 
-==================    NOTES   FROM   PYTHONG   TALKS   ===============
+==================    NOTES   FROM   PYTHON   TALKS   ===============
 - Look these up:
     reversed(), enumerate(), zip(), izip(), sorted()
 
@@ -2587,6 +2598,17 @@ mysql> <run your query>
 mysql> SHOW PROFILES;
 mysql> SHOW PROFILE FOR QUERY 2; (your query number, to get details)
 
+
+Show tables by sorted order
+---
+SELECT table_name, engine FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='fwaas_1' ORDER BY table_name ASC;
+SELECT table_name, engine FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='fwaas_1' AND (table_name LIKE '%master%' OR table_name like '%mapping%') ORDER BY table_name ASC;
+
+
+Show warnings
+---
+SHOW WARNINGS;
+SELECT @warning_count;
 
 Resources:
 [1] Udemy course on Database Design -

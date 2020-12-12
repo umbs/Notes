@@ -81,11 +81,7 @@ How to make an existing Git branch track a remote branch?
 
 http://stackoverflow.com/questions/520650/make-an-existing-git-branch-track-a-remote-branch
 
-****
-Advanced Git: Graphs, Hashes and Compressions
-https://www.youtube.com/watch?v=ig5E8CcdM9g
-
-
+****************************************************************************
 Patching:
 --------
 - Create a patch to a file.
@@ -210,27 +206,29 @@ Git is slow
    ! Does not index file and hence saves time
 
 
+****************************************************************************
+Advanced Git: Graphs, Hashes and Compressions
+https://www.youtube.com/watch?v=ig5E8CcdM9g
+
+****************************************************************************
+
        GIT  INTERNALS
        ==============
 $ git init      // creates .git/ directory
 
 $ ls .git/
-    HEAD
+    HEAD        -- Points to branch you currently checkedout.
     branches/
-    config -- local git config
+    config      -- local git config
     description
-    hooks/ -- contains client/server hook scripts
-    index
-    info/  -- contains .gitignore file
-    objects/
-    refs/
+    hooks/      -- contains client/server hook scripts
+    index       -- Files containing staging area info.
+    info/       -- contains .gitignore file
+    objects/    -- Stores all content for your database.
+    refs/       -- Stores pointers in to commit objects in that branches.
 
 Core parts of Git: HEAD, index, objects, refs
 
-objects/ -- Stores all content for your database.
-refs/ -- Stores pointers in to commit objects in that branches.
-HEAD -- Points to branch you currently checkedout.
-index -- Files containing staging area info.
 
 
 Tree Objects
