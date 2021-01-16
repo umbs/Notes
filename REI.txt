@@ -29,6 +29,21 @@ References:
 
 
 
+@@@@@@@@@@@@@@@   REI Tools    @@@@@@@@@@@@@@@
+Property Management Platform
+---
+- Avail.co
+- Anabode.co
+    * This is one property management software that charges by units (just about
+      $1.5/unit). I like this one (cheap, but full featured).
+
+- https://www.biggerpockets.com/rei/online-property-management-software-cloud/
+    * Big list
+
+
+Electronic Signature Options
+---
+Docusign
 
 
 @@@@@@@@@@@@@@@   Notes From Rod Khlief Multifamily Bootcamp @@@@@@@@@@@

@@ -39,6 +39,11 @@ often shortened to "write stupid code that uses smart objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+@@@@@@@@@@   CFFI  @@@@@@@@@@@
+- C Foreign Function Interface.
+
+https://av.tib.eu/media/21110
+
 @@@@@@@@@@   XML  @@@@@@@@@@@
 Various Nodes and their meaning
 ---
@@ -3052,6 +3057,13 @@ Volume down     down arrow
 ===============    CMU Databases Systems     ================
 Lec 1:
 
+Data Manipulation languages (DML)
+---
+- Procedural: Query specifies the (high-level) strategy the DBMS should use to
+  find the desired result. Relational Algebra
+- Non-Procedural: The query specifies only what data is wanted not how to find
+  it. Relational Calculus
+
 Relational Algebra
 ---
 R ∪ S = (SELECT * FROM R) UNION ALL (SELECT * FROM S)
@@ -3064,7 +3076,6 @@ R S = SELECT * FROM R NATURAL JOIN S;
 Rename, Assignment, Duplicate Elimination, Aggregation, Sorting, Division
 operators
 
-
 ==================================================================
 Lec 2:
 
@@ -3073,13 +3084,16 @@ Using following 3 tables for explanation
     * COURSE(cid, name)
     * ENROLLED(sid, cid, grade)
 
-Aggregates: Aggregate functions can only be used in the SELECT output list.
+Aggregates:
+    * Functions that return a single value from a bag of tuples.
+    * Aggregate functions can only be used in the SELECT output list.
 ---
-AVG(col)
-MIN(col)
-MAX(col)
-SUM(col)
-COUNT(col)
+AVG(col) - Return the average col value.
+MIN(col) - Return the minimum col value.
+MAX(col) - Return the maximum col value.
+SUM(col) - Return the sum of all values in col.
+COUNT(col) - Return the # of values for col.
+
 
 - Get # of students with a "@cs" login:
     SELECT COUNT(login) AS cnt FROM student WHERE login LIKE '%@cs%';
@@ -3118,6 +3132,7 @@ GROUP BY:
       FROM enrolled AS e, student AS s
     WHERE e.sid = s.sid
     GROUP BY e.cid, s.name;
+    # This won't work
 
 
 HAVING:
@@ -3130,13 +3145,16 @@ HAVING:
       AND avg_gpa > 3.9
     GROUP BY e.cid;
 
--
+- This will work. HAVING clause is similar to WHERE clause. It filters on output
+  from previous SELECT
     SELECT AVG(s.gpa) AS avg_gpa, e.cid
       FROM enrolled AS e, student AS s
     WHERE e.sid = s.sid
     GROUP BY e.cid
     HAVING avg_gpa > 3.9;
 
+- In declarative languages like SQL, query optimizer knows there is a HAVING
+  clause. So, it optimizes output of SELECT and only has tuples with avg > 3.9
 
 
 STRING OPERATIONS
@@ -3187,7 +3205,7 @@ OUTPUT REDIRECTION
     SELECT DISTINCT cid INTO CourseIds FROM enrolled;
     is same as following:
     CREATE TABLE CourseIds (SELECT DISTINCT cid FROM enrolled);
-
+    or
     INSERT INTO CourseIds (SELECT DISTINCT cid FROM enrolled);
 
 
@@ -3217,10 +3235,7 @@ NESTED QUERIES
 - Usually JOINs are better option.
 	* SELECT name FROM student WHERE sid IN (SELECT sid FROM enrolled)
 
-- Some other operators to use in nested queries:
-    IN, ALL, ANY, EXISTS
-
-- Nested queries can appear anywhere:
+- Get names of students enrolled in '15-445':
     a) SELECT name FROM student WHERE sid = ANY(
             SELECT sid FROM enrolled WHERE cid = '15-445'
         );
@@ -3228,6 +3243,18 @@ NESTED QUERIES
     b) SELECT (SELECT S.name FROM student AS S WHERE S.sid = E.sid) AS sname
         FROM enrolled AS E
        WHERE cid = '15-445';
+
+    c) SELECT name FROM student
+         WHERE sid IN (
+           SELECT sid FROM enrolled
+             WHERE cid = '15-445'
+         )
+
+- Some other operators to use in nested queries:
+    ALL -> Must satisfy expression for all rows in sub-query
+    ANY -> Must satisfy expression for at least one row in sub-query
+    EXISTS -> At least one row is returned
+    IN -> Equivalent to '=ANY()'
 
 
 - Some complex nested queries:
@@ -3266,12 +3293,21 @@ NESTED QUERIES
 
 WINDOW FUNCTIONS
 ----
-- Performs a calculation across a set of tuples that related to a single row.
+- Performs a 'sliding' calculation across a set of tuples that are related.
 - Like aggregation but tuples are not grouped into a single output tuple.
+
+- Syntax looks like this
+    SELECT ... FUNC-NAME(...) OVER(...) FROM table-name
+                  ^            ^
+                  |            |
+                  |            +------ How to 'slice' up data. Can also sort.
+                  |
+                  +------- Aggregation Functions or Special Functions.
 
 - Special window functions:
     * ROW_NUMBER() -> # of current row.
-    * RANK() -> Order position of the current row.
+    * RANK() -> Order position of the current row in a sorted output. If output
+      is not sorted on some column, every row has rank 1.
 
 Ex:
     SELECT *, ROW_NUMBER() OVER() AS row_num FROM enrolled
@@ -3331,7 +3367,8 @@ COMMON TABLE EXPRESSIONS (CTE)
 - How is CTE different than Nested Queries?
     * You can do recursion.
 
-    WITH RECURSIVE source (counter) AS (
+    * Print sequence of numbers from 1 to 10
+    WITH RECURSIVE cteSource (counter) AS (
         (SELECT 1)
         UNION ALL
         (SELECT counter + 1 FROM cteSource
@@ -3344,9 +3381,26 @@ COMMON TABLE EXPRESSIONS (CTE)
 Lec 3: Storage
 
 
-Buffer Pools: In memory process(?) that takes managers DB files on disk and
-bring them back and forth.
-- DB's do not rely on underlying OS for file management.
+Access Times
+---
+        0.5 ns  L1 Cache Ref        0.5 s
+          7 ns  L2 Cache Ref        7 s
+        100 ns  DRAM                100 s
+    150,000 ns  SSD                 1.7 days
+ 10,000,000 ns  HDD                 16.5 weeks
+~30,000,000 ns  Network Storage     11.4 months
+
+
+Buffer Pools: In memory process(?) that takes DB files on disk and bring them
+back and forth.
+- DB's do not rely on underlying OS for file management. 
+- This is because OS may not have knowledge about application symantics. It
+  treats all applications same. DB may stall on page faults in virtual mem.
+
+- There are some solutions
+    * madvise: Tell OS how you expect to read certain pages.
+    * mlock: Tell OS that memory ranges cannot be paged out.
+    * msync: Tell OS flush memory ranges out to disk.
 
 
 Storage Manager: Responsible for maintaining DB files (same as Buffer Pools?)
@@ -3357,5 +3411,4 @@ DB Pages
     * It can contain tuples, meta-data, indexes, log records ...
 - Each page has unique id
     * DBs uses indirection layer to map page ids to physical location.
-
 
