@@ -136,8 +136,47 @@ union()			Return a set containing the union of sets
 update()		Update the set with the union of this set and others
 
 
+Dictionary Iterating
+----
+a_dict = {'color': 'blue', 'fruit': 'apple', 'pet': 'dog'}
+
+- a_dict.items() gives a tuple
+
+Keys Only 1					Key and Value 1								Key and Value 2 (as tuple)
+----						----										----
+>>> for key in a_dict:      >>> for key in a_dict:                     	>>> for item in a_dict.items():
+...     print(key)          ...     print(key, '->', a_dict[key])      	...     print(item)
+...                         ...                                        	...
+color                       color -> blue                              	('color', 'blue')
+fruit                       fruit -> apple							   	('fruit', 'apple')
+pet                         pet -> dog                                 	('pet', 'dog')
 
 
+
+Key and Value 3                           Keys Only 2                       Values Only 1
+----                                      ----                              ----
+>>> for key, value in a_dict.items():     >>> for key in a_dict.keys():     >>> for value in a_dict.values():
+...     print(key, '->', value)           ...     print(key)                ...     print(value)
+...                                       ...                               ...
+color -> blue                             color                             blue
+fruit -> apple                            fruit                             apple
+pet -> dog                                pet                               dog
+
+
+
+
+
+
+
+Duck Typing
+===========
+Duck typing is a concept related to dynamic typing, where the type or the class
+of an object is less important than the methods it defines. When you use duck
+typing, you do not check types at all. Instead, you check for the presence of a
+given method or attribute.
+
+Ref:
+https://realpython.com/lessons/duck-typing/
 
 
 
