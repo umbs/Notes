@@ -182,6 +182,94 @@ https://realpython.com/lessons/duck-typing/
 
 
 
+@@@@@@@@@@@@@@@@@@      Python Pydantic  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+- Dataclasses: It does not validate inputs
+- Pydantic validates inputs based on type annotation/hints
+- Pydantic does runtime enforcements/validations
+- Predecessors are dataclasses, attrs, marshmallow, valideer etc.
+- Pydantic also offers dropin replacement to dataclass
+    from pydantic.dataclass import dataclass
+
+- Has first class JSON-support
+    .json() serializes into a JSON string
+    .parse_raw(...) deserializes into a Python class
+
+- Validation errors are raised if mismatch
+- JSONSchema can be exported directly from the model
+    - Useful to feed into Swagger/OpenAPI spec
+
+    .schema() gives you Swagger/OpenAPI friendly schema
+
+Custom Validators
+---
+    from pydantic import validator, root_validator
+
+validator: Checks single property type
+root_validator: Checks *entire* model
+
+	from pydantic import validator, root_validator
+
+	class BakedPizza(Pizza):
+	  oven_temperature: int
+
+	  # A validator looking at a single property
+	  @validator('style')
+	  def check_style(cls, style):
+		house_styles = ("Napoli", "Roman", "Italian")
+		if style not in house_styles:
+		  raise ValueError(f"""
+			We only cook the following styles: {house_styles}
+			Given: {style}""")
+		return style
+
+	  # Root validators check the entire model
+	  @root_validator
+	  def check_temp(cls, values):
+		style = values.get("style")
+		temp = values.get("oven_temperature")
+
+		if style != "Napoli":
+		  # No special rules for the rest
+		  return values
+
+		if 350 <= temp <= 400:
+		  # Target temperature 350 - 400°C, ideally around 375°C
+		  return values
+
+		raise ValueError(f"""
+		  Napoli style require oven_temperature in 350-400°C range
+		  Given: {temp}°C""")
+
+Function Validators: @validate_arguments
+
+		from pydantic import validate_arguments
+
+		# Validator on function
+		# Ensure that we use a valid pizza when making orders
+		@validate_arguments
+		def make_order(pizza: Pizza):
+			...
+		try:
+			make_order({
+				"style":"Napoli",
+				"toppings":(
+				  "tomato sauce",
+				  "mozzarella",
+				  "prosciutto",
+				  "pineapple",
+				),
+			})
+		except ValidationError as err:
+			print(err)
+		1 validation error for MakeOrder
+		pizza -> toppings -> 3
+		  value is not a valid enumeration member; permitted: 'mozzarella', 'tomato sauce', 'prosciutto', 'basil', 'rucola' (type=type_error.enum; enum_values=[<Topping.mozzarella: 'mozzarella'>, …])
+
+
+
+https://www.youtube.com/watch?v=WJmqgJn9TXg
+http://slides.com/hultner/python-pizza-2020/
+
 @@@@@@@@@@@@@@@@@@      Python Import Statements   @@@@@@@@@@@@@@@@@@@@@@@
 - sys.path
     * Gives details about directories that interpreter will look for a module
@@ -445,6 +533,56 @@ $ python -m pylint --errors-only module (or filename)
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     pytest
                     ======
+- Tests folder should be same level as project folder
+    project/
+    tests/
+- Module name (File name) must start with test_*.py
+- Method names must start as test_xx()
+- Class names must start as class TestSample
+
+
+Asserting Expected Exceptions
+----
+
+def validate_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be less than 0")
+
+def test_validate_invalid_age():
+    with pytest.raises(ValueError):  # [1]
+        validate_age(-1)
+
+- If we don't have [1] context, pytest sees ValueError andd thinks test has
+  failed.
+
+Markers: Tags for pytests
+-----
+@pytest.mark.skip(reason="Skipping just for fun")
+def test_add():
+    assert add(1, 2) == 3
+
+
+@pytest.mark.skipif(sys.version_info > (3, 7), reason="Skipping just for fun")
+def test_add():
+    assert add(1, 2) == 3
+
+
+# This is most useful marker
+@pytest.mark.parameterize("a, b, c",
+                          [(1, 2, 3), ('a', 'b', 'ab')],
+                          ids=["nums", "str", "list"])
+def test_add(a, b, c):
+    assert add(a, b) == c
+
+- 1st arg calls out the parameters
+- 2nd arg are values to those parameters
+- 3rd arg gives IDs (or names) to those test cases
+
+
+Fixtures
+-------
+
+
 
 
 
@@ -627,28 +765,28 @@ Set operations
 
 
 Operation			Equivalent			Result
-len(s)	 								number of elements in set s (cardinality)
-x in s	 								test x for membership in s
-x not in s	 							test x for non-membership in s
+len(s)									number of elements in set s (cardinality)
+x in s									test x for membership in s
+x not in s								test x for non-membership in s
 s.issubset(t)		s <= t				test whether every element in s is in t
 s.issuperset(t)		s >= t				test whether every element in t is in s
 s.union(t)			s | t				new set with elements from both s and t
 s.intersection(t)	s & t				new set with elements common to s and t
 s.difference(t)		s - t				new set with elements in s but not in t
 s.symmetric_difference(t)	s ^ t		new set with elements in either s or t but not both
-s.copy()	 							new set with a shallow copy of s
+s.copy()								new set with a shallow copy of s
 
 
 s.update(t)			s |= t				return set s with elements added from t
 s.intersection_update(t)	s &= t		return set s keeping only elements also found in t
 s.difference_update(t)	s -= t			return set s after removing elements found in t
 s.symmetric_difference_update(t)	s ^= t	return set s with elements from s or t but not both
-s.add(x)	 							add element x to set s
-s.remove(x)	 							remove x from set s; raises KeyError if not present
-s.discard(x)	 						removes x from set s if present
-s.pop()	 								remove and return an arbitrary element from s;
+s.add(x)								add element x to set s
+s.remove(x)								remove x from set s; raises KeyError if not present
+s.discard(x)							removes x from set s if present
+s.pop()									remove and return an arbitrary element from s;
 											raises KeyError if empty
-s.clear()	 							remove all elements from set s
+s.clear()								remove all elements from set s
 
 
 
@@ -792,6 +930,14 @@ def re_two():
 
 
 
+Decorators Talk by Reuven M Lerner
+
+
+
+https://www.youtube.com/watch?v=MjHpMCIvwsY&list=WL&index=26&t=125s
+
+
+
 Generators:
 -----------
 - Generators: They are Iterators that can iterate only once. Usually
@@ -814,6 +960,8 @@ This is used as follows:
 for x in fibon(10000):
     print(x)
 
+- Corey Schafer on Python Generators:
+    https://www.youtube.com/watch?v=bD05uGo_sVI
 
 @classmethod and @staticmethod
 ----
@@ -1014,7 +1162,7 @@ Operator Overloading
 --------------------
 - Methods that needs overloaded for various operations
 	+		__add__
-	- 		__sub__
+	-		__sub__
 	==		__eq__  This method is NOT used to overload !=
 	!=		__ne__
 	<		__lt__
@@ -1280,7 +1428,249 @@ reversed(...)
 enumerate(...)
 
 
+@@@@@@@@@@@@@@@@@@      DATACLASS      @@@@@@@@@@@@@@@@@@@@@@
+- What is dataclass decorator
+Introduction - https://www.youtube.com/watch?v=2CvzoNPSOHg
 
+    from dataclasses import dataclass
+    @dataclass
+    class Person:
+        name: str
+        age: int
+        city: str
+
+    - Decorator takes care of creating following
+        - Constructor defining class variables
+        - Defining _repr_, _eq_ functions
+
+Parameterized dataclass - https://www.youtube.com/watch?v=Kj8v9mYS0Ik
+    @dataclass(cls=None, *, init=True,  repr=True, eq=True, order=False,
+                un_safe_hash=False, frozen=False)
+
+Dataclass Field - https://www.youtube.com/watch?v=zyo1PLw4hrE
+    field(*, default=MISSING, default_factory=MISSING, init=True, repr=True, hash=None,
+            compare=True, metadata=None)
+    - This field is assigned to each variable and that modifies
+
+    from dataclasses import dataclass, field
+    @dataclass
+    class Person:
+        name: str
+        age: int = field(default=25)
+        city: str = field(default_factory=get_common_city)
+
+    - default_factory method must not any arguments
+    - If `init=False` then that variable is not part of __init__() constructor
+      when instantiating that class
+    - If `repr=False` then that property will not be in object representation
+    - If `hash=False` it is not used in computing hash for the class object
+    - If `compare=False` it is not used while comparing two objects of same
+      class (i.e., __eq__() function ignore this variable)
+
+
+@@@@@@@@@@@@@@@@@@      EXCEPTION HANDLING   @@@@@@@@@@@@@@@@
+test.py
+    def x()
+        try:
+            print(1)
+        except:
+            print(2)
+        else:
+            print(3)
+        finally:
+            print(4)
+
+    x()  <<< what's printed?
+
+- Disassemble above code and see the byte code
+    $ python -m dis test.py
+
+- Now, what happens?
+test.py
+    def x()
+        try:
+            return 1
+        except:
+            return 2
+        else:
+            return 3
+        finally:
+            return 4
+
+    print(x())  <<< what's printed?
+
+
+- Exceptions can be a function, or another variable
+
+test.py
+    exception_in_variable = Exception
+    def exception_fn():
+        return Exception
+
+    try:
+        ...
+    except exception_in_variable:
+        ...
+    except exception_fn:
+        ...
+
+
+- Use exc_info=True in your logs to get exception information
+
+try:
+    ...
+except Exception:
+    logging.info("an error occurred", exc_info=True)
+
+
+- DO NOT log MULTIPLE exceptions as follows
+    try:
+        ...
+    except Exception:
+        logging.exception("an error occured")
+        raise
+
+
+- Use __repr__ instead of __str__ as follows
+
+    try:
+        dict()['nope']
+    except KeyError as e:
+        logging.error("an error occured: %r", e) ## use %r instead of %s
+
+- Why is __repr__ superior to __str__? Look at this
+
+>>> e = Exception("It broke")
+>>>
+>>> str(e)
+'It broke'
+>>>
+>>> repr(e)
+"Exception('It broke',)"    ## More informative
+>>>
+>>> str(Exception())
+''
+>>>
+>>> str(ValueError(1))      # We don't know the *type* of error
+'1'
+>>> str(KeyError(1))
+'1'
+>>>
+>>> repr(KeyError(1))       # Type of error is clear
+'KeyError(1,)'
+>>> repr(ValueError(1))
+'ValueError(1,)'
+>>>
+
+
+Scopes
+    try:
+        ...
+    except Exception as e:
+        pass
+
+    print(e)  <<< out of scope
+
+
+    try:
+        ...
+    except Exception as e:
+        ee = e
+
+    print(ee)  <<< this works
+
+
+- Don't DOUBLE raise Exception, like this
+
+    try:
+        ...
+    except Exception:
+        raise Exception("This is not good idea. Raises double exception")
+
+
+- Chaining exceptions
+    try:
+        1/0
+    except ZeroDivisionError as e:
+        raise Exception("Bad division") from e
+
+    try:
+        1/0
+    except Exception:
+        raise Exception("Bad division") from None
+
+- Exceptions in Threads
+    - Use concurrent.futures library
+    - TBD
+
+- Exception hierarchy
+    - https://docs.python.org/3/library/exceptions.html#exception-hierarchy
+
+
+
+
+---------------- Talk by Miguel Gringer  ---------------
+
+- LBYL: Look Before You Leap
+- EAFTP: Easier to Ask Forgiveness Than Permission
+
+- Don't raise errors. Let higher level scope handle
+- If error is unrecoverable, raise an error
+
+- Unrecoverable errors
+
+    WRONG APPROACH
+
+    @app.route('/songs/<id>', methods=['PUT'])
+    def update_song(id):
+        ...
+        try:
+            db.session.update(song)
+            db.session.commit()
+        except SQLAlchemyError as e:
+            logger.error("failed to update song %s, %s", song.name, e)
+            try:
+                db.session.rollback()
+            except SQLAlchemyError as e:
+                logger.error("error rolling back failed create song, %s", e)
+            return 'Internal Server Error', 500
+        return '', 204
+
+
+    RIGHT APPROACH
+
+    @app.route('/songs/<id>', methods=['PUT'])
+    def update_song(id):
+        db.session.update(song)
+        db.session.commit()
+        return '', 204
+
+
+Another Example
+
+    NOT GOOD PRACTICE                               BEST PRACTICE
+
+    def save_customer_to_db(customer):              def save_customer_to_db(customer):
+        try:                                            validate_customer(customer)
+            validate_customer(customer)                 write_customer(customer)
+            write_customer(customer)
+        except (ValidationError, IOError) as e:
+            # do something here
+
+    if __name__ == "__main__":                      if __name__ == "__main__":
+        args = parser.parse_args()                      args = parser.parse_args()
+        save_customer_to_db(args.customer)              try:
+                                                            save_customer_to_db(args.customer)
+                                                        except (ValidationError, IOError) as e:
+                                                            logger.exception('Error: ' + str(e))
+                                                        except Exception as e:
+                                                            logger.exception('Unexpected Error: ' + str(e))
+
+- Merry library (pip install merry). Miguel's own library
+
+
+https://www.youtube.com/watch?v=V2fGAv2R5j8
+Miguel Gringer: https://www.youtube.com/watch?v=8kTlzR4HhWo
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
