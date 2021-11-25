@@ -3736,6 +3736,172 @@ Queuing
 - If they don't know, they'll ask other servers for answer.
 - 'dig' command on Linux is very useful in examining DNS  messages.
 
+BRIEF HISTORY OF DNS
+---
+- HOSTS.TXT file contained all hosts on ARPANET and their IP addresses. Very
+  similar to /etc/hosts file
+    - Slow, manually updated by admins, shared via FTP
+    - Prone to errors, search was linear
+    - Files were extremely large
+
+- BIND is popular open source implementation of DNS
+
+
+           BIND 4              MSFT DNS Server          BIND 9
+             |                      |                      |
+  1983       |         1987         |           1997       |
+    o--------o-----------o----------o------------o---------o
+    |       1984         |        1993           |       2000
+    |                    |                       |
+ RFC 882            RFC 1032                  BIND 8
+ & 883               to 1033
+
+- Variations of BIND 9 is still in use today.
+
+
+- DNS is a distributed database
+    - It is partitioned into Zones
+
+- DNS is organized as an inverted tree.
+    - Each node in the tree has a label
+    - Label is 0 to 63 bytes in lenght. Up to 64 chars
+
+
+ZONES
+-----
+DOMAINS (& SUB-DOMAINS)
+    - Everything at and below a node in DNS tree is domain.
+
+DELEGATION
+- Root domain is managed by ICAAN. Root is just "" domain.
+- Under root domain, we have com, edu. org, mil etc domains
+- .com is managed by Verisign. ICAAN delegates responsibility of .com to
+  Verisign.
+- Verisgn deligates resposibility under .com to many other entities.
+
+
+Internet Namespaces
+---
+- Intially, only 7 top-level domains
+    com - commercial
+    edu - educational
+    gov - governmental
+    int - international treaty org (nato.int)
+    mil - military orgs
+    net - networking orgs (NSF.net)
+    org - non-profits
+
+- International Domain Names
+    - International Chars can be used in domain names
+    - But DNS understands only ASCII chars. So, PUNYCODE is used.
+    - PUNYCODE encodes chars from non-ASCII scripts into ASCII
+        - After encoding, they start with xn--
+            xn--mxtq1m
+            xn--qcka1pmc
+    - Browsers support IDNA (Internationalized Domain Names in Applications)
+    - They take chars in other languages and convert them into PUNYCODE
+
+
+Authority
+---
+- Name Servers (NS) load data in Zones, the administrative units in DNS.
+    - NS can load thousands of Zones. But no NS can load ENTIRE namespace (like
+      com or edu. Too big)
+    - NS that loads an entire Zone is called Authoritative NS for that Zone.
+    - NS then responds to queries from DNS resolvers or other NS
+
+
+Resolvers
+---
+- DNS resolvers understand low-level format of DNS queries. They are complex and
+  abstracted away.
+
+
+Resolution
+---
+    Resolver queries Name Server, say NS1
+    NS1 queries Root Server
+    RS refers to other NS, say NS2
+    NS1 queries NS2
+    NS2 refers to other NS, say NS3
+    NS1 queries that NS3
+    ....
+    Finally NS1 gets IP to Domain Name resolved by some NS
+    NS1 responds to Resolver
+
+- Queries are Recursive or Non-Recursive
+    - In above example, NS1 is making non-recursive query to other NS
+    - This is intentional. NS1 get referred to other NS.
+    - Referrals have valuable info.
+
+- DNS is UDP based. Protocol contains following
+    header (mandatory)
+    question (mandatory)
+    answer
+    authority
+    additional
+
+    - header and question sections are always present. Even in *referral*
+      queries
+
+    HEADER
+        - OPCODE = QUERY
+        - qr bit: 0 for query and 1 for response
+        - rd bit: recursion desired
+
+    QUESTION
+        - Domain Name the querier is interested in
+        - Class = IN for InterNet
+        - Type: of data (record) querier is interested in
+
+
+CACHING
+---
+- NS caches resource records, especially the other NS
+- TTL
+
+
+SERVER SELECTION AND RETRIES
+---
+- There are many NS in a Zone that has info about Domain Name. Which NS to
+  query?
+    - BIND NS uses RTT to determine which NS to query.
+    - If a query fails, BIND retries to another NS
+
+Types of NS
+---
+- Authoritative NS
+- Caching NS
+- Recursive NS
+
+Authoritative NS
+---
+- A NS authoritative for one or more zones
+- Primary function is to respond to non-recursive queries.
+- Some times, recursion is disabled.
+
+Recursive NS (a.k.a Caching NS)
+---
+- Is recursive in nature
+- They cache responses and sometimes called Caching NS.
+- Caching and Recursive NS are interchangeable.
+
+
+Authoritative NS are of two types
+    - Primary NS
+    - Secondary NS
+
+
+
+
+
+
+
+
+
+
+
+
 - Common DNS record types
     A (IPv4 Host address)
 		* name to IPv4 translation.
@@ -3756,7 +3922,7 @@ Queuing
         * A zone contains exactly one SOA record containing properties of zone
 
     SRV (location of service)
-    TXT (Descriptive text) typeslskdjf
+    TXT (Descriptive text) type
 
 - Many more DNS record types exists.
 
