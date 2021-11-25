@@ -39,10 +39,18 @@ often shortened to "write stupid code that uses smart objects".
 Reference:
 http://users.ece.utexas.edu/~adnan/pike.html
 
+@@@@@@@@@@   RIPGREP  @@@@@@@@
+
+
 @@@@@@@@@@   CFFI  @@@@@@@@@@@
 - C Foreign Function Interface.
 
 https://av.tib.eu/media/21110
+
+@@@@@@@@@@   Homebrew Commands    @@@@@@@@@@
+# Install nightly
+brew install --HEAD <package>
+
 
 @@@@@@@@@@   XML  @@@@@@@@@@@
 Various Nodes and their meaning
@@ -64,12 +72,12 @@ in XML.
 @@@@@@@@@@   VLC Media Player Shortcut Keys  @@@@@@@@@@@
 
 Jumps:
-Very short backwards jump: Shift + Left
-Very short forward jump: Shift + Right
-Short backwards jump: Alt + Left (or just Left)
-Short forward jump: Alt + Right (or just Right)
-Medium backwards jump: CTRL + left
-Medium forward jump: CTRL + Right
+Very short backwards jump (3s): Shift + Left (Ctrl + Cmd + Left)
+Very short forward jump (3s): Shift + Right (Ctrl + Cmd + Right)
+Short backwards jump (10s): Alt + Left (or just Left)
+Short forward jump (10s): Alt + Right (or just Right)
+Medium backwards jump (1m): Ctrl + Left (Shift + Cmd + Left)
+Medium forward jump (1m): Ctrl + Right (Shift + Cmd + Right)
 
 Speed:
 [+]/-/= Faster, slower, normal
@@ -3054,6 +3062,147 @@ Volume up       up arrow
 Volume down     down arrow
 
 
+===============    AWS   Cognito       ======================
+
+OAuth2.0
+---
+- OAuth2.0 is an open standard for authorization.
+    * Users authorize on one website and access their info on another website
+      but without giving their passwords/credentials.
+- OAuth is not an API or service but open standard.
+- OAuth authorizes devices, APIs, Servers, Applications with "access tokens
+  rather than credentials".
+
+
+OpenID Connect (OIDC)
+---
+- OIDC vs OAuth2
+    * OAuth2 = broad spec for authorization
+    * OIDC = spec for identity on top of OAuth2
+- Tokens
+    * JSON Web Tokens (JWT)
+    * ID (Identity claims)
+    * Access Tokens (bearer token used to access resources)
+    * Refresh Tokens (to obtain a new access token). Valid for 30 days.
+
+Dissecting JWT Token (valid for 1 hour after issuing).
+---
+    Header
+        kid:
+        alg:
+    Payload
+        bunch of attributes
+    Signature
+        signature containing payload. Used for verification that token worked.
+
+
+AWS Cognito
+---
+- Cognito gives 3 types of tokens (Access, Identity and Refresh).
+- Cognito gives 3 types of authorization
+    a) User Pools --> User Pool Authorizers
+        - When you want simple Yes/No for user authorization
+        - Valid or Invalid user
+
+    b) Federated Identities --> AWS IAM authorization
+        - IAM based authorization for fine grained access.
+        - IAM makes use of Federated Identities to provide IAM policy for the
+          user.
+
+    c) Custom Identity Providers --> Custom Authorizers
+
+
+- Most secure of the 3 is IAM based authorization as _every_ request is signed.
+- With other forms of authorization, if header can be read and token is taken,
+  impersonation can be done for duration of that tokens validity.
+
+
+
+References:
+https://www.youtube.com/watch?v=VZqG7HjT2AQ
+
+===============    AWS   API Gateway   ======================
+- HTTP API vs REST API
+    * HTTP API is inexpensive than REST API
+    * 70% less cost
+    * 60% faster than p99. Not clear when compared to REST API.
+    * <10ms per API request. Must faster than REST API.
+
+
+- API Gateway Management
+    * AWS Management Console
+    * AWS CLI
+    * AWS Serverless Application Model (SAM) <<< built on top of CloudFormation
+    * AWS CloudFormation
+    * Swagger/OpenAPI   <<< industry standard
+    * AWS Cloud Development Kit (CDK)   <<< programatic way of doing
+
+- CORS meaning (at 16 min). Cross-Origin Resource Sharing
+    * If you don't know this, you can open up security and make mistakes.
+
+
+-
+
+Reference:
+[1] I didn't know API GW can do that
+    * https://www.youtube.com/watch?v=yfJZc3sJZ8E
+
+
+===============    AWS CDK Concepts    ======================
+Constructs:
+
+Apps:
+
+Stacks:
+
+Environments:
+- Environment Variables
+    - Using hard coded values, passed as dictionaries
+    - Using environment variables and access from CDK using os.environ[]
+    - Using shell scripts
+
+Parameters: Custom values supplied at deployment time and incorporated into CF
+template.
+    - Generally not recommended ....
+    - Use following in CLI
+        $ cdk deploy MyStack --parameters MyStack:ParameterName=ParameterValue
+
+Context:
+    - 6 ways of doing
+
+
+===============    AWS CloudTrail    ======================
+- What can you answer using a CloudTrail event?
+    - WHO made the API call?
+        - Detailed info for identity types
+            - Root user, IAM user, Federated User, Role
+        - Info includes
+            - Friendly username
+            - AWS AccessKeyId
+            - 12 digit AWS account number
+            - ARN
+            - Session context and issuer info
+            - invokedBy identifies AWS Service making request on behalf of user
+
+    - WHEN was the API call made?
+        - "eventTime": "2013-10-23T23:30:42Z"
+        - ISO 8601 format
+
+    - WHAT was the API call?
+        - API call name and service the API call belongs to
+        - "eventName": "RunInstances"
+          "eventSource": "ec2.amazonaws.com"
+
+    - WHICH resources were acted up on in the API call?
+    - WHERE was the API call made from and made to?
+
+- S3 logs can be pushed to Cloud Athena and run SQL queries on them.
+
+
+[1] Turn on CloudTrail: Log API Activity in Your AWS Account
+    * https://www.youtube.com/watch?v=BJprWgompq0
+[2] How can I use CloudTrail to API calls and actions
+    * https://www.youtube.com/watch?v=4ztTv5rIRv8
 ===============    CMU Databases Systems     ================
 Lec 1:
 
@@ -3379,7 +3528,7 @@ COMMON TABLE EXPRESSIONS (CTE)
 
 ==================================================================
 Lec 3: Storage
-
+https://15445.courses.cs.cmu.edu/fall2019/slides/03-storage1.pdf
 
 Access Times
 ---
@@ -3393,7 +3542,7 @@ Access Times
 
 Buffer Pools: In memory process(?) that takes DB files on disk and bring them
 back and forth.
-- DB's do not rely on underlying OS for file management. 
+- DB's do not rely on underlying OS for file management.
 - This is because OS may not have knowledge about application symantics. It
   treats all applications same. DB may stall on page faults in virtual mem.
 
@@ -3403,7 +3552,8 @@ back and forth.
     * msync: Tell OS flush memory ranges out to disk.
 
 
-Storage Manager: Responsible for maintaining DB files (same as Buffer Pools?)
+Storage Manager: Responsible for maintaining DB files (same as Buffer Pools?) as
+"Pages".
 
 DB Pages
 ---
@@ -3411,4 +3561,298 @@ DB Pages
     * It can contain tuples, meta-data, indexes, log records ...
 - Each page has unique id
     * DBs uses indirection layer to map page ids to physical location.
+- 3 Notions of Page
+    * Hardware Page (4K)
+    * OS Page (4K)
+    * Database Page (512B - 16KB)
+
+- In PostgreSQL
+    * SELECT r.ctid, r.* FROM r;
+    * ctid gives (page number. offset) result
+    * VACUUM FULL;  This cleans up and compacts tuples (like defragmentation).
+
+- Slotted Page arrangement is one form of file organization on disk.
+
+Lecture 4
+====
+- Log Structured file systems
+    * Each SQL statement is logged and written to disk.
+    * Sequential writes are faster than sequential reads.
+- Reading is drawback.
+
+- IEEE-754 says how to store numbers in memory.
+
+- FIXED PRECISION NUMBERS
+    * Used when rounding errors are unacceptable
+    * These are numeric data types with arbitrary precision and scale.
+
+- How is very large values stored?
+    * Most DBs don't allow value to exceed single page.
+    * DBs use overflow storage pages.
+        - Postgres. TOAST (>2KB)
+        - MySQL. Overflow (>1/2 size of page)
+        - SQL Server. Overflow (> size of page)
+
+- External Value Storage
+    * Some DBs let you store large value in external file.
+    * BLOB type. Binary large object
+    * DB cannot manipulate contents of external file.
+        - No durability or transaction protections.
+    * No rule on how big value must be. DB implementation specific.
+        - 256KB is rough guidance.
+        - Less -> overflow pages
+        - More -> external storage.
+
+- System Catalogs
+    * Meta data, index, views, stats etc about DBs.
+    * INFORMATION_SCHEMA is an ANSI standard all DBs implement.
+
+- SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_catalog = <db_name>;
+    * Following are short cuts to same command
+    \d;             PG
+    SHOW TABLES;    MySQL
+    .tables;        SQLite
+
+- DESCRIBE INFORMATION_SCHEMA.TABLES
+
+- OLTP - Online Transaction Processing
+    * Simple queries reading/writing small data.
+    * Ex: Amazon store front.
+
+- OLAP - Online Analytical Processing
+    * Complex queries reading large portions of DB spanning multiple entities.
+    * Execute queries on data collected from OLTP apps.
+
+- HTAP - Hyper Transaction Analytical Processing
+    * In between OLAP and OLTP
+
+- N-ary Storage Model (NSM)
+    * DBMS stores all attributes for single tuple contiguously in a page.
+
+
+
+==============================
+
+
+
+
+@@@@@@@@@@@@@@@       AWS  DYNAMODB          @@@@@@@@@@@@@@@@@
+What is it?
+- Fast and flexibe NoSQL DB
+- Fully managed. Good for document or Key-Value storage models
+- Good for gaming, web, mobile, advertising tech etc
+
+Benefits
+- Stored on SSD. So, high disk throughput.
+- Saved in 3 geo-locations. High availability.
+- Suited for read heavy apps.
+
+Read Consistency. 2 Options.
+    - Eventually Consistent reads (default)
+    - Strongly consistent reads
+
+- DDB is charged based on 'Provisioned Throughput Capacity'
+    - Write throughput cost: There is cost for
+        10 units of write capacity = 36000 writes per hour
+    - Read throughput cost: There is cost for
+        50 units of read capacity = 180000 "strongly consistent" reads per hour
+                                       OR
+                                    360000 "eventually consistent" reads per hour
+- There's also storage costs per GB
+
+
+
+	             SQL                        NoSQL
+	┌────────────────────────────┬───────────────────────────────┐
+	│  Optimized for Storage     │     Optimized for Compute     │
+	│                            │                               │
+	│  Normalized/Relational     │    Denormalized/Hierarchical  │
+	│                            │                               │
+	│  Adhoc queries             │    Instantiated Views         │
+	│                            │                               │
+	│  Scale vertically          │    Scale horizontally         │
+	│                            │                               │
+	│  Good for OLAP             │    Good for OLTP at scale     │
+	└────────────────────────────┴───────────────────────────────┘
+
+Partition Key and Sort Key:
+- It partitions data. Mandatory key.
+- It's a hash index. Points where data is stored.
+- There can be infinite items in this partition.
+- Sort key sorts these items within this partition.
+
+
+Local Secondary Index (LSI):
+
+
+
+
+
+Reference:
+[1] SimpliLearn 10 mins intro:
+https://www.youtube.com/watch?v=2mVR_Qgx_RU
+[2] re:Invent. DynDB Deep Dive. Rick Houlihan
+
+
+
+
+
+
+@@@@@@@@@@@@@@@       AWS  NETWORKING  FUNDAMENTALS      @@@@@@@@@@@@@@@@@
+Regions:
+    - Connected by dedicated multiple 100 Gigabit parallel lines
+
+Availability zones (AZ)
+    - Close enough within a region to do synchronous replication with databases
+    - Inside each AZ, there's one or more datacenters
+
+VPC
+    - VPC exists within a region and covers all AZ
+    - Each VPC can have multiple subnets per AZ
+    - Two types of subnets: Public and Private
+    - EC2 instances must be placed within a subnet
+    - Few services to get in and out of VPC.
+        - VPC Peering connection
+        - Internet Gateway
+        - VPN Gateway
+        - VPC Endpoints
+        - Customer Gateway
+        - NAT Gateway
+        - AWS Transit Gateway
+
+    - Assign CIDR ranges to VPC
+        - Largest CIDR range is /16 and smallest is /28
+    - From this range, assign IP address ranges to subnets
+
+
+IPv6 on AWS
+    - You do not get to choose the range. AWS does it for you.
+    - /56 VPC. AWS assigns from their range
+    - /64 subnets. You can choose this
+    - Dualstack
+
+"5 Things" required for Internet Traffic
+    - Public IP Address
+    - Internet Gateway attached to a VPC
+    - Route to an Internet Gateway inside EC2 instance Route Table
+    - NACL allow rule
+    - Security Group allow rule
+
+- If instance in Private Subnet needs to downoad something from Internet, what
+  to do?
+    - Have a NAT in public subnet that talks to Internet Gateway
+    - Have a route in route table in instance in Private Subnet
+    - This route points to NAT in Public Subnet
+
+Security Groups
+    - Operates with ALLOW statements
+    - Provides a STATEFUL FIREWALL (what? a Firewall?)
+    - Wraps around Network Interfaces of EC2 instances (ENIs)
+    - But I'm not sure diff between SG and (NACLs + Routes in Route Table)
+
+
+VPC Flow Logs
+    - Provides Netflow, IPFix like data through Cloudwatch Logs
+    - These logs do not impact bandwith, throughput or latency
+    - Apply these logs to VPC, Subnet or ENI
+
+Packet Capture
+    - Some options available
+
+Elastic Load Balancing (ELB)
+    - Application LB (HTTP and HTTPS traffic)
+        - L7, HTTP, HTTPS
+        - Host and Path based routing
+        - Supported Targets: EC2, Containers, AWS Lambda, Private IP
+    - Network LB (TCP, UDP and offloading TLS traffic)
+        - IPv4, L4
+        - Supported Targets: EC2, Containers, Private IP
+    - Classic LB (Deprecated)
+
+
+
+Connecting VPCs
+- VPC Peering. Can use public internet gateway. But that's exposing VPC to
+  public
+- VPC Peering within same region is easy
+    - Setup peering in Console
+    - Update Route table. Destination IP range must go through VPC Peering
+    - Peer must accept traffic from other VPC
+    - Each VPC can have multiple Peering
+    - You cannot peer to 3rd VPC via a 2nd VPC. Peering has to be direct to VPC
+      your VPC wants to talk to.
+
+
+
+
+
+
+@@@@@@@@@@@@@@@       AWS  X-Ray      @@@@@@@@@@@@@@@@@
+
+Concepts:
+Trace - end-to-end data related to single request across services
+Segments - Portion of trace corresponding to single service.
+Sub-Segments - Remote call or local compute sections within a service
+Annotations - Business data that can be used to filter traces
+Metadata - Business data that can be added to the trace but not used for
+           filtering traces
+Errors - Normalized error message and stack trace
+Sampling - Percentage of requests to be captured as traces
+
+
+Sampling Configuration:
+    - Used to configure which services to trace and lot more (TBD)
+
+- A subset of requests must be traced
+- Best practice: Trace all errors
+
+X-Ray can be used Off-Cloud, not just on AWS
+
+Service Map
+Traces
+
+X-Ray Daemon
+    Runs locally, collects traces over UDP from your application and sends to
+    X-Ray service every second or when buffer fills up.
+
+X-Ray API
+    PutTraceSegments
+    BatchGetTraces
+    GetServiceGraph
+    GetTraceSummaries
+
+
+
+@@@@@@@@@@@@@@@       AWS  CloudFormation   @@@@@@@@@@@@@@@@@@
+
+- Flow of CFT
+
+    Template --------> S3 Bucket ---------> AWS CloudFormation ------> Stack -----> AWS Resources
+
+- Stack names are unique per region
+
+YAML Crash Course
+- Key, Value pairs
+- Nested Objects
+- Supports Arrays
+- Multi line strings (not possible in JSON), using a Pipe bar
+- Comments (not possible in JSON)
+
+
+CFT Resources
+=============
+Following 3 are required
+    - Name
+    - Type
+    - Properties
+        - AWS docs on properties have Update property
+        - 3 types of Update: 'No Interruption', 'Some Interruption', 'Replacement'
+
+
+
+CFT Stack Creation Options
+==========================
+- Rollback on failure
+- Timeout
+- Termination protection
 
