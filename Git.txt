@@ -98,6 +98,9 @@ Patching:
 - Create patch of last commit
     git format-patch -1 --stdout > file.patch
 
+- Create patch out of a commit
+    git format-patch -1 <sha>
+
 - Before applying look for stats
     git apply --stat file.patch
 
@@ -194,6 +197,46 @@ References
 
 # git branch -r
    ! remote branches
+
+Git Tagging
+-----------
+- Two types of tags, Lightweight and Annotated. Annotated has full info about
+  the commit.
+
+// List all the tags
+$ git tag
+$ git tag -l
+$ git show <tag-name>
+
+// Create a light weight git tag
+$ git tag <name>
+
+// Create an annotated tag
+$ git tag -a <name> -m "message"
+
+// Push tags to remote
+$ git push origin <tag-name>
+$ git push origin --tags
+$ git push --tags (push all tags)
+
+// Delete tags locally
+git tag -d <tag-name>
+git tag --delete <tag-name>
+
+// Delete tags from remote
+git push origin -d <tag-name>
+git push origin --delete <tag-name>
+git push origin :<tag-name>
+
+// We cannot checkout tags in git. We can create a branch from a tag and
+// checkout the branch
+git checkout -b <branch-name> <tag-name>
+
+// Create a tag from past commit
+git tag <tag-name> <reference-commit>
+
+
+
 
 
 Git is slow
