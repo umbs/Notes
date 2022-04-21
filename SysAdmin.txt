@@ -983,13 +983,34 @@ $ nicstat -S [intf:speed[fd|hd]]    // read manpage
 Display Filters
 ----
 - Protocol pkts, just type their name: ssh, tcp, udp etc
+    - dns or http: filter either packets
+    - dns and http: filter packets having both protocols
+
 - Multiple filters
     tcp and (ip.src==15.111.202.135 and ip.dst==15.116.49.238)
 - tcp.analysis.flags
-    * shows all bad TCP packets. Very useful filter
+    * shows all bad TCP flows. Problem could be anything
+    * Very useful filter
+- ip.addr == 10.0.0.145 (source or destination IP addr)
+- tcp.port == 443
+- !(arp or dns or icmp)
+    * Remove arp, dns and icmp from tracefiles
+- Follow a TCP stream
+    * Right click one packet in the stream
+    * "Follow TCP stream"
+- 'tcp contains facebook'
+    * Searches all TCP streams with clear text containing 'facebook' text
+    * Can do same for UDP stream also
+- 'http.request'
+    * All HTTP requests (GET. POST etc) are shown
+    * 'http.response'
+    * http.response.code == 200
+- tcp.flags.syn == 1
+- tcp.flags.reset == 1
+
 
 [1] https://wiki.wireshark.org/DisplayFilters
-
+[2] https://www.youtube.com/watch?v=68t07-KOH9Y
 
 @@@@@@@@@@@@@@@@@@@@@@@@@   BASH   SHELL  NOTES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 - Arguments passed to bash scripts are called "Positional Parameters"
