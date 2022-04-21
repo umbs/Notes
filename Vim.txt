@@ -1155,3 +1155,66 @@ Reading:
 
 
 [1] https://learnvimscriptthehardway.stevelosh.com/
+
+----------------------------
+Navigating Neovim Terminals
+
+- See `:help terminal-emulator` for more info
+- Ways to spawn a terminal
+    :terminal
+    :term://bash    spawns bash terminal
+    :term://zsh     spawns zsh terminal
+    :term://htop    runs htop in new term
+    :vsplit term://zsh
+    :split term://bash
+
+
+- Ctrl+\ Ctrl+n puts you in 'normal' mode. After that, it is like navigating
+  another window in Vim.
+
+- Navigating between windows is only possible in Normal Mode.
+
+
+[1] https://vid.bina.me/tools/nvim/terminal-in-nvim/
+
+----------------------------
+Up and Running with Neovim + LSP
+- There is native support for LSP in Neovim. But nvim-lspconfig makes it *easy*
+  to setup the LSP config
+- Understood plugin files are laid out, especially making use of Lau support in
+  Neovim.
+
+- Installation of LSP plugin
+    Plug 'neovim/nvim-lspconfig'
+- Note that `nvim-lspconfig` is NOT a client. With plugin, it is easy to
+  configure LSP client to talk to LSP server, manage it etc.
+
+- You can setup the config in `init.vim` like this
+    lua << EOF
+    require'lspconfig'.pyright.setup{}
+    EOF
+
+    OR, just this in `lua` folder inside .config/nvim/lua/
+    require'lspconfig'.pyright.setup{}
+
+- Lots of info about `lua` directory and namespace directory inside that
+  directory. This is best practice [3]
+- For ever plugin, create a .lua file in this namespace folder
+- Read up [2] for more details
+
+- Discussions on root_dir for LSP to know where to start. Each server has their
+  way. Read up on pyright's configurations [4]
+
+- on_attach function during setup of LSP server. Watch at this timestamp [5] and
+  look for configuration at [6]
+
+
+References:
+[1] https://youtu.be/36o52-2_83M
+[2] https://www.jakewiesler.com/blog/getting-started-with-vim
+[3] https://github.com/nanotee/nvim-lua-guide#tips
+[4] https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+[5] https://youtu.be/36o52-2_83M?t=1557
+[6] https://github.com/neovim/nvim-lspconfig#suggested-configuration
+
+
