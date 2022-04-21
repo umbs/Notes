@@ -315,3 +315,33 @@ git ls-tree --name-only // only blobs (files)
 git ls-tree -r SHA // recursively list the tree
 
 git ls-files
+
+
+Git Interactive Rebase
+----------
+
+SHA9 Examples 5.4
+SHA8 Examples 5.3
+SHA7 Examples 5.2
+SHA6 Exampels 4.5  <<< typo
+SHA5 Examples 4.4
+SHA4 Examples 4.3
+SHA3 Examples 5.1  <<< out of order
+SHA2 Examples 4.2
+SHA1 Examples 4.1
+
+$ git rebase -i SHA1
+    - This will open editor in REVERSE commit order, like this
+
+    pick SHA3 Examples 5.1  <<< move this to right place
+    pick SHA4 Examples 4.3
+    pick SHA5 Examples 4.4
+    pick SHA6 Exampels 4.5  <<< fix the typo
+    pick SHA7 Examples 5.2
+    pick SHA8 Examples 5.3
+    pick SHA9 Examples 5.4
+
+Reference:
+https://www.youtube.com/watch?v=tukOm3Afd8s
+
+
