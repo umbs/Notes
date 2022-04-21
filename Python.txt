@@ -179,9 +179,6 @@ Ref:
 https://realpython.com/lessons/duck-typing/
 
 
-
-
-
 @@@@@@@@@@@@@@@@@@      Python Pydantic  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 - Dataclasses: It does not validate inputs
 - Pydantic validates inputs based on type annotation/hints
@@ -1459,7 +1456,7 @@ Dataclass Field - https://www.youtube.com/watch?v=zyo1PLw4hrE
         age: int = field(default=25)
         city: str = field(default_factory=get_common_city)
 
-    - default_factory method must not any arguments
+    - default_factory method must not have any arguments
     - If `init=False` then that variable is not part of __init__() constructor
       when instantiating that class
     - If `repr=False` then that property will not be in object representation
@@ -1700,3 +1697,302 @@ Multiple Inheritance
 Operator Overloading
 [13] https://docs.python.org/2/library/operator.html
 [14] http://thepythonguru.com/python-operator-overloading/
+
+
+@@@@@@@@@@@@@@@@@@   Threading and Multiprocessing   @@@@@@@@@@@@@@@@@@@@@@@@@
+Basic thread example
+---
+
+		import logging
+		import threading
+		import time
+
+		def thread_function(name):
+            # some code
+
+		if __name__ == "__main__":
+            ...
+			x = threading.Thread(target=thread_function, args=(1,))
+			x.start()
+            ...
+
+Daemon Threads
+---
+- If threads are Daemon Threads, then when program ends, it kills the threads
+- If threads are NOT Daemon Threads, then when program ends, it waits for
+  threads to complete
+
+        x = threading.Thread(target=thread_function, args=(1,), daemon=True)
+
+
+Working with many threads - 1
+---
+        import threading
+
+        def thread_function(name):
+            # some code
+
+        if __name__ == "__main__":
+            threads = list()
+            for index in range(3):
+                x = threading.Thread(target=thread_function, args=(index,))
+                threads.append(x)
+                x.start()
+
+            for index, thread in enumerate(threads):
+                thread.join()
+
+
+Working with many threads - 2: ThreadPoolExecutor
+---
+- Easiest way to run multiple threads
+- Present in `concurrent.futures` library
+- Use it as context manager using `with` statement
+
+
+		import concurrent.futures
+
+        def thread_function(name):
+            # some code
+
+		if __name__ == "__main__":
+			with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+				executor.map(thread_function, range(3))
+
+
+- The code creates a ThreadPoolExecutor as a context manager, telling it how
+  many worker threads it wants in the pool.
+- It then uses .map() to step through an iterable of things, in this case
+  range(3), passing each one to a thread in the pool.
+- The end of the with block causes the ThreadPoolExecutor to do a .join() on
+  each of the threads in the pool.
+- It is strongly recommended that you use ThreadPoolExecutor as a context
+  manager when you can, so that you never forget to .join() the threads.
+
+
+		import concurrent.futures
+		import urllib.request
+
+		URLS = ['http://www.foxnews.com/',
+				'http://www.cnn.com/',
+				'http://europe.wsj.com/',
+				'http://www.bbc.co.uk/',
+				'http://some-made-up-domain.com/']
+
+		# Retrieve a single page and report the URL and contents
+		def load_url(url, timeout):
+			with urllib.request.urlopen(url, timeout=timeout) as conn:
+				return conn.read()
+
+		# We can use a with statement to ensure threads are cleaned up promptly
+		with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+			# Start the load operations and mark each future with its URL
+			future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
+			for future in concurrent.futures.as_completed(future_to_url):
+				url = future_to_url[future]
+				try:
+					data = future.result()
+				except Exception as exc:
+					print('%r generated an exception: %s' % (url, exc))
+				else:
+					print('%r page is %d bytes' % (url, len(data)))
+
+
+Basic Synchronization using `Lock`
+---
+TBD
+
+
+
+
+Reference:
+- https://realpython.com/intro-to-python-threading/
+-
+@@@@@@@@@@@@@@@@@@   Rich Library @@@@@@@@@@@@@@@@@@@@@@@@@
+- Gives tons of helpful info
+$ python -m rich
+
+- PRINT: Override python print statement
+    from rich import print
+
+- CONSOLE: Console print is even better
+    from rich import Console
+
+    console = Console()
+
+    console.print("This is some text")
+    console.print("This is some text", style="bold")
+    console.print("This is some text", style="bold underline")
+    console.print("This is some text", style="bold underline green")
+    console.print("This is some text", style="bold underline red on white")
+
+    console.print("[bold]This is [cyan]some[/] text[/]", style="bold underline red on white")
+
+
+- TEXT: Rich text object
+    from rich.text import Text
+
+    text = Text("Hello, World")
+    text.stylize("bold magenta", 0, 6)
+    console.print(text)
+
+- THEME: Use themes for richer output
+    from rich.theme import Theme
+    custom_theme = Theme({"success": "green", "error": "bold red"})
+
+    console = Console(theme=custom_theme)
+
+    console.print("Operation successful", style="succes")
+    console.print("Operation failed", style="error")
+    console.print("Operation [error]failed[/error]") <<< this works too
+
+- EMOJI: Emoji Markup Language can be used, without any additional packages
+
+    console.print(":thumbs_up: File downloaded!")
+    console.print(":apple: :bug:")
+
+- CONSOLE.LOG: It's more informative
+    console.log("...")
+
+- TRACEBACKS: Very useful info is added in Tracebacks
+    console.log("...", log_locals=True) <<< this logs local variables
+
+    from rich.traceback import install
+    install()
+
+    Now, any traceback has awesome output
+
+
+- SAVE HTML: Saves output to HTML
+
+    console = Console(record=True)  <<< record must be True, to save to HTML
+    try:
+        ...
+    except:
+        console.print_exception()
+
+    console.save_html("demo.html")  <<< saves in an html
+
+
+- TABLE: Save output in tables
+
+    from rich.table import Table
+
+    table = Table(title="Star Wars Movies")
+
+    table.add_column("Released", style="cyan")
+    table.add_column("Title", style="magenta")
+    table.add_column("Box Office", justify="left", style="green")
+
+    table.add_row("Dec 20, 2019", "Star Wars: The Rise of Skywalker", "$952,110,690")
+    table.add_row("May 25, 2018", "Solo: A Star Wars Story", "$393,151,347")
+    table.add_row("Dec 15, 2017", "Star Wars Ep. VIII: The Last Jedi", "$1, 332, 539, 889")
+
+    console = Console()
+    console.print(table)
+
+
+- MARKDOWN:
+    from rich.markdown import Markdown
+
+    MARKDOWN = """
+    # This is h1
+
+    Rich can do a pretty *decent* job of rendering markdown.
+
+    1. This is a list item.
+    2. This is another item.
+
+    """
+
+    md = Markdown(MARKDOWN)
+    console = Console()
+    console.print(md)
+
+
+    python -m rich.markdown <FILENAME.md>
+
+
+- PROGRESSBAR
+
+    from rich.progress import track
+
+    from i in track(range(10, description="Processing ..."):
+        print(f"working {i}")
+        time.sleep(1)
+
+
+Reference:
+[1] https://www.youtube.com/watch?v=4zbehnz-8QU&t=6s
+
+
+@@@@@@@@@@@@@@@@@@   strftime cheat sheet  @@@@@@@@@@@@@@@@@@@@
+datetime.now().strftime('%y')           '22'
+datetime.now().strftime('%Y')           '2022'
+datetime.now().strftime('%Y-%m')        '2022-02'
+datetime.now().strftime('%Y-%m-%d')     '2022-02-16'
+datetime.now().strftime('%Y-%h-%d')     '2022-Feb-16'
+
+datetime.now().strftime('%Y-%m-%d-%H')          '2022-02-16-10'
+datetime.now().strftime('%Y-%m-%d-%H:%M:%S')    '2022-02-16-10:32:36'
+datetime.now().strftime('%Y-%m-%d-%H:%M:%S%p')  '2022-02-16-10:32:36AM'
+datetime.now().strftime('%Y-%m-%d-%H:%M:%S%f')  '2022-02-16-10:32:36:01995800'
+
+
+datetime.now().strftime('%s')           '1645036702'
+datetime.now().strftime('%c')           'Wed Feb 16 10:39:24 2022'
+datetime.now().strftime('%x')           '02/16/22'
+datetime.now().strftime('%D')           '02/16/22'
+datetime.now().strftime('%X')           '10:42:23'
+
+
+
+Reference:
+[1] https://strftime.org/
+[2] https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes
+
+@@@@@@@@@@@@@@@@@@   Argparse  Notes       @@@@@@@@@@@@@@@@@@@@
+
+    # Import the library
+    import argparse
+
+    # Create the parser
+    parser = argparse.ArgumentParser()
+
+    # Add an argument
+    parser.add_argument('--name', type=str, required=True)
+        # type indicates ... type
+        # 'required' is boolean type
+
+    # Parse the argument
+    args = parser.parse_args()
+
+The add_argument() method
+-------------------------
+ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])
+Define how a single command-line argument should be parsed. Each parameter has its own more detailed description below, but in short they are:
+
+name or flags - Either a name or a list of option strings, e.g. foo or -f, --foo.
+action - The basic type of action to be taken when this argument is encountered at the command line.
+nargs - The number of command-line arguments that should be consumed.
+const - A constant value required by some action and nargs selections.
+default - The value produced if the argument is absent from the command line and if it is absent from the namespace object.
+type - The type to which the command-line argument should be converted.
+choices - A container of the allowable values for the argument.
+required - Whether or not the command-line option may be omitted (optionals only).
+help - A brief description of what the argument does.
+metavar - A name for the argument in usage messages.
+dest - The name of the attribute to be added to the object returned by parse_args().
+
+
+
+[1] https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
+[2] https://docs.python.org/3/library/argparse.html#the-add-argument-method
+
+==================    NOTES   FROM   PYTHON   TALKS   ===============
+- Look these up:
+    reversed(), enumerate(), zip(), izip(), sorted()
+
+[1] Transforming Code in to Beautiful, Idiomatic Python - Raymond Hettinger
+https://www.youtube.com/watch?v=anrOzOapJ2E&list=WL&index=23&t=19s
+
