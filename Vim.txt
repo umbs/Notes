@@ -1199,7 +1199,7 @@ Up and Running with Neovim + LSP
 
 - Lots of info about `lua` directory and namespace directory inside that
   directory. This is best practice [3]
-- For ever plugin, create a .lua file in this namespace folder
+- For every plugin, create a .lua file in this namespace folder
 - Read up [2] for more details
 
 - Discussions on root_dir for LSP to know where to start. Each server has their
@@ -1216,5 +1216,19 @@ References:
 [4] https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 [5] https://youtu.be/36o52-2_83M?t=1557
 [6] https://github.com/neovim/nvim-lspconfig#suggested-configuration
+
+
+----------------------------
+nvim-lsp-installer
+    github.com/williamboman/nvim-lsp-installer
+
+References:
+[1] Neovim - LSP setup tutorial (Built in LSP 100% Lua)
+
+----------------------------
+Vim - Tutorial on Customizations and Configuration
+- Leeren Chen(?)
+
+1. Initialization
 
 
