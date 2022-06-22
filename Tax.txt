@@ -1,0 +1,55 @@
+
+
+********************* Foreign Earned Income Exclusion *******************
+- To claim FEIE, your tax home must be in foreign country. 
+- Must be there for 330 days during ANY period of 12 months to be considered
+  foreign resident.
+- Use IRS "Interactive Tax Assistant (ITA) Tool" to determine if you are
+  eligible for FEIE
+
+
+
+[1] https://www.irs.gov/individuals/international-taxpayers/foreign-earned-income-exclusion
+[2] https://www.irs.gov/help/ita
+
+********************* HSA (Health Savings Account) **********************
+
+How does my HSA affect my taxes?
+
+    A Health Savings Account (HSA) is a tax-exempt account you can use to pay
+    for qualified medical expenses.
+
+    You or your employer can contribute money to your HSA. Contributions made by
+    your employer are considered  “pre-tax contributions” and are typically
+    reported in box 12 of your W-2 with code W. These contributions aren’t
+    taxable because they aren’t considered income. They’re also not deductible
+    for the same reason.
+
+    When you (not your employer) make contributions to your HSA, they can be
+    deductible and may lower the amount of income you’ll pay taxes on.
+
+What if my employer contributed to my HSA?
+
+    If your employer contributes to your HSA, those contributions are pre-tax,
+    which means you won’t pay tax on them. You can't deduct those contributions
+    on your taxes because they weren’t included in your income.
+
+    If your HSA contributions weren't included in Box 12 of your W-2, those
+    amounts are deductible because you paid tax on those contributions (there
+    are limits, and we'll be sure to check on those). These contributions lower
+    your overall taxable income at the end of the year, which means you get
+    taxed on less income.
+
+Why is it called 'employer-contributed' when the contributions are deducted from
+my salary?
+
+    When an amount in box 12 is coded with a W, it represents the total amount
+    of pre-tax contributions to your HSA. Whether it was you, your employer, or
+    both of you who contributed funds into your HSA account, the combined amount
+    goes into this box.
+
+    We know it's kind of tricky since it says 'Employer contributions', but that
+    box generally contains the full amount of pre-tax contributions to your HSA,
+    including amounts you elected to contribute.
+
+
