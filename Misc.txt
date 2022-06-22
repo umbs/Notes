@@ -2426,13 +2426,6 @@ which I was not interested at this time ---->
 
 [1] Safari Books Online Video
 
-==================    NOTES   FROM   PYTHON   TALKS   ===============
-- Look these up:
-    reversed(), enumerate(), zip(), izip(), sorted()
-
-[1] Transforming Code in to Beautiful, Idiomatic Python - Raymond Hettinger
-https://www.youtube.com/watch?v=anrOzOapJ2E&list=WL&index=23&t=19s
-
 
 ===============   LEARNING DB DESIGN WITH MYSQL   =====================
 Contents
@@ -3700,13 +3693,16 @@ https://www.youtube.com/watch?v=2mVR_Qgx_RU
 
 @@@@@@@@@@@@@@@       AWS  NETWORKING  FUNDAMENTALS      @@@@@@@@@@@@@@@@@
 Regions:
-    - Connected by dedicated multiple 100 Gigabit parallel lines
+    - Connected by dedicated multiple 100 Gigabit parallel lines.
+    - AWS Region is a geographical area, physically isolated from other AWS
+      Regions, but connected via the backbone.
+    - AWS China is exception.
 
 Availability zones (AZ)
     - Close enough within a region to do synchronous replication with databases
     - Inside each AZ, there's one or more datacenters
 
-VPC
+Virtual Private Cloud(VPC)
     - VPC exists within a region and covers all AZ
     - Each VPC can have multiple subnets per AZ
     - Two types of subnets: Public and Private
@@ -3720,7 +3716,10 @@ VPC
         - NAT Gateway
         - AWS Transit Gateway
 
-    - Assign CIDR ranges to VPC
+    - Assign Private CIDR ranges to VPC (IPv4)
+        - 192.168.0.0/16
+        - 172.16.0.0/12
+        - 10.0.0.0/8
         - Largest CIDR range is /16 and smallest is /28
     - From this range, assign IP address ranges to subnets
 
@@ -3729,25 +3728,69 @@ IPv6 on AWS
     - You do not get to choose the range. AWS does it for you.
     - /56 VPC. AWS assigns from their range
     - /64 subnets. You can choose this
-    - Dualstack
+    - Your VPC will now run Dualstack (v4 and v6)
+    - Link Local address and Global Unicast Address is required
 
 "5 Things" required for Internet Traffic
-    - Public IP Address
-    - Internet Gateway attached to a VPC
-    - Route to an Internet Gateway inside EC2 instance Route Table
-    - NACL allow rule
-    - Security Group allow rule
+    1) Public IP Address
+    2) Internet Gateway attached to a VPC
+    3) Route to an Internet Gateway inside EC2 instance Route Table
+    4) NACL allow rule
+    5) Security Group allow rule
 
-- If instance in Private Subnet needs to downoad something from Internet, what
-  to do?
-    - Have a NAT in public subnet that talks to Internet Gateway
-    - Have a route in route table in instance in Private Subnet
-    - This route points to NAT in Public Subnet
+1) Public IP Addresses for your EC2 instances
+    - Auto-Assign public IP addresses (both IPv4 or v6)
+    - Elastic IP Addresses (EIP) Pool
 
-Security Groups
+    - IPv6: AWS can auto-assign public IP address for IPv6 from the VPC CIDR range
+    - IPv4: AWS can *find one* public IPv4 from it's own public IPv4 pool and
+      assign to instance
+        - AWS has a public IPv4 address range
+        - OR we can bring our own public IPv4 address range (BYOIP Pool)
+
+2) Internet Gateway(IGW)
+    - IGW provides way for VPC to connect to Internet
+    - Also acts as NAT between private IP and public IP within the VPC
+    - On AWS console, after creating IGW, we must attach VPC to it
+
+3) Add entries in route table.
+    - In AWS, "Route Table" is associated with a Subnet.
+    - "Route Table" defines behavior of packets originating in that Subnet.
+    - Ex:
+        Destination             Target
+        172.31.0.0/16           local   <<< local means implicit router/LAN
+        2600:1f16:14d::/56      local
+        0.0.0.0/0               igw-09ef...
+        ::/0                    igw-09ef...
+
+    - Egress IGW: When you want traffic orignating in your VPC to go out, but
+      not traffic originating outside to come in.
+    - Public Subnet: Route table has entry to IGW
+    - Private Subnet: All traffic stays within VPC
+
+	- If instance in Private Subnet needs to download something from Internet, what
+	  to do?
+		- Have a NAT in public subnet that talks to Internet Gateway
+		- Have a route in route table in instance in Private Subnet
+		- This route points to NAT in Public Subnet
+
+Network Security
+	a) Network ACLs
+	b) Security Groups
+	c) VPC Flow Logs
+	d) Amazon VPC Traffic Mirroring
+
+4) NACLs:
+	- Defines what traffic flows are allowed/denied between subnets in a VPC
+	- Stateless. ALLOW and DENY statements.
+	- Statements are evaluated in order we define.
+	- By default, NACLs in AWS allows all traffic in and out of Subnets.
+
+5) Security Groups
     - Operates with ALLOW statements
     - Provides a STATEFUL FIREWALL (what? a Firewall?)
-    - Wraps around Network Interfaces of EC2 instances (ENIs)
+    - Wraps around Network Interfaces of EC2 instances (ENIs).
+	- They can span across Subnets and AZs.
     - But I'm not sure diff between SG and (NACLs + Routes in Route Table)
 
 
@@ -3769,27 +3812,92 @@ Elastic Load Balancing (ELB)
         - Supported Targets: EC2, Containers, Private IP
     - Classic LB (Deprecated)
 
+ELB Components:
+	1) Any LB has a listener: Port and Protocol on which LB is listening
+	2) Listener Rules: on how to route traffic
+		- Ex: Path based rule: if path is "/img/*", forward this IP address
+		- They identify Target Groups containing Targets
 
 
 Connecting VPCs
-- VPC Peering. Can use public internet gateway. But that's exposing VPC to
-  public
+- One way to connect VPC is put IGW in each VPC and they talk over public
+  internet. But use ... VPC peering.
+- VPC Peering can work in same region, across regions and across accounts too.
+
 - VPC Peering within same region is easy
-    - Setup peering in Console
+    - Setup peering in Console. VPC Peering starts as pcx-.... 
     - Update Route table. Destination IP range must go through VPC Peering
     - Peer must accept traffic from other VPC
     - Each VPC can have multiple Peering
     - You cannot peer to 3rd VPC via a 2nd VPC. Peering has to be direct to VPC
-      your VPC wants to talk to.
+      your VPC wants to talk to. Not transitive VPC Peering.
+
+- Same AWS Console can be used for cross region and cross account VPC Peering.
+
+CAN and CANNOT of VPC Peering:
+- CAN reference Security Groups from peer VPC.
+- CAN enable DNS hostname resolution to return private IP address.
+- CAN peer for both v4 and v6 traffic.
+
+- CANNOT have overlapping IP addresses.
+- CANNOT have multiple peers between same pair of VPC.
+- CANNOT use Jumbo frames across inter-region VPC peering.
 
 
+Connecting to On-Premises Network
+--------
+1) Site-to-Site VPN - VGW
+    - A Virtual Private Gateway (VGW) must be configured on AWS side.
+    - Must give Autonomous System Number (ASN). It identifies the network on AWS
+      side.
+    - On Customer side, a Customer GW must be configured in AWS Console.
+        - Indicate Static or Dynamic routing. Static means fixed IP address.
+          Dynamic means BGP based.
+        - Can also give Certificate based VPN
+        - Not all things are clear for me here.
+    - AWS creates 2 endpoints in 2 AZs, connecting to CGW. Each endpoint is
+      1.25Gbps. AWS uses only 1 connection and other as failover.
+
+2) AWS Direcct Connect - Physical Connection
+    AWS Network <----> AWS Router <----> Customer Router <----> On-Prem Network
+    - Above is representation of physical connections
+    - 3 types of Interfaces on top of above physical connections
+        - Private VIF: to connect to VPCs using private IPs, directly or via
+                       Direct Connect GW
+        - Transit VIF: to connect to AWS Transit GWs via Direct Connect GW
+        - Public VIF: to access all AWS public services using public IP
+                      addresses
+
+    - All VIFs are 802.1q VLANs with BGP Peering
+        - A VLAN is build from Customer Router to Direct Connect GW
+        - VGW on VPCs connect to Direct Connect GW
+        - See picture at 41:21s to understand
 
 
+AWS Transit Gateway
+- Transit GW sits in middle of VPCs and attaches to them
+- Can connect 1000s of VPCs
+- AWS Transit GW can be used in On-Prem use case. It'll have 2 tunnels to
+  Customer GW. Route tables in VPCs and TGW must be updated with correct
+  entries. Time 44:20s
+- With Direct Connect GW (DX GW), a Transit VIF is created in AWS Router in
+  below diagram
+    AWS Network <----> AWS Router <----> Customer Router <----> On-Prem Network
+
+    - Transit VIF attaches to DX GW, which attaches to TGW. Time: 44:50
+
+
+Name Resolution (DNS): Amazon Route 53 Resolver
+
+
+Reference:
+[1] AWS Networking Fundamentals re:Invent talk
 
 
 @@@@@@@@@@@@@@@       AWS  X-Ray      @@@@@@@@@@@@@@@@@
 
 Concepts:
+--------
 Trace - end-to-end data related to single request across services
 Segments - Portion of trace corresponding to single service.
 Sub-Segments - Remote call or local compute sections within a service
