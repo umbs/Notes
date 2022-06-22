@@ -3914,10 +3914,12 @@ Sampling Configuration:
 - A subset of requests must be traced
 - Best practice: Trace all errors
 
-X-Ray can be used Off-Cloud, not just on AWS
+X-Ray can be used Off-Cloud, any cloud, not just on AWS
 
 Service Map
 Traces
+
+X-Ray SDK
 
 X-Ray Daemon
     Runs locally, collects traces over UDP from your application and sends to
@@ -3928,6 +3930,74 @@ X-Ray API
     BatchGetTraces
     GetServiceGraph
     GetTraceSummaries
+
+Code
+----
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.core import patch_all
+from aws_xray_sdk.core import patch   <<<< Look into this
+from aws_xray_sdk.core.context import Context
+
+xray_recorder.configure()
+xray_recorder.configure(
+    sampling=False,
+    sampling_rules=SAMPLING_RULE_JSON,
+    context_missing='LOG_ERROR',
+    service='Name of service',
+    context=Context(),
+    streaming_threshold=0)
+)
+
+context_missing – Set to LOG_ERROR to avoid throwing exceptions when your
+                  instrumented code attempts to record data when no segment is open.
+
+daemon_address – Set the host and port of the X-Ray daemon listener.
+
+service – Set a service name that the SDK uses for segments.
+
+plugins – Record information about your application's AWS resources.
+
+sampling – Set to False to disable sampling. This disables sampling and global
+           recorder is enabled. ALL incoming requests are recorded
+
+sampling_rules – Set the path of the JSON file containing your sampling rules.
+sampling_rules=<rules>
+    <rules> is either dictionary of rules or absolute path to JSON file
+    containing sampling rules
+
+xray_recorder.begin_segment()
+xray_recorder.end_segment()
+xray_recorder.begin_subsegment()
+xray_recorder.end_subsegment()
+
+xray_recorder.current_subsegment()
+xray_recorder.record_subsegment(    # Look at examples on https://grep.app
+    ...
+)
+
+xray_recorder.put_annotation(key, value)
+xray_recorder.put_metadata(key, dict, value)
+
+Using decorator
+@xray_recorder.capture('some name')
+def function():
+  ...
+
+
+Sample Code:
+https://github.com/aws/aws-xray-sdk-python/blob/master/tests/test_recorder.py
+
+
+Reference:
+
+
+@@@@@@@@@@@@@@@       Sourcegraph  Search   @@@@@@@@@@@@@@@@@@
+Three types of search
+    - Literal
+    - Regular Expression
+    - Structural
+They can be changed in search bar, by clicking one of the 3 small icons
+
 
 
 
