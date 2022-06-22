@@ -2438,6 +2438,62 @@ message. Saves up to 400x cost (if there's 20 polls/s)
         - Individual requests can be marked as 'long poll'
 
 
+What is SNS?
+    - SNS is a fully managed pub/sub messaging service from AWS.
+    - It is used in application integration and allows apps and services to
+      communicate with messages when these are decoupled.
+    - Messages are in JSON format and are pushed to subscribers.
+    - ‘Topics’ are logical access points and allow recipients to subscribe to
+      identical copies of the same message.
+    - Notifications are then formatted for the protocol receiving the message
+      and can be delivered as text messages, emails, and to SQS or HTTP
+      endpoints.
+
+When to use SNS?
+    - SNS can be used to send large numbers of time-sensitive messages to
+      end-users in the form of a push notification, SMS and email. Clients can
+      subscribe to topics and specify the endpoint.
+    - In example in [1], we see how SNS can be used in conjunction with Lambda
+      to perform calculations. By using SNS we ensure that the message gets
+      through.
+
+
+What is SQS?
+    - SQS is a fully managed message queue service from AWS.
+    - It is used in application integration and allows apps and services to
+      communicate with messages when these are decoupled.
+    - SQS can store messages up to 256KB in any format for up to 12 hours while
+      waiting for a system to pull them to process them.
+    - If the job isn’t processed before the time out expires the message will be
+      placed back in the queue, which could cause the message to be processed
+      twice.
+    - Auto-scaling groups can monitor the SQS group and scale up and down
+      depending on the number of messages in the queue.
+    - The Standard queue uses ‘best-effort’ ordering, FIFO queues guarantee
+      messages are pulled in the order that they arrive.
+    - By default short polling returns messages immediately. Long polling waits
+      until there is a message in the queue or until the timeout expires.
+
+
+When to use SQS?
+    - SQS can be used to throttle workload and process work in batches with
+      non-time sensitive messages being stored for up to 14 days.
+    - In this example we see how using Dead Letter Queues allows error handling
+      logic from the application logic
+
+When to use them together?
+    - By combining SNS topics and SQS queues together, you can send immediate
+      and persisted messages.
+    - In this example, we see how to use the two services and Lambda together.
+    - The architecture involves S3 event notifications, an SNS topic, an SQS
+      queue, and a Lambda function sending a message to the Slack channel.
+    - This shows how it is possible to implement an event processing pipeline
+      with potentially multiple consumers and producers.
+
+
+Reference:
+[1] https://helenanderson.co.nz/sns-sqs/
+
 =========================================================================
 Your Vitual Data Center: VPC Fundamentals and Connectivity Options
 https://www.youtube.com/watch?v=jZAvKgqlrjY
