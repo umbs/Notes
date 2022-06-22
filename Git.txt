@@ -81,6 +81,18 @@ How to make an existing Git branch track a remote branch?
 
 http://stackoverflow.com/questions/520650/make-an-existing-git-branch-track-a-remote-branch
 
+****
+How to see detailed history of a single file
+
+git log --follow -p -- <path-to-file>
+
+The two important options are:
+    -p says “show all patch information”
+    --follow tells git to also show information in the event a file has been renamed
+
+https://stackoverflow.com/a/31306082/630866
+https://alvinalexander.com/git/show-commit-history-detailed-for-single-file/
+
 ****************************************************************************
 Patching:
 --------
