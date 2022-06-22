@@ -41,6 +41,49 @@ http://users.ece.utexas.edu/~adnan/pike.html
 
 @@@@@@@@@@   RIPGREP  @@@@@@@@
 
+rg –help | more		Make help useful on Windows
+rg -l NEEDLE		List matching files only
+rg -c NEEDLE		List matching files, including a count
+rg -i NEEDLE		Search case-insensitively
+rg --no-filename NEEDLE			Don’t print filenames, handy when you care about the match more than the file
+rg -v NEEDLE		Invert matching: show lines that do not match
+rg NEEDLE README.md				Search only in specified file(s)
+rg -c ‐‐sort path|modified|accessed|created NEEDLE			Sort the results (-sortr to reverse)
+rg -g '*.nuspec' NEEDLE			Only search in *.nuspec files (can use multiple -g)
+rg -g '!*.nuspec' NEEDLE		Search in everything but *.nuspec files
+rg -p NEEDLE | less -R			Force pretty printed output even in pipes
+rg -e NEEDLE1 -e NEEDLE2		Search for multiple patterns
+rg -z NEEDLE		Search in gzip, bzip2, xz, LZ4, LZMA, Brotli and Zstd compressed files
+rg --type-list		Displays built-in available types and their corresponding globs
+rg -tcs -tconfig	Search in file types cs and config
+rg -Tconfig			Don’t search in file type config
+
+
+rg image utils.py		Search in a single file utils.py
+rg image src/			Search in dir src/ recursively
+rg image				Search image in current dir recursively
+rg '^We' test.txt		Regex searching support (lines starting with We)
+rg -i image				Search image and ignore case (case-insensitive search)
+rg -s image				Smart case search
+rg -F '(test)'			Search literally, i.e., without using regular expression
+rg image -g '*.py'		File globing (search in certain files), can be used multiple times
+rg image -g '!*.py'		Negative file globing (do not search in certain files)
+rg image --type py or rg image -tpy1
+						Search image in Python file
+
+rg image -Tpy			Do not search image in Python file type
+rg -l image				Only show files containing image (Do not show the lines)
+rg --files-without-match image	Show files not containing image
+rg -v image				Inverse search (search files not containing image)
+rg -w image				Search complete word
+rg --count				Show the number of matching lines in a file
+rg --count-matches		Show the number of matchings in a file
+rg neovim --stats		Show the searching stat (how many matches, how many files searched etc.)
+
+
+Reference:
+[1] https://www.philipdaniels.com/blog/2019/ripgrep-cheatsheet/
+[2] https://jdhao.github.io/2020/02/16/ripgrep_cheat_sheet/
 
 @@@@@@@@@@   CFFI  @@@@@@@@@@@
 - C Foreign Function Interface.
@@ -3825,7 +3868,7 @@ Connecting VPCs
 - VPC Peering can work in same region, across regions and across accounts too.
 
 - VPC Peering within same region is easy
-    - Setup peering in Console. VPC Peering starts as pcx-.... 
+    - Setup peering in Console. VPC Peering starts as pcx-....
     - Update Route table. Destination IP range must go through VPC Peering
     - Peer must accept traffic from other VPC
     - Each VPC can have multiple Peering
