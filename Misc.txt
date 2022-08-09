@@ -68,12 +68,13 @@ rg -s image				Smart case search
 rg -F '(test)'			Search literally, i.e., without using regular expression
 rg image -g '*.py'		File globing (search in certain files), can be used multiple times
 rg image -g '!*.py'		Negative file globing (do not search in certain files)
-rg image --type py or rg image -tpy1
+rg image --type py or rg image -tpy
 						Search image in Python file
 
 rg image -Tpy			Do not search image in Python file type
 rg -l image				Only show files containing image (Do not show the lines)
-rg --files-without-match image	Show files not containing image
+rg --files-without-match image
+                        Show files not containing image
 rg -v image				Inverse search (search files not containing image)
 rg -w image				Search complete word
 rg --count				Show the number of matching lines in a file
@@ -4150,4 +4151,49 @@ Resources
 - There are > 700 types of resource
     AWS::aws-product-name::data-type-name
 
+
+
+@@@@@@@@@@@@@@@       Beancount Double-Entry Accounting @@@@@@@@@@@@@
+
+
+- Beancount, double-entry accounting.
+    - Account must start with one of the following
+        - Assets
+        - Liabilities
+        - Income
+        - Expense
+        - Equity
+
+    - Assets = What you own
+    - Liabilities = What you owe
+    - Equity = What you own *before* you started
+    - Income = What you earn
+    - Expenses = What you spend
+    ---> Asset = Liabilities + Equity + Income - Expenses
+
+    - Rules of the game
+        - "Debit" increases an asset account.
+        - "Credit" decreases an asset account.
+        - "Liability" accounts are reveresed.
+        - "Transaction" is Credit or Debit with a timestamp.
+        - All transactions will sum to zero (they will "balance").
+        - Double-Entry Accounting = Credit from one account, Debit into another account.
+        - Income and Expense are accounts in their own right, with balances.
+        - Special account type "Equity" is used when getting started.
+        - Each account handles only *one* type of currency.
+
+
+
+HOW TO BOOKKEEPING?
+    - Step 1: Take a complete inventory of *everything* you own or owe.
+    - Step 2: Everytime you move money from one place to another, write it
+      down. Every transaction must balance to zero.
+    - Step 3: Keep doing Step 2 forever.
+
+
+
+2022, Aug 6 (Sat)
+- Paid Zonasha Elegance Maintainence fee for Rs. 5100+
+- Book train tickets to Aadurru for Nov 4th, for Rs. 7100
+- Paid GIIS fee for Aarushi for $60,000
 
