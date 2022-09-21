@@ -1936,7 +1936,7 @@ datetime.now().strftime('%Y-%h-%d')     '2022-Feb-16'
 datetime.now().strftime('%Y-%m-%d-%H')          '2022-02-16-10'
 datetime.now().strftime('%Y-%m-%d-%H:%M:%S')    '2022-02-16-10:32:36'
 datetime.now().strftime('%Y-%m-%d-%H:%M:%S%p')  '2022-02-16-10:32:36AM'
-datetime.now().strftime('%Y-%m-%d-%H:%M:%S%f')  '2022-02-16-10:32:36:01995800'
+datetime.now().strftime('%Y-%m-%d-%H:%M:%S:%f')  '2022-02-16-10:32:36:01995800'
 
 
 datetime.now().strftime('%s')           '1645036702'
@@ -1964,13 +1964,13 @@ Reference:
         # type indicates ... type
         # 'required' is boolean type
 
-    # Parse the argument
+    # Parse the arguments
     args = parser.parse_args()
 
 The add_argument() method
 -------------------------
 ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])
-Define how a single command-line argument should be parsed. Each parameter has its own more detailed description below, but in short they are:
+Define how a single command-line argument should be parsed. Each parameter has its own detailed description below, but in short they are:
 
 name or flags - Either a name or a list of option strings, e.g. foo or -f, --foo.
 action - The basic type of action to be taken when this argument is encountered at the command line.
