@@ -4153,7 +4153,19 @@ Resources
 
 
 
-@@@@@@@@@@@@@@@       Beancount Double-Entry Accounting @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@       Pacal vs Camel vs Snake Case         @@@@@@@@@@@@@
+Pascal Case = PascalCase
+    Used for Class names
+
+Camel Case = camelCase
+    Used for variable names in classes, method names,
+
+Snake Case = snake_case
+    Used in scripting languages, for file names
+
+Kebab Case = kebab-case
+
+@@@@@@@@@@@@@@@   Beancount Double-Entry Accounting    @@@@@@@@@@@@@
 
 
 - Beancount, double-entry accounting.
@@ -4192,8 +4204,97 @@ HOW TO BOOKKEEPING?
 
 
 
-2022, Aug 6 (Sat)
-- Paid Zonasha Elegance Maintainence fee for Rs. 5100+
-- Book train tickets to Aadurru for Nov 4th, for Rs. 7100
-- Paid GIIS fee for Aarushi for $60,000
+@@@@@@@@@@@@@@@          KQL (KUSTO QUERY LANGUAGE)      @@@@@@@@@@@@@
+
+- This tutorial is primarily to use KQL to query DBs in Azure.
+
+- Azure Data Explorer Cluster
+    - It's a place to connect various DBs in Azure and query them using KQL
+- https://web.kusto.windows.net/clusters
+    - A place to play around with KQL
+    - There's sample DBs there.
+- Azure Data Studio is another tool to run KQL queries.
+
+- Commands:
+    .show databases
+    .show database
+    .show cluster databases
+    .show database schema
+    .alter database prettyname
+    .execute database script
+
+- ABANDONED [1] after 3 videos. Not useful to me at this point.
+
+    SecurityEvent
+    | take 10
+
+
+    TimeGenerated is automatically added by Azure on the logs.
+    SecurityEvent
+    | where TimeGenerated >= ago(1d)
+
+    SecurityEvent
+    | where TimeGenerated >= now(-15m)
+
+    SecurityEvent
+    | where TimeGenerated >= now(-15m)
+    | project TimeGenerated, Account, Computer, EventID
+
+    SecurityEvent
+    | where TimeGenerated >= now(-15m)
+    | where EventID == 4625
+    | project TimeGenerated, Account, Computer, EventID
+
+    SecurityEvent
+    | where TimeGenerated >= now(-15m) and EventID == 4625
+    | project TimeGenerated, Account, Computer, EventID
+
+    SecurityEvent
+    | where TimeGenerated >= now(-15m) and EventID == 4625
+    | project TimeGenerated, Account, Computer, EventID
+    | summarize FailedLogons = count() by Computer
+
+    SecurityEvent
+    | where TimeGenerated >= now(-15m) and EventID == 4625
+    | project TimeGenerated, Account, Computer, EventID
+    | summarize FailedLogons = count() by Computer
+    | order by FailedLogons
+
+    #  following chart can be pinned to a dashboard.
+    SecurityEvent
+    | where TimeGenerated >= now(-15m) and EventID == 4625
+    | project TimeGenerated, Account, Computer, EventID
+    | summarize FailedLogons = count() by Computer
+    | order by FailedLogons
+    | render piechart
+
+- Filter by `where` clause as soon as possible.
+- Filter by timestamp (`TimeGenerated`) quickly.
+
+    Perf
+    | count
+
+    Perf
+    | where ObjectName == "System"
+    | where CounterName == "System Up Time" or CounterName == "Uptime"
+    | extend UpTime = CounterValue * 1s
+    | project  TimeGenerated, Computer, UpTime, InstanceName
+    | summarize arg_max(TimeGenerated, *) by Computer
+    | order by UpTime desc
+
+
+
+
+
+Reference:
+[1] https://youtube.com/playlist?list=PLWf6TEjiiuIDDXxYJQryn0KxZ5OjdG83n
+[2] KQL: https://youtu.be/DuWBLsgqhaI
+[3] KQL Overview: https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@          SQLite (PYTHON)        @@@@@@@@@@@@@@@@@@@@@@
+
+
+
 
