@@ -2546,3 +2546,24 @@ AWS VPN Basics
 
 AWS Direct Connect Basics
 ---
+
+
+@@@@@@@@@@@@@@@@@@     SYSTEM DESIGN NOTES     @@@@@@@@@@@@@@@@@@@@@@
+Databases:
+
+RDBMS: MySQL, PostgreSQL, Oracle,
+NoSQL: DynamoDB, CouchDB, Cassandra, MongoDB, HBase, Neo4j, etc
+    - Key-Value stores, Graph stores, Column stores and Document stores
+    - Join's are not supported.
+    - When to use NoSQL?
+        - Data is unstructured
+        - Requires super low latency (not so sure)
+        - Need to store *massive* amounts of data
+
+Vertical Scaling vs Horizontal Scaling
+    - VS has hard limit. Cannot scale beyond a point.
+    - VS does not have failover or redundancy.
+    - HS can scale infinitely, in theory.
+
+
+
