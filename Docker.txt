@@ -4,8 +4,9 @@ Commands:
 ---------
 sudo usermod -aG docker <username>
 
-// list containers (running, stopped, exited etc)
+// list running containers
 docker ps
+// list all containers
 docker ps -aq
 docker ps -a --filter <options>
     docker ps -af "name=bhaskar"
@@ -21,9 +22,18 @@ docker start `docker ps -q -l`  # restart it in the background
 docker attach `docker ps -q -l` # reattach the terminal & stdin
 
 
-docker stop [image-id]
-docker rm [image-id]
+// stop a running container
+docker stop [container-id]
+// remove a container
+docker rm [container-id]
+// clean up all container
+docker rm -f $(docker ps -aq)
 
+docker rmi [image-id]
+
+
+// clean all unnecessary items like dangling containers, unused images, logs etc
+docker system prune --all
 
 
                     INTRO TO DOCKER
