@@ -28,7 +28,7 @@ How to fix log of last committed message.
   git commit --ammend -author "New Author Name <email@address.com>"
 
 ****
-How to fix logs of last few committed messages. Multple ways to do this:
+How to fix logs of last few committed messages. Multiple ways to do this:
   (a) Using git rebase:
      - `git rebase -i $parent_of_flawed_commit`
      - i) Editor will pop up. Change `pick` to `edit` or appropriate
@@ -317,14 +317,14 @@ git hash-object
         // comes from stdin instead of a file.
 
 git cat-file -p SHA
-git cat-file -t SHA // gives type of SHA
-git cat-file blob SHA // gives content of the blob (if it's blob)
+git cat-file -t SHA     // gives type of SHA
+git cat-file blob SHA   // gives content of the blob (if it's blob)
 git cat-file commit SHA // gives detailed info about SHA
 
-git ls-tree SHA // if the SHA is that of a tree, list its contents
+git ls-tree SHA     // if the SHA is that of a tree, list its contents
 git ls-tree -d SHA  // list only tree within SHA
 git ls-tree --name-only // only blobs (files)
-git ls-tree -r SHA // recursively list the tree
+git ls-tree -r SHA  // recursively list the tree
 
 git ls-files
 
@@ -342,7 +342,7 @@ SHA3 Examples 5.1  <<< out of order
 SHA2 Examples 4.2
 SHA1 Examples 4.1
 
-$ git rebase -i SHA1
+$ git rebase -i SHA2
     - This will open editor in REVERSE commit order, like this
 
     pick SHA3 Examples 5.1  <<< move this to right place
