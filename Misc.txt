@@ -4205,6 +4205,9 @@ HOW TO BOOKKEEPING?
 
 
 @@@@@@@@@@@@@@@          KQL (KUSTO QUERY LANGUAGE)      @@@@@@@@@@@@@
+- Best Practice:
+    - Always `limit`
+    - Always use `timestamp` or range
 
 - This tutorial is primarily to use KQL to query DBs in Azure.
 
@@ -4282,15 +4285,113 @@ HOW TO BOOKKEEPING?
     | summarize arg_max(TimeGenerated, *) by Computer
     | order by UpTime desc
 
+- There's a hint, to read help page of a keyword. Click the '>' in the suggestion box.
 
+    SecurityEvent
+    | where Channel == 'Security'
+    | distinct Activity
+
+
+- `summarize` is group by a certain field.
+- `getschema` tells fields and their datatypes.
+
+- JOINS
+    - innerunique (default)
+        - Get all records, but ignore multiple records on the key/value residing on left table.
+        - T1 | join (T2) on CommonColumn
+
+        Table 1                 Table 2                 Merged Table
+        =======                 =======                 ============
+        Name    Alignment       Name        MLevel      Name    Alignment   MLevel
+        Luke    Light           Luke        25000       Luke    Light       25000
+        Anakin  Dark            Anakin      27000       Anakin  Dark        27000
+
+    - inner
+        - Get all records where the common column matches
+        - T1 | join kind=inner (T2) on CommonColumn
+
+        Table 1                 Table 2                 Merged Table
+        =======                 =======                 ============
+        Name    Alignment       Name        MLevel      Name    Alignment   MLevel
+        Luke    Light           Luke        25000       Luke    Light       25000
+        Anakin  Light           Anakin      27000       Anakin  Light       27000
+        Anakin  Dark                                    Anakin  Dark        27000
+
+    - Outer Join
+        - The result of a outer join will ALWAYS contain all records of the
+          defined kind (left, right, full) even if the join condition doesn't
+          find any matching records.
+
+        - leftouter
+            T1 | join kind=leftouter (T2) on key
+
+            Table 1                 Table 2                 Merged Table
+            =======                 =======                 ============
+            Name    Alignment       Name        MLevel      Name    Alignment   MLevel
+            Luke    Light           Luke        25000       Luke    Light       25000
+            Anakin  Light           Anakin      27000       Anakin  Light       27000
+            Jing    Light                                   Jing    Light
+
+        - rightouter
+            T1 | join kind=rightouter (T2) on key
+        - fullouter
+
+    - Anti Join
+        - Return all records that do not match any record from other side.
+        - T1 | join kind=leftanti (T2) on key
+
+            Table 1                 Table 2                 Merged Table
+            =======                 =======                 ============
+            Name    Alignment       Name        MLevel      Name    Alignment   MLevel
+            Luke    Light           Luke        25000       Jing    Light
+            Anakin  Light           Anakin      27000
+            Jing    Light
+
+        - leftanti
+        - rightanti
+
+    - Semi Join
+        - Return columns only from one side.
+        - T1 | join kind=leftsemi (T2) on key
+            Table 1                 Table 2                 Merged Table
+            =======                 =======                 ============
+            Name    Alignment       Name        MLevel      Name    Alignment   MLevel
+            Luke    Light           Luke        25000       Luke    Light
+            Anakin  Light           Anakin      27000       Anakin  Light
+            Jing    Light
+
+        - leftsemi
+        - rightsemi
+
+
+- UNION
+    union *
+        // union of all tables
+
+    union *
+    | where * has 'some string'
+
+    union *Logs
+        // union of all tables endings with `Logs` name
+
+    union T1, T2
+        // Union of two tables (T1 and T2)
+
+    union isfuzzy=true T1, T2, T3
+        // Enable fuzzy union. It enables union even if something does not exist.
+
+    union withsource=SourceTable kind=inner *
+        // This query will search all tables. "kind=inner" ensures only similar
+        // columns are outputted in the result. `withsource` adds another
+        // column that specifies what table that row came from.
 
 
 
 Reference:
-[1] https://youtube.com/playlist?list=PLWf6TEjiiuIDDXxYJQryn0KxZ5OjdG83n
+[1] https://youtube.com/playlist?list=PLWf6TEjiiuIDDXxYJQryn0KxZ5OjdG83n  -- Not so relevant
 [2] KQL: https://youtu.be/DuWBLsgqhaI
 [3] KQL Overview: https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/
-
+[4] https://www.youtube.com/playlist?list=PLM3TOIlrnaI4hwmXTxrYGE665q-9fyTfB
 
 
 @@@@@@@@@@@@@@@@@@@@@@@          SQLite (PYTHON)        @@@@@@@@@@@@@@@@@@@@@@

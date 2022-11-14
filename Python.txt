@@ -1298,9 +1298,36 @@ Map, Filter, Reduce and Lambda Functions
 Lambda Functions: Anonymous functions, used as throw away functions and only
 needed once
 - Syntax:
-    lambda inputs : output
-- Example:
-    lambda x : x%2 != 0
+    lambda args: expression
+        You use lambda functions when you need a small function for a short
+        time – for example as an argument of a higher order function like `map`
+        or `filter`
+
+        You first write the word lambda, then a single space, then a comma
+        separated list of all the arguments, followed by a colon, and then the
+        expression that is the body of the function.
+
+        A lambda function can have as many arguments as you need to use, but
+        the body must be one single expression.
+
+        NOTE: You can't give a name to lambda functions, as they are anonymous
+        by definition.
+
+- Examples:
+    1)  lambda x : x%2 != 0
+
+    2)  my_list = [1, 2, 3, 4, 5, 6]
+        new_list = list(map(lambda x: x*2, my_list))
+        print(new_list) # [2, 4, 6, 8, 10, 12]
+
+    3)  my_list = [18, -3, 5, 0, -1, 12]
+        new_list = list(filter(lambda x: x > 0, my_list))
+        print(new_list) # [18, 5, 12]
+
+        checks if a number is positive and use it with filter to create a list
+        of only positive numbers.
+
+    4)
 
 
 Map: Applies a function to all items in an input list and returns a list
@@ -1970,9 +1997,11 @@ Reference:
 The add_argument() method
 -------------------------
 ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])
-Define how a single command-line argument should be parsed. Each parameter has its own detailed description below, but in short they are:
+    Define how a single command-line argument should be parsed. Each parameter
+    has its own detailed description below, but in short they are:
 
-name or flags - Either a name or a list of option strings, e.g. foo or -f, --foo.
+name or flags - Either a name or a list of option strings
+    e.g. foo or -f, --foo.
 action - The basic type of action to be taken when this argument is encountered at the command line.
 nargs - The number of command-line arguments that should be consumed.
 const - A constant value required by some action and nargs selections.
