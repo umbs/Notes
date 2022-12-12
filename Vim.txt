@@ -888,7 +888,7 @@ $ vimhelp python    " this will open vim help for python
 ====================== Vimscript (Talk by Prabir Shresta)  ========================
 :help variables
     string          Job
-    number          Channel        
+    number          Channel
     float           Blob
     null
     dictionary
@@ -925,7 +925,7 @@ let dictionary = {"message": "hello world"}
     let b:buffer_var = "buffer scope"
     let w:window_var = "window scope"
     let t:tab_var = "tab scope"
- 
+
 
 Functions
 ---
@@ -1232,3 +1232,19 @@ Vim - Tutorial on Customizations and Configuration
 1. Initialization
 
 
+----------------------------
+Vim Spellchecking
+
+:set spell spelllang=en_us
+:set nospell
+
+# Only on local buffer
+:setlocal spell spelllang=en_us
+:setlocal nospell
+
+]s  Jump to next mispelled word
+[s  Jump to previous mispelled word
+
+z=  Provide suggestions for word under the cursor.
+zg  Word is correct. Add to dictionary.
+zw  Mark word as incorrect.
