@@ -1,0 +1,38 @@
+                               7
+                ╔════════════════════════════════════╗     ─────────────▶   Authentication flow
+                ║        Validate SAML               ║
+                ║         response and               ║     ═════════════▶   Token flow
+                ║            token                   ║
+                ║                                    ║
+  Return        ║                                    ║
+secure page  8  ║                                    ║            Generates SAML auth
+  to user       ║                               ┌────╩───┐        request (XML format)
+                ║                               │ Web App│          and redirects to
+                ║                               │        │            Windows AD.
+                ║      ┌───────────────────────▶│ Server │ ───────────────────────────────┐
+                ║      │                        │        │                 3              │
+                ║      │                        │        │                                │      User
+                ║      │                        └──▲─────┘                              4 │ authenticated
+                ║      │  2                        ║                                      │
+                ║      │                           ║                                      ▼
+                ║      │ Request                   ║                                  ┌────────┐
+                ║      │access to                  ║                                  │ Active │
+                ║      │ source                  6 ║  Token                           │        │
+                ║      │                           ║ Redirect                         │Directory  (IdP)
+                ║      │                           ║                                  │        │
+                ║      │                           ║                                  │  Server│
+                ║      │        ╔══════════════════╝                                  └───╦────┘
+                ║      │        ║                                                         ║
+                ║      │        ║                                                         ║
+           ┌────▼──────┴────────╩───┐                           5                         ║
+ (browser) │ http://www.example.com │◀════════════════════════════════════════════════════╝
+           └────────────────────────┘                      SAML Token
+                       ▲                                  (XML format)
+                       │
+                       │
+                    1  │ User opens a
+                       │   browser
+                    ┌──┴──┐
+                    │User │
+                    └─────┘
+                  (principal)
