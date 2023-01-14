@@ -528,6 +528,13 @@ $ python -m pylint --errors-only module (or filename)
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    unittest
+                    ========
+
+
+[1] https://docs.python.org/3/library/unittest.html#
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     pytest
                     ======
 - Tests folder should be same level as project folder
@@ -2024,4 +2031,164 @@ dest - The name of the attribute to be added to the object returned by parse_arg
 
 [1] Transforming Code in to Beautiful, Idiomatic Python - Raymond Hettinger
 https://www.youtube.com/watch?v=anrOzOapJ2E&list=WL&index=23&t=19s
+
+
+
+==================    DUNDER/MAGIC/SPECIAL METHODS IN PYTHON     ========
+
+
+Dunder method	    Usage / Needed for
+__init__	        Initialise object
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__init__
+__new__	          Create object
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__new__
+__del__	          Destroy object
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__del__
+__repr__	        Compute “official” string representation / repr(obj)
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__repr__
+            https://mathspp.com/blog/pydonts/str-and-repr
+__str__	          Pretty print object / str(obj) / print(obj)
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__str__
+            https://mathspp.com/blog/pydonts/str-and-repr
+__bytes__	        bytes(obj)
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__bytes__
+__format__	      Custom string formatting
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__format__
+            https://mathspp.com/blog/pydonts/string-formatting-comparison#custom-formatting
+__lt__	          obj < ...
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__lt__
+__le__	          obj <= ...
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__le__
+__eq__	          obj == ...
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__eq__
+__ne__	          obj != ...
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__ne__
+__gt__	          obj > ...
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__gt__
+__ge__	          obj >= ...
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__ge__
+__hash__	        hash(obj) / object as dictionary key
+      Link: https://docs.python.org/3/reference/datamodel.html#object.__hash__
+__bool__	        bool(obj) / define Truthy/Falsy value of object
+      Link:
+__getattr__	      Fallback for attribute access
+      Link:
+__getattribute__	Implement attribute access: obj.name
+      Link:
+__setattr__	      Set attribute values: obj.name = value
+      Link:
+__delattr__	      Delete attribute: del obj.name
+      Link:
+__dir__	          dir(obj)
+      Link:
+__get__	          Attribute access in descriptor
+      Link:
+__set__	          Set attribute in descriptor
+      Link:
+__delete__	      Attribute deletion in descriptor
+      Link:
+__init_subclass__	Initialise subclass
+      Link:
+__set_name__	    Owner class assignment callback
+      Link:
+__instancecheck__	isinstance(obj, ...)
+      Link:
+__subclasscheck__	issubclass(obj, ...)
+      Link:
+__class_getitem__	Emulate generic types
+      Link:
+__call__	        Emulate callables / obj(*args, **kwargs)
+      Link:
+__len__	          len(obj)
+      Link:
+__length_hint__	  Estimate length for optimisation purposes
+      Link:
+__getitem__	      Access obj[key]
+      Link:
+__setitem__	      obj[key] = ... or `obj[]
+      Link:
+__delitem__	      del obj[key]
+      Link:
+__missing__	      Handle missing keys in dict subclasses
+      Link:
+__iter__	        iter(obj) / for ... in obj (iterating over)
+      Link:
+__reversed__	    reverse(obj)
+      Link:
+__contains__	    ... in obj (membership test)
+      Link:
+__add__	          obj + ...
+      Link:
+__radd__	        ... + obj
+      Link:
+__iadd__	        obj += ...
+      Link:
+__sub__ 2 3	      obj - ...
+      Link:
+__matmul__ 2 3	  obj @ ...
+      Link:
+__mul__ 2 3	      obj * ...
+      Link:
+__truediv__ 2 3	  obj / ...
+      Link:
+__floordiv__ 2 3	obj // ...
+      Link:
+__mod__ 2 3	      obj % ...
+      Link:
+__divmod__ 2	    divmod(obj, ...)
+      Link:
+__pow__ 2 3	      obj ** ...
+      Link:
+__lshift__ 2 3	  obj << ...
+      Link:
+__rshift__ 2 3	  obj >> ...
+      Link:
+__and__ 2 3	      obj & ...
+      Link:
+__xor__ 2 3	      obj ^ ...
+      Link:
+__or__ 2 3	      obj | ...
+      Link:
+__neg__	          -obj (unary)
+      Link:
+__pos__	          +obj (unary)
+      Link:
+__abs__	          abs(obj)
+      Link:
+__invert__	      ~obj (unary)
+      Link:
+__complex__	      complex(obj)
+      Link:
+__int__	          int(obj)
+      Link:
+__float__         float(obj)
+      Link:
+__index__         Losslessly convert to integer
+      Link:
+__round__         round(obj)
+      Link:
+__trunc__         math.trunc(obj)
+      Link:
+__floor__         math.floor(obj)
+      Link:
+__ceil__          math.ceil(obj)
+      Link:
+__enter__         with obj (enter context manager)
+      Link:
+__exit__          with obj (exit context manager)
+      Link:
+__await__         Implement awaitable objects
+      Link:
+__aiter__         aiter(obj)
+      Link:
+__anext__         anext(obj)
+      Link:
+__aenter__	      async with obj (enter async context manager)
+      Link:
+__aexit__	        async with obj (exit async context manager)
+      Link:
+
+References:
+[1] https://mathspp.com/blog/pydonts/dunder-methods
+[2] https://holycoders.com/python-dunder-special-methods/
 
