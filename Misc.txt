@@ -4445,3 +4445,101 @@ References:
 [2] https://developer.okta.com/docs/concepts/saml/
 
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@   HELIX editor    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Cheatsheet
+    $ brew install helix
+    $ hx -V
+    $ hx --tutor
+    $ hx --health   # gives LSP integration
+
+@@@@@@@@@@@@@@@@@@      INDIA INCOME TAX LAWS BASIC   @@@@@@@@@@@@@@@@@@@@
+- India's tax system is considered most complex in Asia. (Delloitte)
+- Marginal Tax Rate system. Like slab based system.
+
+- Direct and Indirect Tax.
+- Direct tax: Amount depends on your income.
+- Indirect tax: Everyone pays same amount (like GST) on goods and services.
+
+5 different income "heads".
+  - Income from salary (Income, Pension, ESOP).
+  - Income from House Property.
+    - Rent from a rental property.
+  - Profits and Gains from Businesses.
+  - Income from Capital Gains.
+    - Profits (or losses) from sale of Shares, Bonds, etc.
+  - Income from other sources.
+    - Interest on FD, Savings, Cooperative.
+
+- Gross Total Income is combination of above 5 heads.
+- Gross Income - Deduction = Net Taxable Income
+
+- Exemption:
+  - Income from PPF (Personal Provident Fund) is exempt.
+  - Dividend on shares, up to Rs.10 lakhs are exempt.
+  - Providend fund corpus received on completion of 5 years of service is exempt.
+
+- Deductions under Chapter VIA
+  Section 80C:
+    - PPF, EPF, ELSS, Sukanya Samriddhi Yojana, NSC, Life Insurance Premium,
+      Housing Loan Repayments, SCSS, Tax Saver FDs etc
+    - Limit upto Rs.1,50,000
+
+  Section 80CCD:
+    - Contribution to National Pension Scheme (NPS).
+
+  Section 80D:
+    - Health Insurance Premium + Preventative Checkups.
+
+  Section 80DD:
+    - Medical expenditure for dependents.
+
+  Section 80E:
+    - Interest on Education Loans.
+
+  Section 80G:
+    - Donations to Charitable Trusts.
+
+  Section 80GGA:
+    - Donations to Scientific Research.
+
+  Section 80GGC:
+    - Donations to political parties.
+
+  Section 80TTA:
+    - Interest on Savings is deductible.
+
+  Section 80TTB:
+    - Interest for Senior Citizens.
+
+  Section 80U:
+    - Medical expenses for own disability.
+
+- If Net Taxable Income < Rs.5,00,000 then no need to pay taxes. Applicable
+  only to Individuals Resident in India. This is called Rebate.
+
+- Tax Components:
+  - Income Tax
+  - Rebate
+  - Surcharge
+  - Health and Education Cess
+
+- Ways to Pay Taxes
+  1. Advance Tax: To be paid by tax payer in installments.
+  2. Tax Deducted at Source (TDS): Deducted by otthers, at the time of receipt of income.
+  3. Self Assessment Tax: Paid at the time of filing ITR (Income Tax Return)
+
+- Financial Year (or Previous Year) and Assessment Year.
+
+  Period Covered                FY/PY           AY              Due date for filing ITR
+  --------------                ----------      ----------      -----------------------
+  From 1st April 2019 to        FY 2019-20      AY 2020-21      31st July 2020
+  March 31st, 2020
+
+  From 1st April 2020 to        FY 2020-21      AY 2021-22      31st July 2021
+  March 31st, 2021
+
+[1] https://www.youtube.com/watch?v=iTUv3GlFsds
+
+
