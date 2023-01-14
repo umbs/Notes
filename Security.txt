@@ -305,9 +305,15 @@ Beginner Level CTFs
 - Many other that I bookmarked
 
 
+Linux Commands for Hacking:
+  Text manipulation: sed/awk/grep, cut, find/locate, tr, uniq, wc, sort,
+  DNS: dig/host
+  Misc: lsof, symlink, file, hexdump, xxd, xargs, parallel,
+
+
 Reference:
 [1] Talk at Palo Alto Networks by Security Researcher
-
+[2] https://twitter.com/NahamSec/status/1613625889794949121?s=20
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         NOTES FROM [1]
                         =============
