@@ -1256,3 +1256,238 @@ Forms:
 
 
 
+@@@@@@@@@@@@@@@@@@      INDIA INCOME TAX LAWS BASIC   @@@@@@@@@@@@@@@@@@@@
+- India's tax system is considered most complex in Asia. (Delloitte)
+- Marginal Tax Rate system. Like slab based system.
+
+- Direct and Indirect Tax.
+- Direct tax: Amount depends on your income.
+- Indirect tax: Everyone pays same amount (like GST) on goods and services.
+
+5 different income "heads".
+  - Income from salary (Income, Pension, ESOP).
+  - Income from House Property.
+    - Rent from a rental property.
+  - Profits and Gains from Businesses.
+  - Income from Capital Gains.
+    - Profits (or losses) from sale of Shares, Bonds, etc.
+  - Income from other sources.
+    - Interest on FD, Savings, Cooperative.
+
+- Gross Total Income is combination of above 5 heads.
+- Gross Income - Deduction = Net Taxable Income
+
+- Exemption:
+  - Income from PPF (Personal Provident Fund) is exempt.
+  - Dividend on shares, up to Rs.10 lakhs are exempt.
+  - Providend fund corpus received on completion of 5 years of service is exempt.
+
+- Deductions under Chapter VIA
+  Section 80C:
+    - PPF, EPF, ELSS, Sukanya Samriddhi Yojana, NSC, Life Insurance Premium,
+      Housing Loan Repayments, SCSS, Tax Saver FDs etc
+    - Limit upto Rs.1,50,000
+
+  Section 80CCD:
+    - Contribution to National Pension Scheme (NPS).
+
+  Section 80D:
+    - Health Insurance Premium + Preventative Checkups.
+
+  Section 80DD:
+    - Medical expenditure for dependents.
+
+  Section 80E:
+    - Interest on Education Loans.
+
+  Section 80G:
+    - Donations to Charitable Trusts.
+
+  Section 80GGA:
+    - Donations to Scientific Research.
+
+  Section 80GGC:
+    - Donations to political parties.
+
+  Section 80TTA:
+    - Interest on Savings is deductible.
+
+  Section 80TTB:
+    - Interest for Senior Citizens.
+
+  Section 80U:
+    - Medical expenses for own disability.
+
+- If Net Taxable Income < Rs.5,00,000 then no need to pay taxes. Applicable
+  only to Individuals Resident in India. This is called Rebate.
+
+- Tax Components:
+  - Income Tax
+  - Rebate
+  - Surcharge
+  - Health and Education Cess
+
+- Ways to Pay Taxes
+  1. Advance Tax: To be paid by tax payer in installments.
+  2. Tax Deducted at Source (TDS): Deducted by otthers, at the time of receipt of income.
+  3. Self Assessment Tax: Paid at the time of filing ITR (Income Tax Return)
+
+- Financial Year (or Previous Year) and Assessment Year.
+
+  Period Covered                FY/PY           AY              Due date for filing ITR
+  --------------                ----------      ----------      -----------------------
+  From 1st April 2019 to        FY 2019-20      AY 2020-21      31st July 2020
+  March 31st, 2020
+
+  From 1st April 2020 to        FY 2020-21      AY 2021-22      31st July 2021
+  March 31st, 2021
+
+[1] https://www.youtube.com/watch?v=iTUv3GlFsds
+
+
+Tax Saving Investments
+======================
+ELSS = Equity Linked Savings Scheme
+  Benefits:
+    - Lowest lockin period: 3 years of all options. Cannot withdraw even with
+      penalty.
+    - High CAGR (about 12%).
+    - Section 80C of Income Tax (upto 1.5 lakhs exemption per year).
+
+  Cons:
+    - Linked to stock. So, volatility.
+
+  How:
+    - Banks have this ability to set it up, in about a week.
+    - Take advise from Bank Fund manager.
+
+
+ULIP = Unit Linked Insurance Plan
+  Benefits:
+    - Safer than ELSS. Combines insurance with equity and others.
+    - 5 years lockin period.
+    - Section 80C of Income Tax (upto 1.5 lakhs exemption per financial year).
+
+  Cons:
+    - There is entry/exit costs.
+
+
+PPF = Public Provident Fund
+  - Most popular tax savings investment fund.
+  - Fixed rate (about 8%) return. Risk is independent of market volatility.
+  - Central Govt backing.
+
+  Cons:
+    - 15 year lockin period.
+
+
+NPS
+  - Controlled by Government. Safer.
+  - Lockin period until retirement. Excellent retirement savings.
+  - Govt invests NPS funds in equity. About 50%.
+  - Much lower returns than ELSS and ULIP.
+
+
+Credit Cards
+============
+- Banks view Credit Cards as a lending tool for the rich. So, they come with ton of benefits/perks.
+- American Express Membership Rewards Card: Lot of benefits.
+  - 1 point for Rs. 50
+  - 1000 points for 4 transactions of Rs. 1000 or more.
+  - Reach 18000 points in year and get Rs. 8000 Amazon gift  voucher.
+- HDFC Regalia first.
+  - Best for international travel.
+  - Airport lounge various places.
+- ICICI Amazon Pay Credit Card
+  - Best for online shopping.
+- HDFC Diners Club Miles
+  - Not accepted in many places.
+  - But lots of benefits.
+
+
+Best and Safest Long Term Fixed Investment Options
+==================================================
+PPF: Public Provident Fund
+  - Triple E Fund
+    - Triple Tax Exemption Fund.
+    - Tax Exemption on Investing Amount, Interest Earned and Withdrawal.
+    - Returns around 8%.
+    - 15 year lockin period.
+
+Debt Mutual Funds
+  - Equity Mutual Funds invest in Stock. Debt Mutual Funds invest in Government debt. Largely very safe.
+  - No lockin period. But also, no tax saving ability.
+
+
+NPS: National Pension Scheme
+  - Suggest to put Rs. 500/month.
+  - Can only withdraw at retirement.
+  - 40% of withdrawl is tax free.
+
+NSC: National Savings Certificate.
+  - about 8% interest rate.
+  - Post Office.
+  - 5 or 10 years lockin.
+  - Tax Exemption up to 1.5 lakhs under Section 80C
+
+Blue Chip Stocks:
+  - Using Demat account.
+  -
+
+
+SIP: Systematic Investment Plan
+===
+- Similar to Dollar Cost Averaging.
+- Download Zerodha or similar mutual fund apps and setup automatic periodic investment.
+- Your banks also will have this option, without having to open Demat account.
+
+
+Best Medical Insurance
+======================
+- Best to purchase through company as premiums are decent.
+- Max coverage per year: Have it >= 7 lakhs. Birth related problems are not covered.
+- Carefully read their claims process.
+- Two types of claims process:
+  - Cashless:
+    - At partner hospitals, just provide the insurance and pay some minimum
+      amount.
+  - Mediclaim:
+- Check for Lifetime Renewability. You can keep the plan even on getting older.
+- Check for Maternity claims if kids are planned in future.
+
+- Ask insurance company how much of hospital bills you are charged? 50%, 60%?
+  Insurance tends to hide this fact.
+
+
+Life Insurance
+==============
+2 kinds of Life Insurance:
+    Whole Life Insurance
+    Term Life Insurance
+
+
+
+Demat Account
+=============
+- Required to invest in stock market via your bank.
+- Opening fee, transaction fee etc.
+
+
+Index Funds
+===========
+- Sensex, Nifty
+- Nifty:
+  - Index for National Stock exchange (NSE)
+  - Weighted average of top 50 stocks in India.
+  - about 11000 in July 2020.
+  - Index Fund is a Mutual Fund mimicing Nifty.
+
+- Sensex:
+  - Index for Bombay Stock Exchange (BSE)
+
+- Both funds are more or less same. Various companies offer these funds (ICICI Index Funds etc)
+
+
+Reference:
+- Ankit Chawla Millennial Paisa Podcast
+
