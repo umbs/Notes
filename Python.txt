@@ -531,8 +531,54 @@ $ python -m pylint --errors-only module (or filename)
                     unittest
                     ========
 
+- unittest is inspired by JUnit
+
+- Terms:
+  test fixture: preparation needed to perform test - setup and cleanup.
+                Can create temporary DBs, start a server etc.
+  test case:
+  test suite:
+  test runner: The component which orchestrates the execution of tests.
+
+
+Example:
+
+        import unittest
+
+        class TestStringMethods(unittest.TestCase):   # must inherit unittest.TestCase
+
+            def test_upper(self):   # names must start test_xxxx
+                self.assertEqual('foo'.upper(), 'FOO')
+
+            def test_isupper(self):
+                self.assertTrue('FOO'.isupper())
+                self.assertFalse('Foo'.isupper())
+
+            def test_split(self):
+                s = 'hello world'
+                self.assertEqual(s.split(), ['hello', 'world'])
+                # check that s.split fails when the separator is not a string
+                with self.assertRaises(TypeError):
+                    s.split(2)
+
+        if __name__ == '__main__':
+            unittest.main()
+
+
+
+unittest.mock
+=============
+- Library to replace parts of your system with mock objects.
+  - Mock class - core part of this library
+  - MagicMock
+  - patch()
+
+- Read [4]. This is the best write up that I came across.
 
 [1] https://docs.python.org/3/library/unittest.html#
+[2] https://docs.python.org/3/library/unittest.mock.html
+[3] https://www.toptal.com/python/an-introduction-to-mocking-in-python
+[4] https://realpython.com/python-mock-library/
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     pytest
@@ -2192,3 +2238,38 @@ References:
 [1] https://mathspp.com/blog/pydonts/dunder-methods
 [2] https://holycoders.com/python-dunder-special-methods/
 
+==================    Python Logging/Logger        ===================
+
+
+
+
+==================    Python AsyncIO    ===================
+
+import asyncio
+
+async def func():
+    print("A")
+    await asyncio.sleep(1)
+    print("B")
+
+async.run(fun())
+
+---------------
+
+import asyncio
+
+async def func():
+    task = asyncio.create_task(second_func())
+    print("A")
+    print("B")
+    return_value = await task
+
+async def second_func():
+    print("1")
+    await asyncio.sleep(1)
+    print("2")
+    return 10
+
+async.run(fun())
+
+---------------
