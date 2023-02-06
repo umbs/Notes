@@ -1,8 +1,4 @@
 @@@@@@@@@@@@@@@@@@@@@    Mac OSX  tools for SSL certs @@@@@@@@@@@@@@@
-
-
-
-@@@@@@@@@@@@@@@@@@@@@    Mac OSX  tools for SSL certs @@@@@@@@@@@@@@@
 keytool
 openssl
 certool
@@ -591,3 +587,15 @@ DNS Hijacking: https://en.wikipedia.org/wiki/DNS_hijacking
 DNS Spoofing: https://en.wikipedia.org/wiki/DNS_spoofing
 DNS Cache Poisoning: https://en.wikipedia.org/wiki/DNS_cache_poisoning
 
+
+@@@@@@@@@@@@@@@@@    Server Side Request Forgery (SSRF)     @@@@@@@@@@@@@@@@@
+What is SSRF?
+- It's a web security Vulnerability that allows an attacker to induce server
+  side application to make requests to an unintended location.
+- This unintended location can be external network or internal/local network.
+
+
+- Full SSRF, Partial SSRF, Blind SSRF
+
+
+[1] https://youtu.be/qkOIJOlz53U

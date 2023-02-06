@@ -150,7 +150,7 @@ gq} - change only current paragraph
 G   - go to beginning of last line
 ga  - Gives ASCII value of character under cursor
 
-Power of g command
+Power of global(g) command
 ------------------
 :[range]g/pattern/command
 - Above command acts on [range] (default - whole file), by executing 'cmd'
