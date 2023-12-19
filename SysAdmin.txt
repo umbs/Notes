@@ -415,6 +415,36 @@ Benchmarking >>>>>>>
 - pchar
     * traceroute with bandwidth per hop
 
+- ethtool -S eth0
+    root@webserver1-2:~# ethtool -S eth0
+    NIC statistics:
+         rx_queue_0_packets: 1383000
+         rx_queue_0_bytes: 88404885
+         rx_queue_0_drops: 0
+         rx_queue_0_xdp_packets: 0
+         rx_queue_0_xdp_tx: 0
+         rx_queue_0_xdp_redirects: 0
+         rx_queue_0_xdp_drops: 0
+         rx_queue_0_kicks: 22
+         tx_queue_0_packets: 6000
+         tx_queue_0_bytes: 423757
+         tx_queue_0_xdp_tx: 0
+         tx_queue_0_xdp_tx_drops: 0
+         tx_queue_0_kicks: 5719
+
+
+
+root@webserver1-2:~# ip -s link show ens4
+3: ens4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT group default qlen 1000
+    link/ether fa:16:3e:be:77:d2 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast
+      88408725 1383060      0       0       0       0
+    TX:  bytes packets errors dropped carrier collsns
+        423757    6000      0       0       0       0
+    altname enp0s4
+
+
+
 
 Tuning Tools >>>>>>>
 - Read Slides [4]
