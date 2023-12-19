@@ -1,4 +1,7 @@
-Started using VSCode. Notes on the editor, cheatsheet, configs etc.
+@@@@@@@@@@@@@@@@@@@@@@@        PyCharm         @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@@@@@@@@@@@@@@@@@@@@@@@        VS Code         @@@@@@@@@@@@@@@@@@@@@@@@@@@
+Started using VSCode. Notes on the editor, cheat sheet, configs etc.
 
 // open a directory in VS Code
 $ code <directory-name>
@@ -66,3 +69,4 @@ Searching Text
 ====
 Search text in current file     /text   (Vim equivalent)
 Search text in current dir
+

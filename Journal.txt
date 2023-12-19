@@ -87,31 +87,123 @@ Seva
     - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023, Dec 18 (Mon)
+#termlifeinsurance
+
+- Spoke with Bhaskar Bhupalam about abandoning PR where Openstack is enabled by
+  default. Team decided this is not good idea.
+    - Today there are 3 Prod environments: prod1/prod4/prod6
+    - Most deployments are going in prod6 now.
+    - Some *explicit* customer are deployed in prod4.
+    - We got into trouble with Fedramp customers in past due to default
+      settings. We want to disable Openstack for all Fedramp customers (using
+      this setting) and enable explicitly using PASRE ticket.
+
+
+- Watched 'Leeren Chang' video on "Vim as an IDE (VimConf 2020 Talk)".
+    - Took lot of notes (in Vim.txt file)
+    - Watched for an hour or so.
+    - This talk is very good, very dense with info.
+
+- Watched "A Little :help - Dan Phillips - Vimconf Live 2021"
+    - https://youtu.be/LHGG-7TwKBk?list=PLcTu2VkAIIWyuX-yNe0KNSPR7wjS2lNKz
+
+- Watched "Vim: Tutorial on Editing, Navigation, and File Management (2018)" by Leeren Chang
+    - https://www.youtube.com/watch?v=E-ZbrtoSuzw&t=1722s 
+
+- I spent sooooo much time watching Vim videos, because I had this goal of
+  watching all downloaded Vim videos. Not sure if it is worth it, because ... 
+    - Videos are all unrelated and mish-mash of various Vim topics
+    - Ultimately, I came to conclusion of using IDE (VSCode for Go and Pycharm
+      for others). Main reason being debugging capabilities. But there's Neovim
+      Video (downloaded) by TJ Devries on debugging using Neovim. But, overall
+      IDE experience is very superior.
+    - But still, I'll continue watching Vim videos as I've set this goal for
+      myself by end of 2023.
+
+
+- Minutiae:
+    - Uber to office and back
+    - Paid Prudential Term Life Insurance
+        - $750K, $130/mo, 20 years
+    - Transferred $7000 from KPCU to Wells Fargo with intention to pay towards
+      Credit Card.
+
+
+2023, Dec 17 (Sun)
+#AOS
+
+2023, Dec 16 (Sat)
+#AOS
+
+2023, Dec 15 (Fri)
+#AOS
+
+2023, Dec 14 (Thu)
+#birthday #tax #mygtn #AOL #AOS #SilenceCourse #facial
+
+- Silence Course after almost 2 years.
+    - Philip Fraser
+
+- Minutiae:
+    - Paid off HOA on GoCompass website.
+        - Paid past dues ($1104)
+    - Birthday, as per Hindu calendar.
+    - MyGTN - signed e-file forms and uploaded on MyGTN portal.
+        - This completes "everything" for 2022 tax year.
+
+
+2023, Dec 13 (Wed)
+2023, Dec 12 (Tue)
+#bicycle #tax #rolloverira #ira #401k
+- Discussed with Vikram Guleria, the next steps in NLB.
+    - Orchestration changes/designs.
+    - Document the datapath flow (do it over weekend).
+    - Design an lb-plugin/agent running on NLB.
+- Read up, briefly, about Go programming language on learnXinYminutes.com
+  website. Using this, grokking Provisioning service under Orchestrator
+  directory.
+
+- Minutiae:
+    - Biked to work.
+    - Mailed Tax documents to IRS (Federal and State)
+    - Fidelity is direct business partner of Empower Retirement. So, rollover
+      happens electronically.
+        - Confirmation Number for Rollover IRA: 1900267692
+
+
 2023, Dec 11 (Mon)
-- Working on 2nd LB issues:
-    - Discussed with Roy Anthonyraj.
+#chevy #bicycle
+- Working on 2nd LB issues: Discussed with Roy Anthonyraj.
     - Debugged with Eric Platt.
     - NLB started working. There were 2 mistakes:
         - I disassociated Floating IP from VIP and associated it with Interface
           IP on NLB. So, NLB was no longer receiving cURL traffic.
+    - Eric removed static route from Gateway to NLB and cURL calls still
+      worked, with ARP disabled on Web Servers.
 
 
-- Check Payable to: FMTC FBO Sarma B Upadhyayula
-    - Created a Rollover IRA and initiated Hewlett Packard 401K into that
-      account. Funds should be transferred in 1 week. This is pre-tax money.
-    - Account Number: 241822895
-    - There was Roth IRA too (about $2K). I'll get a check for that, after
-      deducting taxes.
 
-- Called Protective Insurance for update on Term Life Insurance
-    - In progress. I should get update in 1 week.
-    - Application Number: LU5946246
-    - Costs only $52/mo, will change to $60/mo after 5 years
-    - Terms/Details: 20 years, $750K face value.
-- Prudential gave a quote for $131/mo
+- Minutiae:
+    - Biked to work.
+    - Check Payable to: FMTC FBO Sarma B Upadhyayula
+        - Created a Rollover IRA and initiated Hewlett Packard 401K into that
+          account. Funds should be transferred in 1 week. This is pre-tax money.
+        - Account Number: 241822895
+        - There was Roth IRA too (about $2K). I'll get a check for that, after
+          deducting taxes.
 
-- Paid off loan and kept HELOC open. Paid $735.84
+    - Called Protective Insurance for update on Term Life Insurance
+        - In progress. I should get update in 1 week.
+        - Application Number: LU5946246
+        - Costs only $52/mo, will change to $60/mo after 5 years
+        - Terms/Details: 20 years, $750K face value.
+    - Prudential gave a quote for $131/mo
 
+    - Paid off loan and kept HELOC open. Paid $735.84
+
+    - First payment of GM Financial (Car Loan). Paid $622.
+    - Spoke with Abbas Maki from Rocket Mortgage about loan qulification.
 
 
 
