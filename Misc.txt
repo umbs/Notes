@@ -45,31 +45,34 @@ rg –help | more		Make help useful on Windows
 rg -l NEEDLE		List matching files only
 rg -c NEEDLE		List matching files, including a count
 rg -i NEEDLE		Search case-insensitively
-rg --no-filename NEEDLE			Don’t print filenames, handy when you care about the match more than the file
+rg --no-filename NEEDLE	Don’t print filenames, handy when you care about the match more than the file
 rg -v NEEDLE		Invert matching: show lines that do not match
-rg NEEDLE README.md				Search only in specified file(s)
-rg -c ‐‐sort path|modified|accessed|created NEEDLE			Sort the results (-sortr to reverse)
-rg -g '*.nuspec' NEEDLE			Only search in *.nuspec files (can use multiple -g)
-rg -g '!*.nuspec' NEEDLE		Search in everything but *.nuspec files
-rg -p NEEDLE | less -R			Force pretty printed output even in pipes
-rg -e NEEDLE1 -e NEEDLE2		Search for multiple patterns
+rg NEEDLE README.md	Search only in specified file(s)
+rg -c ‐‐sort path|modified|accessed|created NEEDLE      Sort the results (-sortr to reverse)
+
+rg -g '*.nuspec' NEEDLE     Only search in *.nuspec files (can use multiple -g)
+rg -g '!*.nuspec' NEEDLE    Search in everything but *.nuspec files
+rg -g 'folder/*' NEEDLE     Search in `folder`
+rg -g '!folder/*' NEEDLE    Search everywhere except in `folder`
+
+rg -p NEEDLE | less -R      Force pretty printed output even in pipes
+rg -e NEEDLE1 -e NEEDLE2    Search for multiple patterns
 rg -z NEEDLE		Search in gzip, bzip2, xz, LZ4, LZMA, Brotli and Zstd compressed files
 rg --type-list		Displays built-in available types and their corresponding globs
 rg -tcs -tconfig	Search in file types cs and config
-rg -Tconfig			Don’t search in file type config
+rg -Tconfig             Don’t search in file type config
 
 
 rg image utils.py		Search in a single file utils.py
 rg image src/			Search in dir src/ recursively
-rg image				Search image in current dir recursively
+rg image			Search image in current dir recursively
 rg '^We' test.txt		Regex searching support (lines starting with We)
-rg -i image				Search image and ignore case (case-insensitive search)
-rg -s image				Smart case search
+rg -i image			Search image and ignore case (case-insensitive search)
+rg -s image			Smart case search
 rg -F '(test)'			Search literally, i.e., without using regular expression
 rg image -g '*.py'		File globing (search in certain files), can be used multiple times
 rg image -g '!*.py'		Negative file globing (do not search in certain files)
-rg image --type py or rg image -tpy
-						Search image in Python file
+rg image --type py or rg image -tpy     Search image in Python file
 
 rg image -Tpy			Do not search image in Python file type
 rg -l image				Only show files containing image (Do not show the lines)
@@ -2623,6 +2626,7 @@ mysql> \s
 mysql> status;
 mysql> show variables;  << tons of info
 mysql> show tables;     << list all tables in db, including views
+mysql> show full tables where Table_Type = 'BASE TABLE' << list all table, and no views
 mysql> describe <table-name>;   << gives lot of details about the table
 
 
@@ -2659,6 +2663,39 @@ Show warnings
 ---
 SHOW WARNINGS;
 SELECT @warning_count;
+
+
+// Find all tables with specific column name in them
+SELECT DISTINCT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME IN('allow_listed') AND TABLE_SCHEMA = 'fwaas_1';
+
+
+mysql> select CURRENT_TIMESTAMP;
++---------------------+
+| CURRENT_TIMESTAMP   |
++---------------------+
+| 2023-10-12 19:19:04 |
++---------------------+
+1 row in set (0.00 sec)
+
+
+// Upto 6 decimals precision
+mysql> select CURRENT_TIMESTAMP(6);
++---------------------+
+| CURRENT_TIMESTAMP   |
++---------------------+
+| 2023-10-12 19:19:04 |
++---------------------+
+1 row in set (0.00 sec)
+
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2023-10-12 19:22:38 |
++---------------------+
+1 row in set (0.00 sec)
+
 
 Resources:
 [1] Udemy course on Database Design -
@@ -3240,6 +3277,8 @@ Context:
     * https://www.youtube.com/watch?v=BJprWgompq0
 [2] How can I use CloudTrail to API calls and actions
     * https://www.youtube.com/watch?v=4ztTv5rIRv8
+
+
 ===============    CMU Databases Systems     ================
 Lec 1:
 
@@ -4459,6 +4498,16 @@ Cheatsheet
 
 Chapter 1
 ---------
+- Bicep is DSL for provisioning Azure resources declaratively.
+- Wrapper around ARM Templates.
+- Bicep is converted (transpiled) into ARM Templates and then submitted to ARM engine.
+
+    // Sample hello world
+    param yourName string
+    var hello = 'Hello World'
+    output helloWorld string = '${hello} $[yourName}'
+
+
 Bicep Playground:
     https://aka.ms/bicepdemo
 
@@ -4467,6 +4516,16 @@ Bicep Playground Features:
 - It allows you to search for templates that fits your needs.
 - Generate unique link to Bicep template you create and share with team mates.
 - It can transpile Bicep code to ARM template and vice versa (ARM to Bicep code).
+
+
+Create Resource Group
+---------------------
+    targetScope = 'subscription'
+
+    resource az_bicep_resource_group 'Microsoft.Resource/resourceGroup@2021-04-01' = {
+        name: 'az_bicep_resource_group'
+        location: 'eastus'
+    }
 
 
 Chapter 2
@@ -4528,4 +4587,30 @@ Communication between Modules using Outputs
     ISP     Interface Segregation Principle
     DIP     Dependency Inversion Principle
 
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   Intro to Negotiation     @@@@@@@@@@@@@@@@@@@@@@
+
+Week 1
+------
+- Pie Framework
+- Negotiation should be done using Principled Arguments
+
+- Think of Negotiation as Math problem instead of Tug of War
+    - This allows you to be dispassionate.
+
+- Goal 1: Understand what is the Pie?
+    - Pie is how much MORE two parties, A and B, can acheive by working
+      together than they can get if they don't reach an agreement.
+    - Pie = Net benefit from working together - (A's net benefit on its own +
+      B's net benefit on its own), where net benefit is the benefit leftover
+      after costs.
+
+
+
+
+Coursera
+[1] https://www.coursera.org/learn/negotiation/
 
