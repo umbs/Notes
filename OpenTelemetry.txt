@@ -1,0 +1,354 @@
+==========================================================
+              OpenTelemetry Notes
+==========================================================
+
+Python + OpenTelemetry
+    https://github.com/open-telemetry/opentelemetry-python/blob/main/docs/examples/auto-instrumentation/server_instrumented.py
+
+Azure + OpenTelemetry Exporter + Python
+    https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter
+
+
+Useful code snippets:
+---------
+[1]
+    context = get_current_span().get_span_context()
+
+[2]
+    with OpenTelemetrySpan() as span:
+        ...
+
+[3]
+    from opentelemetry import trace
+
+    trace.get_tracer_provider()
+
+
+
+opentelemetry-distro installs following packages:
+    API
+    SDK
+    opentelemetry-bootstrap
+    opentelemetry-instrument
+
+
+
+API
+===============
+opentelemetry/trace/__init__.py
+---
+def get_tracer(
+    instrumenting_module_name: str,
+    instrumenting_library_version: typing.Optional[str] = None,
+    tracer_provider: Optional[TracerProvider] = None,
+    schema_url: typing.Optional[str] = None,
+) -> "Tracer":
+            """Returns a `Tracer` for use by the given instrumentation library.
+
+            This function is a convenience wrapper for
+            opentelemetry.trace.TracerProvider.get_tracer.
+
+            If tracer_provider is omitted the current configured one is used.
+            """
+
+
+def get_tracer_provider() -> TracerProvider:
+            """Gets the current global :class:`~.TracerProvider` object."""
+
+
+
+def set_tracer_provider(tracer_provider: TracerProvider) -> None:
+            """Sets the current global :class:`~.TracerProvider` object.
+
+            This can only be done once, a warning will be logged if any furter attempt
+            is made.
+            """
+
+
+@contextmanager
+def use_span(
+    span: Span,
+    end_on_exit: bool = False,
+    record_exception: bool = True,
+    set_status_on_exception: bool = True,
+) -> Iterator[Span]:
+            """Takes a non-active span and activates it in the current context.
+
+            Args:
+                span: The span that should be activated in the current context.
+                end_on_exit: Whether to end the span automatically when leaving the
+                    context manager scope.
+                record_exception: Whether to record any exceptions raised within the
+                    context as error event on the span.
+                set_status_on_exception: Only relevant if the returned span is used
+                    in a with/context manager. Defines wether the span status will
+                    be automatically set to ERROR when an uncaught exception is
+                    raised in the span with block. The span status won't be set by
+                    this mechanism if it was previously set manually.
+            """
+
+
+
+
+
+class Tracer(ABC):
+	@abstractmethod
+    def start_span(
+        self,
+        name: str,
+        context: Optional[Context] = None,
+        kind: SpanKind = SpanKind.INTERNAL,
+        attributes: types.Attributes = None,
+        links: _Links = None,
+        start_time: Optional[int] = None,
+        record_exception: bool = True,
+        set_status_on_exception: bool = True,
+    ) -> "Span":
+
+				"""Starts a span.
+
+				Create a new span. Start the span without setting it as the current
+				span in the context. To start the span and use the context in a single
+				method, see :meth:`start_as_current_span`.
+
+				By default the current span in the context will be used as parent, but an
+				explicit context can also be specified, by passing in a `Context` containing
+				a current `Span`. If there is no current span in the global `Context` or in
+				the specified context, the created span will be a root span.
+
+				The span can be used as a context manager. On exiting the context manager,
+				the span's end() method will be called.
+
+				Example::
+
+					# trace.get_current_span() will be used as the implicit parent.
+					# If none is found, the created span will be a root instance.
+					with tracer.start_span("one") as child:
+						child.add_event("child's event")
+
+				Args:
+					name: The name of the span to be created.
+					context: An optional Context containing the span's parent. Defaults to the
+						global context.
+					kind: The span's kind (relationship to parent). Note that is
+						meaningful even if there is no parent.
+					attributes: The span's attributes.
+					links: Links span to other spans
+					start_time: Sets the start time of a span
+					record_exception: Whether to record any exceptions raised within the
+						context as error event on the span.
+					set_status_on_exception: Only relevant if the returned span is used
+						in a with/context manager. Defines wether the span status will
+						be automatically set to ERROR when an uncaught exception is
+						raised in the span with block. The span status won't be set by
+						this mechanism if it was previously set manually.
+
+				Returns:
+					The newly-created span.
+				"""
+
+    @contextmanager
+    @abstractmethod
+    def start_as_current_span(
+        self,
+        name: str,
+        context: Optional[Context] = None,
+        kind: SpanKind = SpanKind.INTERNAL,
+        attributes: types.Attributes = None,
+        links: _Links = None,
+        start_time: Optional[int] = None,
+        record_exception: bool = True,
+        set_status_on_exception: bool = True,
+        end_on_exit: bool = True,
+    ) -> Iterator["Span"]:
+
+				"""Context manager for creating a new span and set it
+				as the current span in this tracer's context.
+
+				Exiting the context manager will call the span's end method,
+				as well as return the current span to its previous value by
+				returning to the previous context.
+
+				Example::
+
+					with tracer.start_as_current_span("one") as parent:
+						parent.add_event("parent's event")
+						with trace.start_as_current_span("two") as child:
+							child.add_event("child's event")
+							trace.get_current_span()  # returns child
+						trace.get_current_span()      # returns parent
+					trace.get_current_span()          # returns previously active span
+
+				This is a convenience method for creating spans attached to the
+				tracer's context. Applications that need more control over the span
+				lifetime should use :meth:`start_span` instead. For example::
+
+					with tracer.start_as_current_span(name) as span:
+						do_work()
+
+				is equivalent to::
+
+					span = tracer.start_span(name)
+					with opentelemetry.trace.use_span(span, end_on_exit=True):
+						do_work()
+
+				This can also be used as a decorator::
+
+					@tracer.start_as_current_span("name"):
+					def function():
+						...
+
+					function()
+
+				Args:
+					name: The name of the span to be created.
+					context: An optional Context containing the span's parent. Defaults to the
+						global context.
+					kind: The span's kind (relationship to parent). Note that is
+						meaningful even if there is no parent.
+					attributes: The span's attributes.
+					links: Links span to other spans
+					start_time: Sets the start time of a span
+					record_exception: Whether to record any exceptions raised within the
+						context as error event on the span.
+					set_status_on_exception: Only relevant if the returned span is used
+						in a with/context manager. Defines wether the span status will
+						be automatically set to ERROR when an uncaught exception is
+						raised in the span with block. The span status won't be set by
+						this mechanism if it was previously set manually.
+					end_on_exit: Whether to end the span automatically when leaving the
+						context manager.
+
+				Yields:
+					The newly-created span.
+				"""
+
+
+class TracerProvider(ABC):
+    @abstractmethod
+    def get_tracer(
+        self,
+        instrumenting_module_name: str,
+        instrumenting_library_version: typing.Optional[str] = None,
+        schema_url: typing.Optional[str] = None,
+    ) -> "Tracer":
+				"""Returns a `Tracer` for use by the given instrumentation library.
+
+				For any two calls it is undefined whether the same or different
+				`Tracer` instances are returned, even for different library names.
+
+				This function may return different `Tracer` types (e.g. a no-op tracer
+				vs.  a functional tracer).
+
+				Args:
+					instrumenting_module_name: The uniquely identifiable name for instrumentaion
+						scope, such as instrumentation library, package, module or class name.
+						``__name__`` may not be used as this can result in
+						different tracer names if the tracers are in different files.
+						It is better to use a fixed string that can be imported where
+						needed and used consistently as the name of the tracer.
+
+						This should *not* be the name of the module that is
+						instrumented but the name of the module doing the instrumentation.
+						E.g., instead of ``"requests"``, use
+						``"opentelemetry.instrumentation.requests"``.
+
+					instrumenting_library_version: Optional. The version string of the
+						instrumenting library.  Usually this should be the same as
+						``pkg_resources.get_distribution(instrumenting_library_name).version``.
+
+					schema_url: Optional. Specifies the Schema URL of the emitted telemetry.
+				"""
+
+
+opentelemetry/trace/span.py.py
+---
+class Span(abc.ABC):
+    def get_span_context()
+
+class SpanContext(typing.Tuple[int, int, bool, "TraceFlags", "TraceState", bool]):
+    """The state of a Span to propagate between processes.
+
+    This class includes the immutable attributes of a :class:`.Span` that must
+    be propagated to a span's children and across process boundaries.
+
+    Args:
+        trace_id: The ID of the trace that this span belongs to.
+        span_id: This span's ID.
+        is_remote: True if propagated from a remote parent.
+        trace_flags: Trace options to propagate.
+        trace_state: Tracing-system-specific info to propagate.
+    """
+
+
+
+
+
+SDK SDK SDK SDK
+================
+opentelemetry/sdk/resources/__init__.py
+
+class Resource:
+    """A Resource is an immutable representation of the entity producing telemetry as Attributes."""
+
+    @staticmethod
+    def create(
+        attributes: typing.Optional[Attributes] = None,
+        schema_url: typing.Optional[str] = None,
+    ) -> "Resource":
+        """Creates a new `Resource` from attributes.
+
+        Args:
+            attributes: Optional zero or more key-value pairs.
+            schema_url: Optional URL pointing to the schema
+
+        Returns:
+            The newly-created Resource.
+        """
+
+
+
+opentelemetry/sdk/trace/__init__.py
+
+class Span(trace_api.Span, ReadableSpan):
+    """See `opentelemetry.trace.Span`.
+
+    Users should create `Span` objects via the `Tracer` instead of this
+    constructor.
+
+    Args:
+        name: The name of the operation this span represents
+        context: The immutable span context
+        parent: This span's parent's `opentelemetry.trace.SpanContext`, or
+            None if this is a root span
+        sampler: The sampler used to create this span
+        trace_config: TODO
+        resource: Entity producing telemetry
+        attributes: The span's attributes to be exported
+        events: Timestamped events to be exported
+        links: Links to other spans to be exported
+        span_processor: `SpanProcessor` to invoke when starting and ending
+            this `Span`.
+        limits: `SpanLimits` instance that was passed to the `TracerProvider`
+    """
+
+	def get_span_context()
+
+
+class SpanProcessor:
+    """Interface which allows hooks for SDK's `Span` start and end method
+    invocations.
+
+    Span processors can be registered directly using
+    :func:`TracerProvider.add_span_processor` and they are invoked
+    in the same order as they were registered.
+    """
+
+
+class Tracer(trace_api.Tracer):
+    """See `opentelemetry.trace.Tracer`."""
+
+    def start_as_current_span()
+    def start_span()
+
+
