@@ -163,3 +163,26 @@ Resources:
 [1] O'Reilly Kubernetes Bootcamp: Get up to speed with Docker and Kubernetes -
 Zed Shaw
 
+
+
+
+@@@@@@@@@@@@@@@@@@@   KUBERNETES  CHEAT  SHEET    @@@@@@@@@@@@@@@@@@
+
+Kubectl Autocomplete
+BASH
+    source <(kubectl completion bash) # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
+    echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell.
+
+Shorthand alias for kubectl
+    alias k=kubectl
+    complete -o default -F __start_kubectl
+
+
+ZSH
+    source <(kubectl completion zsh)  # set up autocomplete in zsh into the current shell
+    echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' >> ~/.zshrc # add autocomplete permanently to your zsh shell
+
+
+
+Resource:
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
