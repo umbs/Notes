@@ -229,12 +229,131 @@ Intermediate Tools >>>>>>>
 - tcpdump
     sniff packets for post analysis
 
-- netstat
+- netstat. Note that `netstat` belongs to `net-tools` package in linux which is
+  deprecated in favor or `ip` command suite. Use `nstat` which belongs to
+  `iproute2` package.
+
     -s  Various protocol stats
     -i  Interface stats
     -r  route table
     -p  process details
     -c  per-second interval
+
+- netstat statistics
+    # All connections on port 80
+    $ netstat -anp | grep :80
+
+    # Help
+    $ netstat -h
+
+    netstat -s	Display statistics
+    netstat -st	Display TCP statistics
+    netstat -su	Display UDP statistics
+
+
+- netstat listening
+    netstat -ltunp	All Listening ports
+    netstat -ltn	Listening TCP ports
+    netstat -lun	Listening UDP ports
+    netstat -lx	Listening Unix ports
+
+
+- netstat connections
+    netstat -a	All connections
+    netstat -at	All TCP connections
+    netstat -au	All UDP connections
+
+- netstat networks
+    netstat -i	    Show network interfaces
+    netstat -ie	    Show network interfaces extended info
+
+
+- netstat routing
+    netstat -r	    Show routing table
+    netstat -rn	    Show routing table, don't resolve hosts
+
+
+
+- `nstat` cheat sheet. `nstat` is tool for monitoring kernel SNMP and network
+  interface stats and part of iproute2 package.
+
+  $ nstat
+  # kernel
+  IpInReceives                    12057              0.0
+  IpInAddrErrors                  1                  0.0
+  IpInDelivers                    12000              0.0
+  IpOutRequests                   11060              0.0
+  IpOutNoRoutes                   252                0.0
+  TcpActiveOpens                  36                 0.0
+  TcpEstabResets                  3                  0.0
+  TcpInSegs                       11804              0.0
+  TcpOutSegs                      10960              0.0
+  TcpRetransSegs                  3                  0.0
+  TcpOutRsts                      29                 0.0
+  UdpInDatagrams                  196                0.0
+  UdpOutDatagrams                 246                0.0
+  Ip6InReceives                   18                 0.0
+  Ip6OutRequests                  31                 0.0
+  Ip6OutNoRoutes                  248                0.0
+  Ip6InMcastPkts                  18                 0.0
+  Ip6OutMcastPkts                 31                 0.0
+  Ip6InOctets                     1715               0.0
+  Ip6OutOctets                    2791               0.0
+  Ip6InMcastOctets                1715               0.0
+  Ip6OutMcastOctets               2791               0.0
+  Ip6InNoECTPkts                  18                 0.0
+  Icmp6OutMsgs                    13                 0.0
+  Icmp6OutRouterSolicits          3                  0.0
+  Icmp6OutNeighborSolicits        2                  0.0
+  Icmp6OutMLDv2Reports            8                  0.0
+  Icmp6OutType133                 3                  0.0
+  Icmp6OutType135                 2                  0.0
+  Icmp6OutType143                 8                  0.0
+  Udp6OutDatagrams                18                 0.0
+  TcpExtTW                        19                 0.0
+  TcpExtDelayedACKs               37                 0.0
+  TcpExtTCPHPHits                 10981              0.0
+  TcpExtTCPPureAcks               142                0.0
+  TcpExtTCPHPAcks                 267                0.0
+  TcpExtTCPLossUndo               3                  0.0
+  TcpExtTCPTimeouts               3                  0.0
+  TcpExtTCPAbortOnClose           3                  0.0
+  TcpExtTCPRcvCoalesce            327                0.0
+  TcpExtTCPAutoCorking            5                  0.0
+  TcpExtTCPSynRetrans             3                  0.0
+  TcpExtTCPOrigDataSent           390                0.0
+  TcpExtTCPHystartTrainDetect     1                  0.0
+  TcpExtTCPHystartTrainCwnd       17                 0.0
+  TcpExtTCPWinProbe               1                  0.0
+  TcpExtTCPDelivered              424                0.0
+  IpExtInMcastPkts                41                 0.0
+  IpExtOutMcastPkts               47                 0.0
+  IpExtInOctets                   54131913           0.0
+  IpExtOutOctets                  829632             0.0
+  IpExtInMcastOctets              3902               0.0
+  IpExtOutMcastOctets             4142               0.0
+  IpExtInNoECTPkts                48401              0.0
+
+
+- This resource has details about the fields
+    - https://www.kernel.org/doc/html/latest/networking/snmp_counter.html
+    - https://loicpefferkorn.net/2018/09/linux-network-statistics-reference/
+
+- nstat options
+    -a, --ignore
+        Dump absolute values of counters. The default calculates the increments
+        since the previous run.
+    -z, --zeroes
+        Dump all zero counters. They are ignored by default.
+    -r, --reset
+        Resets the history, thus excluding averages since the last run.
+    -d, --scan x
+        Run in daemon mode to collect statistics. x is an interval between
+        measurements in seconds.
+    -t, --interval x
+        Where x is the interval to average rates. Default value is 60s.
+
+
 
 - pidstat
     Very useful process stats, eg, by-thread, disk I/O
