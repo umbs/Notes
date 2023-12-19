@@ -47,39 +47,39 @@ vim -p file1 file 2 // open multiple files in tab mode
 
 Regular Expressions
 -------------------
-. (dot)	Any single character except newline
-*	zero or more occurances of any character
-[...]	Any single character specified in the set
-[^...]	Any single character not specified in the set
-^	Anchor - beginning of the line
-$	Anchor - end of line
-\<	Anchor - begining of word
-\>	Anchor - end of word
-\(...\)	Grouping - usually used to group conditions
-\n	Contents of nth grouping
+. (dot) Any single character except newline
+*       zero or more occurances of any character
+[...]   Any single character specified in the set
+[^...]  Any single character not specified in the set
+^       Anchor - beginning of the line
+$       Anchor - end of line
+\<      Anchor - begining of word
+\>      Anchor - end of word
+\(...\) Grouping - usually used to group conditions
+\n      Contents of nth grouping
 
 [...] - Set Examples
 --------------------
-[A-Z]	The SET from Capital A to Capital Z
-[a-z]	The SET from lowercase a to lowercase z
-[0-9]	The SET from 0 to 9 (All numerals)
-[./=+]	The SET containing . (dot), / (slash), =, and +
-[-A-F]	The SET from Capital A to Capital F and the dash (dashes must be specified first)
-[0-9 A-Z]	The SET containing all capital letters and digits and a space
-[A-Z][a-zA-Z]	In the first position, the SET from Capital A to Capital Z
+[A-Z]   The SET from Capital A to Capital Z
+[a-z]   The SET from lowercase a to lowercase z
+[0-9]   The SET from 0 to 9 (All numerals)
+[./=+]  The SET containing . (dot), / (slash), =, and +
+[-A-F]  The SET from Capital A to Capital F and the dash (dashes must be specified first)
+[0-9 A-Z]       The SET containing all capital letters and digits and a space
+[A-Z][a-zA-Z]   In the first position, the SET from Capital A to Capital Z
 In the second character position, the SET containing all letters
 
 Regular Expression Examples
 ---------------------------
-/Hello/	Matches if the line contains the value Hello
-/^TEST$/	Matches if the line contains TEST by itself
-/^[a-zA-Z]/	Matches if the line starts with any letter
-/^[a-z].*/	Matches if the first character of the line is a-z and there is at least one more of any character following it
-/2134$/	Matches if line ends with 2134
-/\(21|35\)/	Matches if the line contains 21 or 35
+/Hello/ Matches if the line contains the value Hello
+/^TEST$/        Matches if the line contains TEST by itself
+/^[a-zA-Z]/     Matches if the line starts with any letter
+/^[a-z].*/      Matches if the first character of the line is a-z and there is at least one more of any character following it
+/2134$/ Matches if line ends with 2134
+/\(21|35\)/     Matches if the line contains 21 or 35
 Note the use of ( ) with the pipe symbol to specify the 'or' condition
-/[0-9]*/	Matches if there are zero or more numbers in the line
-/^[^#]/	        Matches if the first character is not a # in the line
+/[0-9]*/        Matches if there are zero or more numbers in the line
+/^[^#]/         Matches if the first character is not a # in the line
 
 Notes:
 1. Regular expressions are case sensitive
@@ -622,10 +622,10 @@ filetype off
 
 5) Macros
 - Record operations in to a register and repeatedly apply them
-q 	start recording
-a	record in to register a
+q       start recording
+a       record in to register a
 <do your operations>
-q	end recording
+q       end recording
 
 - But typing entire operation on a line and saving them into a register is more
   convenient.
@@ -919,8 +919,8 @@ let dictionary = {"message": "hello world"}
 
 - Variable Scoping
 
-  	let g:global_var = "global variable accessible across all script"
-	let s:script_var = "script level variable accessible across the entire script/file"
+        let g:global_var = "global variable accessible across all script"
+        let s:script_var = "script level variable accessible across the entire script/file"
     let l:local_var = "local variable accessible only in the scope"
     let b:buffer_var = "buffer scope"
     let w:window_var = "window scope"
@@ -933,8 +933,8 @@ Functions
 
 :help list
 :help dict
-	APIs to interact with list and dict
-	add, remove, has_key, copy, keys, items()
+        APIs to interact with list and dict
+        add, remove, has_key, copy, keys, items()
 
 :h write-plugin
 
@@ -1248,3 +1248,45 @@ Vim Spellchecking
 z=  Provide suggestions for word under the cursor.
 zg  Word is correct. Add to dictionary.
 zw  Mark word as incorrect.
+
+
+
+================== Vim as an IDE (VimConf 2020 Talk) ================
+Leeren Chan
+
+        7 Steps for Setting up Vim as Lightweight IDE
+
+- Open a file as follows:
+	vi -Nu NORC <filename>
+	-Nu: Open in "No Compatible Mode". Meaning, open using Vim
+	NORC: Even if there is no .vimrc file, Vim uses a default vimrc file
+	      somewhere in the system. By providing NORC flag, we tell Vim, not
+              to use that default vimrc.
+
+- Ex command
+    :set filetype?	# filetype is not turned on
+
+    :filetype plugin indent on
+
+    This turns on following:
+        - detection of filetypes
+        - any plugins related to that filetype (not fully sure)
+        - turn on indentations
+
+
+
+1. MAKE A MINIMAL VIMRC
+  - Whichever of the following is found first will be used:
+        $VIMINIT        (environment variable)
+        $HOME/.vimrc
+        $HOME/.vim/vimrc
+        $EXINIT         (environment variable)
+        $HOME/.exrc
+        $VIMRUNTIME/defaults.vim
+
+
+- On some machines you can set minimum Vim settings as environment variable
+  $VIMINIT and that's enough for Vim. You do not need a .vimrc file.
+
+2. FIX FORMATTING
+
