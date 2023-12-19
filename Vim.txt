@@ -1289,6 +1289,19 @@ Vim Insert Current Date and Time
 
 [1] https://vim.fandom.com/wiki/Insert_current_date_or_time
 
+================== A Little :help - Dan Phillips (VimConf 2021 Talk) ================
+:TOhtml
+    - Converts current buffer into an HTML page
+
+- Two types of help manual: User and Reference
+- motions.txt, index.txt: They are Reference Manual. But read them.
+- quotes.txt is fun
+
+- https://vim.help is a better formatted webpage of Vim manuals.
+- g + CTRL-g will give word count, total words, line, column, byte count.
+- K for Unix man page.
+
+
 ================== Vim as an IDE (VimConf 2020 Talk) ================
 Leeren Chan
 
@@ -1312,12 +1325,19 @@ Leeren Chan
         - turn on indentations
 
 
+- `syntax on`
+    - Turns syntax highlighting
+
+- set backspace=start,eol,indent
+    - This allows backspace to work even before where you started typing.
+
+
 
 1. MAKE A MINIMAL VIMRC
   - Whichever of the following is found first will be used:
         $VIMINIT        (environment variable)
         $HOME/.vimrc
-        $HOME/.vim/vimrc
+        $HOME/.vim/vimrc    <<<< suggested by Leeren
         $EXINIT         (environment variable)
         $HOME/.exrc
         $VIMRUNTIME/defaults.vim
@@ -1327,3 +1347,147 @@ Leeren Chan
   $VIMINIT and that's enough for Vim. You do not need a .vimrc file.
 
 2. FIX FORMATTING
+- Choose standards of your language
+- Python (PEP8)
+    - 4 spaces per indentation level.
+    - Limit lines to 79 chars.
+
+- `set list` shows all the special chars used in that file.
+- set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
+
+- runtimepath
+    - A list of directories will be searched for runtime files, in following order
+
+    runtimepath Search Order
+    ------------
+    1. User Home .vim folder
+    2. Sysadmin folder
+    3. $VIMRUNTIME
+    4. Sysadmin "after" folder
+    5. User Home "after" folder in .vim
+
+    What does runtimepath search? It searches for folder structure as follows
+
+    compiler/
+    ftdetect/
+    filetype.vim
+    scripts.vim
+    autoload/
+    ftplugin/
+    plugin/
+    pack/
+    colors/
+    doc/
+    import/
+    keymap/
+    lang/
+    menu.vim
+    print/
+    ...
+
+
+    If you want *something* specific to, say, python, put it in here:
+        .vim/after/ftplugin/python.vim
+    Example, put following in python.vim in above:
+        set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
+
+
+3. FIX YOUR PATH
+- Strongly recommend setting current directory (`:pwd`) to to root of the
+  project.
+
+- After that, figure out parts of the project that are frequently explored. Add
+  those to your `:path`
+    - set path?
+
+- For browsing outside your main project context, make use of `:lcd` and
+  `:setlocal path`
+
+
+4. SETUP INCLUDE-SEARCH
+- `include-search` is very powerful. It defines commands and patternst that
+  allow for instantly locating symbol definitions (like functions, variables,
+  and macros)
+
+  - `include`
+    - Used to define which files should be traversed for searching of relevant symbols
+
+  - `define`
+    - Finds macro definitions (works in tandem with `include`)
+
+- It's quite crazy/complex. But speaker says its very powerful.
+
+
+5. SETUP TAGS
+- When `include-search` fails, tags are the best fallback option to use. All it
+  requires is creating a tags file for your project and keeping in sync after
+  making changes.
+- For prog languages like Go, it's difficult to use `include-search`. Instead use ctags
+
+    ~/.ctags file has this
+    ----------------------
+    --langdef=Go
+    --langmap=Go:.go
+    --regex-Go=/func() ... watch the video around 52 min mark.
+
+
+6. COMPILER SUPPORT
+- Integrate a compiler with vim's `makeprg` and `errorformat` for seamless
+  compile-and-edit workflows
+
+    compiler/   <<<< put here
+    ftdetect/
+    filetype.vim
+    scripts.vim
+    autoload/
+    ftplugin/
+    plugin/
+    pack/
+    colors/
+    doc/
+    import/
+    keymap/
+    lang/
+    menu.vim
+    print/
+    ...
+
+- In ~/.vim/compiler/go.vim file add this
+
+    let current_compiler = 'go'
+    CompilerSet makeprg=go\ build
+
+    # Typically this is how Go errors look
+    CompilerSet errorformat=%E%f:%l:%c:%m
+        E = Error
+        f = file
+        l = line number
+        c = column number
+        m = error message
+
+
+
+7. MAKE CONFIG PORTABLE
+- Use GNU stow
+- Have a common folder, called `configs` (can be any name). Have various
+  configs in them, say for `vim` as follows.
+    $ mkdir -p ~/configs/vim
+    $ cd config
+    $ cp -R ~/.vim vim
+    $ rm -fr ~/.vim
+    $ tree -a
+        vim
+        └── .vim
+            ├── after
+            │   └── ftplugin
+            │       └── python.vim
+            └── vimrc
+
+        4 directories, 3 files
+
+    $ stow vim
+    $ ll ~/.vim
+    lrwxr-xr-x  1 bupadhyayula    16B Dec 19 10:22 /Users/bupadhyayula/.vim -> configs/vim/.vim
+
+    $ git init  # start using version control and all that
+
