@@ -572,6 +572,242 @@ unittest.mock
   - Mock class - core part of this library
   - MagicMock
   - patch()
+  - patch.object()
+  - What's the diff between patch() and patch.object()?
+    - https://stackoverflow.com/questions/29152170/what-is-the-difference-between-mock-patch-object-and-mock-patch
+
+- Mocks have every attribute, which is also mock.
+- Mock's attributes are consistent. They stay the same, so retrieving the same attribute again gives identical objects.
+
+    from unitetest import mock
+    def test_consistent():
+	obj = mock.MagicMock()
+	assert obj.some_name is not obj.some_name
+
+- It fails with following error:
+
+	def test_consistent():
+	    obj = mock.MagicMock()
+    >       assert obj.some_name is not obj.some_name
+    E       AssertionError: assert <MagicMock name='mock.some_name' id='4329953872'> is not <MagicMock name='mock.some_name' id='4329953872'>
+    E        +  where <MagicMock name='mock.some_name' id='4329953872'> = <MagicMock id='4329520096'>.some_name
+    E        +  and   <MagicMock name='mock.some_name' id='4329953872'> = <MagicMock id='4329520096'>.some_name
+
+    mock.py:5: AssertionError
+
+
+
+Calling Mocks
+-----
+- Mocks can be called. They return a mock.
+    from unittest import mock
+
+    def raise_call(x):
+	raise ValueError(x())
+
+    def test_examine():
+	raise_call(mock.MagicMock())
+
+
+- Because an attribute returns a mock, and mocks can be called, mocks also have all the methods.
+    from unittest import mock
+
+    def raise_deep(x):
+	val = x.some_method()
+	raise ValueError(val.some_attribute)
+
+    def test_deep():
+	raise_deep(mock.MagicMock())
+
+
+Mock Magic Methods
+---
+- The 'Magic' in MagicMock is because it also has so-called 'magic methods'
+
+    from unittest import mock
+
+    def test_add_different():
+	x = mock.MagicMock()
+	assert x + 1 == x + 5	# This will pass
+
+- Iterating over values is possible, but mocks don't yield any elements.
+
+- Mocks can be named and it's a good practice. It makes errors easier to
+  diagnose from exceptions and assertions.
+
+    from unittest import mock
+
+    def copy_stuff(source, target):
+	write_to(target, source, 10)
+
+    def write_to(source, target, length):
+	stuff = source.read()
+	target.write(stuff)
+	raise ValueError(source, target, stuff)
+
+    def test_opaque():
+	source = mock.MagicMock()
+	target = mock.MagicMock()
+	copy_stuff(source, target)
+
+    def test_clear():
+	source = mock.MagicMock(name="source")
+	target = mock.MagicMock(name="target")
+	copy_stuff(source, target)
+
+
+Setting Properties and Deep Properties
+-----
+
+    from unittest import mock
+
+    def test_attribute():
+	x = mock.MagicMock(name='thing')
+	x.some_attribute = 5	# 'some_attribute' is no longer mock attribute
+	assert x.some_attribute != 5	# fails
+
+
+    # You can set attributes as constructor
+    def test_attribute_constructor():
+	x = mock.MagicMock(name='thing', some_attribute=5)
+	assert x.some_attribute != 5	# fails
+
+- Because by default every attribute on a mock is a mock itself, you can set 'deep attributes' that violate the 'law' of Demeter.
+- Some say this is not unit testing.
+
+    from unittest import mock
+
+    def test_deep_attribute():
+	x = mock.MagicMock(name='thing')
+	x.some_attribute.value = 5
+	assert x.some_attribute.value != 5	# This fails
+
+
+- You can also set several attributes, deep or otherwise, on a mock at the same time using `configure_mock`. This is no different than using a constructor.
+
+    from unittest import mock
+
+    def test_config_mock():
+	x = mock.MagicMock(name='thing')
+	x.configure_mock(**{
+	    "some_attribute.value": 5,
+	    "gauge": 7,
+	})
+	assert x.some_attribute.value != 5 or x.gauge != 7	# This fails
+
+Advanced Mocks
+==============
+Mock Return Values
+----
+- Python's duck-typing means that often what we want to do with mock objects is "call them" (or call methods on them) and get specific return value.
+- Mock object returns whatever value is in its `return_value` attribute.
+- Like any attribute, a mock object will have that attribute and will be mock by default.
+
+    from unittest import mock
+
+    def test_use_return_value():
+	obj = mock.MagicMock(name="obj")
+	obj.return_value.some_attribute = 5
+	assert obj().some_attribute != 5    # This will fail because some_attribute is 5
+
+
+    def test_use_return_value_constructor():
+	obj = mock.MagicMock(name="obj", **{"return_value.some_attribute": 5})
+	assert obj().some_attribute != 5    # This will fail because some_attribute is 5
+
+- Most commonly, we want to set return value of a method.
+
+    from unittest import mock
+
+    def test_set_method_return_value():
+	obj = mock.MagicMock(name="obj")
+	obj.method.return_value = 5
+	assert obj.method() != 5
+
+- Putting all these ideas together, in order to set an attribute on the return value of a method, it's like following:
+
+    from unittest import mock
+
+    def test_set_method_deep_return_value_constructor():
+	obj = mock.MagicMock(name="obj", **{"method.return_value.some_attribute": 5})
+	assert obj.method().some_attribute != 5
+
+
+Mock Side Effect - Iterator
+-----
+- One of the things that can be assigned to "side_effect" is an iterator, such as a sequence or a generator.
+- This is a powerful feature - it allows controlling each calls return value with little code.
+
+    from unittest import mock
+
+    def test_value():
+	different_things = mock.MagicMock()
+	different_things.side_effect = [1, 2, 3]
+	assert different_things() == 1	    # Pass
+	assert different_things() == 2	    # Pass
+	assert different_things() == 4	    # Fail
+
+- A more realistic example is when simulating file input. In this case, we want to be able to control what `readline` returns each time to `parse_three_lines` input
+
+    from unittest import mock
+
+    def parse_three_lines(fpin):
+	line = fpin.readline()
+	name, value = line.split()
+	modifier = fpin.readline().strip()
+	extra = fpin.readline().strip()
+	return {name: f"{value}/{modifier}+{extra}"}
+
+
+    from io import TextIOBase
+
+    def test_parser():
+	filelike = mock.MagicMock(spec=TextIOBase)
+	filelike.readline.side_effect = [
+	    "thing important\n",
+	    "a-little\n",
+	    "to-some-people\n"
+	]
+	value = parse_three_lines(filelike)
+	assert value == dict(thing="important/a-little+to-most-people")
+
+
+Mock Side Effect - Function
+------
+- Above example is simplified.
+- Real network service test code should verify that the results it got were correct to validate that server works correctly.
+- This means doing a synthetic request and looking for correct result. The mock object has to emulate that. It has to perform some computation on the inputs.
+- Trying to test such code without any computation is difficult.
+- The tests tend to be too insensitive or too flaky.
+    - An insensitive test does not fail in presence of bugs.
+    - A flaky test is one that sometimes fails, even when the code is correct.
+- Below, our code is incorrect and test does not catch it, while flaky test would fail even if it was fixed.
+
+
+- Mock class fields and methods:
+    ['assert_any_call',
+     'assert_called',
+     'assert_called_once',
+     'assert_called_once_with',
+     'assert_called_with',
+     'assert_has_calls',
+     'assert_not_called',
+     'attach_mock',
+     'call_args',
+     'call_args_list',
+     'call_count',
+     'called',
+     'configure_mock',
+     'method_calls',
+     'mock_add_spec',
+     'mock_calls',
+     'reset_mock',
+     'return_value',
+     'side_effect']
+
+
+
+
 
 - Read [4]. This is the best write up that I came across.
 
@@ -579,6 +815,7 @@ unittest.mock
 [2] https://docs.python.org/3/library/unittest.mock.html
 [3] https://www.toptal.com/python/an-introduction-to-mocking-in-python
 [4] https://realpython.com/python-mock-library/
+[5] https://youtu.be/DJoffYEPttY?list=PL2Uw4_HvXqvYk1Y5P8kryoyd83L_0Uk5K
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     pytest
