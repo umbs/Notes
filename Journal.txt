@@ -55,6 +55,7 @@ Career
     Major Projects:
         - SWG on PA Colo
             - Octavia PoC
+        - Released GPGW on Openstack
 
     Minor Projects (Tech Debts):
 
@@ -72,13 +73,59 @@ Seva
     - Setup ART Excel follow ups.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023, Nov 27 (Mon)
+- Standup at 9:30am
+    - Load Balancer design doc - take it to next level
+
+2023, Nov 26 (Sun)
+- Catching up on things.
+- Walking with Suri (
+- Transferred $100K to KPCU from ETrade stock sale.
+
+2023, Nov 25 (Sat)
+- Coffee at Prefecta, with Vivek et all.
+- Madhavi, and family went for shopping at Thrift store.
+- Drove back to Bay Area and reached around midnight.
+
+
+2023, Nov 24 (Fri)
+#thanksgiving
+- Madhavi prepared Indian Thanksgiving dinner.
+    - Shopped around for stuff for dinner.
+- Lunch at a Mexican restaurant.
+
+
+2023, Nov 23 (Thu)
+#Thanksgiving
+- Rest.
+- Went on hike with family.
+
+
+2023, Nov 22 (Wed)
+#vivekty
+- Drove to LA to visit Ty, Vivek, Maya etc
+- I did not take the day off, so it was a bit difficult to "work" and drive to
+  LA.
+- Drive took almost 8 hours
+    - Ate at Indian restaurant at Bakersfield. Bad food.
+    - Do not eat at Indian restaurants on the road. Unreliable food.
+    - I met Megha Lakshminarayan and Naren in the restaurant. Met Sachin Bhatia
+      and Namrata Barbhaiyya too.
+- Finally met family in evening/night.
+
+
 2023, Nov 21 (Tue)
+- Stock sale to get $172K to payoff  HELOC
+- Paid December month rent to Rajkumar ji.
+- GPGW scaled to 6 instances in Openstack region.
+
 
 2023, Nov 20 (Mon)
 #release #privatecloud
 - Release of 5.0.0, GPGW/Private Cloud to pangp.
     - We are able to join to US-West (San Jose)
-- Discussions with Aditya Thirumalai about deploying load balancer from Orchestrator.
+- Discussions with Aditya Thirumalai about deploying load balancer from
+  Orchestrator.
 
 2023, Nov 19 (Sun)
 #worldcup #KPCU #HELOC #facial
