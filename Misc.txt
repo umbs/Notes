@@ -4454,3 +4454,68 @@ Cheatsheet
     $ hx --tutor
     $ hx --health   # gives LSP integration
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@   AZURE BICEP     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Chapter 1
+---------
+Bicep Playground:
+    https://aka.ms/bicepdemo
+
+Bicep Playground Features:
+- It has 130+ bicep templates.
+- It allows you to search for templates that fits your needs.
+- Generate unique link to Bicep template you create and share with team mates.
+- It can transpile Bicep code to ARM template and vice versa (ARM to Bicep code).
+
+
+Chapter 2
+---------
+App Service Plan
+- It defines what's required to run the VMs in RG, such as:
+    - OS to run in VMs
+    - Pricing Tiers
+        Dev and Test: Free, Basic, Shared plans
+        Production: Standard, Premium, Isolated
+
+
+- To run bicep scripts
+    az deployment group -g <rg-name> -f <filename.bicep>
+
+- To preview changes before deploying bicep scripts
+    az deployment group -g <rg-name> -f <filename.bicep> --confirm-with-what-if
+
+    or use shortcut
+
+    az deployment group -g <rg-name> -f <filename.bicep> -c
+
+    - Options given during preview
+        - Create:
+        - Modify:
+        - NoChange:
+        - Ignore:
+
+
+Chapter 3
+---------
+App Service
+- Create App services inside App Service Plan
+    - Must indicate dependency on App Service Plan, otherwise both are deployed
+      in paralled (App Service Plan and App Service). The App Service could
+      error out if it gets deployed before App Service Plan. To avoid must use
+      `dependsOn` attribute.
+
+
+Chapter 4
+---------
+Modules
+- Each bicep file is a module. It deploys some resources to Azure.
+- You can deploy just single module. Or you can have a main module (like an
+  Orchestrator module) that deploys other modules.
+
+
+Chapter 5
+---------
+Parameters
+Communication between Modules using Outputs
+
