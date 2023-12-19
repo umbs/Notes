@@ -868,10 +868,138 @@ def test_add(a, b, c):
 
 Fixtures
 -------
+- Fixture is a function. It is automatically called by pytest when the name of
+  the argument of another function matches the fixture name. Ex:
+
+	@pytest.fixture
+	def example():
+	   return "foo"
+
+	def test_foo(example):
+	    assert example == "foo"
+
+	- In this example `example` is called at the moment of execution of test_foo.
+	- The return value of `example` is passed into `test_foo` as an argument with a name `example`.
+	- There are many nuances to fixtures (e.g. they have scope, they can use yield instead of return to have some cleanup code, etc).
+
+- Use fixtures when there is canned/repetitive data for every test.
+
+
+Parameterization
+----------------
+- It is process of running same test with different values from a prepared set.
+  Each combination of test and data is counted as new test case.
+
+
+    @pytest.mark.parametrize("number", [1, 2, 3, 0, 42])
+    def test_foo(number):
+	assert number > 0
+
+
+Collection Time
+---------------
+- pytest has an execution stages called
+    `collection time`
+    `test time`
+- In this stage, pytest discovers test files and test functions within those
+  files. pytest also performs "dynamic generation of tests" in this stage.
+- Fixtures are also created at this stage, but decorators (such as
+  @pytest.fixture) are executed at a module import time.
+
+- After collection time finished, Pytest starts the next stage, called ‘test time’.
+- In this stage, setup functions are called, fixtures are called, and test
+  functions (which were discovered/generated at collection time) are executed.
+
+
+Fixture Parameters
+------------------
+- Fixtures can have parameters, but they must be iterable (generators, lists,
+  tuples, sets, etc.). pytest consumes them and converts them to a list.
+- There is no lazy evaluation. All iterables are immediately evaluated.
+- Each parameter to a fixture is applied to each function using this fixture.
+- If a few fixtures are used in one test function, pytest generates a Cartesian
+  product of parameters of those fixtures.
+
+
+	I did not understand below section
+	==================================
+
+	- To use those parameters, a fixture must consume a special fixture
+	  named ‘request'.
+	- It provides the special (built-in) fixture with some information on
+	  the function it deals with.
+	- request also contains request.param which contains one element from
+	  params.
+	- The fixture called as many times as the number of elements in the
+	  iterable of params argument, and the test function is called with
+	  values of fixtures the same number of times. (basically, the fixture
+	  is called len(iterable) times with each next element of iterable in
+	  the request.param).
+
+
+
+Parametrization with pytest_generate_tests
+-------------------------------------------
+TBD:
+
+
+Parameters Tips from video [3]
+
+    def square(n: int) -> int:
+	return n * n
+
+    @pytest.mark.parameterize(
+	('input_x', 'expected'),
+	(
+	    (1, 1),
+	    pytest.param(-1, 1, id='negative_trivial_case'),  <<<< you can run this specific test. Look at **
+	    (2, 4),
+	    (-2, 4)
+	)
+    )
+    def test_square(input_x, expected):
+	assert square(input_x) == expected
+
+
+    ** pytest test.py -k negative_trivial_case
+
+
+NOTE: Please do not use too much logic with parameterization, just to void
+writing test cases. Watch [3] for details and concept called "boolean trap".
+
+
+- You can use NameTuple for better readability
+
+
+    from typing import NamedTuple
+
+    class Case(NamedTuple):
+	input_x: int
+	expected: int
+
+    def square(n: int) -> int:
+	return n * n
+
+    @pytest.mark.parameterize(
+	('input_x', 'expected'),
+	(
+	    Case(input_x=1, expected=1),
+	    pytest.param(-1, 1, id='negative_trivial_case'),  <<<< you can run this specific test. Look at **
+	    Case(input_x=2, expected=4),
+	    Case(input_x=-2, expected=4)
+	)
+    )
+    def test_square(input_x, expected):
+	assert square(input_x) == expected
 
 
 
 
+References:
+[1] https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9
+[2] https://pytest.org/en/7.4.x/contents.html
+[3] anthonywritescode: https://www.youtube.com/watch?v=aQH7hyJn-No
+[4] anthonywritescode: https://www.youtube.com/watch?v=ScEQRKwUePI&t=104s
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
