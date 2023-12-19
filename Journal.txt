@@ -20,6 +20,7 @@ Personal:
 
     * Exercising, 3 times a week
 
+    * Rebuild the website using the HTML/CSS webpage saved on getpocket
     * Get blog posts online. At least 2/month.
 
 
@@ -50,6 +51,163 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+@@@@@@@@@@@@@@   December 2023    Goals  @@@@@@@@@@@@@@@@@@
+- PREPARE for VIM talk
+
+Career
+    Major Projects:
+        - Load Balancer on Openstack
+
+    Minor Projects (Tech Debts):
+        - Python Hypothesis talk - STALLED for VIM talk
+        - Git from Scratch - STALLED for VIM talk
+
+Personal
+    - Do this in this order, every day
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+    - Estate Planning.
+    - Read "Commercial Real Estate for Beginners" book
+    - Read "7 Habits of Highly Effective People" book
+
+REI
+    - Insurance shopping for all properties
+        - 629 Celebration Ct
+        - 3012/3014 Pine Valley
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    - Freedom Mortgage - Include escrow.
+    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
+
+Seva
+    - Lead YES follow up.
+    - Attend adult follow up.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023, Dec 11 (Mon)
+- Working on 2nd LB issues:
+    - Discussed with Roy Anthonyraj.
+    - Debugged with Eric Platt.
+    - NLB started working. There were 2 mistakes:
+        - I disassociated Floating IP from VIP and associated it with Interface
+          IP on NLB. So, NLB was no longer receiving cURL traffic.
+
+
+- Check Payable to: FMTC FBO Sarma B Upadhyayula
+    - Created a Rollover IRA and initiated Hewlett Packard 401K into that
+      account. Funds should be transferred in 1 week. This is pre-tax money.
+    - Account Number: 241822895
+    - There was Roth IRA too (about $2K). I'll get a check for that, after
+      deducting taxes.
+
+- Called Protective Insurance for update on Term Life Insurance
+    - In progress. I should get update in 1 week.
+    - Application Number: LU5946246
+    - Costs only $52/mo, will change to $60/mo after 5 years
+    - Terms/Details: 20 years, $750K face value.
+- Prudential gave a quote for $131/mo
+
+- Paid off loan and kept HELOC open. Paid $735.84
+
+
+
+
+2023, Dec 10 (Sun)
+#RSM #hike #missionpeak
+- Ate out, at Komala Vilas.
+- 1st day for Aarushi at RSM Geometry.
+- Hiking Mission Peak with Vijay/Venkat/Suri
+- Short Online SKY Meditation.
+- Came to Office at 11pm to Print Tax documents.
+
+2023, Dec 09 (Sat)
+#facial #balavihar #book #commercialrealestateforbeginners
+- Blood test by ExamOne, for Protective Health Term Life Insurance.
+- Took Akshay to Environmental Education Center at McClelan Ranch.
+- Bala Vihar 1st class.
+- Completed reading the book "Commercial Real Estate for Beginners" by Peter LastName
+
+
+2023, Dec 08 (Fri) #flute
+- Tried a LOT for getting 2 Web Servers working behind IPVS, but damn thing,
+  2nd one is not responding.
+
+Minutiae:
+    - Flute class at night
+
+2023, Dec 07 (Thu)
+
+2023, Dec 06 (Wed)
+
+2023, Dec 05 (Tue)
+#bike #bicycle
+- IPVS Load Balancer:
+    - Discussed IPVS issues with Vikram
+    - Put both Real Servers behind IPVS node on DP network instead of MP
+      network.
+    - We suspect router on MP network is dropping the packets.
+    - Setup brand new topology on DP network. But Ping from IPVS to Servers is
+      not working.
+
+
+- Minutiae:
+    - Biked to work
+        - Feels great.
+        - Must eat before biking. Will have energy. I came to work in 55 mins.
+    - Spoke to Alok Ranjan on the way.
+    - Registering for EVgo for $500 credit
+        - Waiting for Activation Email
+
+
+
+2023, Dec 04 (Mon)
+- Up at 5:30am, working on LB PoC
+    - cURL call was not working. Eric said only certain ports are opened up on Openstack DC.
+
+
+2023, Dec 03 (Sun)
+#facial #flute
+- Hike on Mission Peak with Venkat
+- Flute class from 9:30am-11:30am
+
+2023, Dec 02 (Sat)
+#flute
+- Took Akshay to Nature Education Center in McClellan Ranch. He thoroughly
+  enjoyed it.
+- Group class for Flute. About 10 students joined.
+
+
+2023, Dec 01 (Fri)
+#spaceheater #gmfinancial #changeofaddress #usps #facial
+
+- WFH today
+- Hiccups along setting up LB PoC
+
+- Minutiae:
+    - Dropped kids at school
+    - Sent "Payroll Statement Roll-Up" document to Doreen from GTN. It explains
+      contents of Box 1 in W2 form. I too have to read it carefully to
+      understand W2 form.
+    - Returned Space Heaters on Amazon and at Whole Foods.
+    - Purchased new "Space Heaters" on Amazon that have temperature control and
+      Thermostats so that it turns off when configured room temperature is
+      reached.
+    - Setup mail forwarding from 629 Celebration Ct to 10454 Merriman Rd
+        - Success for Bhaskar
+        - System Error for Madhavi. Retry later.
+    - Transferred money from ETrade to KPCU to payoff Car Loan (9%)
+
+- Setup account on GM Financial.
+    - Saw the amount for Loan Payoff. Must print "Loan Payoff" document and
+      mail them with a check.
+- Transferred $1001 to Mavayyagaru
+- Purchased Zoom Pro membership ($150/year) for flute class.
+
+
+
 @@@@@@@@@@@@@@   November 2023    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
@@ -58,8 +216,8 @@ Career
         - Released GPGW on Openstack - DONE
 
     Minor Projects (Tech Debts):
-        - Python Hypothesis talk - IN PROGRESS
-        - Git from Scratch -
+        - Python Hypothesis talk - STALLED for VIM talk
+        - Git from Scratch - STALLED for VIM talk
 
 Personal
     - Flute
@@ -78,9 +236,15 @@ Seva
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 2023, Nov 30 (Thu)
 - Team Lunch at Komala Vilas
+    - Pretty much ate away the whole time.
 - Load Balancer PoC
     - Shikhar helped to bring up VMs in Openstack under my Project.
     - But ipvsadm is not installed and I'm having difficulty installing
+- Brief discussions with Aditya on using Kubernetes cluster instead of IPVS VMs
+  and building HA in it.
+    - Downside is that our SRE do not have operational knowledge on Kubernetes.
+    - Self Managed Kubernetes is hard. All Kubernetes deployments are Cloud
+      managed.
 
 
 - Minutiae:
@@ -272,6 +436,7 @@ Seva
         - They are getting from https://protective.com
             - $52/mo for $750K for 20 years
             - Filled out application ... waiting.
+            - Application Number: LU5946246
 
 - Purchased Renters insurance from Lemonade.
 - Returned Venkat's bedding (big one). I kept the twin bedding (mattress
@@ -5741,7 +5906,7 @@ Seva:
 
 2019, Aug 30 (Fri)
 #swimming #guest #gunny #riddhiverma
-- Completed PEP8 cheatsheet and shared with following:
+- Completed PEP8 cheat sheet and shared with following:
     * Bhoop, Nilesh
     * Happy that one of my "pet projects" is "shipped" although this is trivial
       stuff.
@@ -15096,7 +15261,7 @@ playdate).
 
 
 2015, Oct 15 (Thu)
-[Thu 15, 11:57] Fixed typos in iproute2 cheatsheet and created a pull request.
+[Thu 15, 11:57] Fixed typos in iproute2 cheat sheet and created a pull request.
 [Thu 15, 11:55] Guru Pooja and off to work.
 [Thu 15, 11:53] SONIC installation in morning. Quite good speed.
 
