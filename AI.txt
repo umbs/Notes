@@ -1,0 +1,55 @@
+AI Terminology
+
+
+Machine Learning vs Data Science
+================================
+ML: "Field of study that gives computers the ability to learn without being explicity programmed"
+  - Arthur Samuel (1959)
+  - This is a software.
+
+Data Science: "Science of extracting knowledge and insights from data".
+  - Usually a slide deck.
+
+
+Deep Learning
+=============
+
+many inputs ---> Big math equation ---> Output
+
+Big math equation ==> Artificial Neural Networks. This is no relation to how brain work (real Neural Networks).
+
+
+     ┌───────────────────────────────────────────────┐
+     │   AI                                          │
+     │  ┌──────────────────────────────┐   ┌──────┐  │
+     │  │                              │   │      │  │
+     │  │   ML                         │   │      │  │
+     │  │                              │   └──────┘  │
+     │  │   ┌─────────────────────┐    │             │
+     │  │   │                     │    │   ┌──────┐  │
+     │  │   │                     │    │   │      │  │
+     │  │   │    DL/NN            │    │   │      │  │
+     │  │   │                     │    │   └──────┘  │
+     │  │   │                     │    │             │
+     │  │   │                     │    │   ┌──────┐  │
+     │  │   │                     │    │   │      │  │
+     │  │   │                     │    │   │      │  │
+     │  │   │                     │    │   └──────┘  │
+     │  │   └─────────────────────┘    │             │
+     │  └──────────────────────────────┘             │
+     └───────────────────────────────────────────────┘
+
+
+AI Transformation Playbook
+----
+1. Execute pilot projects to gain momentum.
+2. Build an in-house AI team.
+3. Provide broad AI training.
+4. Develop an AI strategy.
+5. Develop internal and external communications.
+
+
+- Imperfect rule of thumb to decide what Machine Learning can and cannot do?
+  - Anything you can do with 1 second of thought, we can probably now or soon automate.
+
+
