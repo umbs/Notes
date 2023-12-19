@@ -193,7 +193,7 @@ Events and Signals
 Reference:
 [1] https://www.youtube.com/watch?v=TlB_eWDSMt4
 
-@@@@@@@@@@@@@@@@@@@@   GCP SDK Commands Cheatsheet   @@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@   GCP SDK Commands Cheat Sheet   @@@@@@@@@@@@@@@@@@@@@@@@
 Deploy your app
 	$ gcloud app deploy
 
@@ -213,7 +213,7 @@ gcloud functions deploy  helloGCSGeneric --runtime nodejs6 --trigger-resource gc
 [1] https://gist.github.com/pydevops/cffbd3c694d599c6ca18342d3625af97
 [2] https://github.com/gregsramblings/google-cloud-4-words
 
-@@@@@@@@@@@@@@   GCP Functions Emulator Commands Cheatsheet   @@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   GCP Functions Emulator Commands Cheat Sheet   @@@@@@@@@@@@@@@@@
 // prefix below commands with `gcloud` and you can do everything with gcloud SDK
 // instead of function emulators
 
@@ -2614,7 +2614,7 @@ TODO: Whatever fields are SELECT'ed, must also be present in GROUP BY.
 Research more on this.
 
 
-Cheat sheet
+Cheat Sheet
 ----
 - Pretty print. Couple of methods:
 mysql> pager less -SFX
@@ -4487,7 +4487,7 @@ References:
 
 @@@@@@@@@@@@@@@@@@@@@@@@   HELIX editor    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Cheatsheet
+Cheat Sheet
     $ brew install helix
     $ hx -V
     $ hx --tutor
@@ -4613,4 +4613,55 @@ Week 1
 
 Coursera
 [1] https://www.coursera.org/learn/negotiation/
+
+@@@@@@@@@@@@@@@@@@@@@@@@   IPVS Cheat Sheet         @@@@@@@@@@@@@@@@@@@@@@
+
+- Start an IPVS virtual service. The -t flag indicates TCP connection. VIP
+  indicates the Virtual IP (or real IP) address on which Load Balancer receives
+  Clients traffic.
+        $ ipvsadm -A -t <VIP>
+        # ipvsadm -A -t 10.2.111.231    # weighted least connection
+        # ipvsadm -A -t 10.2.111.231 -s rr  # round robin
+
+- Add a 'Real Server' to forward incoming request.
+        $ ipvsadm -a -t <VIP> -r <real-server-ip>
+
+- Delete a 'Real Server' from Virtual Server table
+        $ ipvsadm -d -t <VIP> -r <real-server-ip>
+
+- List the Virtual Server Table
+        $ ipvsadm -ln
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   Python Hypothesis Library     @@@@@@@@@@@@@@@@@
+- @given()
+    - Takes strategies as input.
+    - Passes them as arguments to test functions.
+- @example()
+    - Run specific test case.
+- Code sample
+    import hypothesis.strategies as st
+        - st.text()
+        - st.integers()
+        - st.integers().filter(lambda x: x%2 == 0)
+
+- hypothesis.note()
+    - Report this value for minimal failing example
+
+- hypothesis.event()
+    - Records events that occurred during this test. Stats will be reported for
+      each event as as a summary.
+- hypothesis.assume()
+    - Calling assume is like an assert that marks the example as bad, rather
+      than failing the test. This allows you to specify properties that you
+      assume will be true, and let Hypothesis try to avoid similar examples in
+      future.
+
+- Test statistics. Run with this flag.
+    --hypothesis-show-statistics
+
+
+
+
+
 
