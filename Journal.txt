@@ -72,6 +72,64 @@ Seva
     - Setup ART Excel follow ups.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023, Nov 21 (Tue)
+
+2023, Nov 20 (Mon)
+#release #privatecloud
+- Release of 5.0.0, GPGW/Private Cloud to pangp.
+    - We are able to join to US-West (San Jose)
+- Discussions with Aditya Thirumalai about deploying load balancer from Orchestrator.
+
+2023, Nov 19 (Sun)
+#worldcup #KPCU #HELOC #facial
+- Up around 3am, following world cup
+- SHOCK: Realized the interest rate on HELOC increased to 8.5%
+    - Paying more than $1000 per month in interest rate.
+    - Balance is $160K
+    - I'll probably sell PANW shares and payoff.
+
+- Moving Journal from Dropbox to Github.
+    - I lost 2 years worth of Journaling (Jan, 2020 to Nov, 2022). Very crucial years.
+    - Looking into restoring it.
+
+
+- "How to Pay Less in Taxes in 2023 (for Professionals and High W-2 Earners)
+    - https://streamyard.com/watch/v4E6Hhmpxq48?utm_medium=email&_hsmi=282591840&_hsenc=p2ANqtz-8a5FzvIvX1h-Z6NA90oy2E1sOZtK_sRsrdDr15GCdzLL11AwEYq-lEZugL4xAmG14ktDVKCZOTooZoQfZC7Qi6F4CHtg&utm_content=282591840&utm_source=hs_email
+    - Effective Tax Rate = Taxes Paid/Total Income
+    - Go to https://decode.tax and upload old tax returns and they'll
+      immediately tell effective tax rate. Not good idea.
+
+
+
+
+2023, Nov 18 (Sat)
+#tax #livingspaces #couch #termlife #insurance
+- Took kids to Library.
+- Term Life insurance from:
+    - Policy Genius
+        - They are getting it from Prudential Insurance.
+            - $130/mo for $750K for 20 years
+            - $107/mo for $750K for 15 years
+    - Costco
+        - They are getting from https://protective.com
+            - $52/mo for $750K for 20 years
+            - Filled out application ... waiting.
+
+- Purchased Renters insurance from Lemonade.
+- Returned Venkat's bedding (big one). I kept the twin bedding (mattress
+  cover).
+- Living Spaces shopping.
+    - Purchased couch for hall/living room.
+- Responded to "Tax Email" from Doreen from myGTN.
+    - Answered all questions and gave all data.
+
+
+2023, Nov 17 (Fri)
+- Reading up LVS documentation and HOWTO from here
+    - http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/index.html
+- Attended "first" team meeting with Kumar Senthivel
+    - 18 people in attendance, many of whom I've never seen.
+
 2023, Nov 16 (Thu)
 - Finally figured out how to setup EV charging for the car.
 
@@ -175,7 +233,7 @@ Seva
       hours due to below reasons. But luckily, scale down happened quickly (10
       mins or so).
         - Session log out.
-- Eric Platt asked 
+- Eric Platt asked
 
 - UAT meetings with Santhos Kumar Chandran, Blake Weiss and Manish Misra
     - Start date check on AMEND messages must be removed.
@@ -191,7 +249,7 @@ Seva
 
 2023, Nov 06 (Mon)
 #facial
-- Standup 
+- Standup
     - MUST finish schedule scale and autoscale tests today.
 - UAT testing.
     - Net New message from UAT team
@@ -242,7 +300,7 @@ Scaledown Issue:
 - Investigate why scale down did not work.
     - gp_auto_global_test_execution_guard lambda
     - gp_auto_global_test lambda
-        - 
+        -
 
 
 @@@@@@@@@@@@@@   October 2023    Goals  @@@@@@@@@@@@@@@@@@
@@ -258,7 +316,7 @@ Personal
     - Flute - ONGOING
     - Read 1 book/month - YET TO START
     - Estate Planning - YET TO START
-    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust 
+    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
         - YET TO START
     - Rebuild the website using the HTML/CSS webpage saved on getpocket:
         - YET TO START
@@ -309,13 +367,13 @@ Seva
 
     1) Thank you for enabling the move. Family joined me last week and we are
     settling down.
-    2) 
+    2)
         a) Working on Openstack/Palo Alto's Private DC project, with Bhaskar
         Bhupalam, Vikram Guleria and Kumar Senthivel.
         b) Testing GPGW: Upgrades, Autoscaling, are all working. Next: Explicit Proxy, NGPA
         c) Shall I send you short monthly reports on what I've done?
     3) Alok Ranjan. Prisma Access in India?
-        
+
 
 2023, Oct 26 (Thu)
 - Usual, dropped kids at school and at work
@@ -389,7 +447,7 @@ Seva
     - 888-870-5064 M-F 8am-5pm PT
     - Subscriber ID: 911-052-174
     - If you want
-        - blueshieldca.com Super Bill from 
+        - blueshieldca.com Super Bill from
         - Register
         - Claims
 Carbon Black booked 6:15pm for TDAP
@@ -415,7 +473,7 @@ Carbon Black booked 6:15pm for TDAP
 - Reading Explicit Proxy FS.
 - Discussions about "Schedule Scale" working or not.
     - I found that `gp_auto_auto_scheduler` had concurrency set to 0. Changed
-      that and *watched* next hour. 
+      that and *watched* next hour.
 
 - Kids TB tests came Negative. Yay.
 - Went to Walmart for returns/purchase.
@@ -464,7 +522,7 @@ Carbon Black booked 6:15pm for TDAP
 
 2023, Oct 11 (Wed)
 - Lot of reading up on code flow, python library to parse XML content.
-- Did not make as much progress as I would like and I need to catch up. 
+- Did not make as much progress as I would like and I need to catch up.
 
 
 - Call with Alok Ranjan in morning. He did not get promotion and is pretty
@@ -642,9 +700,9 @@ Seva
 - Took Rahul Bankhele's help
     - Use http://<ip address>/debug URL to collect data
     - Use CLI admin@ip.address to run CLI commands
-- My changes did not work: 
-    - Enable openstack only for GPGW and not for RN and SC. 
-    - Justin pointed this out. 
+- My changes did not work:
+    - Enable openstack only for GPGW and not for RN and SC.
+    - Justin pointed this out.
     - I tested the code as thoroughly as I can, but figuring out what went
       wrong.
 
@@ -697,14 +755,14 @@ Seva
         0) gp_auto_auto_scheduler lambda
         1) Get `dr_feature_state` from `global_settings` table. It is set to `disable`
         2) Could not query the TraceMasterModelGlobal due to missing required keys. ???
-        3) Insert following record into trace_master: 
+        3) Insert following record into trace_master:
           tenant_id: 0
-          trace_id: 968579eb-571d-4f2a-9ee6-1571e907a94d, 
+          trace_id: 968579eb-571d-4f2a-9ee6-1571e907a94d,
           type: AutoScaleUpdateSchedule
           type_id: 1695667541
 
           Successfully done: Row ID: 8375378
-        4) SELECT compute_region_id, timezone FROM region_master where edge_location_region_id = compute_region_id 
+        4) SELECT compute_region_id, timezone FROM region_master where edge_location_region_id = compute_region_id
         These are where edge == compute. Schedule is updated in these regions.
             1000 is Compute region (OSP)
             200 is not Compute region (GCP)
@@ -720,7 +778,7 @@ Seva
 GPGW Upgrade on Openstack - Status
 -----
 - Brought up GPGW with version: PA-VM-SaaS-10.2.6-c50.sb28_saas
-- Successfully upgraded to version: PA-VM-SaaS-10.2.8-c50.saas 
+- Successfully upgraded to version: PA-VM-SaaS-10.2.8-c50.saas
 - Triggered upgrade workflow using gp_pinned_instance_upgrade_action lambda
 - Validations:
     - New GPGW got vmid, serial_number, public_ip, node_fqdn.
@@ -734,7 +792,7 @@ GPGW Upgrade on Openstack - Status
             Similarly across other regions of the world.
           - Ask Hao Long on exact flow. How GPPT and GPGW recognize each other.
 
-        2) How does GP portal know (or have) list of GPGW currently running. 
+        2) How does GP portal know (or have) list of GPGW currently running.
           - Sam as above.
 
         3) I have 2 GPGW and 2 GPPT in GCP. I'm not able to ping their Public
@@ -811,7 +869,7 @@ GPGW Upgrade on Openstack - Status
 
 
             EXPIRE:
-            -------  
+            -------
                 - When a contract is completed, MS sends an EXPIRE message.
                 - A customer cannot cancel any order (FUTURE_AMEND, FUTURE_RENEW) after paying for it. There is a separate process for it. So, need not worry about receiving FUTURE_AMEND, but not receiving AMEND later.
 
@@ -832,8 +890,8 @@ GPGW Upgrade on Openstack - Status
 
 GPGW Upgrade on Openstack - Status
 -----
-- Brought up GPGW with version: 
-- Triggered upgrade workflow using version: 
+- Brought up GPGW with version:
+- Triggered upgrade workflow using version:
 - I triggered this from AWS lambda function gp_pinned_instance_upgrade_action
 - Found an issue in ami_mapping table. The version I upgraded to was present in
   Openstack (Shikhar uploaded it). It was present in version_mapping, but not
@@ -884,7 +942,7 @@ GPGW Upgrade on Openstack - Status
 2023, Sep 18 (Mon)
 - 45 mins with Manasa Rengineni on CSP
 - 1.5 hours with Bishnu on CSP
-- Examining Prod logs to understand upgrade flow. 
+- Examining Prod logs to understand upgrade flow.
 
 - Visited a home (2265 Lenox Pl, Santa Clara). Good community, but SW facing
   and no bedroom on ground floor.
@@ -936,7 +994,7 @@ GPGW Upgrade on Openstack - Status
 
 2023, Sep 11 (Mon)
 #back2us
-- First day in office. 
+- First day in office.
 - Continued working on Operational Metrics. Shipping memory to App Insights.
 - Met Mahesh Nagarajan at work, catching up, had lunch etc.
 - Met Venkat and had dinner there. Slept the whole afternoon.
@@ -984,7 +1042,7 @@ GPGW Upgrade on Openstack - Status
 2023, Sep 06 (Wed)
 #back2us
 - Got call from Kumar. Management agreed on Sept 10th as start date. I booked
-  tickets 
+  tickets
 - Tested, thoroughly, Operational Metrics code.
     - But did not make progress on "Utilization" SDB variable.
 
@@ -999,7 +1057,7 @@ GPGW Upgrade on Openstack - Status
 2023, Sep 04 (Mon)
 #parents #momdad #akshay
 - Raised PRs for changing error to debug for `ErrorMaxPollExceeded`
-    - Got feedback to make it a warning 
+    - Got feedback to make it a warning
 
 - Raised PR for Operational Metrics. Attached screenshots of metrics showing up
   in App Insights.
@@ -1116,7 +1174,7 @@ TODO
             PRD Task: If a new user is added who chooses to map to CSP Tenant, all
             existing users on Tenant also need to be auto registered.
                 - This is CSP teams work. But how will they do this?
-              
+
             PRD Task: All Tenants must be migrated from Essential to Enhanced/Premium plan.
                 - This is unfamiliar area for me.
     ---------------------------------------------
@@ -1133,7 +1191,7 @@ TODO
     - Merged PRs to azure_dev and 1.8.0 branches
 
 - Operational Metrics work: Memory Stats
-    - 
+    -
 
 
 2023, Aug 30 (Wed)
@@ -1147,7 +1205,7 @@ TODO
   scripts in JIRA.
     - https://jira-dc.paloaltonetworks.com/browse/FWAAS-9540
 
-- Work wise, feels like I did not do anything and lost the day :( 
+- Work wise, feels like I did not do anything and lost the day :(
 
 - Flute class in evening
 - Swimming class in evening. Practised flute for > 1 hour and meditated.
@@ -1229,7 +1287,7 @@ TODO
 #offer #back2usa
 - Discussed FWAAS-9434 (QueryId and ReportId leak) with Davi Gupta.
     - Do a Test Driven Development.
-- Got offer 
+- Got offer
 
 
 2023, Aug 21 (Mon)
@@ -1247,7 +1305,7 @@ TODO
 #backtous
 - flute
 - Talked to parents and told them we are planning to move back to India.
-    - Dad immediately cut the call saying he has to use restroom :( 
+    - Dad immediately cut the call saying he has to use restroom :(
     - But overall parents took the news positively. They handled it well.
 
 
@@ -1292,7 +1350,7 @@ TODO
       BUY, reject it. It gets too complex.
 
 - Intensely working on getting "Idempotent" changes into 1.7.1 branch
-    - Got stuck in a silly bug during UT. Took me >1 hour for an obvious typo/bug. 
+    - Got stuck in a silly bug during UT. Took me >1 hour for an obvious typo/bug.
     - But I swear UTs are so beneficial.
     - I have also started using pytest parameterization. It's so succint,
       beautiful and elegant.
@@ -1359,7 +1417,7 @@ TODO
 2023, Aug 10 (Thu)
 - Testing AMEND before demo at 10am
 - Demo:
-    - Address issue where AMEND comes with "end date" older than "current date". 
+    - Address issue where AMEND comes with "end date" older than "current date".
     - Address use case where a second BUY comes after first BUY has expired.
 
 - Investigating a Prod issue for Tenant: 1f8aefe1-eac8-4532-9c55-115d46c686ee
@@ -1377,8 +1435,8 @@ TODO
 
 - Meeting with Davi Gupta.
     - Have WALLE tickets for short time only. Do things *outside* WALLE and then finally open WALLE.
-    - WALLE-1043 (closed) 
-    - WALLE-1042: 
+    - WALLE-1043 (closed)
+    - WALLE-1042:
         - Create a new GCP subscription. Have a *future proof* name.
         - Ask Blake to send the messages.
         - Pull messages from UI and make sure messages are received.
@@ -1389,7 +1447,7 @@ TODO
         - IT is replaying it back.
         - Product is NOT idempotent. This is causing the publish/consume cycle an infinite loop.
     - Did a code review with Davi for following PR
-        - https://bitbucket.paloaltonetworks.local/projects/FWAAS/repos/fwaas/pull-requests/7241/overview 
+        - https://bitbucket.paloaltonetworks.local/projects/FWAAS/repos/fwaas/pull-requests/7241/overview
         - https://jira-hq.paloaltonetworks.local/browse/FWAAS-8805
             - Add ALL tests that QA must run and validate the change.
 
@@ -1438,14 +1496,14 @@ TODO
             - MPLS, VXLAN
     - Meeting went on till 11:30pm
 
-- Testing AMEND messages. 
+- Testing AMEND messages.
     - Found 2 bugs. Fixed them and notified Alok.
     - Slept at 3am
 
 
 
 2023, Aug 08 (Tue)
-- CSP-16689: Email address has ZERO-WIDTH-SPACE unicode char. 
+- CSP-16689: Email address has ZERO-WIDTH-SPACE unicode char.
     - Discussed with Manasa Rengineni on what the issue is.
 - LST-11815: Product is not receiving CSP SN on Entitlement topic.
     - We are now receiving messages on Entitlement topic. But they are not sent
@@ -1563,8 +1621,8 @@ TODO
         Meeting Minutes:
         New SRE Portal in place, written in React Frontend and Flask/Python backend.
         SRE backend team writes APIs to fetch data. In Prisma Access, it's via calls to RDS in AWS.
-        SRE Portal is hosted on GCPs GKE cluster. 
-        Authenticating API calls from GCP to Azure CosmosDB must be figured out. 
+        SRE Portal is hosted on GCPs GKE cluster.
+        Authenticating API calls from GCP to Azure CosmosDB must be figured out.
 
         Recording Link: https://drive.google.com/file/d/1NWMV8EK94QQdm21Vtg1hGKCKLPhj7MhG/view?usp=drive_link
 
@@ -1657,7 +1715,7 @@ Seva
 2023, Jul 26 (Wed)
 - Helped Manasa with CSP testing.
 - Reading up on Python Logging module
-- 2 PRs got merged :) 
+- 2 PRs got merged :)
     - Client ID and Client Secret is passed as argument to onboarding script (FWAAS-8805)
     - FWAAS-8948. Remove SFDC status.
 
