@@ -439,3 +439,59 @@ Chapter 2: Getting to know .git
 
 9 directories, 17 files
 
+
+- To understand git layout, read details here:
+    https://git-scm.com/docs/gitrepository-layout
+
+
+[10:08] tree .git
+.git
+├── HEAD            # Contains reference to current commit. Initially it'll
+│                   # have following:
+│                   #   ref: refs/heads/master
+│                   #   1) When you create new commit, the commit referenced
+│                   #      by HEAD is used as it's parent.
+│                   #   2) When you checkout new commit or branch, HEAD will
+│                   #      point to the thing you checked out.
+│                   #   3) When you perform merge, the requested branch is
+│                   #      merged with whatever HEAD is pointing to.
+│
+├── config          # Settings that appy *only* to this repo and not globally.
+├── description     # Project name. Edit this file and name the project. Used by gitweb.
+│
+├── hooks           # Scripts to run at various points in Git workflow. Remove 
+│   │               # `.sample` and edit the files.
+│   │
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   └── update.sample
+├── info            # This directory is used to save lots of metadata that does
+│   │               # not fit anywhere else.
+│   │
+│   └── exclude     # All the files you want to exclude. This is different than
+│                   # .gitignore where .gitignore is saved along with your code
+│                   # in the repository. Contents of `exclude` file is not
+│                   # saved in the repo.
+│
+├── objects         # Git database, where Git stores all the content it 
+│   │               # tracks: your source code and other assets put under 
+│   │               # Git version control.
+│   │
+│   ├── info        #
+│   └── pack        # Stores objects in optimized format.
+└── refs
+    ├── heads
+    └── tags
+
+9 directories, 17 files
+
