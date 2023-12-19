@@ -357,3 +357,85 @@ Reference:
 https://www.youtube.com/watch?v=tukOm3Afd8s
 
 
+Git Submodules
+-----------
+# In main git repo, do following. It'll pull another repo and make it a submodule
+$ git submodule add <git url>
+    - After this, there'll be a `.gitmodules` file created. It's a text file.
+
+- After above command, when you clone repo, it'll not clone submodule.
+- Similarly, `git pull` does not pull submodule content.
+- If you want to do `git pull` on all submodules, do this:
+	$ git pull --recurse-submodules
+
+	# You can set this in config
+	$ git config submodule.recurse true
+
+
+# following will recursively clone submodules
+$ git clone <main-repo> --recurse
+
+#
+$ git submodule update --init
+
+
+- Updates or commits to submodules will reflect on parent module. A separate
+  commit must be done on parent module also.
+
+
+
+https://www.youtube.com/watch?v=gSlXo2iLBro
+https://www.youtube.com/watch?v=ZYq3NJnO08U
+
+
+
+Git Worktree
+-----------
+- Manage multiple working trees within same repository
+
+$ git worktree add ../another-dir/      # This is best practice
+$ git worktree list                     # This will list all worktrees
+$ git worktree remove ../another-dir/   # Remove the dir after your work
+
+https://git-scm.com/docs/git-worktree
+https://www.youtube.com/watch?v=2uEqYw-N8uE
+https://www.youtube.com/watch?v=s4BTvj1ZVLM
+
+
+
+****************************************************************************
+*       Notes from Building Git (James Coglan)
+****************************************************************************
+
+Chapter 2: Getting to know .git
+
+[10:08] tree .git
+.git
+├── HEAD
+├── config
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   ├── push-to-checkout.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+
+9 directories, 17 files
+
