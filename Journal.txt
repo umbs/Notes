@@ -55,27 +55,138 @@ Career
     Major Projects:
         - SWG on PA Colo
             - Octavia PoC
-        - Released GPGW on Openstack
+        - Released GPGW on Openstack - DONE
 
     Minor Projects (Tech Debts):
+        - Python Hypothesis talk - IN PROGRESS
+        - Git from Scratch -
 
 Personal
-    - Freedom Mortgage - Include escrow.
     - Flute
-    - Learn Spanish
+    - Sadhana
+    - Vashista Yoga
+
+    - Freedom Mortgage - Include escrow.
     - Read 1 book/month
     - Estate Planning.
     - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
-    - Rebuild the website using the HTML/CSS webpage saved on getpocket:
+    - Rebuild the website using the HTML/CSS webpage saved on getpocket
 
 Seva
-    - ART Excel course.
-    - Setup ART Excel follow ups.
+    - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023, Nov 30 (Thu)
+- Team Lunch at Komala Vilas
+- Load Balancer PoC
+    - Shikhar helped to bring up VMs in Openstack under my Project.
+    - But ipvsadm is not installed and I'm having difficulty installing
+
+
+- Minutiae:
+    - Biked to work. Fixed few things in morning and then rode. Took 1 hour 20
+      mins for door to desk. Feeling very good about it.
+    - Responded to Doreen from GTN about Tax questions.
+
+
+2023, Nov 29 (Wed)
+#TCIS #refund #LGMonitor
+- Continue writing Load Balancer Design Doc
+- Lot of research and updates to Design Doc
+    - Use Keepalived for High-Availability of IPVS nodes.
+    - Under the hood, Keepalived uses VRRP + BFD.
+    - Explained all this to Vikram Guleria and he liked the proposal. Suggested
+      changes to design and we did lot of white boarding. Overall a productive
+      session.
+- Messaged bunch of PANW employees for my question on Payroll and Box 1 in W2.
+    - Finally got link to Maggie Hu and Staci Dosch who pointed me to
+
+
+- Minutiae:
+    - Tried to fix bicycle to ride to work. The stand has issues and I'll fix
+      it later in the day.
+    - Got kids from day care, but very late.
+    - Dropped/Picked Aarushi from RSM.
+    - Returned Venkat's mattress topper and blanket.
+    - Spoke to Alok Ranjan about office gossip.
+    - Got refund from TCIS. Got Rs 1,40,000 (60%) back. Reason? First quarter
+      is considered 40% and remaining 3 quarters are 20% each. Kids studied
+      there for first 2 quarters and so I got this amount refund.
+    - Notified Dad about the refund.
+    - Got LG monitor from Costco for $300 thinking I would save $150 from my
+      current monitor. It does not have USB with PD (Power Delivery)? This is a
+      deal breaker because external keyboard and mouse needs them. So, I've to
+      return it :(
+    - Stayed up late and fixed bicycle carrier/stand. Very happy with end
+      result.
+    - Paid off about $65K in HELOC
+
+
+2023, Nov 28 (Tue)
+- Spoke to Alok and Priyanka
+    - Debugged RMG (Royal Mail Group) flex credits issue.
+
+    @Davi Gupta, yes we can. 3 things are required:
+        - event_type must be changed to AMEND
+        - quantity must be changed to 1676 + 486 = 2162
+        - end date must be changed. The 486 credits message came with Nov 9th, 2024 end date.
+    Thanks to @Priyanka Giri for identifying all these.
+
+    @Blake Weis, this is the payload we need to replay
+    https://panw-rnd.slack.com/archives/GP4LQ0N84/p1701085237374119
+
+
+- Watched following videos on IPVS. Lot of key takeaways
+    - https://www.youtube.com/watch?v=oFsJVV1btDU
+    - https://www.youtube.com/watch?v=KJ-A8LYriGI
+    - Understand ARP issues deeply
+    - IPVS comes with Analytics/stats. Figure out a way to ship it for
+      analysis.
+    - IPVS logs are not available for viewing.
+    - IPVS cluster, for HA, can be done using BGP Anycast routing.
+    - Keepalived comes built with IPVS for Health checks. It is Layer4 health
+      checks.
+    - IPVS works *before* pcap layer. So cannot do `tcpdump` and capture what's
+      going on in IPVS.
+    - IPVS supports address bundling using FWMark
+        - Not fully sure what this is.
+    - IPVS supports DNS load balancing
+        - Not sure if we need this.
+    - IPVS HA
+        - Have BGP daemon running on each of IPVS nodes. They announce *same*
+          IP address (VIP).
+        - The router in front of IPVS will route traffic to either one of the
+          IPVS nodes. Kinda load balancing IPVS nodes themselves.
+        - BIRD/Quagga can be used to run BGP daemon.
+        - BGP Anycast can be used.
+
+
+- Minutiae:
+    - Stayed home to accept sofa delivery from Living Spaces and other items.
+    - Stock hit all time high ($277). Sold $35K worth of stock to pay off car
+      loan.
+    - Paid $1000 to Chase credit card.
+    - Paid off $99K in HELOC, which I transferred from ETrade.
+
+
 2023, Nov 27 (Mon)
+#YNAB #TV
 - Standup at 9:30am
     - Load Balancer design doc - take it to next level
+- Updates to LB design doc.
+
+
+- KPCU did not receive funds from ETrade yet.
+- Credit Card bill reached $10K
+- Tried openeing Bank of America account online, but did not work. Visit
+  in-person in evening and opened joint account.
+    - Picked up kids and went to BofA with them and Madhavi.
+- Neighbor, Atharv's birthday
+    - Did Rudram and went to birthday.
+    - Akshay threw up due to food poisoning.
+- YNAB: Made very good progress.
+- Purchased TV from Costco.
+
 
 2023, Nov 26 (Sun)
 - Catching up on things.
