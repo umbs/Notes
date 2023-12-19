@@ -148,7 +148,7 @@ Keys Only 1					Key and Value 1								Key and Value 2 (as tuple)
 ...     print(key)          ...     print(key, '->', a_dict[key])      	...     print(item)
 ...                         ...                                        	...
 color                       color -> blue                              	('color', 'blue')
-fruit                       fruit -> apple							   	('fruit', 'apple')
+fruit                       fruit -> apple				('fruit', 'apple')
 pet                         pet -> dog                                 	('pet', 'dog')
 
 
@@ -815,7 +815,7 @@ Mock Side Effect - Function
 [2] https://docs.python.org/3/library/unittest.mock.html
 [3] https://www.toptal.com/python/an-introduction-to-mocking-in-python
 [4] https://realpython.com/python-mock-library/
-[5] https://youtu.be/DJoffYEPttY?list=PL2Uw4_HvXqvYk1Y5P8kryoyd83L_0Uk5K
+[5] Moshe Zadka https://youtu.be/DJoffYEPttY?list=PL2Uw4_HvXqvYk1Y5P8kryoyd83L_0Uk5K
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     pytest
@@ -2294,7 +2294,14 @@ ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, defau
 
 name or flags - Either a name or a list of option strings
     e.g. foo or -f, --foo.
+
 action - The basic type of action to be taken when this argument is encountered at the command line.
+    action='store_true' means default=False
+    action='store_false' means default=True
+    - If you want only a flag without value, use above
+    - https://docs.python.org/dev/library/argparse.html#action
+    - https://stackoverflow.com/a/36710639
+
 nargs - The number of command-line arguments that should be consumed.
 const - A constant value required by some action and nargs selections.
 default - The value produced if the argument is absent from the command line and if it is absent from the namespace object.
@@ -2306,6 +2313,31 @@ metavar - A name for the argument in usage messages.
 dest - The name of the attribute to be added to the object returned by parse_args().
 
 
+
+Mutually Exclusive Group
+========================
+
+mydaemon.py
+    parser = argparse.ArgumentParser(prog='mydaemon')
+    action = parser.add_mutually_exclusive_group(required=True)
+    action.add_argument('--start', action='store_true', help='Starts %(prog)s daemon')
+    action.add_argument('--stop', action='store_true', help='Stops %(prog)s daemon')
+    action.add_argument('--restart', action='store_true', help='Restarts %(prog)s daemon')
+
+
+usage: mydaemon [-h] (--start | --stop | --restart)
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --start     Starts mydaemon daemon
+  --stop      Stops mydaemon daemon
+  --restart   Restarts mydaemon daemon
+
+
+
+Sub Parsers
+===========
+TODO
 
 [1] https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
 [2] https://docs.python.org/3/library/argparse.html#the-add-argument-method
@@ -2479,8 +2511,28 @@ References:
 
 ==================    Python Logging/Logger        ===================
 
+Simple Example:
+    https://docs.python.org/3/howto/logging.html#a-simple-example
+
+Logging to a file:
+    https://docs.python.org/3/howto/logging.html#logging-to-a-file
+
+Logging from multiple modules:
+    https://docs.python.org/3/howto/logging.html#logging-from-multiple-modules
+
+Changing format of displayed messages:
+    https://docs.python.org/3/howto/logging.html#logging-from-multiple-modules
+
+Displaying Date/Time of Messages:
+    https://docs.python.org/3/howto/logging.html#displaying-the-date-time-in-messages
+
+Advanced Logging Tutorial:
+    https://docs.python.org/3/howto/logging.html#advanced-logging-tutorial
 
 
+
+[1] https://docs.python.org/3/howto/logging.html#logging-basic-tutorial
+[2] https://docs.python.org/3/howto/logging-cookbook.html
 
 ==================    Python AsyncIO    ===================
 
@@ -2516,5 +2568,50 @@ async.run(fun())
 
 References:
 
+
+##############################    Faker Library   ######################
+from faker import Faker
+fake = Faker()
+
+    fake.address()
+    fake.country()
+    fake.currency()
+    fake.currency_name(), fake.currency_code()
+    fake.email()
+    fake.job()
+    fake.latitude(), fake.longitude()
+    fake.phone_number()
+    fake.name()
+    fake.profile()
+    fake.sentence()
+    fake.text()
+    fake.url()
+    fake.word(), fake.words()
+
+
+#'hi_IN' changed the language to Hindi
+fake = Faker('hi_IN')
+
+- Lot more info here:
+    https://zetcode.com/python/faker/
+
+
+##############################    Hypothesis Package   #################
+- Hypothesis is a property based testing package with roots in Functional
+  Programming. Inspired by, QuickCheck framework for Haskell.
+
+
+ascii.py
+    from functools import reduce
+
+    def to_ascii_codes(inp: str) -> list[int]:
+	return [ord(c) for c in inp]
+
+    def from_ascii_codes(inp: list[int]) -> str:
+	return reduce(lambda x, y: x + chr(y), inp, "")
+
+
+test_ascii.py
+    from hypothesis
 
 
