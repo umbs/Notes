@@ -1,6 +1,16 @@
 Some (not Frequently) Q&A's
 ---------------------------
 ****
+How to list all files by an author between two commits
+
+
+****
+How to print commit message of a given commit
+  git log --format=%B -n 1 <commit>
+  git rev-list --format=%B --max-count 1 <commit>
+  git show -s --format=%B
+
+****
 How to backout all changes committed to local repo but not yet pushed to
 remote?
   git fetch
@@ -459,7 +469,7 @@ Chapter 2: Getting to know .git
 ├── config          # Settings that appy *only* to this repo and not globally.
 ├── description     # Project name. Edit this file and name the project. Used by gitweb.
 │
-├── hooks           # Scripts to run at various points in Git workflow. Remove 
+├── hooks           # Scripts to run at various points in Git workflow. Remove
 │   │               # `.sample` and edit the files.
 │   │
 │   ├── applypatch-msg.sample
@@ -483,8 +493,8 @@ Chapter 2: Getting to know .git
 │                   # in the repository. Contents of `exclude` file is not
 │                   # saved in the repo.
 │
-├── objects         # Git database, where Git stores all the content it 
-│   │               # tracks: your source code and other assets put under 
+├── objects         # Git database, where Git stores all the content it
+│   │               # tracks: your source code and other assets put under
 │   │               # Git version control.
 │   │
 │   ├── info        #
