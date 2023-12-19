@@ -4,10 +4,9 @@ Commands:
 ---------
 sudo usermod -aG docker <username>
 
-// list running containers
-docker ps
-// list all containers
-docker ps -aq
+
+docker ps   // list running containers
+docker ps -aq  // list all containers
 docker ps -a --filter <options>
     docker ps -af "name=bhaskar"
 
