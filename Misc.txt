@@ -4663,5 +4663,28 @@ Coursera
 
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@   Python Hypothesis Library     @@@@@@@@@@@@@@@@@
+"Mitchell Hashimoto" from Hashicorp about on contributing to complex softwares
+    - https://mitchellh.com/writing/contributing-to-complex-projects
 
-
+    - Here are the tip:
+        1) Become a User first. Play with *using* the software before anything.
+        2) Build the project before reading the code.
+        3) Learn how to run test suite.
+        4) Learn "Hot-Path Internals" - take the "Trace Down, Learn Up"
+          approach.
+            - Trace Down:
+                - Take a small/tiny feature and run it. Trace down the code
+                  path, files, line numbers etc. Do not try to understand
+                  yet.
+                - Learn feature by feature.
+            - Learn Up:
+                - Now, learn the system from inside out.
+        5) Experiment and break things
+            - Add logs.
+            - Add tiny functional changes.
+        6) Read and Reimplement recent commits
+            - Check out the code to previous commit.
+            - Repro the bug.
+            - Put a solution yourself.
+        7) Make bite-sized changes.
