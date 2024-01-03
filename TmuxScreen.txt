@@ -65,6 +65,17 @@ t  big clock
 :  prompt
 
 
+Copy/Paste in Tmux
+------------------
+Copying in Tmux:
+   1. Enter Copy Mode: Press `Ctrl` + `b` (default prefix) and `[` to enter copy mode.
+   2. Navigation in Copy Mode: Use arrow keys or vim-like navigation (h, j, k, l) to move the cursor.
+   3. Start Selection: Press Space to start selecting text.
+   4. End Selection: After selecting the desired text, press Enter to copy it to the Tmux buffer.
+
+Pasting in Tmux:
+   1. Paste Buffer: Press Ctrl + b (default prefix) and ] to paste from the Tmux buffer.
+
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SCREEN COMMANDS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Source: www.linuxjournal.com/article/6340?page=0,0
