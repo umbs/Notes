@@ -4014,7 +4014,7 @@ TODO: yet to complete
 
 Point-to-Point Tunneling Protocol (PPTP)
 -------
-- An extension of PPP. Mostly widely used. Default on Windows and promoted
+- An extension of PPP. Most widely used. Default on Windows and promoted
   big by Microsoft. Other vendors (Juniper, Cisco) have support too.
 - MS implementation encapsulates data in PPP and encrypts using Microsofts
   Point-to-Point Encryption (MPPE). Authentication is provided by in-built
@@ -4713,6 +4713,16 @@ Reference:
 [1] https://en.wikipedia.org/wiki/Generic_Routing_Encapsulation
 [2] http://searchenterprisewan.techtarget.com/definition/Generic-routing-encapsulation-GRE
 [3] https://www.juniper.net/documentation/en_US/junos12.3/topics/concept/gre-tunnel-services.html
+
+/**************************************************************************/
+            GENEVE (Generic Network Virtualization Encapsulation)
+/**************************************************************************/
+
+
+
+Reference:
+[1] https://datatracker.ietf.org/doc/html/draft-gross-geneve-00
+[2]
 
 /**************************************************************************/
         OAM Protocols (Operations, Administration and Maintenance)

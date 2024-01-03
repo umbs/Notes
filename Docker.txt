@@ -67,7 +67,7 @@ Above, CLI is being used as a Client. Kitematic is a GUI Client for Docker.
 + Docker Containers:
     * Isolated application platform.
     * Contains everything needed to run your application.
-    * Bsed on one or more images.
+    * Based on one or more images.
 
 + Docker Registry and Repositories:
     * Place to store all images.

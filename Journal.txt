@@ -1,47 +1,38 @@
-@@@@@@@@@@  Overall Goals for 2023  @@@@@@@@@@@@@
+@@@@@@@@@@  Overall Goals for 2024  @@@@@@@@@@@@@
 Personal:
-    * Focus on ONE THING and stay TILL THE END
-        - REI Analysis Course
-        - Python Cookbook, do all exercises
-        - Fluent Python, do all exercises
-        - Neovim/Lua understand in-depth
-            - Do a talk on Advanced Vim.
-
     * Start building products
-        - Mac App for financial accounts, all in one place. No cloud component.
-          Only local. Look at `Actual App` source code.
+        - Write code to analyze deals using Zillow API
+            - Summarize the analysis in Excel file.
         - REI API
-            - Scrape 3000+ county websites
-        - Git visualization tool
-        - Rust - build something
-            - Git rewrite, for example
+            - Scrape 3000+ county websites.
+        - Build your own Git.
 
-    * Spend time with kids in their school work each day
+    * Spend time with kids in their school work each day.
 
-    * Exercising, 3 times a week
+    * Exercising, daily walk. 15000 steps/day.
 
     * Rebuild the website using the HTML/CSS webpage saved on getpocket
-    * Get blog posts online. At least 2/month.
+    * Get blog posts online. At least 1/month.
 
 
-India Move:
-    - Complete Living Will/Estate/Trust
+India:
+    - Check on Employee Provident Fund (EPF)
+    - Close HDFC accounts, unused ones.
 
 
 Work/Career:
+    - Give at least 25 technical talks.
+        - Vim (as many as possible)
+        - Python Hypothesis
 
 
 REI work:
-    * Buy at least one multifamily home (50 units)
+    * Buy at least one multifamily home (~50 units)
 
 
 Books:
     * Goal - read 1 book/month
-    * Everything in my "Book Shelf", that I own
-        * Netflix
-        * BogleHeads
-        * Python Cookbook
-
+        * Everything in my "Book Shelf", that I own
 
 Seva:
     * Organize Knowledge Satsangs
@@ -49,6 +40,138 @@ Seva:
     * AE courses
     * Prison Program
     * Organize KYC courses
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   January 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration. APIs.
+
+    Minor Projects (Tech Debts):
+        - Orchestrating Load Balancer
+        - LocalStack PoC
+
+Personal
+    * Education
+        - Complete watching _all_ downloaded Vim videos.
+        - Complete reading _entire_ Vim help manual.
+    - Do this in this order, every day
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+    - Estate Planning.
+
+REI
+    - Insurance shopping for all properties
+        - 629 Celebration Ct
+        - 3012/3014 Pine Valley
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    - Freedom Mortgage - Include escrow.
+    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
+
+Seva
+    - Lead YES follow up.
+    - Attend adult follow up.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Jan 02 (Tue)
+- Summarized whole years stuff/lessons/learnings in 'Journal' document.
+    - Consumed 1.5 hours and still not done yet.
+
+
+
+
+
+@@@@@@@@@@  Lessons Learned for 2023  @@@@@@@@@@@@@
+Personal:
+
+Professional/Career:
+    1) Communicate with Management often. Do not keep them in dark for too long.
+        - Ex: Like Alok Ranjan, keep chatting with management. Also, I did not
+          ask too many questions of Davi about CSP workflow. I discovered
+          design issues sooooooo late in the process.
+
+    2) Work in teams. I do well when working with one or more members of the
+      team.
+        - Ex: For Flex Credits, working with Alok and Bishnu improved my
+          output.
+
+    3) Identify risks early and call them out. Notify management immediately.
+        - Ex: Although I recognized risks in CSP, I thought I would be able to
+          deal with it myself.
+
+    4) Focus on "local only" testing, using UTs or any other method. This
+    accelerates development.
+        - Ex: I did not write enough UTs at the beginning. Once I started doing
+          UTs, development and bugfix rates improved significantly.
+
+
+@@@@@@@@@@  Report Card for 2023  @@@@@@@@@@@@@
+
+Personal Goals:
+    * GOAL: Focus on ONE THING and stay TILL THE END -
+        - REI Analysis Course
+        - Python Cookbook, do all exercises
+        - Fluent Python, do all exercises
+        - Neovim/Lua understand in-depth
+            - Do a talk on Advanced Vim.
+    * CONCLUSION: I do not recall picking one task and completing till the end.
+
+    * GOAL: Start building products
+        - Mac App for financial accounts, all in one place. No cloud component.
+          Only local. Look at `Actual App` source code.
+        - REI API
+            - Scrape 3000+ county websites
+        - Git visualization tool
+        - Rust - build something
+            - Git rewrite, for example
+    * CONCLUSION: I did not build anything in entire year.
+
+    * GOAL: Spend time with kids in their school work each day
+    * CONCLUSION: Partially achieved.
+
+    * GOAL: Exercising, 3 times a week
+    * CONCLUSION: Partially achieved.
+
+    * GOAL: Rebuild the website using the HTML/CSS webpage saved on getpocket
+    * GOAL: Get blog posts online. At least 2/month.
+    * CONCLUSION: Not done.
+
+
+India Move:
+    * GOAL: Complete Living Will/Estate/Trust
+    * CONCLUSION: Not done.
+
+
+Work/Career:
+
+
+REI work:
+    * GOAL: Buy at least one multifamily home (50 units)
+    * CONCLUSION: Buy at least one multifamily home (50 units)
+
+
+Books:
+    * GOAL: read 1 book/month
+    * CONCLUSION: I've read 2-3 books in entire year.
+
+    * GOAL: Everything in my "Book Shelf", that I own
+        * Netflix
+        * BogleHeads
+        * Python Cookbook
+    * CONCLUSION: I've read 2-3 books in entire year.
+
+
+Seva:
+    * GOAL:
+        * Organize Knowledge Satsangs
+        * YES courses
+        * AE courses
+        * Prison Program
+        * Organize KYC courses
+    * CONCLUSION: None. Did not do anything :(
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 @@@@@@@@@@@@@@   December 2023    Goals  @@@@@@@@@@@@@@@@@@
@@ -68,7 +191,7 @@ Personal
         2) Padma Sadhana + Kriya + Meditation + Guru Pooja
         3) Vashista Yoga
     - Estate Planning.
-    - Read "Commercial Real Estate for Beginners" book
+    - Read "Commercial Real Estate for Beginners" book - DONE
     - Read "7 Habits of Highly Effective People" book
 
 REI
@@ -87,6 +210,159 @@ Seva
     - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023, Dec 31 (Sun)
+#veenakala #missionpeak #covid
+- Dropped Veena, Kala at airport.
+- Hiked Mission Peak and reached the top.
+- Unpacking the boxes.
+- Kala called saying he tested COVID positive.
+    - Madhavi tested negative.
+    - But Madhavi had to cancel her flight to Los Angeles (cost us $336).
+      Alaska Airlines did not refund or give us credit.
+
+2023, Dec 30 (Sat)
+#veenakala #shipment #packages #santumavayya
+- Shipment arrived from India (48 boxes, small and big).
+- Kala and I visited Santu Mavayya's house in evening.
+    - Took a tour of Mountain House. Beautiful and upcoming city. But commute
+      is deal breaker for me.
+
+
+2023, Dec 29 (Fri)
+#veenakala #vimtalk
+- Gave a Vim Talk to Kala and Madhavi
+    - Talk was impromptu and I was unprepared.
+    - Biggest lessons are:
+        - I must use slides. Working off of text file in Vim does not cut it
+          for me.
+        - At the beginning of the talk very clearly state:
+            - Who the target audience are.
+            - What will they learn.
+            - How long the talk is.
+
+
+2023, Dec 28 (Thu)
+#veenakala #PGE
+- Discussions with Vikram Guleria. Focus only on SDWAN + Zycada integration.
+    - Load Balancer is low priority.
+
+
+- Minutiae:
+    - Brought Kala to office along with me.
+    - PGE bill is $352. Electricity is $202 and Gas is $150.
+        - Space heater is main problem. Get rid of it.
+        - On average, I'm using 20kWh/day of energy.
+        - I'm on Peak Time-Of-Use plan, all days of the week.
+            - Between 4pm-9pm each day, I'll pay $0.46/kWh
+            - Outside of that, I'll pay $0.37/kWh
+        - I can switch to Tiered plan or other Peak Time-Of-User plan (Mon-Sun,
+          5pm-8pm peak)
+            - But essentially, minimize use during Peak hours.
+
+2023, Dec 27 (Wed)
+#veenakala #facial
+- Late in the evening, figured out that NLB was implemented on GCP side. I can
+  probably reuse part of that code.
+- VSCode + Go debugging a live process.
+
+- Minutiae:
+    - Came to office
+    - Left around 1pm
+    - Took kids to Library later in evening.
+    - Facial at night
+    - Looked into Humane Society for Volunteering opportunities for kids.
+    - Filled up form sent by Elizabeth Parker from Cupertino Union School District.
+
+2023, Dec 26 (Tue)
+#veenakala #roaringcamp #FTO
+- Took the day off.
+- Visiting Roaring Camp Railroad
+
+2023, Dec 25 (Mon)
+#christmas #veenakala #sfzoo
+- Visited SF Zoo with family
+    - Took Family+ membership
+- Emailed Bay Area Alliance 4 Animals for volunteer opportunities for Akshay
+    - www.bayareaa4a.org
+- Other places to check
+    - Animal Shelters (San Jose, Cupertino)
+
+2023, Dec 24 (Sun)
+#veenakala
+
+2023, Dec 23 (Sat)
+#veenakala #calacademyofsciences
+- Visited Cal Academy of Sciences
+
+2023, Dec 22 (Fri)
+#veenakala
+
+2023, Dec 21 (Thu)
+#veenakala
+#calacademyofsciences #facial
+
+- Tried setting up environment for Zycada.
+    - Ran into 404 Not Found error during `go test` or `make` commands.
+
+- Minutiae:
+    - Took membership of Cal Academy of Sciences.
+
+
+2023, Dec 20 (Wed)
+#veenakala
+
+- Fixed `exclude_openstack` option in `global_settings` table (PASRE-34580) in
+  PROD2 environment.
+- Finally got Provisioning Service to run locally
+
+
+- Minutiae:
+    - Read this article "Math Team" about students going through Math
+      Competitions to get into good colleges. Touched me, but I'm not sure if
+      there's another way for Aarushi. I'll probably not push Akshay so much.
+        - https://benexdict.io/p/math-team
+    - Read "Mitchell Hashimoto" from Hashicorp about on contributing to complex
+      softwares
+        - https://mitchellh.com/writing/contributing-to-complex-projects
+        - Here are the tip:
+            1) Become a User first. Play with *using* the software before anything.
+            2) Build the project before reading the code.
+            3) Learn how to run test suite.
+            4) Learn "Hot-Path Internals" - take the "Trace Down, Learn Up"
+              approach.
+                - Trace Down:
+                    - Take a small/tiny feature and run it. Trace down the code
+                      path, files, line numbers etc. Do not try to understand
+                      yet.
+                    - Learn feature by feature.
+                - Learn Up:
+                    - Now, learn the system from inside out.
+            5) Experiment and break things
+                - Add logs.
+                - Add tiny functional changes.
+            6) Read and Reimplement recent commits
+                - Check out the code to previous commit.
+                - Repro the bug.
+                - Put a solution yourself.
+            7) Make bite-sized changes.
+    - Veena, Kala and family visiting from Austin
+
+
+
+2023, Dec 19 (Tue)
+- Discussed with Ganu Ramachandran on SDWAN and Zycada integration.
+    - Ganu gave a TOI, initial talk on high level architecture.
+
+- Took more notes from Leeren Changs talk.
+- Not sure what I did whole day in office :(
+
+- Minutiae:
+    - Printout for Akshay from Fedex Kinkos
+    - Groceries
+    - Blanket from Sridhar's house
+    - Wasted time at night, thinking of practicing flute, but didnt.
+
+
 2023, Dec 18 (Mon)
 #termlifeinsurance
 
@@ -109,10 +385,10 @@ Seva
     - https://youtu.be/LHGG-7TwKBk?list=PLcTu2VkAIIWyuX-yNe0KNSPR7wjS2lNKz
 
 - Watched "Vim: Tutorial on Editing, Navigation, and File Management (2018)" by Leeren Chang
-    - https://www.youtube.com/watch?v=E-ZbrtoSuzw&t=1722s 
+    - https://www.youtube.com/watch?v=E-ZbrtoSuzw&t=1722s
 
 - I spent sooooo much time watching Vim videos, because I had this goal of
-  watching all downloaded Vim videos. Not sure if it is worth it, because ... 
+  watching all downloaded Vim videos. Not sure if it is worth it, because ...
     - Videos are all unrelated and mish-mash of various Vim topics
     - Ultimately, I came to conclusion of using IDE (VSCode for Go and Pycharm
       for others). Main reason being debugging capabilities. But there's Neovim
