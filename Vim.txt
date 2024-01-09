@@ -1,52 +1,78 @@
-Window Splitting
-----------------
-:vsp // Vertical split
-:sp  // Horizontal split
-:vsp <file> // Opens <file> in new window
-:10sp // Specify split height
-:set splitright // Opens window in right [for vertical splits] and becomes
-                  active
-:set splitbelow // same for horizontal window
+**************************************************
+                Window Splitting
+**************************************************
+:vsp    Vertical split
+:sp     Horizontal split
+:vsp <file>     Opens <file> in new window
+:10sp   Specify split height
 
-ctrl+w is same as :wincmd
-    * Wherever we use ctrl+w, we can do :wincmd
+:set splitright
+    Opens window in right [for vertical splits] and becomes active
 
-ctrl+w <number> < // reduce width of window by <number>
-ctrl+w <number> > // increase width of window by <number>
-<number> ctrl+w +   // increase length of window by <number>
-<number> ctrl+w -   // decrease length of window by <number>
-ctrl+w | // max out window width
-ctrl+w _ // max out window height
-ctrl+w = // normalize all window sizes (equal sizes)
-ctrl+w R // swap both windows [including buffers]
+:set splitbelow
+    Same as above, but for horizontal window
 
-<number> ctrl+w w // switch to window <number>
-ctrl+w T // make current split window in to a tab (capital T)
+CTRL+w is same as :wincmd
+    * Wherever we use CTRL+w, we can do :wincmd
 
-gf          ("goto file") Open file under cursor in current window
-ctrl+w f    Open file under cursor in (horizontal) split window
-ctrl+w gf   Open file under cursor in new tab
-More details here: https://vim.fandom.com/wiki/Open_file_under_cursor
+CTRL+w <number> <
+    reduce width of window by <number>
+
+CTRL+w <number> >
+    increase width of window by <number>
+
+<number> CTRL+w +
+    increase length of window by <number>
+
+<number> CTRL+w -
+    decrease length of window by <number>
+
+CTRL+w |
+    max out window width
+
+CTRL+w _
+    max out window height
+
+CTRL+w =
+    normalize all window sizes (equal sizes)
+
+CTRL+w R
+    swap both windows [including buffers]
+
+<number> CTRL+w w
+    switch to window <number>
+
+CTRL+w T
+    make current split window in to a tab (capital T)
 
 
-vim -O file1 file2 // open two files side by side
 
-Tab Views
-----------
-:tabnew <file> // opens <file> in a new tab
-:tabp // previous tab
-:tabn // next tab
+
+
+**************************************************
+                Tab Views
+**************************************************
+:tabnew <file>
+    opens <file> in a new tab
+:tabp
+    previous tab
+:tabn
+    next tab
 
 In Normal mode
-gt // go to next tab
-gT // go to previous tab
-ngt // got to tab no. n
+    gt // go to next tab
+    gT // go to previous tab
+    ngt // got to tab no. n
 
 vim -p file1 file 2 // open multiple files in tab mode
 
 
-Regular Expressions
--------------------
+
+
+
+**************************************************
+                Regular Expressions
+**************************************************
 . (dot) Any single character except newline
 *       zero or more occurances of any character
 [...]   Any single character specified in the set
@@ -71,7 +97,7 @@ In the second character position, the SET containing all letters
 
 Regular Expression Examples
 ---------------------------
-/Hello/ Matches if the line contains the value Hello
+/Hello/         Matches if the line contains the value Hello
 /^TEST$/        Matches if the line contains TEST by itself
 /^[a-zA-Z]/     Matches if the line starts with any letter
 /^[a-z].*/      Matches if the first character of the line is a-z and there is at least one more of any character following it
@@ -81,14 +107,114 @@ Note the use of ( ) with the pipe symbol to specify the 'or' condition
 /[0-9]*/        Matches if there are zero or more numbers in the line
 /^[^#]/         Matches if the first character is not a # in the line
 
-Notes:
-1. Regular expressions are case sensitive
-2. Regular expressions are to be used where pattern is specified
+
+- Regular expressions are case sensitive
+- Regular expressions are to be used where pattern is specified
 
 
-Very good resource on Vim Regex
---------------------------------
-http://vimregex.com/
+Reference for Regex:
+    - http://vimregex.com/
+
+
+
+**************************************************
+                Cursor Positioning
+**************************************************
+zt puts current line to top of screen
+z. or zz puts current line to center of screen
+zb puts current line to bottom of screen
+
+Ref: http://unix.stackexchange.com/a/110252/45157
+
+
+
+
+**************************************************
+                Code Folding
+**************************************************
+Reference - :help folding
+            :help za
+            :help zo
+            :help zc
+
+Synopsis - Using commands here, code in a file can be temporarily folded
+[hidden]. Folding helps in navigating a file quickly as parts of the file
+is hidden.
+
+zc - close a fold
+zo - open a fold
+za - toggle a fold [open if its closed and vice versa]
+
+zC, zO, zA are similar but inner folding levels are also affected by them,
+not just the level at which cursor is present.
+
+
+
+
+**************************************************
+                Motion
+**************************************************
+CTRL+d  Scroll half page down
+CTRL+u  Scroll half a page up
+
+CTRL+f  Scroll full page down
+CTRL+b  Scroll full page up
+
+L   last line of current screen
+M   middle line of current screen
+^e  move the screen by one line down, with cursor staying in its place
+^y  move the screen up by one line
+
+0   beginning of the line
+$   end of the line
+^   first non-blank character of the line
+g_  last non-blank character of the line
+
+n%  takes you to nth percent position of the file
+
+*   search for occurance of word under cursor
+#   same as *, but move in opposite direction
+
+Q: What is a word in Vim?
+- Hyphen, Exclamation, Period delianated ... stuff?
+
+Word wise navigation:
+w   small word
+W   big word
+e vs E
+b vs B
+
+
+Scrolling
+---
+^E or ^e      Scroll window down
+^Y or ^y      Scroll window up
+^F      Scroll down one page
+^B      Scroll up one page
+H       Move cursor to top of window
+M       Move cursor to middle of window
+L       Move cursor to bottom of window
+
+
+
+
+
+
+
+**************************************************
+                Miscellaneous
+**************************************************
+
+gf          ("goto file") Open file under cursor in current window
+CTRL+w f    Open file under cursor in (horizontal) split window
+CTRL+w gf   Open file under cursor in new tab
+
+More details here: https://vim.fandom.com/wiki/Open_file_under_cursor
+
+
+vim -O file1 file2 // open two files side by side
+
+
 
 
 Substituting Tips
@@ -108,37 +234,6 @@ Diff
 vimdiff file1 file2 // diff two files side by side
 
 
-Cursor Positioning
-------------
-zt puts current line to top of screen
-z. or zz puts current line to center of screen
-zb puts current line to bottom of screen
-
-Ref: http://unix.stackexchange.com/a/110252/45157
-
-Code Folding
-------------
-Reference - :help folding
-            :help za
-            :help zo
-            :help zc
-
-Synopsis - Using commands here, code in a file can be temporarily folded
-[hidden]. Folding helps in navigating a file quickly as parts of the file
-is hidden.
-
-zc - close a fold
-zo - open a fold
-za - toggle a fold [open if its closed and vice versa]
-
-zC, zO, zA are similar but inner folding levels are also affected by them,
-not just the level at which cursor is present.
-
-
-Page Scroll
------------
-^d ^u   Scroll half a page down or up
-^f ^b   Scroll full page up or down
 
 Reformatting
 ------------
@@ -149,6 +244,7 @@ gqG - globally set the entire file to 80 width column. It joins lines. If you
 gq} - change only current paragraph
 G   - go to beginning of last line
 ga  - Gives ASCII value of character under cursor
+
 
 Power of global(g) command
 ------------------
@@ -192,6 +288,7 @@ Code Indentation
 1. Shift+V and then up/down
 2. hit =
 
+
 Key Mappings
 -------------
 {cmd} {attr} {lhs} {rhs}
@@ -227,29 +324,29 @@ call matchadd('ColorColumn', '\81xv', 100)
 Completion tips (tags, file name etc):
 -------
 2)
-ctrl+r --> insert text from a register
-ctrl+a --> insert last inserted text (access . register)
+CTRL+r --> insert text from a register
+CTRL+a --> insert last inserted text (access . register)
 
-ctrl+p --> Keyword completion. 'p' means, look back in the document
-ctrl+n --> Keyword completion. 'n' mean next
+CTRL+p --> Keyword completion. 'p' means, look back in the document
+CTRL+n --> Keyword completion. 'n' mean next
 
-ctrl+x --> puts you in a special X mode (submode of insert mode). This allows
+CTRL+x --> puts you in a special X mode (submode of insert mode). This allows
            you to autocomplete tags using tags file.
-ctrl+x ctrl+] --> completes a class name (and such tags) when pressed after
+CTRL+x CTRL+] --> completes a class name (and such tags) when pressed after
                    letter
 
 3) Vim keeps track of Jump List: files that Vim jumped to.
-ctrl+i, ctrl+o --> you can go in and out of that list
+CTRL+i, CTRL+o --> you can go in and out of that list
 
 4) Filename completion:
-ctrl+x, ctrl+f --> vim completes file names from current directory
+CTRL+x, CTRL+f --> vim completes file names from current directory
 
 5) Context aware completion
-ctrl+x, ctrl+p or ctrl+n
-ctrl+x, ctrl+l --> context aware line completion
+CTRL+x, CTRL+p or CTRL+n
+CTRL+x, CTRL+l --> context aware line completion
 
 6) Context aware Omni completion
-ctrl+x, ctrl+o
+CTRL+x, CTRL+o
 
 7) Auto completion settings
 :set complete
@@ -262,38 +359,8 @@ ctrl+x, ctrl+o
     i = look in inserted file
 
 
-
-
-
 [1] https://www.youtube.com/watch?v=aHm36-na4-4
 [2] https://www.youtube.com/watch?v=3TX3kV3TICU
-
-Vim Navigation
-----
-L   last line of current screen
-M   middle line of current screen
-^e  move the screen by one line down, with cursor staying in its place
-^y  move the screen up by one line
-
-0   beginning of the line
-$   end of the line
-^   first non-blank character of the line
-g_  last non-blank character of the line
-
-n%  takes you to nth percent position of the file
-
-*   search for occurance of word under cursor
-#   same as *, but move in opposite direction
-
-Q: What is a word in Vim?
-- Hyphen, Exclamation, Period delianated ... stuff?
-
-Word wise navigation:
-w   small word
-W   big word
-e vs E
-b vs B
-
 
 Vim Marks
 ---------
@@ -485,16 +552,6 @@ Notes from [6, 7]
 Vim Concepts
 ---
 - Modal Editing: Normal, Insert, Visual, Ex (or Command) modes
-
-Scrolling
----
-^E      Scroll window down
-^Y      Scroll window up
-^F      Scroll down one page
-^B      Scroll up one page
-H       Move cursor to top of window
-M       Move cursor to middle of window
-L       Move cursor to bottom of window
 
 
 text-objects
@@ -1288,6 +1345,54 @@ Vim Insert Current Date and Time
         %FT%T%z                    2007-08-29T02:37:13-0400
 
 [1] https://vim.fandom.com/wiki/Insert_current_date_or_time
+
+==========================     Netrw Commands      =============================
+
+" Verify these. Its generated by ChatGPT and I'm not sure they are 100% correct
+
+:Explore or :E  Open Netrw in the current window.
+<Enter> Open file/directory under the cursor.
+o   Open file/directory in a new horizontal split.
+v   Open file/directory in a new vertical split.
+t   Open file/directory in a new tab.
+<C-t>   Open file/directory in a new tab silently (without switching to it).
+R   Rename a file/directory.
+D   Delete a file/directory.
+%   Create a new file/directory.
+-   Jump to the parent directory.
+~   Jump to the user's home directory.
+q   Close the Netrw window.
+gx  Open the file under the cursor using the system default program.
+
+
+Navigation:
+h   Move left.
+j   Move down.
+k   Move up.
+l   Move right.
+
+
+Modes:
+i   Toggle between thin and wide listing.
+I   Toggle hidden files.
+
+
+File Operations:
+mf  Mark a file.
+mt  Mark a directory.
+mD  Unmark all files/directories.
+mc  Copy marked files/directories.
+mx  Cut marked files/directories.
+md  Create a directory.
+mR  Move marked files/directories.
+mD  Delete marked files/directories.
+:NetrwMark  List marked files/directories.
+
+
+Miscellaneous:
+!   Invoke shell commands on the file/directory under the cursor.
+C   Change the current directory.
+
 
 ================== A Little :help - Dan Phillips (VimConf 2021 Talk) ================
 :TOhtml
