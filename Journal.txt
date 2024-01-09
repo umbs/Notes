@@ -14,6 +14,7 @@ Personal:
     * Rebuild the website using the HTML/CSS webpage saved on getpocket
     * Get blog posts online. At least 1/month.
 
+    * Complete reading _entire_ Vim help manual.
 
 India:
     - Check on Employee Provident Fund (EPF)
@@ -52,13 +53,20 @@ Career
 
 Personal
     * Education
+        - GoByExample read completely
+            - do Gopherism (not sure about this)
         - Complete watching _all_ downloaded Vim videos.
-        - Complete reading _entire_ Vim help manual.
-    - Do this in this order, every day
+    * Vim.txt
+        - Clean up the document and align with slides (prepare slides)
+            - Beginner
+            - Intermediate
+            - Advanced
+
+    * Do this in this order, every day
         1) Flute
         2) Padma Sadhana + Kriya + Meditation + Guru Pooja
         3) Vashista Yoga
-    - Estate Planning.
+    * Estate Planning.
 
 REI
     - Insurance shopping for all properties
@@ -76,12 +84,79 @@ Seva
     - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Jan 08 (Mon)
+- Meeting (Impromptu) with Vikram Guleria and Umesh Jain about Datapath
+  components and architecture
+    - Interaction with ZCache.
+    - Location of Cloud NAT.
+    - Various VPCs and which components should be where?
+    - GCP's Host Project and Service Project.
+        - Agentless Project (Zedge) and Prisma Access (Zcluster) co-exists in
+          same VPC inside Service Project in GCP.
+        - Agentless Project (Zedge) has a Cloud NAT through which traffic goes
+          out to FW in Customer's VPC. The FW in Customer VPC sits behind a NLB
+          with public IP address.
+        - So, the Cloud NAT
+
+
+- Watched recordings of team discussions on ZOS APIs
+
+- Dropped Aarushi at school via bike ride.
+    - I'm still not confident she is riding safely. Not using all precautions.
+
+
+2024, Jan 07 (Sun)
+#flute #cycling #bicycleoutfitters #ranchosanantonio
+- Flute class in morning with Ayush ji.
+- RSM for Aarushi.
+- Costco visit.
+- Cycle
+
+
+
+2024, Jan 06 (Sat)
+
+2024, Jan 05 (Fri)
+#facial
+- Preparation for afternoon, internal, meeting to discuss ZOS APIs that
+  integrate with SDWAN.
+- Internal: ZOS API discussions
+    - When a "Create ZCluster" call comes, ZOS creates an async job and job_id.
+        - Client can query whenever they want.
+        - Inbound call to ZOS. We do not have to call SDWAN Controller.
+        - ZOS runs in namespace "Zycada". What is "namespace" concept in GCP?
+
+
+
+
+- SDWAN + ZOS integration meeting, involving SDWAN team.
+
+
+- Santu Mavayya's airport drop
+- PG&E electrician visit to take care of heater.
+- Madhavi took care of dropping and picking Akshay from RSM.
+
+
+
+2024, Jan 04 (Thu)
+
+2024, Jan 03 (Wed)
+- Meeting with SDWAN team, discussed many issues
+    - I took lot of notes.
+- Watched ZOS Overview video
+
+
 2024, Jan 02 (Tue)
 - Summarized whole years stuff/lessons/learnings in 'Journal' document.
     - Consumed 1.5 hours and still not done yet.
+- Read many Functional Specs and especially SDWAN + Zycada spec.
+- Grokked Zycada code to trace API path.
+    - Especially, "Create ZWorkers Cluster" code path.
 
 
 
+- Got dinner for kids from MOD pizza.
+- Felt very sick at night and slept.
 
 
 @@@@@@@@@@  Lessons Learned for 2023  @@@@@@@@@@@@@
