@@ -4688,3 +4688,84 @@ Coursera
             - Repro the bug.
             - Put a solution yourself.
         7) Make bite-sized changes.
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   API Design Best Practices     @@@@@@@@@@@@@@@@@
+
+
+API Best Practices:
+    1) Accept and respond with JSON
+    2) Use Nouns instead of Verbs in endpoint paths
+        - HTTP method already has Verb. So, have Noun in endpoint name.
+        - GET /articles/
+        - POST /articles/
+        - PUT /articles/:id
+        - DELETE /articles/:id
+
+        - NOTE: In REST APIs colon (:) is used as placeholder for dynamic
+          values (variables). These are parameters that will be replaced with
+          real values.
+
+    3) Use logical nesting on endpoints
+        - Group APIs containing associated info.
+        - Avoid mirroring API design based on database design.
+        - Ex:
+            - GET /articles/    Get all articles
+            - GET /articles/:id/    Get an article
+            - GET /articles/:id/comments    Get all comments of an article
+
+        - However, nesting can go deep. After about the second or third
+          level, nested endpoints can get unwieldy. Consider, instead,
+          returning the URL to those resources instead, especially if that data
+          is not necessarily contained within the top level object.
+
+        - For example, suppose you wanted to return the author of particular
+          comments. You could use
+            /articles/:articleId/comments/:commentId/author.
+
+        - But that's getting out of hand. Instead, return the URI for that
+          particular user within the JSON response instead:
+                "author": "/users/:userId"
+
+    4) Handle errors gracefully. Return standard error codes.
+
+            Common error HTTP status codes include:
+
+            400 Bad Request - This means that client-side input fails validation.
+            401 Unauthorized - This means the user isn't not authorized to access a resource. It usually returns when the user isn't authenticated.
+            403 Forbidden - This means the user is authenticated, but it's not allowed to access a resource.
+            404 Not Found - This indicates that a resource is not found.
+            500 Internal server error - This is a generic server error. It probably shouldn't be thrown explicitly.
+            502 Bad Gateway - This indicates an invalid response from an upstream server.
+            503 Service Unavailable - This indicates that something unexpected happened on server side (It can be anything like server overload, some parts of the system failed, etc.).
+
+    5) Allow filtering, sorting, and pagination
+
+    - Name collections with plural nouns
+    - Maintain Good Security Practices
+    - Cache data to improve performance
+    - Versioning our APIs
+
+
+- Lately HATEOAS is used in REST API designs.
+- HATEOAS stands for "Hypermedia as the Engine of Application State." 
+    - It's a principle in RESTful API design that emphasizes the use of
+      hypermedia links within the API responses to enable clients to
+      dynamically navigate and interact with the application.
+
+    - HATEOAS promotes a more flexible and discoverable API design by providing
+      navigation cues within API responses, fostering better interaction
+      between clients and servers in RESTful architectures.
+
+- Some think HATEOAS is very useful. UI will know what available actions it can
+  perform next, based on the response. Some think HATEOAS bloats API response.
+  UI does not need to know all that info.
+
+Reference:
+[1] ChatGPT
+[2] https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/
+[3] https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design
+[4] https://swagger.io/resources/articles/best-practices-in-api-design/
+
+
