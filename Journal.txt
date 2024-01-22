@@ -56,6 +56,7 @@ Personal
         - GoByExample read completely
             - do Gopherism (not sure about this)
         - Complete watching _all_ downloaded Vim videos.
+
     * Vim.txt
         - Clean up the document and align with slides (prepare slides)
             - Beginner
@@ -66,7 +67,8 @@ Personal
         1) Flute
         2) Padma Sadhana + Kriya + Meditation + Guru Pooja
         3) Vashista Yoga
-    * Estate Planning.
+
+    * Estate Planning
 
 REI
     - Insurance shopping for all properties
@@ -84,7 +86,196 @@ Seva
     - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Jan 22 (Mon)
+
+- Spoke with Sahil Aggarwal, about his interview schedule and way forward.
+- Fidelity, Roth In-Plan conversion setup. 
+    - Going forward, automatic conversion in place.
+    - Asked about $69K total contribution in 401K. Very difficult to match it.
+
+
+
+2024, Jan 21 (Sun)
+#ayodhyarammandir #naturejournaling #flute
+
+- Flute class in morning.
+- Watched Ayodhya Ram Mandir Prana Prathista Live, done by PM Narendra Modi.
+- Took Akshay to "Nature Journaling" program at EEC (Environmental Education
+  Center) on McClellan Ranch.
+- Walk with Sridhar in Rancho San Antonio (about 10,000 steps).
+- Sadhana in evening.
+- Vacuum the house, folding clothes, taking care of mail - must have completed
+  it. I would have finished my daily goal. Got distracted :(
+
+
+
+2024, Jan 20 (Sat)
+2024, Jan 19 (Fri)
+#fidelity
+
+- Discussed timelines/scoping with Vikram Guleria
+    - Feb 23th
+
+
+- Met with investment advisor (Vu Le) at Fidelity.
+    - Discussed many things financial. He took lots of details from us.
+
+- I've question about maximizing contributions to retirement account and get to
+  $69K limit.
+    - May be via VIP ROTH BONUS DEFERRAL. This contribution leads to 401K Roth.
+
+- Asked lot of questions in sg-finance channel.
+- Got AAA membership account number
+    - 429 005 559 146 5518
+
+
+
+2024, Jan 18 (Thu)
+#digitaldetox
+
+- Minutiae:
+    - Day 1 of digital detox.
+    - Called Fidelity to setup automatic Roth In-Plan conversion
+        - Did not happen because they have old address.
+        - Contact Benefits Dept at PANW and change address.
+        - Updated address on ETrade.
+        - Address on ADP, Workday, BenefitConnect are up to date.
+
+2024, Jan 17 (Wed)
+- Quick write up of ZOS FS
+- Working session with Umesh Jain to get zcluster up and running.
+    - Cluster came up.
+    - Health Check is failing.
+- Meeting with Jane Jojo, Dipesh Shah, Vikram Guleria and Umesh Jain
+    - Discuss GCP project layout, VPC layout, host project vs zycada project.
+    - Cloud NAT resides in share vpc in host project.
+
+
+- Minutiae:
+    - Aarushi pickup and drop off.
+    - Costco visit.
+
+    - Talked to (Madhu)lika Madhushetty about India move.
+    - Talked to Ligeo George about India move.
+    - Talked to Abbas Maki from Rocket Mortgage about loan qualifications.
+
+    - Watched Netflix shows:
+        - Dave Chappel one hour show.
+        - Jolly Joseph documentary. Serial Killer who killed 6 people.
+        - Not sure why I do this. I spent 2+ hours watching these shows. I like
+          Dave Chappel jokes, but don't like his life. Don't idiolize people.
+        - Making a promise to myself: 
+            - Not watching TV or wasting time on Phone for 1 week. Digital Detox.
+
+
+2024, Jan 16 (Tue)
+
+- Updated FS for ZOS APIs
+- Discussed following with Vikram
+    - Bring up zcluster using a template
+    - Present "scope of work" with dates
+    - Write an FS just for ZOS team
+        - SDWAN + Zycada integration
+
+
+
+2024, Jan 15 (Mon)
+#umaammagari #tennis
+- Uma Ammagari passed away on Jan 15, 8am IST on Makara Sankranti day.
+- Took Akshay to tennis class in evening.
+
+- Read up Alok Ranjan Billing as a Service FS document
+    - It needs more update.
+
+
+2024, Jan 14 (Sun)
+#ranchosanantonio
+- Did a 5 mile hike up Rancho San Antonio trail
+
+
+2024, Jan 13 (Sat)
+
+- Flute practice ~3 hours
+
+- Minutiae
+    - Family Financial Forum
+        - Finacial accounting 9am-10am
+    - Environment Education Center
+        - Took Akshay to the center
+        - Met an interesting lady (Ranjani, son's name is Aarav)
+    - RSM homework
+    - Walking with Sridhar Dasika. Did 15000 steps.
+
+
+2024, Jan 12 (Fri)
+
+- More than an hour discussion with Nihal Shetty about move to India. Did not
+  think it'll take this long.
+- Minor asks from UAT team for updates. Pinged Bishnu if his setup is ready
+  with latest fix.
+
+
+
+
+2024, Jan 11 (Thu)
+
+- Internal Meeting with Ganu, Vikram and Roy discussing ZOS APIs
+
+    1) Decided to use existing internal zcluster APIs for SDWAN integration.
+    Enhance with tsg_id, total_bandwidth, etc
+
+    2) What exactly is compute_region_oid? Do SDWAN call neo4j database and get
+    it?
+
+    3) In Phase 1 of the project, Customer will have only SDWAN license and no
+    PA license. Then, how is SDWAN tenant info propagated to neo4j, for ZOS to
+    access?
+
+    4) SDWAN gets compute region names from API call to RDS. Will they send
+    compute_region_name or compute_region_id present in RDS? What is
+    compute_region_oid?
+
+    5) Download has more payload than request. So, whats' the purpose of
+    ingress bandwidth? Must have download bandwidth from branch point of view.
+    Branch is downloading XXX Gbps from zworker.
+
+    6) Make sure, when multiple tenants make calls to create zcluster, make
+    sure they are handled gracefully.
+
+
+- 1:1 with Vikram
+    1. Provide rough plan of action items and work involved.
+
+
+
+2024, Jan 10 (Wed)
+- Discussed with Jane Jojo on various APIs.
+    - Error scenarios
+    - API naming
+
+- Wrote up the changes into a Google doc and shared with Roy, Ganu and Vikram.
+    - Got comments from Ganu, which I'm addressing.
+
+
+- Minutiae:
+    - Left home early (4pm), picked up Akshay
+    - Pickup/Drop Aarushi at RSM.
+    - Helped Akshay with RSM homework.
+    - Did Sadhana + Meditation.
+
+- Education:
+    - Watched 03-Up and Running with Neovim + LSP by Jake Weiss
+
+
+
+2024, Jan 09 (Tue)
+
+- Read up on API Design Best Practices from various sources
+
+
+
 2024, Jan 08 (Mon)
+#tennisclass
 - Meeting (Impromptu) with Vikram Guleria and Umesh Jain about Datapath
   components and architecture
     - Interaction with ZCache.
@@ -100,9 +291,15 @@ Seva
 
 
 - Watched recordings of team discussions on ZOS APIs
+- Meeting with Jane Jojo to discuss APIs
+    - Job ID to Response match
+    - Error scenarios
+
 
 - Dropped Aarushi at school via bike ride.
     - I'm still not confident she is riding safely. Not using all precautions.
+- First tennis class for Akshay. He liked the class.
+- Kriya and Rudram and Flute practice at night. Went late into the night.
 
 
 2024, Jan 07 (Sun)
