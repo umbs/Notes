@@ -10,7 +10,7 @@ $ code <directory-name>
 cmd + p     ctrl + p
 
 // Terminal
-cmd + `     ctrl + `
+ctrl + `     ctrl + `
 
 // All methods, properties etc in a file
 - Type @ in command palette
@@ -20,7 +20,7 @@ cmd + `     ctrl + `
 cmd + k,z     ctrl + k,z
 
 
-// Symbols
+// Symbols in currently open file
 cmd + O
 
 

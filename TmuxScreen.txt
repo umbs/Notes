@@ -23,6 +23,7 @@ Hit "Prefix" ctrl+b for the rest:
    f  find windows
    ,  name window
    &  kill window
+   '  brings up a prompt, to enter window number
 
 
    Panes Management:

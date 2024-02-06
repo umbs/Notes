@@ -117,17 +117,6 @@ Reference for Regex:
 
 
 
-**************************************************
-                Cursor Positioning
-**************************************************
-zt puts current line to top of screen
-z. or zz puts current line to center of screen
-zb puts current line to bottom of screen
-
-Ref: http://unix.stackexchange.com/a/110252/45157
-
-
-
 
 **************************************************
                 Code Folding
@@ -197,6 +186,36 @@ L       Move cursor to bottom of window
 
 
 
+zt puts current line to top of screen
+z. or zz puts current line to center of screen
+zb puts current line to bottom of screen
+
+Ref: http://unix.stackexchange.com/a/110252/45157
+
+
+
+**************************************************
+                Key Mappings
+**************************************************
+{cmd} {attr} {lhs} {rhs}
+
+where
+{cmd}  is one of ':map', ':map!', ':nmap', ':vmap', ':imap',
+       <buffer>, <silent>, <expr> <script>, <unique> and
+       <special>. More than one attribute can be specified to a map.
+{lhs}  left hand side, is a sequence of one or more keys that are being
+       mapped.
+{rhs}  right hand side, is the sequence of keys that the {lhs} keys are
+
+Ex: Map Ctrl+Tab to next tab and Ctrl+Shift+Tab to prev tab
+nnoremap <C-Tab> <ESC>:tabnext<CR>
+nnoremap <C-S-Tab> <ESC>:tabprevious<CR>
+
+# Unmap arrow keys
+no <up> <Nop>
+no <down> <Nop>
+no <left> <Nop>
+no <right> <Nop>
 
 
 
@@ -287,29 +306,6 @@ Code Indentation
 ----------------
 1. Shift+V and then up/down
 2. hit =
-
-
-Key Mappings
--------------
-{cmd} {attr} {lhs} {rhs}
-
-where
-{cmd}  is one of ':map', ':map!', ':nmap', ':vmap', ':imap',
-       <buffer>, <silent>, <expr> <script>, <unique> and
-       <special>. More than one attribute can be specified to a map.
-{lhs}  left hand side, is a sequence of one or more keys that are being
-       mapped.
-{rhs}  right hand side, is the sequence of keys that the {lhs} keys are
-
-Ex: Map Ctrl+Tab to next tab and Ctrl+Shift+Tab to prev tab
-nnoremap <C-Tab> <ESC>:tabnext<CR>
-nnoremap <C-S-Tab> <ESC>:tabprevious<CR>
-
-# Unmap arrow keys
-no <up> <Nop>
-no <down> <Nop>
-no <left> <Nop>
-no <right> <Nop>
 
 
 Vim Tips from Youtube talks

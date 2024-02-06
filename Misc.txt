@@ -4769,3 +4769,150 @@ Reference:
 [4] https://swagger.io/resources/articles/best-practices-in-api-design/
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@   neo4j Cypher Query Language   @@@@@@@@@@@@@@@@@
+
+Graph Patters is represented as
+    (node)-[:RELATIONSHIP]->(node)
+
+
+CALL db.schema()
+
+// Find all "Breweries" Businesses that have IN_CATEGORY relationship with
+// Category
+MATCH (c:Category)<-[:IN_CATEGORY]-(brew:Business)
+WHERE c.name CONTAINS "Breweries" AND brew.city = "Phoenix"
+RETURN brew
+
+// Breweries near me that my friends also like
+// TODO: How to find my friends?
+//       How to define 'like'?
+MATCH (brew:Business)<-[:REVIEWS]-(r:Review)<-[:WROTE]-(friend:User)-[:FRIENDS]-(me:User {user_id: "abcd123"})
+WHERE r.star > 4
+RETURN brew.name, brew.address, avg(r.stars) AS average_stars ORDER BY average_stars DESC
+
+
+Notes from ChatGPT
+==================
+    ### Node Creation and Matching:
+
+    - **Create Node:**
+      ```
+      CREATE (node:Label {property: value})
+      ```
+    - **Match Node:**
+      ```
+      MATCH (node:Label {property: value})
+      ```
+
+    ### Relationship Creation and Matching:
+
+    - **Create Relationship:**
+      ```
+      CREATE (source)-[:RELATIONSHIP_TYPE {property: value}]->(target)
+      ```
+    - **Match Relationship:**
+      ```
+      MATCH (source)-[:RELATIONSHIP_TYPE]->(target)
+      ```
+
+    ### Node and Relationship Deletion:
+
+    - **Delete Node:**
+      ```
+      MATCH (node:Label {property: value}) DELETE node
+      ```
+    - **Delete Relationship:**
+      ```
+      MATCH (source)-[r:RELATIONSHIP_TYPE]->(target) DELETE r
+      ```
+
+    ### Filtering and Conditions:
+
+    - **Where Clause:**
+      ```
+      WHERE condition
+      ```
+    - **Multiple Conditions:**
+      ```
+      WHERE condition1 AND/OR condition2
+      ```
+
+    ### Aggregation and Grouping:
+
+    - **Count Nodes:**
+      ```
+      MATCH (node) RETURN count(node)
+      ```
+    - **Grouping:**
+      ```
+      MATCH (node)-[:RELATIONSHIP_TYPE]->() RETURN node, count(*) AS count
+      ```
+
+    ### Ordering and Limiting Results:
+
+    - **Order By:**
+      ```
+      ORDER BY property ASC/DESC
+      ```
+    - **Limit Results:**
+      ```
+      LIMIT n
+      ```
+
+    ### Pattern Matching:
+
+    - **Variable-Length Relationships:**
+      ```
+      MATCH (node)-[:RELATIONSHIP_TYPE*..n]->(target)
+      ```
+    - **Optional Match:**
+      ```
+      OPTIONAL MATCH (node)-[:RELATIONSHIP_TYPE]->(target)
+      ```
+
+    ### Functions and Expressions:
+
+    - **String Functions:**
+      ```
+      TOUPPER(), TOLOWER(), SUBSTRING(), REPLACE()
+      ```
+    - **Math Functions:**
+      ```
+      ROUND(), CEIL(), FLOOR(), ABS()
+      ```
+
+    ### Conditional Expressions:
+
+    - **CASE Statement:**
+      ```
+      CASE WHEN condition THEN result ELSE default END
+      ```
+
+    ### Indexing and Constraints:
+
+    - **Create Index:**
+      ```
+      CREATE INDEX ON :Label(property)
+      ```
+    - **Create Unique Constraint:**
+      ```
+      CREATE CONSTRAINT ON (node:Label) ASSERT node.property IS UNIQUE
+      ```
+
+    ### Union and Combining Results:
+
+    - **Union:**
+      ```
+      MATCH (a) RETURN a UNION MATCH (b) RETURN b
+      ```
+    - **Union All:**
+      ```
+      MATCH (a) RETURN a UNION ALL MATCH (b) RETURN b
+      ```
+
+This cheat sheet covers many common Cypher query operations. Cypher is a rich
+and expressive language, so there are many more features and functions
+available. For detailed information, refer to the official Neo4j Cypher
+documentation.
+
+
