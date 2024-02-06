@@ -42,6 +42,147 @@ Seva:
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   February 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration. APIs.
+
+    Minor Projects (Tech Debts):
+        - Orchestrating Load Balancer - TOI to Justin Huang
+        - LocalStack PoC
+
+Personal
+    * Education
+        - GoByExample read completely
+            - do Gopherism (not sure about this)
+
+    * Vim.txt
+        - Clean up the document and align with slides (prepare slides)
+            - Beginner
+            - Intermediate
+            - Advanced
+        - Complete watching _all_ downloaded Vim videos.
+
+    * Do this in this order, every day
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+
+    * Estate Planning
+
+REI
+    - Insurance shopping for all properties
+        - 629 Celebration Ct
+        - 3012/3014 Pine Valley - IN PROGRESS
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    - Freedom Mortgage - Include escrow.
+    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
+
+Seva
+    - Lead YES follow up.
+    - Attend adult follow up.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Feb 06 (Tue)
+
+- Minutiae:
+    - Madhavi shared her 1:1 meeting with her boss (George).
+        - He said something like "show up more", which triggered her.
+        - I too said she is physically not present at work. She did not like
+          that.
+
+
+2024, Feb 05 (Mon)
+- Made good progress on bringing up zcluster using Postman, but still not
+  crossed finish line :(
+- Meeting with Jane Jojo about "Feature Flags" API.
+    - Call "Feature Flags" API after creating Tenant. This helps in creating VNI.
+    - Use the API to enable/disable feature in a region.
+    - Continue using existing API to create zclusters.
+    - Send "X-Caller": "DIA-client" in header.
+
+- Minutiae:
+    - Went to work using Uber to spend more time on project.
+        - Came back around 7pm
+    - Visited YMCA with family at night.
+        - Found lot of details about swimming.
+        - Registered at YMCA ($150 joining fee and $80 or so prorated fee for
+          February)
+        - Aarushi:
+            - can join Swim Team (highest level) after eval.
+            - can join Swim Club (next highest level) if she cannot make it to Swim
+              Team. Swim Team and Swim Club have different coaches.
+            - "worst case", she can join Level 5 classes to get stroke correction
+              etc.
+        - Akshay:
+            - YMCA currently has Group Lessons.
+            - He is in Level 3.
+            - Found a class on Monday and Wednesday at 6:30pm-7:10pm starting March
+              25th. But the final fee was for "non-members". I already paid for
+              membership.
+    - Spoke to Amma on Phone at night. Dad is in Pune on work.
+        - She spoke for 2+ hours complaining about Purni/Sita Pinni etc.
+        - I understand it is hard on them to manage an adult at home. And Pinni
+          complaining about Mom/Dad to other relatives is hard on Mom/Dad. But boy,
+          complaining for 2+ hours is too much. I listened because there is no one
+          else to listen to her. 
+        - She also spoke at length about Sarma Mavayya's history of forging
+          signatures and being very careful signing any documents.
+
+
+
+2024, Feb 04 (Sun)
+- Woke up at 9am. Been tense about NOT practicing flute.
+    - But no class.
+- Madhavi's silence course ended.
+- Dinner outside, Via Mia Pizza
+- Storm/Windy. There was power outage.
+
+
+2024, Feb 03 (Sat)
+- HVAC repair guy came (Juan Moreno) from Keystone Mechanical and HVAC
+    - Some device inside HVAC responsible for starting the flame is not doing
+      its job. Must replace it. 
+    - Said it'll cost $700, but showed me used part on eBay at around $180. 
+    - I want the used part and not the $700 part.
+- Took kids to Bala Vihaar. Akshay and I slept in the car. Akshay skipped Bala
+  Vihaar :( Aarushi went to the class.
+- Abhay (Sridhar's son) birthday at SkyZone. Akshay had good time. But the
+  place is crazy noisy.
+- I slept pretty early (10:30pm).
+
+
+2024, Feb 02 (Fri)
+- SDWAN + App Acceleration standup
+    - Must deliver APIs asap.
+
+- VNI generation discussions
+    - Umesh investigated and suggested "features flags" API to generate VNI.
+    - But this API is primarily used to enable/disable a feature "globally".
+
+    - Summary:
+        - SDWANC will call new API ("feature flags" API).
+            - This API call is to generate VNI. We want to keep VNI generation with ZOS.
+            - Must pass new variable in payload (validate_licensing=false, default is true).
+
+        - POST API to zclusters remain same.
+- Worked late into the night. Got VSCode with local debugger working.
+    - Attach Go Debugger (delve) to a process running locally.
+    - Set breakpoint in the code.
+    - Run Postman command and breakpoint is hit. Debug from there.
+    - Followed this Video (amazing help)
+        - https://youtu.be/ijWgDzAbQFw?si=to9rVFh0_2AhN9Pf
+
+
+
+2024, Feb 01 (Thu)
+#AOS
+- Stayed late at office to complete APIs
+- Madhavi started Silence Course
+
 @@@@@@@@@@@@@@   January 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
@@ -86,8 +227,93 @@ Seva
     - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-2024, Jan 22 (Mon)
+2024, Jan 31 (Wed)
+- Discussions with Michael Ryan about loans
+2024, Jan 30 (Tue)
+- Video chat with Fernando, Francisco and Kala about construction and costs
+  associated with it.
 
+
+2024, Jan 29 (Mon)
+#fidelity #facial
+- Did not get any work done, in office.
+- Status to team:
+    - Raised PR with Templates and UT. PR in review.
+    - API coding, to be started from today.
+    - Cloud NAT public IP issue. SRE does not have any public IPs left in Prod.
+    - neo4j modeling work in progress.
+
+- Minutiae:
+    - Up at 4:30am and did expenses.
+    - Met with Fidelity advisor and signed up for
+    - https://drive.google.com/drive/folders/1BJ1AuY04Z5odJxDATw9ssrkMiibYiYNv
+    - Lot of facials. Must stop this.
+    - Intro call with Fernando on construction work, scope and what's involved.
+
+
+2024, Jan 28 (Sun)
+#facial
+- Skipped flute class
+- Grocerries shopping for Jyothi Atta and Purni's lunch visit
+    - Kids connected and had fun.
+- Satsang in memory of Umaji
+- Madhavi was not happy that Jyothi Atta and all stayed pretty late, until 5pm.
+
+
+2024, Jan 27 (Sat)
+#facial
+- Prepared lunch for kids.
+    - Got super mad at them, for causing small trouble.
+- Chanting class in afternoon
+- Madhavi is back from Los Angeles
+- Dinner outside, at "Thai Bangkok Cuisine"
+
+
+2024, Jan 26 (Fri)
+- Go Templates, reading, learning
+
+- Minutiae:
+    - Updated ChargePoint payment system
+    - Setup appointment for batter replacement for iPhone 6.
+        - Its at 4:20pm on Winchester Blvd, San Jose (Mobile Kangaroo)
+    - Wrote to Michael Ryan about commercial loans
+
+
+2024, Jan 25 (Thu)
+- Dev environment setup with help from Umesh Jain.
+- Working on passing the UT.
+    - go test ./internal/terraform -run TestDiaCreateUpdateTmpl
+
+- Minutiae:
+    - Sent kids to school. Prepared lunch for Akshay (Fried Idly). Took too
+      much time to do all that.
+
+
+2024, Jan 24 (Wed)
+#madhavi #latrip
+- neo4j modeling discussions
+- ...
+
+
+- Minutiae:
+    - Madhavi left for LA in morning.
+    - Did little bit of flute practice and meditation in morning
+    - Akshay and Aarushi drop off.
+    - Car battery charge went WAAAAY low. Charging at paid station.
+    - Picked Akshay and Aarushi early (by 3:30pm)
+    - Slept at 11pm, even though I was not super tired.
+
+
+2024, Jan 23 (Tue)
+#diabetes #doctorvisit
+- Visited Dr. Bob Medeker for diabetes checkup
+    - Suggested to use continuous glucose monitor.
+    - Talk to CVS and message him back if they'll accept insurance.
+- PGE technician came to look at HVAC issue.
+- Vivek visited home in evening.
+
+
+2024, Jan 22 (Mon)
 - Spoke with Sahil Aggarwal, about his interview schedule and way forward.
 - Fidelity, Roth In-Plan conversion setup. 
     - Going forward, automatic conversion in place.
@@ -194,7 +420,7 @@ Seva
 
 
 2024, Jan 13 (Sat)
-
+#facial
 - Flute practice ~3 hours
 
 - Minutiae
