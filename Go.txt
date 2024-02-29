@@ -1,0 +1,188 @@
+***********************   Notes from `Go by Example`   **********************
+    1. Values
+            - string, integers, boolean, flots, structs (user defined)
+            - strings can be added with +
+
+    2. Variables
+            - `var` declares one or more variables with the type specified at the end
+            - Go can infer type from initialized value
+            - Walrus operator ( := ) declares and initializes variables
+
+    3. Constants
+            - Can be used where `var` is used.
+
+    4. For
+            - Only loop in Go.
+
+    5. If/Else
+            - Like `for`, this has no braces. 
+
+    6. Switch
+        - 
+
+    7. Arrays
+
+    8. Slices
+
+    9. Maps
+    10. Range
+    11. Functions
+    12. Multiple Return Values
+    13. Variadic Functions
+    14. Closures
+    15. Recursion
+    16. Pointers
+    17a. Strings
+            - read-only slice of bytes. The language and the standard library treat
+              strings specially - as containers of text encoded in UTF-8.
+            - strings are equivalent to []byte
+            - Indexing into a string produces the raw byte values at each index. 
+
+
+    17b. Runes
+            - In Go, the concept of a character is called a rune - it’s an integer
+              that represents a Unicode code point.
+            - https://go.dev/blog/strings
+
+        
+    18. Structs
+    19. Methods
+            - Go supports methods defined on struct types.
+            - Methods on struct can have "receiver type", which could be a pointer or a value.
+
+    20. Interfaces
+            - 'Interfaces' are named collections of method signatures.
+            - To implement an interface, implement all its methods.
+            - If a variable has interface type, we can call methods on its interface.
+
+    21. Struct Embedding
+            - Go allows embedding of structs and interfaces.
+
+    22. Generics
+            - Type parameters
+
+
+    23. Errors
+    24. Goroutines
+    25. Channels
+    26. Channel Buffering
+    27. Channel Synchronization
+    28. Channel Directions
+    29. Select
+    30. Timeouts
+    31. Non-Blocking Channel Operations
+    32. Closing Channels
+    33. Range over Channels
+    34. Timers
+    35. Tickers
+    36. Worker Pools
+    37. WaitGroups
+    38. Rate Limiting
+    39. Atomic Counters
+
+
+    40. Mutexes
+    41. Stateful Goroutines
+    42. Sorting
+    43. Sorting by Functions
+    44. Panic
+    45. Defer
+    46. Recover
+    47. String Functions
+    48. String Formatting
+    49. Text Templates
+    50. Regular Expressions
+    51. JSON
+    52. XML
+    53. Time
+    54. Epoch
+    55. Time Formatting / Parsing
+    56. Random Numbers
+    57. Number Parsing
+    58. URL Parsing
+    59. SHA256 Hashes
+    60. Base64 Encoding
+    61. Reading Files
+    62. Writing Files
+    63. Line Filters
+    64. File Paths
+    65. Directories
+    66. Temporary Files and Directories
+    67. Embed Directive
+    68. Testing and Benchmarking
+    69. Command-Line Arguments
+    70. Command-Line Flags
+    71. Command-Line Subcommands
+    72. Environment Variables
+    73. Logging
+    74. HTTP Client
+    75. HTTP Server
+    76. Context
+    77. Spawning Processes
+    78. Exec'ing Processes
+    79. Signals
+    80. Exit
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@     Go Templates     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+0. Intro to Go Templates
+    - Mainly used to output HTML.
+
+Hello World Example
+-------------------
+hello.html
+---
+{{ template "header" }}
+Hello World! My name is {{ .name }}.
+{{ template "footer" }}
+
+common.html
+---
+{{ define "header" }}
+{{ end }}
+
+{{ define "footer" }}
+{{ end }}
+
+1. Template Composition
+2. Syntax and Variables
+3. Functions, methods and pipes
+
+- Templates are mostly used to output HTML, but there are other use cases (like Terraform templates)
+
+- In other templating engines (Django, Jinja2, Laravel blade etc), template references are static
+    e.g. {% include "partials/header.html" %}
+        - references a specific template relative to the template dir
+
+
+- Go's template references are dynamic and you must *compose* the templates yourself
+    e.g. {{ template "header" }}
+        - What is "header"? It depends on what templates you composed together.
+
+
+
+- Big Idea:
+    - In Go, a template is essentially a map[string]*Template
+    - When you compose templates together, you are populating this
+      map[string]*Template data structure
+
+
+Syntax and Variables:
+
+{{ define ... }}
+{{ template ... }}
+{{ block .. }} {{ end }}
+{{ if <var> }} {{ else if <var> }} {{ else }} {{ end }}
+{{ with <var> }} {{ end }}
+{{ range <var> }} {{ else }} {{ end }}
+
+- Everything else (and, or, not, len, index etc) is a function.
+- Every template has access to exactly one variable, denoted by dot '.'
+    - This is whatever variable you passed into Execute()/ExecuteTemplate()
+
+
+
+
+Reference:
+[1] https://www.youtube.com/watch?v=k5wJv4XO7a0
+
