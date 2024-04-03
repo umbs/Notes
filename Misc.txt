@@ -4749,7 +4749,7 @@ API Best Practices:
 
 
 - Lately HATEOAS is used in REST API designs.
-- HATEOAS stands for "Hypermedia as the Engine of Application State." 
+- HATEOAS stands for "Hypermedia as the Engine of Application State."
     - It's a principle in RESTful API design that emphasizes the use of
       hypermedia links within the API responses to enable clients to
       dynamically navigate and interact with the application.
@@ -4915,4 +4915,150 @@ and expressive language, so there are many more features and functions
 available. For detailed information, refer to the official Neo4j Cypher
 documentation.
 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   delve Go debugger @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Specify target and start debugging with the default terminal interface:
+    dlv debug [package]
+    dlv test [package]
+    dlv exec <exe>
+    dlv attach <pid>
+    dlv core <exe> <core>
+    dlv replay <rr trace>
+
+Trace target program execution
+    dlv trace [package] <regexp>
+
+Start a headless backend server only and connect with an external frontend client:
+    dlv --headless <command> <target> <args>
+        • starts a server, enters a debug session for the specified target and
+          waits to accept a client connection over JSON-RPC or DAP
+
+        • <command> can be any of debug, test, exec, attach, core or replay
+        • if `--headless` flag is not specified the default terminal client will be automatically started instead
+        • compatible with `dlv connect`, VS Code Go, GoLand
+
+    dlv dap
+        • starts a DAP-only server and waits for a DAP client connection to specify the target and arguments
+        • compatible with VS Code Go
+        • NOT compatible with dlv connect, GoLand
+
+    dlv connect <addr>
+        • starts a terminal interface client and connects it to a running headless server over JSON-RPC
+
+Help information
+    dlv help [command]
+    dlv log
+    dlv backend
+    dlv redirect
+    dlv version
+
+
+Debugging Go Unit Tests
+----
+    // Will generate a 'package.test' file
+    go test -c /path/to/package
+
+    // Use delve to debug
+    dlv exec package.test
+        (dlv) break package.TestCaseOfInterest
+        (dlv) next/step/continue etc
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   Markdown Cheat Sheet  @@@@@@@@@@@@@@@@@@@@@@@@@
+
+BASIC SYNTAX
+------------
+Headers:
+    # Header 1
+    ## Header 2
+    ### Header 3
+
+
+Emphasis:
+    *Italic*
+    **Bold**
+
+Unordered Lists:
+    - Item 1
+    - Item 2
+
+Ordered Lists:
+    1. Item 1
+    2. Item 2
+
+Links:
+    [Link Text](URL)
+
+Images:
+    ![Alt Text](Image URL)
+
+Blockquotes:
+    > Quote
+
+Code:
+   `Inline Code`
+
+   ```Code Block```
+
+Horizontal Rule:
+    ---
+
+Tables:
+    | Header 1 | Header 2 |
+    | -------- | -------- |
+    | Cell 1   | Cell 2   |
+
+Escape Characters:
+    \*Escaped\*
+
+
+
+EXTENDED SYNTAX
+---------------
+Fenced Code Block:
+    ```
+    {
+      "firstName": "John",
+      "lastName": "Smith",
+      "age": 25
+    }
+    ```
+
+Footnote:
+    Here's a sentence with a footnote. [^1]
+
+    [^1]: This is the footnote.
+
+Heading ID:
+    ### My Great Heading {#custom-id}
+
+Definition List:
+    term
+    : definition
+
+Strikethrough:
+    ~~The world is flat.~~
+
+Task List:
+    - [x] Write the press release
+    - [ ] Update the website
+    - [ ] Contact the media
+
+Emoji:
+    That is so funny! :joy:
+
+Highlight:
+    I need to highlight these ==very important words==.
+
+Subscript:
+    H~2~O
+
+Superscript:
+    X^2^
+
+Reference:
+[1] https://www.markdownguide.org/cheat-sheet/
 
