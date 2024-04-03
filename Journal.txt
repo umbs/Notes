@@ -42,10 +42,534 @@ Seva:
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@   February 2024    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   April 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
         - Zycada + SDWAN Integration. APIs.
+        - Mockoon
+
+    Minor Projects (Tech Debts):
+
+Personal
+    * Do this in this order, every day
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+
+    * Education
+        - Test With Go read completely
+        - GoByExample read completely
+            - do Gopherism (not sure about this)
+
+    * Vim.txt
+        - Clean up the document and align with slides (prepare slides)
+            - Beginner
+            - Intermediate
+            - Advanced
+        - Complete watching _all_ downloaded Vim videos.
+
+    * Estate Planning
+
+REI
+    - Insurance shopping for all properties
+        - 629 Celebration Ct
+        - 3012/3014 Pine Valley - IN PROGRESS
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    - Freedom Mortgage - Include escrow.
+    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Apr 01 (Mon)
+#srinisaripalli
+
+- Solved zcfg issues that Datapath team is facing
+- Closed two of ZY tickets
+- Investigating API changes for Datapath team
+
+
+- Minutiae:
+    - Srini Saripalli visited home to meet Mavayya garu. Great meeting him
+      after many years. Loved hearing how he is taking care of his father and
+      still running Radio Station business.
+    - Watched 'Eric Williams' slide deck to raise $700K, with min of $100K
+
+- Eric Williams Slide Deck to raise $700K
+    - Property in San Angelo, TX
+    - Old name: Harvard House, New Name: District 52
+    - Purchase Price: $2.65M, Equity raise: $1.77M at 3.48% assumable loan
+      until 2031 (Fannie Mae/Freddy Mac)
+
+
+@@@@@@@@@@@@@@   March 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration. APIs. - IN PROGRESS
+
+    Minor Projects (Tech Debts):
+        - Orchestrating Load Balancer - TOI to Justin Huang - ABANDONED
+        - LocalStack PoC - ABANDONED
+
+Personal
+    * Education
+        - GoByExample read completely - ABANDONED
+            - do Gopherism (not sure about this)
+
+    * Vim.txt - NOT DONE
+        - Clean up the document and align with slides (prepare slides)
+            - Beginner
+            - Intermediate
+            - Advanced
+        - Complete watching _all_ downloaded Vim videos.
+
+    * Do this in this order, every day
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+
+    * Estate Planning
+
+REI
+    - Insurance shopping for all properties
+        - 629 Celebration Ct
+        - 3012/3014 Pine Valley - IN PROGRESS
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    - Freedom Mortgage - Include escrow.
+    - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Mar 31 (Sun)
+#dentist
+- Mostly stayed home and did house chores.
+- RSM in afternoon
+- Dentist visit as Akshay had tooth pain.
+
+2024, Mar 30 (Sat)
+#aarushibirthday
+- Minutiae:
+    - Madhavi, kids and Mavayya garu went to Golden Gate Bridge, Cal Academy of
+      Sciences and back by 5pm
+    - Sridhar, Venkat and I went for a walk for an hour or so.
+    - I folded tonnes of clothes, ironed them and what not.
+    - Got cake slice from Paris Baguette
+    - Dinner from MOD Pizza
+
+
+2024, Mar 29 (Fri)
+#akshaybirthday
+- Minutiae:
+    - Akshay Birthday today. He turned 10.
+    - Akshay basketball game. I must train him, whatever I know.
+    - Got cake slice from Paris Baguette
+    - Dinner from Inchin Bamboos
+
+
+2024, Mar 28 (Thu)
+#gokarting
+
+- Took kids to K1 Speed Karting
+    - Was fun, but a bit expensive.
+- Madhavi and Mavayya garu went to Costo and shopped tonne of stuff.
+
+- Did lot of combing through logs. Here's my finding:
+    - In zos.yaml, values are all pointing to dev02.
+    - When running ZOS locally, we use zos.yaml as input config file.
+    - So, Provision Service replies back to dev02 ZOS which does not have info
+      we created in dev03 zos.
+    - Dev02 ZOS does not find the job-id and triggers a delete immediately to
+      Provisioning Service
+
+- On Dev03, there were errors in ZOS
+    - Secrets manager did not have zorchestrator-service-cert and -key files.
+    - sdwan_ca_cert, sdwan_client_cert, sdwan_client_key did not have following
+      Service Account added to them:
+            customer@zycada-platform-dev-project.iam.gserviceaccount.com 
+            Added it and gave "Secret Manager Secret Assesor" Role
+    - BigQuery Data Editor Role given to above account, for the table
+      z_app_metric
+
+
+2024, Mar 27 (Wed)
+- Took kids to Laser Tag (LaserMaxx in San Jose, quite far)
+
+2024, Mar 26 (Tue)
+#facial
+- Flute practice at night with Praveen Herur, Murali Babu, Sanjai ji.
+
+
+2024, Mar 25 (Mon)
+
+- Merged fixes for "zcluster Provisioning"
+    - ScalingPolicy was missing in the payload sent to Provisioning Service.
+    - Prov Serv sends the payload as-is to Terraform Cloud which failed because
+      Min/Max Replicas were 0. No validation done.
+    - In ZOS, I fixed it by sending correct scaling values.
+
+- At night, with help from Bineesh K, got dev/zdia to dev03 pipeline working.
+  Cosmos env (dev03) is ready.
+
+- Minutiae:
+    - Flute practice at night.
+    - Vivek visited.
+
+
+2024, Mar 24 (Sun)
+#losangeles
+- Griffith Museum with whole family.
+- Family dinner at night, ordered Pizza.
+
+2024, Mar 23 (Sat)
+- Lunch at Gracias Madres. Fully vegan place.
+    - Bill is $420, tip included. OMG.
+
+2024, Mar 22 (Fri)
+#losangeles #facial
+- Told Vikram that merge conflicts is wasting time. I'll use dev/zdia as new
+  branch.
+- Worked with Shikhar, but could not get dev/zdia --> dev03 working
+- Getting late for Los Angeles, so, I shut down office work.
+
+- Los Angeles:
+    - Took kids early from school and drove to Los Angeles
+        - Took the car on Turo, on Merriman Rd.
+        - Spoke to Chinna Attaya and Pedda Attaya and Amma/Abbai on the way.
+        - Amma/Abbai are in Varanasi.
+
+2024, Mar 21 (Thu)
+- Figured out DELETE API and got it working. Deleted 40+ VMs. But 20+ VMs still remain because they were created *before* Webhook callback code was introduced. There is no record of those VMs in neo4j.
+
+2024, Mar 20 (Wed)
+2024, Mar 19 (Tue)
+2024, Mar 18 (Mon)
+2024, Mar 17 (Sun)
+2024, Mar 16 (Sat)
+2024, Mar 16 (Sat)
+2024, Mar 15 (Fri)
+2024, Mar 14 (Thu)
+#Mavayyagaru #vishnu
+- Raised MR for issues ZY-145, CYR-40431, CYR-40703
+    - Multiple create zcluster calls results in multiple zclusters, even though they already exists.
+- Discussions on how to 
+
+
+- Minutiae:
+    - Mavayyagaru and Vishnu visiting from India.
+        - Took 4 hours off work. Long time for them to come out.
+
+    - Akshay had breathing trouble.
+
+
+
+2024, Mar 13 (Wed)
+2024, Mar 12 (Tue)
+- Serviceability meeting with Ganu/Jane/Vikram etc
+
+- Warrior
+    - Spoke with Dinesh Nayak
+        - Do Warrior program with your brother as partner. Talk to Mark Nagy and get in as "partner".
+        - Do not rule out other asset classes.
+        - He lives and invests in North Virginia and near by markets.
+        - Currently doing couple of construction projects.
+    - Amar Nagireddy
+        - Underwriting class.
+        - 1.5 hours class. Super useful. Amazing class.
+        - Amar uses Michael Blank excel sheet.
+        - quw.netlify.app
+            - Quick Underwriting
+
+
+2024, Mar 10 (Sun)
+#basketball #rsm
+
+- Sent monthly reports to Kumar Senthivel and Suresh Sangaiah
+
+
+- Minutiae:
+    - Filing Taxes on MyGTN portal.
+    - Basketball and RSM in morning.
+        - Morning batch Basketball
+        - Sunnyvale RSM
+
+
+
+
+2024, Mar 09 (Sat)
+#facial #balavihaar #dentist
+- Akshay has dental problem.
+    - Went to Dr. Nirmala Balachandar in the morning, before Bala Vihaar.
+    - Aarushi's cleaning.
+    - Akshay's tooth removal.
+
+- Warrior:
+    - Elijah Lung
+        - He is from Grand Rapids, MI with agriculture background, had
+          farmlands.
+        - Owned Waste Management business that he ran for 11 years and sold.
+        - Warrior since July 2023. His mentor is Sam Wells.
+        - He has done few LP deals. But *just* got into 208 unit GP deal with
+          his mentor and few other GPs, in Savannah, Georgia.
+        - His focus is Sarasota, FL, Grand Rapids MI, Savannah, GA
+        - Had an Airbnb in Sarasota, but neighbors did not like it. He sold it
+          off in 6 months.
+
+    - Sridhar Sannidhi
+        - Introduced myself and Sashi.
+        - Asked to send us LP deals.
+        - Uses highly qualified Virtual Assistants from Philippines.
+
+    - Rajesh Singh (Shreyas Singh)
+        - Lives in New York area, and invests in North/South Carolina and
+          Georgia.
+        - He is in IT dept of some Bank in New York. Plans to continue W2 job while investing.
+        - Been Warrior since Sept, 2023. His son, Shreyas, is also a Warrior.
+        - His son is 23 years old with a degree in Finance and focus is Real
+          Estate equity fund.
+        - They are doing Mt. Everest Base Camp hiking in April, 2024
+        - Key takeaway:
+            - Do at most, 1 or 2 GP deals per year and LP deals as you want.
+
+2024, Mar 08 (Fri)
+- Pretty frustrated with bugs
+
+- Transferred $12K from ETrade to Wells Fargo, in order to payoff credit card debt and other finances.
+
+2024, Mar 07 (Thu)
+- I did not make ANY progress w.r.t work. Analyzed Umesh's code changes in feature/upsertzdia branch
+
+
+2024, Mar 06 (Wed)
+#emergency
+
+- Worked with Jane Jojo on resolved a certificate issue they saw in dev02
+  environment. Callback started happening.
+
+- Aarushi has severe ear pain. Took her to emergency at 2am in morning.
+- I was totally knocked out during the day due to lack of sleep.
+    - I slept from 2:30pm-5pm
+
+
+2024, Mar 05 (Tue)
+#hemantpawar
+- Merged MR for "context canceled" error and API not accessible error.
+    - Must merge these changes to `release` branches.
+
+- IronVault discussions.
+
+
+- Minutiae:
+    - Helped out Meenakshi Mittal with her System Design interview prep.
+        - Not sure how I get pulled into these. I spent 1 hour with her coaching.
+          Why is Vineet, her husband, not doing?
+    - Worst yet, I kept watching Youtube videos until 1:45am, followed by Emergency
+      visit for Aarushi.
+
+- Warrior:
+    - Met Hemant Pawar at Starbuck.
+        - Eye opening visit.
+        - Warrior program is not that big a deal as it is made out to be. Very
+          little money in Syndication. Especially in last few years, returns
+          have dwindled. GP's barely make any money.
+        - Ask your coach and anyone to show the numbers: Year 1, Year 2, etc
+        - Have deals of your own (JV, 15-20 unit multiplex etc).
+
+
+2024, Mar 04 (Mon)
+
+- Warrior:
+    - Elevator Pitch:
+        My name is Bhaskar. I'm a Real Estate Investor focused on commercial
+        multifamily properties in San Antonio area. In short term, I'm focused
+        on acquiring 15-25 unit assets in ~$2.5M range.
+
+        I've just started in Warrior program and would like to help out in your
+        RE business, in any way possible, so that I can learn this business.
+
+        I'm a Software Engineer in cybersecurity field, living in Bay Area. I'm
+        married with 2 pre-teen children.
+
+    - What do I want to achieve? Vision Board
+
+        10 year goal (Dec, 2034):
+        =========================
+            Personal:
+
+            AOL:
+
+            REI:
+                Personal REI:
+                    - Assets cashflowing $100K/mo.
+                    - Completely debt free on all my assets.
+
+                Syndication REI as GP:
+                    - AUM worth $100M
+
+
+        5 year goal (Dec, 2029)
+        =======================
+            Personal:
+
+            AOL:
+
+            REI:
+                Personal REI:
+
+                Syndication REI as GP:
+
+
+        1 year goal (Dec, 2024)
+        =======================
+            Personal:
+
+            AOL:
+
+            REI:
+            - Assets with NOI $100K/mo.
+            -
+
+
+
+2024, Mar 03 (Sun)
+- Coaching call with Max Shah
+    - This week and next few days:
+        1) Setup long term goals: Both life goals, investment, charity, personal - all goals
+            - 5 year plan
+                - 3 year plan
+                - 1 year plan
+                - monthly plan
+                - weekly paln
+            - Goal setting workshop. Watch this.
+
+        2) Have a vision board.
+            - What you want to achieve? Write it down.
+            - Have it printed and put it on cardboard.
+            - Screensaver.
+
+        3) Create a website for your company
+            - Get a name, domain name.
+            - Brand yourself.
+                - Put Max Shah as senior advisor.
+            - Have a CRM (future)
+                - Hubspot is free.
+                - Link your website to Hubspot.
+                - You can build lot of automation with this.
+            - Open an LLC, but not in California. Max LLC, Trust etc in Wyoming, Delaware, Nevada
+            - Watch website of other Warrior.
+
+        4) Introduce yourself on Facebook page (very important)
+            - Tag Max Shah.
+            - Mention your goals in the post.
+            - Schedule at least 10 calls/week with other Warriors.
+                - Get Name, Email, Phone and put it in CRM.
+            - Calendly
+
+        5) Other REI groups on Facebook.
+            - Introduce yourself there and meet them.
+                - Get Name, Email, Phone and put it in CRM with each person you
+                  are talking to.
+
+        6) Talk to Warrior, Investors. Have at least 5-10 calls/day.
+
+    - I'm new in this field. So, I've to focus on helping others and constantly
+      be in their heads. Do not think about benefit *now*. Think of helping
+      others and think of benefits later.
+
+    - Go "live" on FB and tag Max Shah so his friends can see.
+    - Talk to Amar Nagireddy once a month.
+    - Put yourself out there so people notice you.
+        - What can you offer them? We can get to that later.
+    - Move properties into LLC and have insurance on LLC.
+    - Consistently post on personal REI website.
+    - Stay away from Family, but Friends is OK.
+    - First 100 investors, who actually wire you money, are *very* hard to
+      find. But after that it is easy, especially if you execute very well.
+
+
+
+
+2024, Mar 02 (Sat)
+- Canceled OnStar service ($30/mo) on GM/Chevrolet website.
+    - Spoke to a rep named Daniel and got it canceled.
+
+- Warrior:
+    - Watched entire "Finding Deals Action Plan" course
+    - Underwriting workshop
+
+- Minutiae:
+    - Dentist.
+    - Madhavi took kids to Bala Vihaar.
+    - Folded clothes and washed some, while watching Warrior videos.
+
+
+2024, Mar 01 (Fri)
+
+Self Evaluation & Goals:
+
+- Share highlights regarding the achievement of goals and milestones or the
+  impact realized during this performance period. (Be mindful to note specific
+  areas of success and opportunity.)
+
+
+    Enable App Acceleration for SDWAN: Enable App Acceleration for SDWAN clients for ""Direct Internet Access"" traffic.
+    Duration: Jan 2024 to Feb 2024
+    Success: On time delivery of Phase 1, while learning new tech stack, new architecture and formalizing requirements and design specification in collaboration with SDWAN team.
+    Opportunity: 
+
+    Load Balancer on Openstack: Bring up Load Balancer as a Service (LBaaS) on Openstack. After that, use this for Explicit Proxy (a.k.a Secure Web Gateway) Product.
+    Duration: Nov 2023 - Dec 2023
+    Success: Brought up IPVS based Load Balancer
+    Opportunity: 
+
+    Mobile User (MU) on Openstack: Deploy, test and verify MU Firewalls on Openstack private cloud. The goal of this project is to bring down Prisma Access infrastructure costs.
+    With help from the team, I've deployed and tested subset of MU functionalities and released the feature to internal teams for usage.
+    Duration: Sep 2023 to Oct 2023
+    Success:
+    Opportunity:
+
+    Flex Credits for CNGFW for Azure: This feature enables customers to purchase credits that are then applied to their firewall usage. As firewalls secure customer traffic, these
+    credits are consumed and reported back to the customer. Flex credits play a fundamental role in purchase orders initiated by sales representatives. This feature is critical to
+    the revenue generated by the CNGFW Product. I worked with Finance, Revenue, PLM, UAT and other teams to deliver this feature.
+    Duration: Jul 2023 to Sep 2023
+    Success: Excellent coordination and collaboration with many teams. Feature helped in realizing > $1.5M in first 6 months after GA.
+    Opportunity: Gaining insights into the finance, sales, and revenue aspects of the product provides a deeper perspective on the features I am developing.
+
+    CNGFW for Azure: Customer Support Portal (CSP): I delivered a highly complex component that enables Sales and Technical Marketing Engineers to open support tickets
+    for the CNGFW product. While working from the India office, I coordinated with five functional teams based in Santa Clara and successfully delivered the feature.
+    Duration: Jan 2023 to Sep 2023
+    Success: Strong collaboration and execution resulted in delivering this highly complex feature.
+    Opportunity: I sometimes delayed communicating risks to management. I need to highlight risks to management as early as possible.
+
+
+- Provide examples of how our values were demonstrated in day to day work
+  throughout this performance period.
+
+  #execution:
+
+
+- Minutiae:
+    - Basketball game at Cupertino Middle School
+        - Montclaire vs Nimitz. Akshay was good.
+    - Paid HOA for 629 Celebration Ct, San Jose
+        - Paid $1230.70 for Dec/Jan/Feb months.
+
+
+@@@@@@@@@@@@@@   February 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration. APIs. - DONE
+            - Demo for DTHO1 done on Thursday, Feb 29th
 
     Minor Projects (Tech Debts):
         - Orchestrating Load Balancer - TOI to Justin Huang
@@ -86,7 +610,282 @@ Seva
     - Lead YES follow up.
     - Attend adult follow up.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Feb 29 (Thu)
+#demo
+- Preparing for demo with Jane Jojo
+    - Recorded demo
+- Demo went well. One of my commits caused a hiccup, but we have backup recording.
+    - Lesson for future. If something is working, do not mess up before a demo.
+
+- Warrior:
+    - Started watching "Multifamily Deals Action Plan" series of videos.
+
+
+
+2024, Feb 28 (Wed)
+2024, Feb 27 (Tue)
+2024, Feb 26 (Mon)
+2024, Feb 25 (Sun)
+2024, Feb 24 (Sat)
+- Paid Toll Invoice/Violation penalty.
+    - Toll Invoice #: I692410943565
+    - Paid $9.75 + $25 (late payment fee) = $34.75 on https://bayareafastrak.org
+    - Confirmation #: 653941776
+
+
+2024, Feb 23 (Fri)
+- Met Indraneel Gupta at University of Miami
+- Took phone call on SDWAN sync up meeting.
+
+
+2024, Feb 22 (Thu)
+- Kids went to Snorkling and Dolphin watching.
+
+2024, Feb 21 (Wed)
+#parasail #florida
+- Raised PR for UpsertTenantFeature API handler
+
+- Florida:
+    - Vacated the Airbnb in Miami and drove to Key West.
+    - Kids did Parasailing
+
+
+2024, Feb 20 (Tue)
+- Raised PR for 'GetTenantFeature' API
+- Meeting with Jane Jojo, Umesh to debug SDWAN integration failure. There are 3
+  issues.
+    1) SDWANC is stripping 'X-Caller' headers when calling ZOS. So, ZOS throws
+      403 Not Authorized error. Only SRE or DIA client can call this API.
+        - Jane found an issue in their Java library.
+        - cURL call is not seeing same issue.
+
+    2) ZCluster creation is failing with an error in Terraform Template.
+        - Umesh and I debugged and resolved this issue.
+        - Merged the fix.
+
+    3) Current deployment in Dev02 is crashing when calling 'GetTenantFeature'
+      or 'CreateTenantFeature' APIs. This is due to License check that is
+      happening.
+        - Raised MR with changes for both APIs.
+
+
+- Warrior:
+    - Amar Nagireddy:
+        - Amar worked 40hrs/week in first 2-3 months.
+            - He learnt everything about syndication.
+            - Then learnt everything about underwriting multifamily (CRE).
+            - Then learnt underwriting development/construction.
+        - Add as much value as possible to others. It comes back in some way
+          (or may not come back, does not matter).
+        - Amar is *completely focused* in 30min chunks.
+        - He advocates keeping W2 and doing this on side.
+        - Amar did free underwriting. Now deal flow is too much because of
+          that.
+        - High Performance calls/meetings is most useful.
+            - Be open and share your doubts. Coaches help you in resolving
+              them.
+
+
+
+2024, Feb 19 (Mon)
+#warrior
+
+
+- Warrior:
+    - Max Shah. First intro call with Max Shah (Priyank Shah).
+    - Setup meeting with Amar Nagireddy from Wellington, Florida. Meeting him on
+      Tuesday.
+
+- Minutiae:
+    - Rental Car fiasco.
+        - Rented a car from 'NextCar' which was a cheap/inexpensive.
+        - After visiting them, they asked $100K/$300K insurance coverage. Mine was only $15K/$30K.
+        - I called Priceline and cancelled the reservation.
+        - Was super cold in morning
+
+    - Budget Rental Car $280
+        - Budget Confirmation Number: 47106767US1
+        - Priceline Confirmation Number - 488-375-645-16
+
+    - Went to Trump Tower
+    - Lunch at some Sushi/Thai place
+    -
+
+2024, Feb 18 (Sun)
+#flute #florida #miami
+- Flute class in morning, with Murali Babu from Connecticut.
+- Flew to Miami, Florida.
+- Met Rajkumar ji to check on his health.
+
+2024, Feb 17 (Sat)
+#facial
+- Walk with Sridhar.
+
+2024, Feb 16 (Fri)
+- Did my best to fix, figure out zcluster creation issue.
+    - SDWAN is getting "Only SRE or DIA client can create zcluster"
+- Fixed issues in VNI creation flow.
+    - Made ZDia specific changes.
+
+2024, Feb 15 (Thu)
+2024, Feb 14 (Wed)
+2024, Feb 13 (Tue)
+#rodkhlief #warriorprogram
+
+
+- Minutiae:
+    - Fridge repair guy. Fixed the leak.
+    - I spoke with Shea Sliter from Rod Khlief team about Warrior Program.
+
+    - My response to Shea Sliter
+        1. If you were to get all of the help and guidance and support you need, what
+        would you like to acquire in the next 12 months (size of deal, specific market,
+        syndicated or not, A,B or C, properties, etc...)
+            In 12 months, my goal is:
+            a) Two commercial multiplex properties. A- or B+ class properties. Each
+            asset is < $2.5M. Each property consists of 15+ units. Each property brings
+            in $20K/month in Operating Income.
+
+            b) The property will be in San Antonio market
+            c) For immediate goal, I do not want to syndicate. The funds will be from
+            1031 exchange of my existing properties.
+
+
+        2. Long Term Vision: Imagine your financial life was perfect in every way. How
+        much would you be earning? What would you do with your time and money? How
+        would your life be different from what it is now? Why are achieving these goals
+        so important to you? Please be detailed…
+
+            a) How much would you be earning?
+                - From Real Estate investments, I would be earning $100K/month in cash
+                  flow, in 10 years from now (year 2034).
+                - I may have paid off all the mortgages and own the assets free and
+                  clear.
+
+            b) What would you do with your time and money?
+                * I and my family will be focusing on 3 things after that.
+                    - My wife can quit her job, if she wants to. She can pursue her
+                      entreprenuer and other dreams.
+                    - I want to live in India and spend more time with my parents
+                      (about 6 months in a year).
+                    - Want to contribute time, money and skill to couple of charities
+                      that I'm passionate about.
+
+            c) How would your life be different from what it is now? Why are achieving
+            these goals so important to you? Please be detailed…
+                - I would be financially independent by age 55.
+                - I can look after my parents living abroad (India) who do not wish to
+                  relocate to US in their old age.
+                - I no longer have to worry about W2 job and take care of their health etc.
+
+            d) Finally, I would like to leave enough wealth for wife and kids that they
+            can take more risks with their careers than I did.
+
+
+        3. What do you foresee as your single biggest hurdle or challenge investing
+        into multifamily? What types of help do you think you would benefit from in
+        your business?
+            I do not have any hurdles to reach my goal. But I see the rate of progress
+            is slow and I cannot reach my goal by 2034 at this speed.
+
+
+        4. Why is NOW the time in your life to take action towards this vision?
+            - NOW, I have specific goals with target dates in my mind.
+            - However, the time I've set for myself is very aggressive.
+            - Having a knowledgeable group and mentors will help me achieve that goal.
+
+
+        5. I also invite you to think about any concerns/fears/skepticism that you
+        have, and turn them into questions below, so we can really figure out how to
+        create breakthroughs for you.
+        - Minor things that are on my mind:
+            - Legal entities: LLCs, S-Corps, C-Corps etc in commercial REI space. I
+              don't have any knowledge.
+            - Tax: Poor knowledge on tax systems. How to reduce tax.
+            - Lawsuits: Some reason, I fear some tenant will file a lawsuit and try to
+              get all my wealth.
+
+
+
+2024, Feb 12 (Mon)
+- Merged more PRs (DAL layer, Job Provisioning code).
+- Wrote UTs for code changes.
+- UT was failing and I debugged for hours.
+    - But when I ran from top level directory, using `make test`, tests ran
+      successfully. This is confusing.
+
+
+2024, Feb 11 (Sun)
+#facial
+- Went to office after Aarushi's RSM class and got some work done.
+    - Costco on the way back from work.
+    - Back home at 6:3pm for Weekly kriya.
+    - Charged car too, for 4 hours.
+- Did not do flute class :(
+
+2024, Feb 10 (Sat)
+#ganeshnarayanan #missionpeak
+- Hike of Mission Peak with Ganesh Narayanan. Started at almost 7am.
+
+
+2024, Feb 09 (Fri)
+-
+
+2024, Feb 08 (Thu)
+- Addressed review comments and merged initial code to dev/2.0
+    - A lot more to merge
+- Pair programming with Umesh Jain to get ZDia template to deploy.
+
+
+- Did not do Sadhana. Sugar levels through the roof and I ate dinner early and
+  went for a walk.
+
+
+2024, Feb 07 (Wed)
+- Able to do a "Create zcluster" API call and provision zcluster
+
+- Rode to office on a cycle.
+
+- Booked tickets to India travel (SFO to DEL via AMS)
+    - June 12 to 30
+    - Round Trip is $5300
+    - Confirmation Number: GJLCCQ
+
+
+
 2024, Feb 06 (Tue)
+
+- Performance Elevation Foundation Meeting:
+    - Raise the bar on Performance
+    - Deliver ambitious and challenging Goals and Milestones
+    - Practice continuous learning and development
+
+    - Step 1: Do Self-Review. Feb 16th or earlier deadline. Workday will close
+      after that.
+    - Step 2: Enter Goals and Milestone in Workday. March 1st is deadline.
+
+    - Your Responsibilities:
+        - Clear Goals
+        - Deliver
+        - Proactive
+    - 3 Opportunities for Development
+        - 1:1 with Managers
+        -
+    - Self-Evaluation is an opportunity to ...
+        - Document what you acheived last 6 months.
+        - What you can do next few months.
+        - Opportunity for Growth
+    - When Manager Assess Performance
+        - WHAT I'm accountable to deliver.
+            - Progress against challenging goals and the impact had on the
+              business.
+        - HOW I accomplished it.
+            - Behavior and values demonstrated while delivering the work.
+    - Preparing for Performance Conversation
+    ...
+    ...
+    - Watch the recording and Slide deck that'll be sent later.
+
 
 - Minutiae:
     - Madhavi shared her 1:1 meeting with her boss (George).
@@ -128,7 +927,7 @@ Seva
         - I understand it is hard on them to manage an adult at home. And Pinni
           complaining about Mom/Dad to other relatives is hard on Mom/Dad. But boy,
           complaining for 2+ hours is too much. I listened because there is no one
-          else to listen to her. 
+          else to listen to her.
         - She also spoke at length about Sarma Mavayya's history of forging
           signatures and being very careful signing any documents.
 
@@ -145,8 +944,8 @@ Seva
 2024, Feb 03 (Sat)
 - HVAC repair guy came (Juan Moreno) from Keystone Mechanical and HVAC
     - Some device inside HVAC responsible for starting the flame is not doing
-      its job. Must replace it. 
-    - Said it'll cost $700, but showed me used part on eBay at around $180. 
+      its job. Must replace it.
+    - Said it'll cost $700, but showed me used part on eBay at around $180.
     - I want the used part and not the $700 part.
 - Took kids to Bala Vihaar. Akshay and I slept in the car. Akshay skipped Bala
   Vihaar :( Aarushi went to the class.
@@ -315,7 +1114,7 @@ Seva
 
 2024, Jan 22 (Mon)
 - Spoke with Sahil Aggarwal, about his interview schedule and way forward.
-- Fidelity, Roth In-Plan conversion setup. 
+- Fidelity, Roth In-Plan conversion setup.
     - Going forward, automatic conversion in place.
     - Asked about $69K total contribution in 401K. Very difficult to match it.
 
@@ -390,7 +1189,7 @@ Seva
         - Jolly Joseph documentary. Serial Killer who killed 6 people.
         - Not sure why I do this. I spent 2+ hours watching these shows. I like
           Dave Chappel jokes, but don't like his life. Don't idiolize people.
-        - Making a promise to myself: 
+        - Making a promise to myself:
             - Not watching TV or wasting time on Phone for 1 week. Digital Detox.
 
 
