@@ -1,3 +1,17 @@
+***********************   Go Environment Variables   **********************
+GOOS & GOARCH
+GOPATH & GO111MODULE
+GOCACHE & GOTMPDIR
+GOBIN & GOPROXY
+GOFLAGS
+GOENV
+GOTRACEBACK
+GODEBUG
+
+Reference:
+[1] https://medium.com/@souravchoudhary0306/go-your-own-way-customizing-go-with-environment-variables-3e47c880fe34
+
+
 ***********************   Notes from `Go by Example`   **********************
     1. Values
             - string, integers, boolean, flots, structs (user defined)

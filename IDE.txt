@@ -1,5 +1,11 @@
 @@@@@@@@@@@@@@@@@@@@@@@        PyCharm         @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+Go to Type      Cmd + O
+Go to File      Shift + Cmd + O
+Recent Files    Cmd + E
+Switch View or Keymap   ^`
+Search Everywhere       Double Shift
+
 @@@@@@@@@@@@@@@@@@@@@@@        VS Code         @@@@@@@@@@@@@@@@@@@@@@@@@@@
 Started using VSCode. Notes on the editor, cheat sheet, configs etc.
 

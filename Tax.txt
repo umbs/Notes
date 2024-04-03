@@ -13,6 +13,12 @@
 [2] https://www.irs.gov/help/ita
 
 ********************* HSA (Health Savings Account) **********************
+Form 8889
+    - Contributions made to HSA by you, your employer are reported here. If you
+      have used HSA funds (Distributions) for qualified medical expenses, that
+      is reported here too.
+    - If you are eligible to make deductions from payroll, towards the money
+      you contributed to HSA, those details are in form 8889.
 
 How does my HSA affect my taxes?
 
