@@ -1,3 +1,80 @@
+***********************   Test With Go (Jon Calhoun) **********************
+
+Error() = Log() + Fail()
+Errorf() = Logf() + Fail()
+Fatal() = Log() + FailNow()
+Fatalf() = Logf() + FailNow()
+
+- If you want to keep running the test, use Error()/Errorf()
+- If you want to stop the test, use Fatal()/Fatalf()
+
+
+Chapter: Examples as Test Cases
+--------
+- Example code can be used for both UT and Documentation
+
+    func ExampleHello() {
+        Hello()
+    }
+
+
+
+********   Go Testing By Example (Russ Cox GopherCon Australia 2023)    *******
+
+Tip #1: Make it easy to add new test cases.
+Tip #2: Use test coverage to add new tests.
+    $ go test -coverprofile=c.out
+    $ go tool cover -html=c.out
+Tip #3: Coverage is no substitute for thought.
+Tip #4: Write exhaustive tests.
+Tip #5: Separate test cases from test logic.
+Tip #6: Look for special cases.
+Tip #7: If you didn't add a test, you didn't fix the bug.
+    - Look at
+        - go/src/fmt/fmt_test.go
+
+Tip #8: Not every test fits in a table.
+    - Look at
+        - go/src/strconv/fp_test.go
+        - go/src/strconv/testdata/testfp.txt
+
+Tip #9: Test cases can be in testdata files.
+    - Tests don't have to be in source code.
+    - Look at
+        - go/src/regexp/testdata/basic.dat
+    -  Another way to store test cases in files is to have pairs of files.
+       "File Driven" testing. One for input and one for output.
+            - go/src/cmd/internal/test2json/testdata
+                - ascii.json; ascii.test
+                - bench.json; bench.test
+                - issue23036.json; issue23036.test
+                - ...
+
+Tip #10: Compare against other implementations
+
+Tip #11: Make test failures readable.
+Tip #12: If the answers can change, write code to update them.
+    - Not sure I understood.
+
+Tip #13: Use txtar for multi-file test cases.
+    - import "golang.org/x/tools/txtar"
+
+Tip #14:
+Tip #15:
+
+Tip #16: Code quality is limited by test quality.
+    - Watch the video ... it brings ideas from earlier tips and shows how UTs
+      were written for `go` command.
+
+Tip #17: Scripts make good test cases.
+Tip #18: Try rsc.io/script for your own script based test cases.
+
+Tip #19:
+Tip #20:
+
+Reference:
+[1] https://www.youtube.com/watch?v=X4rxi9jStLo
+
 ***********************   Go Environment Variables   **********************
 GOOS & GOARCH
 GOPATH & GO111MODULE
@@ -10,6 +87,7 @@ GODEBUG
 
 Reference:
 [1] https://medium.com/@souravchoudhary0306/go-your-own-way-customizing-go-with-environment-variables-3e47c880fe34
+
 
 
 ***********************   Notes from `Go by Example`   **********************
@@ -29,10 +107,10 @@ Reference:
             - Only loop in Go.
 
     5. If/Else
-            - Like `for`, this has no braces. 
+            - Like `for`, this has no braces.
 
     6. Switch
-        - 
+        -
 
     7. Arrays
 
@@ -50,7 +128,7 @@ Reference:
             - read-only slice of bytes. The language and the standard library treat
               strings specially - as containers of text encoded in UTF-8.
             - strings are equivalent to []byte
-            - Indexing into a string produces the raw byte values at each index. 
+            - Indexing into a string produces the raw byte values at each index.
 
 
     17b. Runes
@@ -58,7 +136,7 @@ Reference:
               that represents a Unicode code point.
             - https://go.dev/blog/strings
 
-        
+
     18. Structs
     19. Methods
             - Go supports methods defined on struct types.
