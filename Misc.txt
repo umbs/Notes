@@ -3067,7 +3067,52 @@ https://github.com/Shougo/neocomplete.vim/blob/master/doc/neocomplete.txt#L974
 
 
 
+Reference:
 [1] https://www.youtube.com/watch?v=vB2pl1QbY3I
+
+
+    ----------------------------------------------------------
+
+Tip #1: Visualization
+    - Visualize the room, giving the talk.
+
+Tip #2: Dare to be Dull
+    - Comes from Improv world.
+
+Tip #3: Cognitive reframing technique
+    - Instead of saying "I'm nervous, scared etc". Reframe it to "I'm excited,
+      this is fun, ..." because on physical level, the chemecial reaction is
+      same in both situation.
+
+Tip #4: Have a Mantra that you repeat to yourself like: "I have value to add to this audience"
+    - For one person it was "Last time this went well".
+    - "It's not about me. It's about the content".
+
+Tip #5: Instead of talking to the audience, facilitate the conversation.
+    - A Google senior executive would always open the talk like:
+        - "Good morning. Let's watch this 30s video".
+        - Then they would ask what audience thought about it and go from there.
+
+Tip #6: Normalizing public speaking anxiety.
+    - An example of someone feeling better knowing everyone also feels anxious.
+    - Not sure how this helps :)
+
+- For most people, they are most anxious 1 min before and 1 min after start of talking.
+
+
+Tip #7: Inhale and Long exhalation. Straw breath.
+    - What your body feels, your mind thinks same thing. Example of a research
+      about participants holding cold coffee and hot coffee and judging people.
+
+
+Tip #8: Warm up before the talk
+    - Athletes warm up before competition. Do same thing.
+    - Matt does tongue twisters before a talk.
+
+
+
+[1] How to speak confidently and persuasively. Matt Abrahams.
+https://youtu.be/LpbBzmXrzEY
 
 
 ================     Bitcoin: Talk by Sarva    ===========================
