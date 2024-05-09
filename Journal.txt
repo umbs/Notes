@@ -42,6 +42,200 @@ Seva:
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   May 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration
+            - Software Upgrade
+            - IronVault Integration
+            - Serviceability
+        - Mockoon
+
+    Minor Projects (Tech Debts, Tech Talks, etc):
+
+Personal
+    * Do this in this order, every day
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+
+    * Education
+        - Test With Go
+
+    * Vim.txt
+        - Clean up the document and align with slides (prepare slides)
+            - Beginner
+            - Intermediate
+            - Advanced
+        - Complete watching _all_ downloaded Vim videos.
+
+REI
+    * Warrior:
+    * Others:
+        - Insurance shopping for all properties
+            - 629 Celebration Ct - OBIE
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3040/3042 Pine Valley
+            - 3040/3042 Green Mountain Dr
+            - Whitebrush Loop
+            - Duval Rd
+        - Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, May 08 (Wed)
+- Work:
+    - Debugged SDWANC issues, involving SDWANC, ZOS and Datapath.
+    - Team meeting. Solve dev/zdia sanity testing.
+    - Discussed Software Upgrade flow with:
+        - Ganu. Found a flaw. Scale down event is not gauranteed to scale old
+          VMs down. It could scale even new VMs. Came up with enhancement to
+          design.
+        - Discussed enhancements with James Huang if the new design will work
+          in Datapath.
+        - Discussed updated design with Roy Anthony. Roy made some good
+          suggestions that I incorporated.
+
+
+- Warrior:
+    - Sent out 2 emails to San Antonio brokers. Planning to complete that list
+      tonight (150+ emails).
+
+- Minutiae:
+    - Kothai called in morning. 30+ mins
+    - Meenakshi Mittal called in morning. 30+ mins
+    - Prepared a daily plan/chart. Stick to it to form good habits and make
+      progress.
+    - Akshay's 'Open House'.
+    - Sadhana after dropping off Aarushi at RSM.
+    - Planned India trip.
+        1. June 14th(Fri): Ram and family arrive in Delhi and leave for Guwahati on 7:20am flight.
+        2. June 15th(Sat): Laxman and family arrive in Delhi and leave for Guwahati on 7:20am flight.
+        3. June 24th(Mon): Dasaratha and Garbham, all fly to New Delhi in morning. Rest that day and go around in the evening.
+        4. June 25th(Tue): Dasaratha and family fly from New Delhi to Ayodhya. Depart at 10:50 and arrive at 12:15
+        5. June 26th(Wed): All fly from Ayodhya to New Delhi. Depart at 12:50 and arrive at 14:20
+        6. June 26th(Wed): Local tour of New Delhi in evening.
+        7. June 27th(Thu): Take morning train from New Delhi to Agra. Depart at 8:10am and arrive at 9:50am. Hazrat Nizamuddin Express.
+        8. June 27th(Thu): Visit Taj Mahal and come back to New Delhi same day by train. Gatimaan Exp. Depart at 15:40 and Arrive at 19:30
+        9. June 28th(Fri): Local tour of New Delhi
+        10. June 29th(Sat): Local tour of New Delhi. Ram and family fly back to US
+        11. June 29th (Sat): Laxman and family fly to Hyderabad. Mom and Dad fly back to Guwahati.
+
+
+2024, May 06 (Mon)
+- Work:
+    - 
+- Warrior:
+    - Brief meeting with Amar about their website still not working.
+    - Amar's Underwriting Workshop
+        - Need: T-12, Rent Roll, Asking Price
+
+
+- Minutiae:
+    - Kids stayed home because of 'Staff Learning Day' at their school.
+    - I am WFH to take care of them.
+
+2024, May 05 (Sun)
+#flute #rakeshchaurasia #pooja #birthday
+
+- Work:
+- Warrior:
+- Minutiae:
+    - Pooja in Morning.
+    - I went to Rakesh Chaurasia flute masterclass.
+    - Madhavi picked kids and chauffered around.
+    - I took Akshay to Abir's birthday party at Rosita Park in Los Altos.
+
+
+2024, May 04 (Sat)
+- Work:
+- Warrior:
+- Minutiae:
+    - Took Akshay to swimming class in morning.
+    - Took Aarushi and Akshay to Bala Vihaar in afternoon.
+    - Sridhar and kids, Venkat and kids came home for dinner.
+
+
+2024, May 03 (Fri)
+- Work:
+    - Documenting in FS all the design decisions made on Thursday.
+    - Lunch with Simranjit Chadha.
+
+- Warrior:
+- Minutiae:
+    - Spent most of the day doing IRS stuff, Insurance updates on Freedom Mortgage.
+
+    - Extension to pay, up to 180 days. 
+        - Otherwise, my case was in 'collections'.
+        - Called IRS and spoke with an representative who helped me what to do
+          on their website, inside my own IRS account.
+        - Make sure I continue filing the amendment on Saturday.
+    - Paid RSM fee for Summer Classes for Aarushi on Blackbaud.
+    - Insurance: 
+        - Cancelled Assurant Insurance for 629 Celebration Ct
+        - Policy Number: CND0150050
+        - Website: https://manage.myassurantpolicy.com/app/policy/snapshot
+        - Call them on May 10th at 1-877-900-0354 from Monday through Friday
+          from 8:00 AM to 8:00 PM EST
+            - They'll tell about refund.
+    - Freedom Mortgage:
+        - 866-222-9005 - Direct line to Insurance Dept within Freedom Mortgage.
+        - 855-690-5900 - Customer Service. Handle all inquiries.
+        - More than 1 hour call on Freedom Mortgage.
+            - They received my loan in mid-2022. Home Insurance was already
+              paid off by then.
+            - In 2023, they do not have information about home insurance, so
+              they did not pay it. I paid it from my own credit card.
+            - They are unsure if they have to pay home insurance in 2024 or
+              not. I've already paid for it for 2024.
+
+
+2024, May 02 (Thu)
+- Work:
+    - 'Software Upgrade' design document. Presented to Vikram and team.
+    - Meeting with Sathya Thilakan and Naveen Birru:
+        - Discussed zdeploy module and its workflow.
+        - Presented our design. Sathya suggested to remove PubSub from the
+          design, or keep it as 'nice to have' feature. But instead, have an
+          API that zworker calls to get the data.
+
+- Warrior:
+    - Got list of brokers done via Upwork.
+
+
+- Minutiae:
+    - YMCA for swimming. Aarushi could go, but not me.
+    - Flute practice for couple of hours at night.
+
+
+2024, May 01 (Wed)
+- Work:
+    - April month summary and email Kumar Senthivel and Suresh Sangaiah
+    - 'Software Upgrade' design disucssions:
+        - Whiteboarding with Umesh Jain
+        - Discussions with Ganu about ZOS to zworker interaction.
+        - Discussions with Amit Chandak about GCP pubsub design.
+
+
+- Warrior:
+- Minutiae:
+    - Flute practice. Did not go well. Ayush ji said I'm regressing.
+        - Sapaat Taan was messed up.
+    - Family dinner at Chipotle.
+
+
 @@@@@@@@@@@@@@   April 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
@@ -71,13 +265,16 @@ Personal
     * Estate Planning
 
 REI
-    - Insurance shopping for all properties
-        - 629 Celebration Ct
-        - 3012/3014 Pine Valley - IN PROGRESS
-        - 3040/3042 Pine Valley
-        - 3040/3042 Green Mountain Dr
-        - Whitebrush Loop
-        - Duval Rd
+    Warrior:
+
+    Others:
+        - Insurance shopping for all properties
+            - 629 Celebration Ct - OBIE
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3040/3042 Pine Valley
+            - 3040/3042 Green Mountain Dr
+            - Whitebrush Loop
+            - Duval Rd
 
     - Freedom Mortgage - Include escrow.
     - Find Texas Lawyers and get New Braunfels properties under LLC and Trust
@@ -86,6 +283,342 @@ Seva
     - Lead YES follow up. - NOT DONE
     - Attend adult follow up. - DONE
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2024, Apr 30 (Tue)
+- Work:
+    - PoC 'Rolling Upgrade' workflow
+
+
+- Warrior:
+    - Talked with Kala at length (about an hour) and updated him on Warrior
+      event in Sarasota.
+
+- Minutiae:
+
+
+2024, Apr 29 (Mon)
+- Work:
+    - Whiteboard discussions about Software Upgradw workflow.
+    - Meeting with Hritesh Yadav and Tanmay Sawant to get Sanity tests working.
+        - v1.0/tenants API was failing and giving 500 Internal error in their
+          pipeline.
+
+- Warrior:
+- Minutiae:
+    - Deposited checks from RocketMortgage returning Escrow money. Put it in Business Account.
+    - Deposited checks from Fidelity 401K, about $1900+
+    - Could not deposit checks from GM Financial about Chevy Bolt because it had both names (Madhavi and I).
+
+2024, Apr 28 (Sun)
+#warrior #sarasota #facial
+- Work:
+    - Slept on Flight from Sarasota to Atlanta. Watched TestWithGo videos from
+      Atlanta to San Jose.
+
+- Warrior:
+    - Spoke with Max and Amar Nagireddy and told him about Montegomery,
+      Alabama, deal where 106 room hotel. Eric Hooiman, who runs this wants to
+      sell it. Don't do it because of these reason:
+        - We have no clue how to run it.
+        - Crime. Cannot resell.
+    - Flew back. Did not do much networking.
+
+
+- Minutiae:
+    - Reached home around 11:30pm and slept.
+    - Facial at night, around 1:30am :(
+
+2024, Apr 27 (Sat)
+- Work:
+- Warrior:
+    - Spoke with ~20 Warriors and had meaningful conversations.
+
+- Minutiae:
+
+#warrior #sarasota
+2024, Apr 26 (Fri)
+#warrior #sarasota
+- Work:
+- Warrior:
+    - Warrior event in Sarasota, Florida
+- Minutiae:
+
+
+2024, Apr 25 (Thu)
+- Work:
+    - Meeting with Vikram/Pankaj/Adithya/Umesh about Autoscaling.
+        - Reading up Google doc for ILB and NLB and session affinity.
+        - Pankaj did nice presentation on 'Load Balancer' and limitations we have today.
+            - ELB/ILB under the hood is Maglev instances.
+            - If new Maglev instance comes up, they do not cache existing
+              session info with the new instance.
+    - Looked into IronVault code.
+
+- Warrior:
+- Minutiae:
+    - I've almost completed 'Number Go Up' book by Zeke Faux. What a book. Dizzying.
+
+2024, Apr 24 (Wed)
+#facial
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Apr 23 (Tue)
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Apr 22 (Mon)
+- Work:
+    - Reading up on Upgrade Workflow for zdia clusters.
+    - Debug Jane/Rajmohan provisioning failure 'jwt expired'.
+
+
+2024, Apr 21 (Sun)
+#pooja #facial #toyota
+- First day of Seven Sunday pooja for Akshay
+- Purchased Toyota RAV4 Hybrid from CarMax
+- Facial at night
+
+
+
+2024, Apr 20 (Sat)
+#chandra #kedaar
+- Flute practice with Murali in the morning, at 7am
+- Maha Kriya, Bay Area wide around 9am.
+- Presentation from Kedaar Rentachintala, Chandra's son at 11am.
+    - Amazing session. Almost 2 hours long.
+- Kids Bala Vihaar.
+- Rest in the evening.
+
+2024, Apr 19 (Fri)
+- Tenant association for existing zcluster is merged.
+- Reading up
+
+
+2024, Apr 18 (Thu)
+
+
+2024, Apr 17 (Wed)
+#car
+
+- Work:
+    - Created 6 JIRA tickets to track various tasks and stories
+    - Helped unblock Rajmohan. Helped clean up resources in GCP.
+    - Created new VM instances for James Zhuang. Health Check is working on it.
+    - Cleaned up about 30 zdia clusters and associated resources.
+        - I wrote a python script to do this job.
+        - Super happy with the result.
+
+- Minutiae:
+    - "Reserved" Toyota RAV4 Hybrid
+    - Stayed up until 1am and folded clothes while watching NetSec All Hands
+      presentation from Subhash Kodnad, Anupam Upadhyay, Scott Fanning. Very
+      interesting presentation, showing *lot* of products and business. Lots of
+      growth.
+    - Folded tonnes of clothes. Super happy about it :)
+    - Watched "Ninad Kamat" video/interview. He is a voice over artist, does
+      dubbing for multiple actors in Bollywood.
+    - Watched a video where Vishwanathan Anand interviewed many other Indian
+      Chess masters, over a dinner: Humpy Koneru, Gokesh, Pragg and his sister
+      Vishali.
+
+
+2024, Apr 16 (Tue)
+
+- Work:
+    - Raised MR for additional logs, code optimization, API input validations.
+    - Clean up of dev04 unused clusters.
+
+- Tax:
+    - Trying to understand the tax notice I received from IRS (form CP2000):
+    - W2
+        - https://www.youtube.com/watch?v=k6ZgdiZhyvU
+        - https://www.youtube.com/watch?v=r6jCZ7SvRFw
+        - I sent following message to Venkat and Madhavi
+            Rami,
+
+            - I paid taxes on all the RSU that were sold for "Sell to Cover".
+            - 1099-B showed $0 Cost Basis, but 1099 Supplemental showed correct Adjusted Cost Basis.
+            - I got additional pay stub when RSUs vested. They showed the taxes that were witheld.
+            - When filing taxes, Schedule D has $0 in all the "Short Term" and "Long Term" capital gains. Is it because I only looked at 1099-B when I filed the taxes and not at Supplemental Form?
+            - I did not file Form 8949 in Year 2021.
+
+            Next Steps:
+            - Respond to IRS and attach Form 1099 Suplemental.
+            - Attach pay stubs associated with the sale of RSUs.
+            - Probably hire CPA to do this formally and correctly.
+
+            But I'm confident I don't owe any taxes.
+
+
+
+- Minutiae:
+    - Woke up at 5:30am
+    - Brought breakfast items from Safeway
+    - Tony from Janitorial Service visited and quoted $180/visit for our house.
+    - Been browsing cars on Carvana and CarMax. Settled on Toyota RAV4 Hybrid,
+      same as old car.
+    - Tried understanding CP2000 form issue, by watching this video.
+
+
+2024, Apr 15 (Mon)
+2024, Apr 14 (Sun)
+
+2024, Apr 13 (Sat)
+#flute #viveksonar
+
+- Flute:
+    - Session with Vivek Sonar ji (Hariprasad Chaurasia's student)
+        - Loved the session. Very simple man. An ocean of knowledge. What a
+          performer.
+        - Got a ride with Atharva Amdekar, an IITG graduate from 2020.
+        - Venue was at Abhijeet Deshpande's house in Fremont. Great family. Served
+          home made lunch.
+        - Joined Madhavi and Kids at Bala Vihaar and came back home with them.
+
+- Minutiae:
+    - Got knocked out after coming back from Bala Vihaar. Slept for 1.5 hours.
+    - Sadhana in evening at 6pm.
+
+2024, Apr 12 (Fri)
+- Work:
+    - Asked Umesh to merge the code involving Tenant association with zcluster.
+        - I got very frustrated due to delay in getting this code in.
+        - Asked to setup 1:1 with Vikram on Monday.
+
+    - Had session with Rajmohan Jeevanandam (QA), Jane Jojo and Umesh Jain.
+        - There was regression w.r.t `request_version` change. But actually, it was
+          old data in dev03 that caused problems in provisioning new cluster.
+        - Setup a working session and determined the issue. But bug must be closed.
+
+- Minutiae:
+    - Parents found that Akshay's Astrology is not good. Yelinaati Shani.
+        - They performed Shani Sampootikarana + Ekadasa Rudrabhishekam.
+        - We attended in the night up to 1am.
+
+    - Went to see an Open House in Willow Glen area.
+        - https://www.redfin.com/CA/San-Jose/1221-Delmas-Ave-95125/home/17290884
+        - Listed for $1.4M, but sure it'll go for $1.8M
+        - I did not like the floor plan. It has 1950 sqft, but did not feel like
+          it. All 4 bedrooms are upstairs and it was very *box* like feeling.
+        - The schools are not good. So, with $1.8M offer and private schools,
+          it is equivalent to $2.5M offer (or thereof).
+
+
+2024, Apr 11 (Thu)
+- Work:
+
+- Minutiae:
+
+
+2024, Apr 10 (Wed)
+#RSM
+- Work:
+    - With Umesh, I debugged issue where NLB was not returning IP address.
+        - Found the root cause. Umesh will put the fix.
+    - My MR involving returning NLB IP in the same formate as ILB IP got
+      feedback that involved more work. I did that and found that Umesh's task
+      and mine has overlap. I raised new MR involving *just* NLB IP format
+      change. Earlier it was presented as list. Now it is *exactly same* as ILB
+      IP addres.
+
+- Minutiae:
+    - Took Aarushi to RSM evaluation for skipping one level.
+        - Found that it'll help her if she does Algebra II which also has SAT test
+          prep. She also did not do super well in evaluation.
+        - She is advised to take competitive exams in Summer.
+
+
+2024, Apr 09 (Tue)
+- Work:
+    - Raise MR to have NLB same as ILB.
+        - Code review comments to refactor the code. If 'zdia' worker, send
+          only zdia tenant info.
+    - Made sure Modelo changes are deployed to dev03 and dev04 Cosmos.
+    - Showed James and Shikhar how to create zclusters.
+    - Watching TestWithGo.
+
+
+- Flute:
+    - dsrgrsdpgrsdpdsrgrsds pdsrg grsds
+
+- Family:
+
+- Warrior:
+    - Built investors list
+        - Initial list from Phone contacts.
+
+2024, Apr 08 (Mon)
+- Merged NLB IP address change
+- Merged change for dev/2.0 --> dev02 and dev/zdia --> dev04 deployment change.
+- Code review couple of MR from Umesh
+
+
+2024, Apr 07 (Sun)
+#facial #birthday #dentist
+- Minutiae:
+    - Basketball training in morning.
+        - Akshay got scolding from instructor.
+    - RSM for Akshay
+    - Went to Aarushi's RSM to discuss options for Summer and next year.
+      Aarushi wants to jump one level higher. Dropped Aarushi home.
+    - Then went back to pick Akshay from RSM and took him to Dentist for tooth
+      removal.
+    - Got the birthday cake from Safeway and we all went to Golfland.
+    - Akshay's birthday party at Mini Golf (Golfland) in Sunnyvale.
+        - Lot of his school basketball team came.
+    - Pretty exhausted by evening.
+
+
+2024, Apr 06 (Sat)
+- Minutiae:
+
+2024, Apr 05 (Fri)
+#facial
+- Fixed 'AllTenants' API to return NLB IP address. But the darn thing is not
+  getting populated.
+
+- Yazdan Jamshadi
+    - Met this colleague to talk about AI/ML leveling up.
+
+
+2024, Apr 04 (Thu)
+#RSM
+- Hardly made any progress on API work/task.
+    - Vikram is not happy.
+
+- Minutiae:
+    - Registered Aarushi and Akshay in 2024-25 RSM
+
+- Warrior:
+    - Meeting with Murray Macy from Los Angeles.
+
+
+2024, Apr 03 (Wed)
+#Mavayyagaru #shantinallacheruvu
+- I kept working on API
+- Regional vs Zonal MIG discussions to resolve zcfg errors
+    - Meeting with Sathya Thilakan, Umesh Jain, Shikhar Dogra to discuss zcfg
+      details.
+- qa-dev sync up with Rajmohan and dev team.
+    - Complete Software Upgrade tasks scoping.
+    - Complete Autoscaling (or Manual Scaling) scoping.
+- Lunch meeting with Shanti Nallacheruvu
+    - She is visiting from India only for a week.
+    - Nice to catch up and discuss India stuff.
+
+- Work on Tenant Association/Disassociation
+- Minutiae:
+    - Mavayyagaru and Vishnu left for India
+
+- Warrior:
+    - Slide Deck presentation from Eric Williams.
+    - Told him the why I do not want to invest.
+    - Spoke to Amar Nagireddy
+
+
+2024, Apr 02 (Tue)
 2024, Apr 01 (Mon)
 #srinisaripalli
 
@@ -100,11 +633,42 @@ Seva
       still running Radio Station business.
     - Watched 'Eric Williams' slide deck to raise $700K, with min of $100K
 
-- Eric Williams Slide Deck to raise $700K
+- Watched Youtube video sent by Eric Williams and watched their Slide Deck to
+  raise $700K
+    - https://www.youtube.com/watch?v=cEWMaL685iM
     - Property in San Angelo, TX
     - Old name: Harvard House, New Name: District 52
-    - Purchase Price: $2.65M, Equity raise: $1.77M at 3.48% assumable loan
-      until 2031 (Fannie Mae/Freddy Mac)
+    - 52 unit B class property
+    - Purchase Price: $2.65M
+    - Equity raise: $1.77M
+    - Interest Rate: 3.48% assumable loan until 2031 (Fannie Mae/Freddy Mac)
+    - Hold Period: 5-7 years
+    - Waterfall: 7% preferred return followed by 70/30 split (Investor/Sponsor)
+    - Projected Return: 1.9 equity multiple | 6-8% CoC | 17-19% AAR | 14-16% IRR
+    - Min investment: $100K
+
+    - Questions:
+    ------------
+    - Please elaborate "Equity Raise" of $1.77M?
+        - Sponsors are assuming existing agency debt at 3.48% until 2031
+        - Sponsors are raising $700K for capex. So, assumed debt is about $1M?
+        - In 2031, interest rate "may" go very high. So, there is a hard
+          deadline to sell the property before 2031. Is my understanding
+          correct?
+
+    - What is the median household income in the neighborhood of District 52?
+      With 15% rent bump, rents will be around $1200/mo for 2bed unit. Is that
+      correct? Is this realistic in comparison to household income for that
+      demographic?
+
+    - Personally, I do not like "interest only" financial arrangements for many
+      many years because Sponsors are relying on "value add" play and sell the
+      asset off. Since Sponsors are raising capital for capex do they need to
+      do "interest only" payments until 2026?
+
+    - San Angelo is Tier 3 or Tier 4 city. What if there is no buyer in 5 years
+      for projected sale price? What is the fallback plan for Sponsors?
+
 
 
 @@@@@@@@@@@@@@   March 2024    Goals  @@@@@@@@@@@@@@@@@@
@@ -196,7 +760,7 @@ Seva
     - Secrets manager did not have zorchestrator-service-cert and -key files.
     - sdwan_ca_cert, sdwan_client_cert, sdwan_client_key did not have following
       Service Account added to them:
-            customer@zycada-platform-dev-project.iam.gserviceaccount.com 
+            customer@zycada-platform-dev-project.iam.gserviceaccount.com
             Added it and gave "Secret Manager Secret Assesor" Role
     - BigQuery Data Editor Role given to above account, for the table
       z_app_metric
@@ -262,7 +826,7 @@ Seva
 #Mavayyagaru #vishnu
 - Raised MR for issues ZY-145, CYR-40431, CYR-40703
     - Multiple create zcluster calls results in multiple zclusters, even though they already exists.
-- Discussions on how to 
+- Discussions on how to
 
 
 - Minutiae:
