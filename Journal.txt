@@ -95,6 +95,141 @@ Seva
 - Warrior:
 - Minutiae:
 
+2024, May 17 (Fri)
+#warrior
+
+- Work:
+- Warrior:
+    - Broker calls:
+        - Nick Ambrosia (Kansas City):
+        - Max McQueen (Kansas City):
+
+- Minutiae:
+    - Went to Wells Fargo bank, but Madhavi's Drivers License expired. She
+      forgot to bring her Temporary License. New appointment on Monday 9am.
+
+
+2024, May 16 (Thu)
+#vivekty
+- Work:
+    - Prod deployment: Samarpit, Kumar Senthivel, Roy and Bhaskar
+    - Team lunch due to Phase 2 GA launch. Sat next to Suresh Sangaiah.
+
+- Warrior:
+
+- Minutiae:
+    - Vivek visited with Maya for first time. Picked him from airport and
+      dropped him off at Zscaler office. Took Maya home. Madhavi took care of
+      Maya for most of the day.
+    - Flute practice with Murali garu.
+    - Posted about Ayush ji in IITG SF Bay Area group.
+    - Family went out for dinner, at Ulavacharu Tiffins. I took care of Maya
+      and ate at home.
+
+
+2024, May 15 (Wed)
+- Work:
+    - Did handoff to Jane (SDWAN team). She did integration testing and is working.
+    - I've to get number of keys right.
+
+- Warrior:
+- Minutiae:
+
+2024, May 14 (Tue)
+- Work:
+    - IronVault work, raised MR for modelo changes. Got approved, merged and
+      made relevant changes in IronVault.
+    - Pushed out integration to Wednesday.
+
+- Warrior:
+    - Spoke with Broker Jack Corrigan (Austin)
+
+- Minutiae:
+
+2024, May 13 (Mon)
+#mahalingaashtakam #FTO
+- Work:
+    - Took day off for Pooja.
+
+- Warrior:
+- Minutiae:
+    - Maha Lingaashtakam pooja
+        - Madhavi did shopping and we prepared a bit.
+        - Got kids back from school and Pooja started around 4:30pm
+        - We called Venkat family, Vijay family and Sridhar family in last
+          minute. Madhavi made dinner, somehow. Greatful to her for all that.
+          I'm glad they all came. Neighbors also came.
+
+2024, May 12 (Sun)
+- Work:
+    - Worked on IronVault from 11am onwards.
+- Warrior:
+- Minutiae:
+    - Pooja in morning.
+    - Took Akshay to basketball class, almost 30 mins late. He was getting
+      asthma and difficulty breathing. We forgot water bottle (never do that).
+    - No RSM
+
+
+2024, May 11 (Sat)
+#haircut
+- Work:
+    - Came to office after lunch
+        - IronVault tasks
+
+- Warrior:
+    - Emailed *all* brokers from Nashville, Knoxville, Cincinnati, Kansas City
+    - Got response from: 
+        - Brice Bradshaw and her colleague Parker Beck from Kansas City.
+          Setting up a meeting on Tuesday or Wednesday with them.
+        - Jack Corrigan from Austin, TX. Sent a Calendar invite.
+        - Richard Cole from Nashville, TN. Sent a Calendar invite.
+
+- Minutiae:
+    - Breakfast at Kovi Cafe
+    - Hair Cut at "Lucky Cuts" in Sunnyvale. Paid $15 + $3 tip.
+    - Swimming class for Akshay
+    - Madhavi took kids to Bala Vihaar. Last class. Next week is Bala Utsav.
+    - Walking with Sridhar, followed by working at Office
+        - Covered 14K steps and did not hydrate myself correctly. Got back pain at night.
+
+
+
+2024, May 10 (Fri)
+#facial
+- Work:
+- Warrior:
+    - Spoke with couple of Brokers (Andrew Kopenec, Tyler Marshal)
+    - Emailed all 80 brokers in San Antonio area.
+
+- Minutiae:
+    - Took Aarushi to Fremont for Bala Vihaar practice at Shruti Harve's house.
+    - Spoke with Francisco about:
+        - AC repair in 3045 Pine Valley
+        - Tenants causing trouble at 3045 Pine Valley, divorce, legal issues etc
+        - Got a quote for AC/HVAC replacement (new one) - $10,500
+            - New AC/HVAC uses 410A coolant/chemical. It costs $85/lb vs
+              $300/lb that Freon/R22 costs.
+
+
+2024, May 09 (Thu)
+#kumar
+- Work:
+    - 1:1 with Kumar Senthivel
+        - What is your expectations from me?
+        - My goal this year:
+            - Layer 4 acceleration of SDWAN 80% completed.
+            - Layer 7 acceleration of SDWAN.
+                - This goes until October
+
+            - 'Exceeding Expectations' rating.
+            - Massive ownership of projects.
+
+
+- Warrior:
+- Minutiae:
+
+
 2024, May 08 (Wed)
 - Work:
     - Debugged SDWANC issues, involving SDWANC, ZOS and Datapath.
