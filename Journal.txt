@@ -95,6 +95,151 @@ Seva
 - Warrior:
 - Minutiae:
 
+2024, May 25 (Sat)
+- Work:
+- Warrior:
+    - Listen to all remaining 23 podcasts of Michael Blank
+- Minutiae:
+    - Swimming for Akshay.
+    - 2nd day of YES for Aarushi.
+
+
+2024, May 24 (Fri)
+#YES
+
+- Work:
+    - Shared video recording of CICD pipeline workflow with Rajmohan and Shivam Pal.
+    - Edited "Production Rollout of new zworker image" and removed sensitive info.
+        - Uploaded to GDrive and shared link with team.
+    - Automation (Nightly) is configured on Dev02 and QA01 and QA03 Cosmos
+      environments. This project is complete.
+
+
+- Warrior:
+- Minutiae:
+    - WFH, lot of cleaning in Morning.
+    - Aarushi started YES course with Priya. Nishka Vasudev is also there.
+      Total of 5 students.
+
+
+2024, May 23 (Thu)
+#music #californiaconservatory
+
+- Work:
+    - Research/Debug/Investigate IronVault Key Generation algorithm.
+    - Long meeting with Gary Zhang (Yu Zhang), Sathya Thilakan, Umesh Jain,
+      Vikram Guleria and Bhaskar U.
+        - Did not converge on a 'hitless' solution yet.
+
+- Warrior:
+    - Meeting with Kevin Findlen, to ask about Franklin, TN market
+        - Good areas/pocket of growth in Franklin, Nashville?
+            - Franklin is very desirable place. Cost of living is almost like
+              Pleasanton and East Bay in California.
+            - Brentwood, which is South of Nashville is where celebrities live.
+        - Which areas to avoid?
+            - Davidson County in Nashville, TN
+        - Health Care and Music industries are primary drivers.
+        - Oracle, Amazon have massive campuses there.
+
+
+- Minutiae:
+    - FasTrak: Waived $70 fee and I paid $32 only. Open a FasTrak account
+      online. Old account is closed.
+    - Dinner with Ligeo and Ganesh at Tirupati Bhimas
+    - Took Aarushi to California Conservatory of Music in Sunnyvale. Met
+      Chenaya and her father Jay there. Aarushi liked the class. Probably we
+      will go with this class instead of Veksler Academy.
+    - Lot of driving around.
+    - Madhavi started AOS course today, over long weekend.
+    - Chinna Attaya's Swamy's health in trouble and admitted to emergency/ICU.
+    - In Adurru, "Matti Pani" started in the farm.
+
+
+
+2024, May 22 (Wed)
+#colonoscopy #FTO
+- Work:
+    - FTO, to take care of Madhavi's colonoscopy process.
+
+- Warrior:
+- Minutiae:
+    - Madhavi's colonoscopy process at Sutter Health/PMF.
+    - Dropped kids to school in morning.
+    - Paid $397 HOA fees for Crescendo at Riveroaks
+    - Cleaned up entire Garage and arranged books in shelves. Much more to do, but Garage is looking awesome.
+
+2024, May 21 (Tue)
+- Work:
+    - Raised MRs for IronVault change
+    - Raised MR and merged it to setup `develop` and `release` branches. Sent
+      following update to team.
+
+        Team, 
+
+        We have recently made changes to branching strategy for ZOS. 
+
+        `develop` branch:
+        1. This is default branch and has latest changes. Please pull feature branches from here.
+        2. We are working with QA to set up daily sanity runs on this branch.
+        3. MR to `develop` will be deployed to dev02 and dev04 Cosmos.
+        4. This branch is considered stable, due to daily sanity tests.
+
+        `release` branch:
+        1. Periodically, changes will be pulled from `develop` to `release`.
+        2. MR to `release` will be deployed to QA1 and QA3 Cosmos.
+
+        `dev/zdia` branch:
+        1. This is now read only branch. 
+
+- Warrior:
+    - Watching Syndication Deal Analyzer (SDA) Videos by Michael Blank
+
+- Minutiae:
+    - Dropped Maya at Airport. Vivek came directly to airport from office.
+
+
+2024, May 20 (Mon)
+- Work:
+    - Raised MRs for IronVault changes, where I do some validation.
+    - Raised MRs for branching strategy: `develop`, `release` branches.
+
+
+- Warrior:
+    - Watched Syndication Deal Analyzer (SDA) Videos by Michael Blank. Up to 15
+      or so videos. Very well done.
+
+- Minutiae:
+    - Visited Mylapore Express for dinner with whole family.
+    - Visited YMCA at night for walking. I wish they were open a bit late (like
+      10pm or so).
+
+2024, May 19 (Sun)
+- Work:
+    - Completed couple of mandatory trainings.
+
+- Warrior:
+- Minutiae:
+    - Akshay Pooja in Morning.
+    - Basketball after Pooja.
+    - RSM after Basketball. Pick up and drop off Aarushi at home in between.
+    - Visited Cupertino Library for Book Sale and car recharging. Feels like
+      lot of running around.
+
+2024, May 18 (Sat)
+#balavihaar
+- Work:
+- Warrior:
+- Minutiae:
+    - Last day of Bala Vihaar. Fun watching Akshay and Aarushi's skit on stage.
+    - Long conversation with Alok Ranjan. I like these conversations.
+    - Kids ate in Bala Vihaar, but I've eaten at nearby restaurant (Idly
+      Express).
+    - Madhavi took Akshay to Sridhar's house for basketball play date.
+    - Vivek visited SFO and I took care of Maya at night this time too. Tried
+      to give Madhavi some rest.
+
+
 2024, May 17 (Fri)
 #warrior
 
@@ -107,6 +252,8 @@ Seva
 - Minutiae:
     - Went to Wells Fargo bank, but Madhavi's Drivers License expired. She
       forgot to bring her Temporary License. New appointment on Monday 9am.
+    - Vivek visited SFO and I took care of Maya at night. She was mostly
+      sleeping calmly.
 
 
 2024, May 16 (Thu)
