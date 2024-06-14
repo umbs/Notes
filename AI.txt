@@ -20,6 +20,24 @@ AI Resources
 𝟭𝟳. Introduction to Artificial Intelligence (AI) : https://lnkd.in/gYNJFA9F
 
 
+
+1/ Fundamental AI Concepts: https://lnkd.in/dSbhE7C3
+2/ Fundamentals of Generative AI: https://lnkd.in/dVAjnymE
+3/ Fundamentals of Responsible Generative AI: https://lnkd.in/dtSu2WHT
+4/ Fundamentals of Azure OpenAI: https://lnkd.in/dA6BYJTR
+5/ Prompt Engineering with Azure OpenAI: https://lnkd.in/dhExyuRY
+6/ Implementation of RAGs: https://lnkd.in/d8SD9nzm
+7/ Build RAG based copilot: https://lnkd.in/dpZkP7HQ
+8/ Create a knowledge store: https://lnkd.in/dZq5dR6X
+9/ Fine-tune foundational models: https://lnkd.in/dHPW6ivK
+10/ Build Recommendation Systems: https://lnkd.in/dCRgv5iR
+11/ MLOps: https://lnkd.in/dcTntKni
+12/ Deploy a model with Github Actions: https://lnkd.in/dBTSbxgZ
+13/ Deploy model to NVIDIA Triton: https://lnkd.in/d6DwXV74
+14/ Monitoring ML models: https://lnkd.in/dBdm9z-j
+15/ Securing ML Models: https://lnkd.in/dq82tXQ4
+
+
 AI Terminology
 
 
