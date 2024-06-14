@@ -42,6 +42,257 @@ Seva:
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   June 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration
+            - Software Upgrade
+            - IronVault Integration
+            - Serviceability
+        - Mockoon
+
+    Minor Projects (Tech Debts, Tech Talks, etc):
+
+Personal
+    * Do this in this order, every day, preferably in morning.
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+
+    * Education
+        - Test With Go
+
+    * Vim.txt
+        - Clean up the document and align with slides (prepare slides)
+            - Beginner
+            - Intermediate
+            - Advanced
+        - Complete watching _all_ downloaded Vim videos.
+
+REI
+    * Warrior:
+    * Others:
+        - Insurance shopping for all properties
+            - 629 Celebration Ct - OBIE
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3040/3042 Pine Valley
+            - 3040/3042 Green Mountain Dr
+            - Whitebrush Loop
+            - Duval Rd
+        - Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3043/3045 Pine Valley - IN PROGRESS
+            - 3040/3042 Green Mountain Dr - IN PROGRESS
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Jun 14 (Fri)
+#travel
+- Work:
+- Warrior:
+- Minutiae:
+    - Read HRB Top 10 "On High Performance".
+    - Reached Guwahati after long, multiple flights.
+
+2024, Jun 13 (Thu)
+#travel
+
+2024, Jun 12 (Wed)
+#travel
+- Work:
+- Warrior:
+- Minutiae:
+    - Travel to India.
+
+2024, Jun 11 (Tue)
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Jun 10 (Mon)
+- Work:
+    - WFH
+    - Completed 'Software Upgrade' documentation and shared with Ganu and Roy.
+
+- Warrior:
+- Minutiae:
+
+2024, Jun 09 (Sun)
+- Work:
+- Warrior:
+- Minutiae:
+    - Matt from All American Restoration started work on the property.
+    - Jonathan, handyman, also joined.
+    - 2+ hours of walking with Sridhar, Venkat and Vijay
+        - Must reduce the number of steps/hours I'm exercising.
+        - Did 21K steps in the day.
+
+2024, Jun 08 (Sat)
+- Work:
+- Warrior:
+- Minutiae:
+    - Kovai Cafe breakfast in morning.
+    - Akshay swimming got cancelled because of "contamination" in the pool. Someone went poo in it.
+    - Prepared a Report/Timeline of all activities of "629 Celebration Ct" rental property.
+
+    - FFD:
+        - She'll send Diet chart.
+        - Vegan diet. No (animal) milk.
+
+        - Breakfast:
+            - Green Smoothie: Green leafy vegetables.
+            - In a day 1 litre. Prepare in morning.
+            - Avoid all cereals:
+            - Daal based breakfast.
+            - 50% cooked + 50% raw (25% Salad, 25% Sprouts)
+                - 2 dosas (6 in) - 1 bowl of Sprouts, 1 bowl of Salad
+
+        - Lunch & Dinner: 25% principle
+            - 25% Rice
+            - 25% Cooked saabji
+            - 25% Daal
+            - 25% Salad
+
+        - Evening Snacks: 1 glass of Smoothie between 4pm-6pm
+            - 10 nuts, soaked in water. Any nuts.
+            - 3-4 teaspoons of seeds. Raw or roasted form.
+            - 1 glass of smoothie.
+
+        - Must reduce weight by 10-12 lbs
+
+        - Fruit: Apple, Guava, Pear, All Bears, Dragon Fruit
+        - All Vegetables except: Carrot, Beetroot
+        - Grains Void: Ragi, Finger Millet, Little Millet, White Rice, Maida Products.
+            - You can use Banyard Millet, Kodo, Foxtail Millet.
+        - Lemonade without sugar, Sabja seed water, Coconut water.
+
+
+2024, Jun 07 (Fri)
+#facial #ffd
+- Work:
+    - Barely got any work done :(
+
+- Warrior:
+- Minutiae:
+    - Renters cancelled the lease.
+        - I'm taking "Tenant Placement Fee" and let them go.
+        - They said that wood rot under sink is reason for it.
+
+    - Plumber visited the property and fixed bunch of issues.
+        - Replaced faucets in bathroom.
+        - Replaced pipes under the sink, which was not properly fixed. Had the risk of pipe bursting.
+        - Fixed toilet flush in master bathroom, which was not 100% working.
+        - Fixed loose faucet in Kitchen sink.
+        - Total = $745 {$450 (Labor) + $295 (Materials)}
+
+    - I called "All American Restoration" who fixes mold. Set up appointment at 5pm.
+        - Paid $800 towards $2373 full quote.
+        - Got good understanding of what needs to be done.
+
+    - Registered for "Freedom From Diabetes" program after attending the 2 hour intro workshop.
+
+
+2024, Jun 06 (Thu)
+- Work:
+    - Cut `release` branch from latest `develop` branch. Now we are setup and
+      ready to go for `release` branches.
+    - Grokking 'zcfg' code. Lot of time spent on this.
+    - Investigating issue where all the tenants were getting same encryption keys.
+        - Reason is all Tenant ID is being converted to 'any' internally
+          because 'per_tenant' flag is set to 'false' in ZDIA Encryption
+          Profile
+
+- Warrior:
+- Minutiae:
+    - Came to work at 9am thinking of attending NetSec All Hands, but cannot
+      spend 1 hour on it.
+    - Sadhana at work, during noon.
+    - Went to 629 Celebration Ct to clean up more.
+        - Cleaned up lot of stuff.
+        - Fixed doors under the kitchen sink.
+        - Added shelf liners under the sink.
+
+
+2024, Jun 05 (Wed)
+- Work:
+    - Grokking "Certificate Profiles" code in IronVault.
+    - Request from James Huang if I could help with zcfg changes
+    - Meeting with Jane Jojo, Prasad Chigurupati and Ganu about L7 App Accel
+      workflow.
+        - Very useful meeting.
+        - I should have done this myself on 1st day of the project. I should
+          have talked to Ganu and get a knowledge dump.
+
+- Warrior:
+
+- Minutiae:
+    - Lots of cleaning done by Day Workers.
+        - Paid them $150 + $20 (tip and car gas)
+
+    - "Day Worker" Cleaners at property (629 Celebration Ct). Got tonnes of stuff cleaned.
+        [x] Under sink cabinets.
+        [x] Windows Cleaning from outside.
+        [x] Broom Patio walls. Clean Patio grill/fence.
+        [x] Broom outside front door.
+        [x] Garage
+            [x] Garage Walls cleaning.
+            [x] Garage closet door cleaning.
+        [x] Doors cleaning.
+        [x] Walls with mould.
+        [x] Markers on Wall, kids bedroom entrance.
+
+2024, Jun 04 (Tue)
+- Work:
+- Warrior:
+- Minutiae:
+    - I was going back/forth between Office and Condo.
+    - Cleaners at property (629 Celebration Ct)
+        - "Perfect Shine" cleaners. I'm not happy with them.
+        - Pressure wash (Power wash) cleaned Garage and Patio.
+    - Paid $1000 to Carlos, Painter at 3043 Pine Valley Dr. I owe more money to him ($800)
+    - Plumber visited and told me what needs to be done.
+        - Spoke to HOA and scheduled Water Shutoff on Friday (June 7th).
+        - Ordered plumbing stuff from Home Depot.
+
+2024, Jun 03 (Mon)
+- Work:
+    - Meeting with James Huang and Roy Anthonyraj about IronVault Keys exchange, APIs etc.
+
+- Warrior:
+    - Message from Nick Ambrosia about Kansas City property underwriting.
+
+- Minutiae:
+    - Vijay/Geeta/Rajkumar ji visited home late at night (9:15pm)
+        - They discussed the Tenants issue.
+        - Stayed till 1am.
+        - Madhavi is super pissed off at me, although I could not do much.
+
+2024, Jun 02 (Sun)
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Jun 01 (Sat)
+#629-celebration-ct
+- Work:
+- Warrior:
+- Minutiae:
+    - Visited 629 Celebration Ct in morning. Property was in bad shape/dirty.
+    - Breakfast at Kovai Cafe.
+    - Swimming class for Akshay.
+
+
+
 @@@@@@@@@@@@@@   May 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
@@ -81,9 +332,9 @@ REI
             - Duval Rd
         - Converting to LLC
             - 629 Celebration Ct
-            - 3012/3014 Pine Valley
-            - 3043/3045 Pine Valley
-            - 3040/3042 Green Mountain Dr
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3043/3045 Pine Valley - IN PROGRESS
+            - 3040/3042 Green Mountain Dr - IN PROGRESS
     * Freedom Mortgage - Include escrow.
     * Estate Planning
 
@@ -91,9 +342,172 @@ Seva
     - Lead YES follow up. - NOT DONE
     - Attend adult follow up. - DONE
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2024, May 31 (Fri)
+- Work:
+- Warrior:
+    - Spent good time customizing 'Scenarios' tab
+
+
+- Minutiae:
+    - Got tea candles from FedEx. It was delievered by IKEA to FedEx. $5
+      shipping cost.
+    - Met Mohit Soni, PM from Bengaluru office. Lunch with him.
+        - He booked a new home: Adarsh builder, between Electronic City and
+          Sarjapur Road.
+
+
+2024, May 30 (Thu)
+#sick
+- Work:
+    - Found 2 bugs and fixed them. They were caused by PRA changes.
+        - AllTenants API built a "collection" of features if Request Body did
+          not have the feature name. It missed ZDIA feature.
+        - L7 checks were added to ZDIA code path that broke functionality.
+        - These changes came in last 2 weeks and caused regression. My mistake
+          is not to add Unit Tests. Ultimately, it is my responsibility to add
+          UTs.
+    - It was very difficult, but I fixed these bugs and unblocked James Huang
+      and Jane Jojo (SDWANC).
+
+- Warrior:
+    - At night, I played a lot with SDA (Syndication Deal Analyzer) and I
+      think, I improved it slightly for my needs.
+
+- Minutiae:
+    - Stayed back home after dropping kids off.
+    - Still felt quite weak/sick and rested quite a bit.
+    - Cleaners came home. I like how clean bathrooms are, after they do their
+      job. Asked Madhavi to book twice/month.
+
+
+2024, May 29 (Wed)
+#sick #avadhani
 - Work:
 - Warrior:
 - Minutiae:
+    - Meeting with Avadhan Jonnavithula about India move and reasons for coming
+      back. Shared all my perspective.
+    - I felt very sick in evening and slept around 7pm and all the way into
+      next morning.
+
+
+2024, May 28 (Tue)
+#facial
+- Work:
+- Warrior:
+- Minutiae:
+    - At night, I had a heart-to-heart conversation with Madhavi, followed by facial :)
+        - Told her that I am stretching myself thin and I prefer this style of
+          living. Otherwise, I'll do "just enough" in my life and regret later.
+        - Told her that her behavior is very very immature.
+        - Every 2-3 days, she gets depressed and upset about something that I did not do.
+        - She feels very lonely.
+        - She wants me to talk to her and have proper conversation. I said she
+          must seek that out from me. Not just sit and wait for me to do it.
+          Not just the conversation, everything she wants from she, she should
+          at least try to do that first and I'll respond more.
+
+    - More than 1 hour conversation with Alok Ranjan.
+        - Mostly about Priyanka Giri and how to handle her.
+    - Property Managers Search
+        - Joseph Deblasio, Real Property Management LoneStar
+        - Lexi Teife and Matt, TRE Homes (They are on BP)
+        - John Martin Ascension Realty Group
+        - NARPM (National Assoc of Residential Property Managers)
+            - https://www.narpm.org/find/chapters/?a=chapterinfo&chap=C016&submitted=true
+
+            1. Do you mark-up maintenance and repairs?
+            2. What does your screening process look like?
+            3. Do you charge any fees if the unit is vacant?
+            4. What are your management fees?
+            5. What is the best way to communicate with your team and what options do I have?
+            6. If I want to cancel my management agreement do I have to pay any fees?
+            7. How do you determine the rent amount?
+            8. How do you market vacant units?
+            9. What kind of software do you use?
+
+            1. Ask how many units they manage and how much experience they
+            have. If it's a larger organization, feel free to inquire about
+            their different staff qualifications.
+
+            2. Review their management agreement. Make sure it explicitly
+            explains the process for termination if you are unhappy with their
+            services, but especially if they violate the terms of your
+            agreement.
+
+            3. Understand the fees involved and calculate the total cost for an
+            entire year of management so you can compare the different
+            managers. It may sound nice to pay a 5% management fee but the
+            extra fees can add up to be more than the other company that
+            charges 10% with no add-on fees. Fees should be clearly stated,
+            easy to understand, and justifiable. If you ask the manager to
+            justify a fee and he starts hemming and hawing, move on or require
+            them to remove the fee. Don't be afraid to negotiate!
+
+            4. Review their lease agreement and addendums. Think of all the
+            things that could go wrong and see if the lease addresses them:
+            unauthorized pets or tenants, early termination, security deposit,
+            lease violations, late rent, eviction, lawn maintenance, parking,
+            etc.
+
+            5. Don't just read the lease! Ask the manager to explain their
+            process for dealing with maintenance or problem tenants. If they
+            are professional, they can explain this quickly and easily. If they
+            are VERY professional, they will have their processes in writing as
+            verification that it is enforced equally and fairly by their entire
+            staff.
+
+            6. Ask to speak with some of their current owners and
+            current/former tenants. You can also check their reviews online at
+            Google, Facebook, or Yelp. Just remember: most negative reviews are
+            written by problematic tenants. The fact they are complaining
+            online might be an indication the property manager dealt with them
+            properly so be sure to ask the manager for their side of the story.
+
+
+
+2024, May 27 (Mon)
+#YES
+- Work:
+- Warrior:
+    - Bit of underwriting analysis. One for Nevada property (Sparks City) that Venkat emailed.
+
+
+- Minutiae:
+    - Last day of YES course. Aarushi loved it.
+        - Got feedback from Priya that she's very upset with Madhavi giving all
+          love to Akshay and taking his side during conflict.
+    - Brought Akshay back from Geeta/Vijay's house from sleepover.
+    - AOS course completed (Madhavi's).
+    - Lot of issues getting text messages on India phone number.
+        - India plan reduced to $399/mo. It used to be family line at $599/mo
+
+    - She's unhappy with me, because I cut her off when she was talking to
+      Aarushi. She thinks it's all in my mind that Madhavi does not like
+      Aarushi etc.
+        - I think it is good to give some space/time with her.
+        - Also, I need to maintain my dignity and self-respect and not go back
+          to her easily.
+
+
+2024, May 26 (Sun)
+#YES #RSM
+- Work:
+
+- Warrior:
+    - Little bit of Underwriting analysis.
+
+- Minutiae:
+    - Did Pooja in Morning for Akshay. Took him to Basketball in San Jose.
+    - 3rd day of YES for Aarushi. Arranged ride for Aarushi. One of the parents
+      gave her a ride.
+    - I picked up Aarushi from YES course while Akshay was at RSM.
+    - Akshay's RSM end-of-the-year test results were very very bad. He got 1/12
+      questions right. I'm not sure what to do with him.
+        - I *really* need to work with him to improve his results.
+    - Akshay went for Sleepover at Kashyap's house.
+    - Prepared Custard for Aarushi's next day YES recepie. Shopped for it.
 
 2024, May 25 (Sat)
 - Work:
@@ -175,9 +589,9 @@ Seva
     - Raised MR and merged it to setup `develop` and `release` branches. Sent
       following update to team.
 
-        Team, 
+        Team,
 
-        We have recently made changes to branching strategy for ZOS. 
+        We have recently made changes to branching strategy for ZOS.
 
         `develop` branch:
         1. This is default branch and has latest changes. Please pull feature branches from here.
@@ -190,7 +604,7 @@ Seva
         2. MR to `release` will be deployed to QA1 and QA3 Cosmos.
 
         `dev/zdia` branch:
-        1. This is now read only branch. 
+        1. This is now read only branch.
 
 - Warrior:
     - Watching Syndication Deal Analyzer (SDA) Videos by Michael Blank
@@ -326,7 +740,7 @@ Seva
 
 - Warrior:
     - Emailed *all* brokers from Nashville, Knoxville, Cincinnati, Kansas City
-    - Got response from: 
+    - Got response from:
         - Brice Bradshaw and her colleague Parker Beck from Kansas City.
           Setting up a meeting on Tuesday or Wednesday with them.
         - Jack Corrigan from Austin, TX. Sent a Calendar invite.
@@ -418,7 +832,7 @@ Seva
 
 2024, May 06 (Mon)
 - Work:
-    - 
+    -
 - Warrior:
     - Brief meeting with Amar about their website still not working.
     - Amar's Underwriting Workshop
@@ -459,13 +873,13 @@ Seva
 - Minutiae:
     - Spent most of the day doing IRS stuff, Insurance updates on Freedom Mortgage.
 
-    - Extension to pay, up to 180 days. 
+    - Extension to pay, up to 180 days.
         - Otherwise, my case was in 'collections'.
         - Called IRS and spoke with an representative who helped me what to do
           on their website, inside my own IRS account.
         - Make sure I continue filing the amendment on Saturday.
     - Paid RSM fee for Summer Classes for Aarushi on Blackbaud.
-    - Insurance: 
+    - Insurance:
         - Cancelled Assurant Insurance for 629 Celebration Ct
         - Policy Number: CND0150050
         - Website: https://manage.myassurantpolicy.com/app/policy/snapshot
@@ -1371,12 +1785,12 @@ Self Evaluation & Goals:
     Enable App Acceleration for SDWAN: Enable App Acceleration for SDWAN clients for ""Direct Internet Access"" traffic.
     Duration: Jan 2024 to Feb 2024
     Success: On time delivery of Phase 1, while learning new tech stack, new architecture and formalizing requirements and design specification in collaboration with SDWAN team.
-    Opportunity: 
+    Opportunity:
 
     Load Balancer on Openstack: Bring up Load Balancer as a Service (LBaaS) on Openstack. After that, use this for Explicit Proxy (a.k.a Secure Web Gateway) Product.
     Duration: Nov 2023 - Dec 2023
     Success: Brought up IPVS based Load Balancer
-    Opportunity: 
+    Opportunity:
 
     Mobile User (MU) on Openstack: Deploy, test and verify MU Firewalls on Openstack private cloud. The goal of this project is to bring down Prisma Access infrastructure costs.
     With help from the team, I've deployed and tested subset of MU functionalities and released the feature to internal teams for usage.
