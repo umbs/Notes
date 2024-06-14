@@ -222,6 +222,7 @@ References:
 [3] https://en.wikipedia.org/wiki/Certificate_signing_request
 [4] https://tls.ulfheim.net/
 [5] https://tls13.ulfheim.net/
+[6] https://tls12.xargs.org
 
 
 @@@@@@@@@@@@@@@@@@@@        OpenSSL    Cheatsheet @@@@@@@@@@@@@@@@@@@@@@@@@@@
