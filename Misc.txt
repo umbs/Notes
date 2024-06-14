@@ -5107,3 +5107,164 @@ Superscript:
 Reference:
 [1] https://www.markdownguide.org/cheat-sheet/
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@   jq Cheat Sheet  @@@@@@@@@@@@@@@@@@@@@@@@@
+
+Basic Syntax
+    jq 'filter':
+        filter: The expression to process the JSON data.
+        .: Represents the entire JSON document.
+
+Assume we have JSON file named `data.json`
+
+    {
+      "name": "John",
+      "age": 30,
+      "city": "New York",
+      "skills": ["Python", "JavaScript", "Go"],
+      "address": {
+        "street": "123 Main St",
+        "zipcode": "10001"
+      }
+    }
+
+Print entire JSON
+    jq '.' data.json
+
+Access a specific key
+    jq '.name' data.json
+    # Output: "John"
+
+Access nested keys
+    jq '.address.street' data.json
+    # Output: "123 Main St"
+
+Access array elements
+    jq '.skills[0]' data.json
+    # Output: "Python"
+
+Iterate over array elements
+    jq '.skills[]' data.json
+    # Output: "Python" "JavaScript" "Go"
+
+Filter elements from an array
+
+Assume data.json contains an array of objects:
+    [
+      {"name": "John", "age": 30},
+      {"name": "Jane", "age": 25},
+      {"name": "Doe", "age": 22}
+    ]
+
+To filter elements where age is greater than 23:
+    jq '.[] | select(.age > 23)' data.json
+    # Output:
+    # {
+    #   "name": "John",
+    #   "age": 30
+    # }
+    # {
+    #   "name": "Jane",
+    #   "age": 25
+    # }
+
+Modify a value
+    jq '.age = 31' data.json
+    # Output:
+    # {
+    #   "name": "John",
+    #   "age": 31,
+    #   "city": "New York",
+    #   "skills": ["Python", "JavaScript", "Go"],
+    #   "address": {
+    #     "street": "123 Main St",
+    #     "zipcode": "10001"
+    #   }
+    # }
+
+Add a new key-value pair
+    jq '. + { "country": "USA" }' data.json
+    # Output:
+    # {
+    #   "name": "John",
+    #   "age": 30,
+    #   "city": "New York",
+    #   "skills": ["Python", "JavaScript", "Go"],
+    #   "address": {
+    #     "street": "123 Main St",
+    #     "zipcode": "10001"
+    #   },
+    #   "country": "USA"
+    # }
+
+Remove a key
+    jq 'del(.city)' data.json
+    # Output:
+    # {
+    #   "name": "John",
+    #   "age": 30,
+    #   "skills": ["Python", "JavaScript", "Go"],
+    #   "address": {
+    #     "street": "123 Main St",
+    #     "zipcode": "10001"
+    #   }
+    # }
+
+Combine multiple filters
+    jq '.name, .age' data.json
+    # Output: 
+    # "John"
+    # 30
+
+Pretty print JSON
+    jq '.' data.json
+
+Compact (minify) JSON output
+    jq -c '.' data.json
+
+
+Advanced Examples
+
+Group by a key. Assume data.json is an array of objects like before. To group by age:
+    jq 'group_by(.age)[]' data.json
+    # Output:
+    # [
+    #   {
+    #     "name": "Doe",
+    #     "age": 22
+    #   }
+    # ]
+    # [
+    #   {
+    #     "name": "Jane",
+    #     "age": 25
+    #   }
+    # ]
+    # [
+    #   {
+    #     "name": "John",
+    #     "age": 30
+    #   }
+    # ]
+
+Aggregating values
+
+Summing up values:
+    jq '[.[] | .age] | add' data.json
+    # Output: 77
+
+Getting keys of an object
+    jq 'keys' data.json
+    # Output: ["address", "age", "city", "name", "skills"]
+
+Useful Options
+-r or --raw-output: Output raw strings, not JSON-encoded strings.
+    jq -r '.name' data.json
+    # Output: John
+
+
+-c or --compact-output: Produce compact output.
+    jq -c '.' data.json
+
+-f or --from-file: Read filter from a file.
+    jq -f filter.jq data.json
