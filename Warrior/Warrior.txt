@@ -87,11 +87,11 @@ Body:
 
 Hello
 
-My name is Bhaskar. I am a real estate investor looking to acquire one small multi-family (up to 25 units) and one large multi-family (80+ units) assets in San Antonio market. 
+My name is Bhaskar. I am a real estate investor looking to acquire one small multi-family (up to 25 units) and one large multi-family (80+ units) assets in San Antonio market.
 
-My team and I have extensive experience investing in variety of real estate asset classes (multi-family, storage, land, flex warehouse). 
+My team and I have extensive experience investing in variety of real estate asset classes (multi-family, storage, land, flex warehouse).
 
-Would you be available for introductory call in next 2-3 days? 
+Would you be available for introductory call in next 2-3 days?
 
 Thank you,
 Bhaskar
@@ -187,7 +187,7 @@ Hyderabad and have been living in US since 2001.
 
 *********************    Rod Khleif     **************************
 
-Lifetime Cashflow Through Multifamily 
+Lifetime Cashflow Through Multifamily
 Course & Coaching Program
 =========================
 
@@ -271,7 +271,7 @@ Module #1
       - Build relationship with Seller. This is very very very important.
 
       - Understand their motivation
-        • Management Problem          • Out of state owner 
+        • Management Problem          • Out of state owner
         • Divorce                     • Multiple evictions
         • Inherited the property      • Deferred maintenance
         • Foreclosure                 • Estate sale
@@ -316,7 +316,7 @@ Module #2
   ---
     • One good broker can make you wealthy
     • Have a script to talk to, when calling them.
-        • ALWAYS ALWAYS respond when they send you a deal. 
+        • ALWAYS ALWAYS respond when they send you a deal.
         • On LoopNet there are brokers who have lot of listings. Call them and
         establish relationship.
         • Keep writing to them every 3-4 weeks so that you are in their mind
@@ -522,7 +522,7 @@ Useful Websites/Links/Resources:
     NETRonline
     ---
         - www.NETRonline.com
-          - It has every county 
+          - It has every county
 
     Mailing Lists Broker
     ---
@@ -554,7 +554,7 @@ Useful Websites/Links/Resources:
     Rate Map
     ---
         - Rents: www.ratemap.org
-    
+
     Misc:
     ---
         - Axios Metrics (now Real Page): https://www.realpage.com/asset-optimization/market-analytics/
@@ -604,7 +604,7 @@ Erick Segura
 
     My team and I at Black Bridge Capital Partners are actively sourcing deals in the tertiary markets of GA, NC, SC. Lets connect soon!
 
-    Feel free to join our bi-weekly zoom calls 'SYNERGY IN MULTIFAMILY' GROWTH & MINDSET Calls 
+    Feel free to join our bi-weekly zoom calls 'SYNERGY IN MULTIFAMILY' GROWTH & MINDSET Calls
 
     Sign up here: https://www.eventbrite.com/e/708763419467?aff=oddtdtcreator
 
@@ -616,7 +616,7 @@ Tim (Denver Area)
 
 
 Dinesh Nayak (Sarasota, Florida)
-    linkedin.com/in/dineshnayak 
+    linkedin.com/in/dineshnayak
     calendly.com/dineshnayak/30min
 
 
@@ -739,17 +739,17 @@ Cash-on-Cash Return
    Example CoC =  ------ = 10%
                   200,000
 
-    
+
 Anual Rate of Return (ARR)
 
-            (Total $ distributed over life cycle / Number of years) 
+            (Total $ distributed over life cycle / Number of years)
     ARR =   -------------------------------------------------------
             Total amount invested
 
     Example:
 
-                (75,000 / 5)
-        ARR =   ------------ = 15%
+                (75,000/5)
+        ARR =   ----------- = 15%
                  100,000
 
         - Total cash distributed over 5 years is $75,000
@@ -779,3 +779,76 @@ Deal Provider: One who finds deals.
 
 OM: Offering Memorandum
 PPM: Private Placement Memorandum
+
+
+@@@@@@@@@@@@@@@@@@@@@@     Syndicated Deal Analyzer (SDA)      @@@@@@@@@@@@@@@@@
+
+(Lesson 12) 3 Steps to the 10 Minute Offer
+---
+Step 1: Adjust the income (about 4 mins)
+    - Look for "Gross Potential Rents" adjusted for vacancies, bad debt etc.
+    - If Vacancies in Pro Forma > 10% use it, otherwise, at least 10% vacancy.
+    - If you have Rent Roll, DO NOT use the financials from it. Use "Gross Potential Rents" from Marketing Package.
+
+Step 2: Adjust the Expenses (3 mins)
+    - Use higher of the following:
+        a) Expenses reported in Marketing Package.
+        b) 50% expense
+    - Don't spend anymore time on this.
+
+Step 3: Use the advertised cap rate to come up with a revised Fair Maket Value (FMV) (3 mins)
+    - Cap Rate = NOI/Asking Price
+    - Now, get to FMV using above Cap Rate.
+
+
+(Lesson 13) The 10 Minute Offer Getting Back to the Broker
+---
+    - Respond to Broker with details why you like/don't like the deal and
+      reasons.
+    - Watch the video for sample email.
+
+
+(Lesson 14) The 10 Minute Offer In Action
+---
+    - Blue font = Populate the data
+    - Black font = There's formula in there and automatically calculated. If
+                   you overwrite it, turn the cell to Yellow or such, to know
+                   what you did.
+
+
+(Lesson 15) Side-by-Side Scenarios Column #1 Marketing Package
+---
+    - Take everything from Marketing Package and put it in Column #1
+        - Numbers have to line up (NOI, etc)
+
+
+(Lesson 16) Side-by-Side Scenarios Column #2 My Version
+---
+    - This is where 10-minute analysis comes into play.
+    - Step 1: Adjust the Income
+        - Keep 'Gross Potential Rent' as it is. Do NOT use *actual* rent roll.
+
+    - Step 2: Adjust Expenses
+        - Adjust for Vacancies etc:
+            - Concessions: Move-in specials and other discounts.
+            - Loss to Lease: Below market rent to attract tenants.
+            - Bad Debt: Economic vacancy. Non paying tenants.
+        - Finally, expense MUST be at least 50%
+
+    - Step 3: Using Cap Rate, calculate Fair Market Value (FMV)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
