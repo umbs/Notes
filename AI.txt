@@ -38,6 +38,40 @@ AI Resources
 15/ Securing ML Models: https://lnkd.in/dq82tXQ4
 
 
+https://news.ycombinator.com/item?id=41105348
+
+
+
+Generative AI Learning Path
+  - https://karpathy.ai/zero-to-hero.html
+  - "Deep Learning" by Bengio
+  - Karpathy's videos on GPT from scratch
+  - 3b1b's videos going over the math and fundamentals should give you a nice grip over the concepts.
+  - After that I feel you would be ready to delve into newer papers and be able
+    to understand what's going on and stay "relevant" as you said.
+
+  - I compiled some - see here https://news.ycombinator.com/item?id=36195527
+    - https://llm-utils.org/AI+Learning+Curation
+  - https://github.com/swyxio/ai-notes/blob/main/README.md#top-ai-reads
+
+  - Updated version: https://www.bishopbook.com
+
+  - I studied Physics in college, so I mostly knew the Math.
+      Here's what I used to self-learn:
+      1. Machine Learning for Absolute Beginners by Oliver Theobald
+      2. Introduction to Statistical Learning
+      3. Machine Learning by Andrew Ng on Coursera
+      4. Deep Learning by Andrew Ng on Coursera
+      5. fast.ai
+      6. Sebastian Raschka's PyTorch book
+      Good Math refreshers:
+      1. Mathematics for Machine Learning Specialization by Imperial College London
+      2. Linear Algebra and Calculus series by 3blue1brown on YT
+      Later I delved deep into Computer Vision for profession, and Edge AI for personal projects.
+
+
+
+
 AI Terminology
 
 
