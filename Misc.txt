@@ -5268,3 +5268,73 @@ Useful Options
 
 -f or --from-file: Read filter from a file.
     jq -f filter.jq data.json
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   Career Advice    @@@@@@@@@@@@@@@@@@@@@@@@@
+Louie Bacaj: Timeless Career Advice for Software Engineer
+    - Software Engineers create value. If you are not doing it, you are
+      wasting time.
+    - Growth Fixes Many Problems:
+        - If you can grow the pie, you'll have all the time and resources
+          in the world to do what you want.
+
+    - The Soft Skills
+        - If you learn to write, you'll pass 90% of those who wont
+            - Write blog posts about your work, its free credibility for you AND your company.
+            - Write internal memos, write architecture docs, write documentations, just write :)
+            - Highlight your team. Give!!! It'll come back.
+            - Writing is thinking. You'll out-think people if you write.
+            - A public body of essays is FAR BETTER than a resume and LinkedIn.
+        - Present your ideas and what you are doing to people regularly.
+        - Setup team wide and then company wide initiatives.
+
+    - Empathy is a Superpower as an Engineer
+        - People that stare at screens seem to be less empathetic to others
+          situation. If you can change that, your career will sky rocket.
+
+    - Compounding Engineers vs Detracting Engineers
+        - Compounding Engineers aka 10x Engineers
+            - They consistently make solid tradeoffs
+            - Their knowledge compounds and they compound teams efforts
+            - They live pareto distribution: 80/20 rule.
+            - They understand leverage well, they can go into debt and then get out.
+            - They can communicate and help their whole team.
+
+        - Detracting Engineers aka 0.1x Engineers
+
+    - The Promotion Formula: It has 2 steps
+        - Add Value
+        - Make Noise
+
+    - How do Promotions Work?
+        - Always about future scope
+            - It's about what you did for them. But really, it's about what
+              else you can do for them.
+
+        - From Promo Nomination to Official Promo
+            - Calibrations at multiple levels.
+            - Always a fight between managers.
+            - At times done by committee, especially for very Senior ICs.
+
+    - One on Ones
+        - Most important meetings of your career.
+        - DO NOT let your One on Ones with your manager lapse.
+        - Dont stop with your manager
+            - Have them with your peers, business people, product people, engineers from other teams etc.
+
+    - Mid year reviews and Annual reviews
+        - Take these seriously.
+        - Take notes on your work throughout the year.
+        - Write a great review for yourself.
+
+
+https://www.jointaro.com/course/timeless-career-advice-for-software-engineers/empathy-as-an-engineer/
+
+@@@@@@@@@@@@@@@@@@@@@@@@   Nail Your Promotion As A Software Engineer   @@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+https://www.jointaro.com/course/nail-your-promotion-as-a-software-engineer/how-this-course-works/
+
