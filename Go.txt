@@ -1,23 +1,228 @@
 ***********************   Test With Go (Jon Calhoun) **********************
+CHAPTER: Naming Conventions
+----------
 
-Error() = Log() + Fail()
-Errorf() = Logf() + Fail()
-Fatal() = Log() + FailNow()
-Fatalf() = Logf() + FailNow()
+
+File Naming Conventions: Usually, the convention is as follows:
+-----
+    math.go
+    math_test.go
+
+- `export_test.go`: access unexported variables in external tests.
+- `xxx_internal_test.go`: for internal tests.
+- `example_xxx_test.go`: for examples in isolated files.
+
+Function Naming Conventions:
+-----
+- Typically:
+    func TestXXX(t *testing.T) {
+    }
+
+- How to write test case for following code
+
+    import "fmt"
+
+    type Dog struct {
+        Name    string
+        Age     int
+    }
+
+    func (d Dog) Bark(muzzled bool) {
+        if muzzled {
+            fmt.Println("woof")
+        } else {
+            fmt.Println("WOOF!!")
+        }
+    }
+
+
+    func TestDog_Bark(t *testing.T) {
+        ...
+    }
+
+    func TestDog_Bark_muzzled(t *testing.T) {
+        ...
+    }
+
+    func TestDog_Bark_unmuzzled(t *testing.T) {
+        ...
+    }
+
+    etc
+
+Variable Naming Conventions:
+-----
+- Use `want` and `got`. By far mostly used.
+- Some people use `actual` and `expected`
+
+
+
+
+
+
+CHAPTER: Ways to signal test failure
+---------
+- Log()/Logf() is similar to Print()/Printf(). They only show up if Test fails or Verbose flag is passed (-v).
+- Fail() will mark test as failed but continue running till end of the test.
+- FailNow() will mark test as failed and aborts immediately.
+
+
+    Error() = Log() + Fail()
+    Errorf() = Logf() + Fail()
+    Fatal() = Log() + FailNow()
+    Fatalf() = Logf() + FailNow()
 
 - If you want to keep running the test, use Error()/Errorf()
 - If you want to stop the test, use Fatal()/Fatalf()
 
 
-Chapter: Examples as Test Cases
---------
-- Example code can be used for both UT and Documentation
+- Suggested failure message convention
+    t.Errorf("SomeFunc(%v) err = %v; want %v", args, error, want)
 
+
+
+
+
+CHAPTER: Examples as Test Cases
+--------
+- Example code can be used for both UT and Documentation.
+- It is written just like a test case, without input argument.
+
+- So, how is this written?
+
+    func Hello(name string) string {
+        return fmt.Sprintf("Hello %s", name)
+    }
+
+    // This naming convention is MUST
     func ExampleHello() {
-        Hello()
+        greeting := Hello("Bhaskar")
+        fmt.Println(greeting)
+
+        // Output: Hello Bhaskar
+    }
+
+    - Run `go test`, just like any other test.
+    - For documentation, run `godoc -http=:3000` and go to `localhost:3000` in the browswer to view docs.
+
+
+
+Testing unordered example output
+-----
+- How to test output that is not gauranteed to be in any order, like a range over maps?
+
+    func Page(checkIns map[string]bool) {
+        for name, checkIn := range checkIns {
+            if !checkIn {
+                fmt.Printf("Paging %s; please see the front desk to check in.\n", name)
+            }
+        }
+    }
+
+    func ExamplePage() {
+        checkIns := map[string]bool {
+            "Bob":      true,
+            "Alice":    false,
+            "Eve":      false,
+            "Janet":    true,
+            "Susan":    true,
+            "John":     false,
+        }
+        Page(checkIns)
+
+        // MUST put 'Unordered output' instead of just 'Output' to solve this
+
+        // Unordered output:
+        // Paging Alice; please see the front desk to check in.
+        // Paging Eve; please see the front desk to check in.
+        // Paging John; please see the front desk to check in.
     }
 
 
+Complex Examples
+------
+- Lot of good things in this video
+    https://courses.calhoun.io/lessons/les_twg_les_16
+
+- In output of `godoc`, the Example() code does not show `import` statements.
+  It only shows code inside `Example()` function. What to do?
+    - Have single example file like `example_xxx_test.go`
+    - declare an unused variable at the beginning and only then imports show up
+      in the `godoc`
+
+- Watch the video. It is very good.
+
+
+
+
+
+CHAPTER: Testing Multiple Cases
+-------------
+- Table Driven Tests is a design pattern. Look at 'underscore' directory in Jon
+  Calhoun github repo.
+- Subtests are whenever we call tt.Run() method.
+- Shared setup and teardown.
+- Look at 'users' directory to setup DB and teardown after tests.
+    - Very good example of test setup and teardown.
+
+- TestMain()
+    - Called before all other tests.
+
+    func TestMain(m *testing.M) {
+        // 0. flag.Parse() if you need flags
+        // 1. Setup anything you need
+        // 2. explicitly run your tests from here
+            exitCode := m.Run()
+
+        // 3. Call Exit with same exitCode. os.Exit() when called, stops the
+        // program immediately. It does not run `defer` functions.
+            os.Exit(exitCode)
+
+    }
+
+
+
+CHAPTER: Parallel Tests
+--------------
+
+
+
+
+
+===========================================================================
+
+********   Go Environment Variables Explained   *******
+GOBIN
+GOPATH
+GOROOT
+
+********   Go Commands Explained   *******
+go build:
+    - Compiles code and moves executable to GOPATH/bin/<executable>. Discards
+      the packages.
+
+go get:
+    - Flags:
+        - Use -x flag for details when command runs.
+        - Use -d flag to only download repos and packages but not compile them.
+        - Use -u flag to update packages and their dependencies.
+
+    - Read this. Very good resource.
+        - https://github.com/NanXiao/golang-101-hacks/blob/master/posts/go-get-command.md
+
+go install:
+    - Compiles code and moves the executable to $GOPATH/bin and installs all non-main
+      packages in $GOPATH/pkg.
+    - The cache will be used during the next compilation provided the source
+      did not change yet.
+
+    - Read this to understand differences between `go build` and `go install`
+        - https://github.com/NanXiao/golang-101-hacks/blob/master/posts/go-build-vs-go-install.md
+
+go run:
+    - Compiles and runs the program.
+
+go mod:
 
 ********   Go Testing By Example (Russ Cox GopherCon Australia 2023)    *******
 
@@ -273,8 +478,11 @@ Syntax and Variables:
     - This is whatever variable you passed into Execute()/ExecuteTemplate()
 
 
+NOTE: Read Hashicorp link and Go's original reference page.
 
 
 Reference:
 [1] https://www.youtube.com/watch?v=k5wJv4XO7a0
+[2] https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax
+[3] https://pkg.go.dev/text/template
 
