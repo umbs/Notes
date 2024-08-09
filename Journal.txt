@@ -42,14 +42,630 @@ Seva:
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   August 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration
+            - L7 App Acceleration
+                - FS COMPLETE - DONE
+                - Development - IN PROGRESS
+        - App Accel Serviceability
+            - Write confluence page and share with Vikram
+        - App Accel Testing
+            - Postman or Mockoon or httptest or httpmock
+        - Jenkins automation of zworker upgrade
+            - Write confluence page and share with Vikram
+        - Hitless Software Upgrade Design
+
+Personal
+    * Do this in this order, every day, preferably in morning.
+        1) Flute
+        2) Padma Sadhana + Kriya + Meditation + Guru Pooja
+        3) Vashista Yoga
+
+    * Education
+        - Test With Go
+        - Taro: Timeless Career Advice for Software Engineers - DONE
+        - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * Warrior:
+    * Others:
+        - Insurance shopping for all properties
+            - 629 Celebration Ct - OBIE
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3040/3042 Pine Valley
+            - 3040/3042 Green Mountain Dr
+            - Whitebrush Loop
+            - Duval Rd
+        - Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3043/3045 Pine Valley - IN PROGRESS
+            - 3040/3042 Green Mountain Dr - IN PROGRESS
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2024, Aug 01 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+
+
+
+2024, Aug 08 (Thu)
+- Work:
+    - Met with Swati Bhosale from UI team.
+        - Reviewed the APIs that SDWAN UI will call (ZOS APIs).
+    - 1:1 meeting with Vikram. Spoke about various engineering ideas I have.
+        - Serviceability.
+        - 100% local test environment.
+        - Testing:
+            - 3 types
+                - Using Postman, end-to-end in real Cosmos env, like dev04.
+                - Using Postman or Mockoon, mocking outbound HTTP calls and testing end-to-end.
+                - Using httptest or httpmock, writing UTs.
+
+    - Thoroughly tested "Upgrade ZDIA" workflow thoroughly. Following test cases.
+            TC1: Tenant1 creates ZDIA cluster.
+                Validations:
+                    a) PASS: ZDIA cluster created in GCP
+                    b) PASS: Check Tenants associated with Zcluster. We have one Tenant.
+                    c) PASS: Check TF, TFRP nodes in neo4j
+
+            TC2: Tenant2, create ZDIA cluster in same Compute Region.
+                Validations:
+                    a) PASS: Response returns same ELB IP address.
+                    b) PASS: Check Tenants associated with Zcluster. Now we have 2 of them.
+                    c) PASS: Check TF, TFRP nodes in neo4j for both the Tenants.
+
+            TC3: Tenant1 disables App Accel.
+                Validations:
+                    a) PASS: Check in DB that TF, TFRP nodes are removed for Tenant1.
+                        - PASS: TF node is removed.
+                        - FAIL: TFRP node is still present. Opened bug ZY-1029.
+                    b) PASS: Check in DB that TF, TFRP nodes are unchanged for Tenant2.
+                    c) PASS: Check that Tenants associated with Zcluster is only Tenant2.
+                    d) PASS: Check that Zcluster associated with Tenant1 is empty.
+                    e) PASS: Check all Zclusters associated with Tenant2. Above Zcluster must appear in that list.
+                    f) PASS: Tenant1 creates ZDIA cluster. Error because App Accel is disabled.
+                    g) PASS: Tenant1 Enable App Accel.
+                        1. PASS: This should create a TF node.
+                        2. PASS: Get call on feature API should get `true`
+                    h) PASS: Tenant1 creates ZDIA cluster.
+                        1. PASS: Tenant1 gets back *same* Zcluster as above.
+                        2. PASS: Tenant1 has TFRP node in that region.
+                        3. PASS: Tenants on Zcluster must have Tenant1 in the list.
+                        4. PASS: GET /iapi/zos/v1.0/tenants/{tenant1}/zclusters must have above Zcluster.
+                            - BUG: num_assigned_tenants = 1. It must be 2. Opened bug ZY-1030
+
+            TC4: Upgrade existing ZDIA cluster with new image. Change global config to have another AMI image.
+                Validations:
+                    a) PASS: Get ZDIA cluster details via API call.
+                    b) PASS: Check image details on GCP console.
+
+        - Daily sync with SDWAN + QA
+            - Prod deployments. I've to be involved in that.
+
+
+
+- Warrior/REI:
+- Minutiae:
+    - O'Connor and Associates
+        3012 Pine Valley Dr - $335K changed to $327K, tax savings is $141.91. 35% charge equals $49.68
+        3042 Green Mountain Dr - $335K changed to $329K, tax savings is $108.20. 35% charge equals $38.88
+
+    - Call with Alok Ranjan in morning.
+        - Wow!! He blasted Suman Prakash in front of whole team.
+
+2024, Aug 07 (Wed)
+- Work:
+    - Struggled a lot to get things working. Finally, found that ZOS on dev04
+      was consuming jobs I was running locally on laptop.
+    - When I deployed my code to dev04 using Custom Branch, things started
+      working. Worked late into the night and got test cases working.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Aug 06 (Tue)
+- Work:
+    - Watching tonnes of videos of 'Testing With Go'. Very useful, learning a lot.
+        - Completed "Testing Multiple Cases" chapter, that had table driven testing etc.
+    - Came to work at 1pm and attended Kumar's Team All Hands.
+    - Stayed up late, until 2am and refactored TFRP and ZDIA code/logic.
+
+- Warrior/REI:
+- Minutiae:
+    - Stayed WFH in morning.
+    - Tree Trimming services came and cut down many branches.
+    - Aarushi dropped out of "Intermediate Python" course.
+
+
+2024, Aug 05 (Mon)
+#venuvanguveety
+- Work:
+    - Code and Design review of Upgrade workflow with Umesh Jain.
+        - Lot of good feedback.
+        - I'll keep code as much as possible and only change for Upgrade.
+        - Delete TFRP nodes upon disabling App Acceleration.
+        - When deleting TF node, remove TFRP nodes first and then relationship and then TF node.
+    - Watching tonnes of videos of 'Testing With Go'. Very useful, learning a lot.
+        - Completed "Example" based testing.
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi started "Intermediate Python" course.
+    - Very interested incident with Venu Vanguveety, his wife Usha, his sister
+      Hema and his mother.
+        - His wife, Usha, called me. Venu has been married for 5 years. He got married in June, 2019.
+        - But he has never taken her back to US. His wife has a grown up daughter (undergrad).
+        - Venu used to visit a month here and there to see them, but he never
+          took them to Arizona.
+        - He probably sent them some money to support them.
+        - She was super distressed that he called and said he is absolutely broke. He's been saying things like comitting suicide etc.
+        - I spoke with his sister, Hema, also. I got her number from his wife.
+        - She gave a different story about Venu, Usha etc.
+        - Venu is currently in LA Ashram, sharing room with David Longnecker. Naveen Koneru gave this info.
+
+
+
+2024, Aug 04 (Sun)
+- Work:
+    - Focusing on Upgrade work
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi and Akshay went to Santa Clara County Fair.
+
+2024, Aug 03 (Sat)
+- Work:
+    - Focusing on Upgrade work
+
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 02 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 01 (Thu)
+#sick #akshaysick
+- Work:
+    - Cleaned up many ZDIA clusters in dev04
+- Warrior/REI:
+- Minutiae:
+    - Akshay was coughing continuously. Took him to Dr. Geetha Thippesamy in
+      Cupertino.
+        - Use Albuterol every 4 hours, via Nebulizer. Do this for 3 days. Then reduce it to every 6 hours.
+        - User Budecort (Steriod) 2 times a day, via Nebulizer.
+        - Meet doctor on Wednesday.
+    - Made Burgers for lunch for the kids and left them at home.
+    - Got lunch from India Cash n Carry.
+
+
+
+
+2024, Jul 31 (Wed)
+- Work:
+    - Cleaned up many ZDIA clusters in dev04.
+    - Status meeting in evening.
+
+- Warrior/REI:
+- Minutiae:
+    - Met Richie Hartnett for Coffee.
+    - Met Sourav Kundu as he is looking to switch teams.
+    - Paid $180 to AquaTex plumbing for pilot flame ignition.
+    - Wrote following to IITG SFBA group
+
+        Hi All,
+        Need career advise for a family friend.
+
+        If a person is let go on performance basis, will it show up in background checks for next job? This happened to a friend who is a Chartered Accountant working for small, family run, accounting firm in Salt Lake City of about 30 employees. She never had performance issues and was let go when they learnt she plans to relocate. She moved to Bay Area to be with Husband and had an offer from KPMG. KPMG's offer was revoked after background check with performance reasons. My friend received a copy of the report.
+
+        Friend is in dilema that her future employment is severely affected due to this. She wants advise on how to handle future background checks.
+
+        Thanks
+    - Deposited lot of checks to KPCU account.
+    - Gave $300 credit to Tenants for the Cockroaches issue.
+    - Spoke with Swarup Saha, HDFC bank contact in India about UPI payment issue. He's fixing it.
+
+
+
+
+
+2024, Jul 30 (Tue)
+#delhicrime
+- Work:
+    - Unbelieable day of meetings and work.
+        - Standup in morning.
+        - 1 hour Dev env setup with 5G team's Anandakumar Muthu.
+        - 30 mins Program Meeting with PLM (Bill Pruitt) where we mainly discussed UI changes.
+        - 30 mins UI meeting with Swati Bhosle and Rich Sneiderman.
+        - 30 mins setup with Pradeep Badri to bring up new image in US West region for performance testing. This turned out a mistake.
+        - 30 mins debugging session with Umesh Jain to unblock me on a P1 bug.
+            - Bug is about DELETE ZDIA VM not working.
+        - Another 1.5 hours of Dev env setup with Anandakumar Muthu late at night until 11pm.
+        - Setup QA env with Rajmohan
+
+- Warrior/REI:
+- Minutiae:
+    - Starting at midnight, I watched Delhi Crime and completed the whole season.
+
+
+2024, Jul 29 (Mon)
+- Work:
+    - Watched Serviceability presentation by Ganu.
+        - Did thorough investigation on state of ZDIA w.r.t Serviceability dashboards.
+
+- Warrior/REI:
+- Minutiae:
+    - Terminix visited our property.
+    - Discussion with Madhavi about Aarushi's opinion about marriage, dating, crush etc.
+    - Akshay has been sick (coughing at night). Madhavi stayed home to look after him and Aarushi.
+
+
+2024, Jul 28 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Back to Bay Area.
+    - Hair cut for Akshay.
+    - Walking with Venkat and Sridhar.
+
+
+
+2024, Jul 27 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Great time at LA
+    - Pool Birthday Party for Maya
+        - Party at Ketaki's home.
+    - Garden Movie night
+        - Harry Potter last movie.
+
+
+2024, Jul 26 (Fri)
+#losangeles
+- Work:
+    - FS presentation and got good feedback.
+
+
+        Action Items:
+        ---------------------
+        1) [Bhaskar/James] During Zworker upgrade, ZOS disables App Accel on
+        Tenants, waits for a 'cool off' period and then upgrades Zworker. What
+        will SDWAN upon receiving this message? What will SDWAN do to existing
+        sessions? NOTE that SDWAN has active and backup regions also.
+
+
+        2) [Bhaskar] In ZOS orchestration layer, have SDWAN UI make API call to
+        ZOS for sending Certificate Names, just like PA use case. If the call
+        is from SDWAN service then, ZOS will push the message to GCP Pubsub.
+        This design pattern will be followed for all future SDWAN use cases
+        (and perhaps other Clients in future).
+
+        Thanks
+
+
+    - Watched Alok Ranjan's Credit Management System (CMS) Demo/Presentation.
+
+- Warrior/REI:
+    - Spoke with Max McQueen from Kansas City.
+
+
+- Minutiae:
+    - Off to LA
+
+2024, Jul 25 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Jul 24 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Jul 23 (Tue)
+- Work:
+    - Fixing Zcluster provisioning issue in QA env.
+    - Found the root cause. Stayed up very late and resolved the issue and raised MR.
+    - Hallway meeting with
+
+- Warrior/REI:
+- Minutiae:
+    - Scheduled Terminix for 2nd visit as Tenant is seeing small roaches near
+      Master Bathroom and Living room baseboards.
+        - Signed up for quarterly visits, with option to call them anytime when
+          we see roaches.
+
+
+
+
+2024, Jul 19 (Fri)
+#GuruPoornima
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - GP
+
+
+2024, Jul 18 (Thu)
+#GuruPoornima
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - GP
+
+
+2024, Jul 17 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Up around 2am, and along with family, flew to North Carolina for Guru
+      Poornima celebrations.
+        - Rented car in N. Carolina and drove to Boone with kids.
+        - Refreshed in Holiday Inn Express and went to Ashram.
+        - First Darshan of Guruji, along with kids.
+
+
+2024, Jul 16 (Tue)
+- Work:
+- Warrior/REI:
+    - Lot of meetings.
+    - Meeting with Jane Jojo
+        - Discussed SDWAN UI --> ZOS --> SDWANC design
+            - Pros and Cons
+            - Tenant level toggle
+            - App level toggle
+            - Cert Management
+    - Meeting with Prasad, PLM (Bill Pruitt, Mahmood Ali, Kerry Hew), Pradeep
+      Badri, Vivek Guleria, Jane Jojo, Pankaj Bhagra, Mani Ramasamy
+        -
+
+- Minutiae:
+
+
+2024, Jul 15 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Taro: Mo Tiwari
+        - On you deathbed, what do you want to say you have done?
+        - Write down your goals and stick them on your desk
+            - Everything else, say no.
+            - Spend time with friends and family.
+            - 7 Habits of Highly Effective Individuals.
+        - Profile your time
+            - RescueTime
+        - Grayscale your iPhone
+        - Resources:
+            - Taro course on Productivity
+            - Principles by Ray Dalio
+            - Atomic Habits by James Clear
+            - 7 Habits of Highly Effective People by Steven Covey
+            - Tools of Titans by Tim Ferris
+            - Deep Work by Cal Newport
+        - Mo’s feedback form: https://motiwari.com/feedback/
+        - Mo on LinkedIn: https://www.linkedin.com/in/motiwari/
+        - Productivity course: https://www.jointaro.com/course/maximize-your-productivity-as-a-software-engineer/how-this-course-works/
+
+
+
+2024, Jul 14 (Sun)
+- Work:
+- Warrior:
+    - Tenant seeing many more roaches. Sent pictures.
+    - I've setup an appointment with Terminix for Monday 4pm.
+    - Quite anxious about Roaches issue.
+    - Spoke to neighbor Nilou and Paymon Teyer from 627 Celebration Ct.
+        - They are having problem with their Tenant, Nicole.
+
+- Minutiae:
+
+
+2024, Jul 13 (Sat)
+- Work:
+- Warrior:
+    - New Tenant moved into the house. Tenant seeing roaches :(
+
+- Minutiae:
+    - Dinner at Meenakshi's home. Nice time.
+        - A bit overwhelemd by her 'thank you' gift: Apple Watch and Michael
+          Kors handbag.
+
+
+2024, Jul 12 (Fri)
+- Work:
+- Warrior:
+- Minutiae:
+    - Handyman at home, fixed many things, late into the night.
+
+
+2024, Jul 11 (Thu)
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Jul 10 (Wed)
+- Work:
+    - Long conversation with Anandakumar Muthu about 5G Orchestration and how
+      ZOS works.
+    - Spoke with Rajkumar. He wants '1 day deletion' job. Today, deletion takes
+      > 7 days.
+        - He kinda blocked "himself" due to this change.
+    - Jane raised 2 bugs on IronVault service. It is missing in dev03
+      environment.
+    - Man, I feel like I'm not getting much work done :(
+
+- Warrior:
+    - Underwriting session with Partha Chaitanya
+
+- Minutiae:
+    - Went to 629 Celebration Ct
+        - Checked on "Key Not Working". But the smartbox and key is working
+          fine. Mentioned this to Ziprent.
+        - Got panicked that mailbox key was missing. But found it.
+        - There was candy cover in bathroom. There was also a used soap in
+          shower. What's going on? Started getting doubts if squatters on
+          property.
+        - Met a couple who visited the property and wanted to lease/rent it.
+        - Signed lease with them at end of the day.
+
+2024, Jul 09 (Tue)
+- Work:
+    - Attended L7 App Acceleration meeting with Jane, Badrinath, Sathya etc
+        - I *really* need to pull my socks and make my presence felt. I must
+          drive the whole design from ZOS side.
+    - Worked on DrawIO coming up with designs.
+    - Did some code reviews.
+
+- Warrior:
+- Minutiae:
+    - Attended 'Group Office Hours' by Alex from Taro
+    - Got an application for 629 Celebration Ct
+
+
+2024, Jul 08 (Mon)
+- Work:
+- Warrior:
+- Minutiae:
+    - Same diet protocol, but there is intermittent fasting and juice feasting on one day/week.
+    - Juice feasting once/week.
+        - 5 week protocol
+        - 1st week
+            - 3 meals/day, 2 meals/day, alternate 6 days and ...
+            - Sunday juice feasting. Vegetable juice.
+            - Goal: reduce carbohydrate intake. Reduce insulin secretion.
+
+        - 2nd week
+            - 2 meals/day, 1 meals/day, alternate 6 days and ...
+            - Sunday juice feasting. Vegetable juice.
+            - Goal: reduce carbohydrate intake. Reduce insulin secretion.
+
+
+
+2024, Jul 07 (Sun)
+#californiaconservatory
+
+- Work:
+- Warrior:
+- Minutiae:
+    - On call with Murali Garlapati, for about 40 mins.
+    - Looked into California Conservatory of Music schedule, for Aarushi.
+    - Emailed 'Tabla Niketan' for Akshay's classes.
+
+
+
+2024, Jul 06 (Sat)
+- Work:
+- Warrior:
+- Minutiae:
+    - Alok Ranjan
+
+        Bio: Alok has 15+ years experience leading teams in building enterprise
+        software in Networking, Storage, Security industries. Alok joined PANW
+        in July, 2022 in Cloud NGFW. He has consistently delivered complex,
+        high impact projects with top quality and ahead of time. Some of the
+        projects are:
+
+            a) CNGFW Billing System
+            b) Credit Management System (CMS)
+            c) Single Pane Dashboards for Observability
+
+        Recognizing his contributions, PANW promoted Alok to Sr. Principal role
+        within 1.5yr after joining the team, arguably fastest promotion in PANW
+        history.
+
+        Value Prop: What does Alok bring to team?
+        Alok specializes in delivering on both greenfield and existing
+        projects. He excels at building teams, nurturing talent, working with
+        coss-functional teams, effectively communicating with leaders,
+        distilling difficult problems and providing robust solutions.
+
+    - Louie Bacaj: Timeless Career Advice for Software Engineer
+        - Notes in 'Misc.txt' file
+
+
+2024, Jul 05 (Fri)
+- Work:
+- Warrior:
+- Minutiae:
+
+2024, Jul 04 (Thu)
+#emd #incometax #indiaincometax #indiatickets #registration #facial
+- Work:
+- Warrior:
+- Minutiae:
+    - Wired $100K to EMD deal (Amar Nagireddy and Max Shah).
+        - Updated Max Shah, Amar Nagireddy
+    - Filed India Income Tax returns. Paid Rs.93,020 to income tax. Mainly due
+      to interest on FD.
+        - Signed consent form, asked questions/doubts to Jignesh Parekh
+    - Spoke with Dietician Mamtha Hiremath.
+        - Just follow the recipe in the FFD app for all meals.
+    - Booked India tickets
+        - 1-888-391-6705 Oojo Agent Minami
+            - Booked tickets to India.
+            - Ticket is $1135
+            - Paid $225 for travel protection
+            - Total $1350
+    - Paid $424 for Toyota RAV4 Vehicle registration.
+
+
+2024, Jul 03 (Wed)
+- Work:
+- Warrior:
+    - High Performance Coaching Call
+
+- Minutiae:
+
+2024, Jul 02 (Tue)
+#facial
+- Work:
+- Warrior:
+- Minutiae:
+    - First day at office.
+    - Registered Aarushi for MCP "Year Long" program. Monday 5:45pm-7:15pm
+    - Reegistered Akshay for AOPS: July 8 - Aug 2 5pm-6:30pm
+    - Facial in morning and at night
+
+
+2024, Jul 01 (Mon)
+#deanza #4h #pygmygoat
+- Work:
+- Warrior:
+- Minutiae:
+    - First day of De Anza college. Aarushi is doing Physics, Chemistry and
+      Public Speaking classes.
+    - I WFH to take care of Akshay.
+    - Visited 4H Pygmy Goat Progject. Met with Tara Gomez.
+
+
 @@@@@@@@@@@@@@   June 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
         - Zycada + SDWAN Integration
-            - Software Upgrade
-            - IronVault Integration
-            - Serviceability
-        - Mockoon
+            - Software Upgrade - IN PROGRESS
+            - IronVault Integration - DONE
+            - Serviceability - IN PROGRESS
+        - Mockoon - ON HOLD
 
     Minor Projects (Tech Debts, Tech Talks, etc):
 
@@ -60,7 +676,7 @@ Personal
         3) Vashista Yoga
 
     * Education
-        - Test With Go
+        - Test With Go - IN PROGRESS
 
     * Vim.txt
         - Clean up the document and align with slides (prepare slides)
@@ -92,15 +708,65 @@ Seva
     - Attend adult follow up. - DONE
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+2024, Jun 30 (Sun)
+#india
 - Work:
 - Warrior:
 - Minutiae:
+    - Came back to US
+    - Visited 629 Celebration Ct property and cleaned up Windows using Hydrogen
+      Peroxide solution.
+    - Investigated work done by Jonathan.
+        - Job is done well.
+        - Property requires clean up.
+
+
+2024, Jun 29 (Sat)
+#india
+- Work:
+- Warrior:
+- Minutiae:
+    - Email Nick Ambrosia
+        Hello Nick,
+
+        Thank you so much for sending the propertyes my way. We did underwriting for Torrey Woods Apartments. Unfortunately, we cannot make an offer on this property for following reasons.
+
+        NOTE: We assumed ProForma rents to underwrite. Did not use current rents.
+
+        a) Expenses in the ProForma is too low (40%). In our underwriting, expenses came out to be 54%.
+        b) Vacancy in the Proforma is 5%. We used 10% in our underwriting.
+        b) Concessions/Loss to Lease/Bad Debt is 0% in Proforma. We used 5% in our underwriting.
+
+        Due to these factors, property has negative cashflow of $13K/year. For this reason, we would not be making an offer.
+
+        I apologize this took so long. I'll be sure to respond to you in 1-2 days going forward.
+
+        I'll get back to you by Wednesday (July 3rd) with my decision on other properties.
+
+
+        Thank you,
+        Bhaskar
+    - Replied to Jignesh Parekh with all details
+        - Rental Agreement
+        - March 2024 Tax Computation
+        - School Fees from Bank Statement.
+
+    - India won T20 World Cup.
+    - Back to US. Flight at 2am.
 
 
 2024, Jun 28 (Fri)
 - Work:
 - Warrior:
 - Minutiae:
+    - Questions for Amar
+        - Liquidating my portion of the 1.5% equity.
+            - Amar gave few scenarios, but largely, it is best to stay invested
+              longer for better returns.
+
+        - In SDA, default Cap Rate is 7%. This significantly affects
+            - For JV, go by Cash Flow rather than IRR. But do have an eye on IRR.
+
 
 2024, Jun 27 (Thu)
 #ayodhya
