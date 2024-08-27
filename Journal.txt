@@ -102,6 +102,184 @@ Seva
 
 
 
+2024, Aug 27 (Tue)
+#DACA #phone #Chinmaya #ScienceOlympiad
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - I woke up at 4am.
+    - Signed up Aarushi's Science Olympiad forms and made payment.
+    - Signed up Volunteer form for Chinmaya Mission (San Jose) to teach Telugu class.
+    - Purchased Tello phone service for Aarushi.
+
+2024, Aug 26 (Mon)
+#RSM
+- Work:
+    - Working on V2 API.
+        - Taking baby steps. But I must move very fast.
+
+- Warrior/REI:
+- Minutiae:
+    - First day of DACA swimming.
+        - Aarushi felt very low and let down. She cramped. But that's only
+          first day. She'll get better and improve.
+        - I canceled YMCA membership. It's still open until Sep 19th.
+
+2024, Aug 25 (Sun)
+#RSM
+- Work:
+    - Continued building the V2 API.
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi's first Geometry RSM class. She liked this.
+    - My first YES Kriya (SKY Teens Kriya) follow up after >2 years. Greatful
+      to Guruji and Priya Mayur for this opportunity.
+    - Aarushi and kids assembled lawn chairs.
+
+2024, Aug 24 (Sat)
+- Work:
+    - Got IronVault issue resolved.
+- Warrior/REI:
+- Minutiae:
+    - Took car to Chevrolet for servicing.
+        - Spoke to Alok Ranjan for an hour.
+    - Aarushi's first day of Algebra RSM class.
+        - She did not like the class. Felt very bored.
+    - Walking with Sridhar and Venkat.
+        - Kids came along too.
+        - I did my Sadhana at Sridhar's home.
+
+2024, Aug 23 (Fri)
+- Work:
+    - Meeting with Jane Jojo and Swati Bhosale. Showed new API (v2/settings)
+    - Unblocked James and Shikhar. Hardcoded HTTP info in Tenants V2 response.
+    - PoC IronVault failed.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi and Kids went to Sowmya Dasika's Varalakshmi Vratam pooja.
+    - Dinner at Chaat Bhavan.
+
+2024, Aug 22 (Thu)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Aug 21 (Wed)
+- Work:
+    - Meeting with Jane Jojo. Recognized the APIs (existing) do not work. Must
+      have new APIs to support Prisma Access and SDWAN, both.
+
+- Warrior/REI:
+    - Terminix visit to Celebration Ct, property.
+
+- Minutiae:
+    - Taekwondo, 4H for Akshay.
+
+
+2024, Aug 20 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 19 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 18 (Sun)
+- Work:
+- Warrior/REI:
+    - Filled out Tenant info and emailed HOA at Crescendo community.
+
+- Minutiae:
+    - Lot of planning for upcoming year. Put all info in family calendar and
+      shared with Aarushi and Madhavi.
+
+2024, Aug 17 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Jay, Ayesha, Chenaya, Evan visited for couple of hours. Playdate. Learnt
+        - Took kids to lunch at MOD Pizza in Santa Clara.
+      that Crescendo community is not doing well and lot of bad crowd is moving
+      in.
+    - Sridhar visited with Abhay and Aditya. Walking and catching up on his
+      England visit.
+    - Got String Lights hooks (Cup Hooks) and Gardening stuff from Home Depot.
+    - Paid off $14K on Credit Card bill.
+    - Cleaners (Maria) came to home.
+
+
+2024, Aug 16 (Fri)
+- Work:
+    - Struggled a lot with bugs in Upgrade flow.
+        - ZOS was sending two templates with *same* name in them.
+        - ActiveMigVersion was set as Template Name. So, whenever we generate a
+          Template, it always had Active Template name on it. During upgrade,
+          ZOS sends 2 Templates to Terraform: Old and New. Both these had same
+          name. To fix this, we changed 'create_dia_template.tf' file to have
+          Template Version in its name.
+        - This finally fixed the problem.
+
+- Warrior/REI:
+- Minutiae:
+    - Slept early, around
+
+2024, Aug 15 (Thu)
+#school
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - First day of school for both the kids.
+
+
+2024, Aug 14 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - When you exercies, 4 chemicals are released at 4 different stages:
+        - Dopamine
+        - Endorphins
+        - Serotin
+        - Oxytocin
+
+
+2024, Aug 13 (Tue)
+- Work:
+    - Debugging Provisioning Service failure. Anhoe Shih fixed it.
+    - Provisioned new ZDIA cluster for Shikhar Dogra in 214 region.
+    - Provisioned new ZDIA cluster for myself in 222 region.
+        - ZOS is returning existing entry (dev04-096) which does not exist.
+        - Must clean up the whole damn thing.
+    - Stayed up late and fixed Tenants v2.0 API issue (A bug in PRA code)
+    - Raised modelo change for end-to-end Tracing ID change.
+
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 12 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 11 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 10 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Aug 09 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
 
 2024, Aug 08 (Thu)
 - Work:
