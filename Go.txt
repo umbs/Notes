@@ -184,9 +184,124 @@ CHAPTER: Testing Multiple Cases
 
 CHAPTER: Parallel Tests
 --------------
+- 'parallel' package has all code in 'twg' repo.
+- All tests that have following is put in a queue to run tests in Parallel
+    t.Parallel()
+
+- Advise:
+    - Run tests in Parallel only to test parallelism which happens in real world scenario.
+    - DO NOT RUN IT for speed boost. When/If you see issues in your tests,
+      fixing it takes LOT of time that it'll be net negative in the end.
+    - Use it when there's clear reason to use it.
+
+- Setup and Tear Down
+    - To have parallel subtests obey setup and teardown behavior, you have to
+      wrap all subtests in another t.Run()
+
+
+- Closure Gotcha's
+
+    func TestGotcha(t *testing.T) {
+        for i := 0; i < 10; i++  {
+            t.Run(fmt.Sprintf("i=%d", i), func(t *testing.T) {
+                t.Parallel()
+                t.Logf("Testing with i=%d", i)      <<<<< this is not accessible within subtest.
+            })
+        }
+    }
+    - Watch the video. Very insightful.
+
+
+CHAPTER: Testing Race Conditions
+--------------
+TODO. Come back later and watch this.
 
 
 
+
+CHAPTER: Comparing Objects for Equality
+--------------
+- 'compare' directory
+- Read this:
+    https://golang.org/ref/spec#Comparison_operators
+
+- 'reflect' package is used.
+    - reflect.DeepEquals()
+    - Can compare Slices, Maps etc.
+    - https://golang.org/pkg/reflect/#DeepEqual
+    - People have different opinions about 'reflect' package.
+
+
+Golden Files
+---
+- "Golden Files" are files that are desired output.
+- They are used when we have to compare large files (csv, images, etc) in test
+  cases.
+- Typically, "Golden Files" are saved in same directory as tests.
+
+
+Helper Comparison Functions
+---
+- TODO
+
+
+CHAPTER: Testing Utilities
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: Controlling Which tests are run
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: Addtional Testing Flags
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: External and Internal Testing
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: Types of Tests
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: State
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: Dependency Injection (DI)
+--------------
+TODO. Come back later and watch this.
+
+
+CHAPTER: Mocks, Stubs, and Fakes
+--------------
+- Third Party Packages
+    - github.com/josharian/impl
+    - github.com/golang/mock
+    - github.com/matryer/moq
+
+    - In Go, you really don't need third party packages. Just providing an
+      implementation to an interface is enough.
+
+Faking APIs
+---
+- API calls go through, but they go to *your* endpoint and returns responses
+  *you* defined for testing.
+
+
+CHAPTER: Interface Test Suites
+--------------
+
+
+CHAPTER: Testing with HTTP
+--------------
 
 
 ===========================================================================
@@ -482,7 +597,7 @@ NOTE: Read Hashicorp link and Go's original reference page.
 
 
 Reference:
-[1] https://www.youtube.com/watch?v=k5wJv4XO7a0
+[1] https://www.youtube.com/watch?v=k5wJv4XO7a0  <<< very tough to understand this.
 [2] https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax
 [3] https://pkg.go.dev/text/template
 
