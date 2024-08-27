@@ -5331,6 +5331,191 @@ Louie Bacaj: Timeless Career Advice for Software Engineer
 
 https://www.jointaro.com/course/timeless-career-advice-for-software-engineers/empathy-as-an-engineer/
 
+@@@@@@@@@@@@@@@@@@@@@@@@   High Growth Engineer   @@@@@@@@@@@@@@@@@@@@@@@@@
+Jordan Cutler: 21 Ways to Make Yourself a Better Engineer (From a Senior Engineer at Pintrest)
+
+Agenda (3 tips in each category)
+    1. Career Growth
+    2. Influence
+    3. Communication
+    4. Managing Up
+    5. Leading Projects
+    6. Technical Skills
+    7. Productivity
+
+Career Growth
+-------------
+Tip 1: Solve hard problems for the team.
+
+    - Be known for making your teammates lives easier, not "snacking"
+        - Do high impact, high effort projects.
+
+    - Snacking = Low impact and low effort.
+
+Tip 2: Become a go-to person in the team. (There's a course on Taro)
+
+Tip 3: Be visible
+    Do:
+        - Share what you know.
+        - Share what you figure out.
+        - Give presentations.
+
+    Dont:
+        - Be silent in meetings.
+        - Only focus on your work.
+        - Assume your work speaks for itself. You speak for your work.
+
+
+Influence
+---------
+Tip 1: (Framing) Speak to the other person's interests.
+    - Framing changes how other person hears your message.
+    - Always share how what you want will benefit the other person.
+    - "Whats in it for them?"
+    - Framing:
+        - Who am I speaking to?
+        - What do I want?
+        - What do they care about?
+        - How can I frame it in those terms?
+
+    - Example: You want to be promoted - How do you frame it?
+        - You'd like to expand your impact on the team and want help creating a plan
+            "Hey Jeff, I've really been loving the projects I've worked on the
+            past few quarters. I appreciate you giving me the opportunity to
+            work on these. I'd love to expand my impact on the team. What would
+            a plan look like to get to the next level."
+
+Tip 2: Influence is more relationships than wording
+
+Tip 3: Add "What do you think?" to your repertoire
+    Do:
+        - Use more "?"s
+        - End suggestions with "What do you think?"
+
+    Don't:
+        - Only assert your opinion and leave it at that.
+
+
+Communication
+-------------
+Tip 1: Lead with the takeaways. Bottom Line Up Front (BLUF)
+    - Start with take aways first and end with the context.
+    - Always callout what you want from the other person first and then provide context.
+
+    Do:
+        - I think X. Here's why.
+        - I need X from you. Here's the context.
+
+    Don't:
+        - Bunch of context. Finally, my point is ...
+        - Bunch of context. Can I get help?
+
+Tip 2: There's no such thing as overcommunication
+    - One of the worst things you can do for your career is be invisible.
+    - Share updates, ask for feedback, give kudos.
+    - Small and frequent > Large and infrequent.
+
+Tip 3: Use clear deltas
+    Example:
+        Don't:
+            Reduced home page load time by adding caching.
+
+        Do:
+            Reduced home page load time by 2s thourgh additional caching.
+
+        Best:
+            Cut home page load time by 66%, from 3s to 1s through additional
+            caching. This resulted in a 30% increase in engagement, accounting for
+            more than half of our quarter OKR target.
+
+
+    Example:
+        Don't:
+            How do you think I could have done better?
+
+        Do:
+            How could I have done 10% better?
+
+        Best:
+            How could I have executed on this project at the Senior level? What
+            traits of Senior engineer do you see that I can work to
+            incorporate?
+
+
+Managing Up
+-----------
+Tip 1: Remove uncertainty
+
+    - Your View: 
+        - Discuss work, do work.
+    - Managers View:
+        - Discuss work.
+        - Worry about:
+            - Are they doing work?
+            - Are they doing a good job?
+            - Can I not worry about it?
+        - Resolve above uncertainty
+
+    - Week by Week Plan
+        Planned                             Accomplished
+        1. ...                              1. DONE
+        2. ...                              2. DONE
+        3. ...                              3. In Progress
+
+
+Tip 2: Set up recurring feedback and growth check-ins
+    - Start, Stop, Continue
+    - Growth Plan
+    - Eng performance attributes.
+    - Bonus Tip: Be HUNGRY for feedback
+
+
+Tip 3: Ask about their priorities more
+    - Managers priorities = your priorities
+    - "Whats top-of-mind for you?"
+    - "How can I help you more?"
+
+
+Leading Projects
+----------------
+Tip 1: Add accountability
+    - Use weekly syncs.
+    - Teammates must feel they are part of the project.
+
+Tip 2: Go the extra mile for meetings.
+    - Ineffective vs Effective meetings.
+
+Tip 3: Setup 1:1s with teammates on the project
+    - 1:1s allow the unspoken to come out.
+    - Get their honest thoughts and feedback.
+        - "Whats going well?"
+        - "What can we do better?"
+        - Optional:
+            - "What feels like waste of time?"
+            - "What annoys you?"
+
+
+Technical Skills
+----------------
+Tip 1: Build deep understanding of the tools you use
+
+Tip 2: Don't move past problems right after you solve it.
+
+Tip 3: Learn functional programming
+
+
+Productivity
+------------
+Tip 1: Plan ahead of time.
+Tip 2: Optimize your terminal setup.
+Tip 3: Pair with others. Watch what they do.
+
+
+
+
+
+https://www.jointaro.com/lesson/vPzzNqoi2EtYYhBGlRPG/21-ways-to-make-yourself-a-better-engineer-from-a-senior-engineer-at-pinterest/
+
 @@@@@@@@@@@@@@@@@@@@@@@@   Nail Your Promotion As A Software Engineer   @@@@@@@@@@@@@@@@@@@@@@@@@
 
 
