@@ -1,5 +1,7 @@
 @@@@@@@@@@@@@@@@@@@@@@@@   Career Advice    @@@@@@@@@@@@@@@@@@@@@@@@@
 Louie Bacaj: Timeless Career Advice for Software Engineer
+https://www.jointaro.com/course/timeless-career-advice-for-software-engineers/empathy-as-an-engineer/
+
     - Software Engineers create value. If you are not doing it, you are
       wasting time.
     - Growth Fixes Many Problems:
@@ -54,10 +56,6 @@ Louie Bacaj: Timeless Career Advice for Software Engineer
         - Take these seriously.
         - Take notes on your work throughout the year.
         - Write a great review for yourself.
-
-
-https://www.jointaro.com/course/timeless-career-advice-for-software-engineers/empathy-as-an-engineer/
-
 
 @@@@@@@@@@@@@@@@@@@@@@@@   High Growth Engineer   @@@@@@@@@@@@@@@@@@@@@@@@@
 Jordan Cutler: 21 Ways to Make Yourself a Better Engineer (From a Senior Engineer at Pintrest)
@@ -264,7 +262,10 @@ Tip 3: Pair with others. Watch what they do.
 
 
 @@@@@@@@@@@@@@@@     NOTES    FROM     VARIOUS    TALKS     @@@@@@@@@@@@
-The Effective Engineer [1]:
+[1] Edmond Lau: "The Effective Engineer" | Talks at Google
+https://www.youtube.com/watch?v=BnIz7H5ruy0&list=WL&index=5&t=177s
+
+The Effective Engineer:
 ---
 - Effort != Impact
     People like Jeff Dean work whose impact is 10x that of junior engineer
@@ -307,9 +308,6 @@ Questions:
 - What's one thing that you did not like in your previous company's culture?
 
 
-
-[1] Edmond Lau: "The Effective Engineer" | Talks at Google
-https://www.youtube.com/watch?v=BnIz7H5ruy0&list=WL&index=5&t=177s
 
 @@@@@@@@@@@@@@@@@@@@@@@@   Nail Your Promotion As A Software Engineer   @@@@@@@@@@@@@@@@@@@@@@@@@
 
