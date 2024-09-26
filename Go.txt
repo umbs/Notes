@@ -60,7 +60,10 @@ Variable Naming Conventions:
 
 
 
-CHAPTER: Ways to signal test failure
+CHAPTER: Failing Tests
+---------
+
+Ways to signal test failure
 ---------
 - Log()/Logf() is similar to Print()/Printf(). They only show up if Test fails or Verbose flag is passed (-v).
 - Fail() will mark test as failed but continue running till end of the test.
@@ -346,9 +349,27 @@ Tip #2: Use test coverage to add new tests.
     $ go test -coverprofile=c.out
     $ go tool cover -html=c.out
 Tip #3: Coverage is no substitute for thought.
+    - Fuzzing is designed to input as many variety of data as possible. Even
+      Fuzzing is no substitute for thought.
+
 Tip #4: Write exhaustive tests.
+    - If you can test every possible input to a function, you should. While it
+      may sound unrealistic, we can test up to a certain input under certain
+      constraints.
+
+    - In the talk, author has *another* implementation of code under test. This
+      reference implementation is supposed to be correct. If required, we can
+      write UT for that reference implementation too. Back to the point ....
+    - Actual implementation and reference implementation output can be
+      compared.
+
 Tip #5: Separate test cases from test logic.
+    - In Table-Driven-Tests, the cases are in the table and the loop that
+      processes them contains test logic.
+    - Because they are separated, the table can be used in multiple contexts.
+
 Tip #6: Look for special cases.
+
 Tip #7: If you didn't add a test, you didn't fix the bug.
     - Look at
         - go/src/fmt/fmt_test.go
@@ -357,6 +378,10 @@ Tip #8: Not every test fits in a table.
     - Look at
         - go/src/strconv/fp_test.go
         - go/src/strconv/testdata/testfp.txt
+    - Extracting test input data out to it's own files actually makes testing
+      easier because of less Go syntax and code.
+    - Writing mini-parser for test input data is not much harder and has many
+      benefits.
 
 Tip #9: Test cases can be in testdata files.
     - Tests don't have to be in source code.
