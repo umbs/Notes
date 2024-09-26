@@ -9,16 +9,16 @@ Personal:
 
     * Spend time with kids in their school work each day.
 
-    * Exercising, daily walk. 15000 steps/day.
+    * Exercising. Daily Gym.
 
-    * Rebuild the website using the HTML/CSS webpage saved on getpocket
-    * Get blog posts online. At least 1/month.
-
-    * Complete reading _entire_ Vim help manual.
+    * Build Personal Brand
+        - Personal Website.
+        - Blog Posts.
+        - Side Projects.
 
 India:
-    - Check on Employee Provident Fund (EPF)
-    - Close HDFC accounts, unused ones.
+    - Finances
+    - House Construction
 
 
 Work/Career:
@@ -42,12 +42,13 @@ Seva:
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@   August 2024    Goals  @@@@@@@@@@@@@@@@@@
+
+@@@@@@@@@@@@@@   September 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
         - Zycada + SDWAN Integration
             - L7 App Acceleration
-                - FS COMPLETE - DONE
+                - FS Update
                 - Development - IN PROGRESS
         - App Accel Serviceability
             - Write confluence page and share with Vikram
@@ -58,6 +59,279 @@ Career
         - Hitless Software Upgrade Design
 
 Personal
+    * Do this in this order, every day, in from 6am
+        - Padma Sadhana + Kriya + Meditation + Guru Pooja
+        - Flute
+        - Vashista Yoga
+
+    * File 2023 taxes
+
+    * Education
+        - Test With Go
+        - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * Warrior:
+        - Watch the *entire* catalog of classes from Rod Khlief.
+            - It feels like I'm starting all over again in the Warrior program :)
+
+    * Others:
+        - Insurance shopping for all properties
+            - 629 Celebration Ct - OBIE
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3040/3042 Pine Valley
+            - 3040/3042 Green Mountain Dr
+            - Whitebrush Loop
+            - Duval Rd
+        - Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3043/3045 Pine Valley - IN PROGRESS
+            - 3040/3042 Green Mountain Dr - IN PROGRESS
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2024, Sep 01 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+
+
+
+
+2024, Sep 25 (Wed)
+- Work:
+    - Debugged '500 Internal Server' error that Rich Sneiderman was seeing on
+      SCM UI. Root cause is that license info is missing for that Tenant in
+      `tenant_app_association` table in RDS on dev10.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi took blood test at Mountain View hospital.
+    - Madhavi went to Acupunture in Cupertino. She saw huge benefit.
+
+2024, Sep 24 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Took Madhavi to Sutter Health (Samira Vedantham). She refused to give
+      'Short Term Disability' letter. We did X-Ray.
+    - Drop Aarushi for Swimming. Akshay did his AOPS class.
+    - Ran 3.5 miles.
+
+
+2024, Sep 23 (Mon)
+#chiropractor #fto
+- Work:
+    - Took the ay off to take care of Madhavi.
+
+- Warrior/REI:
+- Minutiae:
+    - Took Madhavi to Dermatologist at California Skin Institute.
+    - Took Madhavi to Numo Acupuncture. Dr. Eugine did Chiropractice on Madhavi
+      and she got good relief. But pain came back later in evening.
+
+2024, Sep 22 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 21 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 20 (Fri)
+- Work:
+    - Manually deleted ZDIA VMs that have no record in ZOS.
+    - Meeting with Suneel
+        - Zycada acquisition about 1 year back.
+        - App Acceleration.
+        - Integrating with Prisma Access.
+        - Integrating with SDWAN.
+    - If you need anything engineering related, please ask me.
+
+
+- Warrior/REI:
+- Minutiae:
+    - Met Karthik Muktinutulapati in Palo Alto along with Dhirendra and Gaurav Kataria.
+
+
+2024, Sep 19 (Thu)
+#facial
+- Work:
+    - End-To-End upgrade discussions with Jane Jojo: ZY-1135
+    - Discussed with Jane about periodically updating IronVault with Tenant
+      Certs+Private Key: ZY-1136
+    - Swathi Bhosale identified a bug. Apps enabled/disabled list in GET call
+      is incorrect to the configuration made earlier.
+    - `IsDIA` flag set for IronVault and code ready for testing.
+
+- Warrior/REI:
+- Minutiae:
+    - WFH
+    - Facial
+
+
+2024, Sep 18 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Madhavi and I had *heart to heart* discussion.
+    - Taekwondo (Akshay) and RSM (Aarushi). First day of RSM for Aarushi. Her
+      old classmates were there.
+
+2024, Sep 17 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 16 (Mon)
+#demo
+- Work:
+    - Demo/DTHO of L7 App Acceleration of SDWAN.
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 15 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 14 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 13 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 12 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 11 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Sep 10 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Sep 09 (Mon)
+- Work:
+    - Got my code merged in.
+    - Addressed integration issues and merged the fixes too.
+
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 08 (Sun)
+- Work:
+    - Made progress with work.
+- Warrior/REI:
+- Minutiae:
+    - YES Kriya
+    - Took kids to San Chen boba place.
+
+2024, Sep 07 (Sat)
+#chanting #chinmayamission
+- Work:
+    - Barely got to work.
+- Warrior/REI:
+- Minutiae:
+    - RSM in morning for Aarushi.
+    - Went for Hair Cut (MC Salon) and Farmer Market shopping.
+    - First day of Bala Vihaar and Telugu chanting class.
+    - Dinner at Sridhar's house
+
+2024, Sep 06 (Fri)
+#volunteertrainingprogram #vtp #sacramento
+- Work:
+    - Integration testing. Identified couple of issues:
+        - For a specific Tenant (TSG ID: 1657773383), GET and PATCH API calls were `panic`ing
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi left to Sacramento for Volunteer Training Program (VTP)
+    - Ganesha Chaturthi Pooja. Madhavi made all the preparations. Kids and
+      myself did the Pooja with lot of mistakes :)
+
+2024, Sep 05 (Thu)
+- Work:
+    - SDWAN L7 App Accel end-to-end infra.
+    - Gateway mgmt work
+        - List API NOT returning App List when deployed. Does return it when running locally.
+        - Gateway Mgmt: Double commit s/uk/us change to QA branch and update Master branch MR with this change.
+    - Raised MR with tonnes of changes (almost 500 lines of *actual* code and 500 lines of docs that Golang generates).
+    - Did integration testing with SCM UI (Swathi Bhosale)
+
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 04 (Wed)
+- Work:
+    - SDWAN L7 App Accel end-to-end infra.
+    - Gateway mgmt work
+
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 03 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 02 (Mon)
+#vacation #lassen
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Vacation at Lassen Volcanic National Park.
+    - Updates to Dropbox, taxes.
+
+2024, Sep 01 (Sun)
+#vacation #lassen
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Vacation at Lassen Volcanic National Park
+
+
+@@@@@@@@@@@@@@   August 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - Zycada + SDWAN Integration
+            - L7 App Acceleration
+                - Development - IN PROGRESS
+        - App Accel Serviceability - TBD
+            - Write confluence page and share with Vikram
+        - App Accel Testing - TBD
+            - Postman or Mockoon or httptest or httpmock
+        - Jenkins automation of zworker upgrade - TBD
+            - Write confluence page and share with Vikram
+        - Hitless Software Upgrade Design - TBD
+
+Personal
+    * File 2023 taxes
+
     * Do this in this order, every day, preferably in morning.
         1) Flute
         2) Padma Sadhana + Kriya + Meditation + Guru Pooja
@@ -91,26 +365,49 @@ Seva
     - Attend adult follow up. - DONE
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-2024, Aug 01 (Mon)
+2024, Aug 31 (Sat)
+#vacation #lassen
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Vacation at Lassen Volcanic National Park
+
+
+2024, Aug 30 (Fri)
+#lassen
+- Work:
+    - Did my best to integrate with SDWAN UI.
+
+- Warrior/REI:
+- Minutiae:
+    - Drive to Lassen Volcanic National Park.
+
+2024, Aug 29 (Thu)
 - Work:
 - Warrior/REI:
 - Minutiae:
 
-
-
-
-
-
+2024, Aug 28 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
 
 2024, Aug 27 (Tue)
 #DACA #phone #Chinmaya #ScienceOlympiad
 - Work:
+    - Working on V2 API.
+        - Built PATCH app_acceleration flow
+        - Built GET app_acceleration flow
+        - Built PATCH sdwan flow
+        - Built GET sdwan flow
+
 - Warrior/REI:
 - Minutiae:
     - I woke up at 4am.
     - Signed up Aarushi's Science Olympiad forms and made payment.
     - Signed up Volunteer form for Chinmaya Mission (San Jose) to teach Telugu class.
     - Purchased Tello phone service for Aarushi.
+    - 6506G3 License Plate of the guys who took Mattress away.
 
 2024, Aug 26 (Mon)
 #RSM
