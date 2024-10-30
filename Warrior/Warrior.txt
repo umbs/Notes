@@ -5,13 +5,23 @@
 
             Personal:
 
+            Career:
+
             REI:
+                - At least 2 JV deals
+                    - Each asset is about 25 units worth $2.5M each, for a
+                      combined worth of $5M.
+                    - Combined, they must generate > $500K/year in Gross
+                      Operating Income.
 
         2 year goal (Dec, 2025)
         =======================
             AOL:
 
             Personal:
+
+            Career:
+
 
             REI:
 
@@ -21,13 +31,20 @@
 
             Personal:
 
+            Career:
+
+
             REI:
+                - Entire REI portfolio must generate > $100K/month in Gross Operating Income.
 
         4 year goal (Dec, 2027)
         =======================
             AOL:
 
             Personal:
+
+            Career:
+
 
             REI:
 
@@ -37,6 +54,9 @@
 
             Personal:
 
+            Career:
+
+
             REI:
 
         6 year goal (Dec, 2029)
@@ -44,6 +64,9 @@
             AOL:
 
             Personal:
+
+            Career:
+
 
             REI:
 
@@ -53,6 +76,9 @@
 
             Personal:
 
+            Career:
+
+
             REI:
 
         8 year goal (Dec, 2031)
@@ -60,6 +86,9 @@
             AOL:
 
             Personal:
+
+            Career:
+
 
             REI:
 
@@ -69,6 +98,9 @@
 
             Personal:
 
+            Career:
+
+
             REI:
 
         10 year goal (Dec, 2033)
@@ -77,7 +109,12 @@
 
             Personal:
 
+            Career:
+
+
             REI:
+                - Entire REI portfolio must generate > $100K/month in Cash Flow.
+
 
 @@@@@@@@@@@@@@@@@@@@@@@      Email to Brokers                    @@@@@@@@@@@@@@@@@@@@@
 
@@ -779,6 +816,15 @@ Deal Provider: One who finds deals.
 
 OM: Offering Memorandum
 PPM: Private Placement Memorandum
+
+
+@@@@@@@@@@@@@@@@@@@@@@     High Performance Coaching Calls      @@@@@@@@@@@@@@@@@
+July 3, 2024
+---
+INFLUENCE:
+    - "Influence is not about popularity, it's about leadership." - unknown
+    - Leaders shape how we think.
+
 
 
 @@@@@@@@@@@@@@@@@@@@@@     Syndicated Deal Analyzer (SDA)      @@@@@@@@@@@@@@@@@
