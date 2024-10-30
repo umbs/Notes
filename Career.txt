@@ -1,3 +1,58 @@
+@@@@@@@@@@@@@@@@@@@@@@@@   Career Lessons from Dhirendra Sinha   @@@@@@@@@@@@@@@@@@@@@@@@@
+
+1. You are the CEO of your career, so think like one!
+- Create value: Understand how your work drives business success.
+- Prioritize wisely: Focus on what adds quality, speed, or value to your product.
+- Make decisions with impact: Know how features align with business goals.
+
+2. Find Ways Around Blockers
+- Never stay stuck: Find solutions through persuasion or technical creativity.
+- Escalate if needed: Raise blockers early to avoid delays.
+- Stay proactive: Your goal is to create value, not just write code.
+
+3. Take Ownership
+- Don’t wait for tasks: Identify what needs to be done and take action.
+- Own the mission: Treat your team’s goals as your responsibility.
+- Be proactive: Managers depend on your creativity and problem-solving.
+
+4. Write Clearly and Effectively
+- Write clearly: Use concise language and avoid jargon.
+- Know your audience: Tailor your message for different readers.
+- Always add a TL;DR: Make your point clear from the start.
+
+5. Manage Projects Like a Pro
+- Understand dependencies: Know which parts rely on others.
+- Assign ownership: Ensure each task has a clear owner.
+- Communicate progress: Regular updates keep stakeholders aligned.
+
+6. Stay Curious and Keep Learning
+- Learn daily: Even 5 minutes a day adds up over time.
+- Read deeply: Go through manuals, books, and research papers.
+- Stay consistent: Build habits to keep learning throughout your career.
+
+7. Master the Tools of the trade
+- Know your IDE: Master editors, compilers, and debugging tools.
+- Go deeper with commands: Learn advanced Unix/network tools.
+- Keep experimenting: New tools often have hidden efficiencies.
+
+8. Communicate Like a Leader
+- Share regularly: Keep your team informed about goals and progress.
+- Speak up smartly: Participate meaningfully in meetings.
+- Build goodwill: Knowledge-sharing fosters collaboration and trust.
+
+9. Collaborate Across Teams
+- Work cross-functionally: Collaborate with other teams to grow visibility.
+- Build your brand: Collaboration showcases your skills beyond code.
+- Expand your impact: Leverage teamwork to multiply results.
+
+10. Be Dependable and Professional
+- Show up prepared: Be punctual and focused in meetings.
+- Deliver on promises: Communicate early when things go off-track.
+- Stay respectful: Keep your cool and encourage those around you.
+
+
+https://www.linkedin.com/posts/dhirendra-sinha_in-the-last-20-years-of-my-career-ive-mentored-activity-7255231648990998528-elxz?utm_source=share&utm_medium=member_desktop
+
 @@@@@@@@@@@@@@@@@@@@@@@@   Career Advice    @@@@@@@@@@@@@@@@@@@@@@@@@
 Louie Bacaj: Timeless Career Advice for Software Engineer
 https://www.jointaro.com/course/timeless-career-advice-for-software-engineers/empathy-as-an-engineer/
