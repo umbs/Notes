@@ -43,12 +43,434 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+@@@@@@@@@@@@@@   October 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - App Accel Serviceability
+            - Write confluence page and share with Vikram
+
+        - Zycada + SDWAN Integration
+            - L7 App Acceleration
+                - FS Update - IN PROGRESS
+                - Development - IN PROGRESS
+
+        - App Accel Testing
+            - Postman or Mockoon or httptest or httpmock
+
+        - Jenkins automation of zworker upgrade
+            - Write confluence page and share with Vikram
+
+        - Hitless Software Upgrade Design
+
+Personal
+    * Do this in this order, every day, in from 6am
+        - Padma Sadhana + Kriya + Meditation + Guru Pooja
+        - Flute
+        - Vashista Yoga
+
+    * File 2023 taxes
+
+    * Education
+        - Test With Go
+        - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * Warrior:
+        - Watch the *entire* catalog of classes from Rod Khlief.
+            - It feels like I'm starting all over again in the Warrior program :)
+
+    * Others:
+        - Insurance shopping for all properties
+            - 629 Celebration Ct - OBIE
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3040/3042 Pine Valley
+            - 3040/3042 Green Mountain Dr
+            - Whitebrush Loop
+            - Duval Rd
+        - Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley - IN PROGRESS
+            - 3043/3045 Pine Valley - IN PROGRESS
+            - 3040/3042 Green Mountain Dr - IN PROGRESS
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES follow up. - NOT DONE
+    - Attend adult follow up. - DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2024, Oct 01 (Fri)
+- Work:
+
+- Warrior/REI:
+
+- Minutiae:
+
+
+
+
+
+
+
+
+
+2024, Oct 29 (Tue)
+#healthinsurance #wellness #openenrollment
+
+- Work:
+    - Attended Rajmohan's demo to SDWAN Sales Consultants.
+
+- Warrior/REI:
+
+- Minutiae:
+    - Attended "Open Enrollements Benefits" workshop.
+        - Blueshield: HSA Core, HSA Plus, PPO
+            - https://theloop.paloaltonetworks.com/loop/u-s-employee-benefits
+            - https://myoptions.blueshieldca.com/paloaltonetworks/panw/index#plans
+
+        - Pharmacy benefits by "Express Scripts by Evernorth"
+            - www.express-scripts.com/paloaltonetworks
+
+        - nursehelp 24/7 - Registered Nurse answers your question. No cost,
+          included in plan.
+        - Teledoc - *actual* doc. It has a cost.
+            - $10 co-pay if you are in PPO plan.
+            - For HSA plan, goes towards your deductible.
+
+        - Accredo provides discounted speciality medications. They are part of
+          "Express Scripts", but take care of Speciality medicines.
+        - Virtual Physio Therapy is free with medical plan.
+        - Use "Generic Medications" wherever applicable.
+        - Step Therapy
+            - What is this?
+
+
+
+
+
+2024, Oct 28 (Mon)
+- Work:
+    - Spent lot of time building an API to fix ZY-1762 issue. I've manual
+      solution, but want to automate it via an API call. Changes are in
+      bugfix/1762 branch.
+
+- Warrior/REI:
+- Minutiae:
+    - Rudram in morning.
+    - Abandoned Zed Editor because:
+        - Zed is asking permission to access *too many* apps on MacOS.
+        - I cannot make a subfolder as *root folder* in Zed. There is no
+          "right-click --> set as root folder" option. Tried various things,
+          but just not working.
+        - I had enough.
+
+
+
+2024, Oct 27 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Paid of property taxes for 629 Celebration Ct, San Jose.
+
+
+2024, Oct 26 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Oct 25 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Oct 24 (Thu)
+- Work:
+    - Closed PASRE-48485 (Configure ZDIA global config in Prod)
+    - Debugging ZY-1762 (ZDIA stuck in upgrade_in_progress state)
+        - Created new ZDIA cluster in dev03: dev03-7wc7
+            - Original Image: zdia-worker-develop-680-img
+            - New Image: zdia-worker-develop-662-img
+            - I was expecting `admin` state to be stuck in
+              `update_in_progress`, but in my reproduction, it worked properly.
+
+
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Oct 23 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Oct 22 (Tue)
+#WFH #vivek #tax #CP2000
+- Work:
+    - Worked with Bineesh K from SRE and got Prod ready for L4 deployment.
+    - UTs were failing *badly*. `make test` was throwing errors.
+        - I used `git bisect` to narrow down the bad commit.
+
+- Warrior/REI:
+- Minutiae:
+    - Mailed taxes to IRS. CP2000
+        - Certified Mail USPS: 9589 0710 5270 2285 4295 28
+        - It's a HUGE milestone for me. Personally.
+    - Vivek is visiting.
+    - Learnt about Akshay's Math test performance in AOPS. He got 2/15
+      questions correct. Madhavi and I have to work with him daily for an hour.
+
+
+
+
+2024, Oct 21 (Mon)
+- Work:
+    - Jane and Manoj Palkar ran into a "500 Internal Server" issue. Debugged
+      and found that latest modelo changes are not deployed in dev03 env.
+
+- Warrior/REI:
+- Minutiae:
+    - 2+ hours on phone to get hold of IRS representative. But finally got answers to these questions:
+        - I do NOT have to file ammendment *yet*. Just respond to IRS questions.
+        - I can upload the documents online, but I'll also mail them.
+    - Uploaded CP2000 tax forms online on IRS website. I got a confirmation
+      which is saved in Dropbox.
+
+
+2024, Oct 20 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Played cricket with Hema's son, Darsh in Milpitas. Someone's apartment
+      has cricket nets.
+    - YES follow up in afternoon
+    - 4H (Pygmy goats) in evening
+    - Yelled at Madhavi for not pulling her weight.
+    - Folded tonnes of clothes at night, watching Postman videos.
+    - Go over CP2000 notice from IRS. I know what to submit to IRS.
+
+
+2024, Oct 19 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went to Kovai Cafe in morning with Madhavi.
+    - Spent 3 hours cutting veggies, cleaning kitchen and helping Madhavi, in general.
+    - Akshay's eye checkup. Madhavi took him.
+        - 2 in one eye and 1.75 in another.
+    - Chinmaya Mission, Bala Vihaar and Telugu class.
+
+
+
+2024, Oct 18 (Fri)
+#facial #soccer
+- Work:
+    - Closed PASRE-50582
+        - Cloud NAT is deployed in all Cosmos regions.
+    - Closed PASRE-48126
+        - Latest IronVault is deployed in all Cosmos regions.
+    - Helped Anandkumar Muthu from 5G team with merging his code.
+        - Oh man. I've helped this guy *sooo* much.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay's soccer game.
+
+
+
+2024, Oct 16 (Wed)
+- Work:
+    - Cleaned up (manual delete) of many ZDIA clusters in QA01. Helped out Rajmohan.
+    - Working on ZY-1675.
+        - Seeing "409 Conflict" errors when fetching Zcluster Id during
+          Zcluster create process.
+
+- Warrior/REI:
+- Minutiae:
+    - Lunch with Meenakshi Mittal
+    - Meeting with Campbell City Council for zoning and other questions.
+
+2024, Oct 15 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Team code for CTF: KYBK2788
+
+
+2024, Oct 14 (Mon)
+- Work:
+    - Meeting with Jane Jojo about ZDIA worker upgrade flow.
+        - Sent out summary of meeting in an email to entire team.
+    - Opened a ticket for Grafana team. Lots are missing again. COREEXT-1103
+        - Assigned it to Sharath Basavaraj.
+    - Provisioning ZDIA cluster failed in QA01. Rajmohan reached out. Retry from SDWANC worked.
+
+- Warrior/REI:
+- Minutiae:
+    - Did Kriya in morning and came to work. I'll follow this going forward.
+    - Installed Poppler tool to convert PDF to text.
+    - Got Tax forms completed by Kristie Moon.
+        - Signed and uploaded e-signature forms.
+
+
+2024, Oct 13 (Sun)
+#facial
+- Work:
+    - "single trace id" tasks. Minimum work.
+
+- Warrior/REI:
+- Minutiae:
+    - YES! follow up.
+    - 4H goats.
+    - Aarushi RSM Geometry class.
+    - Aarushi class with Usha garu.
+
+2024, Oct 12 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Chinmaya Mission Telugu class.
+        - Prepared for the class from Starbucks. Avoiding "Gayatri Chandrasekaran" :)
+    - All nighter. Watching "Baby Reindeer".
+
+
+2024, Oct 11 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Madhavi went to 'Qi Clinic' and completely relieved of pain. Hopefully,
+      it stays.
+
+
+2024, Oct 09 (Wed)
+- Work:
+    - Debugging ZY-1560, blocker bug. IronVault did not receive CA Cert and
+      Priv Key for a Tenant. So, domain cert generation is failing.
+
+- Warrior/REI:
+- Minutiae:
+        Contact Info:
+            Matthew (Matt) Ellis
+            Phone: 385-276-4172
+            Email: mellis@primecorporateservices.com
+
+        Questions for PRIME Consulting
+        ---
+        1. Income, savings, RSUs in India. Can you handle that when filing US taxes?
+            - Can help.
+
+        2. LLCs already created. Move rental properties into that?
+            - Draft Operating agreements
+            - Quit Claim Deed with Title company. About $100.
+
+        3. Update Estate Planning document, created by *another* lawyer. Can you do that?
+            - Setup fee.
+            - Changes are unlimited and free.
+
+        4. File taxes at end of the year.
+
+        5. Availability. Will I have a dedicated personnel that I can call and speak with?
+            - Turn around 24 hours.
+            - One strategist I'll be working with.
+
+        6. Can I have IRA opened for kids through LLC?
+            - Tax strategist can help answer.
+            - Helps with lot of tax deductions.
+
+        - 2024 Taxes.
+            - Nov 15th planning and enrollement done.
+            - How many LLCs are multi-members vs Single Members and S-Corp vs Pass Through.
+
+        - Costs
+            - Depends on LLCs, S-Corps, etc
+                - Multiple returns
+                - Depends on number forms.
+
+            - One time setup fee. 100% tax deductible. $4000
+                - Annual fee. $2500 deducted monthly.
+
+2024, Oct 08 (Tue)
+- Work:
+    - Integration of GCP Pubsub message format with SDWANC.
+    - Helped out Anandakumar Muthu with *something* at night.
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi swimming.
+    - Akshay's AOPS and NOT doing homework. Madhavi and I must address it asap.
+
+
+2024, Oct 07 (Mon)
+- Work:
+    - Rajmohan setup meeting with SRE for "Production Readiness". Few tickets came my way and I've to close them.
+    - Worked with Naveen Birru and deployed GCP Pubsub in staging-01 and staging-02 environments. Side effect. All prod env also got deployed.
+    - GCP Payload coding.
+
+- Warrior/REI:
+- Minutiae:
+    - Kristie Moon came back with more questions and account info.
+
+
+2024, Oct 06 (Sun)
+#tracy #sindu #babyshower
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Baby shower (Srimantham) of Sindu (Jyothi Atta).
+        - Met Bujji Mavayya, Santu Mavayya etc.
+    - Aarushi went to RSM by herself on bicycle. I gave a "Green Pass" to let
+      her come back by herself after the class.
+    - Visited Costco for eye glasses. Waste of time.
+    - 4H cleaning at night. Went late into the evening.
+    - Completed Tax stuff and still got email with more questions.
+    - Ayurvedic doctor (Dr. Ganesh Sharma) Zoom session from Guwahati. Dr.Ramu
+      from NIPER did Zoom session.
+        - Madhavi got lot of tips on how to manage pain.
+        - She got medicines too.
+
+2024, Oct 05 (Sat)
+#rsm #balavihar
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Telugu class in afternoon.
+    - Aarushi had her first RSM MCP class with new teacher. She liked it.
+    - Aarushi had first class with Usha garu in evening at 7pm.
+
+
+2024, Oct 04 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Oct 03 (Thu)
+- Work:
+    - Bill Pruit, setup permissions to access Grafana dashboards.
+- Warrior/REI:
+- Minutiae:
+
+2024, Oct 02 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Oct 01 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
 @@@@@@@@@@@@@@   September 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
         - Zycada + SDWAN Integration
             - L7 App Acceleration
-                - FS Update
+                - FS Update - DONE
                 - Development - IN PROGRESS
         - App Accel Serviceability
             - Write confluence page and share with Vikram
@@ -96,17 +518,52 @@ Seva
     - Attend adult follow up. - DONE
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-2024, Sep 01 (Mon)
+
+2024, Sep 30 (Mon)
+#facial
+- Work:
+    - Debugging ZY-1486. Domain certs were not getting generated.
+        - CA Cert was missing in IronVault
+    - Discussed with Roy and Ganu on following:
+        - Can we provide an IronVault API? Not possible today. Must bring in
+          etcd to IronVault. Huge benefits if we can do it.
+        - App List node attached to Tenant node instead of Tenant Feature node.
+          There's a "Unified App" project driven by Kumar Senthivel. Plug into
+          that.
+
+- Warrior/REI:
+- Minutiae:
+    - Facial in morning after massage :)
+
+
+2024, Sep 29 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2024, Sep 28 (Sat)
 - Work:
 - Warrior/REI:
 - Minutiae:
 
 
+2024, Sep 27 (Fri)
+- Work:
+    - Spent time on 'deprovisioning failure'. That is, after Tenant is
+      deprovisioned, ZDIA cluster is not getting deleted. No clue yet.
+
+- Warrior/REI:
+- Minutiae:
+    - Kashyap's birthday.
+    - Venkat purchased a house in Cambrian.
 
 
-
-
-
+2024, Sep 26 (Thu)
+- Work:
+    - Spent 2 hours with Anandkumar Muthu from 5G team.
+        - Man, this is eating away all my time.
+- Warrior/REI:
+- Minutiae:
 
 
 2024, Sep 25 (Wed)
@@ -114,6 +571,7 @@ Seva
     - Debugged '500 Internal Server' error that Rich Sneiderman was seeing on
       SCM UI. Root cause is that license info is missing for that Tenant in
       `tenant_app_association` table in RDS on dev10.
+    - Again spent 2 hours with Anandakumar Muthu on 5G work.
 
 - Warrior/REI:
 - Minutiae:
