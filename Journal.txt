@@ -43,16 +43,17 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@@@@@@@@@@@@@@   October 2024    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   November 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
+        - ZDIA Upgrade workflow
+        - ZY-1675: We are running out of sequence IDs within 20 days or so in QA environment. There's a *leak*. Too many GET API calls are happening.
+        - Single Trace Id feature
+        - etcd integration with IronVault feature
+
+        - SDWAN + App Accel Integration Bugs
         - App Accel Serviceability
             - Write confluence page and share with Vikram
-
-        - Zycada + SDWAN Integration
-            - L7 App Acceleration
-                - FS Update - IN PROGRESS
-                - Development - IN PROGRESS
 
         - App Accel Testing
             - Postman or Mockoon or httptest or httpmock
@@ -63,16 +64,263 @@ Career
         - Hitless Software Upgrade Design
 
 Personal
+    * 6am Wake Up: Do this in this order, every day.
+        - Padma Sadhana + Kriya + Meditation + Guru Pooja
+        - Flute
+        - Vashista Yoga
+
+    * Read 1/book a month
+
+    * Education
+        - Test Driven Develop in Go (Book) and follow along coding.
+        - Test With Go
+        - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - Start underwriting 1 deal/day
+
+    * Insurance:
+        - 3012/3014 Pine Valley - IN PROGRESS
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Organize a YES course
+    - Sign up for YES TRM
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2024, Nov 01 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+2024, Nov 18 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Up by 3am and came to office.
+
+
+
+2024, Nov 17 (Sun)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Arrived home around 3pm
+    - 4H with Akshay
+    - FasTrak toll. Invoice#: T822441466579. License: CZ27S21 (Chevy Bolt)
+        - Confirmation#: 818301290
+        - Paid $12.20
+    - Paid off $3000 on Chase Credit Card.
+    - Realized that Car Insurance is $1400 for 6 months.
+        - High time to get quotes from Upwork.
+
+
+
+2024, Nov 16 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Traveling from India to US.
+
+
+
+2024, Nov 15 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Ainavilli Temple visit. 108 coconuts. Donation. Media team asked a
+      statement from Dad and recorded it.
+    - Left for Hyderabad via Train from Palakollu station.
+        - Met a lady Ms. Subba Lakshmi who gave 'Southern India Travels'
+          details who book entire itenerary.
+          7 & 8 Mustafa Towers, Ayodhya Junction, Lakdikapul
+          Hyderabad, TN
+          Ph: 040 2331 8866
+          Mobile: 984 802 3236
+
+
+
+2024, Nov 14 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Kumkuma Archana in Durgamma Temple.
+
+
+
+2024, Nov 13 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Poojas for Dwajah Sthamba Sthapana.
+    - Final day. The most beautiful experience ever in my life. Thanks to
+      Mom and Dad and villagers and God for giving this opportunity.
+
+
+
+2024, Nov 12 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Poojas for Dwajah Sthamba Sthapana.
+
+
+
+2024, Nov 11 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Poojas for Dwajah Sthamba Sthapana.
+
+
+
+2024, Nov 10 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Landed in Hyd, flew to Rajahmundry. Kala joined around 3pm.
+    - Drove to Adurru along with Pedda Attayya and Hanumanthu Uncle and reached around 8pm.
+
+
+2024, Nov 09 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - In flight to India
+
+
+
+2024, Nov 08 (Fri)
+#india #Adurru
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Flew to India/Hyderabad/Adurru via Qatar Airways.
+
+
+
+2024, Nov 07 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Nov 06 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Nov 05 (Tue)
+- Work:
+    - 'Global Feature App Acceleration' API is a problem. It is assuming App Accel nodes/worker in the backend. We
+
+
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Nov 04 (Mon)
+- Work:
+    - Woke up at 3am and came to work at 4am and went home at 6am :)
+    - ZY-1041
+        - With Umesh's help, found the issue with GraphQL query.
+
+- Warrior/REI:
+- Minutiae:
+    - Took car to cleaning.
+
+
+2024, Nov 03 (Sun)
+- Work:
+    - Watched Jane Jojo's ZDIA upgrade FS.
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi RSM class.
+    - Madhavi Farmers Market.
+    - Akshay Basketball class.
+    - YES follow up.
+
+2024, Nov 02 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Voted in Presidential Elections.
+    - Aarushi's AOPS 2-day AMC10 Virtual started.
+    - Donated previous nights food at LifeMoves Innvision.
+
+
+2024, Nov 01 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Spoke with IRS personnel on phone (>1 hour long).
+        - Wait for a mail from IRS about updated payments.
+        - Save all documents that I've mailed to IRS.
+        - I do not have anything to worry. IRS will not levi any fines.
+
+    - Took Akshay to Cupertino library. I spoke with Election Officals. I'm
+      already in the system as registered voter. Just go there on Saturday and
+      vote.
+    - Diwali dinner with friends.
+    - Went to office to look for Gold Bracelet. Only Silver plates but no Gold
+      Bracelets. Luckily, Amma found them in Hyderabad.
+
+
+@@@@@@@@@@@@@@   October 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - App Accel Serviceability - IN PROGRESS
+            - Write confluence page and share with Vikram
+
+        - Zycada + SDWAN Integration
+            - L7 App Acceleration
+                - FS Update - DONE
+                - Development - DONE
+
+        - App Accel Testing - IN PROGRESS
+            - Postman or Mockoon or httptest or httpmock
+
+        - Jenkins automation of zworker upgrade - IN PROGRESS
+            - Write confluence page and share with Vikram
+
+        - Hitless Software Upgrade Design - IN PROGRESS
+
+Personal
     * Do this in this order, every day, in from 6am
         - Padma Sadhana + Kriya + Meditation + Guru Pooja
         - Flute
         - Vashista Yoga
 
-    * File 2023 taxes
+    * File 2023 taxes - DONE - This is huge achievement.
+    * Respond to 2021 CP2000 Notice - DONE - This is huge achievement.
 
     * Education
-        - Test With Go
-        - Taro: Nail Your Promotion As A Software Engineer
+        - Test With Go - IN PROGRESS
+        - Taro: Nail Your Promotion As A Software Engineer - IN PROGRESS
 
 REI
     * Warrior:
@@ -96,23 +344,33 @@ REI
     * Estate Planning
 
 Seva
-    - Lead YES follow up. - NOT DONE
+    - Lead YES follow up. - DONE
     - Attend adult follow up. - DONE
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-2024, Oct 01 (Fri)
+2024, Oct 31 (Thu)
 - Work:
+    - Grokking the code to scope ZDIA upgrade flow. Things I found.
+        - HandlePatchFeature()
+            - SetGlobalOneFeature()
+                - SetGlobalOneFeature()
+                - go NotifyAllFeatureEnabledTenants()
 
 - Warrior/REI:
-
 - Minutiae:
 
 
 
+2024, Oct 30 (Wed)
+- Work:
+    - Grokking code for ZY-1041 bug (Deprovisioning is not cleaning up Zclusters).
+    - Grokking code for ZY-1687 tasks - Support ZDIA upgrade workflow.
 
+- Warrior/REI:
 
-
-
+- Minutiae:
+    - Terminix came and set traps at 629 Celebration Ct. Tenants suspect seeing a mouse.
+    - Long talk with Alok Ranjan and issues with Suman Prakash.
 
 
 2024, Oct 29 (Tue)
@@ -120,6 +378,13 @@ Seva
 
 - Work:
     - Attended Rajmohan's demo to SDWAN Sales Consultants.
+    - Fixed many Zcluster VMs in limbo state during upgrade. Closed ZY-1762.
+    - "Out of nowhere" there was "500 Internal Server" error happening in QA01
+      on v1/settings API. Samarpit opened a bug (ZY-1811) and assigned to me
+      (since I volunteered to look into). But it is tied to PASRE-52137 and
+      deployment issue. Closed ZY-1811.
+    - Sprint6 started.
+
 
 - Warrior/REI:
 
@@ -144,12 +409,17 @@ Seva
         - Use "Generic Medications" wherever applicable.
         - Step Therapy
             - What is this?
-
-
+    - Long talk with Alok Ranjan about issues with Suman Prakash.
+        - She's asking everyone to work on PARTS framework.
+        - Dev team is resisting.
+    - Short run after dropping off Aarushi at Swimming.
+    - Went to Home Depot to purchase bulb with plugin socket. But it is not working :(
+    - Went to Safeway and purchased cupcakes etc for Aarushi's Speech team.
 
 
 
 2024, Oct 28 (Mon)
+#facial
 - Work:
     - Spent lot of time building an API to fix ZY-1762 issue. I've manual
       solution, but want to automate it via an API call. Changes are in
