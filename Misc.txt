@@ -5215,3 +5215,83 @@ Useful Options
 -f or --from-file: Read filter from a file.
     jq -f filter.jq data.json
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@   Concurrency vs Parallelism   @@@@@@@@@@@@@@@@@@@@@@@@@
+
+Concurrency:
+    - Multiple tasks making progress simultaneously
+    - Tasks can start, run, and complete in overlapping time periods
+    - Does NOT require multiple CPU cores
+    - About dealing with multiple things at once
+    - Example: Single chef juggling multiple dishes
+      - While pasta is boiling, chop vegetables
+      - While sauce is simmering, prepare garnish
+      - Tasks are interleaved but not truly simultaneous
+
+
+Parallelism:
+    - Multiple tasks executing at exactly the same moment
+    - Requires multiple CPU cores/processors
+    - About doing multiple things at the same time
+    - Example: Multiple chefs working simultaneously
+      - Chef 1 prepares main dish
+      - Chef 2 prepares side dish
+      - Chef 3 prepares dessert
+      - All working truly simultaneously
+
+
+Key Differences:
+
+Hardware Requirements:
+    Concurrency: Can work with single core
+    Parallelism: Requires multiple cores
+
+Execution:
+    Concurrency: Tasks progress by switching context
+    Parallelism: Tasks progress simultaneously
+
+Design Focus:
+    Concurrency: Structure (dealing with multiple tasks)
+    Parallelism: Execution (doing multiple tasks)
+
+
+
+Common Use Cases:
+
+Concurrency:
+    - I/O operations
+    - User interface handling
+    - Network requests
+    - Database operations
+
+Parallelism:
+    - Image/video processing
+    - Scientific calculations
+    - Big data processing
+    - Neural network training
+
+
+
+Programming Models:
+
+Concurrency:
+    - Async/await
+    - Callbacks
+    - Event loops
+    - Coroutines
+
+Parallelism:
+    - Threading
+    - Multiprocessing
+    - Distributed computing
+    - GPU computing
+
+
+Remember:
+
+- You can have concurrency without parallelism
+- You can have parallelism without concurrency
+- You can have both together
+- Choice depends on your specific use case
+
+Reference: Claude
