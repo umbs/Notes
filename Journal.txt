@@ -47,6 +47,7 @@ Seva:
 Career
     Major Projects:
         - ZDIA Upgrade workflow
+
         - ZY-1675: We are running out of sequence IDs within 20 days or so in QA environment. There's a *leak*. Too many GET API calls are happening.
         - Single Trace Id feature
         - etcd integration with IronVault feature
@@ -65,15 +66,16 @@ Career
 
 Personal
     * 6am Wake Up: Do this in this order, every day.
-        - Padma Sadhana + Kriya + Meditation + Guru Pooja
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
         - Flute
-        - Vashista Yoga
+        - Vashista Yoga (at night)
 
-    * Read 1/book a month
+    * Read 1 book a month
+        - The Man Who Solved The Market by Greg Zuckerman
 
     * Education
         - Test Driven Develop in Go (Book) and follow along coding.
-        - Test With Go
+        - Test With Go Videos
         - Taro: Nail Your Promotion As A Software Engineer
 
 REI
@@ -112,8 +114,113 @@ Seva
 
 
 
-2024, Nov 18 (Mon)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2024, Nov 25 (Mon)
 - Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Nov 24 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - One of the most intense days of work.
+    - Sadhana early morning, around 6am.
+    - Cricket with Darsh, Hemasundar. Back home at 9:30am.
+    - Took Akshay to breakfast at Kovai Cafe.
+    - Aarushi biked to RSM. Akshay and I went to Subway, got sandwich for
+      Akshay and Aarushi and left it at home for Aarushi to have after she's
+      back from RSM.
+    - Basketball game for Akshay.
+    - 4H meeting from 3pm-4pm right after basketball game.
+    - YES Kriya follow up right after the meeting. Only one person showed up
+      and she left in the middle of Kriya. I've to lead SKY Kriya with more
+      purity/sanctity.
+    - Signed up Aarushi for AOPS (2 classes). About $1300 with books.
+    - Helped out Akshay with Math classes.
+
+
+
+2024, Nov 23 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - AOL in morning.
+    - Chinmaya Mission classes.
+    - Akshay basketball practice.
+
+
+2024, Nov 22 (Fri)
+#losangeles
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Madhavi went to LA in morning (6am)
+
+
+2024, Nov 21 (Thu)
+#birthday
+- Work:
+    - Work with Tanmay and Ramya to get Smoketests to run on dev04.
+
+- Warrior/REI:
+- Minutiae:
+    - Did Guru Pooja in morning and Sadhana.
+    - Dinner at Kovai Cafe
+
+
+2024, Nov 20 (Wed)
+- Work:
+    - In office by 9am
+
+- Warrior/REI:
+    - Watched Syndated Deal Analyzer videos from 5th to 10th lesson
+
+- Minutiae:
+
+
+
+
+2024, Nov 19 (Tue)
+- Work:
+    - Listen in on NetActuate talk by Roy Anthonyraj.
+    - Spent some time on installing hyperfine, iperf etc profiling tools.
+    - Meeting with team about ZDNS project.
+    - Meeting with Jane Jojo about ZDIA upgrade flow.
+
+- Warrior/REI:
+- Minutiae:
+    - Up by 3am and came to office
+    - AoPs for Akshay. Very disappointed that he cheated on homework. Gave him a lecture.
+    - Jet Lag, slept for 2 hours in afternoon.
+
+
+
+2024, Nov 18 (Mon)
+#facial
+- Work:
+    - Looked into a GraphQL authorization error that Anand Muthu from 5G team is seeing.
+    - Cloud NAT IPs list. Built an API to fetch this list. (ZY-1614)
+        - Reviewed and merged.
+        - But sent to Ganu/Roy/Vikram for feedback on API semantics.
+
+    - num_assigned_tenants is off by 1. (ZY-1030)
+
 - Warrior/REI:
 - Minutiae:
     - Up by 3am and came to office.
