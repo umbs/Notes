@@ -116,6 +116,11 @@
                 - Entire REI portfolio must generate > $100K/month in Cash Flow.
 
 
+@@@@@@@@@@@@@@@@@@@@@@@      Deal Criteria                    @@@@@@@@@@@@@@@@@@@@@
+Cash-on-Cash: 8%
+ARR: 18%
+IRR: 15%
+
 @@@@@@@@@@@@@@@@@@@@@@@      Email to Brokers                    @@@@@@@@@@@@@@@@@@@@@
 
 Subject: Multi-Family assets in San Antonio
@@ -535,8 +540,7 @@ Module #6: Biggest Deal Mistakes
     - Not communicating properly with Brokers.
 
 
-Useful Websites/Links/Resources:
----
+@@@@@@@@@@@@@@@@         Useful Websites/Links/Resources           @@@@@@@@@@@@@@@@@
     Data/Research
     ---
         • Sperlings Bestplaces
@@ -644,8 +648,6 @@ Erick Segura
     Feel free to join our bi-weekly zoom calls 'SYNERGY IN MULTIFAMILY' GROWTH & MINDSET Calls
 
     Sign up here: https://www.eventbrite.com/e/708763419467?aff=oddtdtcreator
-
-
 
 
 Tim (Denver Area)
@@ -806,6 +808,7 @@ Debt Coverage Ratio
             Debt Service
 
     - Banks look for 1.25, at least.
+    - Some deals you get have lower DCR in first year (or second). Ask them how they plan to handle.
 
 
 Internal Rate of Return (IRR)
@@ -813,18 +816,9 @@ Internal Rate of Return (IRR)
 Equity Multiple
 
 Deal Provider: One who finds deals.
-
 OM: Offering Memorandum
 PPM: Private Placement Memorandum
-
-
-@@@@@@@@@@@@@@@@@@@@@@     High Performance Coaching Calls      @@@@@@@@@@@@@@@@@
-July 3, 2024
----
-INFLUENCE:
-    - "Influence is not about popularity, it's about leadership." - unknown
-    - Leaders shape how we think.
-
+FMV: Fair Market Value
 
 
 @@@@@@@@@@@@@@@@@@@@@@     Syndicated Deal Analyzer (SDA)      @@@@@@@@@@@@@@@@@
@@ -882,19 +876,5 @@ Step 3: Use the advertised cap rate to come up with a revised Fair Maket Value (
         - Finally, expense MUST be at least 50%
 
     - Step 3: Using Cap Rate, calculate Fair Market Value (FMV)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
