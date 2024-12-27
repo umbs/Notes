@@ -43,32 +43,52 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@@@@@@@@@@@@@@   November 2024    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   December 2024    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
-        - ZDIA Upgrade workflow
+        DONE - ZDIA Upgrade workflow
+            - Validation use cases.
+            - Did a Alerts and Dashboards presentation on Dec 17th
+                - Attendees were PLM, TME from SDWAN.
 
-        - ZY-1675: We are running out of sequence IDs within 20 days or so in QA environment. There's a *leak*. Too many GET API calls are happening.
+            - Did a demo on Dec 19th
+            - Include ZDIA in Django dashboard + Jenkins that Thilakkumar and
+              Shankar are building.
+
+        DONE - App Accel Serviceability
+            - Built dashboards and panels.
+
+        - ZY-1675: We are running out of sequence IDs within 20 days or so in
+          QA environment. There's a *leak*. Too many GET API calls are
+          happening.
+
+        - Tenants V2 API is extremely slow. How to speed up?
+            - GraphQL instead of CoreAPI
+            - Make *single* lambda call for ALL tenants to get licensing
+              details.
+            - Do not make one lambda per Tenants. Ganu said there's some work
+              going on to sync RDS with neo4j.
+
         - Single Trace Id feature
         - etcd integration with IronVault feature
 
-        - SDWAN + App Accel Integration Bugs
-        - App Accel Serviceability
-            - Write confluence page and share with Vikram
-
         - App Accel Testing
-            - Postman or Mockoon or httptest or httpmock
-
-        - Jenkins automation of zworker upgrade
-            - Write confluence page and share with Vikram
+            - Using Postman
+            - Using Mockoon
+            - Using httptest
+            - Using httpmock
 
         - Hitless Software Upgrade Design
 
 Personal
     * 6am Wake Up: Do this in this order, every day.
         - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
-        - Flute
+
+    * At Night
+        - Flute practice
         - Vashista Yoga (at night)
+        - Go to bed by 11pm and no later.
+        - If there is screen time at night then, it should be REI or 'Testing With Go' classes.
 
     * Read 1 book a month
         - The Man Who Solved The Market by Greg Zuckerman
@@ -105,7 +125,7 @@ Seva
     - Sign up for YES TRM
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-2024, Nov 01 (Fri)
+2024, Dec 01 (Sun)
 - Work:
 - Warrior/REI:
 - Minutiae:
@@ -113,25 +133,528 @@ Seva
 
 
 
+2024, Dec 26 (Fri)
+#FFD
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Returned the car, grocery shopping at Indian store.
+    - Visited office to recharge car, exercise.
+    - Paid 1st installment of rent to Rajkumar ji.
+    - Spoke with Mamata from FFD. Weight gain happened (about 1.5 kg).
+        - Go on fasting. No grains and daal. Grains means: Wheat, Rice, Quinoa
+          etc. Daal means: Toor, Chana, Moong, etc.
+        - During fasting, drink Shahi water, Vegetables/Sabji only, Soups, etc.
+          Never go without eating anything.
+    - Lot of chores around the house.
+
+
+2024, Dec 22 - Dec 25
+#losangeles #reveal
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went to pick up Minivan in morning.
+    - Off to LA on Dec 22nd, Saturday, along with Kala and family. We went via
+      San Luis Obispo. Visited Pismo Beach and Boardwalk. Drove via Santa
+      Barbara. It got dark and we couldn't see surrounding beauty.
+    - Arrived at Vivek's house and glad to see whole family: Ty, Maya, Phil and
+      Rita.
+    - On 23rd, Monday, we went to park. Akshay practiced Basketball. After
+      that, Kala and my family went to Santa Monica Pier and carnival. Kids
+      thoroughly enjoyed the rides.
+    - On 24th, Tuesday, we went to La Brea Tar Pits. It was educational.
+      Enjoyed the visits.
+    - In evening, while talking to Amma, I did video conference and showed
+      Maya, Vivek and everyone. It was shocking reveal and I was in guilt for
+      remaining 2 days.
+    - Zak and Becky, Ty's brother and sis-in-law, came on Christmas eve.
+    - On Christmas eve, Kala cooked biryani for entire family. That was very
+      nice of him to put so much effort into it.
+    - On 25th, Christmas morning, Ty's mom, Rita, fell sick. Dehydrated. Later
+      in the day, Ty took her to hospital and she was put on IV.
+    - Kala, Veena and Abhiraam visited Griffith's observatory. We stayed on and
+      spent time with family.
+
+
+
+2024, Dec 21 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Dec 20 (Fri)
+#tuition #rsm
+- Work:
+    - Meeting with Roy Anthony about "Zcluster Optimization" project.
+        - M Cosmos Regions and N Compute Regions. We spin up M x N Zclusters.
+        - We want to have N Zclusters for N Compute Regions. They are shared
+          between *all* Cosmos Deployments.
+        -
+
+    - Meeting with Jane Jojo about updates to GCP Pubsub.
+        - In Prod, several Cosmos are mapped to Single SDWANC. They must know
+          which Cosmos region is getting upgraded. Therefore, one idea is to
+          send list of Tenants getting affected in GCP Pubsub. Tenants in that
+          Cosmos.
+    - I've created Tenants in dev04 that Tanmay Sawant asked.
+
+
+- Warrior/REI:
+- Minutiae:
+    - Paid off $300 of RSM tuition fees.
+    - Akshay stayed home on last day of school.
+
+
+2024, Dec 19 (Thu)
+- Work:
+    - Trying to prepare for DTHO.
+        - We had to change testing environment to Dev04 which AWS China team
+          was using (Umesh). We have to set it up for testing :(
+    - DTHO completed, late at night, around 11:30pm
+
+- Warrior/REI:
+- Minutiae:
+    - Brought Sashi along with me to office.
+    - Went to Jayant ji's house and dropped of Tax Returns.
+        - He asked for various 1098 forms (from Rental Properties). Also asked
+          for 1098 forms for Primary Residence. I did not have it. I called PHH
+          Mortgage to get 2021 and 2022 1098 forms. PHH Mortgage transfered
+          ownership of Mortgage to Freedom Mortgage in 2022.
+
+    - Sashi's friend, Srikanth, visited home. Sashi and Srikanth went to Dublin
+      to meet old friends.
+
+
+2024, Dec 18 (Wed)
+- Work:
+    - At work by 11am
+
+- Warrior/REI:
+- Minutiae:
+    - Dropped of Dell Monitor at UPS.
+    - Picked up IKEA candles from FedEx.
+    - Calling IRS for clarification on Notices.
+        - On call for >2 hours
+    - Spoke with Jayant Trivedi on advice from Madhavi.
+        - He's willing to help and I feel *sooooo* relieved.
+        - I came back to Office, took printouts of Tax Returns and went to his
+          house to drop them off. House was locked :(. But apparently doors
+          were open :(
+
+    - Gym with Raychel.
+        - Did lot of weight training. Very happy with the decision.
+    - Sashi, Veena and family came.
+
+
+2024, Dec 17 (Tue)
+- Work:
+    - Presentation on 'Alerts & Dashboards' to SDWAN TME and PLM teams.
+        - Spent lot of time preparing for the talk.
+    - Spoke with Vikram about Engineering Project.
+        - He advised "Cost reduction" project by reducing number of VMs is good
+          project. I should get lot of visibility if done effectively.
+
+- Warrior/REI:
+- Minutiae:
+    - Due to late night TV watch, I woke up exhausted :(
+
+
+
+2024, Dec 16 (Mon)
+- Work:
+    - Up a bit early (6am) and in office at 8:30am
+    - Attended All Hands by Suresh Sangaiah.
+
+- Warrior/REI:
+- Minutiae:
+    - Up a bit early (6am) and in office at 8:30am
+    - Slept at 3am, watching Breaking Bad, Season 3 until Episode 11.
+
+
+2024, Dec 15 (Sun)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay had Basket Ball tournament. Their team qualified to Finals, but came runners up.
+    - I stayed back to pick/drop Aarushi at RSM.
+    - I did 4H by myself.
+    - Kriya in evening.
+    - Lot of "Clothes Folding" in preparing for Kala's family arrival.
+
+
+2024, Dec 14 (Sat)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay had Advanced Yellow Belt test. He did well.
+    - Akshay had Basket Ball coaching.
+    - Chinmaya Mission, Bala Vihaar, Telugu Class.
+    - Kriya in evening.
+
+
+2024, Dec 13 (Fri)
+- Work:
+    - I had to move the presentation out to Tuesday, Dec 17th because TME and
+      PLM were busy.
+    - Meeting with Jane Jojo, Praveen Atmanath and Gopi Dhulipalla.
+        - Discuss Tenants with PA + SDWAN license and how Tenant info is saved in neo4j.
+        - Minutes of Meeting from Jane
+                1) SDWAN + PA tenant, User purchase SDWAN App accel license ->
+                SDWAN Controller will detect that tenant node is already
+                present in the graph (with oid= <cdl_tenant_id>) and patch the
+                tenant node with SDWAN Controller uri details. Node will have
+                SDWAN and PA attributes
+
+                2) SDWAN tenant with App accel license -> There’s no CDL tenant
+                id at that moment. SDWAN Controller will create the tenant node
+                with oid = <tsg_group>. ZOS service in Cosmos also creates
+                relationship nodes with this tenant node. and User purchase PA
+                license for such a tenant -> When SDWAN Controller detects that
+                tenant has cdl_tenant_id, patch the tenant node with (with oid=
+                <cdl_tenant_id>) with special query params and Node will have
+                SDWAN and PA attributes
+
+                Praveen and Gopi,
+                Please provide the query params to use, for rewriting oid in the ne04j.
+
+                Thanks,
+                Jane.
+
+
+
+    - Meena Sehar meeting.
+        - Showed her that Zworker came up in Prod. She verified ION devices got
+          NLB IP address.
+    - Meeting with Amit Gupta
+        - Understand how Grafana can be edited. I want to have my own (SDWAN)
+          Grafana dashboards.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay's soccer game is canceled due to poor weather. I picked him up.
+
+
+2024, Dec 12 (Thu)
+- Work:
+    - I prepared a bit about Alerts and Dashboards on Grafana.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Dec 11 (Wed)
+#wfh
+- Work:
+    - Prod issue where ZDIA workers were not coming up for TME (Meena Shehar).
+      ZY-2099. Turns out, there are not ZDIA images in GCP project. Working
+      with QA to upload these images.
+    - Integration testing with SDWANC for ZDIA upgrade.
+
+- Warrior/REI:
+- Minutiae:
+    - Personal Trainer session at Cupertino Sports Center. 9-10am
+        - Legs have become like Jelly.
+        - All other exercises were manageable.
+
+
+2024, Dec 10 (Tue)
+- Work:
+    - James/Pradeep pointed an issue where Tenants V2 API is not fetching NLB
+      IP address of a tenant: 1641641337 in QA01.
+        - This tenant does not show up in Tenants V1 and V2 API calls.
+            - Tenants V1 API: {{url}}/iapi/zos/v1.0/tenants
+            - Tenants V2 API: {{url}}/iapi/zos/v2.0/tenants?cloud_provider=gcp&cloud_region_name=us-west2
+
+        - Direct Core API call to this Tenant pulls details. So, how is this data saved?
+            - CORE API: {{url}}/api/sase/v2.0/controller/tenant?tenant_service_group=1641641337
+
+        - App Sec feature was doing a check. That broke functionality.
+            - As per the check, App Sec, assumed that all Tenants will be in CYR.
+            - If not present, they'll raise an error and move onto other Tenants.
+            - SDWAN only Tenants will NOT be in CYR.
+        - Amit Chandak helped fix that.
+        - After that fix, my own code change in previous MR caused regression.
+
+    - One round of UIT with Jane. ZOS is publishing message to GCP but SDWANC
+      is not consuming.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Dec 09 (Mon)
+#debtcollection
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Paid off debt collection for CEP America. Emergency doctors visit on
+      March 6th for Aarushi. Paid $429 (original amount). I was charged $444
+      (with interest). I've asked for discount and got to pay original amount
+      :). Wakefield is name of debt collector. I paid from KPCU account using
+      money from checking account.
+    - Madhavi paid off $11000+ amount in Credit Card debt from her BoA account.
+    - Meeting with Fidelity Advisor: Richard Rocke
+
+        - My Questions:
+            - Performance is 16.39%, correct? This is before the fees.
+            - Just looking for a summary of my portfolio.
+            - Is there anything I have to do due to end of the year?
+            - Sell loss making stocks for Tax loss harvesting?
+            - College Fund
+            - Convert to Inherited IRA
+                - Put Contingent Beneficiaries on all accounts. Aarushi and Akshay.
+
+        - Annual Review
+
+        - Retirement Guidance Tool
 
 
 
 
+2024, Dec 08 (Sun)
+- Work:
+    - I quickly tested all my changes are working on dev04.
+
+- Warrior/REI:
+- Minutiae:
+    - I yelled at Aarushi about her obsession with her *things*. Disappointed for showing so much anger. It's due to lack to sleep previous night. I must get my bsics right. Time is running out and I cannot afford to waste time on TV and useless stuff.
+    - Aarushi RSM.
+    - Basketball game.
+    - 4H with Akshay. Cleaning and later meeting with Vet about Q fever.
+    - YES Kriya.
+    - Dinner with Kanika and Tarana, Kathyayini and Varun and entire family at BJ's
+
+
+2024, Dec 07 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Bala Vihaar + Telugu class. Madhavi came along, which was nice.
+    - Akshay's basketball practice. Madhavi dropped him off from Chinmaya Mission.
+    - Stayed up until 3am and watched Breaking Bad episodes in Season 2. It is
+      extremely well made, but intense intense intense series. I'll stop
+      watching them.
+    - Finshed up 'Private Equity', A Memoir by Carrie Sun. I'll post a review
+      of the book on my website.
 
 
 
+2024, Dec 06 (Fri)
+#WFH
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay has soccer game with Collins Elementary.
+
+
+2024, Dec 05 (Thu)
+- Work:
+    - Finally got MR merged.
+    - Stayed up late to add validation checks and deployment to subenv.
+    - Call with Amit Kumar Agarwal at night to debug an SDWAN issue.
+        - From SDWAN UI, they applied a performance policy. It should have
+          trigger App Acceleration and spun up ZDIA workers. It did not happen.
+          Jane says it's because SDWANC did not receive message via pubsub.
+        - This is in Prod. I do not have access to Prod Grafana to debug.
+
+- Warrior/REI:
+- Minutiae:
+    - Stayed up late to watch Aus vs India game.
+
+
+2024, Dec 04 (Wed)
+#facial
+- Work:
+    - Raised MR for ZDIA upgrade flow.
+
+- Warrior/REI:
+- Minutiae:
+    - 4 mile run at Cupertino Gym
+
+
+2024, Dec 03 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
 
 
 
+2024, Dec 02 (Mon)
+- Work:
+    - Meeting with Roy and Ganu on ZDIA upgrade process.
+        - Have 'is_disabled_for_upgrade' boolean flag.
+        - When user enables App Accel again, make sure all upgrades are completed.
+        - User can "force" enable using the flag if some nodes are still upgrading.
+        - Remove the 'zdia' endpoint. Use only 'app_acceleration' endpoint.
 
+    - Spoke with Vikram.
+        - What happens to ZDIA when dcache is being upgraded?
+        - Answer: When App Accel is disabled, we notify *all* clients including SDWANC.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2024, Dec 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Chores most of the day.
+    - Ate at Chaat Bhavan in evening.
+    - I must listen to Madhavi more and have more meaningful conversations. I
+      zone out and do my own thing. She feels I'm not available, emotionally.
+
+
+
+@@@@@@@@@@@@@@   November 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        ONGOING - ZDIA Upgrade workflow
+
+        NOT DONE - ZY-1675: We are running out of sequence IDs within 20 days or so in QA environment. There's a *leak*. Too many GET API calls are happening.
+        NOT DONE - Single Trace Id feature
+        NOT DONE - etcd integration with IronVault feature
+
+        DONE - SDWAN + App Accel Integration Bugs
+
+        NOT DONE - App Accel Serviceability
+            - Write confluence page and share with Vikram
+
+        NOT DONE - App Accel Testing
+            - Postman or Mockoon or httptest or httpmock
+
+        NOT DONE - Jenkins automation of zworker upgrade - BEING DONE BY THILAK AND SHANKAR (Team Mates)
+            - Write confluence page and share with Vikram
+
+        NOT DONE - Hitless Software Upgrade Design
+
+Personal
+    * NOT DONE - 6am Wake Up: Do this in this order, every day.
+        DONE - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+        NOT DONE - Flute
+        NOT DONE - Vashista Yoga (at night)
+
+    * DONE - Read 1 book a month - DONE
+        DONE - The Man Who Solved The Market by Greg Zuckerman
+
+    * NOT DONE - Education
+        NOT DONE - Test Driven Develop in Go (Book) and follow along coding.
+        NOT DONE - Test With Go Videos
+        NOT DONE - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * NOT DONE - Warrior:
+        NOT DONE - Deal Maker Mastermind (Michael Blank). Watch all video lessons. - NOT DONE
+        NOT DONE - Start underwriting 1 deal/day - NOT DONE
+
+    * NOT DONE - Insurance:
+        - 3012/3014 Pine Valley
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    * DONE by Madhavi - Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * NOT DONE - Freedom Mortgage - Include escrow.
+    * NOT DONE - Estate Planning
+
+Seva
+    ONGOING - Lead YES Follow Up
+    NOT DONE - Organize a YES course
+    NOT APPLICABLE - Sign up for YES TRM - Signed up for Teachers Upgrade program
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2024, Nov 30 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Hiking in Rancho San Antonio.
+
+
+
+2024, Nov 29 (Fri)
+- Work:
+    - Coded ZDIA upgrade workflow. Raised couple of MRs (modelo and an inefficiency improvement).
+
+- Warrior/REI:
+- Minutiae:
+
+
+2024, Nov 28 (Thu)
+#calacademyofsciences
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Cal Academy of Sciences
+    - Went to Office Gym after returning home and ran 3.5+ miles in an hour.
+    - Worked late into the night and wasted lot of time.
+
+
+2024, Nov 27 (Wed)
+- Work:
+    - Coding continues for 'app_accel_disabled_for_upgrade' flag.
+    - I'm seriously worred about Tenant --> TenantFeature --> Apps
+
+- Warrior/REI:
+    - I spoke with Kim from Century 21. I've transferred $5000 to Century 21
+      account for future payments for repairs.
+
+
+- Minutiae:
+    - Lot of time spent on assessing money in various accounts (ETrade,
+      Fidelity, etc).
+        - Setup weekly investments for Madhavi from KPCU --> ETrade -->
+          SPY/QQQ/FXAIX funds
+        - Transferred $20K from Madhavi's BoA to KPCU to setup weekly recurring
+          investments.
+        - Checked my Fidelity returns: 14% YTD. Not bad.
+    - Transferred funds from Wells Fargo San Antonio properties to personal
+      account to pay for repairs.
+    - Transferred money to Century 21 for future reserves and pay for
+      dishwasher and microwave oven.
+    - Tried setting up an account on Franchise Tax Board (myFTB). They failed
+      to connect to TransUnion so, they could not verify my identity. Instead,
+      I've opted for sending a PIN via letter/mail. I can open an account once
+      I've that letter.
+
+
+2024, Nov 26 (Tue)
+- Work:
+    - Discussion with Vikram, Jane Jojo, Ganu about ZDIA Upgrade workflow and API changes.
+        - We will mostly go with just adding `upgrade` attribute in the API body.
+    - ZOS was failing to come up in new regions (ID, TW, QA), due to missing
+      SDWANC certificates. Worked with Mausami Patel and raised PASRE ticket.
+    - Meeting with Ganu, Roy, Vikram, Shankar Palakodeti, Thilak about how to handle ZDIA upgrade
+        - Discovered ZDIA upgrade has dependency on dcache upgrade.
+        - Include one attribute `is_disabled_for_upgrade={true|false}`
+
+
+- Warrior/REI:
+- Minutiae:
 
 
 
 
 2024, Nov 25 (Mon)
+#facial
 - Work:
+    - ZDIA upgrade design. Updated FS. Made code changes. Thinking through various edge cases.
+    - Raised an MR with fixes to typos. (s/ClodProviderRegion/CloudProviderRegion).
+
 - Warrior/REI:
 - Minutiae:
+    - Madhavi is back from LA.
+    - Facial at night.
 
 
 
