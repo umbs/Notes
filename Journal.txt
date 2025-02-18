@@ -1,4 +1,4 @@
-@@@@@@@@@@  Overall Goals for 2024  @@@@@@@@@@@@@
+@@@@@@@@@@  Overall Goals for 2025  @@@@@@@@@@@@@
 Personal:
     * Start building products
         - Write code to analyze deals using Zillow API
@@ -43,42 +43,389 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@@@@@@@@@@@@@@   December 2024    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   February 2025    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
-        DONE - ZDIA Upgrade workflow
-            - Validation use cases.
-            - Did a Alerts and Dashboards presentation on Dec 17th
-                - Attendees were PLM, TME from SDWAN.
+        - FedRAMP
+            - Functional Spec review
 
-            - Did a demo on Dec 19th
-            - Include ZDIA in Django dashboard + Jenkins that Thilakkumar and
-              Shankar are building.
+        - COREEXT-1471: App Accel Serviceability
+            - Build Alerts based on Logs
 
-        DONE - App Accel Serviceability
-            - Built dashboards and panels.
+        - Work with Tanmay and setup Dev04 for the team.
+
+        - Maintanence
+            - ZY-2386
+            - ZY-2351
+
+        - Tenants V2 API is extremely slow. How to speed up?
+            - GraphQL instead of CoreAPI
+            - Batching: Make *single* lambda call for ALL tenants to get licensing
+              details.
+
+        - Single Trace Id feature
+
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+Personal
+    * 6am Wake Up: Do this in this order, every day.
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * At Night
+        - Flute practice
+        - Vashista Yoga (at night)
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+        - Currency Wars, Drop The Ball, Family Firm
+
+    * Education
+        - Test Driven Develop in Go (Book) and follow along coding.
+        - Test With Go Videos
+        - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - Start underwriting 1 deal/day
+
+    * Insurance:
+        - 3012/3014 Pine Valley
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Organize a YES course
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Feb 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+2025, Feb 17 (Mon)
+- Work:
+    - Mid-Year Self Evaluation
+        1. Share highlights regarding the achievement of goals and milestones or the impact realized during this performance period. (Be mindful to note specific areas of success and opportunity.)
+            SDWAN:
+                - SDWAN + L7 App Accel PROD rollout.
+                - Worked with TMEs and PLMs to iron out issues in PROD.
+                - Set up Dashboards, Alerts for serviceability of SDWAN feature.
+                - Enhance ZDIA workers upgrade workflow.
+
+            QA Regression Improvements:
+                - Enable QA Control Plane regression on dev04 environment.
+                - Enabling more frequent regression runs and, in future, custom tests execution.
+
+            ZOS Control Plane Improvements:
+                - Contributed towards ZOS architectural improvements for better performance.
+
+        2. Provide examples of how our values were demonstrated in day to day work throughout this performance period.
+            COLLABORATION: I've worked with multiple stake holders to bring "SDWAN + App Acceleration" to finish line. Engineers from ZOS, SDWAN and QA, PLM, TME and leadership.
+
+            EXECUTION: "SDWAN + App Accel" project was delivered with near zero P1 bugs in ZOS control plane.
+
+            INTEGRITY: Execution of the projects, communication of risks, making design decisions, were all conducted with high integrity.
+
+        3. What is one area of development that would lead to greater levels of performance or growth?
+            Seeking help when blocked will allow me to make progress faster.
+
+        4. What final comments would you like to share regarding this performance period or focusing on the next?
+            My focus in next cycle will be to deliver more value and impact to the team. In immediate future, this will be via FedRAMP project.
+
+- Warrior/REI:
+- Minutiae:
+    - Ate at bibimbowl in Sunnyvale.
+
+
+
+2025, Feb 16 (Sun)
+#tarnakahouse
+- Work:
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi at RSM
+    - Farmers Market
+    - Sent out email summary to Kondal Rao garu
+
+
+2025, Feb 15 (Sat)
+#facial #tarnakahouse
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Aarushi and Akshay to theCoderSchool.
+    - I returned books in library.
+    - Paid $1254 to Elite Taekwondo for Akshay for next 6 months.
+    - Went to office gym, ran 1.75 miles, when Aarushi called that she's scared
+      at home, being alone. Came back.
+    - Meeting with family about Tarnaka house plans. Summary.
+        1. We like Option 6 with some modifications.
+        2. We want another balcony (small one) in North, next to Pooja Room.
+        3. Currently, Store Room is 6.1" x 7.6". This can be reduced to 6" x 6". This makes Utility Room larger. We can put Washer in it.
+        4. Currently, Balcony in the East is 16.6" x 6.6". This can be shorted by 1 ft on both sides, making it 14.6" wide.
+        5. Currently, Pooja Room is 6" x 12". Width can be reduced to 9" thus making it 6" x 9".
+        6. Currently, Living Room is 18.1" wide. Points 1-5 will make width of Living Room 22.1" wide.
+        7. Currently, there is no Office Room in Option 6. We want to have Office Room next to Pooja Room. Size 6" x 6". This will make Living Room 16.1" wide. We can make Office Room with glass walls for wider look and feel.
+        8. Entrace for Guest Bedrooms must be in NE corner of the Guest Bedroom.
+
+        THIS IS IMPORTANT.
+        We want Main Entrance (Simha Dwaram) to be at the center of the plot. Towards this, below are some suggestions:
+        9. Currently, Guest Bedrooms are of unequal width (15" and 15.6" respectively). We can make both 15" or 15.3".
+        10. Currently, Powder Room is to the left of entrance. We can move it to the right of entrance, sharing the wall with Master Bathroom. Walk-In Closet can be adjusted accordingly. This is pending Vaastu approval.
+        11. Main Entrance must be moved to left, to be Symmetrical and Center to the plot. Balcony in East must be moved to left to be symmetrical with the Main Entrance.
+
+
+
+2025, Feb 14 (Fri)
+- Work:
+    - All Hands meeting in morning.
+    - Debugging session with Amit Agarwal and team about bug CG
+
+- Warrior/REI:
+- Minutiae:
+    - Watched 'Inception' with Vivek and entire family. Great movie.
+
+
+2025, Feb 13 (Thu)
+- Work:
+    - ZY-2462 and ZY-2386 are fixed. MR merged.
+    - Met with Amit Agarwal to make sure his doubts are cleared.
+
+- Warrior/REI:
+- Minutiae:
+    - Bhargava Yerrapragada. Internal referral.
+
+
+2025, Feb 12 (Wed)
+#facial
+- Work:
+    - Lengthy meetings with Gopi Dhulipalla, Praveen Atmanath, Umesh Jain and Jane Jojo
+        - ZY-2462 - neo4j return '404 Not Found' error
+    - Meeting in evening with Tanmay Sawant, Zhe Fan, Badrinath. Tanmay presented on how to enable new test bed. Zhe Fan will implement it.
+    - Stayed up *pretty* late at night and completed ZY-2386 MR and ZY-2176 MR
+    - Spoke with Amit Kumar Agarwal and explained the root cause.
+
+- Warrior/REI:
+- Minutiae:
+    - Gym in morning.
+    - Paid $1041.73 to Carlos for fixing flooring/carpet issue in 3043 Pine Valley Dr house.
+
+
+2025, Feb 11 (Tue)
+- Work:
+    - Meeting with Anish Mathews about new Job model.
+        - Task is smallest unit of definition in this model. What is an example of 'Task'?
+    - Kumar's team meeting. Focus on bugs. Top priority right now. Every
+      Thursday afternoon, a report is generated that goes to Anand Oswal. Make
+      sure no bugs > 90 days are open.
+    -
+
+- Warrior/REI:
+- Minutiae:
+    - Meeting with City of Campbell
+        - Not religous
+        - No overnight stay
+        - No certification
+        - It is *not* a Head Quarters
+        - We fall under "Studio, Large"
+        - We do not fall under "Public Assembly Gatherings"
+        - Visit library.municode.com for Campbell city codes.
+        - Visit gis.campbellca.gov for zoning maps.
+        - Takes about 4 months for Conditiona Use permit.
+        - Email with "document"
+        - How to get Conditional User Permit
+            - Submit an application to Planning Commission with our activities.
+            - They'll approve/deny
+            - 4 months
+
+    - Vivek Ganti visiting for office related work.
+
+
+
+2025, Feb 10 (Mon)
+- Work:
+    - ZY-1430 Unit Tests. Understanding how to write UTs in new model.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi returned from LA.
+    -
+
+
+2025, Feb 09 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Feb 08 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Feb 07 (Fri)
+- Work:
+    - Meeting with FedRAMP PLM (Chandra Lakshmi Narayanan) and GCAT (Alex Nieves). Gary presented data path encapsulation info (Geneve).
+        - We can proceed without SCR as App Accel is a small deployment.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Feb 06 (Thu)
+- Work:
+    - Current Nightly Regression Tests
+        Meeting Notes (Nightly Regression Tests) - 2/6/2025
+        Attendees: Tanmay Sawant, Badrinath Natarajan, Zhe Fan, Bhaskar,
+
+        Currently available:
+        1. Control Plane Tests (27 tests). These are run nightly. Takes 1 hour to complete.
+        2. Data Plane Tests. These can be run on-demand. Takes 4 hours to complete.
+
+        Want to have:
+        1. Bring in DP tests to nightly regression. Run CP tests on `develop` branch and DP tests on `develop` branch of zImage.
+        2. Have the ability to run subset of DP tests by developers on-demand.
+        3. Have the ability to run nightly regression suite on Custom branches. This will help in testing Hot Fix branches, Feature branches etc.
+        4. Use different Compute Regions for sharding. That is: On Dev10, nightly sanity tests are run in one Compute Region (say R1) using Tenant T1. Developers can run sanity tests on another Compute Region (say R2) using Tenant T2.
+
+        Questions:
+        1. Who owns the DP tests going forward? Ans: Devs
+        2. Who will implement these changes? Ans: Devs
+
+        Action Items:
+        1. Badri: Formalize this project with consent from Vikram.
+        2. Zhe Fan: Learn from Tanmay on Parts Framework. How to run existing tests.
+        3. Bhaskar and Zhe Fan: Scope the project and come up with a plan post Step 1.
+
+        Thanks,
+        Bhaskar
+
+    - FedRAMP Functional Spec
+    - 1:1 with Vikram
+        - Updates on FedRAMP
+        - SDWAN Testing
+        - Chit chat on College Counseling, etc.
+    - Amit Kumar Agarwal identified a bug in QA1 environment. He is not able to toggle App Accel from UI. 'v2/settings' API is returning 500 Internal Server error.
+
+- Warrior/REI:
+- Minutiae:
+    - Submitted tax forms at IRS office in San Jose. Got a stamped approval.
+
+2025, Feb 05 (Wed)
+- Work:
+    - Debugging session at late night with Anand Muthukumar from 5G team.
+- Warrior/REI:
+- Minutiae:
+    - I went to IRS, spent an hour there, then realized that Madhavi and I did not sign the documents :(
+    - Late night call with Sahil Aggarwal.
+    - Discussion with Alok Ranjan.
+        - Issues with Suman Prakash :)
+
+
+2025, Feb 04 (Tue)
+- Work:
+    - Closed CYR-47303
+        - Discussions with Vishal Narasimha (QA) and other SDWAN team members on how to test this.
+    - COREEXT-1471: Meeting with Naresh Nimmala to discuss Alerts on logs using Loki as data source.
+
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi was a *bit* late to school.
+    - Akshay friend's birthday party (Dylan). Took him to San Carlos LaserMaxx. Friend (Jayden) picked him up and Madhavi brought him back home.
+    - Notice from Ms. Santellan about Akshay being behind on assignments and homework :(
+
+
+
+2025, Feb 03 (Mon)
+- Work:
+    - Fixed CYR-4703. MR merged and deployed to dev and QA environments.
+    - Watched Vinit Adhkar's Tech Talk on FedRAMP. Very detailed architecture diagrams. Password and links in WorkTodo.txt file.
+    - Draw ZOS architecture to put it in FedRAMP FS.
+    - Resolved Amit Agarwal's "Tenant not found" issue whenever he was making v2/settings API call.
+
+- Warrior/REI:
+- Minutiae:
+    - Sat with Aarushi until 1am while she was doing her work, I did my office work.
+
+
+
+2025, Feb 02 (Sun)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Aarushi RSM, Akshay Basketball, spoke with Sireesha and Chinna Attaya, 4H.
+    - YES Kriya leading.
+    - Tarnaka House planning with Kala and Parents.
+
+
+
+2025, Feb 01 (Sat)
+#facial #thecoderschool
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - PG&E power cut for entire day.
+    - First day of theCoderSchool
+    - Chanting & Telugu class
+    - Basketball
+    - Dinner at 'Peppermint Restaurant' in Sunnyvale. Lovely place.
+    - PG&E power restored.
+
+
+
+@@@@@@@@@@@@@@   January 2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - COMPLETED: ZDIA Upgrade workflow
+            - Validate use cases.
+            - Complete Alerts and Dashboards
+            - Include ZDIA in Django dashboard + Jenkins that Thilakkumar and Shankar are building.
+
+        - COMPLETED: App Accel Serviceability
+            - Build dashboards and panels.
 
         - ZY-1675: We are running out of sequence IDs within 20 days or so in
           QA environment. There's a *leak*. Too many GET API calls are
           happening.
 
-        - Tenants V2 API is extremely slow. How to speed up?
+        - ONGOING: Tenants V2 API is extremely slow. How to speed up?
             - GraphQL instead of CoreAPI
             - Make *single* lambda call for ALL tenants to get licensing
               details.
             - Do not make one lambda per Tenants. Ganu said there's some work
               going on to sync RDS with neo4j.
 
-        - Single Trace Id feature
-        - etcd integration with IronVault feature
+        - ONGOING: Single Trace Id feature
+        - SCRAP: etcd integration with IronVault feature
 
-        - App Accel Testing
-            - Using Postman
-            - Using Mockoon
-            - Using httptest
-            - Using httpmock
+        - ONGOING: App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
 
-        - Hitless Software Upgrade Design
+        - SCRAP: Hitless Software Upgrade Design
 
 Personal
     * 6am Wake Up: Do this in this order, every day.
@@ -124,16 +471,524 @@ Seva
     - Organize a YES course
     - Sign up for YES TRM
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-2024, Dec 01 (Sun)
+2025, Jan 27 (Mon)
 - Work:
+    - Lot of PROD issues in morning.
+        - Deployments were not successfully working. K8s Pods were crashing
+          with `ImagePullBackOff` error.
+        - Ganu pointed that image was missing in that Cosmos Env.
+        - Post that, PRODS are working well.
+    - Meeting with Mike Korenbaum and Meena Sehar. They are seeing their
+      Tenants on Grafana dashboard. Yay!!!
+    - I've setup meeting with Abishek Kumar and Naveen Birru regarding
+        - https://jira-dc.paloaltonetworks.com/browse/COREEXT-1471
+        - New Alerts using Loki logs.
+        - Abishek asked that we move our code from zgrafana to garuda-tenant/zycada folder. Then Garuda team can manage CICD pipelines.
+
+
 - Warrior/REI:
 - Minutiae:
 
 
 
+2025, Jan 26 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Aarushi AMC8 test at RSM Westgate, just like AMC10.
+    - Breaking Bad. Whole night :)
+    - Reading up on Minuteman Press Disclosure Document.
+        - FEES:
+            - INITIAL fees: $48,000 when signing Franchise Agreement.
+                - Must deposit $5,500 (binder fee) that is refundable if you decide NOT to purchase the Franchise. This goes towards Initial fees.
+            - EQUIPMENT:
+                - OWNING: Purchasing the equipment: $92,190. Non-refundable.
+                    - FLEX Management Software is included.
+                - LEASING: If leasing the equipment: $8,050 down payment. Non-refundable. Then monthly payments.
+                    - FLEX Management Software must be purchased separately.
+                    - $7,995 and $370/year for support and maintenance.
+            - WEBSITE: $395/mo for website support and maintenance.
+            - MARKETING: (Optional) Internet Marketing: $280 to $2280/mo. Subject to increase.
+            - AUDIT: May be audited if Gross Revenue is more than 2% short or reports are not furnished in time.
+            - ADDITIONAL TRAINING:
+            - TRANSFER/TRAINING:
+            - QUESTIONS:
+                - RENTS ??
+                - PAYROLL ??
+                - INSURANCE ??
+        - CAUTION:
+            - (Pg 16): You should not infer that your revenues will exceed your expenses at the end of the six (6) month initial phase.
 
-2024, Dec 26 (Fri)
+
+
+
+
+2025, Jan 25 (Sat)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Taekwondo Championships for Akshay. He participated in Pomsae and Board Breaking events.
+    - Telugu class. Kids skipped Bala Vihar today.
+    - Kennedy Middle School Speech Program
+        - COMPLETED: Waiver Form
+        - COMPLETED: Permission Slip
+        - COMPLETED: Media Release Form
+        - COMPLETED: Tabroom Account
+            - I did not Link any account, as requested in the email.
+        - COMPLETED: Registration and paid $15 to Monta Vista Speech Boosters
+
+
+2025, Jan 24 (Fri)
+- Work:
+    - Identified a bug in Production. GraphQL query that Roy Anthony wrote was
+      failing. No jobs were being picked up by jobrunner. Got the fix merged to
+      Prod.
+    - With Vikram's help, submitted FedRAMP "Initial SCR Intake" form. Opened
+      JIRA tickets and Infosec tickets.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jan 23 (Thu)
+- Work:
+- Warrior/REI:
+    - REI Training call. Chris Wooten.
+        - Weighted Return. CAP Rate. Leverage. DSCR etc.
+        - Cash-on-Cash increases if you use debt to purchase.
+        - If CAP Rate < Interest rate then, Cash-on-Cash will be very low.
+        - Entity Structures, LLC, LP, Syndication Organization, etc.
+
+- Minutiae:
+    - Long meeting with Alok Ranjan. Suneel Gogineni is leaving India and
+      moving to US as a Sr. Director role managing GCS team.
+
+
+
+2025, Jan 19 (Sun)
+- Work:
+    - Debugging session with QA (India), Amit Kumar Agarwal and James Zhuang.
+        - App Accel is not working.
+        - There's a job in zcfg that calls Tenants V2 API. This is not running.
+          There's a cascading effect due to this. Ironvault API is not called.
+        - James to work with Shikhar to figure out.
+
+    - Watched Shikhar Dogra's video and learnt a lot on debugging ZDIA worker.
+    - Opened bunch of JIRA tickets for QA nightly regression and assigned to Tanmay and Myself.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jan 18 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went to office and scanned Tax documents scanning/copies.
+    - Paid Bay Area Fastrak Invoice.
+        - Invoice Number: I692422248408
+            - Amount $10.25
+        - Invoice Number: I692527001733
+            - Amount $10.25
+
+
+2025, Jan 01 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jan 16 (Thu)
+- Work:
+    - Met with Arun Srinivasan and got access to TME, PLM etc for Grafana dashboards.
+    - Met with Arun Srinivasan and JM Teo and figured out how to SSH into Prod VMs.
+    - Met with Tanmay Sawant to discuss QA regression test suite. When QA tests pass, how can we tag the successful commit?
+    - Zoom call with Shikhar Dogra to understand how to debug ZDIA datapath issues. Recorded the session. Take notes from it later.
+    - Meeting with Amit Kumar Agarwal at night to debug Ironvault issues.
+        - There are multiple issues.
+    - Shivam Pal identified ZDIA creation failure.
+        - I tried pushing the fix, but `git` related problems.
+- Warrior/REI:
+- Minutiae:
+    - Sat with Aarushi and Akshay in their room.
+    - I watched 'Breaking Bad' until 3am and got earful from Madhavi next
+      morning and rightfully so :)
+
+2025, Jan 15 (Wed)
+- Work:
+    -
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jan 14 (Tue)
+#WFH #Copperas
+- Work:
+    - Worked with SRE, QA teams to upgrade ZDIA worker in PROD env for TME (Meena Sehar).
+        - After upgrade, ZDIA worker was unhealthy and continuous reboot cycle.
+          James said zcachex process must be down. To debug, we must disable
+          health check and SSH into the box.
+        - Figured the V2 Tenants API call is taking > 120s on average. This
+          will timeout the zcfg.
+
+- Warrior/REI:
+- Minutiae:
+    - Paid yearly bill to Suryam for Copperas Cove land.
+
+
+2025, Jan 13 (Mon)
+- Work:
+    - Worked with Meena Sehar to get SDWANC + App Acceleration working.
+
+- Warrior/REI:
+    - Spoke with Eric Williams and Steven Wrigth from Warriors group.
+
+- Minutiae:
+    - Met Jayant ji and got the taxes completed. I've to now post them and drop
+      them off at San Jose office.
+
+
+
+2025, Jan 12 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Up around 8am and did SKY breathing.
+    - Dropped Aarushi at RSM. Madhavi picked her up.
+    - Akshay Basketball at Bascom Community Center.
+    - 4H Pygmy Goats.
+    - SKY Teens Kriya.
+    - Visited Sandeep ji and saw the new baby.
+    - Completed reading "The Money Trap" by Alok Sama.
+    - Watched Bhool Bhulaiyya with family.
+
+
+2025, Jan 11 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Chanting + Telugu class
+    - Akshay's Basketball Junior League. First weekend.
+
+
+2025, Jan 10 (Fri)
+- Work:
+    - Due to misinformation, I spent lot of time looking for QA Tenant in Prod logs.
+    - Got ZY-2175 merged to main.
+
+- Warrior/REI:
+- Minutiae:
+    - Visited Jayant ji for tax related stuff. He finished fixing 2021 tax returns.
+    - I called IRS and got all the info.
+
+
+
+2025, Jan 09 (Thu)
+#WFH
+- Work:
+    - Could not get Anand's MR to merge to 'main' branch.
+    - Found leads to integrate Gitlab with Slack app.
+        - Simranjit Chadha pointed to following links for further details
+            - https://code.pan.run/prisma-access/sase-cosmos-group/sase-controller-group/pa-infra-group/pa-infra-components-deployment-monitoring
+            - Search for "Adding a New Slack Channel" in https://confluence-dc.paloaltonetworks.com/display/CYR/MARS+Notification+Service+Guide
+
+- Warrior/REI:
+    - REI: Merrill Kaliser talk on various SEC rules.
+
+- Minutiae:
+    - Mohamed Yousef (Nexus Square CPA)
+        - Spoke on Jan 9, 2025.
+        - California based.
+        - LLCs and entity structures, they can take care of. They advise moving properties to LLC.
+        - Foreign Income, they can take care of.
+            - Savings, RSUs in India. Can you handle FBAR, when filing US taxes?
+        - Advised using STRs to reduce W2 taxes.
+        - Familiar with IRA for Children, using Real Estate properties income.
+
+
+
+2025, Jan 08 (Wed)
+- Work:
+    - Jane Jojo: Discussed API concerns
+        - Today, there's no way SDWAN Controller knows which subscription they are consuming message from.
+        - cdl_region will help only if Tenant is SDWAN + PA. Otherwise, it's not helpful.
+    - Merging 5G changes to main
+        - Lot of conflict resolutions.
+    - Tanmay Sawant: Setup Dev04 with 2 Tenants.
+        - The 2 Tenants given to me by Tanmay was manually created in Dev04 DB. Their CYR environment is Dev10.
+        - API calls are now going through.
+        - Nightly run on Dev04 raised few bugs.
+
+- Warrior/REI:
+- Minutiae:
+    - I've been researching a lot about CPA. Posted on Bigger Pockets and got quite a few responses.
+    - Brief call with Irfan Raza from SBook Solutions. CPA firm.
+        - Spoke on Jan 8, 2025, briefly for 10 mins.
+        - East Cost (Pensylvania)
+        - He charges $300/hr for Tax advising and strategizing.
+        - His friend Ralf does tax preparation.
+        - I'll be best to take advise from him, implement it and use Ralf's services.
+        - Irfan said I do not need LLC for all rental properties. There are 3 cases when I need LLC
+            - Cash. How did you do the loan? Only one entity in US gives 30 year fixed loans to LLC as of 2024.
+        - Rental income goes in Schedule E. It does not get added to your W2 income. Schedule E is taxed at different rate than your W2 income.
+
+
+2025, Jan 07 (Tue)
+- Work:
+    - Worked with Tanmay Sawant to setup Dev04 Cosmos for continuous regression
+      suite runs. There's an issue where two Tenants were not working properly.
+      That is, following API call was failing in Dev04.
+        - GET /iapi/zos/v1.0/tenants/{oid}/features/app_acceleration
+        - Root cause is those Tenants were manually created in Dev04 neo4j.
+        - When API call is made to Dev10 CYR to check licenses etc, an error was happening.
+        - Reason for error is, Tenant was created with incorrect data in Dev04.
+        - The same Tenant exists in Dev02 Cosmos. I looked up what they have in
+          Dev02 and recreated that Tenant in Dev04. Then API call started
+          working.
+
+- Warrior/REI:
+- Minutiae:
+    - "Managing Up" talk by Ethan Evans. Recommended Books:
+        - How to Win Friends and Influence People
+        - Radical Candor
+        - Crucial Conversations
+        - Rejection Proof
+
+    - Buildofy membership and watched few videos. Liked the Nandi Alayam house in Nandyala.
+        - Cost per sq ft is coming to Rs.4000 in most designs. This can push
+          our costs to > 2 Crores. We have to find a way.
+
+
+2025, Jan 06 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jan 05 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay's tryouts in morning.
+    - Aarushi's RSM in new year.
+    - Lunch, 4H Pygmy Goats project.
+    - YES Kriya after that.
+    - Call parents about floor plan changes and other discussions.
+
+2025, Jan 04 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+2025, Jan 03 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jan 02 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jan 01 (Wed)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Lunch at Venkat's house. Dasika's and Vasudev's also came.
+
+
+@@@@@@@@@@  Overall Goals for 2024  @@@@@@@@@@@@@
+Personal:
+    * Start building products
+        - Write code to analyze deals using Zillow API
+            - Summarize the analysis in Excel file.
+        - REI API
+            - Scrape 3000+ county websites.
+        - Build your own Git.
+
+    * Spend time with kids in their school work each day.
+
+    * Exercising. Daily Gym.
+
+    * Build Personal Brand
+        - Personal Website.
+        - Blog Posts.
+        - Side Projects.
+
+India:
+    - Finances
+    - House Construction
+
+
+Work/Career:
+    - Give at least 25 technical talks.
+        - Vim (as many as possible)
+        - Python Hypothesis
+
+
+REI work:
+    - Buy at least one multifamily home (~50 units)
+    ((NOT DONE. I did not do *anything* related to REI for 6 months.))
+
+
+Books:
+    * Goal - read 1 book/month
+        * Everything in my "Book Shelf", that I own
+        ((Partially done. Since October 2024, I've started reading books regularly.
+            - Man Who Solved The Markets.
+            - Private Equity
+            - The Money Trap
+            ))
+
+Seva:
+    * Organize Knowledge Satsangs
+    * YES courses
+    * AE courses
+    * Prison Program
+    * Organize KYC courses
+    ((NOT DONE. No Seva in entire 2024.))
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+@@@@@@@@@@@@@@   December 2024    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        DONE - ZDIA Upgrade workflow
+            ONGOING - Validation use cases.
+            - Did a Alerts and Dashboards presentation on Dec 17th
+                - Attendees were PLM, TME from SDWAN.
+
+            - Did a demo on Dec 19th
+            - Include ZDIA in Django dashboard + Jenkins that Thilakkumar and
+              Shankar are building.
+
+        ONGOING - App Accel Serviceability
+            - Built dashboards and panels.
+
+        ONGOING - ZY-1675: We are running out of sequence IDs within 20 days or so in
+          QA environment. There's a *leak*. Too many GET API calls are
+          happening.
+
+        ONGOING - Tenants V2 API is extremely slow. How to speed up?
+            - GraphQL instead of CoreAPI
+            - Make *single* lambda call for ALL tenants to get licensing
+              details.
+            - Do not make one lambda per Tenants. Ganu said there's some work
+              going on to sync RDS with neo4j.
+
+        ONGOING - Single Trace Id feature
+
+        - etcd integration with IronVault feature
+
+        - App Accel Testing
+            - Using Postman
+            - Using Mockoon
+            - Using httptest
+            - Using httpmock
+
+        - Hitless Software Upgrade Design
+
+Personal
+    * 6am Wake Up: Do this in this order, every day.
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * At Night
+        - Flute practice
+        - Vashista Yoga (at night)
+        - Go to bed by 11pm and no later.
+        - If there is screen time at night then, it should be REI or 'Testing With Go' classes.
+
+    * Read 1 book a month
+        - Private Equity by Carrie Sun
+        - The Money Trap by Alok Sama
+
+    * Education
+        - Test Driven Develop in Go (Book) and follow along coding.
+        - Test With Go Videos
+        - Taro: Nail Your Promotion As A Software Engineer
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - Start underwriting 1 deal/day
+
+    * Insurance:
+        - 3012/3014 Pine Valley - IN PROGRESS
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Organize a YES course
+    - Sign up for YES TRM
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+2024, Dec 31 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Kala, Veena left to Austin.
+    - I'm back to work.
+
+
+2024, Dec 30 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Gym in the morning. Spoke with Cherukuri for 1+ hour.
+    - Kala and I went to hike Mission Peak.
+    - Took Kala, Veena to Royal Thaali in Milpitas. I did not like the food.
+
+
+
+2024, Dec 29 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Kovai cafe with family, for breakfast.
+    - Kala, Veena and Abhiram went to SFO to get the signs. I stayed home.
+    - Akshay and I went to 4H
+
+
+2024, Dec 28 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Visit to SFO Golden Gate bridge, Ghirardelli, walk along the Pier 99.
+        - We ordered custom signs from 'Carved Signs' shop.
+        - Kids and family thoroughly enjoyed.
+    - Cal Academy of Sciences subscription: $379
+    - Read the article about Lua language.
+        - https://nflatrea.bearblog.dev/lua-is-so-underrated/
+        - Generally, learning and mastering lua is worth it.
+            - It is super concise.
+            - It is designed to be embedded with application (such as Neovim)
+              yet run very fast.
+            - It is easy to work with multi-platform (that is, the application
+              could be written in multiple languages).
+            - It's error handling is similar to Go lang.
+    - Kala made Sushi for everyone for dinner.
+
+
+2024, Dec 27 (Fri)
 #FFD
 - Work:
 - Warrior/REI:
@@ -149,7 +1004,7 @@ Seva
     - Lot of chores around the house.
 
 
-2024, Dec 22 - Dec 25
+2024, Dec 22 - Dec 26
 #losangeles #reveal
 - Work:
 - Warrior/REI:
@@ -259,7 +1114,6 @@ Seva
 - Warrior/REI:
 - Minutiae:
     - Due to late night TV watch, I woke up exhausted :(
-
 
 
 2024, Dec 16 (Mon)
@@ -1269,7 +2123,7 @@ Seva
             - Quit Claim Deed with Title company. About $100.
 
         3. Update Estate Planning document, created by *another* lawyer. Can you do that?
-            - Setup fee.
+            - Setup fee of $4000
             - Changes are unlimited and free.
 
         4. File taxes at end of the year.
@@ -3765,8 +4619,69 @@ Seva
 - Maha Kriya, Bay Area wide around 9am.
 - Presentation from Kedaar Rentachintala, Chandra's son at 11am.
     - Amazing session. Almost 2 hours long.
-- Kids Bala Vihaar.
-- Rest in the evening.
+
+    Introduction:
+        Kedaar is a high school senior going to UC Berkeley M.E.T program in the fall. Been avid debater in LD format, club president for DECA and Business/Entrepreneurship club at Basis Independent Silicon Valley
+
+        - Informal session. About an hour long.
+        - Q&A style
+        - Participation from all
+        - Start from Tanmayi, but consolidate to 2-3 questions?
+        - Dhirendra Sinha
+
+    Questions for College Prep:
+
+        1.Public school vs private school for high school, which is better for admissions to top schools
+        2.How easy is to change majors in school? Say you enter as a mechanical engineering major and then change it after 1st year to CS?
+
+        3. Is there difference in preparation between colleges? For example: Stanford application vs UC Berkley vs Cal Tech?
+        4. When to start appearing for SAT exams, as a practice?
+
+        - FBLA, DECA
+        - Diamond Challenge (Business Competition)
+        - NextAdmit - Essay Reviews
+        - Find a student in that college and send essays to them for review.
+
+        SAT Practice PDF
+
+        kedaar.nandan@gmail.com
+
+    Internships:
+            Stanford STEM
+            Cisco Internship
+            Data Science Academy
+            Summer Pre-College Programs
+            Search Up online or colleagues
+            Shadow Programs in Companies
+            ASDRP - Research Oriented Internship. It’s in Fremont (www.asdrp.org)
+
+    From High Schoolers:
+        1.Reflecting on your high school experience, what are some valuable lessons you learned that have helped you in college?
+        2.Are there any study habits or time management techniques you developed in high school that you still find useful in college?
+        3.Did you participate in any extracurricular activities or leadership roles in high school? How did they contribute to your personal growth and development?
+        4.Looking back, is there anything you wish you had known or done differently in high school to better prepare for college?
+        5.What advice would you give to current high school students who are preparing for college in terms of academics, extracurriculars, and planning for the future?
+        6.Did you have any mentors or role models in high school who had a significant impact on your academic or personal growth? If so, how did they influence you?
+        7.How did you approach the college application process in high school, and what advice would you give to students who are currently going through that process?
+
+    From Middle Schoolers:
+        0. I know extra curricular is an important part of the application but is it important that should have won some competition or gained some certification in that for it to be admissible?
+        1. How can you make your application stand out?
+
+
+        2. Is there difference in preparation between colleges? For example: Stanford application vs UC Berkley vs Cal Tech?
+        3. How much to focus on academics vs extra curricular activities?
+        4. As part of academics: how important to focus on Competitive Exams? AMC, Math Kangaroo, etc
+        5. When to start appearing for SAT exams, as a practice?
+
+        1.Public school vs private school for high school, which is better for admissions to top schools
+        2.How do activities play a role in college admissions. 3 activities vs 1 activity
+        3.Does winning national awards and recognition sort of the baseline or showing your dedication to an activity more important
+        4.Does the activity need to align with the major you are applying for
+        5.How easy is to change majors in school? Say you enter as a mechanical engineering major and then change it after 1st year to CS?
+
+    - Kids Bala Vihaar.
+    - Rest in the evening.
 
 2024, Apr 19 (Fri)
 - Tenant association for existing zcluster is merged.
