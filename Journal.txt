@@ -43,29 +43,1497 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@@@@@@@@@@@@@@   February 2025    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   May 2025    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
         - FedRAMP
-            - Functional Spec review
-
+        - Single Trace Id feature
+        - Concurrent Tenants V2 API
         - COREEXT-1471: App Accel Serviceability
+
+        - Maintanence bugs
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * Evening:
+        - 2 mile run
+        - Gym
+
+    * Night:
+        - Flute practice
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+
+    * Education
+        - DONE - Taro: Nail Your Promotion As A Software Engineer
+        - Test Driven Development in Go (Book) and follow along coding.
+        - Test With Go Videos
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - 1 underwriting/day.
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, May 01 (Sun)
+- TODO
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+2025, May 27 (Tue)
+- TODO
+    - Meena Sehar: SDWAN Apps are disabled on page refresh.
+    - SDWAN Rollout (ZY-3852)
+    - FedRAMP CP MR to upgrade golang to 1.24.3
+    - FedRAMP Docker FIPS complaint image
+
+    - Ownwell action items
+    - Crescendo HOA. New management. Setup HOA autopay.
+
+- Work:
+    - FedRAMP:
+        - Shikhar finally got ZDIA worker up and running. Helped him out a
+          little bit.
+    -
+
+- Warrior/REI:
+- Minutiae:
+    - SBI Finances:
+        - $1500/month each (Kala & Bhaskar). Total $3000/month towards loan
+          amount until construction completion (say, 18 months, till end of
+          2026). Assuming rents from Jan, 2027
+        - 288 months loan term.
+
+    - Questions for Lakshman SBI Officer
+        - Can I payoff loan early? Pay off principal regularly?
+        - Online access of SBI loan account.
+        - 288 months loan term.
+
+
+2025, May 26 (Mon)
+- Work:
+    - SCM QA UI is not functioning (CYR-53554). Bug got changed to ADI-46046
+        - This has been fixed by Pratibha Sharma.
+        - Certificate got expired between ExtGPCS --> PA API GW.
+
+    - Discussion with Ganu
+        - Upgraded PRA cluster in staging. New instances cannot talk to ZOS.
+            - Wrote GCP ticket. We do not have enough Cloud NAT IPs (Public IPs).
+            - What VPC is Zworker talks to Control Plane?
+                - Talking to ZOS is not working?
+                - Why is Ports per VM set to 128 ports.
+                - mgmt has enough IPs
+                - dp does not have IPs
+            - Why is 1024 ports.
+            - Can we increase Public IPs.
+            - What is causing spike in ZOS to CoreAPI calls?
+            - New service Cert management service (rotation) for private web app (PRA).
+
+
+- Warrior/REI:
+- Minutiae:
+    - Family lunch with Alok Ranjan. He came back home. Spoke badly about
+      Guruji. Hated him for that. Went for a walk after lunch.
+    - Took Alok to Gilroy Premium Outlets. Bought some clothes and dropped him off at his hotel.
+
+
+2025, May 25 (Sun)
+#laketahoe
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went to Lake Tahoe along with Suresh Melam, Alok Ranjan.
+        - Amazing trip.
+        - Woke up at 4am, sadhana, picked up Alok and went to Suresh Melam's house in Livermore.
+        - Breakfast at his house and we drove to Tahoe in his Tesla.
+        - Loved the Self Driving feature, conversations with Suresh and Alok.
+        - Did Gandola ride, lunch, beach, drive, long hike along the lake, drive back.
+        - Dinner at Mylapore in Folsom.
+        - Reached home at 1am.
+    - Spoke to Amma/Abbai after reaching home about house demolition.
+        - Pretty emotional.
+
+
+2025, May 24 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Took Alok Ranjan and his friend Suresh Kota to SFO.
+        - Picked them up from Airport and went to SFO.
+        - Golden Gate bridge.
+        - Girhardelli.
+        - Lunch.
+        - Boat ride along Alcatraz. About $40/person.
+        - Water Massage.
+        - On the way back Stanford University.
+        - Dinner at Chaat Bhavan Express.
+
+
+2025, May 23 (Fri)
+- Work:
+    - SDWAN Rollout (ZY-3852)
+        - Created JIRA for Thilak to deploy my SDWAN App Accel fix to deploy to
+          Production.
+        - Discussion with Mrityunjay to understand the seriousness of this
+          change.
+        - Ramya Rajendran approved the JIRA ticket. SRE is waiting on PRA team
+          to fix a bug they found in staging.
+
+    - SCM QA UI is not functioning (CYR-53554)
+        - Followed up with Ratika Durgade to renew Client Certs from
+          Ext-GPCS-->PA API GW
+
+- Warrior/REI:
+- Minutiae:
+    - AOS Silence Course refund. Sent registration id to Madhavi. She's going
+      to ask Rupal Vashi for refund.
+        - registration ID of AOS: 00742942
+        - registration ID of Art of Living Premium: 00742933
+    - Did sadhana in afternoon, at work.
+
+
+2025, May 22 (Thu)
+- Work:
+    - SDWAN App Acceleration debugging (ZY-3835)
+        - Found RCA and raised MR.
+    - TME found another issue. Page refresh resets all App Configuration to 'false'.
+        - Amit provided x-trace-id
+            PATCH: c6bb5e
+            GET: 07638f
+            TSG ID: 1237065249
+            Region: Americas
+
+- Warrior/REI:
+- Minutiae:
+    - 4H (we swapped with other family).
+    - PYS in evening.
+    - Math (AoPS) training to help Aarushi out.
+
+
+2025, May 21 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, May 20 (Tue)
+- Work:
+    - FedRAMP upgrade new images and test.
+        - Failing. Not working. James is debugging it.
+
+- Warrior/REI:
+- Minutiae:
+    - 8th grade promotion ticket order ID: TFWZR5S
+        - Jun 5, 3:15-4pm, San Jose Center for the Performing Arts
+
+
+2025, May 19 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, May 18 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Took Alok Ranjan to SFO.
+        - Golden Gate Bridge.
+            - The hill next to it.
+        - Muirwoods.
+        - Crooked Street.
+        - Pier 9 (waste of time).
+        - Waymo, autopilot car (great).
+
+2025, May 17 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Bala Utsav celebrations
+        - Kids did an amazing job.
+    - Took Alok Ranjan to Mystery Spot, but tickets were sold out.
+    - Santa Cruz.
+        - Boardwalk
+        - Drone show at night.
+        - Dinner at India Restaurant.
+
+
+2025, May 16 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Scaned IRS documents: LT11
+    - Did not happen: Scan Akshay's newspaper article
+    - Call IRS
+        - I waited 2 hours on the call and then it went blank.
+    - Bala Utsav:
+        - Printouts of Bala Utsav
+        - Decorate the basket for Bala Utsav
+    - Call Terminix
+        - Called them, but they do have me on monthly plan.
+    - Alok Ranjan came from India.
+        - Picked up from airport.
+        - Dinner at home and drop off at hotel.
+
+
+2025, May 15 (Thu)
+- Work:
+    - Chasing lot of people to get SCM QA UI up and working.
+    - Working with Shikhar Dogra to get zworker up and running.
+        - Meeting with Kaci to understand the role of isLeader() field.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi's birthday.
+        - Guru Pooja in morning
+        - Temple in evening
+        - Dinner at Siam Station (Thai) Restaurant.
+    - Meena ji took care of Bala Utsav rehearsals.
+    - Madhuri Damera took care of PYS session.
+
+
+2025, May 14 (Wed)
+#irs
+- TODO
+    - IRS issue
+    - Bring up Zworker and send traffic.
+
+- Work:
+    - Debugging sessions with Shankar Palakodeti.
+        - We looked at configmap in k8s cluster
+            - kubectl get cm -n zycada
+                zos-config
+
+
+- Warrior/REI:
+- Minutiae:
+    - I called IRS asking to put a hold on the account.
+        - Hold put until Aug 12, 2025
+        - Agent details
+            Name: E Martinez
+            ID: 1000183077
+
+
+
+
+2025, May 13 (Tue)
+- Work:
+    - FS review preparation and delivery.
+    - MR merge for License API fix.
+        - But issue persisted. Very difficult to debug.
+        - Lot of debugging into the night.
+
+- Warrior/REI:
+- Minutiae:
+    - I opened IRS notice/letter "Notice of Intent to Levy and Your Collection Due Process Right to a Hearing".
+    - Notice Name: LT11
+    - Notice Date: 04/15/2025
+    - Case Reference: 3109947934
+    - Amount: $70,526.37
+
+
+2025, May 12 (Mon)
+- Work:
+    - At work by 10:30am.
+    - Understood the License URL failure issue. Raised an MR at night.
+
+- Warrior/REI:
+- Minutiae:
+    - Kriya in morning.
+    - Nice conversation with James Zhuang about private/public schools. His son
+      joined private school (Basis Independent) in 7th grade as he needed more
+      individual attention.
+    - Basis Independent is $37K/year in tuition.
+    - Music school drive for kids.
+    - Heart-to-Heart conversation with Madhavi after dinner walk.
+
+
+
+2025, May 11 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Flute class in morning.
+    - Aarushi's RSM at 11am.
+    - Akshay's in-person IP in afternoon at 2pm at Sukanya ji's house.
+    - PYS session from 6-7:30pm
+    - Went for walk with Madhavi after dinner.
+        - She said "My youth died because of you" or something like that. Man,
+          this really affected me, shook me. I tried to act normal.
+        - I've to mature more, as a person, husband and father. I got to
+          reflect more on what I want to be, what I want to become going
+          forward.
+        - I have to and I must work hard to provide the best for my family, but
+          I cannot control if they are happy. Their happiness is their
+          responsibility.
+    - Booked tickets to India on www.travelgo.com (via Google Flights).
+        - Booking No: ITOVWD250512MM355195
+        - Air India
+        - SFO to HYD: Jul 25, Fri 21:00 --> Jul 27, Sun 09:50
+        - HYD to SFO: Aug 13, Wed 10:30 --> Aug 13, Wed 17:30
+
+
+2025, May 10 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Bala Vihaar Telugu class skit preparation and practice for Bala Utsav.
+    - Lot of driving around to get printouts for Bala Vihaar, but failed.
+    - Visited Sahil Aggarwal's house for baby shower.
+    - Venkat and Nikita visited and stayed for dinner.
+    - I was soooo exhausted by end of the day, but took coffee and practiced flute.
+    - I watched 'The Diplomat' movie. Slept at 4am :(
+
+
+
+2025, May 09 (Fri)
+- Work:
+    - FedRAMP:
+        - MU bring up
+            - With Srikanth's help, tried to bring up MU, but provisioning
+              failed.
+            - Taking help from Justin Huang and Shikhar Dogra, we identified that image was not distributed to GCP.
+            - We downgraded image version in `cust_master` table and brought up MU.
+            - But that did not bring up Zworker :(
+
+        - SCM UI + API GW changes
+            - Learnt from Jikun Li that for FedRAMP, I've to go back to old
+              repo and use `qa2` branch. Raised MR on it. Merged after code
+              review.
+            - Changes are now working. Mazen checked in SCM UI and confirmed.
+
+        - Tenant Activation
+            - Srikanth created a Magic Link to activate new tenant for FedRAMP.
+            - TSG ID: 1744859549
+            - But activation is not happening.
+            - I've raised the issue on #fed-mod-xteam-maui-integration Slack
+              channel. Srihari Prasanth Swaminathan tried to debug, but we
+              setup a call on Monday to debug further.
+
+        - SCM UI License Capabilities Errors:
+            - We are now seeing license_capabilities call is returning Internal
+              Server Error.
+            - Must be debugged.
+
+
+- Warrior/REI:
+- Minutiae:
+    - Glad to know that Sandeep Kondam landed safely in Bengaluru.
+
+
+2025, May 08 (Thu)
+- Work:
+    - FedRAMP
+        - SCM UI & APIGW:
+            - Raised MR for API GW changes, but was told that repo has changed.
+              We now have API GW Manifest, a new repo.
+            - Raised MR on that repo.
+
+- Warrior/REI:
+- Minutiae:
+    - SBI Loan Documents:
+        - I had to take more printouts, notary and finally handed off the
+          documents to Sandeep.
+        - I took notary at PostalAnnex near Trader Joe's and man, it cost
+          $15/signature :(
+
+
+
+2025, May 07 (Wed)
+#facial
+- Work:
+    - RTT Variance: While there is TCP Connection from Client to Zworker
+      exists, metrics are collected in Zworker kernel. At the end of the TCP
+      connection, what is the variance throughout the connection is captured in
+      tcp_end_rtt_var_millis.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, May 06 (Tue)
+- Work:
+    - App Acceleration performance numbers questions by Meena. Meeting with DP
+      team. We have to understand fields in BQ a bit more.
+    - Struggled, but finally got Ironvault service to be deployed from custom
+      branch. Ironvault is failing at 'is_fedramp = false' area. CICD is not
+      picking up correct field/value.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, May 05 (Mon)
+- Work:
+    - Code review meeting with Ganu and Umesh about sase-accl-common repo. Merged MR after.
+    - Code review for Ironvault. Merged MR after.
+    - Ironvault "still" failing. Very frustrated.
+
+- Warrior/REI:
+    - GP Split
+        Sourcing Deal   10%
+        Risk Capital    10%
+        Raise Equity    30%
+        Loan Guarantor  5% - 33% (Key Principal)
+        Asset Management    33% - 40%
+            - This is different than Asset Management Fee that you collect every month.
+
+- Minutiae:
+    - Completed Telugu skit writing in Telugu script.
+
+
+
+2025, May 04 (Sun)
+#marriageanniversary
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Marriage Anniversary Day.
+    - Lunch at Venkat's house. Anil Musku and Vernika came. Sandeep Kondam was visiting from India.
+    - Spent most of the day with Sandeep Kondam at home. Dinner at Kovai cafe.
+    - Aarsuhi's friend, Navya, having sleepover at our house.
+
+
+2025, May 03 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Chinmaya Mission Telugu class preparation. Somehow, got through.
+
+
+
+2025, May 02 (Fri)
+- Work:
+    - WFH
+    - Spent lot of time reading up on unit testing code.
+
+- Warrior/REI:
+    - I shipped SBI loan documents to India using UPS: 1Z55F5570410690711
+        - Went to Fedex first. It's expensive (around $230).
+        - UPS did same thing for $160.
+
+- Minutiae:
+
+
+
+2025, May 01 (Thu)
+- Work:
+    - Completed sase-accl-common and ironvault code changes to do:
+        - Create secret in GCP with user-managed replication in us-central1 region.
+        - Earlier, I made mistake of saving secrets 'regionally'.
+        - Working on writing UTs for these changes.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+@@@@@@@@@@@@@@   April   2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - FedRAMP
+        - COREEXT-1471: App Accel Serviceability
+        - Work with Tanmay and setup Dev04 for the team.
+        - Concurrent Tenants V2 API
+        - Single Trace Id feature
+        - JobID in API response.
+
+        - Maintanence bugs
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+Personal
+    * 6am Wake Up: Do this in this order, every day.
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * At Night
+        - Flute practice
+        - Vashista Yoga (at night)
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+
+    * Education
+        - Taro: Nail Your Promotion As A Software Engineer
+        - Test With Go Videos
+        - Test Driven Develop in Go (Book) and follow along coding.
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons. Code using Windsurf.
+        - Start underwriting 1 deal/day
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Organize a YES course
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Apr 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+2025, Apr 30 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Indian Embassy visit. Got GPA document stamped.
+
+
+
+2025, Apr 29 (Tue)
+- Work:
+    - Ironvault MR is failing in pipeline.
+- Warrior/REI:
+- Minutiae:
+    - Woke up at 7:30am, very groggy, with only 4.5 hours sleep.
+    - Did full Sadhana and came to work at 11am.
+    - More printouts for SBI Loan and notary.
+    - Kids pick up and chores and back at work at 4pm.
+
+
+
+2025, Apr 28 (Mon)
+- Work:
+    - MR in sase-accl-common with GetSecretV2() and CreateV2() utility functions is merged to develop.
+    - MR for Ironvault is in review.
+
+- Warrior/REI:
+- Minutiae:
+    - In afternoon, I went to Notary to get stamps. Again, I went in evening.
+      Spent around $150 and 3 hours.
+    - Went to office around midnight to scan documents and verify with Lakshman
+      (SBI loan officer).
+        - All docs look good.
+    - I slept at 3am :(
+
+
+
+2025, Apr 27 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Apr 26 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Apr 25 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Apr 24 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Apr 23 (Wed)
+- Work:
+    - Made progress on Ironvault service, but not full progress.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi stayed home and picked up kids etc.
+    - Went to Notary, got passport photos taken. But could not get all pages notarized.
+
+
+
+2025, Apr 22 (Tue)
+#facial
+- Work:
+    - Ganapathy advised to put FedRAMP checks in charts.yaml file. Rewriting the code.
+
+- Warrior/REI:
+    - Jerry Parawahiro visiting PANW because of job interview.
+        - I met him and had brief chat.
+
+- Minutiae:
+    - I came in early, around 8:30am. Tonnes of printout for SBI loan.
+    - Learning and reading up on AoPS Math class to help Aarushi. Quadratic equations.
+
+
+
+2025, Apr 21 (Mon)
+- Work:
+    - Meeting with Wilson Yang, Mazen G, Srikanth K
+        Questions
+            - What's the CYR env where this Tenant info is present?
+            - Is provisioning service also in same env?
+    - Ganu helped with Ironvault error w.r.t Google Secret Manager.
+        - Upload secrets per region instead of global.
+        - He even gave code snippet.
+    - I've asked some questions to Jikun Li from API GW team. He gave a
+      document to read up about FedRAMP endpoints.
+    - At night, discussions and debugging session with Anish Mathew and
+      Ganapathy. Fixed regression issues.
+
+
+- Warrior/REI:
+    - Listened to Hemant Pawar's monthly meeting.
+        - Someone presented details on how to buy small businesses. They spoke
+          about business shipping cargo via aeroplanes. Very new idea.
+
+- Minutiae:
+    - Gym with PT Raychel.
+    - Posted check for Annemarie Heynig
+    - Picked Akshay from Taekwondo.
+    - Took kids to Music class.
+    - Talked to Kala about following:
+        - Rental unit in Duval property.
+        - SBI loan paperwork.
+    - Spent time with Madhavi after work.
+    - Learning and reading up on AoPS Math class to help Aarushi. Quadratic equations.
+    - And of course, wasted 1+ hours scrolling through Facebook reels.
+
+
+2025, Apr 20 (Sun)
+#intuitionprocess
+- Work:
+- Warrior/REI:
+    - Calls with Lakshman from SBI regarding loan documents.
+
+- Minutiae:
+    - Intuition Process:
+        Module 1 (1st weekend):
+            - ART Excel and YES Kriya are taught.
+            - Kriya is preparation for IP.
+            - Can be conducted by ART Excel and YES teachers.
+            Week 1:
+                - ART Excel and YES Kriya online. Conducted daily.
+
+        Module 2 (2nd weekend):
+            - IP is taught by IP teacher.
+            - All 3 days (Fri, Sat and Sun)
+            - Fri & Sat - 2 hours, Sun - 4 hours
+            Week 2:
+                - IP process is done online. Conducted daily.
+
+        Module 3 (3rd weekend):
+            - Going forward technique.
+
+        - There's an IP2 (Telekinesis)
+
+    - Akshay's last day of Intuition Process.
+    - Akshay went to Abhay's house after IP course. I picked him up in evening.
+    - Madhavi and Aarushi back from Paris/London trip. Glad to have them back.
+      They were very happy with home organization work.
+    - Did 4H by myself as Akshay was very tired :(
+    - PYS in evening.
+
+
+2025, Apr 19 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Apr 18 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Spring Break holiday at work.
+        - I took Akshay to SFO Zoo.
+        - Watched Ne Zha 2 at a Theatre in San Bruno.
+
+2025, Apr 17 (Thu)
+#ExceedingExpectations
+- Work:
+    - Performance review. Got "Exceeding Expectations" :)
+    - Meeting with Srikanth Kanneganti to onboard new Tenants with Prisma
+      Access + App Accel license in FedRAMP Moderate environment. He created 2
+      magic links (activation links) and I activated on Tenant (1721172312).
+      Will activate another one when needed.
+    - Meeting with Mazen about SCM UI. He's unable to see 'App Accel' on
+      Sidebar Navigation page. I've setup a meeting with Wilson Yang, Srikanth
+      Kanneganti, Mazen G and myself for Monday, April 21st.
+
+- Warrior/REI:
+    - 3045 Pine Valley is on market.
+
+- Minutiae:
+    - Up very late (8:30am). Sadhana and Guru Pooja.
+    - Meeting with Srikanth Kanneganti to onboard new Tenant.
+
+
+
+2025, Apr 16 (Wed)
+- Work:
+    - Sent an email to Roy, Vikram etc about `develop` to `release` merges happening without checks and balances.
+    - Attended FedRAMP weekly meeting.
+        - Must come up with Tenant for April 21st Pentesting.
+        - Must talk to Srikanth Kanneganti for Tenant bring up.
+        - There may be 'FedRAMP High' testing followed by 'FedRAMP Mod'.
+
+    - Meeting with Brett Fox of GCAT team for Pentesting
+        - April 21st Pentesting, App Accel is not in scope.
+        - In fact, App Accel does not require pentesting at all.
+    - Meeting with Vikram G and Shikhar D
+        - FedRAMP is at risk because we cannot build FIPS compliant image.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay came with me to work.
+    -
+
+
+
+2025, Apr 15 (Tue)
+- Work:
+    - Debugged ZBE crash in UK Prod with Shikhar Dogra.
+        - Found that customer@zdia Service Account is not added to UK Prod
+          Cosmos. Not sure how/why it was not reported earlier.
+        - We upgraded ZDIA nodes yesterday. That started raising alerts. Asked
+          SRE to add the SA in UK Prod (ZY-3234) and assigned to Shankar P.
+        - Shankar P from SRE copied Service Account details in UK Prod Cosmos.
+        - Issue is resolved after that.
+    - SCM UI discussion with Mazen G
+    - Ironvault deployment investigation.
+
+- Warrior/REI:
+    - Paid Carlos Lopez for work on 3045 Pine Valley Dr property.
+        - Zelled $5397
+- Minutiae:
+    - Home Organizing with Annemarie (Ann) going one. Lot of good progress happened.
+    - Mailed the extension form (Form 4868) and $51K check to IRS.
+        - Scanned the form and saved in Dropbox.
+    - Journalled past 1 week events.
+    - Took Akshay to Comic Book store (Illusive Comic)
+
+
+2025, Apr 14 (Mon)
+- Work:
+- Warrior/REI:
+    - Lot of discussions with Francisco about property repairs, bills, etc.
+      It's almost done and ready to be put on market.
+
+- Minutiae:
+    - FedEx'ed Aarushi glasses to Paris. Tracking no: 880534126791
+        - Cost $155 and will be deliverd on Wednesday, April 16th by noon.
+    - Home Organizing with Annemarie (Ann) started. First day. Done with
+      following rooms:
+        - Garage
+        - Hallway Closets
+        - Washer/Dryer Rooms
+        - Madhavi/Bhaskar bedroom
+        - Guest bedroom.
+
+    - Akshay's Taekwondo in afternoon.
+    - Took Akshay to Golfland around 6pm.
+    - Missed Kriya/Sadhana whole day.
+    - Gigantic waste of time at night scrolling through FB reels. This has
+      become addiction :(
+
+
+2025, Apr 13 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Madhavi and Aarushi went to Paris for Spring Break vacation.
+    - Akshay's Intuition Process in-person class continues.
+
+
+
+2025, Apr 12 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay's coding at 9am.
+    - Akshay's Intuition Process in-person class continues. Madhavi picked/dropped Akshay.
+    - Aarushi's Inter School Speech Competition. She won and got 2nd place
+      (Humorous Interpretation). Competition was held from 7:30am to 6pm at
+      Cupertino Middle School.
+
+
+2025, Apr 11 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay's Intuition Process in-person class from 5-7pm
+    - 4H and picking Akshay, while Madhavi and Aarushi went to Beauty Salon etc
+      was very challenging, but got it done.
+
+
+
+2025, Apr 10 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Apr 09 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Long conversation with Alok Ranjan about Sapna Mehta.
+
+
+
+2025, Apr 08 (Tue)
+#facial
+- Work:
+    - Raise MR for FedRAMP YAML file changes.
+        - Added new GCP project for DP.
+    - Got MR merged: "JobID in API reponse" task.
+    - Discussions with James about SDWAN scaling numbers. Chandu sent an email ...
+    - Discussions with Mazen Ghalayani about SCM UI for FedRAMP.
+        - He'll give me a document to fix API GW Manifest file for FedRAMP.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi is feeling depressed and lonely. I've to spend time with her.
+      Maybe walks after dinner. Do gym together. Maybe on Saturday morning.
+    - Long conversation with Alok Ranjan about Sapna Mehta.
+
+
+2025, Apr 07 (Mon)
+- Work:
+    - Meeting with Siby to create new GCP project for DP VMs.
+    - Suggestion from team is to create new IAM role, just like it is in commercial, today.
+    - Meeting with Bineesh, at night, to understand if all these things are automated. Yes, they are.
+
+- Warrior/REI:
+- Minutiae:
+    - Music class for kids.
+    - Spoke with Lakshman garu from SBI Tarnaka. I've to start collecting documents.
+
+
+2025, Apr 06 (Sun)
+#flute
+- Work:
+    - Worked on "JobID in API reponse" task. Raised MR.
+
+- Warrior/REI:
+- Minutiae:
+    - Went to 629 Celebration Ct to fix lights.
+    - Dropped Aarushi at RSM and took family to Farmers Market.
+    - Lunch at IKE's and dropped Akshay at IP (1pm-3pm).
+    - Aarushi's friends came from 2pm-5pm to do social studies project.
+    - SKY Teens follow up in evening.
+    - Akshay went to Abhay's house for play date. I picked him up at 7pm.
+    - Overall, an intense, non-stop day.
+
+
+2025, Apr 05 (Sat)
+#flute
+- Work:
+- Warrior/REI:
+    - Meeting with Lori Ann Pyne, Real Estate Agent, from Yosemite. Gave info talk on AirBnB homes.
+        - Madhavi, Kala and Suryam attended.
+
+- Minutiae:
+    - Akshay and Madhavi went to Fundraiser Fair organized by PTA at Montclaire Elementary.
+    - IP class for Akshay.
+    - Telugu class
+
+2025, Apr 04 (Fri)
+#flute #intuitionprocess
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - First class of IP for Akshya. It's a 17 day program.
+    - Ravi Vadlamani and family visited for dinner (Aditi and Divya).
+    - Took them to 4H, as I've those chores to do in Akshay's absense :)
+    - Ordered food from Chaat Bhavan.
+        - Somehow, I had a dull feeling throughout the meeting.
+    - Gave the girl some dresses as gifts and gave $51 for Vadlamani's.
+
+
+2025, Apr 03 (Thu)
+#flute
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Basketball game for Akshay. Close game, but lost.
+    - I spent a lot of time *outside* of work, driving kids around etc.
+    - Yoga Vasishtha in evening.
+
+
+2025, Apr 02 (Wed)
+#flute
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - first flute class in more than a year.
+
+
+2025, Apr 01 (Tue)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+@@@@@@@@@@@@@@   March 2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - FedRAMP - ONGOING
+            - PoC
+
+        - COREEXT-1471: App Accel Serviceability - ONGOING
             - Build Alerts based on Logs
 
-        - Work with Tanmay and setup Dev04 for the team.
+        - Work with Tanmay and setup Dev04 for the team. - ONGOING
 
-        - Maintanence
+        - Maintanence - DONE
             - ZY-2386
             - ZY-2351
 
-        - Tenants V2 API is extremely slow. How to speed up?
+        - Tenants V2 API is extremely slow. How to speed up? - ONGOING
             - GraphQL instead of CoreAPI
             - Batching: Make *single* lambda call for ALL tenants to get licensing
               details.
 
-        - Single Trace Id feature
+        - Single Trace Id feature - ONGOING
 
-        - App Accel Testing
+        - App Accel Testing - ONGOING
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+Personal
+    * 6am Wake Up: Do this in this order, every day.
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * At Night
+        - Flute practice
+        - Vashista Yoga (at night)
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+        - NONE
+
+    * Education
+        - Taro: Nail Your Promotion As A Software Engineer - ALMOST COMPLETED.
+        - Test Driven Develop in Go (Book) and follow along coding.
+        - Test With Go Videos
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons. - NOT DONE
+        - Start underwriting 1 deal/day - NOT DONE
+
+    * Insurance: - NOT DONE
+        - 3012/3014 Pine Valley
+        - 3040/3042 Pine Valley
+        - 3040/3042 Green Mountain Dr
+        - Whitebrush Loop
+        - Duval Rd
+
+    * Converting to LLC - NOT DONE
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Organize a YES course
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Mar 31 (Mon)
+- Work:
+    - FedRAMP
+        - Raised MR
+        - Updated Confluence page with ...
+        - GNS research.
+
+    - SDWAN App Accel
+        - Amit Agarwal testing autoscaling is working.
+        - Updated FS with 'Operational Execellence' section.
+        - Updated FS with 'Prepping for Production' section.
+
+    - 429 errors
+        - Answered questions from Anand.
+
+    - Monthly report
+
+- Warrior/REI:
+- Minutiae:
+    - Flew back to Bay Area in morning. Came to work.
+
+
+2025, Mar 30 (Sun)
+#patanjaliyogasutras #losangelesashram
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Great series overall. Very happy to have met Guruji.
+    - Met with Neena/Kapil Bhatnagar, Ashutosh Shastry, Poornima Raman, Sanjana Chopra, Anjali Vishwanath,etc.
+
+2025, Mar 29 (Sat)
+#patanjaliyogasutras #losangelesashram
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Travelled to LA to attend PYS with Guruji. Up at 3:30am and took flight at 6:15am to LA.
+    - Great series overall. Very happy to have met Guruji.
+    - Stayed with Sridhar and Arvind.
+
+
+2025, Mar 28 (Fri)
+- Work:
+    - I could not create GCP folder for zclusters for FedRAMP.
+        - Opened ticket CLOUDOPS-10495
+        - URL: https://cx.ccoe.paloaltonetworks.local/gcp/rnr/foldercreation/createfolder_fedramp
+
+    - 429 errors MR merge.
+
+- Warrior/REI:
+- Minutiae:
+    - Tarnaka House designs. Finalized. Meeting with Architect, Mavayya and
+      rest of the family.
+
+
+
+2025, Mar 27 (Thu)
+- Work:
+    - Raised MR for 429 errors.
+        - Addressed lot of review questions.
+    - Trying to create GCP project for Zworker deployment.
+    - Asking questions to Chandu Gutti and Meena Sehar on production data/values.
+
+- Warrior/REI:
+- Minutiae:
+    - WFH because Akshay was sick/cough/cold.
+
+
+
+2025, Mar 26 (Wed)
+- Work:
+    - ZOS in FedRAMP finally got working.
+        - Uploaded zorchestrator-service-cert and key to Secrets Manager.
+        - Raise a ticket (NETOPS-257) to track this. All FedRAMP projects must have these.
+    - Found issues in Grafana/Garuda UI. Raised a bug - COREEXT-1728
+    - Gave bonusly points to Jane Jojo, Mazen Ghalayini, Amit Kumar Agarwal,
+      Rajitha Pesaladenne, Kaci Gu.
+    - 429 errors
+
+- Warrior/REI:
+- Minutiae:
+    - Long conversation with Alok Ranjan. Suman Prakash is finally out. All
+      details around that.
+
+
+
+2025, Mar 25 (Tue)
+- Work:
+    - Worked on ZY-2970, a customer issue seen by TME in SE lab.
+        - There's mismatch of Telemetry Region between Prisma Access and SDWAN.
+          This is a lab tenant used by SE team. This mismatch should not happen
+          in production. TME team decided to use some other tenant. Closed the
+          bug.
+    - Closed ZY-2780 because another related bug, ZY-2855, resolved the issue.
+    - ZOS was successfully deployed in FedRAMP, but failing in CrashLoopBackOff.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Mar 24 (Mon)
+- Work:
+    - Worked on ZY-2970, a customer issue seen by TME in SE lab.
+    - Pretty frustrating day. Barely have access to engineers who can resolve
+      CICD issues, FedRAMP environment issues etc.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Mar 23 (Sun)
+- Work:
+    - 429 Too Many Requests
+        - Code changes were a bit complex.
+
+- Warrior/REI:
+- Minutiae:
+    - Tarnaka House Design meeting at 7:30am
+        - Discussed for 3+ hours in morning and 1+ hour in evening.
+    - Basketball from 1-3pm.
+        - Completed Sexual Harassment training by IAHV.
+    - 4H Monthly Meeting at 3pm, followed by chores.
+    - Patanjali Yoga Sutras.
+    - Folded clothes.
+
+
+2025, Mar 22 (Sat)
+#sarmamavayya
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Akshay's coding class at 9am.
+    - Akshay's basketball class at 10:30am in Campbell Community Center.
+        - Watched IAHV training for Sexual Harrassment.
+    - Akshay's Green Belt exam at 2pm. Madhavi took him there.
+    - I went to Chinmaya Mission to teach Telugu class.
+    - I went to Target and bought dress for Sarma Mavayya. Invited Purni, Ravi
+      and family for dinner.
+
+
+
+2025, Mar 21 (Fri)
+- Work:
+    - Currently seeing this error in ZOS pods:
+        pods "zorchestrator-service-d955c47fd-" is forbidden: error looking up service account zycada/admin-vm-acct: serviceaccount "admin-vm-acct" not found
+        - Analyzed permission between: admin-vm-acct and zycada-sa
+
+
+- Warrior/REI:
+- Minutiae:
+    - Lunch with Simranjit Chadda. Heart-to-Heart conversation. Very nice one.
+
+
+2025, Mar 20 (Thu)
+- Work:
+    - Very frustrating day as I was not finding anyone to help me with KAS_CONTEXT_NAME.
+        - asked Shankar Palakodeti, Amit Chandak, Umesh Jain.
+        - I got an idea after talking to Amit Chandak and Umesh Jain.
+        - Made changes to gitlab-ci.jsonnet and resolved the issue.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Mar 19 (Wed)
+- Work:
+    - Figured out bug in CICD.
+
+- Warrior/REI:
+- Minutiae:
+    - Electrical repair at 629 Celebration Ct. Simply Electric. Minh Nguyen.
+      Charged $200/hour rate and total of $430. The guy is very good.
+        - Living room: Replace with 4in retrofit recess lights. Halo brand. 6 of them.
+        - Kitchen: Replace with 6in retrofit recess lights. 4000K warm light. Halo brand. 4 of them.
+        - Master Bedroom: Replace with 4in retrofit recess lights. Halo brand. 4 of them.
+        - Guest Bedroom: Get a 240V thermostat. Wall mount. Baseboard heater.
+    - Once I buy the thermostat, call him and he'll replace it for me.
+
+
+2025, Mar 18 (Tue)
+- Work:
+    - Struggled a lot to get ZOS deployed in FedRAMP Maui env.
+
+- Warrior/REI:
+    - Late night, continued building Underwriting App.
+
+- Minutiae:
+    - Akshay left for Walden West Science Camp.
+    - Mavayyagaru and Vishnu left for LA. I dropped them off in morning at airport.
+    - Aarushi was very upset that she's behind for AMC and USACO preparation.
+      We purchased AMC preparation course (Self Study) from Alphastar.
+
+
+
+2025, Mar 17 (Mon)
+- Work:
+    - Listened to Netsec All Hands in morning. Mavayya garu and Vishnu are at home.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Mar 16 (Sun)
+- Work:
+    - ZY-2664. Wrote UTs for GenerateZClusterId() function.
+    - Raised MR late at night.
+
+- Warrior/REI:
+- Minutiae:
+    - Went to Jyothi Atta and Sarma Mavayya's grand daughter baby shower in
+      Tracy Hills (Sindhu and Padma's daughter). Met Bujji Mavayya, Santu
+      Mavayya and all.
+    - Listened to 'Nail Your Promotion' on the way there.
+    - Spoke with Sridhar on the way back.
+    - Watched 'Bandish Bandits' one episode.
+
+
+
+2025, Mar 15 (Sat)
+#facial
+- Work:
+    - ZY-2664.
+- Warrior/REI:
+- Minutiae:
+    - Telugu class.
+    - Ran almost 6 miles.
+    - Took kids to Badminton at CSC.
+    - Facial while Mavayyagaru and family are sleeping in the hall. Ashamed. Pretty let down by myself.
+
+
+
+2025, Mar 14 (Fri)
+#facial
+- Work:
+    - ZY-2780. Tenants V2 API failed.
+    - Meeting with Wilson Yang and Mazen Ghalayini about SCM UI for FedRAMP Mod.
+    - MR raised and merged for refactoring gitlab-ci.jsonnet file.
+    - Meeting with Yuval Twig, Anandkumar Muthu, Ganu and Roy.
+        - 409 errors
+        - 429 errors
+    - Meeting with Umesh on how to deploy customBranch to a Cosmos environment.
+
+
+- Warrior/REI:
+- Minutiae:
+    - Architecture Plan review
+        - MEDIA ROOM:
+            - Should we convert to dining room? Better utilization.
+        - STORE ROOM:
+            - It's currently 13.9' x 6'. Width can be compressed to give Kitchen more space.
+        - UTILITY ROOM:
+            - Can this size be increased?
+
+        - 2nd FLOOR:
+            - Should we have balcony?
+            - Can we have 3b/2ba on both sides? Can we reuse 1st floor plan?
+        - TERRACE:
+            - Single portion.
+            - Solar Panels.
+            - Roof Garden.
+    - Facial while Mavayyagaru is sleeping in the hall. Ashamed.
+
+
+
+2025, Mar 13 (Thu)
+- Work:
+    - MR raised and merged for refactoring gitlab-ci.jsonnet file.
+- Warrior/REI:
+- Minutiae:
+    - Took Mavayyagaru and Vishnu to Target. Dropped Maya at SJC airport.
+
+
+
+2025, Mar 12 (Wed)
+#mavayyagaru
+- Work:
+    - Barely got any work done.
+- Warrior/REI:
+- Minutiae:
+    - WFH
+    - Akshay and Aarushi pickup from schools and then airport ride.
+    - Mavayyagaru and Vishnu visiting from India.
+
+
+
+2025, Mar 11 (Tue)
+#vivek
+- Work:
+    - FedRAMP
+        - ZY-2683 resolved. Make sure Feature Flag is set for MUs. Confirmed that MUs are coming up with Service NIC.
+        - Continue updating values-fed-mod-maui.yaml file.
+
+- Warrior/REI:
+- Minutiae:
+    - Picked up Vivek and Maya from SJC airport. Maya came with me home. Madhavi and I WFH and took care of her.
+    - Call with Alok discussing various things: Subhash Kodnad, Bishnuraj, Shiva Chikkamath etc
+
+
+2025, Mar 10 (Mon)
+- Work:
+    - FedRAMP YAML file changes.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Mar 09 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Daylight Savings day.
+    - Aarushi's RSM
+    - YES! Kriya in afternoon.
+    - Madhavi and Akshay did 4H.
+    - Went to Sindhu's house to see the baby (Anjali). Jyothi atta invited.
+      Madhavi and I went. We listened to Patanjali Yoga Sutras along the way.
+      We bought new clothes from Target for the baby. Aarushi and Akshay stayed
+      home. We 'doordashed' from Panera bread for them.
+    - Sat with Aarushi with her coding problems. She finally finished
+      Codingbat.com questions. Amazing. Impressed with her dedication.
+    - I've subscribed to Codeacademy.com (discount pricing. $120/yr).
+
+
+2025, Mar 08 (Sat)
+#violin #facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - I got super mad at Akshay during lunch because he interrupted.
+        - Ashamed of myself on how mean I got with him. I've got to treat him
+          with more respect.
+    - Chanting + Telugu class
+    - Got violin from The Starving Musicians store in Santa Clara. Akshay is
+      super happy.
+
+
+2025, Mar 07 (Fri)
+- Work:
+    - Got zsetup code reviewed and approved and merged by Naveen Birru.
+        - Double committed to release and main branches.
+    - Vikram asked to focus on deploying ZOS with current Zworker image.
+
+- Warrior/REI:
+- Minutiae:
+    - Up at 5am and meeting with Kondala Rao garu, family and Srinu Mavayya. We
+      agreed on a design. Kondala Rao garu will work on it and get back in a
+      week (March 15th).
+    - Cancelled O'Connor property tax. Booked Ownwell property tax.
+
+
+2025, Mar 06 (Thu)
+- Work:
+    - Updated 4 bugs raised by Anandakumar Muthu from 5G team.
+        - Provided lot of details in the bug.
+        - Included Vikram G and Yuval T.
+        - Assigned them back to Anand.
+
+- Warrior/REI:
+- Minutiae:
+    - Dropped Aarushi in school and came to work early (8:30am).
+    - Spoke with Alok 1+ hour. He spoke with Subhash Kodnad, Kunal Ruvala about
+      Suman Prakash, his projects, proposed new projects and how the management
+      were super impressed. I must do the same with my management chain.
+
+
+2025, Mar 05 (Wed)
+- Work:
+    - Debugged tonnes of issues in nightly regression that Tanmay Sawant raised.
+    - Meeting with Chandu Gutti and Mahmood Syed Ali about SDWAN UI changes. Not much for me.
+    - Meeting with Badri, Shikhar and Vikram on building FIPS compliant images for FedRAMP.
+        - I've asked Chandru (PLM) and Alexis Neivess about building Ubuntu
+          (non-FIPS) + Kernel (FIPS) images and using it for Zworker.
+    - Barely got Zsetup changes done for FedRAMP.
+
+- Warrior/REI:
+- Minutiae:
+    - Worked with Kala on Tarnaka House plan for 3+ hours.
+    - Helped Aarushi little bit with coding.
+    - Sadhana, picked up Akshay from Taekwondo and got food from India shop.
+    - Spoke with Alok 1+ hour. About his meeting with Kunal Ruvala. Assurances
+      he got from KR about Suman Prakash etc.
+
+
+2025, Mar 04 (Tue)
+- Work:
+    - Meeting with Vikram on FedRAMP tasks.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Mar 03 (Mon)
+- Work:
+    - FedRAMP tasks.
+
+- Warrior/REI:
+- Minutiae:
+    - Running in Office Gym.
+        - I'll come to office and do the gym during office hours. More often,
+          will ask Madhavi to pick up kids from school.
+    - Worked with Kala and Srinu Mavayya on Tarnaka House plan for 3+ hours.
+
+
+
+2025, Mar 02 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - 4H
+    - Sadhana in evening
+    - Tarnaka House designs. Kala did great job drawing to scale.
+
+
+2025, Mar 01 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Kids care, mostly.
+    - Coding class at 11am
+        - I went to office to take printouts, but decided to keep old
+          printouts.
+        - Chapter 2, Page 35 to 39
+
+
+@@@@@@@@@@@@@@   February 2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - FedRAMP
+            - COMPLETE: Functional Spec review
+
+        - ONGOING: COREEXT-1471: App Accel Serviceability
+            - Build Alerts based on Logs
+
+        - ONGOING: Work with Tanmay and setup Dev04 for the team.
+
+        - ONGOING: Maintanence
+            - ZY-2386
+            - ZY-2351
+
+        - ONGOING: Tenants V2 API is extremely slow. How to speed up?
+            - GraphQL instead of CoreAPI
+            - Batching: Make *single* lambda call for ALL tenants to get licensing
+              details.
+
+        - ONGOING: Single Trace Id feature
+
+        - ONGOING: App Accel Testing
             - Using Postman, Mockoon, httptest, httpmock
             - Increase code coverage to 40%
 
@@ -112,12 +1580,199 @@ Seva
     - Organize a YES course
     - Yoga Vasishta Reading - ONGOING
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-2025, Feb 01 (Sun)
+
+2025, Feb 28 (Fri)
+#silencecourse #cleaning
+- Work:
+    - ZY-2386: Sent cypher queries to Gopi. Most issues fixed, but not all.
+      TF-->TFRP relationship is still broken.
+    - FedRAMP:
+        - Updates to code repo for PoC.
+        - Created JIRA tickets for each task.
+
+- Warrior/REI:
+    - Texted Eric Williams and he floated a property in Arkansas. Min investment $25K.
+
+- Minutiae:
+    - Madhavi in Silence Course.
+    - Cleaner came to property.
+    - Aarushi had a Dance Party at school.
+
+
+
+2025, Feb 27 (Thu)
+- Work:
+    - ZY-2604: Finally closed ZY-2604 as resolved. I identified issues during dcache provisioning flow. I created a Slack channel and sent out below summary. Requested Anish Mathew to help fix these.
+            Huge thanks to @Rajitha Pesaladenne and @Kaci Gu for helping with following
+
+            Background:
+            Consider a region where there is no dcache (no Prisma Access, no MU/RN).
+            1. SDWAN only Tenant enables App Accel.
+            2. ZOS creates ZDIA worker.
+            3. zcfg in ZDIA worker makes Tenants V2 API call every 5 mins.
+            4. Upon this call, ZOS provisions Dcache.
+            5. This has been failing (ZY-2604)
+
+            Observations/Issues:
+            1. There are 100s of entries in Jobs table in ready state, for provisioning dcache clusters. ZOS is creating new entry in the same Compute Region even if there's already an entry. For example, in northamerica-northeast1, there are 89 jobs right now. This is a bug. A lot of churn is happening due to this as explained below.
+            2. ZOS makes 10 API calls to GET and PATCH sequence_id for dcache clusters. (Screenshot below).
+                a. Why is ZOS generating sequence_id when there's already a provisioning job? This is a bug. If possible, this should be a bulk call.
+                b. On average, ZOS is wasting 0.5s in sequence_id generation.
+                c. ZOS is consuming and wasting up sequence_id namespace.
+            3. Jobrunner is creating TF workspace for each provisioning job in the table.
+            4. TF creates DCache and makes Webhook callback to ZOS.
+            5. ZOS, once again checks if DCache is already exist. If Dcache already exists, ZOS initiate DELETE Dcache call. Dcache created in Step 4 is deleted. Example.
+
+            So, in this example, ONE Of the 89 jobs succeed. The other 88 jobs create Dcache and ZOS immediately deletes them :disappointed:
+            I know @Anish Mathew is working on fixing Dcache provisioning workflow. I'm listing the issues found by us.
+            In SDWAN Tenant only case, it's taking many hours before Dcache is actually created in the region.
+
+    - ZY-2386:
+        - This issue is same as ZY-2462 issue. Chasing Gopi Dhulipalla to fix the DB.
+
+    - FedRAMP:
+
+
+- Warrior/REI:
+    - Attended Warrior QnA session lead by Georgy Ferrero. Max Shah team mate.
+    - Meetiing with Dhiraj Chug. He lives in Washington DC area. Invests in
+      near by areas. Mostly does flips.
+
+- Minutiae:
+
+
+2025, Feb 26 (Wed)
+- Work:
+    - ZY-2604: Worked very hard to understand why dcache creation is failing.
+      Raised an MR. But team and myself had doubts about the MR. So, mostly,
+      I'll not commit the MR.
+    - ZY-2386: Slept at midnight and woke up at 5am next morning (Thursday) and
+      figured out that ZY-2386 is happening due to Tenant node getting deleted.
+      Just like ZY-2462. I mentioned this to Shivam Pal and Amit Agarwal.
+
+- Warrior/REI:
+- Minutiae:
+    - Chevy Bolt service at Stevens Creek dealership. Cost me $300 :(
+    - Aarushi is struggling with AoPS Alcumus set of problems. I'll help her
+      more, going forward.
+
+
+2025, Feb 25 (Tue)
 - Work:
 - Warrior/REI:
 - Minutiae:
 
 
+2025, Feb 24 (Mon)
+- Work:
+    - Studying UT framwork for ZY-1430 code review comments. Planning to write
+      UT for *subset* of functions I wrote.
+        - Discussion with Kaci Gu on how the framework *works*. Looking at
+          Webhook_test.go file to *inspiration*. It is written by Ganu.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Feb 23 (Sun)
+- Work:
+    - Debugging ZOS Knowledge transfer to QA teams in India.
+
+- Warrior/REI:
+- Minutiae:
+    - Tarnaka House Option 8 Review
+        - Kala prepared our version of architecture on Draw.io
+        - Main Entrance must be exactly in middle of the house.
+        - After entering, Drawing Room must be symmetrical to the entrance.
+        - Balcony in East (next to Kitchen) must be aligned and centered to the Main entrance.
+        - We moved Powder Bath and Office Room in Option 8 to different position.
+    - I woke up at 5am and watched India vs Pakistan game. Champions Trophy.
+      India won easily. Kohli scored century on last ball/winning run. Akshay
+      watched with me. That was good.
+    - I folded cloths, some of them.
+
+
+
+
+2025, Feb 22 (Sat)
+- Work:
+    - Debugging ZY-2604: L7 App Accel is not working.
+        - Understood that '-' vs '_' change in Compute Region name is failing
+          to fetch dcache info for `europe-west2` region.
+    - Updates to ZY-1430 code changes. SDWAN License Check.
+
+- Warrior/REI:
+- Minutiae:
+    - Coding class.
+        - I went to work to printout telugu text book.
+    - Chanting + Telugu classes.
+    - Telugu Class:
+        - We practiced Gunintaalu for letter: k, K, g, G, c, C, j, J.
+        - We completed Chapter 2 (mirapakaaya).
+        - I've given a printout of the textbook to kids today.
+
+
+2025, Feb 21 (Fri)
+- Work:
+    - Debugging an issue that QA (Amit Agarwal) found. Acceleration was not
+      happening.
+        - ZDIA worker makes API calls to ZOS to fetch dcache info.
+        - API was returning empty result.
+        - API was differentiating between 'europe-west2' (not working) vs
+          'europe_west2' (working).
+        - From ZOS API, I've to debug why it's not working.
+        - dcache clusters are *assumed* to be present for "L7 App Accel for
+          SDWAN" feature. They do not exits in this case. Fix is to create
+          them. Must take help from Shikhar/James.
+
+    - Update to FedRAMP FS after talking to Umesh Jain.
+        - Meeting with Vikram Guleria. Listed all tasks for FedRAMP.
+        - Must create a ZOS API for whitelisting IP address of ION. This is
+          used by ZOS to create a firewall rule to let the traffic through.
+
+- Warrior/REI:
+- Minutiae:
+    - Long conversation with Alok Ranjan about Bishnu Raj, his resignation etc.
+      Man, it's a mess.
+    - Called Venkata Shastry garu from VEDA temple about Kala's house Vaastu
+      situation. He asked Kala to do a video call on Monday, February 24th at
+      3pm PST. Show him the whole house, live on video call.
+    - Called Carmax Service center asking for Extended Warranty documents. How
+      to find a service center that can fix my issue and service the car?
+        - Jorge Goitia answered my call.
+    - Santu Mavayya visited, briefly, in evening.
+
+
+2025, Feb 20 (Thu)
+- Work:
+    - Meeting with Chandu Gutti about SDWAN dashboards
+        - Ask Mahmood who implemented the Dashboards UI. Follow that lead.
+    - Watched Alok Ranjan's video about CMS dashboards demo.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Feb 19 (Wed)
+#facial
+- Work:
+    - Trying to find out various project names in GCP used FedRAMP Prisma Access.
+    - Meeting with SDWAN teams about CGSDW-29604
+        - We concluded that `app_accelerated` field in `end_conn` table does not tell if app is accelerated or not. It only tells that App Acceleration configuration has been set and zworker is *aware* of it.
+        - Swati and Abhishek from SDWAN UI team will fix the issue.
+
+- Warrior/REI:
+- Minutiae:
+    - Facial at night. Must stop this.
+
+
+
+2025, Feb 18 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
 
 
 2025, Feb 17 (Mon)
@@ -1250,6 +2905,7 @@ Seva
       (with interest). I've asked for discount and got to pay original amount
       :). Wakefield is name of debt collector. I paid from KPCU account using
       money from checking account.
+        - Confirmation Number: 1245620927
     - Madhavi paid off $11000+ amount in Credit Card debt from her BoA account.
     - Meeting with Fidelity Advisor: Richard Rocke
 
