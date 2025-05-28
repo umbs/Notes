@@ -1,4 +1,9 @@
 ***********************   Test With Go (Jon Calhoun) **********************
+References:
+[1] https://github.com/joncalhoun/twg
+[2] https://golang.org/pkg/testing/#pkg-index
+
+
 CHAPTER: Naming Conventions
 ----------
 
@@ -103,6 +108,9 @@ CHAPTER: Examples as Test Cases
         fmt.Println(greeting)
 
         // Output: Hello Bhaskar
+	// OR
+	// Output:
+	// Hello Bhaskar
     }
 
     - Run `go test`, just like any other test.
@@ -158,14 +166,30 @@ Complex Examples
 
 
 
+Examples in the Standard Library
+------
+https://golang.org/src/image
+	decode_example_test.go
 
-CHAPTER: Testing Multiple Cases
+
+- How to find source of a certain package?
+	1. Go to pkg documentation (Google it) --> https://golang.org/pkg/sort
+	2. Click on a function, which takes you to it's documentation: func Float64s(a []float64)
+	3. Click on the function, which takes you to it's source :)
+	4. https://golang.org/src/sort
+		Lot of example tests
+
+
+
+
+
+CHAPTER: Testing Multiple Cases - START
 -------------
 - Table Driven Tests is a design pattern. Look at 'underscore' directory in Jon
   Calhoun github repo.
 - Subtests are whenever we call tt.Run() method.
 - Shared setup and teardown.
-- Look at 'users' directory to setup DB and teardown after tests.
+- Look at 'psql' directory to setup DB and teardown after tests.
     - Very good example of test setup and teardown.
 
 - TestMain()
@@ -421,6 +445,9 @@ Reference:
 [1] https://www.youtube.com/watch?v=X4rxi9jStLo
 
 ***********************   Go Environment Variables   **********************
+GOPROXY =
+GOPRIVATE =
+
 GOOS & GOARCH
 GOPATH & GO111MODULE
 GOCACHE & GOTMPDIR
@@ -625,4 +652,8 @@ Reference:
 [1] https://www.youtube.com/watch?v=k5wJv4XO7a0  <<< very tough to understand this.
 [2] https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax
 [3] https://pkg.go.dev/text/template
+
+*************************** Concurrency in Go ***********************************
+CSP = Communicating Sequential Processes
+    - Technique and name of paper that introduced it in 1978 by Charles Anthony Richard Hoare.
 
