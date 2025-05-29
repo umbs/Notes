@@ -70,6 +70,17 @@ Generative AI Learning Path
       Later I delved deep into Computer Vision for profession, and Edge AI for personal projects.
 
 
+AI Agentic Tools
+---
+- n8n.io
+- relevanceai.com - Sales and Marketing focused.
+- stack-ai.com - enterprise AI for internal use.
+- crewai.com - not easy to get started with. For technical people.
+- botpress.com - beginner friendly. Easy to build chat bot.
+- flowwise.com - open source alternative to botpress.com
+- lindy.ai
+- mindstudio.ai
+
 
 
 AI Terminology
