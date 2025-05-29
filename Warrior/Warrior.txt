@@ -821,6 +821,24 @@ PPM: Private Placement Memorandum
 FMV: Fair Market Value
 
 
+@@@@@@@@@@@@@@@@@@@@@@     Talk by Merrill Kaliser            @@@@@@@@@@@@@@@@@
+PARTNERSHIPS
+    - It's like marriage. Long Term relationship.
+    - More than 50% LLCs are dissolved.
+    - Koble test (or other similar strengths tests for partnerships).
+        - https://www.kolbe.com
+    - "Date First" with your LLC partner.
+    - Use MOUs (Memorandum of Understanding) FIRST.
+        - MOU is non-binding in Court. But it is considered "binding" for all practical purposes.
+        - Lawyers put NDA's on investors list. That is, one GP will not *steal* other GP's investors list on *another* deal.
+    - Choose your partner like you would choose your spouse.
+
+
+KEY PERSON/GUARANTOR
+    - Person with liquidity and financial *might*.
+    - They guaranty the debt.
+
+
 @@@@@@@@@@@@@@@@@@@@@@     Syndicated Deal Analyzer (SDA)      @@@@@@@@@@@@@@@@@
 
 (Lesson 12) 3 Steps to the 10 Minute Offer
@@ -878,3 +896,13 @@ Step 3: Use the advertised cap rate to come up with a revised Fair Maket Value (
     - Step 3: Using Cap Rate, calculate Fair Market Value (FMV)
 
 
+@@@@@@@@@@@@@@@@@@@@@@     UNDERWRITING MY STEPS     @@@@@@@@@@@@@@@@@
+
+'Scenarios' tab
+1. Input Asking Price in C6
+
+
+Victoria McGuire Presentations
+	Joseph El Hage
+	https://us06web.zoom.us/rec/play/HokAQeoFQ531d1fCtanaNee4xyGEmDQKH-2ipB7vaJO2BiFrOpCS9M2QIwatThKJLZwUchHC4DIrVVQ.IV6DEx4CWgMH26TO?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fus06web.zoom.us%2Frec%2Fshare%2FFuJkQOUZ3IhwUmMojisj8tBKXYD3kV1IS-mkUqQKDGJPg94W901hlI66cNrdlxeM.jx9ByTJAKFc8fvQR%3Ffbclid%3DIwY2xjawIWflpleHRuA2FlbQIxMAABHd39MyLQAd5M_snuZT4myYlsE-mWuDaGnYNnz_GEgqwAY4RaRJMDnY167A_aem_0kHo6y1KsNCY-Yh74g2fdg
+	@!UY5APW
