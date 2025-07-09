@@ -43,15 +43,614 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@@@@@@@@@@@@@@   May 2025    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   July 2025    Goals  @@@@@@@@@@@@@@@@@@
+- TODO
+    - PRA Cert Management Service
+    - FedRAMP Docker FIPS complaint image
+
+    - Ownwell action items
+
 Career
     Major Projects:
+        - PRA Cert Management Service
         - FedRAMP
+
+    Minor Projects, Tech Debts
         - Single Trace Id feature
         - Concurrent Tenants V2 API
         - COREEXT-1471: App Accel Serviceability
-
         - Maintanence bugs
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * Evening:
+        - 2 mile run
+        - Gym
+
+    * Night:
+        - Flute practice
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+
+    * Education
+        - DONE - Taro: Nail Your Promotion As A Software Engineer
+        - Test With Go Videos
+        - Test Driven Development in Go (Book) and follow along coding.
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - 1 underwriting/day.
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Jul 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+2025, Jul 07 (Mon)
+- Work:
+    - Resume Cert Management Service work.
+    - Code review of 5G/Pradnya code (UMF Radius node).
+    - Meeting with Tanmay Shrivastava
+        - ZY-2379. Ironvault is taking 25+ minutes to generate domain cert.
+            - This is fixed by Hsin-Yi Shen. She did concurrent cert generation.
+        - Nightly regression. Should we migrate from dev04 to dev02? Or create new Tenants in dev04.
+    - FedRAMP:
+        - Meeting with Shikhar Dogra.
+        - He got the Ubuntu image working.
+        - He needs 2 weeks to get all things in place.
+    - Meena Sehar
+        - SDWAN geneve tunnels were not coming up.
+        - ZOS received and successfully responded to API requests.
+
+
+- Warrior/REI:
+- Minutiae:
+    - Gym in morning with Personal Trainer.
+    - Meeting with Samhitha Sathyanarayana. She's going to India, probably in September.
+
+
+
+2025, Jul 06 (Sun)
+#GuruPoornima #silencecourse
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Last day of silence course.
+    - GP celebrations.
+    - Got Guruji's darshan. Blessed that He's in our lives.
+
+
+
+2025, Jul 03-05 (Thu - Sat)
+#GuruPoornima #silencecourse
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jul 02 (Wed)
+#GuruPoornima #silencecourse
+- Work:
+    - CloudSQL changes to create PRA Profile in database.
+      `certificate_profiles` table is created. sqlc changes.
+    - Refactored code in trxn package. Wrote a utility function to get
+      transaction querier objects.
+    - Pushed the new REST API code upstream.
+
+- Warrior/REI:
+- Minutiae:
+    - GP Silence Course started.
+
+
+
+2025, Jul 01 (Tue)
+- Work:
+    - Emailed Suresh Sangaiah my 6 month progress report
+            Hello Suresh,
+
+            I want to keep you informed on the work I've been doing. Here's the report of the first half of 2025.
+
+            SDWAN + App Acceleration
+            Status: GA'ed in March.
+                - Extensive Integration Test coverage.
+                - Good number of Unit Tests while continuously adding more for increased coverage.
+                - App Acceleration is available for SDWAN clients across all 200+ GCP edge regions.
+                - Benchmarks show up to 300% faster content download. Results.
+                - Currently, TMEs are training ~200 SEs as part of GTM strategy.
+                    - Working with Meena Sehar (TME) in taking the feature to SEs.
+
+
+            FedRAMP for App Acceleration
+            Status: Ongoing
+                - Modified Control Plane components for FedRAMP compliance.
+                - ZOS, Ironvault, Zsession Manager, Zaggregator.
+                - Working on building FIPS enabled images for Data Plane.
+                - Targeting for FedRAMP certification in October, 2025.
+                - This work will align with FedRAMP for the PRA project starting in August.
+
+
+            Certificate Management Service for PRA Web Apps
+            Status: Ongoing
+                - Building Certificate Management Service for Privileged Remote Access (PRA) project.
+                - The service interacts with Let's Encrypt, a free Certificate Authority.
+                - This project completely eliminates the high costs of generating domain certs from GoDaddy and likes.
+                - For example, our PoC assumes 100,000 private apps.
+                - At $200/certificate, that's about $20M+ cost savings.
+
+
+            Other Projects/Technical Debt
+            Quality Initiatives
+                - From the dev team, own and drive nightly regression test suites.
+                - Address nightly failures consistently.
+                - Aim to increase Unit Tests coverage to 40% by August and 80% by December 2025
+            Architectural Improvements
+                - Identify and fix performance bottlenecks in the App Acceleration control plane.
+                - Fixed rate limiting issues between ZOS and CoreAPI (429 errors).
+
+
+    - Emailed Kumar Senthivel my 6 month progress report
+        Hello Kumar,
+
+            I want to keep you informed on the work I've been doing. Here's the report of the first half of 2025.
+
+            SDWAN + App Acceleration
+            Status: GA'ed in March.
+                - Extensive Integration Test coverage.
+                - Good number of Unit Tests (15+), while continuously adding more for increased coverage.
+                - App Acceleration is available for SDWAN clients across all 200+ GCP edge regions.
+                - Benchmarks show up to 300% faster content download. Results.
+                - Currently, TME is training ~200 SEs as part of GTM strategy.
+                - Working with Meena Sehar (TME) in taking the feature to SEs.
+
+
+            FedRAMP for App Acceleration
+            Status: Ongoing
+                - Modified Control Plane components for FedRAMP compliance.
+                - ZOS, Ironvault, Zaggregator.
+                - CP work is dev complete.
+                - Working with Shikhar, on building FIPS enabled images for Data Plane.
+                - This work will align with FedRAMP for the PRA project.
+
+
+            Certificate Management Service for PRA Web Apps
+            Status: Ongoing
+                - Building Certificate Management Service for Privileged Remote Access (PRA) project.
+                - You may know that this service interacts with Let's Encrypt to generate domain certs.
+                - This project should completely eliminate the high costs of generating domain certs from GoDaddy. My back of envelope estimate:
+                    - For example, our PoC assumes 100,000 private apps.
+                    - At $200/certificate, that's about $20M+ cost savings.
+
+
+            Other Projects/Technical Debt
+            Quality Initiatives
+                - From the dev team, own and drive nightly regression test suites.
+                - Address nightly failures consistently.
+                - Aim to increase Unit Tests coverage to 40% by August and 80% by December 2025
+            Architectural Improvements
+                - Identify and fix performance bottlenecks in the App Acceleration control plane.
+                - Fixed rate limiting issues between ZOS and CoreAPI (429 errors).
+
+
+- Warrior/REI:
+- Minutiae:
+    - Took Aarushi and Zeynab to Great America Parkway in morning.
+
+
+
+@@@@@@@@@@@@@@   June 2025    Goals  @@@@@@@@@@@@@@@@@@
+- TODO
+    - DONE: ZY-3920 Meena Sehar: Zcluster creation failure.
+    - DONE: ZY-3834 Meena Sehar: Apps disabled, does not stay disabled.
+    - DONE: FedRAMP CP MR to upgrade golang to 1.24.3
+
+    - DONE: Crescendo HOA. New management. Setup HOA autopay.
+
+    - TBD: ZOS --> CoreAPI call spike
+    - TBD: FedRAMP Docker FIPS complaint image
+    - TBD: FedRAMP DP image. Deploy default/base image and test baseline.
+    - TBD: FedRAMP DP FIPS image. Deploy image and test FIPS image.
+
+    - TBD: Ownwell action items
+
+Career
+    Major Projects:
+        - FedRAMP
+            - TBD: Took a back seat due to DP FIPS image issues.
+
+        - TBD: Single Trace Id feature
+            - This is *simple project*, but not done YET.
+
+        - TBD: Concurrent Tenants V2 API
+        - TBD: COREEXT-1471: App Accel Serviceability
+
+        - ONGOING: Maintanence bugs
+        - TBD: App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+        ===> Need to be more regularly.
+
+    * Evening:
+        - 2 mile run
+        - Gym
+        ===> Started doing this regularly.
+
+    * Night:
+        - Flute practice
+        - Go to bed right after Aarushi goes to bed.
+        ===> Must do this more regularly.
+
+    * Read 1 book a month
+
+    * Education
+        - DONE - Taro: Nail Your Promotion As A Software Engineer
+        - Test With Go Videos
+        - Test Driven Development in Go (Book) and follow along coding.
+
+REI
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - 1 underwriting/day.
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2025, Jun 30 (Mon)
+#lassen
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Drive back to Bay Area.
+    - Spoke with Alok Ranjan at length.
+        - ASUS laptop is budget laptop with good performance.
+        - Amazon.in is good.
+        - Shiva told Kunal Ruvala that India team is 3x slower than US
+          counterpart. This is not good :(
+        - Alok had to withdraw the fight with HR about food/beverage bills.
+    - Folded clothes while on call with Alok.
+    - Watched 'Adolescence' Netflix series. Slept at 4:30am :(
+
+
+2025, Jun 29 (Sun)
+#lassen
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Woke up at 6am and left for Burney Falls.
+    - Hike Cinder Cone mountain. Exhausting, but worth it.
+        - Beautiful views. The crater was amazing. Fabulous lava beds were really fabulous.
+        - Highlight:
+            - Aarushi and I started hiking.
+            - Madhavi and Akshay stayed back.
+            - But Akshay started hiking by himself and caught up midway.
+            - Amazing feeling, as a dad, to see him "conquer" the mountain.
+
+
+
+2025, Jun 28 (Sat)
+#lassen #vacation
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Burney Falls. Had to turn around as parking was full.
+    - Boating in Manzanita Lake.
+    - Drive through Lassen Park.
+    - Sulphur Works.
+    - Visitor Center, kids wanted to buy stuff.
+
+
+
+2025, Jun 27 (Fri)
+#lassen
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Last day of Coding camp for Aarushi.
+    - Drive to Lassen Volcanic National Park.
+
+
+
+2025, Jun 26 (Thu)
+- Work:
+    - Helped out Badri with develop --> release --> deploy and CICD etc.
+      Zworker, Dcache clean up etc.
+    - Helped Pradnya with 5G stuff.
+    - Meeting with Alex Neives and Chandru about FedRAMP App Acceleration FIPS
+      compliant image.
+    - Prepared list of tasks for completing PRA Cert Manager feature. A bit
+      overwhelming. Need to work with Ganu to reduce scope and refine the
+      estimates.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay swimming.
+    - Aarushi Alphastar.
+    - Cleaners came today morning.
+    - Downloaded 'Rectangle Pro' app and paid $10 for lifetime subscription.
+    - Sold about $5,200 stock on ETrade at $202 per share. Capital gains is
+      about $500.
+
+
+
+2025, Jun 25 (Wed)
+#WFH
+- Work:
+    - Up at 4am and went to office by 5am, to prepare for the demo.
+        - I did not feel ready, but gave an informal demo to Ganu.
+        - Then gave same thing to entire team.
+        - Got lot of feedback.
+    - Meena Sehar brought up App Acceleration not working issues.
+        - Looks like its misconfiguration.
+
+- Warrior/REI:
+- Minutiae:
+    - My WFH day.
+    - Akshay swimming.
+    - Aarushi pick up in evening.
+    - Took Aarushi to Optometry and Akshay to Taekwondo. Coordinating the ride
+      was challenging.
+
+
+
+
+2025, Jun 24 (Tue)
+- Work:
+    - CloudDNS Client is being updated to use GCP CloudDNS.
+        - When talking to Lets Encrypt, it provides a challenge (TXT + Value).
+        - This must be added to CloudDNS.
+        - Initially generated code by Gemini/Claude assumed Manual DNS
+          Challenge.
+        - Rewriting the "Manual" part to automate it because Ironvault has
+          Service Account to write to CloudDNS.
+    - Talked to Meena Sehar
+        - https://jira-dc.paloaltonetworks.com/browse/CGSDW-29688
+        - VMs are present in us-east4, App Accel is enabled. But 'dump
+          acceleration status' shows Status = Down.
+        - Pradeep Badri debugged and more info in above bug.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay's swimming at DACA.
+    - Gayatri's son, Samarth came over for play date with Akshay.
+
+
+2025, Jun 23 (Mon)
+- Work:
+    - LetsEncryptClient coding
+    - CloudDSNClient coding
+- Warrior/REI:
+- Minutiae:
+    - Akshay's swimming at DACA started.
+    - Helped out Aarushi with Alphastar Coding.
+    - Taekwondo, CCM classes.
+    - Long discussion with parents and Kala about Tarnaka House Elevation plan
+      and new architect.
+
+
+2025, Jun 22 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jun 21 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jun 20 (Fri)
+- Work:
+    - Woke up at 4am, did coding for 2 hours. And slept until 8:30am.
+
+- Warrior/REI:
+- Minutiae:
+    - Bay Area Fastrak ticket
+        - Invoice #: I692527051297
+        - License Plate: 7UPL370
+        - Paid: $10.25
+        - Confirmation #:
+    - Akshay came with me to office.
+    - I've opened the backyard gate for George (Gardner) to do his thing.
+
+
+
+2025, Jun 19 (Thu)
+#junteenth #facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Junteenth holiday.
+    - Yoga Vasishtha.
+    - Aarushi's Silicon Valley Eye/Optometry.
+
+
+2025, Jun 18 (Wed)
+#WFH
+- Work:
+    - With Rajitha's help, I learned about sqlc tool and wrote up CloudSQL
+      interface. It's not complete yet, but raised and merged an MR.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jun 17 (Tue)
+- Work:
+    - Meeting with Sathya and got questions clarified.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jun 16 (Mon)
+#WFH
+- Work:
+    - FedRAMP certificate expiry issue. Umesh helped me debug and identify.
+      Raised it with Lance Roberts and Ganu.
+
+- Warrior/REI:
+- Minutiae:
+    - WFH, for Akshay.
+    - Gym in morning.
+    - Aarushi went to Alphastar in Cupertino.
+    - Helped her out in evening.
+    - Music class in evening.
+
+
+2025, Jun 15 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went to SFO airport around 7:30am to pick up Madhavi and Akshay, coming
+      from LA.
+    - Met Shiva Chikkamath around 5pm and took him to Costco. Got some
+      chocolates for his kids.
+    - Then took him to Target for some gifts for his kids.
+    - Dinner at Kovai Cafe (because Mylapore was 2+ hours wait time). He seems,
+      overall, very happy.
+
+
+2025, Jun 14 (Sat)
+- Work:
+    - Up around 4am and worked on PRA Cert Management feature.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Jun 05 - 13
+- Work:
+    - Lot of struggles around fixing ZY-3854 (Apps getting disabled)
+    - Not much progress on FedRAMP.
+        - Stuck at Certs expiration between ZOS and Provisioning Service.
+        - With some help, recovered.
+        - DCaches are created (4 of them), using FIPS image that Shikhar gave.
+
+    - PRA Cert Management.
+        - Used AI to produce code.
+
+- Warrior/REI:
+- Minutiae:
+    - Madhavi and Akshay went to Los Angeles.
+    - Shiva Chikkamath is here. Met him couple of times.
+
+
+
+2025, Jun 04 (Wed)
+- Work:
+    - ZY-3920
+        - Tested changes in staging. Created a Spreadsheet of all the tests I've done
+            https://docs.google.com/spreadsheets/d/1CR8dsap0YTZ1GookFwmS6H1Zg05dhX1x_6rwDJ9DZrg/edit?gid=0#gid=0
+
+        - Found a bug (ZY-4016) where multiple Tenants are not mapped to same ZDIA cluster.
+
+    - ZY-3854
+        - Akshay put a fix, which I did not fully understand.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Jun 03 (Tue)
+#facial
+- Work:
+    - ZY-3920
+        - Tested, raised MR and merged changes to develop and release branches.
+        - Got approvals from Manish H and Rohit M to deploy to staging first.
+
+    - ZY-3854: Apps are disabled on refresh
+        - Very frustrated with lack of progress.
+        - Tested by running "production" ZOS locally. GET API call perfectly
+          works. But GET calls from SCM UI is failing.
+
+    - Cert Mmgmt Service
+        - Meetings with Sathya Thilakan for Certificate Management Services.
+        - Understood the requirements about ACME, Letsencrypt, PRA needs.
+        - Next steps, download go-acme and play with CLI.
+
+    - Meeting with
+- Warrior/REI:
+- Minutiae:
+    - Facial at night.
+
+
+2025, Jun 02 (Mon)
+- Work:
+    - Raised MR
+
+- Warrior/REI:
+- Minutiae:
+    - Gym on morning with Raychel (Personal Trainer)
+
+
+
+2025, Jun 01 (Sun)
+#florida #sarasota #warrior
+- Work:
+    - On flight back from Sarasota, did lot of UT for ZDIA cluster creation workflow.
+
+- Warrior/REI:
+    - Warrior event.
+    - Flew back via Atlanta.
+- Minutiae:
+
+
+
+@@@@@@@@@@@@@@   May 2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - ONGOING: FedRAMP
+        - HOLD: Single Trace Id feature
+        - HOLD: Concurrent Tenants V2 API
+        - HOLD: COREEXT-1471: App Accel Serviceability
+
+        - ONGOING: Maintanence bugs
         - App Accel Testing
             - Using Postman, Mockoon, httptest, httpmock
             - Increase code coverage to 40%
@@ -72,8 +671,8 @@ Personal
 
     * Education
         - DONE - Taro: Nail Your Promotion As A Software Engineer
-        - Test Driven Development in Go (Book) and follow along coding.
         - Test With Go Videos
+        - Test Driven Development in Go (Book) and follow along coding.
 
 REI
     * Warrior:
@@ -93,25 +692,73 @@ Seva
     - Lead YES Follow Up - ONGOING
     - Yoga Vasishta Reading - ONGOING
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-2025, May 01 (Sun)
+
+
+2025, May 31 (Sat)
+#florida #sarasota #warrior
 - TODO
 - Work:
+- Warrior/REI:
+    - Warrior Event in Sarasota
+    - Redeye flight via Atlanta
+- Minutiae:
+
+
+2025, May 30 (Fri)
+- Work:
+    - Meena Sehar: Zcluster creation issue.
+        - Code completed. Writing UTs.
+
 - Warrior/REI:
 - Minutiae:
 
 
+2025, May 29 (Thu)
+#facial
+- Work:
+    - Meena Sehar: Zcluster creation failure.
+        - Able to repro the issue locally on Dev04 setup.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay's "Student of the Month" ceremony. He was overjoyed. Happy for him.
+    - Rajkumar ji visited to fix Kitchen faucet. Helped him out a bit.
+    - Yoga Vasishta in evening.
+    - Hang out with Alok Ranjan at Santana Row.
+
+
+2025, May 28 (Wed)
+- Work:
+    - SDWAN App Accel Production Issue: Zcluster not coming up.
+        - Chased SRE
+        - Found that my hot fix is *actually* deployed to PROD.
+        - Continue debugging PROD issue. I've no clue what's going on.
+
+    - SDWAN App Accel Production Issue:
+        - GET V2 Settings API getting 'false' for all Apps.
+        - Requested Ganu for help.
+        - Ganu advised to talk to Mrityunjay and Akshay. They suggested to do
+          initial triage and then ask Akshay. Will do.
+
+    - FedRAMP:
+        - Shikhar working on building images.
+        - I'm trying to deploy dcache with 4 VM instances. Did not work.
+        - Vikram asked me deploy "base" image in FedRAMP and test traffic.
+            - Shikhar gave a 'default/base' image: zworker-appsec-release-942-img
+            - Deploy this in FedRAMP env. Test basic traffic acceleration is happening.
+
+- Warrior/REI:
+- Minutiae:
+    - Lunch with Alok Ranjan.
+        - He's had meetings with PLMs, Subhash Kodnad (VP), Sundar Jayaprakash
+          (Sr. Dir), Mahesh Geereddy (VP), Suneel Gogineni (Sr Dir).
+        - Suneel Gogineni assured him that he's on path to become DE. Do not
+          worry about ratings in one cycle.
+        - I was also present in a meeting with IT/CSP team: Manish Mishra,
+          Seshpani, Suparna Ghosh, Murali Pulipati
 
 
 2025, May 27 (Tue)
-- TODO
-    - Meena Sehar: SDWAN Apps are disabled on page refresh.
-    - SDWAN Rollout (ZY-3852)
-    - FedRAMP CP MR to upgrade golang to 1.24.3
-    - FedRAMP Docker FIPS complaint image
-
-    - Ownwell action items
-    - Crescendo HOA. New management. Setup HOA autopay.
-
 - Work:
     - FedRAMP:
         - Shikhar finally got ZDIA worker up and running. Helped him out a
