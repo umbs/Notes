@@ -1,0 +1,108 @@
+AARUSHI ============
+- Complete Alphastar Academy AMC10 coaching classes.
+- Evaluate appearing for SAT for 'testing the waters'.
+
+
+
+
+Meeting with Raji M on
+---
+Meeting with Raji M on Feb 25, 2025
+---
+    - Sign up Aarushi at Alphastar Academy
+    - Research International Science and Engineering Fair (ISEF)
+    - IPRD Fair
+
+    - Start preparing for AMC10, USACO
+
+    - Look for opportunity to join City of Cupertino Youth Council.
+    - Appear for PSAT in 9th grade. May be not allowed in Monta Vista HS.
+
+Resources:
+---
+- SAT Preparation/Coaching: https://satnpaper.com/
+- AP classes coaching (Physics, Math, Computer Science)
+    ✉️ Email: nilanjan@apguidance.com
+    📱 Phone: 669-302-6791
+    🌐 Website: APGuidance.com
+    - Nilanjan Chatterjee. IIT KGP alum.
+- Aparna Lanka (408-368-0754) teaches AP Chemistry
+    - Pritam Gaonkar's son took and excelled. Pritam's number: 408-768-3812
+- Sanjay Tutoring
+    - He runs a high school parents Whatsapp group.
+    - 847-666-5699
+    - Not sure if he's local/Cupertino.
+    - Not sure if he himself teaches AP Chemistry or a group of parents do it.
+    - "Please DM me; we are few parents whose kids have gone thru the same path and try to surface the tribal knowledge we have learned over the years. We have a high school parent WhatsApp group for discussions/questions; please feel free to join"
+
+- Physics Tutors for AP courses
+    - Mr. Giri (giridhar)
+    - His flyer is in Dropbox
+    - giridhar@yourphysicstutor.com
+    - (973)223-6252
+
+- Math Tutors
+    - Tutor --> Monica Puthran: 610-416-2181
+        - Annu (408-368-3715), Kavitha (707-685-2719), Richa Garg (650-382-9713) from MVHS Whatsapp group highly recommended her.
+        - Sonali Naik Pandit (408-476-8289) has this to say:
+            - Highly recommend Monica. Both my kids were her students and they both love mathematics as a subject thanks to her style of teaching!
+        - Monica teaches from 9th grade, for high school kids.
+    - Tutor --> Bhavika 
+
+
+
+
+
+
+
+
+
+
+
+
+
+AoPS Math Notes
+---
+
+Intermediate Algebra (4200)
+---
+Week 4: Quadratic Equations and Graphing Parabolas
+---
+"Completing The Square"
+---
+- How to find minimum (or maximum) value of a quadratic expression?
+- Make a square of expression (Completing The Square) and you'll get the min/max value of the parabola.
+- Example: What is min value of
+    x^2 + 10x + 22 ==> (x+5)^2 - 3
+
+    Hence min value is -3
+
+- For a quadratic equation: ax^2 + bx + c = 0, the roots are 
+    x = (-b +- sqrt(b^2-4ac))/2a
+
+"The Discriminant"
+---
+- The (b^2 - 4ac) under square root is called discriminant.
+- If a, b, c are real numbers and if discriminant is positive then the roots of equation are real numbers.
+- If discriminant is 0 then we get only one root (called 'double root').
+- Sign of discriminant tells if quadratic has:
+    - two real roots
+    - two non-real roots
+    - only one root
+
+"Graphing Quadratics"
+---
+- Definition of Parabola: It is the set of points that are equidistant from a
+  given line (called the directrix) and a point not on that line (called the
+  focus).
+
+- It turns out that every graph of an equation of the form
+    y = ax^2 + bx + c
+for constants a, b, and c is a parabola. (But not every parabola is an equation
+of this form: if the directrix is slanted, you get a rotated parabola.)
+
+- A parabola has a special point called the vertex, which is mid-way between
+  the focus and the directrix. (That point must be on the parabola because it
+is the midpoint between the focus and directrix, meaning that it has the same
+distance from each.) The vertex for y = x^2 is at the origin (0,0)
+
