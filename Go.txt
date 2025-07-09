@@ -589,10 +589,233 @@ Reference:
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@     Go Templates     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-0. Intro to Go Templates
-    - Mainly used to output HTML.
 
-Hello World Example
+- At its core, a Go template is a string or file containing text and "actions."
+- Actions are enclosed in double curly braces {{...}} and are the placeholders
+  for dynamic data and control structures.
+
+There are two primary template packages in Go's standard library:
+    - text/template: For generating any kind of plain text output.
+    - html/template: Specifically for generating HTML. This package
+      automatically handles HTML escaping, which is crucial for preventing
+      Cross-Site Scripting (XSS) vulnerabilities.
+
+A Simple Example
+----
+
+        package main
+
+        import (
+            "os"
+            "text/template"
+        )
+
+        func main() {
+            // Define a struct to hold our data
+            type User struct {
+                Name string
+            }
+
+            // Create a user instance
+            user := User{Name: "World"}
+
+            // Parse the template string
+            t, err := template.New("hello").Parse("Hello, {{.Name}}!\n")
+            if err != nil {
+                panic(err)
+            }
+
+            // Execute the template, passing in the user data
+            err = t.Execute(os.Stdout, user)
+            if err != nil {
+                panic(err)
+            }
+        }
+
+        Template:
+            Hello, {{.Name}}!
+
+        Output:
+            Hello, World!
+
+- In this example, {{.Name}} is an action.
+- The dot (.) represents current data object being passed to the template.
+- In this case, it's the user struct, and `.Name` accesses the `Name` field of
+  that struct.
+
+
+- Go templates can handle various data structures like structs, maps, slices.
+- You access struct fields using a dot followed by field name: {{.FieldName}}
+- The field must be exported (starting with Capital letter) to be accessible
+  within the template.
+
+Maps:
+---
+- For accessing maps, you can use dot notation with the key. Example:
+
+		package main
+
+		import (
+			"os"
+			"text/template"
+		)
+
+		func main() {
+			data := map[string]string{
+				"greeting": "Hola",
+				"name":     "Amigo",
+			}
+
+			t, _ := template.New("map").Parse("{{.greeting}}, {{.name}}!\n")
+			t.Execute(os.Stdout, data)
+		}
+
+        Template:
+            {{.greeting}}, {{.name}}
+
+        Output:
+            Hola, Amigos
+
+
+Conditionals:
+---
+- The `if` action lets you render a block of template conditionally.
+- An empty string, false, 0, nil, or empty slice/maps is considered false.
+
+
+		package main
+
+		import (
+			"os"
+			"text/template"
+		)
+
+		func main() {
+			type User struct {
+				Name    string
+				IsAdmin bool
+			}
+
+			user1 := User{Name: "Alice", IsAdmin: true}
+			user2 := User{Name: "Bob", IsAdmin: false}
+
+			t, _ := template.New("auth").Parse("{{if .IsAdmin}}Welcome, Admin {{.Name}}!{{else}}Hello, {{.Name}}.{{end}}\n")
+
+			t.Execute(os.Stdout, user1)
+			t.Execute(os.Stdout, user2)
+		}
+
+
+		Template:
+			{{if .IsAdmin}}Welcome, Admin {{.Name}}!{{else}}Hello, {{.Name}}.{{end}}
+
+		Output:
+			Welcome, Admin Alice!
+			Hello, Bob.
+
+
+Loops: `range`
+---
+- The `range` action iterates over a slice, array, map or channel.
+- Inside the `range` block, the dot (.) is rebound to the current element of
+  the iteration.
+
+		package main
+
+		import (
+			"os"
+			"text/template"
+		)
+
+		func main() {
+			items := []string{"Apples", "Bananas", "Cherries"}
+
+			t, _ := template.New("list").Parse("My favorite fruits:\n{{range .}}- {{.}}\n{{end}}")
+			t.Execute(os.Stdout, items)
+		}
+
+		Template:
+			My favorite fruits:
+			{{range .}}- {{.}}
+			{{end}}
+
+		Output:
+			My favorite fruits:
+			- Apples
+			- Bananas
+			- Cherries
+
+- You can use `range` with `else` to handle empty collections:
+
+		{{range .Items}}
+		  <p>{{.}}</p>
+		{{else}}
+		  <p>There are no items to display.</p>
+		{{end}}
+
+
+
+Pipelines & Functions:
+---
+- Go templates support the concept of "pipelines," where the output of one
+  action can be passed as the input to the next.
+- This is often used with built-in or custom functions.
+- In below example `printf` is a built-in function.
+
+        package main
+
+        import (
+            "os"
+            "text/template"
+        )
+
+        func main() {
+            t, _ := template.New("func").Parse(`{{. | printf "The value is: %q"}}`)
+            t.Execute(os.Stdout, "some text")
+        }
+
+        Template:
+            {{. | printf "The value is: %q"}}
+
+        Output:
+            The value is: "some text"
+
+- In this example, the dot (.) representing the input string "some text" is
+  piped (|) into the printf function.
+
+
+Whitespace Control:
+---
+Sometimes, newline and spaces in your template can result in unwanted
+whitespace in the output. You can control this using hyphen (-) inside action
+delimiters.
+    {{- (hyphen at the beginning): Trims whitespace before the action.
+    -}} (hyphen at the end): Trims whitespace after the action.
+
+
+
+Nested Templates (Sub-Templates)
+----
+As your templates grow in complexity, it becomes useful to break them down into
+smaller, reusable components. For example, a website might have a common header
+and footer across multiple pages.
+
+
+- The {{template "templateName"}} action is used to render another template
+  within current one.
+- If you want to pass subset of data to the nested template, you can use
+  {{template "templateName" .Data}}
+
+
+
+
+
+
+
+
+
+
+Hello World Example (HTML)
 -------------------
 hello.html
 ---
