@@ -5295,3 +5295,55 @@ Remember:
 - Choice depends on your specific use case
 
 Reference: Claude
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@   JSON Web Token (JWT)     @@@@@@@@@@@@@@@@@@@@@@@@@
+- JWT has 3 main sections separated by dots
+
+1. HEADER: contains metadata about the token:
+	alg (algorithm): The signing algorithm used. eg. HS256, RS256
+	typ (type): Usually set to "JWT"
+	kid (key ID): Optional identifier for the signing key
+		{
+			"alg": "HS256",
+			"typ": "JWT"
+		}
+
+2. PAYLOAD (Claims): contains the actual data/claims about the user or entity. Common fields include:
+
+Standard Claims (RFC 7519)
+	iss (issuer): Who issued the token
+	sub (subject): Subject identifier (usually user ID)
+	aud (audience): Intended audience for the token
+	exp (expiration): Expiration timestamp
+	nbf (not before): Token not valid before this time
+	iat (issued at): When the token was issued
+	jti (JWT ID): Unique identifier for the token
+
+Custom Claims:
+	name: User's full name
+	email: User's email address
+	roles: User permission/roles
+	scope: API access scope
+
+	{
+	  "sub": "1234567890",
+	  "name": "John Doe",
+	  "email": "john@example.com",
+	  "roles": ["user", "admin"],
+	  "iat": 1516239022,
+	  "exp": 1516242622
+	}
+
+3. SIGNATURE: Created by encoding the header and payload, then signing with a secret key:
+
+	HMACSHA256(
+	  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+	  secret
+	)
+
+Complete JWT Structure:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+- JWT structure ensures the token is stateless, verifiable and contains all necessary information for authentication and authorization.
+
