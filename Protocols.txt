@@ -3813,8 +3813,14 @@ Authority
 
 Resolvers
 ---
-- DNS resolvers understand low-level format of DNS queries. They are complex and
-  abstracted away.
+- DNS resolvers understand low-level format of DNS queries. They are complex
+  and abstracted away.
+- When you type a domain name (like www.amazon.com) in browswer there is a
+  "stub resolver" in your browser or OS that initiates a DNS query.
+- Stub Resolver tries to get answers to question: "I want to know the IP of
+  www.amazon.com"
+- Stub Resolver queries Recursive Resolver
+- Recursive Resolver does the heavy lifting to answer DNS query.
 
 
 Resolution
@@ -3855,10 +3861,57 @@ Resolution
         - Type: of data (record) querier is interested in
 
 
+Bootstrapping Resolvers
+---
+- DNS runs on UDP (or TCP as fallback, if UDP fails).
+- DNS requests goes over port 53
+- UDP is cheaper (because it is stateless). Hence it is preferred in this case.
+
+- But UDP traffic also needs DNS resolving. How is this circular dependency
+  broken?
+    - Using DHCP.
+
+Stub Resolver:
+    - Stub Resolvers are in Browsers or OS.
+    - When they boot up, they make DHCP call and get the IP of DNS server.
+
+Recursive Resolver:
+    - This is more involved.
+    - There is a ROOT HINTS file.
+        - It's a file containing IPs of global Root NS.
+        - This list is maintained by IANA on behalf of ICAAN.
+
+
+Registrars and Registries
+---
+    www  .   amazon  .  com  .
+                             ^
+                             |
+                             +--- Dot is Root Zone.
+                                  ICAAN controls this.
+
+- ICAAN decides who manages 'com', 'us', 'uk' etc. They are called TLD (Top
+  Level Domains)
+- 'us' belongs to USA and a company manages it on behalf of USA. Similarly for
+  'uk'.
+- TLD owners are called 'registries'.
+
+
+DNS queries looks like this (when using 'dig')
+
+    www.amazon.com    300    IN    A    192.0.2.1
+      (NAME)         (TTL)  (CLS) (TYPE)  (DATA)
+
+Query Tuple = (Name, Type, Class)
+
+
 CACHING
 ---
 - NS caches resource records, especially the other NS
-- TTL
+- TTL determines how long to cache the record. Stub Resolver, when it asks for
+  DNS record, it gets 'remaining TTL' back as response from Recursive Resolver.
+- There are false 'rumors' on internet that DNS TTL is not honored by
+  DNS clients. Not true.
 
 
 SERVER SELECTION AND RETRIES
@@ -3892,16 +3945,6 @@ Authoritative NS are of two types
     - Secondary NS
 
 
-
-
-
-
-
-
-
-
-
-
 - Common DNS record types
     A (IPv4 Host address)
 		* name to IPv4 translation.
@@ -3927,6 +3970,7 @@ Authoritative NS are of two types
 - Many more DNS record types exists.
 
 [1] https://simpledns.com/help/dns-record-types
+[2] 0x6 - A deep dive into DNS --> https://youtu.be/drWd9HIhJdU
 
 /****************************************************/
                Neighbor Discovery (ND) [9]
