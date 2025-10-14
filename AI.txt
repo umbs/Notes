@@ -1,3 +1,43 @@
+Ollama Cheat Sheet
+===
+// Pull/Download models
+ollama pull llama2
+ollama pull mistral:7b
+
+// List available models
+ollama list
+
+// Remove models
+ollama rm llama2
+
+// Show model info
+ollama show llama2
+
+// Running models
+---
+// Interactive chat
+ollama run llama2
+
+// Single prompt
+ollama run llama2 "Explain quantum computing"
+
+// Run with custom parameters
+ollama run llama2 --temperature 0.8 --top-p 0.9
+
+
+// Server Management
+---
+// Start Ollama server. Runs at http://localhost:11434
+ollama serve
+
+// Check server status
+ollama ps
+
+// Stop running models
+ollama stop llama2
+
+
+
 AI Resources
 ============
 
@@ -81,6 +121,59 @@ AI Agentic Tools
 - lindy.ai
 - mindstudio.ai
 
+
+Here’s my 5-step roadmap to go from 0 to shipping real AI systems:
+-----------------
+
+Step 1️⃣ Nail the Foundations
+---
+To get started:
+⑴ Complete ML for Beginners (Microsoft) – classical ML, Scikit-learn, quizzes, projects → https://lnkd.in/eHHiv3g2
+
+⑵ Then dive into with AI for Beginners (Microsoft) – neural nets, NLP, CV, ethics, PyTorch & TensorFlow labs → https://lnkd.in/eNN8y6g8
+
+Test yourself on real datasets before moving on.
+Once that's done, you're ready for..
+
+Step 2️⃣ Master Modern Deep Learning
+---
+This is where you go beyond the basics and start understanding how today’s AI systems actually work
+
+⑶ Build from scratch with Neural Networks: Zero to Hero (Karpathy) – code tiny GPTs and grasp every layer → https://lnkd.in/eDzGhrtn
+
+⑷ Explore state-of-the-art model via DL Paper Implementations – 60+ transformer, GAN, diffusion models in clean PyTorch → https://lnkd.in/eH53_5mi
+
+First learn how deep learning works. Then learn how it’s applied.
+
+Step 3️⃣ Learn to Ship ML Systems
+---
+Now it’s time to go beyond the notebook.
+
+⑸ Made With ML (Goku Mohandas)– teaches designing, building, deploying, and iterating on production-grade ML systems with MLOps, CI/CD and testing → https://lnkd.in/ek5YHbhN
+
+Step 4️⃣ Go Deep on LLMs and RAG
+---
+Most jump straight to fine-tuning and get lost. Instead, take the best path:
+
+⑹ Hands-on LLMs (Jay Alammar & Maarten Grootendorst)– clear guide covering tokenization, fine-tuning, embeddings, RAG, and more in a clear, visual way → https://lnkd.in/esWdYHwc
+
+⑺ Advanced RAG Techniques (Nir Diamant)– 30+ methods to make retrieval-augmented generation faster, smarter, and more accurate → https://lnkd.in/ezx_5nUk
+
+⑻ LLM Engineer’s Handbook (Paul Iusztin & Maxime Labonne) end-to-end guide to the full LLM lifecycle with a focus on practical implementation and LLMOps best practices → https://lnkd.in/eiuBSW2k
+
+Step 5: Build and Deploy Agents
+---
+Now that you understand LLMs and RAG work, it’s time to go agentic.
+
+⑼ AI Agents for Beginners (Microsoft) – hands-on course to build LLM agents using frameworks like AutoGen → https://lnkd.in/efzMR5aU
+
+⑩ Agents Towards Production – a practical playbook for deploying agents with memory, orchestration, security, and more → https://lnkd.in/eDbEYmGD
+
+⑪ AI Engineering Hub (Avi Chawla & Akshay Pachaar)– 70+ real-world projects and agent apps you can build, adapt, and ship → https://lnkd.in/eAR8asPv
+
+Follow this path, and you won’t just learn—you’ll learn how to ship real AI systems.
+
+============================================================================
 
 
 AI Terminology
