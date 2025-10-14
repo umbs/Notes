@@ -43,6 +43,114 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+@@@@@@@@@@@@@@   Oct 2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - PRA PWA
+        - FedRAMP
+
+    Minor Projects, Tech Debts
+        - 100% Code Coverage
+        - Single Trace Id feature
+        - Concurrent Tenants V2 API
+        - COREEXT-1471: App Accel Serviceability
+        - Maintanence bugs
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * Evening:
+        - 2 mile run
+        - Gym
+
+    * Night:
+        - Flute practice
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+
+    * Education
+        - DONE - Taro: Nail Your Promotion As A Software Engineer
+        - Test With Go Videos
+        - Test Driven Development in Go (Book) and follow along coding.
+
+REI
+    - Ownwell action items
+    * Warrior:
+        - Deal Maker Mastermind (Michael Blank). Watch all video lessons.
+        - 1 underwriting/day.
+
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Oct 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+
+2025, Oct 05 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Carmel By The Sea: Vacation with family. Disaster.
+
+
+
+2025, Oct 06 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Oct 07 (Tue)
+- Work:
+    - Working on integration testing/dry-run in preparation of QA Handoff
+
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Oct 08 (Wed)
+- Work:
+    - DTHO (QA Handoff) of Private Web App
+    - Tremendous preparation for DTHO. But we had to postpone in the end.
+
+- Warrior/REI:
+    - Kala got Property Manager to get a handyman (and more) to fix the water leak.
+    - Quoted $2250. We got off to cheap with this.
+
+
+- Minutiae:
+    - Vivek visiting for couple of days.
+    - Mint Mobile:
+        - Account Number: 111237424963
+        - PIN: 9834
+    - Visible: Moved out of Mint Mobile and into Visible.
+    - Stayed up late and read AoPS Final Five class transcripts.
+        - Intention is to help Aarushi with her homework.
+
+
+
 @@@@@@@@@@@@@@   July 2025    Goals  @@@@@@@@@@@@@@@@@@
 - TODO
     - PRA Cert Management Service
