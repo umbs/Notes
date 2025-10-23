@@ -108,6 +108,155 @@ Seva
 
 
 
+2025, Oct 23 (Thu)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 22 (Wed)
+- Work:
+    - Meeting with Narayanan and Ganu to discussed the design. Updated Tasks for PoC.
+    - Late night meeting with India team to understand following:
+        - After connecting to remote App (say, Private Web App), how is
+          authentication happening? Particularly, if there is a SAML Auth
+          involved.
+    - Spent time writing UTs for uncovered code. But abandoned the idea because
+      the effort is too much compared to number of lines covered.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 20 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 19 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 18 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 17 (Fri)
+- Work:
+    - Raised MR for semver change. ZY-6443
+        - dev/develop --> develop
+        - rel/2.0 --> release
+
+    - Meetings around PRA + RBI design
+        - Wireshark packet capture and examine the DNS queries. Deep understanding of DNS behavior.
+        - Logged into PRA Portal in incognito mode and collecting HAR.
+        - Using Google HAR Analyzer and examining the request/response queries.
+        - Talking to Narayanan to get a full picture.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 16 (Thu)
+- Work:
+    - Raised MR for UTs and bugfix that Narayanan asked in CA certs workflow.
+    - Team Huddle
+    - Team Meetings
+
+- Warrior/REI:
+- Minutiae:
+    - WFH
+
+
+
+2025, Oct 15 (Wed)
+#tax #2024tax
+- Work:
+    - Lot of design discussions to understand PRA + RBI flows
+
+- Warrior/REI:
+- Minutiae:
+    - 2024 Tax filed, finally.
+        - Jayant ji massively helped.
+        - Paid $5500 to Federal
+        - Will receive $3600 from State
+
+
+2025, Oct 14 (Tue)
+- Work:
+    - Investigated ZY-6104: DCaches missing in some regions in UK & US Cosmos.
+        - But dcaches are not getting created/provisioned.
+
+- Warrior/REI:
+- Minutiae:
+    - Up at 3am :(
+
+    - Jayanti did all my taxes on Monday. I went over them and replied on Tuesday (see below):
+
+        Hello Jayant ji,
+
+        Thank you so much for taking care of this. Couple of things I want to bring to your attention.
+
+        Schedule E:
+        - I have 6 rental properties. But only 5 are entered in Schedule E on Page 22
+          and Page 23. The property 4304 Duval Rd, Austin TX is missing. It is in an
+          LLC. Please see details below.
+
+
+        Austin Properties:
+        [1]
+        Address: 629 Celebration Ct, San Jose
+        - 2024 Expenses: $5183. These are out of pocket expenses. I have receipts/invoices. I'm attaching spreadsheet.
+
+        [2] New Braunfels properties
+        - Total Income: $84500
+        - I've attached "2024 1099 San Antonio.pdf"
+
+        Address: 3012 & 3014 Pine Valley Dr, New Braunfels, TX
+            - 2024 Expenses: $7,146.27 (excluding Insurance and Property Taxes)
+
+        Address: 3043 & 3045 Pine Valley Dr, New Braunfels, TX
+            - 2024 Expenses: $19,306.23 (excluding Insurance and Property Taxes)
+
+        Address: 3040 & 3042 Green Mountain Dr, New Braunfels, TX
+            - 2024 Expenses: $6,260.93 (excluding Insurance and Property Taxes)
+
+        [3]
+        Address: 16812 Whitebrush Loop, Austin, TX, 787
+        Entity: MAVE59 LLC. The property is in LLC.
+        - Madhavi and I own 50%
+        - I've attached K1 documents.
+
+
+        [4] THIS is not entered
+        Address: 4304 Duval Rd, Austin, TX, 78759
+        Entity: MAVE60 LLC. The property is in LLC.
+        - Madhavi and I own 50%
+        - I've attached K1 documents.
+
+
+
+
+2025, Oct 13 (Mon)
+- Work:
+    - Lot of preparation for RBI + PRA workflow
+
+- Warrior/REI:
+- Minutiae:
+
+
+
 2025, Oct 05 (Sun)
 - Work:
 - Warrior/REI:
