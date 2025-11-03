@@ -46,11 +46,12 @@ Seva:
 @@@@@@@@@@@@@@   Oct 2025    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
+        - PRA + RBI
         - PRA PWA
         - FedRAMP
 
     Minor Projects, Tech Debts
-        - 100% Code Coverage
+        - 100% Code Coverage of Ironvault
         - Single Trace Id feature
         - Concurrent Tenants V2 API
         - COREEXT-1471: App Accel Serviceability
@@ -65,17 +66,107 @@ Personal
         - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
 
     * Evening:
-        - 2 mile run
-        - Gym
+        - 2 mile run. 3x/week
+        - Gym. 3x/week
 
     * Night:
-        - Flute practice
+        - Flute practice. 3x/week
         - Go to bed right after Aarushi goes to bed.
 
     * Read 1 book a month
 
     * Education
-        - DONE - Taro: Nail Your Promotion As A Software Engineer
+        - Tangled Web. Read the whole book.
+
+REI
+    * Ownwell action items
+    * Warrior:
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Nov 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+@@@@@@@@@@@@@@   Oct 2025  Report   @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - PRA PWA
+            - BU: 1st drop to QA went on time. 2nd drop got delayed by >2 weeks. Main lessons?
+                1) We did not review Acceptance Tests.
+
+                2) We could have requested QA to give us the elaborate setup
+                mentioned in Acceptance tests. This will allow us to focus on
+                deliverables. QA can help us with setup.
+
+
+        - FedRAMP
+            - BU: There is no movement on this project. I do not know where
+              this is.
+
+    Minor Projects, Tech Debts
+        - 100% Code Coverage
+            - BU: Added UTs to cover up to 18%, up from 5% or so. But this is not enough.
+
+        - Single Trace Id feature
+            - BU: Did not do.
+
+        - Concurrent Tenants V2 API
+            - BU: Did not do.
+
+        - COREEXT-1471: App Accel Serviceability
+            - BU: Did not do.
+
+        - Maintanence bugs
+            - BU: Did a few of them.
+
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+            - BU: Partially done. I've been doing Guru Pooja and Gayatri Japam
+              and Hanuman Chalisa regularly.
+
+    * Evening:
+        - 2 mile run
+            - BU: No
+
+        - Gym
+            - BU: No
+
+    * Night:
+        - Flute practice
+            - BU: No
+
+        - Go to bed right after Aarushi goes to bed.
+            - BU: Somewhat Yes.
+
+    * Read 1 book a month
+            - BU: Somewhat Yes.
+                - Spent time on "Who Knew: Barry Diller", but stopped it
+                  mid-way and returned the book. Did not enjoy.
+
+    * Education
+        - Taro: Nail Your Promotion As A Software Engineer
         - Test With Go Videos
         - Test Driven Development in Go (Book) and follow along coding.
 
@@ -98,18 +189,110 @@ Seva
     - Lead YES Follow Up - ONGOING
     - Yoga Vasishta Reading - ONGOING
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-2025, Oct 01 (Sun)
+2025, Oct 31 (Fri)
 - Work:
+    - Long time testing PWA for QA handoff. More than 4 hours of meeting, working session.
+
 - Warrior/REI:
 - Minutiae:
 
 
 
+2025, Oct 30 (Thu)
+- Work:
+    - Meeting with Christian (Dir of PLM), Amit Jain (VP of PLM), Eswar
+      Rajagopalan, Swapan Goel etc about Persistent Systems deal. PoC
+      timelines, etc. Sumeet Burde, Mahavir Karnavat, Ganu Ramachandran, Rakesh
+      Chaitanya etc were all present. Narayanan was also present.
+        - Complete PoC by mid-November.
+    - Lot of time spent on integration testing for PWA support.
+    - Merged lot of code into Ironvault and merged to release branch.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 29 (Wed)
+- Work:
+    - Met Rakesh Chaitany from RBI team, visiting HQ from Pune.
+
+    - Merged many GET API calls and DB changes into Ironvault. Quick testing
+      and quick commits. Very happy with the progress.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 28 (Tue)
+- Work:
+    - Debugging session with Narayanana. CA Cert changes are working.
+
+- Warrior/REI:
+- Minutiae:
+    - Health Benefits presentation. 1 hour.
+    - Went to Akshay's wrestling tournament and spent 3 hours :(
+        - There from 2:45-5:45pm. Akshay wrestled last.
+
+
+2025, Oct 27 (Mon)
+- Work:
+    - Fixed length issue in Certificates column. 128 chars long.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2025, Oct 26 (Sun)
+- Work:
+    - Watched RBI Training & Troubleshooting demo by Shiva V, TME from
+      Bengaluru. About 1.5 hours video. Educational.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay's archery practice.
+
+
+2025, Oct 25 (Sat)
+#speech
+- Work:
+    - Got the CoreAPIClient mocking framework in-place. Need to test and make
+      sure everything is working :)
+
+- Warrior/REI:
+- Minutiae:
+    - Aarushi's Speed competition (CFL Novice) at Westmont High school.
+        - Up at 5am and dropped her at school by 7am.
+        - Aarushi got 3rd place. Yay!
+    - Akshay Archery at 10am
+    - Telugu class at 3pm. Found out that Center is closed for Diwali :(
+    - Ate out
+    - Saw Gaurav Mathur, Harsh Parandekar, Sailaja Velicheti, Meena Sehar. So
+      many current and former colleagues. Got a bit tense after seeing Harsh
+      Parandekar :)
+
+
+2025, Oct 24 (Fri)
+- Work:
+    - Identified that UT framework is missing in Ironvault. The CoreAPIClient
+      mockery is missing.
+
+- Warrior/REI:
+- Minutiae:
+    - Akshay's archery practice.
 
 
 
 2025, Oct 23 (Thu)
 - Work:
+    - Standup/Huddle.
+    - Worked with Narayanan to fix the validation errors in API.
+    - Deployment was failing. Required lot of YAML file changes. Fixed them
+      with help from Shankar. I'm not sure why they were passing in production.
+    - Merged the MR, but Narayan says he *STILL* sees the input validation error.
+
 - Warrior/REI:
 - Minutiae:
 
@@ -127,6 +310,17 @@ Seva
 
 - Warrior/REI:
 - Minutiae:
+    - Back spasm was very bad. Madhavi took WFH. Went to Qi's Clinic, and it
+      was terrible.
+
+
+
+2025, Oct 21 (Tue)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Very bad back spasm. Started in morning during shower. But went to office
+      anyway.
 
 
 
