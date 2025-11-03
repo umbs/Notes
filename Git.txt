@@ -403,15 +403,46 @@ Git Worktree
 -----------
 - Manage multiple working trees within same repository
 
-$ git worktree add ../another-dir/      # This is best practice
+$ git worktree add ../another-dir/      # This is best practice. Create a worktree (actual directory) at ../another-dir
 $ git worktree list                     # This will list all worktrees
 $ git worktree remove ../another-dir/   # Remove the dir after your work
+
+
+git worktree add <path> <branch>
+    - Create a new worktree at <path> and check out the existing <branch> into it.
+    - Example: git worktree add ../review-feature feature/A
+
+git worktree add -b <new-branch> <path>
+    - Create a new worktree at <path>, create and check out a new branch named
+      <new-branch> starting from HEAD.
+    - Example: git worktree add -b bugfix-B ../bugfix-dir
+
+git worktree add --detach <path> <commit-ish>
+    - Create a detached HEAD worktree (not on a branch) at a specific commit or
+      tag.
+    - Example: git worktree add ../old-version v1.0.0
+
+git worktree list
+    - List all linked working trees, showing their paths, HEAD commit, and
+      branch.
+    - Example: git worktree list
+
+git worktree remove <path>
+    - Remove a linked worktree. The directory at <path> will be deleted and
+      metadata in $GIT_DIR/worktrees directory is cleaned up. This command
+      takes care of deleting the *actual* directory at <path>. You do not have
+      to 'rm -f <path>'
+    - Example: git worktree remove ../review-feature
+
+git worktree prune
+    - Remove stale worktree management files from the main repository's
+      internal files. Used to clean up after worktree directories have been
+      manually deleted.
+    - Example: git worktree prune
 
 https://git-scm.com/docs/git-worktree
 https://www.youtube.com/watch?v=2uEqYw-N8uE
 https://www.youtube.com/watch?v=s4BTvj1ZVLM
-
-
 
 ****************************************************************************
 *       Notes from Building Git (James Coglan)
