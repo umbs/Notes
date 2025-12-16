@@ -43,12 +43,242 @@ Seva:
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@@@@@@@@@@@@@@   Oct 2025    Goals  @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@   Dec 2025    Goals  @@@@@@@@@@@@@@@@@@
 Career
     Major Projects:
         - PRA + RBI
         - PRA PWA
-        - FedRAMP
+
+    Minor Projects, Tech Debts
+        - 100% Code Coverage of Ironvault
+        - Single Trace Id feature
+        - Concurrent Tenants V2 API
+        - COREEXT-1471: App Accel Serviceability
+        - Maintanence bugs
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+
+    * Evening:
+        - 2 mile run. 3x/week
+        - Gym. 3x/week
+
+    * Night:
+        - Flute practice. 3x/week
+        - Go to bed right after Aarushi goes to bed.
+
+    * Read 1 book a month
+
+    * Education
+        - Tangled Web. Read the whole book.
+
+REI
+    * Ownwell action items
+    * Warrior:
+    * Converting to LLC
+            - 629 Celebration Ct
+            - 3012/3014 Pine Valley
+            - 3043/3045 Pine Valley
+            - 3040/3042 Green Mountain Dr
+
+    * Freedom Mortgage - Include escrow.
+    * Estate Planning
+
+Seva
+    - Lead YES Follow Up - ONGOING
+    - Yoga Vasishta Reading - ONGOING
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2025, Dec 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+
+2025, Dec 17 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Dec 16 (Tue)
+- Work:
+    - Meeting with Gokul, about Portal UI changes for PRA + RBI project.
+    - Meeting with Rakesh Chaitanya. Questions about enabling PRA + RBI in Finland region, ZPRA node.
+
+    - PRA + RBI Tasks list. Discussed with Ganu.
+    - ZY-7122: TDF Cluster deletion failed. Cluster Id not found.
+        - Lot of debugging. Not sure how it happened. Moved to Deferred/Monitor state.
+
+- Warrior/REI:
+    - Talked to few Refinance Lenders. Did not apply yet.
+
+- Minutiae:
+
+
+
+2025, Dec 15 (Mon)
+- Work:
+    - Raised MR for ZY-7027: ZOS does not have info about Tenant. So, Tenants
+      V2 does not pull any info about it in ZDIA worker.
+
+- Warrior/REI:
+- Minutiae:
+    - Fred Murchison. Real Genius
+        - 980-340-6667
+        - Florida
+        - 5.99%, 30-year fixed, no-points, less than $1000 in lender fee
+            - $313,000
+            - $1874/mo
+        - I can take $100K cash out. Rate stays same.
+
+    - Kimberly Rohas. Optimus First
+        - 949-539-8457
+        - Same as above. But a lot more options sent in email. They are not
+          super attractive. Closing costs are very high if interest rate is
+          lower.
+
+
+2025, Dec 14 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Flew back to Bay Area
+
+
+2025, Dec 13 (Sat)
+- Work:
+- Warrior/REI:
+    - Visited 16812 Whitebrush Loop
+        - Deck replacement
+        - Siding replacement
+        - Backyard cleaning
+
+    - Visited 4304 Duval Rd
+        - Siding replacement
+        - Patio wood is rotting
+        - Trash must be cleaned up by Tenants
+        - Back side of the building is very messy
+
+- Minutiae:
+
+
+
+2025, Dec 12 (Fri)
+#austin
+- Work:
+- Warrior/REI:
+    - Visited New Braunfels. Met Francisco.
+        - 3040 Green Mountain has lot of Foundation work required.
+            - Foundation
+            - Backyard steps
+            - Landscaping, to prevent soil erosion
+            - Fence repair/replacement
+            - Fascia replacement and/or painting
+
+        - 3012 Pine Valley has few issues
+            - Rebar
+            - Tape flow
+            - Fence repair/replacement
+            - Fascia replacement and/or painting
+
+        - 3043 Pine Valley
+            - Front column repair
+            - Soil erosion, landscaping
+            - Fence repair/replacement
+
+- Minutiae:
+    - Woke up at 8am, got ready and left for San Antonio around 9:30am
+    - Bought a gift for Francisco from Costco.
+    - Super tired and exhausted after returning home.
+
+
+
+2025, Dec 11 (Thu)
+#austin
+- Work:
+    - Completed ironvault semver and WIF changes
+    - Completed pra-cfg semver and WIF changes
+- Warrior/REI:
+- Minutiae:
+    - Flew to Austin to check on properties.
+    - So tired the whole day. I was sleeping most of the time.
+
+
+2025, Dec 10 (Wed)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Tax 2021 amended 1040-X filed in IRS San Jose office. Huge relief.
+
+
+2025, Dec 09 (Tue)
+#facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Late night binge watching *something* and drank tea.
+
+
+2025, Dec 07 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Dec 06 (Sat)
+#facial #propertytax
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Sunitha's house. Get together. Lots of people came.
+
+
+2025, Dec 05 (Fri)
+- Work:
+    - Code Review: Arpita's code to cache CA Cert in Ironvault and use it to
+      generate Custom Domain Certs.
+    - DCache Provisioning Issue: TF is flooded with dcache provisioning requests that are failing.
+
+
+- Warrior/REI:
+    - Talked to Francisco about 3045 Pine Valley.
+        - They are leaving end of Jan :(
+        - They had hip injury, had a fall :(
+        - Not sure what's going on with 3045 Pine Valley unit :(
+        - Discussed about Lowe's Dishwasher installation on Monday, Dec 8th.
+
+    - Called Lowe's for Dishwasher delivery on Monday, Dec 8th. Want to get
+      exact timing. Installation is NOT included :(. I'm trying to pay for that
+      on phone today so it is easy/smooth on Monday
+
+    - Call this number of Lowe's to pay for installation.
+        - 737-404-6061 and Press 2
+        - 888-516-1010
+        - 800-445-6937
+
+    - I got an offer, opportunity of 12-Unit property in Des Moine, Iowa. Sent
+      to me by Victoria Brentwood.
+
+- Minutiae:
+    - IME for Aarushi: 359297740107809
+
+
+
+@@@@@@@@@@@@@@   Nov 2025    Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - PRA + RBI - LOT OF PROGRESS ON FUNCTIONAL SPEC
+        - PRA PWA - LOT OF PROGRESS on Bug fixes etc.
+        - FedRAMP - De-Prioritized.
 
     Minor Projects, Tech Debts
         - 100% Code Coverage of Ironvault
@@ -98,6 +328,158 @@ Seva
 - Work:
 - Warrior/REI:
 - Minutiae:
+
+
+
+2025, Nov 30 (Sun)
+- Work:
+- Warrior/REI:
+    - We owed $95.96 in Whitebrush Loop property HOA (Goodwin & Co at Brushy
+      Creek).
+        - HOA increased from $45 to $55.24 and I forgot to update the Autopay.
+          It started accruing balance and late fee on that.
+        - I've updated Autopay to pay the "open balance" going forward.
+
+- Minutiae:
+    - Paid off Fastrack violation. Confirmation No: 963333893.
+    - Met Jayant ji and gave him:
+        - 2021 Fidelity documents, letters from IRS, past notices.
+        - Schedule E and 8582 forms from previous years to make Scheduled Depreciation.
+
+
+2025, Nov 29 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went around looking for Archery shop for Akshay. Wasted 2 hours :(
+    - Watched Stranger Things for 3 hours :(
+
+
+2025, Nov 28 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Madhavi took Akshay, Aarushi and her friend Palak to Cal Academy of Sciences.
+    - I came to office later in the day to Gym.
+
+
+2025, Nov 27 (Thu)
+#thanksgiving
+- Work:
+    - Writing FS
+- Warrior/REI:
+- Minutiae:
+    - Brought Akshay and his friend Vihaan, to Golfland.
+    - Cooking for Silence Course.
+
+
+2025, Nov 26 (Wed)
+- Work:
+    - "Productizing" PRA + RBI code.
+    - Meeting at night with RBI India team.
+
+    - Writing FS
+- Warrior/REI:
+- Minutiae:
+    - Called National Financial Services (Fidelity) and they said 2021 docs are
+      online. I downloaded it :)
+    - I've uploaded these documents on IRS website (www.irs.gov/dutreply).
+        - Jayant ji asked not to do that as IRS will not have complete picture.
+
+
+2025, Nov 25 (Tue)
+- Work:
+    - Helped QA (Surbhi) unblock many issues.
+    - Discussed with Narayanan on next steps.
+        - Create isolate/ endpoint.
+
+- Warrior/REI:
+- Minutiae:
+    - Determined
+    - Called "Merrill Lynch" for 2021 tax year documents. They mailed it to me.
+    - Called IRS
+        - Agent ID: 1000191073
+        - Cannot Extend. Call "Collections" Dept.
+        - Case closed. Sent for IRS collection. 800-829-7650
+        - Submit the Schedules, Forms, that were NOT included in 1040 X.
+        - Upload docs to IRS website.
+
+
+2025, Nov 17 (Mon)
+- Work:
+    - SAA + UI meeting at 8am
+    - DTHO handoff preparation meeting. I was focusing on my merging Ironvault MRs.
+    - Meeting with Suren Jayachandran to understand Hub service for Microsoft
+      Purview project.
+
+- Warrior/REI:
+    Rocket Mortgage
+    3012 Pine Valley Dr, New Braunfels, TX, 78130
+            - Loan Number: 3491518691
+            - Old Policy - SageSure Insurance #: TXF741482004
+            - New Policy - AllState Insurance #: 438510094
+            - UPDATED on mycoverageinfo.com
+
+    3043 Pine Valley Dr, New Braunfels, TX
+            - Loan Number: 3495025088
+            - Old Policy - SageSure Insurance #: TXF741729704
+            - New Policy - AllState Insuarnce #: 438510091
+            - UPDATED on mycoverageinfo.com
+
+- Minutiae:
+    AllState Insurance Agent
+    ---
+    Andy Cao
+    andycao@allstate.com
+    Office - (832) 813-8337
+
+
+
+2025, Nov 14 (Sun)
+- Work:
+    - Debugged
+- Warrior/REI:
+- Minutiae:
+    - Sridhar and kids dropped by for chai and litte play time.
+    - Sheeta Saripalli and family dropped by for persimon picking.
+    - YES Kriya in evening.
+    - Madhavi was hungry at night. Went to Nepalese restaurant, Everest
+      Cuisine, at midnight :)
+
+2025, Nov 14 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Nov 14 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Nov 13 (Thu)
+- Work:
+    - ZY-6710:
+        - But fix, UT, merge and double commit to release.
+    - Worked with Surbhi (QA) to make sure she' unblocked.
+    - Bringing up ZPRA <--> MU <--> SC <--> PA-VM <--> App Server
+        - Hit a roadblock. Debugged with help from Ganu, Karthick, Umesh.
+    - Meeting with PLM (Sapan Goel) at 10pm PST. RBI team from India and PRA
+      team from US joined.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2025, Nov 3-7 (Mon-Fri)
+- Work:
+    - Rakesh Chaitany KN from RBI. Lot of design discussions and PoC of Public
+      SaaS app.
+
+- Warrior/REI:
+- Minutiae:
+
 
 
 
