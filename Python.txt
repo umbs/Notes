@@ -117,23 +117,23 @@ nsmallest(n, iterable[, key])
 
 Set Methods
 ----
-add()			Adds an element to the set
-clear()			Removes all the elements from the set
-copy()			Returns a copy of the set
-difference()	Returns a set containing the difference between two or more sets
-difference_update()	Removes the items in this set that are also included in another, specified set
-discard()	Remove the specified item
-intersection()	Returns a set, that is the intersection of two other sets
-intersection_update()	Removes the items in this set that are not present in other, specified set(s)
-isdisjoint()	Returns whether two sets have a intersection or not
-issubset()		Returns whether another set contains this set or not
-issuperset()	Returns whether this set contains another set or not
-pop()			Removes an element from the set
-remove()		Removes the specified element
-symmetric_difference()	Returns a set with the symmetric differences of two sets
-symmetric_difference_update()	inserts the symmetric differences from this set and another
-union()			Return a set containing the union of sets
-update()		Update the set with the union of this set and others
+add()   Adds an element to the set
+clear()   Removes all the elements from the set
+copy()   Returns a copy of the set
+difference() Returns a set containing the difference between two or more sets
+difference_update() Removes the items in this set that are also included in another, specified set
+discard() Remove the specified item
+intersection() Returns a set, that is the intersection of two other sets
+intersection_update() Removes the items in this set that are not present in other, specified set(s)
+isdisjoint() Returns whether two sets have a intersection or not
+issubset()  Returns whether another set contains this set or not
+issuperset() Returns whether this set contains another set or not
+pop()   Removes an element from the set
+remove()  Removes the specified element
+symmetric_difference() Returns a set with the symmetric differences of two sets
+symmetric_difference_update() inserts the symmetric differences from this set and another
+union()   Return a set containing the union of sets
+update()  Update the set with the union of this set and others
 
 
 Dictionary Iterating
@@ -142,29 +142,64 @@ a_dict = {'color': 'blue', 'fruit': 'apple', 'pet': 'dog'}
 
 - a_dict.items() gives a tuple
 
-Keys Only 1					Key and Value 1								Key and Value 2 (as tuple)
-----						----										----
->>> for key in a_dict:      >>> for key in a_dict:                     	>>> for item in a_dict.items():
-...     print(key)          ...     print(key, '->', a_dict[key])      	...     print(item)
-...                         ...                                        	...
-color                       color -> blue                              	('color', 'blue')
-fruit                       fruit -> apple				('fruit', 'apple')
-pet                         pet -> dog                                 	('pet', 'dog')
+Keys Only - Option 1
+----
+>>> for key in a_dict:
+...     print(key)
+...
+color
+fruit
+pet
 
 
-
-Key and Value 3                           Keys Only 2                       Values Only 1
-----                                      ----                              ----
->>> for key, value in a_dict.items():     >>> for key in a_dict.keys():     >>> for value in a_dict.values():
-...     print(key, '->', value)           ...     print(key)                ...     print(value)
-...                                       ...                               ...
-color -> blue                             color                             blue
-fruit -> apple                            fruit                             apple
-pet -> dog                                pet                               dog
-
+Keys Only - Option 2
+----
+>>> for key in a_dict.keys():
+...     print(key)
+...
+color
+fruit
+pet
 
 
+Key and Value - Option 1
+----
+>>> for key in a_dict:
+...     print(key, '->', a_dict[key])
+...
+color -> blue
+fruit -> apple    ('fruit', 'apple')
+pet -> dog
 
+
+Key and Value - Option 2 (as tuple)
+----
+>>> for item in a_dict.items():
+...     print(item)
+...
+('color', 'blue')
+
+('pet', 'dog')
+
+
+Key and Value - Option 3
+----
+>>> for key, value in a_dict.items():
+...     print(key, '->', value)
+...
+color -> blue
+fruit -> apple
+pet -> dog
+
+
+Values Only - Option 1
+----
+>>> for value in a_dict.values():
+...     print(value)
+...
+blue
+apple
+dog
 
 
 
@@ -204,63 +239,63 @@ Custom Validators
 validator: Checks single property type
 root_validator: Checks *entire* model
 
-	from pydantic import validator, root_validator
+ from pydantic import validator, root_validator
 
-	class BakedPizza(Pizza):
-	  oven_temperature: int
+ class BakedPizza(Pizza):
+   oven_temperature: int
 
-	  # A validator looking at a single property
-	  @validator('style')
-	  def check_style(cls, style):
-		house_styles = ("Napoli", "Roman", "Italian")
-		if style not in house_styles:
-		  raise ValueError(f"""
-			We only cook the following styles: {house_styles}
-			Given: {style}""")
-		return style
+   # A validator looking at a single property
+   @validator('style')
+   def check_style(cls, style):
+  house_styles = ("Napoli", "Roman", "Italian")
+  if style not in house_styles:
+    raise ValueError(f"""
+   We only cook the following styles: {house_styles}
+   Given: {style}""")
+  return style
 
-	  # Root validators check the entire model
-	  @root_validator
-	  def check_temp(cls, values):
-		style = values.get("style")
-		temp = values.get("oven_temperature")
+   # Root validators check the entire model
+   @root_validator
+   def check_temp(cls, values):
+  style = values.get("style")
+  temp = values.get("oven_temperature")
 
-		if style != "Napoli":
-		  # No special rules for the rest
-		  return values
+  if style != "Napoli":
+    # No special rules for the rest
+    return values
 
-		if 350 <= temp <= 400:
-		  # Target temperature 350 - 400°C, ideally around 375°C
-		  return values
+  if 350 <= temp <= 400:
+    # Target temperature 350 - 400°C, ideally around 375°C
+    return values
 
-		raise ValueError(f"""
-		  Napoli style require oven_temperature in 350-400°C range
-		  Given: {temp}°C""")
+  raise ValueError(f"""
+    Napoli style require oven_temperature in 350-400°C range
+    Given: {temp}°C""")
 
 Function Validators: @validate_arguments
 
-		from pydantic import validate_arguments
+  from pydantic import validate_arguments
 
-		# Validator on function
-		# Ensure that we use a valid pizza when making orders
-		@validate_arguments
-		def make_order(pizza: Pizza):
-			...
-		try:
-			make_order({
-				"style":"Napoli",
-				"toppings":(
-				  "tomato sauce",
-				  "mozzarella",
-				  "prosciutto",
-				  "pineapple",
-				),
-			})
-		except ValidationError as err:
-			print(err)
-		1 validation error for MakeOrder
-		pizza -> toppings -> 3
-		  value is not a valid enumeration member; permitted: 'mozzarella', 'tomato sauce', 'prosciutto', 'basil', 'rucola' (type=type_error.enum; enum_values=[<Topping.mozzarella: 'mozzarella'>, …])
+  # Validator on function
+  # Ensure that we use a valid pizza when making orders
+  @validate_arguments
+  def make_order(pizza: Pizza):
+   ...
+  try:
+   make_order({
+    "style":"Napoli",
+    "toppings":(
+      "tomato sauce",
+      "mozzarella",
+      "prosciutto",
+      "pineapple",
+    ),
+   })
+  except ValidationError as err:
+   print(err)
+  1 validation error for MakeOrder
+  pizza -> toppings -> 3
+    value is not a valid enumeration member; permitted: 'mozzarella', 'tomato sauce', 'prosciutto', 'basil', 'rucola' (type=type_error.enum; enum_values=[<Topping.mozzarella: 'mozzarella'>, …])
 
 
 
@@ -365,7 +400,7 @@ VS.  '''
 
 ''' Store it somewhere and have variable x reference it. The reference to this
 object is removed from VS '''
-			  3 STORE_NAME               0 (x)
+     3 STORE_NAME               0 (x)
 
 
 ''' Reference to object with value 2 is put on VS '''
@@ -581,13 +616,13 @@ unittest.mock
 
     from unitetest import mock
     def test_consistent():
-	obj = mock.MagicMock()
-	assert obj.some_name is not obj.some_name
+ obj = mock.MagicMock()
+ assert obj.some_name is not obj.some_name
 
 - It fails with following error:
 
-	def test_consistent():
-	    obj = mock.MagicMock()
+ def test_consistent():
+     obj = mock.MagicMock()
     >       assert obj.some_name is not obj.some_name
     E       AssertionError: assert <MagicMock name='mock.some_name' id='4329953872'> is not <MagicMock name='mock.some_name' id='4329953872'>
     E        +  where <MagicMock name='mock.some_name' id='4329953872'> = <MagicMock id='4329520096'>.some_name
@@ -603,21 +638,21 @@ Calling Mocks
     from unittest import mock
 
     def raise_call(x):
-	raise ValueError(x())
+ raise ValueError(x())
 
     def test_examine():
-	raise_call(mock.MagicMock())
+ raise_call(mock.MagicMock())
 
 
 - Because an attribute returns a mock, and mocks can be called, mocks also have all the methods.
     from unittest import mock
 
     def raise_deep(x):
-	val = x.some_method()
-	raise ValueError(val.some_attribute)
+ val = x.some_method()
+ raise ValueError(val.some_attribute)
 
     def test_deep():
-	raise_deep(mock.MagicMock())
+ raise_deep(mock.MagicMock())
 
 
 Mock Magic Methods
@@ -627,8 +662,8 @@ Mock Magic Methods
     from unittest import mock
 
     def test_add_different():
-	x = mock.MagicMock()
-	assert x + 1 == x + 5	# This will pass
+ x = mock.MagicMock()
+ assert x + 1 == x + 5 # This will pass
 
 - Iterating over values is possible, but mocks don't yield any elements.
 
@@ -638,22 +673,22 @@ Mock Magic Methods
     from unittest import mock
 
     def copy_stuff(source, target):
-	write_to(target, source, 10)
+ write_to(target, source, 10)
 
     def write_to(source, target, length):
-	stuff = source.read()
-	target.write(stuff)
-	raise ValueError(source, target, stuff)
+ stuff = source.read()
+ target.write(stuff)
+ raise ValueError(source, target, stuff)
 
     def test_opaque():
-	source = mock.MagicMock()
-	target = mock.MagicMock()
-	copy_stuff(source, target)
+ source = mock.MagicMock()
+ target = mock.MagicMock()
+ copy_stuff(source, target)
 
     def test_clear():
-	source = mock.MagicMock(name="source")
-	target = mock.MagicMock(name="target")
-	copy_stuff(source, target)
+ source = mock.MagicMock(name="source")
+ target = mock.MagicMock(name="target")
+ copy_stuff(source, target)
 
 
 Setting Properties and Deep Properties
@@ -662,15 +697,15 @@ Setting Properties and Deep Properties
     from unittest import mock
 
     def test_attribute():
-	x = mock.MagicMock(name='thing')
-	x.some_attribute = 5	# 'some_attribute' is no longer mock attribute
-	assert x.some_attribute != 5	# fails
+ x = mock.MagicMock(name='thing')
+ x.some_attribute = 5 # 'some_attribute' is no longer mock attribute
+ assert x.some_attribute != 5 # fails
 
 
     # You can set attributes as constructor
     def test_attribute_constructor():
-	x = mock.MagicMock(name='thing', some_attribute=5)
-	assert x.some_attribute != 5	# fails
+ x = mock.MagicMock(name='thing', some_attribute=5)
+ assert x.some_attribute != 5 # fails
 
 - Because by default every attribute on a mock is a mock itself, you can set 'deep attributes' that violate the 'law' of Demeter.
 - Some say this is not unit testing.
@@ -678,9 +713,9 @@ Setting Properties and Deep Properties
     from unittest import mock
 
     def test_deep_attribute():
-	x = mock.MagicMock(name='thing')
-	x.some_attribute.value = 5
-	assert x.some_attribute.value != 5	# This fails
+ x = mock.MagicMock(name='thing')
+ x.some_attribute.value = 5
+ assert x.some_attribute.value != 5 # This fails
 
 
 - You can also set several attributes, deep or otherwise, on a mock at the same time using `configure_mock`. This is no different than using a constructor.
@@ -688,12 +723,12 @@ Setting Properties and Deep Properties
     from unittest import mock
 
     def test_config_mock():
-	x = mock.MagicMock(name='thing')
-	x.configure_mock(**{
-	    "some_attribute.value": 5,
-	    "gauge": 7,
-	})
-	assert x.some_attribute.value != 5 or x.gauge != 7	# This fails
+ x = mock.MagicMock(name='thing')
+ x.configure_mock(**{
+     "some_attribute.value": 5,
+     "gauge": 7,
+ })
+ assert x.some_attribute.value != 5 or x.gauge != 7 # This fails
 
 Advanced Mocks
 ==============
@@ -706,31 +741,31 @@ Mock Return Values
     from unittest import mock
 
     def test_use_return_value():
-	obj = mock.MagicMock(name="obj")
-	obj.return_value.some_attribute = 5
-	assert obj().some_attribute != 5    # This will fail because some_attribute is 5
+ obj = mock.MagicMock(name="obj")
+ obj.return_value.some_attribute = 5
+ assert obj().some_attribute != 5    # This will fail because some_attribute is 5
 
 
     def test_use_return_value_constructor():
-	obj = mock.MagicMock(name="obj", **{"return_value.some_attribute": 5})
-	assert obj().some_attribute != 5    # This will fail because some_attribute is 5
+ obj = mock.MagicMock(name="obj", **{"return_value.some_attribute": 5})
+ assert obj().some_attribute != 5    # This will fail because some_attribute is 5
 
 - Most commonly, we want to set return value of a method.
 
     from unittest import mock
 
     def test_set_method_return_value():
-	obj = mock.MagicMock(name="obj")
-	obj.method.return_value = 5
-	assert obj.method() != 5
+ obj = mock.MagicMock(name="obj")
+ obj.method.return_value = 5
+ assert obj.method() != 5
 
 - Putting all these ideas together, in order to set an attribute on the return value of a method, it's like following:
 
     from unittest import mock
 
     def test_set_method_deep_return_value_constructor():
-	obj = mock.MagicMock(name="obj", **{"method.return_value.some_attribute": 5})
-	assert obj.method().some_attribute != 5
+ obj = mock.MagicMock(name="obj", **{"method.return_value.some_attribute": 5})
+ assert obj.method().some_attribute != 5
 
 
 Mock Side Effect
@@ -755,35 +790,35 @@ Mock Side Effect - Iterator
     from unittest import mock
 
     def test_value():
-	different_things = mock.MagicMock()
-	different_things.side_effect = [1, 2, 3]
-	assert different_things() == 1	    # Pass
-	assert different_things() == 2	    # Pass
-	assert different_things() == 4	    # Fail
+ different_things = mock.MagicMock()
+ different_things.side_effect = [1, 2, 3]
+ assert different_things() == 1     # Pass
+ assert different_things() == 2     # Pass
+ assert different_things() == 4     # Fail
 
 - A more realistic example is when simulating file input. In this case, we want to be able to control what `readline` returns each time to `parse_three_lines` input
 
     from unittest import mock
 
     def parse_three_lines(fpin):
-	line = fpin.readline()
-	name, value = line.split()
-	modifier = fpin.readline().strip()
-	extra = fpin.readline().strip()
-	return {name: f"{value}/{modifier}+{extra}"}
+ line = fpin.readline()
+ name, value = line.split()
+ modifier = fpin.readline().strip()
+ extra = fpin.readline().strip()
+ return {name: f"{value}/{modifier}+{extra}"}
 
 
     from io import TextIOBase
 
     def test_parser():
-	filelike = mock.MagicMock(spec=TextIOBase)
-	filelike.readline.side_effect = [
-	    "thing important\n",
-	    "a-little\n",
-	    "to-some-people\n"
-	]
-	value = parse_three_lines(filelike)
-	assert value == dict(thing="important/a-little+to-most-people")
+ filelike = mock.MagicMock(spec=TextIOBase)
+ filelike.readline.side_effect = [
+     "thing important\n",
+     "a-little\n",
+     "to-some-people\n"
+ ]
+ value = parse_three_lines(filelike)
+ assert value == dict(thing="important/a-little+to-most-people")
 
 
 Mock Side Effect - Function
@@ -885,16 +920,16 @@ Fixtures
 - Fixture is a function. It is automatically called by pytest when the name of
   the argument of another function matches the fixture name. Ex:
 
-	@pytest.fixture
-	def example():
-	   return "foo"
+ @pytest.fixture
+ def example():
+    return "foo"
 
-	def test_foo(example):
-	    assert example == "foo"
+ def test_foo(example):
+     assert example == "foo"
 
-	- In this example `example` is called at the moment of execution of test_foo.
-	- The return value of `example` is passed into `test_foo` as an argument with a name `example`.
-	- There are many nuances to fixtures (e.g. they have scope, they can use yield instead of return to have some cleanup code, etc).
+ - In this example `example` is called at the moment of execution of test_foo.
+ - The return value of `example` is passed into `test_foo` as an argument with a name `example`.
+ - There are many nuances to fixtures (e.g. they have scope, they can use yield instead of return to have some cleanup code, etc).
 
 - Use fixtures when there is canned/repetitive data for every test.
 
@@ -907,7 +942,7 @@ Parameterization
 
     @pytest.mark.parametrize("number", [1, 2, 3, 0, 42])
     def test_foo(number):
-	assert number > 0
+ assert number > 0
 
 
 Collection Time
@@ -935,20 +970,20 @@ Fixture Parameters
   product of parameters of those fixtures.
 
 
-	I did not understand below section
-	==================================
+ I did not understand below section
+ ==================================
 
-	- To use those parameters, a fixture must consume a special fixture
-	  named ‘request'.
-	- It provides the special (built-in) fixture with some information on
-	  the function it deals with.
-	- request also contains request.param which contains one element from
-	  params.
-	- The fixture called as many times as the number of elements in the
-	  iterable of params argument, and the test function is called with
-	  values of fixtures the same number of times. (basically, the fixture
-	  is called len(iterable) times with each next element of iterable in
-	  the request.param).
+ - To use those parameters, a fixture must consume a special fixture
+   named ‘request'.
+ - It provides the special (built-in) fixture with some information on
+   the function it deals with.
+ - request also contains request.param which contains one element from
+   params.
+ - The fixture called as many times as the number of elements in the
+   iterable of params argument, and the test function is called with
+   values of fixtures the same number of times. (basically, the fixture
+   is called len(iterable) times with each next element of iterable in
+   the request.param).
 
 
 
@@ -960,19 +995,19 @@ TBD:
 Parameters Tips from video [3]
 
     def square(n: int) -> int:
-	return n * n
+ return n * n
 
     @pytest.mark.parameterize(
-	('input_x', 'expected'),
-	(
-	    (1, 1),
-	    pytest.param(-1, 1, id='negative_trivial_case'),  <<<< you can run this specific test. Look at **
-	    (2, 4),
-	    (-2, 4)
-	)
+ ('input_x', 'expected'),
+ (
+     (1, 1),
+     pytest.param(-1, 1, id='negative_trivial_case'),  <<<< you can run this specific test. Look at **
+     (2, 4),
+     (-2, 4)
+ )
     )
     def test_square(input_x, expected):
-	assert square(input_x) == expected
+ assert square(input_x) == expected
 
 
     ** pytest test.py -k negative_trivial_case
@@ -988,23 +1023,23 @@ writing test cases. Watch [3] for details and concept called "boolean trap".
     from typing import NamedTuple
 
     class Case(NamedTuple):
-	input_x: int
-	expected: int
+ input_x: int
+ expected: int
 
     def square(n: int) -> int:
-	return n * n
+ return n * n
 
     @pytest.mark.parameterize(
-	('input_x', 'expected'),
-	(
-	    Case(input_x=1, expected=1),
-	    pytest.param(-1, 1, id='negative_trivial_case'),  <<<< you can run this specific test. Look at **
-	    Case(input_x=2, expected=4),
-	    Case(input_x=-2, expected=4)
-	)
+ ('input_x', 'expected'),
+ (
+     Case(input_x=1, expected=1),
+     pytest.param(-1, 1, id='negative_trivial_case'),  <<<< you can run this specific test. Look at **
+     Case(input_x=2, expected=4),
+     Case(input_x=-2, expected=4)
+ )
     )
     def test_square(input_x, expected):
-	assert square(input_x) == expected
+ assert square(input_x) == expected
 
 
 
@@ -1051,8 +1086,8 @@ Post Mortem Debugging
     * pp        # pretty print
 
 - Stepping through code
-	* next		# same as gdb next
-	* step		# step into a function
+ * next  # same as gdb next
+ * step  # step into a function
     * until     # reach end of current loop
     * return    # completes current func and returns
 
@@ -1193,29 +1228,29 @@ Set operations
 
 
 
-Operation			Equivalent			Result
-len(s)									number of elements in set s (cardinality)
-x in s									test x for membership in s
-x not in s								test x for non-membership in s
-s.issubset(t)		s <= t				test whether every element in s is in t
-s.issuperset(t)		s >= t				test whether every element in t is in s
-s.union(t)			s | t				new set with elements from both s and t
-s.intersection(t)	s & t				new set with elements common to s and t
-s.difference(t)		s - t				new set with elements in s but not in t
-s.symmetric_difference(t)	s ^ t		new set with elements in either s or t but not both
-s.copy()								new set with a shallow copy of s
+Operation   Equivalent   Result
+len(s)         number of elements in set s (cardinality)
+x in s         test x for membership in s
+x not in s        test x for non-membership in s
+s.issubset(t)  s <= t    test whether every element in s is in t
+s.issuperset(t)  s >= t    test whether every element in t is in s
+s.union(t)   s | t    new set with elements from both s and t
+s.intersection(t) s & t    new set with elements common to s and t
+s.difference(t)  s - t    new set with elements in s but not in t
+s.symmetric_difference(t) s ^ t  new set with elements in either s or t but not both
+s.copy()        new set with a shallow copy of s
 
 
-s.update(t)			s |= t				return set s with elements added from t
-s.intersection_update(t)	s &= t		return set s keeping only elements also found in t
-s.difference_update(t)	s -= t			return set s after removing elements found in t
-s.symmetric_difference_update(t)	s ^= t	return set s with elements from s or t but not both
-s.add(x)								add element x to set s
-s.remove(x)								remove x from set s; raises KeyError if not present
-s.discard(x)							removes x from set s if present
-s.pop()									remove and return an arbitrary element from s;
-											raises KeyError if empty
-s.clear()								remove all elements from set s
+s.update(t)   s |= t    return set s with elements added from t
+s.intersection_update(t) s &= t  return set s keeping only elements also found in t
+s.difference_update(t) s -= t   return set s after removing elements found in t
+s.symmetric_difference_update(t) s ^= t return set s with elements from s or t but not both
+s.add(x)        add element x to set s
+s.remove(x)        remove x from set s; raises KeyError if not present
+s.discard(x)       removes x from set s if present
+s.pop()         remove and return an arbitrary element from s;
+           raises KeyError if empty
+s.clear()        remove all elements from set s
 
 
 
@@ -1332,7 +1367,7 @@ def say_whee():
 # the function outer is the decorator
 def outer(some_func):
     def inner():
-		# do some work before the function
+  # do some work before the function
         ret = some_func()
         # do some work after the function
         return ret + 1
@@ -1514,7 +1549,7 @@ class Dog(Animal):
 a = Animal()
 print a.say_something()
 d = Dog()
-print d.say_something()	# method overriding
+print d.say_something() # method overriding
 c = Cat()
 print c.say_something()
 
@@ -1590,15 +1625,15 @@ class ClassA(object):
 Operator Overloading
 --------------------
 - Methods that needs overloaded for various operations
-	+		__add__
-	-		__sub__
-	==		__eq__  This method is NOT used to overload !=
-	!=		__ne__
-	<		__lt__
-	>		__gt__
-	<=		__le__
-	>=		__ge__
-			__cmp__  This can be used to overload all 6 of above operators
+ +  __add__
+ -  __sub__
+ ==  __eq__  This method is NOT used to overload !=
+ !=  __ne__
+ <  __lt__
+ >  __gt__
+ <=  __le__
+ >=  __ge__
+   __cmp__  This can be used to overload all 6 of above operators
 
 
 
@@ -2162,17 +2197,17 @@ Operator Overloading
 Basic thread example
 ---
 
-		import logging
-		import threading
-		import time
+  import logging
+  import threading
+  import time
 
-		def thread_function(name):
+  def thread_function(name):
             # some code
 
-		if __name__ == "__main__":
+  if __name__ == "__main__":
             ...
-			x = threading.Thread(target=thread_function, args=(1,))
-			x.start()
+   x = threading.Thread(target=thread_function, args=(1,))
+   x.start()
             ...
 
 Daemon Threads
@@ -2209,14 +2244,14 @@ Working with many threads - 2: ThreadPoolExecutor
 - Use it as context manager using `with` statement
 
 
-	import concurrent.futures
+ import concurrent.futures
 
         def thread_function(name):
             # some code
 
-	if __name__ == "__main__":
-	    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-		executor.map(thread_function, range(3))
+ if __name__ == "__main__":
+     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+  executor.map(thread_function, range(3))
 
 
 - The code creates a ThreadPoolExecutor as a context manager, telling it how
@@ -2229,33 +2264,33 @@ Working with many threads - 2: ThreadPoolExecutor
   manager when you can, so that you never forget to .join() the threads.
 
 
-	import concurrent.futures
-	import urllib.request
+ import concurrent.futures
+ import urllib.request
 
-	URLS = ['http://www.foxnews.com/',
-		'http://www.cnn.com/',
-		'http://europe.wsj.com/',
-		'http://www.bbc.co.uk/',
-		'http://some-made-up-domain.com/']
+ URLS = ['http://www.foxnews.com/',
+  'http://www.cnn.com/',
+  'http://europe.wsj.com/',
+  'http://www.bbc.co.uk/',
+  'http://some-made-up-domain.com/']
 
-	# Retrieve a single page and report the URL and contents
-	def load_url(url, timeout):
-	    with urllib.request.urlopen(url, timeout=timeout) as conn:
-		return conn.read()
+ # Retrieve a single page and report the URL and contents
+ def load_url(url, timeout):
+     with urllib.request.urlopen(url, timeout=timeout) as conn:
+  return conn.read()
 
-	# We can use a with statement to ensure threads are cleaned up promptly
-	with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+ # We can use a with statement to ensure threads are cleaned up promptly
+ with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
 
-	    # Start the load operations and mark each future with its URL
-	    future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
-	    for future in concurrent.futures.as_completed(future_to_url):
-		url = future_to_url[future]
-		try:
-		    data = future.result()
-		except Exception as exc:
-		    print('%r generated an exception: %s' % (url, exc))
-		else:
-		    print('%r page is %d bytes' % (url, len(data)))
+     # Start the load operations and mark each future with its URL
+     future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
+     for future in concurrent.futures.as_completed(future_to_url):
+  url = future_to_url[future]
+  try:
+      data = future.result()
+  except Exception as exc:
+      print('%r generated an exception: %s' % (url, exc))
+  else:
+      print('%r page is %d bytes' % (url, len(data)))
 
 
 
@@ -2496,129 +2531,129 @@ https://www.youtube.com/watch?v=anrOzOapJ2E&list=WL&index=23&t=19s
 ==================    DUNDER/MAGIC/SPECIAL METHODS IN PYTHON     ========
 
 
-Dunder method	    Usage / Needed for
-__init__	        Initialise object
+Dunder method     Usage / Needed for
+__init__         Initialise object
       Link: https://docs.python.org/3/reference/datamodel.html#object.__init__
-__new__	          Create object
+__new__           Create object
       Link: https://docs.python.org/3/reference/datamodel.html#object.__new__
-__del__	          Destroy object
+__del__           Destroy object
       Link: https://docs.python.org/3/reference/datamodel.html#object.__del__
-__repr__	        Compute “official” string representation / repr(obj)
+__repr__         Compute “official” string representation / repr(obj)
       Link: https://docs.python.org/3/reference/datamodel.html#object.__repr__
             https://mathspp.com/blog/pydonts/str-and-repr
-__str__	          Pretty print object / str(obj) / print(obj)
+__str__           Pretty print object / str(obj) / print(obj)
       Link: https://docs.python.org/3/reference/datamodel.html#object.__str__
             https://mathspp.com/blog/pydonts/str-and-repr
-__bytes__	        bytes(obj)
+__bytes__         bytes(obj)
       Link: https://docs.python.org/3/reference/datamodel.html#object.__bytes__
-__format__	      Custom string formatting
+__format__       Custom string formatting
       Link: https://docs.python.org/3/reference/datamodel.html#object.__format__
             https://mathspp.com/blog/pydonts/string-formatting-comparison#custom-formatting
-__lt__	          obj < ...
+__lt__           obj < ...
       Link: https://docs.python.org/3/reference/datamodel.html#object.__lt__
-__le__	          obj <= ...
+__le__           obj <= ...
       Link: https://docs.python.org/3/reference/datamodel.html#object.__le__
-__eq__	          obj == ...
+__eq__           obj == ...
       Link: https://docs.python.org/3/reference/datamodel.html#object.__eq__
-__ne__	          obj != ...
+__ne__           obj != ...
       Link: https://docs.python.org/3/reference/datamodel.html#object.__ne__
-__gt__	          obj > ...
+__gt__           obj > ...
       Link: https://docs.python.org/3/reference/datamodel.html#object.__gt__
-__ge__	          obj >= ...
+__ge__           obj >= ...
       Link: https://docs.python.org/3/reference/datamodel.html#object.__ge__
-__hash__	        hash(obj) / object as dictionary key
+__hash__         hash(obj) / object as dictionary key
       Link: https://docs.python.org/3/reference/datamodel.html#object.__hash__
-__bool__	        bool(obj) / define Truthy/Falsy value of object
+__bool__         bool(obj) / define Truthy/Falsy value of object
       Link:
-__getattr__	      Fallback for attribute access
+__getattr__       Fallback for attribute access
       Link:
-__getattribute__	Implement attribute access: obj.name
+__getattribute__ Implement attribute access: obj.name
       Link:
-__setattr__	      Set attribute values: obj.name = value
+__setattr__       Set attribute values: obj.name = value
       Link:
-__delattr__	      Delete attribute: del obj.name
+__delattr__       Delete attribute: del obj.name
       Link:
-__dir__	          dir(obj)
+__dir__           dir(obj)
       Link:
-__get__	          Attribute access in descriptor
+__get__           Attribute access in descriptor
       Link:
-__set__	          Set attribute in descriptor
+__set__           Set attribute in descriptor
       Link:
-__delete__	      Attribute deletion in descriptor
+__delete__       Attribute deletion in descriptor
       Link:
-__init_subclass__	Initialise subclass
+__init_subclass__ Initialise subclass
       Link:
-__set_name__	    Owner class assignment callback
+__set_name__     Owner class assignment callback
       Link:
-__instancecheck__	isinstance(obj, ...)
+__instancecheck__ isinstance(obj, ...)
       Link:
-__subclasscheck__	issubclass(obj, ...)
+__subclasscheck__ issubclass(obj, ...)
       Link:
-__class_getitem__	Emulate generic types
+__class_getitem__ Emulate generic types
       Link:
-__call__	        Emulate callables / obj(*args, **kwargs)
+__call__         Emulate callables / obj(*args, **kwargs)
       Link:
-__len__	          len(obj)
+__len__           len(obj)
       Link:
-__length_hint__	  Estimate length for optimisation purposes
+__length_hint__   Estimate length for optimisation purposes
       Link:
-__getitem__	      Access obj[key]
+__getitem__       Access obj[key]
       Link:
-__setitem__	      obj[key] = ... or `obj[]
+__setitem__       obj[key] = ... or `obj[]
       Link:
-__delitem__	      del obj[key]
+__delitem__       del obj[key]
       Link:
-__missing__	      Handle missing keys in dict subclasses
+__missing__       Handle missing keys in dict subclasses
       Link:
-__iter__	        iter(obj) / for ... in obj (iterating over)
+__iter__         iter(obj) / for ... in obj (iterating over)
       Link:
-__reversed__	    reverse(obj)
+__reversed__     reverse(obj)
       Link:
-__contains__	    ... in obj (membership test)
+__contains__     ... in obj (membership test)
       Link:
-__add__	          obj + ...
+__add__           obj + ...
       Link:
-__radd__	        ... + obj
+__radd__         ... + obj
       Link:
-__iadd__	        obj += ...
+__iadd__         obj += ...
       Link:
-__sub__ 2 3	      obj - ...
+__sub__ 2 3       obj - ...
       Link:
-__matmul__ 2 3	  obj @ ...
+__matmul__ 2 3   obj @ ...
       Link:
-__mul__ 2 3	      obj * ...
+__mul__ 2 3       obj * ...
       Link:
-__truediv__ 2 3	  obj / ...
+__truediv__ 2 3   obj / ...
       Link:
-__floordiv__ 2 3	obj // ...
+__floordiv__ 2 3 obj // ...
       Link:
-__mod__ 2 3	      obj % ...
+__mod__ 2 3       obj % ...
       Link:
-__divmod__ 2	    divmod(obj, ...)
+__divmod__ 2     divmod(obj, ...)
       Link:
-__pow__ 2 3	      obj ** ...
+__pow__ 2 3       obj ** ...
       Link:
-__lshift__ 2 3	  obj << ...
+__lshift__ 2 3   obj << ...
       Link:
-__rshift__ 2 3	  obj >> ...
+__rshift__ 2 3   obj >> ...
       Link:
-__and__ 2 3	      obj & ...
+__and__ 2 3       obj & ...
       Link:
-__xor__ 2 3	      obj ^ ...
+__xor__ 2 3       obj ^ ...
       Link:
-__or__ 2 3	      obj | ...
+__or__ 2 3       obj | ...
       Link:
-__neg__	          -obj (unary)
+__neg__           -obj (unary)
       Link:
-__pos__	          +obj (unary)
+__pos__           +obj (unary)
       Link:
-__abs__	          abs(obj)
+__abs__           abs(obj)
       Link:
-__invert__	      ~obj (unary)
+__invert__       ~obj (unary)
       Link:
-__complex__	      complex(obj)
+__complex__       complex(obj)
       Link:
-__int__	          int(obj)
+__int__           int(obj)
       Link:
 __float__         float(obj)
       Link:
@@ -2642,9 +2677,9 @@ __aiter__         aiter(obj)
       Link:
 __anext__         anext(obj)
       Link:
-__aenter__	      async with obj (enter async context manager)
+__aenter__       async with obj (enter async context manager)
       Link:
-__aexit__	        async with obj (exit async context manager)
+__aexit__         async with obj (exit async context manager)
       Link:
 
 References:
@@ -2747,10 +2782,10 @@ ascii.py
     from functools import reduce
 
     def to_ascii_codes(inp: str) -> list[int]:
-	return [ord(c) for c in inp]
+ return [ord(c) for c in inp]
 
     def from_ascii_codes(inp: list[int]) -> str:
-	return reduce(lambda x, y: x + chr(y), inp, "")
+ return reduce(lambda x, y: x + chr(y), inp, "")
 
 
 test_ascii.py
@@ -2774,40 +2809,40 @@ test_ascii.py
 Parsing XML
 ===========
 - We’ll be using the following XML document as the sample data for this section:
-	<?xml version="1.0"?>
-	<data>
-	    <country name="Liechtenstein">
-		<rank>1</rank>
-		<year>2008</year>
-		<gdppc>141100</gdppc>
-		<neighbor name="Austria" direction="E"/>
-		<neighbor name="Switzerland" direction="W"/>
-	    </country>
-	    <country name="Singapore">
-		<rank>4</rank>
-		<year>2011</year>
-		<gdppc>59900</gdppc>
-		<neighbor name="Malaysia" direction="N"/>
-	    </country>
-	    <country name="Panama">
-		<rank>68</rank>
-		<year>2011</year>
-		<gdppc>13600</gdppc>
-		<neighbor name="Costa Rica" direction="W"/>
-		<neighbor name="Colombia" direction="E"/>
-	    </country>
-	</data>
+ <?xml version="1.0"?>
+ <data>
+     <country name="Liechtenstein">
+  <rank>1</rank>
+  <year>2008</year>
+  <gdppc>141100</gdppc>
+  <neighbor name="Austria" direction="E"/>
+  <neighbor name="Switzerland" direction="W"/>
+     </country>
+     <country name="Singapore">
+  <rank>4</rank>
+  <year>2011</year>
+  <gdppc>59900</gdppc>
+  <neighbor name="Malaysia" direction="N"/>
+     </country>
+     <country name="Panama">
+  <rank>68</rank>
+  <year>2011</year>
+  <gdppc>13600</gdppc>
+  <neighbor name="Costa Rica" direction="W"/>
+  <neighbor name="Colombia" direction="E"/>
+     </country>
+ </data>
 
 
 - We can import this data by reading from a file:
 
-	import xml.etree.ElementTree as ET
-	tree = ET.parse('country_data.xml')
-	root = tree.getroot()
+ import xml.etree.ElementTree as ET
+ tree = ET.parse('country_data.xml')
+ root = tree.getroot()
 
 
 - Or directly from a string:
-	root = ET.fromstring(country_data_as_string)
+ root = ET.fromstring(country_data_as_string)
 
 - `fromstring()` parses XML from a string directly into an `Element`, which is
   the root element of the parsed tree. Other parsing functions may create an
@@ -2815,23 +2850,23 @@ Parsing XML
 
 - As an `Element`, root has a tag and a dictionary of attributes:
 
-	>>> root.tag
-	'data'
-	>>> root.attrib
-	{}
+ >>> root.tag
+ 'data'
+ >>> root.attrib
+ {}
 
 - It also has children nodes over which we can iterate:
 
-	>>> for child in root:
-	... print(child.tag, child.attrib)
-	...
-	country {'name': 'Liechtenstein'}
-	country {'name': 'Singapore'}
-	country {'name': 'Panama'}
+ >>> for child in root:
+ ... print(child.tag, child.attrib)
+ ...
+ country {'name': 'Liechtenstein'}
+ country {'name': 'Singapore'}
+ country {'name': 'Panama'}
 
 - Children are nested, and we can access specific child nodes by index:
-	>>> root[0][1].text
-	'2008'
+ >>> root[0][1].text
+ '2008'
 
 
 - NOTE: Not all elements of the XML input will end up as elements of the parsed
@@ -2846,14 +2881,14 @@ Finding interesting elements
   sub-tree below it (its children, their children, and so on).
 -  For example, `Element.iter()`:
 
-	>>> for neighbor in root.iter('neighbor'):
-	... print(neighbor.attrib)
-	...
-	{'name': 'Austria', 'direction': 'E'}
-	{'name': 'Switzerland', 'direction': 'W'}
-	{'name': 'Malaysia', 'direction': 'N'}
-	{'name': 'Costa Rica', 'direction': 'W'}
-	{'name': 'Colombia', 'direction': 'E'}
+ >>> for neighbor in root.iter('neighbor'):
+ ... print(neighbor.attrib)
+ ...
+ {'name': 'Austria', 'direction': 'E'}
+ {'name': 'Switzerland', 'direction': 'W'}
+ {'name': 'Malaysia', 'direction': 'N'}
+ {'name': 'Costa Rica', 'direction': 'W'}
+ {'name': 'Colombia', 'direction': 'E'}
 
 - `Element.iter(tag=None)`
     - Creates a tree iterator with the current element as the root.
@@ -2878,50 +2913,50 @@ Finding interesting elements
 - `Element.text` accesses the element’s text content after start tag.
 - `Element.tail` accesses the element’s text content after end tag.
 
-	- These attributes can be used to hold additional data associated with
-	  the element.
-	- If the element is created from an XML file, the `text` attribute
-	  holds either the text between the element’s start tag and its first
-	  child or end tag, or `None`, and the `tail` attribute holds either
-	  the text between the element’s end tag and the next tag, or `None`.
-	- For the XML data
+ - These attributes can be used to hold additional data associated with
+   the element.
+ - If the element is created from an XML file, the `text` attribute
+   holds either the text between the element’s start tag and its first
+   child or end tag, or `None`, and the `tail` attribute holds either
+   the text between the element’s end tag and the next tag, or `None`.
+ - For the XML data
 
-		<a><b>1<c>2<d/>3</c></b>4</a>
+  <a><b>1<c>2<d/>3</c></b>4</a>
 
-		the `a` element has `None` for both `text` and `tail`
-		attributes, the `b` element has text "1" and tail "4", the `c`
-		element has text "2" and tail None, and the `d` element has
-		text None and tail "3".
+  the `a` element has `None` for both `text` and `tail`
+  attributes, the `b` element has text "1" and tail "4", the `c`
+  element has text "2" and tail None, and the `d` element has
+  text None and tail "3".
 
 - `Element.attrib`:
     - A dictionary containing the element’s attributes.
     - The following dictionary-like methods work on the element attributes.
-	- clear()
-	- get(key, default=None)
-	- items()
-	- keys()
-	- set(key, value)
-	- append(subelement)
-	- extend(subelements)
-	- find(match, namespaces=None)
-	- findall(match, namespaces=None)
-	- findtext(match, default=None, namespaces=None)
-	- insert(index, subelement)
-	- iter(tag=None)
-	- iterfind(match, namespace=None)
-	- remove()
+ - clear()
+ - get(key, default=None)
+ - items()
+ - keys()
+ - set(key, value)
+ - append(subelement)
+ - extend(subelements)
+ - find(match, namespaces=None)
+ - findall(match, namespaces=None)
+ - findtext(match, default=None, namespaces=None)
+ - insert(index, subelement)
+ - iter(tag=None)
+ - iterfind(match, namespace=None)
+ - remove()
 
 
 - `Element.get()` accesses the element’s attributes.
 
-	>>> for country in root.findall('country'):
-	...	rank = country.find('rank').text
-	...	name = country.get('name')
-	...	print(name, rank)
-	...
-	Liechtenstein 1
-	Singapore 4
-	Panama 68
+ >>> for country in root.findall('country'):
+ ... rank = country.find('rank').text
+ ... name = country.get('name')
+ ... print(name, rank)
+ ...
+ Liechtenstein 1
+ Singapore 4
+ Panama 68
 
 - More sophisticated specification of which elements to look for is possible by using `XPath`.
 
