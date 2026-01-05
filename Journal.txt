@@ -1,15 +1,13 @@
-@@@@@@@@@@  Overall Goals for 2025  @@@@@@@@@@@@@
+@@@@@@@@@@  Overall Goals for 2026  @@@@@@@@@@@@@
 Personal:
-    * Start building products
-        - Write code to analyze deals using Zillow API
-            - Summarize the analysis in Excel file.
+    * Start building products using AI
+        - Use AI and build something to make REI investments easier.
         - REI API
             - Scrape 3000+ county websites.
-        - Build your own Git.
 
     * Spend time with kids in their school work each day.
 
-    * Exercising. Daily Gym.
+    * Exercising Daily.
 
     * Build Personal Brand
         - Personal Website.
@@ -17,15 +15,14 @@ Personal:
         - Side Projects.
 
 India:
-    - Finances
-    - House Construction
+    - House Construction.
+    - Cancel FD in HDFC account and instead buy Mutual Funds.
 
 
 Work/Career:
-    - Give at least 25 technical talks.
-        - Vim (as many as possible)
-        - Python Hypothesis
-
+    - Deliver high quality projects starting with PRA + RBI
+    - Give at least 5 technical talks.
+        - Vim
 
 REI work:
     * Buy at least one multifamily home (~50 units)
@@ -41,6 +38,86 @@ Seva:
     * AE courses
     * Prison Program
     * Organize KYC courses
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2026, Jan 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+
+
+
+
+
+@@@@@@@@@@  Overall Goals for 2025  @@@@@@@@@@@@@
+Personal:
+    * Start building products
+        - Write code to analyze deals using Zillow API
+            - Summarize the analysis in Excel file.
+        - REI API
+            - Scrape 3000+ county websites.
+        - Build your own Git.
+        SUMMARY:
+            - NOT DONE. FAILED MISERABLY.
+            - I did not do single project. I did not follow through on this vision.
+
+    * Spend time with kids in their school work each day.
+        SUMMARY:
+            - Yes. I did this well. It was worth it.
+
+    * Exercising. Daily Gym.
+        SUMMARY:
+            - Partially done. This must be significantly improved.
+
+    * Build Personal Brand
+        - Personal Website.
+        - Blog Posts.
+        - Side Projects.
+        SUMMARY:
+            - NOT DONE. FAILED MISERABLY.
+            - I did not do single project from this list.
+
+India:
+    - Finances
+    - House Construction
+    SUMMARY:
+        - Yes. I've done good job with House Construction and Construction Finances.
+        - But I must focus on investing HDFC money into Mutual Funds instead of Fixed Deposits.
+
+
+Work/Career:
+    - Give at least 25 technical talks.
+        - Vim (as many as possible)
+        - Python Hypothesis
+        SUMMARY:
+            - I did not do any of the above.
+            - But I delivered good work.
+            - Got promoted.
+
+REI work:
+    * Buy at least one multifamily home (~50 units)
+    SUMMARY:
+        - FAILED
+        - Consistency is required in acquiring assets. Do it in 2026
+
+Books:
+    * Goal - read 1 book/month
+        * Everything in my "Book Shelf", that I own
+    SUMMARY:
+        - I've read about 3-4 books in the entire year.
+
+Seva:
+    * Organize Knowledge Satsangs
+    * YES courses
+    * AE courses
+    * Prison Program
+    * Organize KYC courses
+    SUMMARY:
+        - Yoga Vasistha
+        - YES Follow ups for now
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 @@@@@@@@@@@@@@   Dec 2025    Goals  @@@@@@@@@@@@@@@@@@
@@ -81,35 +158,99 @@ REI
     * Ownwell action items
     * Warrior:
     * Converting to LLC
-            - 629 Celebration Ct
-            - 3012/3014 Pine Valley
-            - 3043/3045 Pine Valley
-            - 3040/3042 Green Mountain Dr
+            - NOT DOING 629 Celebration Ct
+            - NOT DOING 3012/3014 Pine Valley
+            - NOT DOING 3043/3045 Pine Valley
+            - NOT DOING 3040/3042 Green Mountain Dr
 
-    * Freedom Mortgage - Include escrow.
-    * Estate Planning
+    * Freedom Mortgage
+    * Estate Planning Updates
 
 Seva
     - Lead YES Follow Up - ONGOING
     - Yoga Vasishta Reading - ONGOING
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-2025, Dec 01 (Sun)
+2025, Dec 30 - 31(Tue-Wed)
 - Work:
+    - Using Claude Code, I've code UTs for zgw main workflow
+      (ProxyToLocalUpstream) function.
+    - Huge improvement in Code Coverage.
+
 - Warrior/REI:
 - Minutiae:
 
 
 
+2025, Dec 29 (Mon)
+#facial
+- Work:
+    - Presented FS to Hritesh Yadav.
+    - Debugging sessions with Harun Ahmed.
+        - Gave him pointers to debug.
+- Warrior/REI:
+- Minutiae:
+    - facial in morning.
+    - Venkat's situation is ongoing. I dropped their kid, Gauri, in Milpitas
+      for a playdate.
+    - SageSure. They'll send another check to me for Green Mountain property.
+
+
+2025, Dec 25-28 (Thu-Sun)
+#aos #treecutting #hiltonhead #southcarolina
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Returned from South Carolina (Hilton Head) vacation.
+    - A tree fell in backyard, due to thunderstorms.
+    - AOS Course.
+    - Venkat's situation is same throughout.
+    - Rajkumar ji came on Sunday to cut the tree. I helped him after the course.
+    - Family went to Zootopia 2. I got headache because it was right after the AOS course.
+
+
+2025, Dec 20-25 (Sat-Thu)
+#hiltonhead #southcarolina
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Met Sireesha & Family, Kala and Kids at Hilton Head.
+    - The flight journey was very hard, but made it.
+    - Hilton Head is good. The luxury villas were amazing.
+    - Kids met their cousins first time. They had good time.
+    - Nice to see Attayya and Sireesha's MIL.
+    - Nice beaches and calm town. Refreshing break.
+
+
+2025, Dec 18 (Thu)
+- Work:
+    - Closed few bugs:
+        - ZY-7142
+
+- Warrior/REI:
+- Minutiae:
 
 
 
 2025, Dec 17 (Wed)
 - Work:
+    - Raised few MRs for P1 bugs.
+    - 5G team started seeing errors in DELETE calls.
+        - Debugged for some time. But Ganu helped in evening.
+
 - Warrior/REI:
 - Minutiae:
+    - Went to Venkat's house in morning at 6am or so. Got call from Madhuri.
+        - Venkat had mental breakdown.
+        - Nikita called 911. They took him away to Emergency Psychiatry Services (EPS).
+        - Sudarshan and I spent couple of hours.
+        - Venkat's brother, Narayana, was also there.
+        - Sowmya Lolla visited in morning and stayed few hours.
+        - Madhavi visted in afternoon and stayed few hours.
+        - EPS transferred Venkat to Fremont Hospital for longer term Psychiatric care.
 
 
 2025, Dec 16 (Tue)
+#venkat
 - Work:
     - Meeting with Gokul, about Portal UI changes for PRA + RBI project.
     - Meeting with Rakesh Chaitanya. Questions about enabling PRA + RBI in Finland region, ZPRA node.
@@ -122,7 +263,8 @@ Seva
     - Talked to few Refinance Lenders. Did not apply yet.
 
 - Minutiae:
-
+    - Went to Venkat's house in evening with Sudarshan Kadari to meet Venkat & Nikita.
+        - Venkat was having mental breakdown.
 
 
 2025, Dec 15 (Mon)
