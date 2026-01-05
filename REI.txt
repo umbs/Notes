@@ -28,7 +28,16 @@ References:
 
 https://www.city-data.com
 https://www.deptofnumbers.com/employment/metros/
-https://www.deptofnumbers.com/employment/metros/
+
+APIs:
+https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=place:*&in=state:06&key=YOUR_KEY
+    Developers Page: https://www.census.gov/data/developers.html
+
+https://datausa.io/api/data?drilldowns=Place&measures=Population&year=latest
+https://api.api-ninjas.com/v1/city?name=San Francisco&country=US
+
+
+
 
 Property Management Platform
 ---
@@ -45,6 +54,32 @@ Electronic Signature Options
 ---
 Docusign
 
+@@@@@@@@@@@@@@@   Neal Bawa (Multifamily University)    @@@@@@@@@@@@@@@
+
+Real Focus 1: Population Growth - 10.6%
+- If city is between 250K to 1M in population, you want 10.6% growth between 2011 to 2020
+
+- 7% growth for large cities (1M-2M population)
+  - Ex: Phoenix, AZ; Philadelphia, PA; San Antonio, TX; San Diego, CA
+
+- 15% growth for micro cities (<250K population)
+  - Ex: St. George, UT; Durham, NC; Fort Wayne, IN
+
+- How to get this data?
+  - Perplexity/Google etc
+
+Real Focus 2: Median Household Income
+
+Real Focus 3:
+
+Real Focus 4:
+
+Real Focus 5:
+
+
+Reference:
+[1] https://www.udemy.com/course/realfocus/learn/lecture/12998740#overview
+Neal Bawa
 
 @@@@@@@@@@@@@@@   Notes From Rod Khlief Multifamily Bootcamp @@@@@@@@@@@
 
