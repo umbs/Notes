@@ -20,9 +20,28 @@ India:
 
 
 Work/Career:
+    - Major Projects:
+        - PRA + RBI
+
+    - Minor Projects, Tech Debts
+        - UT for Tenants V2 API
+        - Concurrent Tenants V2 API
+        - Test Containers integration project
+        - UI for charts files. What feature is present in which region?
+        - 100% Code Coverage of Ironvault
+        - Single Trace Id feature
+        - App Accel Testing
+            - Using Postman, Mockoon, httptest, httpmock
+            - Increase code coverage to 40%
+
+    - Personal Development
+        - Claude Code ramp up
+
     - Deliver high quality projects starting with PRA + RBI
     - Give at least 5 technical talks.
         - Vim
+    - "pan" CLI, like aws cli to manage PANW infra?
+
 
 REI work:
     * Buy at least one multifamily home (~50 units)
@@ -30,15 +49,149 @@ REI work:
 
 Books:
     * Goal - read 1 book/month
-        * Everything in my "Book Shelf", that I own
+        - Everything in my "Book Shelf", that I own
+        - Zen and Art of Motorcycle Maintanence
+        - Building LLM from Scratch
 
 Seva:
     * Organize Knowledge Satsangs
+        - YV
+        - Bhakti Sutras
+        - AG
+        - PYS
     * YES courses
     * AE courses
     * Prison Program
     * Organize KYC courses
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@@@@@@@@@@@@@@   Feb 2026 Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - PWA Prod Monitoring for (Deloitte)
+
+        - PRA + RBI
+            - Deliver Drop 1
+                - zgw
+                - pra-cfg
+                - UI
+                - Ironvault
+                - Update FS with Matrix of License x UI combinations
+                    - Licenses: PA, PRA, RBI
+                    - App Types: RDP/SSH/VNC, PvtWA, PubWA
+                    - UI: PANW Managed Cert, BYOC
+                - Update FS with other changes
+
+
+    Minor Projects, Tech Debts
+        - Single Trace Id across ZWorker and Job Provisioning
+        - UT for Tenants V2 API
+        - Test Containers project
+
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+    * Evening:
+        - 2 mile run. 3x/week
+        - Gym. 3x/week
+    * Night:
+        - Flute practice. 3x/week
+        - Go to bed right after Aarushi goes to bed.
+    * Read "Zen and Art of Motorcycle Maintenance"
+    * Education
+        - Claude Code Video Series
+        - AI course with Aarushi
+        - AI course with Madhavi
+        - Udemy Course on AI
+
+
+REI
+    * One REI underwriting/analysis per day
+    * Complete the "Family Financial Forum" Excel spreadsheet
+    * Complete the "Tarnaka Accounts" Excel spreadsheet
+    * Ownwell action items
+    * Warrior:
+        - TBD
+    * Freedom Mortgage. Add Property Taxes to Escrow
+    * Estate Planning Updates
+
+Seva
+    - Lead YES Follow Up
+    - Yoga Vasishta Reading
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2026, Feb 01 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+@@@@@@@@@@@@@@   Jan 2026 Goals  @@@@@@@@@@@@@@@@@@
+Career
+    Major Projects:
+        - DONE - PWA Prod rollout (Deloitte)
+        - PRA + RBI
+            - DONE - zgw tasks
+                - Scoped and coded 80% of zgw tasks
+            - DONE - pra-cfg tasks
+            - DONE - UI mocks finalize
+            - DONE - Ironvault tasks
+            - NOT DONE - Update FS with Matrix of License x UI combinations
+                - Licenses: PA, PRA, RBI
+                - App Types: RDP/SSH/VNC, PvtWA, PubWA
+                - UI: PANW Managed Cert, BYOC
+
+    Minor Projects, Tech Debts
+        - ONGOING - Single Trace Id across ZWorker and Job Provisioning
+        - NOT DONE - UT for Tenants V2 API
+        - NOT DONE - Test Containers project
+
+
+Personal
+    * Morning:
+        - Padma Sadhana + Kriya + Meditation + Gayatri Japam + Guru Pooja
+    * Evening:
+        - 2 mile run. 3x/week
+        - Gym. 3x/week
+
+    * Night:
+        - Flute practice. 3x/week
+            - NOT DONE
+
+        - Go to bed right after Aarushi goes to bed.
+            - NOT FOLLOWING. I had to work with RBI/India team and unable to keep
+              up with this.
+
+    * Read "Zen and Art of Motorcycle Maintenance"
+        - ONGOING
+    * Education
+        - DONE - Claude Code Video Series
+            - Did it. But have to watch again.
+
+        - CANCELLED - AI course with Aarushi
+            - We signed up and then cancelled this course.
+
+        - ONGOING - AI course with Madhavi
+            - This is intense and will take lot of time.
+
+        - NOT DONE - Udemy Course on AI
+            - There is no time for this
+
+
+REI
+    * One REI underwriting/analysis per day
+    * Complete the "Family Financial Forum" Excel spreadsheet
+    * Complete the "Tarnaka Accounts" Excel spreadsheet
+    * Ownwell action items
+    * Warrior:
+        - TBD
+    * Freedom Mortgage. Add Property Taxes to Escrow
+    * Estate Planning Updates
+
+Seva
+    - Lead YES Follow Up
+    - Yoga Vasishta Reading
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 2026, Jan 01 (Sun)
 - Work:
 - Warrior/REI:
@@ -46,8 +199,286 @@ Seva:
 
 
 
+2026, Jan 31 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Telugu preparation and class in afternoon.
+    - Kondala Rao garu sent final drawing, which we approved/liked.
 
 
+2026, Jan 30 (Fri)
+- Work:
+    - Debugging call with RBI team in morning.
+    - Team meeting where Ganu shared his experience with Deloitte rollout.
+    - Ironvault prod deployment of Spain region.
+    - In evening, I vibe coded a LOT of UTs for Ironvault.
+
+- Warrior/REI:
+- Minutiae:
+    - In morning, final meeting with Kondala Rao garu, Srinu mavayya etc.
+        - About an hour or so meeting.
+
+
+2026, Jan 29 (Thu)
+- Work:
+    - Debugging session with RBI team in morning, for couple of hours.
+        - The DNS IP that RBI team wants is not easy to get for ZGW.
+        - Karthick joined and explained the difficulties.
+    - RBI team has to update saas-agent to include RBI NAT and DNS Security policies.
+
+- Warrior/REI:
+- Minutiae:
+    - Paid off Airtel bill.
+    - Architecture meeting with Kala, Parents etc for almost 3 hours into the night.
+
+
+2026, Jan 28 (Wed)
+#vivekty
+- Work:
+    - Late night integration calls with RBI team.
+
+- Warrior/REI:
+- Minutiae:
+    - Vivek & Ty visited
+    - Akshay mood is very bad. His math performance is bad.
+    - Taekwondo and stuff for Akshay.
+    - I rented furniture dolly from U-Haul and moved the table from Garage to dining room.
+
+
+2026, Jan 26 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2026, Jan 25 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - IK class on Gen AI.
+        - Quite intense class.
+    - Went to San Mateo and got the dining table.
+        - Rented U Haul and moved the table ourselves.
+        - Paid $300 for table and $130 for U Haul
+    - Madhavi sold off the old table for $100
+
+2026, Jan 24 (Sat)
+- Work:
+    - Continued working on zgw code.
+- Warrior/REI:
+- Minutiae:
+    - Telugu class.
+
+
+
+2026, Jan 23 (Fri)
+- Work:
+    - Put RBI feature behind a flag. Built UTs around it.
+
+- Warrior/REI:
+- Minutiae:
+
+
+2026, Jan 22 (Thu)
+- Work:
+    - I've put in a fix for "page refresh" issue in zgw.
+        - zgw is unable to find the webapp.
+    - SAA Dashboard meeting. Various team members built new dashboards. Team
+      demo'ed it.
+    - Meeting with Shikhar and Nyle about FedRAMP Mod feature
+    - Meeting with RBI team at night to test "page refresh" bug fix.
+        - Fix did not work. zgw is *still* not able to find the web app.
+
+- Warrior/REI:
+- Minutiae:
+    - WFH
+    - Aarushi is unwell. Stayed at home.
+
+
+2026, Jan 20 (Tue)
+- Work:
+    - InfoSec meeting at 7am. Infosec team was a no-show, just like previous meeting.
+    - UI/UX review meeting.
+    - Fixing UTs
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2026, Jan 19 (Mon)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Meeting with Duval property manager. Shared lot of ideas for safety and security of the property.
+    - Spoke with Kala about HELOC options. Career/Resume preparation etc.
+    - I took Akshay to Archery with Hue-Young Park (HYP).
+        - 30 min tryout cost $50
+        - She's accomplished, but I felt she was upselling.
+        - She prefers her students have recurve bows, not bell bows that Akshay
+          has. Recurve bows cost $3000, a good one.
+        - She did not do much during the tryout.
+        - We will try more teachers and evaluate what to do.
+
+
+2026, Jan 18 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Aarushi's 2nd day of James Logan speech competition. She left at 6am in
+      morning and came back to 6pm. She did not move to quarter finals, but
+      overall very intense experience.
+    - Lunch at Anil Musku's house in Fremont. Venkat and family visited. Very
+      nice to see everyone.
+
+
+2026, Jan 17 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Aarushi's James Logan speech competition. She left at 6am in morning and
+      came back to 6pm.
+    - Bala Vihar. Spent tonnes of time on Bala Vihar preparation.
+
+
+
+2026, Jan 16 (Fri)
+- Work:
+- Warrior/REI:
+- Minutiae:
+
+
+
+2026, Jan 15 (Thu)
+- Work:
+    - Addressed code review comments from Karthick ad Narayanan. But more
+      comments remain, and I too added lot of changes.
+    - Coded logic to JWE (JWT + Encrypt) ztrbi-ext div tag before injecting to
+      HTML page.
+    - Meeting with Rakesh N and Pune team from 9:30pm to morning 2am
+        - Very long meeting, but fruitful in the end.
+
+- Warrior/REI:
+- Minutiae:
+    - Went out after RBI meeting at night, to Safeway, to get Chips for Akshay.
+      Very happy that I kept my word.
+
+
+2026, Jan 14 (Wed)
+- Work:
+    - Infosec review of PRA + RBI design
+        - Did not happen. Moved to Jan 20th
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2026, Jan 13 (Tue)
+- Work:
+    - Kumar Senthivel's All Hands in morning
+    - Meeting with Narayanan & Ganu
+        - BYOC: Destination Domain, Access Domain, CNAME and Lauch URL
+        - PANW Managed: Destination Domain, Access Domain, CNAME and Lauch URL
+        - I got clarity on these.
+    - Addressed code review feedback.
+    - Code Review:
+        - Rajitha's zapp MR
+
+- Warrior/REI:
+- Minutiae:
+    - Took Akshay to Golden State Warrior game in Chase Center, SFO.
+        - Drive was super long (>1.5 hrs)
+        - Game was a bit boring.
+        - Akshay loved it.
+
+2026, Jan 12 (Mon)
+#facial
+- Work:
+    - Meetings with Rakesh from Pune team.
+    - Mettings with Rajitha, Harun on progress.
+
+- Warrior/REI:
+- Minutiae:
+
+
+
+2026, Jan 11 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Sadhana in morning.
+    - Contact with HYP JOAD Archery for Akshay
+    - Akshay Archery practice at Bowhunter Unlimited
+    - 4H
+    - YES Kriya
+    - Spoke with Priya Mayur. Must talk to Mridu about Biology.
+    - Met Venkat. Was happy to see him. Long discussion. Clearly he is having
+      positive experiences. Spiritually evolved a lot. But I've my qualms.
+    - Akshay had a birthday party at Abhay's house.
+
+
+2026, Jan 10 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Bala Vihar preparation
+
+
+2026, Jan 05-09 (Mon-Fri)
+#yogahealthcenter #sancarlos
+- Work:
+    - Back to work.
+    - Pvt Web App production rollout to Deloitte
+    - PRA + RBI meetings and work progress
+        - Lot of progress on work: PRA + RBI coding using Claude Code.
+
+- Warrior/REI:
+- Minutiae:
+    - Kids are back in school. I'm glad Akshay is not doing Wrestling.
+    - Madhavi and I visited Yoga Health Center in San Carlos.
+    - Akshay wanted Nintendo Switch and we talked him out of it. He is not
+      happy. He promised to work super hard in anything he commits to.
+    - Akshay signed up for Kangroo Math.
+    - Aarushi quick USACO exam midway.
+
+
+2026, Jan 04 (Sun)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Meetings on Tarknaka House Elevation plans.
+
+
+2026, Jan 03 (Sat)
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Slowly, getting back to normal.
+    - Worked a lot on Tarknaka House Elevation plans and Accounts.
+
+
+
+2026, Jan 02 (Fri)
+- Work:
+    - Met Sharath Basavaraja. He showed all the projects he built using AI.
+        - Impressed.
+
+- Warrior/REI:
+- Minutiae:
+    - 4H
+
+
+
+2026, Jan 01 (Thu)
+#holiday #shoreline #facial
+- Work:
+- Warrior/REI:
+- Minutiae:
+    - Went to Shoreline with family and bikes. Loved the time spent there.
+    - 4H
 
 
 
