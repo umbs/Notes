@@ -1109,8 +1109,14 @@ $ tcpdump src 192.168.1.100 and dst 192.168.1.2 and port ftp
 
 $ dig www.google.com // DNS record from a Name Server
 $ dig +trace www.google.com // Trace of where all the Name Server got the record
-                            // from.
-$ dig -x <ip-addr> // Reverse lookup.
+                            // from. This bypasses all resolvers. Use this to
+                            // ignore all caches and get directly from NS.
+
+$ dig -x <ip-addr>          // Reverse lookup.
+$ dig example.com NS +short // Find the authoritative nameservers.
+$ dig @[nameserver] example.com       // Query directly the nameserver
+$ dig @8.8.8.8 example.com  // Try Google's resolver
+$ dig @1.1.1.1 example.com
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@   nicstat notes   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

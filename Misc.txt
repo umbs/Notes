@@ -89,6 +89,12 @@ Reference:
 [1] https://www.philipdaniels.com/blog/2019/ripgrep-cheatsheet/
 [2] https://jdhao.github.io/2020/02/16/ripgrep_cheat_sheet/
 
+
+@@@@@@@@@@   Sub Reddits @@@@@@@@@@@
+https://www.reddit.com/r/dataisbeautiful/
+
+
+
 @@@@@@@@@@   CFFI  @@@@@@@@@@@
 - C Foreign Function Interface.
 
