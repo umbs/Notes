@@ -1,3 +1,78 @@
+********************    Claude Code         ***********************
+
+/terminal-setup   Allows you to press Shift + Enter in commandline.
+/init             Initializes CLAUDE.md file in the project root folder where Claude is running.
+
+** Memory
+- Add memory to CLAUDE.md by using # symbol or the /memory command
+  - This memory can be saved in:
+    - Project Memory    ./CLAUDE.md   <<< checked in
+    - Project Memory (local)   ./CLAUDE.local.md    <<< gitignored
+    - Uesr Memory       ~/.claude/CLAUDE.md
+
+## Context
+/exit     Exits the chat session completely.
+/clear    Clears the context and chat history, but you stay in same chat.
+/compact  Compacts the chat and context into small summary.
+
+Press ESC twice to rewind to previous point in session.
+
+/resume   Resume a previous conversation
+
+
+## Tools & Permissions
+- In Anthropic Docs website there is list of tools that Claude uses.
+- When you allow certain commands, they are saved in .claude/settings.json file
+
+## Planning & Thinking
+- Planning Mode
+  - Thorough
+
+- Thinking Mode
+  - Consumes more tokens.
+  - Recommended to break down tasks into smaller tasks.
+  - *think*, *think hard*, *think harder*, *ultrathink* triggers Extended Think mode.
+
+## Slash Commands (just Commands)
+- Way too many commands.
+- Custom Command
+  - Make a 'commands' folder inside .claude folder.
+  - Give it a some-name.md and add instructions to it.
+      - This is like a big prompt.
+  - You can add following markdown metadata at the beginning of the file
+
+
+            ---
+            description: Create a UT
+            agrument-hint: UT name | UT summary
+            ---
+
+            ## Context
+            Parse $ARGUMENTS to get the following values:
+
+            - [name]: Component name from $ARGUMENTS, converted to PascalCase
+            - [summary]: Component summary from $ARGUMENTS
+
+
+## MCP: Model Context Protocol
+- Allows models to easily interact with external sources
+
+- MCP Servers
+    Claude Code <--> MCP Server <--> External Sources
+
+- Example MCP servers
+  - Playwright: provides browswer automation capabilities using Playwright.
+      - Enables LLMs to interact with web pages through snapshots.
+  - Context7: Get up to date documentation for LLMs and AI code editors.
+  - pulsemcp.com: Website listing many MCP servers
+
+- scope of MCP servers
+  - project, local (default), global
+
+
+
+*******************************************************************
+
 Ollama Cheat Sheet
 ===
 // Pull/Download models
